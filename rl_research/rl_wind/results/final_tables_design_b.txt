@@ -1,0 +1,152 @@
+
+=== P=25  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                      J     cost  fail/day  P(any)  undeliv      mk
+TSALNS (no wind, r=0, as published)                    961.84   712.57     9.971   0.999    4.958   165.6
+TSALNS (forecast wind, r=0)                            831.94   728.73     4.129   0.819    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.15)               790.16   746.64     1.741   0.432    1.295   182.2
+NoRL fixed r=0.1 (dev-tuned)                           777.40   728.24     1.967   0.509    1.317   243.4
+NoRL fixed r=0.1 (tuned on train+dev, 639 cases)       777.40   728.24     1.967   0.509    1.317   243.4
+NoRL rule r=a+b(W-w0) (0.1,0.0,6) dev-tuned            777.40   728.24     1.967   0.509    1.317   243.4
+RL adaptive reserve (1 plan)                           783.05   745.30     1.510   0.397    1.059   235.3
+ref: sim-select over 9 plans (9x compute)              770.75   727.55     1.728   0.464    1.207   250.1
+RL action histogram: {0.2: 87, 0.15: 10, 0.4: 3}
+RL - baseline (negative = RL better), Holm over 24 tests
+  vs TSALNS (no wind, r=0, as published)                J        diff  -178.788 (-18.59%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                cost     diff   +32.725 ( +4.59%)  better/worse 10/90  p=1.14e-15  p_Holm=1.82e-14
+  vs TSALNS (no wind, r=0, as published)                failed   diff    -8.461 (-84.86%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                undeliv  diff    -3.899 (-78.64%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        J        diff   -48.894 ( -5.88%)  better/worse 87/13  p=3.54e-13  p_Holm=2.48e-12
+  vs TSALNS (forecast wind, r=0)                        cost     diff   +16.574 ( +2.27%)  better/worse 32/68  p=3.64e-05  p_Holm=2.18e-04
+  vs TSALNS (forecast wind, r=0)                        failed   diff    -2.619 (-63.43%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        undeliv  diff    -1.037 (-49.46%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           J        diff    -7.108 ( -0.90%)  better/worse 76/24  p=3.14e-04  p_Holm=6.67e-04
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           cost     diff    -1.338 ( -0.18%)  better/worse 67/33  p=4.81e-03  p_Holm=4.81e-03
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           failed   diff    -0.231 (-13.26%)  better/worse 88/11  p=1.44e-13  p_Holm=1.30e-12
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           undeliv  diff    -0.236 (-18.22%)  better/worse 86/14  p=2.01e-13  p_Holm=1.61e-12
+  vs NoRL fixed r=0.1 (dev-tuned)                       J        diff    +5.644 ( +0.73%)  better/worse 31/69  p=1.33e-04  p_Holm=6.67e-04
+  vs NoRL fixed r=0.1 (dev-tuned)                       cost     diff   +17.059 ( +2.34%)  better/worse 4/96  p=4.41e-15  p_Holm=6.61e-14
+  vs NoRL fixed r=0.1 (dev-tuned)                       failed   diff    -0.457 (-23.22%)  better/worse 96/4  p=4.60e-17  p_Holm=8.75e-16
+  vs NoRL fixed r=0.1 (dev-tuned)                       undeliv  diff    -0.258 (-19.57%)  better/worse 88/12  p=1.62e-14  p_Holm=1.94e-13
+  vs NoRL fixed r=0.1 (tuned on train+dev, 639 cases)   J        diff    +5.644 ( +0.73%)  better/worse 31/69  p=1.33e-04  p_Holm=6.67e-04
+  vs NoRL fixed r=0.1 (tuned on train+dev, 639 cases)   cost     diff   +17.059 ( +2.34%)  better/worse 4/96  p=4.41e-15  p_Holm=6.61e-14
+  vs NoRL fixed r=0.1 (tuned on train+dev, 639 cases)   failed   diff    -0.457 (-23.22%)  better/worse 96/4  p=4.60e-17  p_Holm=8.75e-16
+  vs NoRL fixed r=0.1 (tuned on train+dev, 639 cases)   undeliv  diff    -0.258 (-19.57%)  better/worse 88/12  p=1.62e-14  p_Holm=1.94e-13
+  vs NoRL rule r=a+b(W-w0) (0.1,0.0,6) dev-tuned        J        diff    +5.644 ( +0.73%)  better/worse 31/69  p=1.33e-04  p_Holm=6.67e-04
+  vs NoRL rule r=a+b(W-w0) (0.1,0.0,6) dev-tuned        cost     diff   +17.059 ( +2.34%)  better/worse 4/96  p=4.41e-15  p_Holm=6.61e-14
+  vs NoRL rule r=a+b(W-w0) (0.1,0.0,6) dev-tuned        failed   diff    -0.457 (-23.22%)  better/worse 96/4  p=4.60e-17  p_Holm=8.75e-16
+  vs NoRL rule r=a+b(W-w0) (0.1,0.0,6) dev-tuned        undeliv  diff    -0.258 (-19.57%)  better/worse 88/12  p=1.62e-14  p_Holm=1.94e-13
+  [ref] RL - sim-select J diff +12.30 (+1.60%)
+
+=== P=50  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                      J     cost  fail/day  P(any)  undeliv      mk
+TSALNS (no wind, r=0, as published)                   1211.10   712.57     9.971   0.999    4.958   165.6
+TSALNS (forecast wind, r=0)                            935.16   728.73     4.129   0.819    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.15)               833.68   746.64     1.741   0.432    1.295   182.2
+NoRL fixed r=0.15 (dev-tuned)                          821.33   736.60     1.695   0.449    1.146   240.0
+NoRL fixed r=0.15 (tuned on train+dev, 639 cases)      821.33   736.60     1.695   0.449    1.146   240.0
+NoRL rule r=a+b(W-w0) (0.15,0.1,9) dev-tuned           821.33   738.89     1.649   0.442    1.119   243.0
+RL adaptive reserve (1 plan)                           820.31   750.56     1.395   0.379    0.948   240.0
+ref: sim-select over 9 plans (9x compute)              809.53   738.05     1.430   0.405    1.008   254.5
+RL action histogram: {0.2: 70, 0.4: 24, 0.15: 6}
+RL - baseline (negative = RL better), Holm over 24 tests
+  vs TSALNS (no wind, r=0, as published)                J        diff  -390.792 (-32.27%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                cost     diff   +37.991 ( +5.33%)  better/worse 9/91  p=6.12e-16  p_Holm=1.10e-14
+  vs TSALNS (no wind, r=0, as published)                failed   diff    -8.576 (-86.01%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                undeliv  diff    -4.010 (-80.89%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        J        diff  -114.852 (-12.28%)  better/worse 96/4  p=7.56e-18  p_Holm=1.44e-16
+  vs TSALNS (forecast wind, r=0)                        cost     diff   +21.839 ( +3.00%)  better/worse 28/72  p=2.95e-07  p_Holm=1.77e-06
+  vs TSALNS (forecast wind, r=0)                        failed   diff    -2.734 (-66.22%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        undeliv  diff    -1.148 (-54.78%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           J        diff   -13.370 ( -1.60%)  better/worse 78/22  p=1.83e-05  p_Holm=9.17e-05
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           cost     diff    +3.928 ( +0.53%)  better/worse 57/43  p=4.49e-01  p_Holm=1.00e+00
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           failed   diff    -0.346 (-19.87%)  better/worse 89/10  p=7.26e-15  p_Holm=1.09e-13
+  vs TSALNS (forecast wind, dev-tuned r=0.15)           undeliv  diff    -0.347 (-26.83%)  better/worse 87/13  p=2.06e-14  p_Holm=2.88e-13
+  vs NoRL fixed r=0.15 (dev-tuned)                      J        diff    -1.027 ( -0.13%)  better/worse 48/46  p=8.05e-01  p_Holm=1.00e+00
+  vs NoRL fixed r=0.15 (dev-tuned)                      cost     diff   +13.961 ( +1.90%)  better/worse 9/85  p=2.07e-13  p_Holm=2.70e-12
+  vs NoRL fixed r=0.15 (dev-tuned)                      failed   diff    -0.300 (-17.69%)  better/worse 84/10  p=2.96e-15  p_Holm=5.03e-14
+  vs NoRL fixed r=0.15 (dev-tuned)                      undeliv  diff    -0.198 (-17.29%)  better/worse 73/19  p=5.89e-10  p_Holm=5.30e-09
+  vs NoRL fixed r=0.15 (tuned on train+dev, 639 cases)  J        diff    -1.027 ( -0.13%)  better/worse 48/46  p=8.05e-01  p_Holm=1.00e+00
+  vs NoRL fixed r=0.15 (tuned on train+dev, 639 cases)  cost     diff   +13.961 ( +1.90%)  better/worse 9/85  p=2.07e-13  p_Holm=2.70e-12
+  vs NoRL fixed r=0.15 (tuned on train+dev, 639 cases)  failed   diff    -0.300 (-17.69%)  better/worse 84/10  p=2.96e-15  p_Holm=5.03e-14
+  vs NoRL fixed r=0.15 (tuned on train+dev, 639 cases)  undeliv  diff    -0.198 (-17.29%)  better/worse 73/19  p=5.89e-10  p_Holm=5.30e-09
+  vs NoRL rule r=a+b(W-w0) (0.15,0.1,9) dev-tuned       J        diff    -1.024 ( -0.12%)  better/worse 46/47  p=9.01e-01  p_Holm=1.00e+00
+  vs NoRL rule r=a+b(W-w0) (0.15,0.1,9) dev-tuned       cost     diff   +11.679 ( +1.58%)  better/worse 14/79  p=3.78e-10  p_Holm=3.78e-09
+  vs NoRL rule r=a+b(W-w0) (0.15,0.1,9) dev-tuned       failed   diff    -0.254 (-15.41%)  better/worse 78/15  p=8.39e-12  p_Holm=9.22e-11
+  vs NoRL rule r=a+b(W-w0) (0.15,0.1,9) dev-tuned       undeliv  diff    -0.171 (-15.32%)  better/worse 71/20  p=1.81e-09  p_Holm=1.27e-08
+  [ref] RL - sim-select J diff +10.78 (+1.33%)
+
+=== P=100  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                      J     cost  fail/day  P(any)  undeliv      mk
+TSALNS (no wind, r=0, as published)                   1709.62   712.57     9.971   0.999    4.958   165.6
+TSALNS (forecast wind, r=0)                           1141.59   728.73     4.129   0.819    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.3)                896.22   768.72     1.275   0.331    0.994   192.6
+NoRL fixed r=0.3 (dev-tuned)                           890.67   763.52     1.271   0.338    0.853   237.2
+NoRL fixed r=0.4 (tuned on train+dev, 639 cases)       886.60   771.83     1.148   0.314    0.759   261.5
+NoRL rule r=a+b(W-w0) (0.3,0.05,6) dev-tuned           898.62   780.53     1.181   0.315    0.703   252.2
+RL adaptive reserve (1 plan)                           881.72   761.09     1.206   0.340    0.822   251.9
+ref: sim-select over 9 plans (9x compute)              876.18   749.14     1.270   0.357    0.905   252.6
+RL action histogram: {0.2: 37, 0.4: 61, 0.15: 2}
+RL - baseline (negative = RL better), Holm over 24 tests
+  vs TSALNS (no wind, r=0, as published)                J        diff  -827.901 (-48.43%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                cost     diff   +48.516 ( +6.81%)  better/worse 7/93  p=8.01e-17  p_Holm=1.44e-15
+  vs TSALNS (no wind, r=0, as published)                failed   diff    -8.764 (-87.90%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                undeliv  diff    -4.136 (-83.42%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        J        diff  -259.870 (-22.76%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        cost     diff   +32.365 ( +4.44%)  better/worse 18/82  p=3.59e-12  p_Holm=6.11e-11
+  vs TSALNS (forecast wind, r=0)                        failed   diff    -2.922 (-70.78%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        undeliv  diff    -1.274 (-60.77%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, dev-tuned r=0.3)            J        diff   -14.493 ( -1.62%)  better/worse 81/19  p=9.79e-06  p_Holm=8.81e-05
+  vs TSALNS (forecast wind, dev-tuned r=0.3)            cost     diff    -7.630 ( -0.99%)  better/worse 70/30  p=5.09e-04  p_Holm=3.05e-03
+  vs TSALNS (forecast wind, dev-tuned r=0.3)            failed   diff    -0.069 ( -5.38%)  better/worse 53/46  p=4.01e-03  p_Holm=1.60e-02
+  vs TSALNS (forecast wind, dev-tuned r=0.3)            undeliv  diff    -0.172 (-17.29%)  better/worse 63/34  p=1.48e-07  p_Holm=1.63e-06
+  vs NoRL fixed r=0.3 (dev-tuned)                       J        diff    -8.946 ( -1.00%)  better/worse 61/39  p=4.37e-03  p_Holm=1.60e-02
+  vs NoRL fixed r=0.3 (dev-tuned)                       cost     diff    -2.434 ( -0.32%)  better/worse 47/53  p=8.34e-01  p_Holm=8.34e-01
+  vs NoRL fixed r=0.3 (dev-tuned)                       failed   diff    -0.065 ( -5.12%)  better/worse 60/39  p=2.93e-03  p_Holm=1.46e-02
+  vs NoRL fixed r=0.3 (dev-tuned)                       undeliv  diff    -0.031 ( -3.58%)  better/worse 56/42  p=4.40e-02  p_Holm=8.79e-02
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   J        diff    -4.880 ( -0.55%)  better/worse 33/6  p=3.40e-05  p_Holm=2.72e-04
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   cost     diff   -10.735 ( -1.39%)  better/worse 39/0  p=5.26e-08  p_Holm=7.54e-07
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   failed   diff    +0.059 ( +5.10%)  better/worse 0/39  p=5.25e-08  p_Holm=7.54e-07
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   undeliv  diff    +0.063 ( +8.27%)  better/worse 0/38  p=7.73e-08  p_Holm=9.28e-07
+  vs NoRL rule r=a+b(W-w0) (0.3,0.05,6) dev-tuned       J        diff   -16.902 ( -1.88%)  better/worse 53/11  p=5.03e-08  p_Holm=7.54e-07
+  vs NoRL rule r=a+b(W-w0) (0.3,0.05,6) dev-tuned       cost     diff   -19.437 ( -2.49%)  better/worse 58/6  p=4.21e-10  p_Holm=6.73e-09
+  vs NoRL rule r=a+b(W-w0) (0.3,0.05,6) dev-tuned       failed   diff    +0.025 ( +2.15%)  better/worse 14/50  p=1.85e-04  p_Holm=1.30e-03
+  vs NoRL rule r=a+b(W-w0) (0.3,0.05,6) dev-tuned       undeliv  diff    +0.119 (+16.97%)  better/worse 14/49  p=5.65e-06  p_Holm=5.65e-05
+  [ref] RL - sim-select J diff +5.55 (+0.63%)
+
+=== P=200  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                      J     cost  fail/day  P(any)  undeliv      mk
+TSALNS (no wind, r=0, as published)                   2706.67   712.57     9.971   0.999    4.958   165.6
+TSALNS (forecast wind, r=0)                           1554.46   728.73     4.129   0.819    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.4)               1013.71   781.21     1.163   0.307    0.881   198.9
+NoRL fixed r=0.5 (dev-tuned)                          1022.73   792.20     1.153   0.304    0.670   273.2
+NoRL fixed r=0.4 (tuned on train+dev, 639 cases)      1001.38   771.83     1.148   0.314    0.759   261.5
+NoRL rule r=a+b(W-w0) (0.4,0.05,6) dev-tuned          1021.67   790.40     1.156   0.304    0.673   266.6
+RL adaptive reserve (1 plan)                           999.63   767.34     1.161   0.323    0.785   258.2
+ref: sim-select over 9 plans (9x compute)              996.72   761.17     1.178   0.331    0.826   256.7
+RL action histogram: {0.4: 84, 0.2: 15, 0.15: 1}
+RL - baseline (negative = RL better), Holm over 24 tests
+  vs TSALNS (no wind, r=0, as published)                J        diff -1707.043 (-63.07%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                cost     diff   +54.762 ( +7.69%)  better/worse 2/98  p=8.78e-18  p_Holm=1.58e-16
+  vs TSALNS (no wind, r=0, as published)                failed   diff    -8.809 (-88.35%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (no wind, r=0, as published)                undeliv  diff    -4.173 (-84.17%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        J        diff  -554.829 (-35.69%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        cost     diff   +38.611 ( +5.30%)  better/worse 13/87  p=4.61e-16  p_Holm=7.38e-15
+  vs TSALNS (forecast wind, r=0)                        failed   diff    -2.967 (-71.87%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, r=0)                        undeliv  diff    -1.311 (-62.54%)  better/worse 100/0  p=3.90e-18  p_Holm=9.35e-17
+  vs TSALNS (forecast wind, dev-tuned r=0.4)            J        diff   -14.083 ( -1.39%)  better/worse 80/20  p=9.95e-06  p_Holm=8.96e-05
+  vs TSALNS (forecast wind, dev-tuned r=0.4)            cost     diff   -13.878 ( -1.78%)  better/worse 85/15  p=4.89e-06  p_Holm=4.89e-05
+  vs TSALNS (forecast wind, dev-tuned r=0.4)            failed   diff    -0.001 ( -0.09%)  better/worse 55/45  p=3.28e-01  p_Holm=3.28e-01
+  vs TSALNS (forecast wind, dev-tuned r=0.4)            undeliv  diff    -0.096 (-10.91%)  better/worse 66/34  p=1.04e-04  p_Holm=6.22e-04
+  vs NoRL fixed r=0.5 (dev-tuned)                       J        diff   -23.101 ( -2.26%)  better/worse 69/31  p=3.60e-07  p_Holm=5.05e-06
+  vs NoRL fixed r=0.5 (dev-tuned)                       cost     diff   -24.866 ( -3.14%)  better/worse 96/4  p=1.05e-17  p_Holm=1.79e-16
+  vs NoRL fixed r=0.5 (dev-tuned)                       failed   diff    +0.009 ( +0.77%)  better/worse 25/75  p=2.00e-06  p_Holm=2.60e-05
+  vs NoRL fixed r=0.5 (dev-tuned)                       undeliv  diff    +0.115 (+17.19%)  better/worse 29/69  p=3.25e-06  p_Holm=3.90e-05
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   J        diff    -1.749 ( -0.17%)  better/worse 11/5  p=3.40e-02  p_Holm=6.80e-02
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   cost     diff    -4.489 ( -0.58%)  better/worse 16/0  p=4.38e-04  p_Holm=2.19e-03
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   failed   diff    +0.014 ( +1.19%)  better/worse 0/16  p=4.38e-04  p_Holm=2.19e-03
+  vs NoRL fixed r=0.4 (tuned on train+dev, 639 cases)   undeliv  diff    +0.026 ( +3.38%)  better/worse 0/15  p=6.53e-04  p_Holm=2.19e-03
+  vs NoRL rule r=a+b(W-w0) (0.4,0.05,6) dev-tuned       J        diff   -22.034 ( -2.16%)  better/worse 57/25  p=3.91e-06  p_Holm=4.30e-05
+  vs NoRL rule r=a+b(W-w0) (0.4,0.05,6) dev-tuned       cost     diff   -23.064 ( -2.92%)  better/worse 80/2  p=4.25e-15  p_Holm=6.37e-14
+  vs NoRL rule r=a+b(W-w0) (0.4,0.05,6) dev-tuned       failed   diff    +0.005 ( +0.45%)  better/worse 18/64  p=2.59e-05  p_Holm=1.81e-04
+  vs NoRL rule r=a+b(W-w0) (0.4,0.05,6) dev-tuned       undeliv  diff    +0.112 (+16.69%)  better/worse 22/57  p=1.28e-05  p_Holm=1.02e-04
+  [ref] RL - sim-select J diff +2.91 (+0.29%)

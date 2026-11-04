@@ -1,0 +1,65 @@
+== ac=models/pp_attn/best.pt
+static30               J             -6.754    -0.76    44     6    1.3e-09    9.2e-09
+static30               ontime_h       0.002     0.24    30    20       0.45       0.45
+static30               mk            -6.526    -4.64    41     9    1.9e-08    1.1e-07
+static30               resp          -0.224    -3.66    34    16      0.017       0.05
+== ac=models/pp_api/best.pt
+static30               J             -6.200    -0.70    40    10    1.5e-08      1e-07
+static30               ontime_h       0.007     0.81    29    20       0.12       0.24
+static30               mk            -3.099    -2.20    30    20      0.054       0.18
+static30               resp          -0.240    -3.92    33    17      0.046       0.18
+== ac=models/pp_mlp/best.pt
+static30               J             -3.131    -0.35    34    16     0.0063      0.038
+static30               ontime_h       0.009     1.05    29    21      0.086       0.34
+static30               mk             3.706     2.63    23    27      0.091       0.34
+static30               resp          -0.387    -6.31    34    16     0.0023      0.016
+== rl=models/pg_b30/best.pt
+static30               J             -6.430    -0.72    37    13    4.8e-06    9.6e-06
+static30               ontime_h       0.023     2.66    39    10    2.9e-06    8.6e-06
+static30               mk             4.177     2.97     8    42    1.8e-08    1.1e-07
+static30               resp          -0.727   -11.84    48     2    6.6e-13    4.6e-12
+== rl=models/pg_r12ft/best.pt
+static30               J             -6.995    -0.79    41     9    2.5e-06      5e-06
+static30               ontime_h       0.030     3.45    40    10    6.4e-07    3.2e-06
+static30               mk             8.285     5.89    11    39    6.4e-07    3.2e-06
+static30               resp          -0.921   -15.01    44     6    2.6e-11    1.8e-10
+== rl=models/pg_r11ft/best.pt
+static30               J             -4.585    -0.52    37    13    0.00035     0.0007
+static30               ontime_h       0.018     2.08    38    11    3.6e-05    0.00014
+static30               mk             4.838     3.44    10    40      3e-07    1.8e-06
+static30               resp          -0.778   -12.67    49     1    5.3e-15    3.7e-14
+== rl=models/api_s0/it0.pt
+static30               J              6.538     0.74     9    41    6.8e-05    0.00041
+static30               ontime_h      -0.002    -0.17    24    26       0.71          1
+static30               mk            13.483     9.58    11    39    9.4e-07    6.6e-06
+static30               resp          -0.156    -2.54    30    20      0.099        0.4
+== rl=models/pg_r10/best.pt
+static30               J             -5.359    -0.60    36    14    1.9e-05    0.00013
+static30               ontime_h       0.008     0.92    30    20      0.037      0.074
+static30               mk            -2.470    -1.76    33    17     0.0074      0.025
+static30               resp          -0.305    -4.97    34    16     0.0016     0.0096
+== rl=models/pg_r11/best.pt
+static30               J             -4.885    -0.55    34    16    4.2e-05    8.4e-05
+static30               ontime_h       0.023     2.66    42     7      2e-08    9.8e-08
+static30               mk             5.641     4.01     4    46    7.7e-12    4.6e-11
+static30               resp          -0.799   -13.01    50     0    1.8e-15    1.2e-14
+== rl=models/pg_r12/best.pt
+static30               J             -7.068    -0.80    40    10    3.8e-06    7.6e-06
+static30               ontime_h       0.036     4.10    42     8    1.1e-08    5.3e-08
+static30               mk            12.573     8.94     6    44    1.1e-09    6.5e-09
+static30               resp          -1.062   -17.30    45     5    4.9e-12    3.4e-11
+== ac=models/ppo_gae/best.pt
+static30               J             -1.627    -0.18    29    21       0.15       0.15
+static30               ontime_h      -0.017    -1.92    18    32     0.0063      0.019
+static30               mk            -8.586    -6.10    40    10    1.5e-07    1.1e-06
+static30               resp           0.322     5.25    15    35     0.0033      0.013
+== ac=models/a2c_gae/best.pt
+static30               J             -2.412    -0.27    27    23      0.066        0.2
+static30               ontime_h       0.012     1.38    32    18      0.041       0.16
+static30               mk            10.217     7.26    17    33    0.00088     0.0062
+static30               resp          -0.527    -8.59    35    15    0.00088     0.0062
+== ac=models/ppo_gae_attn/best.pt
+static30               J              1.699     0.19    20    30       0.13       0.13
+static30               ontime_h       0.021     2.42    35    15    0.00082     0.0033
+static30               mk            22.824    16.22    16    34    1.7e-06    1.2e-05
+static30               resp          -0.733   -11.95    34    16    4.8e-06    2.9e-05

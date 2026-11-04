@@ -1,0 +1,23 @@
+{
+  "classification": "official reference with explicitly recorded I/O, shared-seed and wall-time instrumentation; not independent implementation",
+  "original_unchanged": true,
+  "patch": "results/preflight/reference_instrumentation.diff",
+  "original_source_sha256": {
+    "Calculator.java": "51351bc6b47ffbf80524be4fca8b0dc80f3336a0a50568040eafac186c2d4bc6",
+    "Solution.java": "bf471a64dc85f848fd458ae950a4f041832495aa466e69ecff555e36eca7ef60",
+    "Main.java": "03180c23fb52f55ae42f7131576694e3ccd7ee11145e161ce7359f0994c12ed1",
+    "Init.java": "d1ce2773d73a3da36d362eec7494eb62ff0cd582eff90a96aa5bc1fc65c13e97",
+    "RoutingOperator.java": "e07b28d504a6fda03d09e76b9923371a505fe088c71b108c5d64486b509c265c",
+    "Node.java": "ec4b9b474cb708b0713e5a002395ba304cbffd8594f61cb32497916f3b2ab9c5",
+    "Check.java": "ea0f541cb5eb0b90772e8fc1cadc62e72ba3338d6a6d005dae0ac43abbd54d23",
+    "FileReaderUtil.java": "26d0e9bd02f5e4ae5c970108dc6a5ff5f93a7a5d50616dde4747fd5e491e8b6c",
+    "ALNSSolver.java": "030f80be3257a28f9aae4aba7b8e540592260188c2f9a1f805a5786f2ef0bb43",
+    "LocationOperator.java": "969f4e0d6893163a0574abb73a2ef53b2ef0cf129b3406de5cfa8750db7ddacf"
+  },
+  "changes": [
+    "parameterized input path",
+    "shared seeded java.util.Random for reproducible future runs; original paper seeds unknown",
+    "cooperative wall-time checks; default loop limits untouched",
+    "write best-so-far JSON for independent feasibility audit"
+  ]
+}

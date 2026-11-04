@@ -1,0 +1,12 @@
+{
+  "outer_iterations": 500,
+  "local_iterations": 500,
+  "alns_iterations": 5000,
+  "weight_lower": 0.1,
+  "weight_upper": 0.5,
+  "initial_temperature": 1000.0,
+  "cooling_rate": 0.95,
+  "final_temperature": 0.001,
+  "strict_deadline": true,
+  "profile": "paper supplementary parameter profile; distinct from author's Java code profile"
+}

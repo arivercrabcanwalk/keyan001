@@ -1,0 +1,60 @@
+
+=== P=50  (n=100 test cases = Liu-50 x 2 wind contexts, 100 MC scenarios each) ===
+method                                            J     cost  fail/day  P(any)      mk  undeliv
+TSALNS (no wind, as published)               808.60   680.13    2.5695   0.817   150.5   0.0018
+TSALNS (forecast wind)                       748.21   680.31    1.3580   0.614   151.1   0.0001
+TSALNS (forecast) + margin recourse          698.25   697.79    0.0092   0.007   156.7   0.0000
+ours plan only (dev-tuned r)                 669.55   667.99    0.0313   0.017   210.9   0.0002
+NoRL: plan + margin rule (dev-tuned)         668.85   668.17    0.0136   0.010   210.9   0.0000
+NoRL-model: MC look-ahead (dev-tuned)        668.80   668.32    0.0097   0.008   210.9   0.0000
+RL: plan + learned recourse                  669.00   668.08    0.0185   0.013   210.9   0.0000
+RL vs baseline (diff = RL - base; negative = RL better), Holm-adjusted over 9 tests
+  vs TSALNS (no wind, as published)         J      mean diff -139.5984  RL better/worse 99/1  p=4.02e-18  p_Holm=3.61e-17
+  vs TSALNS (no wind, as published)         cost   mean diff  -12.0484  RL better/worse 71/29  p=3.50e-10  p_Holm=1.75e-09
+  vs TSALNS (no wind, as published)         failed mean diff   -2.5510  RL better/worse 99/0  p=5.70e-18  p_Holm=3.98e-17
+  vs TSALNS (forecast wind)                 J      mean diff  -79.2042  RL better/worse 99/1  p=4.27e-18  p_Holm=3.61e-17
+  vs TSALNS (forecast wind)                 cost   mean diff  -12.2292  RL better/worse 76/24  p=3.91e-10  p_Holm=1.75e-09
+  vs TSALNS (forecast wind)                 failed mean diff   -1.3395  RL better/worse 99/0  p=5.69e-18  p_Holm=3.98e-17
+  vs NoRL: plan + margin rule (dev-tuned)   J      mean diff   +0.1481  RL better/worse 15/20  p=2.19e-03  p_Holm=2.19e-03
+  vs NoRL: plan + margin rule (dev-tuned)   cost   mean diff   -0.0969  RL better/worse 35/0  p=2.48e-07  p_Holm=7.43e-07
+  vs NoRL: plan + margin rule (dev-tuned)   failed mean diff   +0.0049  RL better/worse 0/20  p=8.51e-05  p_Holm=1.70e-04
+
+=== P=100  (n=100 test cases = Liu-50 x 2 wind contexts, 100 MC scenarios each) ===
+method                                            J     cost  fail/day  P(any)      mk  undeliv
+TSALNS (no wind, as published)               937.08   680.13    2.5695   0.817   150.5   0.0018
+TSALNS (forecast wind)                       816.11   680.31    1.3580   0.614   151.1   0.0001
+TSALNS (forecast) + margin recourse          698.71   697.79    0.0092   0.007   156.7   0.0000
+ours plan only (dev-tuned r)                 672.98   672.20    0.0078   0.005   222.3   0.0003
+NoRL: plan + margin rule (dev-tuned)         669.41   668.63    0.0078   0.006   211.0   0.0000
+NoRL-model: MC look-ahead (dev-tuned)        669.29   668.32    0.0097   0.008   210.9   0.0000
+RL: plan + learned recourse                  672.73   672.23    0.0050   0.003   222.3   0.0003
+RL vs baseline (diff = RL - base; negative = RL better), Holm-adjusted over 9 tests
+  vs TSALNS (no wind, as published)         J      mean diff -264.3439  RL better/worse 99/1  p=4.02e-18  p_Holm=3.61e-17
+  vs TSALNS (no wind, as published)         cost   mean diff   -7.8939  RL better/worse 63/37  p=1.03e-05  p_Holm=3.08e-05
+  vs TSALNS (no wind, as published)         failed mean diff   -2.5645  RL better/worse 99/0  p=5.70e-18  p_Holm=3.98e-17
+  vs TSALNS (forecast wind)                 J      mean diff -143.3747  RL better/worse 98/2  p=4.81e-18  p_Holm=3.85e-17
+  vs TSALNS (forecast wind)                 cost   mean diff   -8.0747  RL better/worse 65/35  p=7.91e-05  p_Holm=1.58e-04
+  vs TSALNS (forecast wind)                 failed mean diff   -1.3530  RL better/worse 99/0  p=5.69e-18  p_Holm=3.98e-17
+  vs NoRL: plan + margin rule (dev-tuned)   J      mean diff   +3.3257  RL better/worse 20/80  p=7.93e-11  p_Holm=3.17e-10
+  vs NoRL: plan + margin rule (dev-tuned)   cost   mean diff   +3.6057  RL better/worse 17/83  p=1.56e-12  p_Holm=7.79e-12
+  vs NoRL: plan + margin rule (dev-tuned)   failed mean diff   -0.0028  RL better/worse 13/2  p=5.76e-03  p_Holm=5.76e-03
+
+=== P=200  (n=100 test cases = Liu-50 x 2 wind contexts, 100 MC scenarios each) ===
+method                                            J     cost  fail/day  P(any)      mk  undeliv
+TSALNS (no wind, as published)              1194.03   680.13    2.5695   0.817   150.5   0.0018
+TSALNS (forecast wind)                       951.91   680.31    1.3580   0.614   151.1   0.0001
+TSALNS (forecast) + margin recourse          699.63   697.79    0.0092   0.007   156.7   0.0000
+ours plan only (dev-tuned r)                 673.76   672.20    0.0078   0.005   222.3   0.0003
+NoRL: plan + margin rule (dev-tuned)         673.02   672.52    0.0025   0.002   222.5   0.0002
+NoRL-model: MC look-ahead (dev-tuned)        669.80   668.72    0.0054   0.005   211.1   0.0000
+RL: plan + learned recourse                  673.23   672.23    0.0050   0.003   222.3   0.0003
+RL vs baseline (diff = RL - base; negative = RL better), Holm-adjusted over 9 tests
+  vs TSALNS (no wind, as published)         J      mean diff -520.7939  RL better/worse 99/1  p=4.02e-18  p_Holm=3.61e-17
+  vs TSALNS (no wind, as published)         cost   mean diff   -7.8939  RL better/worse 63/37  p=1.03e-05  p_Holm=4.11e-05
+  vs TSALNS (no wind, as published)         failed mean diff   -2.5645  RL better/worse 99/0  p=5.70e-18  p_Holm=3.98e-17
+  vs TSALNS (forecast wind)                 J      mean diff -278.6747  RL better/worse 98/2  p=4.53e-18  p_Holm=3.63e-17
+  vs TSALNS (forecast wind)                 cost   mean diff   -8.0747  RL better/worse 65/35  p=7.91e-05  p_Holm=2.37e-04
+  vs TSALNS (forecast wind)                 failed mean diff   -1.3530  RL better/worse 99/0  p=5.69e-18  p_Holm=3.98e-17
+  vs NoRL: plan + margin rule (dev-tuned)   J      mean diff   +0.2087  RL better/worse 43/8  p=6.56e-03  p_Holm=1.31e-02
+  vs NoRL: plan + margin rule (dev-tuned)   cost   mean diff   -0.2913  RL better/worse 51/0  p=5.15e-10  p_Holm=2.57e-09
+  vs NoRL: plan + margin rule (dev-tuned)   failed mean diff   +0.0025  RL better/worse 0/8  p=1.16e-02  p_Holm=1.31e-02

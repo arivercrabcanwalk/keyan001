@@ -1,0 +1,616 @@
+
+=== P=25  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                            J     cost  fail/day  undeliv      mk
+TSALNS (no wind, r=0, as published)                          961.84   712.57     9.971    4.958   165.6
+TSALNS (forecast wind, r=0)                                  831.94   728.73     4.129    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.15)                     790.16   746.64     1.741    1.295   182.2
+NoRL best fixed r=0.1 (train+dev)                            778.47   729.34     1.965    1.291   240.9
+NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]      769.47   724.19     1.811    1.282   264.1
+NoRL supervised tree rule (depth 6, leaf 20)                 769.24   724.02     1.809    1.262   263.9
+ref: sim-select over 36 plans (36x compute)                  761.73   719.09     1.706    1.288   264.6
+RL (mean +- std over 5 seeds)                               773.78±4.59  734.89±7.66    1.56±0.13    1.14±0.10  264.34±1.62
+
+=== P=50  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                            J     cost  fail/day  undeliv      mk
+TSALNS (no wind, r=0, as published)                         1211.10   712.57     9.971    4.958   165.6
+TSALNS (forecast wind, r=0)                                  935.16   728.73     4.129    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.15)                     833.68   746.64     1.741    1.295   182.2
+NoRL best fixed r=0.2 (train+dev)                            824.60   749.26     1.507    0.988   235.9
+NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]      814.75   724.19     1.811    1.282   264.1
+NoRL supervised tree rule (depth 3, leaf 20)                 814.51   737.45     1.541    1.142   261.2
+ref: sim-select over 36 plans (36x compute)                  799.86   729.78     1.402    1.108   270.8
+RL (mean +- std over 5 seeds)                               815.49±2.15  744.58±4.47    1.42±0.06    1.04±0.06  263.37±1.40
+
+=== P=100  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                            J     cost  fail/day  undeliv      mk
+TSALNS (no wind, r=0, as published)                         1709.62   712.57     9.971    4.958   165.6
+TSALNS (forecast wind, r=0)                                 1141.59   728.73     4.129    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.3)                      896.22   768.72     1.275    0.994   192.6
+NoRL best fixed r=0.3 (train+dev)                            890.67   763.84     1.268    0.838   240.8
+NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]      882.02   751.08     1.309    0.944   267.2
+NoRL supervised tree rule (depth 8, leaf 20)                 886.17   753.30     1.329    0.946   264.1
+ref: sim-select over 36 plans (36x compute)                  866.44   737.31     1.291    1.048   275.6
+RL (mean +- std over 5 seeds)                               886.01±1.82  751.34±3.39    1.35±0.03    0.96±0.03  264.01±1.13
+
+=== P=200  test n=100 (Liu-50 x 2 strong-wind contexts, 400 independent MC scenarios) ===
+method                                                            J     cost  fail/day  undeliv      mk
+TSALNS (no wind, r=0, as published)                         2706.67   712.57     9.971    4.958   165.6
+TSALNS (forecast wind, r=0)                                 1554.46   728.73     4.129    2.096   175.5
+TSALNS (forecast wind, dev-tuned r=0.4)                     1013.71   781.21     1.163    0.881   198.9
+NoRL best fixed r=0.3 (train+dev)                           1017.51   763.84     1.268    0.838   240.8
+NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]     1012.97   751.08     1.309    0.944   267.2
+NoRL supervised tree rule (depth 3, leaf 50)                1007.70   766.23     1.207    0.842   271.4
+ref: sim-select over 36 plans (36x compute)                  989.55   747.07     1.212    0.962   276.4
+RL (mean +- std over 5 seeds)                              1016.79±4.11  752.37±4.41    1.32±0.04    0.95±0.04  264.11±2.39
+
+--- RL seed0: RL - baseline (negative = RL better), Holm over 120 tests ---
+  P= 25 vs TSALNS (no wind, r=0, as published)                      J        -192.824 (-20.05%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (no wind, r=0, as published)                      failed     -8.286 (-83.11%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              J         -62.929 ( -7.56%) b/w 97/3 p_Holm=1.1e-14 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              failed     -2.444 (-59.20%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -21.144 ( -2.68%) b/w 94/6 p_Holm=1.4e-12 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost      -19.732 ( -2.64%) b/w 93/7 p_Holm=6.3e-12 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.056 ( -3.24%) b/w 46/54 p_Holm=1.0e+00
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.041 ( -3.16%) b/w 53/46 p_Holm=1.0e+00
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +83.747 (+45.96%) b/w 4/96 p_Holm=6.3e-16 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        J          -9.460 ( -1.22%) b/w 59/41 p_Holm=1.0e+00
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        cost       -2.431 ( -0.33%) b/w 33/67 p_Holm=5.4e-01
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        failed     -0.281 (-14.30%) b/w 77/22 p_Holm=1.4e-09 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        undeliv    -0.037 ( -2.83%) b/w 68/32 p_Holm=4.6e-02 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        mk        +25.032 (+10.39%) b/w 35/65 p_Holm=3.3e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          -0.457 ( -0.06%) b/w 13/25 p_Holm=4.2e-01
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost       +2.711 ( +0.37%) b/w 5/33 p_Holm=3.3e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.127 ( -7.00%) b/w 32/6 p_Holm=4.5e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.028 ( -2.16%) b/w 31/7 p_Holm=2.2e-01
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         +1.821 ( +0.69%) b/w 15/23 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             J          -0.231 ( -0.03%) b/w 19/35 p_Holm=2.6e-01
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             cost       +2.881 ( +0.40%) b/w 13/41 p_Holm=4.6e-04 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             failed     -0.124 ( -6.88%) b/w 41/13 p_Holm=4.7e-04 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             undeliv    -0.008 ( -0.64%) b/w 38/16 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             mk         +2.031 ( +0.77%) b/w 26/28 p_Holm=1.0e+00
+  P= 50 vs TSALNS (no wind, r=0, as published)                      J        -399.859 (-33.02%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (no wind, r=0, as published)                      failed     -8.468 (-84.93%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              J        -123.920 (-13.25%) b/w 98/2 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              failed     -2.626 (-63.61%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -22.438 ( -2.69%) b/w 90/10 p_Holm=1.1e-09 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost      -10.516 ( -1.41%) b/w 73/27 p_Holm=8.6e-05 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.238 (-13.70%) b/w 72/28 p_Holm=1.8e-05 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.145 (-11.20%) b/w 76/23 p_Holm=2.3e-05 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +82.799 (+45.44%) b/w 4/96 p_Holm=6.7e-16 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        J         -13.358 ( -1.62%) b/w 64/36 p_Holm=2.2e-01
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        cost      -13.139 ( -1.75%) b/w 57/43 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        failed     -0.004 ( -0.29%) b/w 59/41 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        undeliv    +0.163 (+16.47%) b/w 44/54 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        mk        +29.094 (+12.33%) b/w 25/75 p_Holm=1.6e-07 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          -3.507 ( -0.43%) b/w 46/28 p_Holm=2.5e-01
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +11.927 ( +1.65%) b/w 5/69 p_Holm=2.9e-10 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.309 (-17.04%) b/w 68/6 p_Holm=1.9e-10 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.132 (-10.28%) b/w 67/7 p_Holm=4.2e-07 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         +0.873 ( +0.33%) b/w 33/41 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             J          -3.275 ( -0.40%) b/w 32/31 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             cost       -1.332 ( -0.18%) b/w 32/31 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             failed     -0.039 ( -2.52%) b/w 37/26 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             undeliv    +0.008 ( +0.69%) b/w 30/32 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             mk         +3.863 ( +1.48%) b/w 25/38 p_Holm=1.0e+00
+  P=100 vs TSALNS (no wind, r=0, as published)                      J        -822.424 (-48.11%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (no wind, r=0, as published)                      failed     -8.678 (-87.03%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              J        -254.392 (-22.28%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              failed     -2.836 (-68.69%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  J          -9.015 ( -1.01%) b/w 77/23 p_Holm=4.6e-02 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  cost      -10.793 ( -1.40%) b/w 78/22 p_Holm=8.4e-03 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  failed     +0.018 ( +1.39%) b/w 53/44 p_Holm=1.0e+00
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv    -0.089 ( -8.98%) b/w 66/32 p_Holm=6.5e-03 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  mk        +72.041 (+37.41%) b/w 11/89 p_Holm=8.3e-14 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        J          -3.474 ( -0.39%) b/w 65/35 p_Holm=2.2e-01
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        cost       -5.914 ( -0.77%) b/w 59/41 p_Holm=2.0e-01
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.024 ( +1.92%) b/w 44/53 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.066 ( +7.91%) b/w 34/63 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        mk        +23.808 ( +9.89%) b/w 26/74 p_Holm=2.3e-06 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +5.179 ( +0.59%) b/w 31/26 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       +6.852 ( +0.91%) b/w 15/42 p_Holm=1.6e-02 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     -0.017 ( -1.28%) b/w 37/17 p_Holm=1.2e-01
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    -0.039 ( -4.17%) b/w 40/17 p_Holm=8.4e-02
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -2.547 ( -0.95%) b/w 36/21 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             J          +1.030 ( +0.12%) b/w 30/31 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             cost       +4.633 ( +0.61%) b/w 32/29 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             failed     -0.036 ( -2.71%) b/w 32/29 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             undeliv    -0.042 ( -4.40%) b/w 35/26 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             mk         +0.485 ( +0.18%) b/w 32/29 p_Holm=1.0e+00
+  P=200 vs TSALNS (no wind, r=0, as published)                      J       -1695.016 (-62.62%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (no wind, r=0, as published)                      failed     -8.717 (-87.43%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              J        -542.802 (-34.92%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              failed     -2.875 (-69.64%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  J          -2.055 ( -0.20%) b/w 75/25 p_Holm=1.4e-01
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  cost      -20.210 ( -2.59%) b/w 83/17 p_Holm=4.5e-04 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  failed     +0.091 ( +7.81%) b/w 34/65 p_Holm=7.2e-03 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv    -0.012 ( -1.35%) b/w 41/57 p_Holm=1.0e+00
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  mk        +61.999 (+31.17%) b/w 10/90 p_Holm=1.9e-13 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        J          -5.849 ( -0.57%) b/w 67/33 p_Holm=1.8e-02 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        cost       -2.839 ( -0.37%) b/w 49/51 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        failed     -0.015 ( -1.19%) b/w 52/43 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.031 ( +3.66%) b/w 42/55 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        mk        +20.077 ( +8.34%) b/w 27/73 p_Holm=1.2e-05 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          -1.308 ( -0.13%) b/w 45/15 p_Holm=4.6e-02 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       +9.927 ( +1.32%) b/w 10/50 p_Holm=4.0e-06 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     -0.056 ( -4.29%) b/w 46/11 p_Holm=2.7e-04 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    -0.075 ( -7.94%) b/w 47/13 p_Holm=3.4e-05 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -6.278 ( -2.35%) b/w 37/23 p_Holm=1.0e+00
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             J          +3.961 ( +0.39%) b/w 33/23 p_Holm=1.0e+00
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             cost       -5.229 ( -0.68%) b/w 47/9 p_Holm=1.2e-05 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             failed     +0.046 ( +3.81%) b/w 21/35 p_Holm=5.9e-01
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             undeliv    +0.027 ( +3.24%) b/w 16/39 p_Holm=1.0e+00
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             mk        -10.511 ( -3.87%) b/w 44/12 p_Holm=1.4e-03 *
+
+--- RL seed1: RL - baseline (negative = RL better), Holm over 120 tests ---
+  P= 25 vs TSALNS (no wind, r=0, as published)                      J        -190.216 (-19.78%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (no wind, r=0, as published)                      failed     -8.391 (-84.16%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              J         -60.322 ( -7.25%) b/w 96/4 p_Holm=3.1e-14 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              failed     -2.550 (-61.75%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -18.537 ( -2.35%) b/w 92/8 p_Holm=1.6e-11 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost      -14.494 ( -1.94%) b/w 84/16 p_Holm=9.0e-09 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.162 ( -9.29%) b/w 63/37 p_Holm=1.1e-02 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.129 ( -9.92%) b/w 73/26 p_Holm=1.7e-04 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +81.437 (+44.69%) b/w 6/94 p_Holm=9.8e-16 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        J          -6.853 ( -0.88%) b/w 50/50 p_Holm=1.0e+00
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        cost       +2.807 ( +0.38%) b/w 23/77 p_Holm=8.2e-04 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        failed     -0.386 (-19.66%) b/w 87/12 p_Holm=8.6e-13 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        undeliv    -0.124 ( -9.61%) b/w 77/23 p_Holm=9.2e-06 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        mk        +22.723 ( +9.43%) b/w 33/67 p_Holm=3.1e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +2.150 ( +0.28%) b/w 16/38 p_Holm=8.4e-03 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost       +7.949 ( +1.10%) b/w 1/53 p_Holm=1.1e-08 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.232 (-12.81%) b/w 54/0 p_Holm=1.1e-08 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.115 ( -8.99%) b/w 52/1 p_Holm=5.1e-08 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -0.489 ( -0.18%) b/w 26/28 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             J          +2.376 ( +0.31%) b/w 18/50 p_Holm=5.2e-04 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             cost       +8.119 ( +1.12%) b/w 5/63 p_Holm=1.4e-09 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             failed     -0.230 (-12.70%) b/w 59/9 p_Holm=9.1e-09 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             undeliv    -0.096 ( -7.58%) b/w 58/10 p_Holm=2.3e-06 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             mk         -0.279 ( -0.11%) b/w 39/29 p_Holm=1.0e+00
+  P= 50 vs TSALNS (no wind, r=0, as published)                      J        -394.293 (-32.56%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (no wind, r=0, as published)                      failed     -8.537 (-85.62%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              J        -118.354 (-12.66%) b/w 96/4 p_Holm=1.1e-15 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              failed     -2.695 (-65.28%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -16.872 ( -2.02%) b/w 83/17 p_Holm=8.7e-06 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost       -1.505 ( -0.20%) b/w 66/34 p_Holm=1.4e-01
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.307 (-17.65%) b/w 89/11 p_Holm=7.2e-11 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.258 (-19.90%) b/w 89/10 p_Holm=1.6e-11 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +78.942 (+43.32%) b/w 5/95 p_Holm=7.3e-16 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        J          -7.792 ( -0.94%) b/w 59/41 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        cost       -4.128 ( -0.55%) b/w 45/55 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        failed     -0.073 ( -4.86%) b/w 81/18 p_Holm=1.8e-04 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        undeliv    +0.050 ( +5.05%) b/w 62/36 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        mk        +25.237 (+10.70%) b/w 18/82 p_Holm=9.0e-09 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +2.059 ( +0.25%) b/w 51/37 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +20.938 ( +2.89%) b/w 2/86 p_Holm=6.1e-14 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.378 (-20.85%) b/w 88/0 p_Holm=3.1e-14 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.245 (-19.08%) b/w 84/2 p_Holm=2.2e-13 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -2.984 ( -1.13%) b/w 42/46 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             J          +2.291 ( +0.28%) b/w 29/27 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             cost       +7.679 ( +1.04%) b/w 19/37 p_Holm=2.7e-02 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             failed     -0.108 ( -6.99%) b/w 44/10 p_Holm=4.5e-05 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             undeliv    -0.105 ( -9.19%) b/w 44/12 p_Holm=8.8e-04 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             mk         +0.006 ( +0.00%) b/w 23/33 p_Holm=1.0e+00
+  P=100 vs TSALNS (no wind, r=0, as published)                      J        -822.485 (-48.11%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (no wind, r=0, as published)                      failed     -8.582 (-86.07%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              J        -254.454 (-22.29%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              failed     -2.740 (-66.36%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  J          -9.077 ( -1.01%) b/w 80/20 p_Holm=4.8e-03 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  cost      -20.482 ( -2.66%) b/w 84/16 p_Holm=3.3e-05 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  failed     +0.114 ( +8.95%) b/w 31/67 p_Holm=4.1e-03 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv    +0.004 ( +0.40%) b/w 46/52 p_Holm=1.0e+00
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  mk        +69.359 (+36.02%) b/w 11/89 p_Holm=2.9e-14 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        J          -3.535 ( -0.40%) b/w 60/40 p_Holm=9.8e-01
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        cost      -15.603 ( -2.04%) b/w 79/21 p_Holm=1.2e-07 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.121 ( +9.51%) b/w 23/74 p_Holm=3.3e-05 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.160 (+19.02%) b/w 21/77 p_Holm=1.8e-06 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        mk        +21.126 ( +8.77%) b/w 35/65 p_Holm=7.0e-04 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +5.118 ( +0.58%) b/w 22/18 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -2.837 ( -0.38%) b/w 27/13 p_Holm=8.0e-02
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.080 ( +6.08%) b/w 9/29 p_Holm=1.2e-02 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.054 ( +5.70%) b/w 16/24 p_Holm=7.8e-01
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -5.230 ( -1.96%) b/w 30/10 p_Holm=2.6e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             J          +0.969 ( +0.11%) b/w 32/39 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             cost       -5.056 ( -0.67%) b/w 52/19 p_Holm=3.3e-03 *
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             failed     +0.060 ( +4.53%) b/w 22/47 p_Holm=3.1e-02 *
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             undeliv    +0.052 ( +5.44%) b/w 26/45 p_Holm=1.8e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             mk         -2.198 ( -0.83%) b/w 40/31 p_Holm=1.0e+00
+  P=200 vs TSALNS (no wind, r=0, as published)                      J       -1683.907 (-62.21%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (no wind, r=0, as published)                      failed     -8.606 (-86.31%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              J        -531.693 (-34.20%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              failed     -2.764 (-66.95%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  J          +9.054 ( +0.89%) b/w 65/35 p_Holm=1.0e+00
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  cost      -31.366 ( -4.02%) b/w 86/14 p_Holm=1.0e-06 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  failed     +0.202 (+17.38%) b/w 7/92 p_Holm=7.4e-14 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv    +0.101 (+11.42%) b/w 27/72 p_Holm=9.8e-04 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  mk        +63.847 (+32.10%) b/w 11/89 p_Holm=1.8e-13 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        J          +5.260 ( +0.52%) b/w 49/51 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        cost      -13.995 ( -1.83%) b/w 78/22 p_Holm=6.1e-07 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.096 ( +7.59%) b/w 25/72 p_Holm=2.5e-04 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.143 (+17.09%) b/w 22/75 p_Holm=1.1e-05 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        mk        +21.926 ( +9.10%) b/w 33/67 p_Holm=1.7e-04 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +9.801 ( +0.97%) b/w 14/16 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -1.229 ( -0.16%) b/w 19/11 p_Holm=4.5e-01
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.055 ( +4.21%) b/w 9/20 p_Holm=2.6e-01
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.038 ( +3.98%) b/w 14/16 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -4.430 ( -1.66%) b/w 23/7 p_Holm=3.2e-01
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             J         +15.070 ( +1.50%) b/w 27/58 p_Holm=4.2e-02 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             cost      -16.385 ( -2.14%) b/w 79/6 p_Holm=3.7e-12 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             failed     +0.157 (+13.03%) b/w 15/70 p_Holm=6.5e-08 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             undeliv    +0.140 (+16.61%) b/w 12/72 p_Holm=1.6e-07 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             mk         -8.663 ( -3.19%) b/w 58/27 p_Holm=5.5e-02
+
+--- RL seed2: RL - baseline (negative = RL better), Holm over 120 tests ---
+  P= 25 vs TSALNS (no wind, r=0, as published)                      J        -189.234 (-19.67%) b/w 99/1 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (no wind, r=0, as published)                      failed     -8.307 (-83.32%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              J         -59.340 ( -7.13%) b/w 94/6 p_Holm=4.3e-13 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              failed     -2.465 (-59.71%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -17.554 ( -2.22%) b/w 90/10 p_Holm=1.5e-09 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost      -15.623 ( -2.09%) b/w 83/17 p_Holm=4.6e-08 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.077 ( -4.44%) b/w 49/51 p_Holm=1.0e+00
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.112 ( -8.68%) b/w 59/41 p_Holm=2.4e-01
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +81.417 (+44.68%) b/w 5/95 p_Holm=7.9e-16 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        J          -5.870 ( -0.75%) b/w 55/45 p_Holm=1.0e+00
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        cost       +1.678 ( +0.23%) b/w 28/72 p_Holm=7.7e-03 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        failed     -0.302 (-15.36%) b/w 81/19 p_Holm=1.4e-10 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        undeliv    -0.108 ( -8.37%) b/w 73/27 p_Holm=5.5e-04 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        mk        +22.703 ( +9.42%) b/w 32/68 p_Holm=2.1e-05 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +3.133 ( +0.41%) b/w 9/21 p_Holm=8.6e-02
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost       +6.820 ( +0.94%) b/w 0/30 p_Holm=9.5e-05 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.147 ( -8.14%) b/w 30/0 p_Holm=9.5e-05 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.099 ( -7.74%) b/w 29/1 p_Holm=2.1e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -0.509 ( -0.19%) b/w 13/17 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             J          +3.359 ( +0.44%) b/w 16/36 p_Holm=3.8e-02 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             cost       +6.990 ( +0.97%) b/w 7/45 p_Holm=8.3e-06 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             failed     -0.145 ( -8.03%) b/w 40/12 p_Holm=3.8e-04 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             undeliv    -0.079 ( -6.30%) b/w 40/12 p_Holm=8.7e-03 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             mk         -0.299 ( -0.11%) b/w 27/25 p_Holm=1.0e+00
+  P= 50 vs TSALNS (no wind, r=0, as published)                      J        -394.243 (-32.55%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (no wind, r=0, as published)                      failed     -8.551 (-85.76%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              J        -118.303 (-12.65%) b/w 95/5 p_Holm=1.7e-15 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              failed     -2.709 (-65.61%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -16.821 ( -2.02%) b/w 83/17 p_Holm=4.1e-06 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost       -0.769 ( -0.10%) b/w 61/39 p_Holm=3.5e-01
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.321 (-18.44%) b/w 83/17 p_Holm=1.3e-10 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.277 (-21.37%) b/w 88/11 p_Holm=2.1e-12 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +81.690 (+44.83%) b/w 5/95 p_Holm=7.8e-16 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        J          -7.741 ( -0.94%) b/w 57/43 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        cost       -3.391 ( -0.45%) b/w 44/56 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        failed     -0.087 ( -5.77%) b/w 74/26 p_Holm=2.2e-03 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        undeliv    +0.031 ( +3.13%) b/w 59/39 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        mk        +27.985 (+11.86%) b/w 17/83 p_Holm=1.6e-09 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +2.110 ( +0.26%) b/w 50/33 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +21.675 ( +2.99%) b/w 0/83 p_Holm=2.0e-13 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.391 (-21.61%) b/w 81/2 p_Holm=6.6e-13 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.264 (-20.56%) b/w 80/2 p_Holm=1.8e-12 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -0.236 ( -0.09%) b/w 36/47 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             J          +2.342 ( +0.29%) b/w 37/35 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             cost       +8.415 ( +1.14%) b/w 26/46 p_Holm=8.6e-02
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             failed     -0.121 ( -7.88%) b/w 55/16 p_Holm=8.9e-04 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             undeliv    -0.124 (-10.84%) b/w 47/25 p_Holm=5.9e-03 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             mk         +2.754 ( +1.05%) b/w 29/43 p_Holm=1.0e+00
+  P=100 vs TSALNS (no wind, r=0, as published)                      J        -823.757 (-48.18%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (no wind, r=0, as published)                      failed     -8.617 (-86.43%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              J        -255.726 (-22.40%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              failed     -2.775 (-67.22%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  J         -10.349 ( -1.15%) b/w 80/20 p_Holm=2.2e-03 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  cost      -18.199 ( -2.37%) b/w 83/17 p_Holm=1.4e-04 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  failed     +0.079 ( +6.16%) b/w 34/64 p_Holm=1.2e-01
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv    -0.035 ( -3.54%) b/w 46/53 p_Holm=1.0e+00
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  mk        +72.715 (+37.76%) b/w 10/90 p_Holm=3.1e-14 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        J          -4.808 ( -0.54%) b/w 55/45 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        cost      -13.320 ( -1.74%) b/w 79/21 p_Holm=2.5e-06 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.085 ( +6.71%) b/w 23/75 p_Holm=1.3e-04 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.120 (+14.35%) b/w 24/74 p_Holm=5.1e-05 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        mk        +24.482 (+10.17%) b/w 31/69 p_Holm=4.8e-06 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +3.846 ( +0.44%) b/w 17/23 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -0.554 ( -0.07%) b/w 19/21 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.044 ( +3.36%) b/w 17/21 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.015 ( +1.55%) b/w 19/21 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -1.874 ( -0.70%) b/w 22/18 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             J          -0.304 ( -0.03%) b/w 34/45 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             cost       -2.774 ( -0.37%) b/w 52/27 p_Holm=4.1e-02 *
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             failed     +0.025 ( +1.86%) b/w 31/47 p_Holm=3.5e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             undeliv    +0.012 ( +1.31%) b/w 32/47 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             mk         +1.159 ( +0.44%) b/w 36/43 p_Holm=1.0e+00
+  P=200 vs TSALNS (no wind, r=0, as published)                      J       -1690.887 (-62.47%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (no wind, r=0, as published)                      failed     -8.651 (-86.76%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              J        -538.673 (-34.65%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              failed     -2.809 (-68.03%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  J          +2.074 ( +0.20%) b/w 64/36 p_Holm=7.4e-01
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  cost      -29.401 ( -3.76%) b/w 87/13 p_Holm=1.2e-06 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  failed     +0.157 (+13.54%) b/w 8/91 p_Holm=8.7e-14 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv    +0.059 ( +6.70%) b/w 26/73 p_Holm=8.9e-04 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  mk        +68.028 (+34.20%) b/w 9/91 p_Holm=3.2e-14 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        J          -1.720 ( -0.17%) b/w 46/54 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        cost      -12.030 ( -1.57%) b/w 76/24 p_Holm=1.8e-05 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.052 ( +4.06%) b/w 23/75 p_Holm=1.6e-04 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.102 (+12.12%) b/w 25/73 p_Holm=6.6e-05 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        mk        +26.106 (+10.84%) b/w 30/70 p_Holm=2.5e-06 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +2.821 ( +0.28%) b/w 19/21 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       +0.736 ( +0.10%) b/w 16/24 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.010 ( +0.80%) b/w 18/21 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    -0.004 ( -0.43%) b/w 22/18 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -0.250 ( -0.09%) b/w 19/21 p_Holm=1.0e+00
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             J          +8.090 ( +0.80%) b/w 28/59 p_Holm=2.2e-02 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             cost      -14.420 ( -1.88%) b/w 76/11 p_Holm=1.6e-10 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             failed     +0.113 ( +9.32%) b/w 17/70 p_Holm=3.8e-08 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             undeliv    +0.098 (+11.66%) b/w 19/67 p_Holm=6.8e-06 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             mk         -4.483 ( -1.65%) b/w 50/36 p_Holm=1.0e+00
+
+--- RL seed3: RL - baseline (negative = RL better), Holm over 120 tests ---
+  P= 25 vs TSALNS (no wind, r=0, as published)                      J        -188.675 (-19.62%) b/w 99/1 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (no wind, r=0, as published)                      failed     -8.447 (-84.72%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              J         -58.781 ( -7.07%) b/w 94/6 p_Holm=2.6e-13 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              failed     -2.605 (-63.10%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -16.995 ( -2.15%) b/w 90/10 p_Holm=1.5e-09 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost      -11.559 ( -1.55%) b/w 79/21 p_Holm=1.7e-06 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.217 (-12.49%) b/w 76/24 p_Holm=9.2e-06 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.149 (-11.49%) b/w 78/20 p_Holm=8.6e-06 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +84.161 (+46.19%) b/w 6/94 p_Holm=1.2e-15 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        J          -5.311 ( -0.68%) b/w 42/58 p_Holm=1.0e+00
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        cost       +5.742 ( +0.79%) b/w 16/84 p_Holm=7.1e-05 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        failed     -0.442 (-22.50%) b/w 92/8 p_Holm=7.8e-14 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        undeliv    -0.144 (-11.19%) b/w 82/18 p_Holm=3.5e-07 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        mk        +25.446 (+10.56%) b/w 29/71 p_Holm=3.9e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +3.692 ( +0.48%) b/w 29/71 p_Holm=9.1e-05 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +10.885 ( +1.50%) b/w 10/90 p_Holm=3.9e-13 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.288 (-15.89%) b/w 86/14 p_Holm=3.7e-12 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.136 (-10.58%) b/w 84/14 p_Holm=1.4e-07 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         +2.235 ( +0.85%) b/w 49/51 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             J          +3.918 ( +0.51%) b/w 25/71 p_Holm=1.0e-05 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             cost      +11.055 ( +1.53%) b/w 6/90 p_Holm=1.0e-13 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             failed     -0.285 (-15.78%) b/w 81/15 p_Holm=2.1e-11 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             undeliv    -0.116 ( -9.18%) b/w 79/15 p_Holm=4.1e-07 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             mk         +2.445 ( +0.93%) b/w 49/47 p_Holm=1.0e+00
+  P= 50 vs TSALNS (no wind, r=0, as published)                      J        -394.463 (-32.57%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (no wind, r=0, as published)                      failed     -8.565 (-85.91%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              J        -118.523 (-12.67%) b/w 93/7 p_Holm=1.8e-15 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              failed     -2.724 (-65.97%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -17.041 ( -2.04%) b/w 82/18 p_Holm=2.5e-05 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost       -0.252 ( -0.03%) b/w 64/36 p_Holm=3.4e-01
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.336 (-19.29%) b/w 92/8 p_Holm=2.5e-12 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.271 (-20.93%) b/w 90/10 p_Holm=4.2e-12 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +82.130 (+45.07%) b/w 6/94 p_Holm=8.5e-16 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        J          -7.961 ( -0.97%) b/w 61/39 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        cost       -2.875 ( -0.38%) b/w 41/59 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        failed     -0.102 ( -6.75%) b/w 81/18 p_Holm=3.0e-06 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        undeliv    +0.037 ( +3.71%) b/w 64/34 p_Holm=8.4e-01
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        mk        +28.425 (+12.05%) b/w 17/83 p_Holm=2.6e-09 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +1.890 ( +0.23%) b/w 56/44 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +22.191 ( +3.06%) b/w 8/92 p_Holm=3.9e-14 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.406 (-22.42%) b/w 96/4 p_Holm=1.7e-15 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.258 (-20.11%) b/w 93/5 p_Holm=2.4e-12 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         +0.204 ( +0.08%) b/w 44/56 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             J          +2.122 ( +0.26%) b/w 32/31 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             cost       +8.932 ( +1.21%) b/w 21/42 p_Holm=1.8e-02 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             failed     -0.136 ( -8.84%) b/w 51/11 p_Holm=1.8e-06 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             undeliv    -0.118 (-10.35%) b/w 45/18 p_Holm=3.8e-03 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             mk         +3.195 ( +1.22%) b/w 23/40 p_Holm=1.0e+00
+  P=100 vs TSALNS (no wind, r=0, as published)                      J        -822.291 (-48.10%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (no wind, r=0, as published)                      failed     -8.600 (-86.25%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              J        -254.260 (-22.27%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              failed     -2.758 (-66.80%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  J          -8.883 ( -0.99%) b/w 78/22 p_Holm=1.9e-02 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  cost      -18.450 ( -2.40%) b/w 82/18 p_Holm=2.7e-04 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  failed     +0.096 ( +7.50%) b/w 33/65 p_Holm=2.3e-02 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv    -0.018 ( -1.85%) b/w 49/49 p_Holm=1.0e+00
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  mk        +71.338 (+37.04%) b/w 10/90 p_Holm=6.0e-14 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        J          -3.341 ( -0.38%) b/w 58/42 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        cost      -13.571 ( -1.78%) b/w 78/22 p_Holm=5.7e-07 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.102 ( +8.07%) b/w 24/73 p_Holm=2.5e-05 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.137 (+16.36%) b/w 20/78 p_Holm=3.2e-06 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        mk        +23.105 ( +9.59%) b/w 33/66 p_Holm=1.4e-04 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +5.312 ( +0.60%) b/w 22/17 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -0.805 ( -0.11%) b/w 26/13 p_Holm=3.4e-01
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.061 ( +4.67%) b/w 11/25 p_Holm=1.9e-01
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.031 ( +3.33%) b/w 16/23 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -3.251 ( -1.22%) b/w 28/11 p_Holm=2.7e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             J          +1.163 ( +0.13%) b/w 33/39 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             cost       -3.024 ( -0.40%) b/w 55/17 p_Holm=3.1e-03 *
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             failed     +0.042 ( +3.15%) b/w 26/46 p_Holm=7.3e-02
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             undeliv    +0.029 ( +3.09%) b/w 27/45 p_Holm=4.9e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             mk         -0.219 ( -0.08%) b/w 38/34 p_Holm=1.0e+00
+  P=200 vs TSALNS (no wind, r=0, as published)                      J       -1686.529 (-62.31%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (no wind, r=0, as published)                      failed     -8.621 (-86.46%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              J        -534.315 (-34.37%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              failed     -2.779 (-67.30%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  J          +6.431 ( +0.63%) b/w 66/34 p_Holm=1.0e+00
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  cost      -31.064 ( -3.98%) b/w 86/14 p_Holm=1.1e-06 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  failed     +0.187 (+16.13%) b/w 9/90 p_Holm=8.8e-13 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv    +0.092 (+10.47%) b/w 27/72 p_Holm=1.4e-03 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  mk        +64.287 (+32.32%) b/w 11/89 p_Holm=2.1e-13 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        J          +2.638 ( +0.26%) b/w 49/51 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        cost      -13.692 ( -1.79%) b/w 79/21 p_Holm=8.2e-07 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.082 ( +6.44%) b/w 25/72 p_Holm=3.2e-04 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.135 (+16.09%) b/w 21/77 p_Holm=4.6e-06 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        mk        +22.365 ( +9.29%) b/w 32/68 p_Holm=5.9e-05 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +7.179 ( +0.71%) b/w 15/15 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -0.926 ( -0.12%) b/w 18/12 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.041 ( +3.09%) b/w 10/17 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.029 ( +3.09%) b/w 12/18 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -3.991 ( -1.49%) b/w 22/8 p_Holm=2.0e-01
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             J         +12.448 ( +1.24%) b/w 31/56 p_Holm=1.1e-01
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             cost      -16.082 ( -2.10%) b/w 81/6 p_Holm=2.0e-12 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             failed     +0.143 (+11.82%) b/w 17/70 p_Holm=1.0e-07 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             undeliv    +0.131 (+15.62%) b/w 13/73 p_Holm=1.7e-07 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             mk         -8.224 ( -3.03%) b/w 59/28 p_Holm=6.8e-02
+
+--- RL seed4: RL - baseline (negative = RL better), Holm over 120 tests ---
+  P= 25 vs TSALNS (no wind, r=0, as published)                      J        -179.334 (-18.64%) b/w 99/1 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (no wind, r=0, as published)                      failed     -8.642 (-86.67%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              J         -49.440 ( -5.94%) b/w 87/13 p_Holm=8.0e-10 *
+  P= 25 vs TSALNS (forecast wind, r=0)                              failed     -2.800 (-67.82%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J          -7.655 ( -0.97%) b/w 79/21 p_Holm=2.4e-04 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost       +2.651 ( +0.36%) b/w 60/40 p_Holm=1.0e+00
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.412 (-23.68%) b/w 98/2 p_Holm=2.8e-15 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.334 (-25.76%) b/w 92/6 p_Holm=9.1e-15 *
+  P= 25 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +79.805 (+43.80%) b/w 5/95 p_Holm=8.8e-16 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        J          +4.029 ( +0.52%) b/w 28/72 p_Holm=2.9e-03 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        cost      +19.952 ( +2.74%) b/w 6/94 p_Holm=6.2e-12 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        failed     -0.637 (-32.40%) b/w 99/0 p_Holm=5.5e-16 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        undeliv    -0.329 (-25.51%) b/w 93/7 p_Holm=4.1e-15 *
+  P= 25 vs NoRL best fixed r=0.1 (train+dev)                        mk        +21.091 ( +8.75%) b/w 31/69 p_Holm=8.0e-04 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J         +13.032 ( +1.69%) b/w 19/81 p_Holm=6.5e-09 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +25.094 ( +3.47%) b/w 2/98 p_Holm=7.0e-16 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.482 (-26.64%) b/w 97/3 p_Holm=1.4e-15 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.320 (-24.99%) b/w 96/3 p_Holm=3.0e-15 *
+  P= 25 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -2.121 ( -0.80%) b/w 46/54 p_Holm=1.0e+00
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             J         +13.258 ( +1.72%) b/w 17/83 p_Holm=4.7e-09 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             cost      +25.264 ( +3.49%) b/w 0/100 p_Holm=4.7e-16 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             failed     -0.480 (-26.55%) b/w 97/3 p_Holm=1.3e-15 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             undeliv    -0.301 (-23.83%) b/w 96/4 p_Holm=1.6e-14 *
+  P= 25 vs NoRL supervised tree rule (depth 6, leaf 20)             mk         -1.911 ( -0.72%) b/w 51/49 p_Holm=1.0e+00
+  P= 50 vs TSALNS (no wind, r=0, as published)                      J        -395.190 (-32.63%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (no wind, r=0, as published)                      failed     -8.640 (-86.66%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              J        -119.250 (-12.75%) b/w 94/6 p_Holm=1.5e-15 *
+  P= 50 vs TSALNS (forecast wind, r=0)                              failed     -2.799 (-67.79%) b/w 100/0 p_Holm=4.7e-16 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 J         -17.768 ( -2.13%) b/w 83/17 p_Holm=8.8e-06 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 cost       +2.772 ( +0.37%) b/w 60/40 p_Holm=1.0e+00
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 failed     -0.411 (-23.60%) b/w 98/2 p_Holm=2.8e-15 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv    -0.334 (-25.76%) b/w 92/6 p_Holm=9.1e-15 *
+  P= 50 vs TSALNS (forecast wind, dev-tuned r=0.15)                 mk        +80.197 (+44.01%) b/w 5/95 p_Holm=8.8e-16 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        J          -8.688 ( -1.05%) b/w 58/42 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        cost       +0.150 ( +0.02%) b/w 37/63 p_Holm=9.1e-02
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        failed     -0.177 (-11.73%) b/w 86/14 p_Holm=4.5e-11 *
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        undeliv    -0.026 ( -2.63%) b/w 64/35 p_Holm=9.9e-02
+  P= 50 vs NoRL best fixed r=0.2 (train+dev)                        mk        +26.492 (+11.23%) b/w 21/79 p_Holm=4.9e-08 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J          +1.163 ( +0.14%) b/w 57/43 p_Holm=1.0e+00
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost      +25.216 ( +3.48%) b/w 2/98 p_Holm=6.8e-16 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed     -0.481 (-26.56%) b/w 97/3 p_Holm=1.4e-15 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv    -0.320 (-24.99%) b/w 96/3 p_Holm=3.0e-15 *
+  P= 50 vs NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk         -1.729 ( -0.65%) b/w 46/54 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             J          +1.395 ( +0.17%) b/w 28/30 p_Holm=1.0e+00
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             cost      +11.956 ( +1.62%) b/w 14/44 p_Holm=1.7e-04 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             failed     -0.211 (-13.71%) b/w 46/10 p_Holm=3.7e-06 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             undeliv    -0.181 (-15.83%) b/w 45/13 p_Holm=2.4e-04 *
+  P= 50 vs NoRL supervised tree rule (depth 3, leaf 20)             mk         +1.262 ( +0.48%) b/w 21/37 p_Holm=1.0e+00
+  P=100 vs TSALNS (no wind, r=0, as published)                      J        -827.099 (-48.38%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (no wind, r=0, as published)                      failed     -8.643 (-86.68%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              J        -259.068 (-22.69%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, r=0)                              failed     -2.801 (-67.84%) b/w 100/0 p_Holm=4.7e-16 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  J         -13.691 ( -1.53%) b/w 81/19 p_Holm=1.7e-04 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  cost      -18.993 ( -2.47%) b/w 85/15 p_Holm=1.9e-05 *
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  failed     +0.053 ( +4.16%) b/w 35/62 p_Holm=1.1e-01
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv    -0.033 ( -3.29%) b/w 47/50 p_Holm=1.0e+00
+  P=100 vs TSALNS (forecast wind, dev-tuned r=0.3)                  mk        +71.716 (+37.24%) b/w 9/91 p_Holm=4.2e-14 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        J          -8.149 ( -0.91%) b/w 61/39 p_Holm=2.7e-01
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        cost      -14.114 ( -1.85%) b/w 81/19 p_Holm=4.7e-07 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.060 ( +4.70%) b/w 25/74 p_Holm=2.7e-04 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.123 (+14.66%) b/w 22/76 p_Holm=1.8e-06 *
+  P=100 vs NoRL best fixed r=0.3 (train+dev)                        mk        +23.483 ( +9.75%) b/w 31/68 p_Holm=1.9e-04 *
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +0.504 ( +0.06%) b/w 29/33 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -1.348 ( -0.18%) b/w 31/31 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.019 ( +1.41%) b/w 18/43 p_Holm=1.0e-01
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.017 ( +1.82%) b/w 28/34 p_Holm=1.0e+00
+  P=100 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -2.873 ( -1.08%) b/w 35/27 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             J          -3.645 ( -0.41%) b/w 33/34 p_Holm=1.0e+00
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             cost       -3.568 ( -0.47%) b/w 44/23 p_Holm=2.5e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             failed     -0.001 ( -0.06%) b/w 22/43 p_Holm=3.4e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             undeliv    +0.015 ( +1.57%) b/w 25/42 p_Holm=7.3e-01
+  P=100 vs NoRL supervised tree rule (depth 8, leaf 20)             mk         +0.160 ( +0.06%) b/w 35/32 p_Holm=1.0e+00
+  P=200 vs TSALNS (no wind, r=0, as published)                      J       -1693.073 (-62.55%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (no wind, r=0, as published)                      failed     -8.648 (-86.73%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              J        -540.860 (-34.79%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, r=0)                              failed     -2.806 (-67.96%) b/w 100/0 p_Holm=4.7e-16 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  J          -0.113 ( -0.01%) b/w 64/36 p_Holm=4.7e-01
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  cost      -32.173 ( -4.12%) b/w 89/11 p_Holm=2.0e-08 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  failed     +0.160 (+13.79%) b/w 11/88 p_Holm=1.8e-13 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv    +0.083 ( +9.45%) b/w 25/72 p_Holm=2.3e-04 *
+  P=200 vs TSALNS (forecast wind, dev-tuned r=0.4)                  mk        +67.963 (+34.17%) b/w 10/90 p_Holm=4.0e-14 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        J          -3.906 ( -0.38%) b/w 50/50 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        cost      -14.801 ( -1.94%) b/w 83/17 p_Holm=7.7e-08 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        failed     +0.054 ( +4.30%) b/w 25/74 p_Holm=3.4e-04 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        undeliv    +0.126 (+15.01%) b/w 21/77 p_Holm=5.4e-07 *
+  P=200 vs NoRL best fixed r=0.3 (train+dev)                        mk        +26.041 (+10.81%) b/w 30/69 p_Holm=1.3e-05 *
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J          +0.635 ( +0.06%) b/w 25/31 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost       -2.035 ( -0.27%) b/w 29/27 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed     +0.013 ( +1.02%) b/w 18/37 p_Holm=2.9e-01
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv    +0.020 ( +2.13%) b/w 25/31 p_Holm=1.0e+00
+  P=200 vs NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk         -0.314 ( -0.12%) b/w 30/26 p_Holm=1.0e+00
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             J          +5.903 ( +0.59%) b/w 29/54 p_Holm=1.6e-01
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             cost      -17.192 ( -2.24%) b/w 77/6 p_Holm=7.8e-11 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             failed     +0.115 ( +9.56%) b/w 12/71 p_Holm=2.4e-08 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             undeliv    +0.122 (+14.54%) b/w 13/70 p_Holm=1.2e-07 *
+  P=200 vs NoRL supervised tree rule (depth 3, leaf 50)             mk         -4.547 ( -1.68%) b/w 52/31 p_Holm=1.0e+00
+
+=== robustness summary across seeds: mean rel. diff, #seeds RL significantly better / worse (Holm<0.05) ===
+  P= 25 TSALNS (forecast wind, dev-tuned r=0.15)                 J        -2.07%±0.58  better 5/5  worse 0/5
+  P= 25 TSALNS (forecast wind, dev-tuned r=0.15)                 cost     -1.57%±1.03  better 4/5  worse 0/5
+  P= 25 TSALNS (forecast wind, dev-tuned r=0.15)                 failed  -10.63%±7.33  better 3/5  worse 0/5
+  P= 25 TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv -11.80%±7.52  better 3/5  worse 0/5
+  P= 25 TSALNS (forecast wind, dev-tuned r=0.15)                 mk      +45.06%±0.89  better 0/5  worse 5/5
+  P= 25 NoRL best fixed r=0.1 (train+dev)                        J        -0.60%±0.59  better 0/5  worse 1/5
+  P= 25 NoRL best fixed r=0.1 (train+dev)                        cost     +0.76%±1.05  better 0/5  worse 4/5
+  P= 25 NoRL best fixed r=0.1 (train+dev)                        failed  -20.84%±6.49  better 5/5  worse 0/5
+  P= 25 NoRL best fixed r=0.1 (train+dev)                        undeliv -11.50%±7.55  better 5/5  worse 0/5
+  P= 25 NoRL best fixed r=0.1 (train+dev)                        mk       +9.71%±0.67  better 0/5  worse 5/5
+  P= 25 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J        +0.56%±0.60  better 0/5  worse 3/5
+  P= 25 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost     +1.48%±1.06  better 0/5  worse 5/5
+  P= 25 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed  -14.10%±7.04  better 5/5  worse 0/5
+  P= 25 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv -10.89%±7.60  better 4/5  worse 0/5
+  P= 25 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk       +0.07%±0.61  better 0/5  worse 0/5
+  P= 25 NoRL supervised tree rule (depth 6, leaf 20)             J        +0.59%±0.60  better 0/5  worse 4/5
+  P= 25 NoRL supervised tree rule (depth 6, leaf 20)             cost     +1.50%±1.06  better 0/5  worse 5/5
+  P= 25 NoRL supervised tree rule (depth 6, leaf 20)             failed  -13.99%±7.05  better 5/5  worse 0/5
+  P= 25 NoRL supervised tree rule (depth 6, leaf 20)             undeliv  -9.50%±7.72  better 4/5  worse 0/5
+  P= 25 NoRL supervised tree rule (depth 6, leaf 20)             mk       +0.15%±0.61  better 0/5  worse 0/5
+  P= 50 TSALNS (forecast wind, dev-tuned r=0.15)                 J        -2.18%±0.26  better 5/5  worse 0/5
+  P= 50 TSALNS (forecast wind, dev-tuned r=0.15)                 cost     -0.28%±0.60  better 1/5  worse 0/5
+  P= 50 TSALNS (forecast wind, dev-tuned r=0.15)                 failed  -18.54%±3.17  better 5/5  worse 0/5
+  P= 50 TSALNS (forecast wind, dev-tuned r=0.15)                 undeliv -19.83%±4.76  better 5/5  worse 0/5
+  P= 50 TSALNS (forecast wind, dev-tuned r=0.15)                 mk      +44.53%±0.77  better 0/5  worse 5/5
+  P= 50 NoRL best fixed r=0.2 (train+dev)                        J        -1.10%±0.26  better 0/5  worse 0/5
+  P= 50 NoRL best fixed r=0.2 (train+dev)                        cost     -0.62%±0.60  better 0/5  worse 0/5
+  P= 50 NoRL best fixed r=0.2 (train+dev)                        failed   -5.88%±3.67  better 4/5  worse 0/5
+  P= 50 NoRL best fixed r=0.2 (train+dev)                        undeliv  +5.15%±6.24  better 0/5  worse 0/5
+  P= 50 NoRL best fixed r=0.2 (train+dev)                        mk      +11.63%±0.59  better 0/5  worse 5/5
+  P= 50 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  J        +0.09%±0.26  better 0/5  worse 0/5
+  P= 50 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  cost     +2.82%±0.62  better 0/5  worse 5/5
+  P= 50 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  failed  -21.70%±3.05  better 5/5  worse 0/5
+  P= 50 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  undeliv -19.01%±4.81  better 5/5  worse 0/5
+  P= 50 NoRL best fixed (r_s,r_l)=(0.3, 0.1) (train+dev) [main]  mk       -0.29%±0.53  better 0/5  worse 0/5
+  P= 50 NoRL supervised tree rule (depth 3, leaf 20)             J        +0.12%±0.26  better 0/5  worse 0/5
+  P= 50 NoRL supervised tree rule (depth 3, leaf 20)             cost     +0.97%±0.61  better 0/5  worse 3/5
+  P= 50 NoRL supervised tree rule (depth 3, leaf 20)             failed   -7.99%±3.59  better 4/5  worse 0/5
+  P= 50 NoRL supervised tree rule (depth 3, leaf 20)             undeliv  -9.10%±5.40  better 4/5  worse 0/5
+  P= 50 NoRL supervised tree rule (depth 3, leaf 20)             mk       +0.85%±0.53  better 0/5  worse 0/5
+  P=100 TSALNS (forecast wind, dev-tuned r=0.3)                  J        -1.14%±0.20  better 5/5  worse 0/5
+  P=100 TSALNS (forecast wind, dev-tuned r=0.3)                  cost     -2.26%±0.44  better 5/5  worse 0/5
+  P=100 TSALNS (forecast wind, dev-tuned r=0.3)                  failed   +5.63%±2.64  better 0/5  worse 2/5
+  P=100 TSALNS (forecast wind, dev-tuned r=0.3)                  undeliv  -3.45%±3.10  better 1/5  worse 0/5
+  P=100 TSALNS (forecast wind, dev-tuned r=0.3)                  mk      +37.09%±0.59  better 0/5  worse 5/5
+  P=100 NoRL best fixed r=0.3 (train+dev)                        J        -0.52%±0.20  better 0/5  worse 0/5
+  P=100 NoRL best fixed r=0.3 (train+dev)                        cost     -1.64%±0.44  better 4/5  worse 0/5
+  P=100 NoRL best fixed r=0.3 (train+dev)                        failed   +6.18%±2.66  better 0/5  worse 4/5
+  P=100 NoRL best fixed r=0.3 (train+dev)                        undeliv +14.46%±3.67  better 0/5  worse 4/5
+  P=100 NoRL best fixed r=0.3 (train+dev)                        mk       +9.63%±0.47  better 0/5  worse 5/5
+  P=100 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J        +0.45%±0.21  better 0/5  worse 0/5
+  P=100 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost     +0.03%±0.45  better 0/5  worse 1/5
+  P=100 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed   +2.85%±2.57  better 0/5  worse 1/5
+  P=100 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv  +1.64%±3.26  better 0/5  worse 0/5
+  P=100 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk       -1.18%±0.42  better 0/5  worse 0/5
+  P=100 NoRL supervised tree rule (depth 8, leaf 20)             J        -0.02%±0.21  better 0/5  worse 0/5
+  P=100 NoRL supervised tree rule (depth 8, leaf 20)             cost     -0.26%±0.45  better 3/5  worse 0/5
+  P=100 NoRL supervised tree rule (depth 8, leaf 20)             failed   +1.36%±2.53  better 0/5  worse 1/5
+  P=100 NoRL supervised tree rule (depth 8, leaf 20)             undeliv  +1.40%±3.25  better 0/5  worse 0/5
+  P=100 NoRL supervised tree rule (depth 8, leaf 20)             mk       -0.05%±0.43  better 0/5  worse 0/5
+  P=200 TSALNS (forecast wind, dev-tuned r=0.4)                  J        +0.30%±0.41  better 0/5  worse 0/5
+  P=200 TSALNS (forecast wind, dev-tuned r=0.4)                  cost     -3.69%±0.56  better 5/5  worse 0/5
+  P=200 TSALNS (forecast wind, dev-tuned r=0.4)                  failed  +13.73%±3.29  better 0/5  worse 5/5
+  P=200 TSALNS (forecast wind, dev-tuned r=0.4)                  undeliv  +7.34%±4.62  better 0/5  worse 4/5
+  P=200 TSALNS (forecast wind, dev-tuned r=0.4)                  mk      +32.79%±1.20  better 0/5  worse 5/5
+  P=200 NoRL best fixed r=0.3 (train+dev)                        J        -0.07%±0.40  better 1/5  worse 0/5
+  P=200 NoRL best fixed r=0.3 (train+dev)                        cost     -1.50%±0.58  better 4/5  worse 0/5
+  P=200 NoRL best fixed r=0.3 (train+dev)                        failed   +4.24%±3.02  better 0/5  worse 4/5
+  P=200 NoRL best fixed r=0.3 (train+dev)                        undeliv +12.80%±4.86  better 0/5  worse 4/5
+  P=200 NoRL best fixed r=0.3 (train+dev)                        mk       +9.68%±0.99  better 0/5  worse 5/5
+  P=200 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  J        +0.38%±0.41  better 1/5  worse 0/5
+  P=200 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  cost     +0.17%±0.59  better 0/5  worse 1/5
+  P=200 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  failed   +0.97%±2.92  better 1/5  worse 0/5
+  P=200 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  undeliv  +0.17%±4.31  better 1/5  worse 0/5
+  P=200 NoRL best fixed (r_s,r_l)=(0.4, 0.2) (train+dev) [main]  mk       -1.14%±0.89  better 0/5  worse 0/5
+  P=200 NoRL supervised tree rule (depth 3, leaf 50)             J        +0.90%±0.41  better 0/5  worse 2/5
+  P=200 NoRL supervised tree rule (depth 3, leaf 50)             cost     -1.81%±0.58  better 5/5  worse 0/5
+  P=200 NoRL supervised tree rule (depth 3, leaf 50)             failed   +9.51%±3.17  better 0/5  worse 4/5
+  P=200 NoRL supervised tree rule (depth 3, leaf 50)             undeliv +12.33%±4.84  better 0/5  worse 4/5
+  P=200 NoRL supervised tree rule (depth 3, leaf 50)             mk       -2.68%±0.88  better 1/5  worse 0/5

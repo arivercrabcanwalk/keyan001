@@ -1,0 +1,12 @@
+{
+  "outer_iterations": 100000,
+  "local_iterations": 100,
+  "alns_iterations": 5000,
+  "weight_lower": 0.1,
+  "weight_upper": 5.0,
+  "initial_temperature": 1000.0,
+  "cooling_rate": 0.95,
+  "final_temperature": 0.001,
+  "strict_deadline": true,
+  "profile": "research-budget wrapper around frozen V6 engine; wall-clock deadline controls stopping"
+}

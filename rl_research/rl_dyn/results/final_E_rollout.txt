@@ -1,0 +1,30 @@
+subset      method     days         J    ontime  ontime_h      resp        mk      cost  ms/dec
+rollb30_1   RL3         500   872.761     0.934     0.905     5.429   144.865   769.349  0.062
+rollb30_1   static30    500   876.739     0.927     0.892     6.034   139.906   769.206  0.004
+rollb30_1   rollb30_1   500   894.815     0.873     0.796     8.037   122.197   769.517  2.928
+rollb30_8   RL3         500   872.761     0.934     0.905     5.429   144.865   769.349  0.062
+rollb30_8   static30    500   876.739     0.927     0.892     6.034   139.906   769.206  0.004
+rollb30_8   rollb30_8   500   882.723     0.901     0.846     7.071   127.760   769.663  48.784
+rollb30_32  RL3         150   862.362     0.932     0.910     5.287   145.111   759.318  0.057
+rollb30_32  static30    150   858.420     0.937     0.916     5.125   136.877   759.181  0.004
+rollb30_32  rollb30_32   150   860.172     0.920     0.887     5.896   127.475   759.568  237.412
+
+RL3 - rollout (instance-level, Holm over 18)
+rollb30_1   J           -22.054   -2.46% win 45 lose  5 p=1.8e-11 p_holm=1.9e-10
+rollb30_1   ontime        0.061    6.99% win 49 lose  1 p=1.8e-14 p_holm=2.5e-13
+rollb30_1   ontime_h      0.109   13.73% win 48 lose  2 p=3.4e-14 p_holm=4.4e-13
+rollb30_1   resp         -2.608  -32.45% win 50 lose  0 p=1.8e-15 p_holm=3.2e-14
+rollb30_1   mk           22.668   18.55% win  0 lose 50 p=1.8e-15 p_holm=3.2e-14
+rollb30_1   cost         -0.168   -0.02% win 29 lose 20 p=0.11 p_holm=0.34
+rollb30_8   J            -9.961   -1.13% win 36 lose 14 p=0.00014 p_holm=0.0011
+rollb30_8   ontime        0.032    3.60% win 43 lose  7 p=1.4e-09 p_holm=1.4e-08
+rollb30_8   ontime_h      0.060    7.06% win 42 lose  7 p=6.4e-08 p_holm=5.8e-07
+rollb30_8   resp         -1.642  -23.22% win 50 lose  0 p=1.8e-15 p_holm=3.2e-14
+rollb30_8   mk           17.105   13.39% win  0 lose 50 p=1.8e-15 p_holm=3.2e-14
+rollb30_8   cost         -0.314   -0.04% win 28 lose 21 p=0.041 p_holm=0.16
+rollb30_32  J             2.190    0.25% win 18 lose 32 p=0.31 p_holm=0.34
+rollb30_32  ontime        0.011    1.25% win 28 lose 19 p=0.03 p_holm=0.15
+rollb30_32  ontime_h      0.023    2.58% win 28 lose 17 p=0.0083 p_holm=0.05
+rollb30_32  resp         -0.608  -10.32% win 37 lose 13 p=0.00019 p_holm=0.0013
+rollb30_32  mk           17.636   13.83% win  1 lose 49 p=3.4e-14 p_holm=4.4e-13
+rollb30_32  cost         -0.250   -0.03% win 29 lose 20 p=0.15 p_holm=0.34

@@ -1,0 +1,56 @@
+{
+  "version": "CA-RL-TSALNS-v5-development-20261101",
+  "status": "development_snapshot_not_final_freeze",
+  "git_commit": null,
+  "versioning": "content-addressed; no Git repository in this workspace",
+  "source_sha256": "6faccf7775a700286183e1588e42447f2a378ecf3f2c096ebf3f84680840d8ad",
+  "source_file_count": 82,
+  "state_schema": "carl-state-v4-operator-level-history-75",
+  "action_schema": "carl-action-v4-explicit-17-operators-x-3-intensity-51",
+  "reward_schema": "current-cost-delta-time-best-v2",
+  "n_features": 75,
+  "n_actions": 51,
+  "official_java_source_lock_sha256": "75969858622a8f44e02dc0f269e0fd7241f409c94186a0d9e37e0e2717df6ccf",
+  "paper30_manifest_sha256": "8d51adb421018d0d3392fa6a62f836cd51272c3169bd9721cce355c84f06070d",
+  "formal_v3_manifest_sha256": "be65b6a0fe2b47b7e2faf123a1c7eb4f18ac92560fe818b61a593467e6b6a37e",
+  "formal_v3_generator_sha256": "fe5cb5e11142ad67ec9c7fe1176e82f9f6da574326bcf254e49cf1eba4aa41af",
+  "analysis_artifacts": {
+    "rl_global_transfer": "8801221a4b6bfe222f77775bf82240c20e7ab7c19a964625790ab81578a1f1a1",
+    "global_joint_scope": "4a8a71ec2fb567eda7d1784751029e4d5fb97fb66bde3fa86426c74c572e0646",
+    "paper30": "bdae928836b28827df1cc6546d0b33ef2ade4916f594266a1020ef9dc6d4b648"
+  },
+  "models": {
+    "../training_runs_v5_final72/BC_seed11/bc.pt": {
+      "sha256": "d78c4b8e6125daf8a7c098ba72e14deea8f6b1e77f32bd176ceaf365bffe07d5"
+    },
+    "../training_runs_v5_final72/BC_seed23/bc.pt": {
+      "sha256": "597911925765e42caac7221533053f1a27e4057c1063955343fa2eb3ae4d8683"
+    },
+    "../training_runs_v5_final72/BC_seed37/bc.pt": {
+      "sha256": "4912784d16c480223c3b0b7ca6e29a12a02007576119eca4c8024ad6428fbf34"
+    },
+    "../training_runs_v5_final72/PPO_seed11/best.pt": {
+      "sha256": "c782c6a2e05dbe5aecf03f45e05c7290402778cb161098d674370933791aeb91"
+    },
+    "../training_runs_v5_final72/PPO_seed23/best.pt": {
+      "sha256": "8715e4f0510e319c0ebb1d8493f1c101e925d20053e4259ece6079a9f1310e15"
+    },
+    "../training_runs_v5_final72/PPO_seed37/best.pt": {
+      "sha256": "d0eca247664caf0f377acce5942b8fd2c29f158db8a7c209ee4f5c93943fe64a"
+    },
+    "../training_runs_v5_a2c_final72/A2C_seed11/best.pt": {
+      "sha256": "11199c0e4a125b2aa26212b3d3ecafa250abce347c6804f67258399ee7537c3a"
+    },
+    "../training_runs_v5_a2c_final72/A2C_seed23/best.pt": {
+      "sha256": "fe1bb1dc7a76cadd9652883999ed6b6a61d70ef3549b6b3b89ab2eeb32c9c1fa"
+    },
+    "../training_runs_v5_a2c_final72/A2C_seed37/best.pt": {
+      "sha256": "b12b75cece92949bb3f80c56e64b94e668ce0bd4f6d12af811a1a5ffa012f9e1"
+    }
+  },
+  "environment": {
+    "python": "3.11.14"
+  },
+  "cpu_max": "1200000 100000",
+  "note": "Development snapshot; BC Global ablations running. Formal v3 mapset was revised before any optimizer access to include explicit alternative-receiver coverage strata. Not a final freeze."
+}

@@ -1,0 +1,707 @@
+{
+  "schema": "CA-RL-TSALNS-formal-v3",
+  "status": "GENERATED_AND_WITNESS_VALIDATED_NOT_OPENED_TO_SOLVER",
+  "purpose": "independent formal evaluation; not Liu original data",
+  "generator_sha256": "a14303697fa2caf6418f667f930208e5abad1856067d211a5be828bb7dce30fc",
+  "counts": {
+    "main": 30,
+    "stress": 6,
+    "total": 36
+  },
+  "independence": {
+    "hash_overlap_with_official_or_locked_v2": 0,
+    "source_directories": [
+      "external/LRPHSD/data/Instances_Alg",
+      "datasets/locked_v2"
+    ]
+  },
+  "selection_policy": "all predeclared maps retained; no result-dependent exclusion",
+  "witness_policy": "each target is served exactly once by a feasible one-target trip; independent evaluator used",
+  "solver_policy": "do not run any optimizer on this suite before algorithm/source/protocol freeze",
+  "rows": [
+    {
+      "name": "main_ns08_nt050_uniform_s21001",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "uniform",
+      "generation_seed": 21851,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "f149a4e8a7a5b6d418838a006103e71e315c2983d86259129f4e1b10ffb2e56b",
+      "witness_sha256": "e5e34053f9b7d6ad04ceb005d60a1580215fe5b8c54ea895007c3e7301f2e45c",
+      "witness_cost": 684.6312899990874,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns08_nt050_uniform_s21002",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "uniform",
+      "generation_seed": 21852,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "93c37ee404e5439b760f2d6e69a520455bcab99cbad284afbfb88b4a388d0170",
+      "witness_sha256": "6a1a710e6ace331d3a94c373a6df2be4edc0bd8244d70f22ad57b15b2803bdbf",
+      "witness_cost": 689.7818090226775,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns08_nt050_clustered_s21001",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "clustered",
+      "generation_seed": 21851,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "477c252039bc25e97cea5551716a4099d6d8dd2ffc113902f982e99dde50679e",
+      "witness_sha256": "77c199a9d98480aa068e82ee9b57140177fbf6435c2c4f9b411e7c26f5736590",
+      "witness_cost": 634.1610348553445,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns08_nt050_clustered_s21002",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "clustered",
+      "generation_seed": 21852,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "158a3244972a3e5c43b9f752a9d57909427e69f1e30857f960ebb66bfd78e8f0",
+      "witness_sha256": "bb7b652e1492234a6685a2e7cbdded0cb5732d253a1640154127a33866f9bc51",
+      "witness_cost": 635.5201996001417,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns08_nt050_boundary_s21001",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "boundary",
+      "generation_seed": 21851,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "f22e1a1d8e9ece6e250735f573aef1a04fc7a3126f1a9831c915338a84bdecd0",
+      "witness_sha256": "09481e3b958161783e3637fb9c24341d356a5490ede66a306f600f62b83b5810",
+      "witness_cost": 860.0414963903172,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns08_nt050_boundary_s21002",
+      "role": "main",
+      "stations": 8,
+      "targets": 50,
+      "distribution": "boundary",
+      "generation_seed": 21852,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "b0ea9fda059703af08bd066d17a6f509b2ec70bf3b45d602be5d125107dc2467",
+      "witness_sha256": "5b2cd95ed99d69b400811c8ca20a2dd0fc1dc52995011fbe5847dfe557905cd7",
+      "witness_cost": 860.4707063091023,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_uniform_s21001",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "uniform",
+      "generation_seed": 22301,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "eeb8697c866fec469bdb95d11572ef0d75132b15d1791bbefc38ac7c08c5adac",
+      "witness_sha256": "bc38e5ba57be4df189632815799798af8aa90b50096953ba31d5ea723a369a51",
+      "witness_cost": 1224.1332338405443,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_uniform_s21002",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "uniform",
+      "generation_seed": 22302,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "1309670702aecd6ca64860eb7abc22c88bfbb9b7e5a61cdab8fba65cb2d16965",
+      "witness_sha256": "c6532abd12f8f3e1c2f9bd9496538c8fd93d5de1f3baf1fd36349029e9204e88",
+      "witness_cost": 1234.0530684810985,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_clustered_s21001",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "clustered",
+      "generation_seed": 22301,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "591032fb9ae9cc5f1c3bda23ca30cdedffe95361c3f39519e571e41eca29575d",
+      "witness_sha256": "6f8dd3343e13d48b86cbb936e3b35cb2e72ee373ef0f00a2afc8a924f7b716e8",
+      "witness_cost": 1102.2351589305229,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_clustered_s21002",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "clustered",
+      "generation_seed": 22302,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "95a048980d7e5d9a96ed1d7138394f7d90dcf97c310edee7b7f894a97457c526",
+      "witness_sha256": "e3c5127eaa690c7a83b4507b0811bb05822f90c83b11c3e26d914824d9a75c7b",
+      "witness_cost": 1104.8528930725545,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_boundary_s21001",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "boundary",
+      "generation_seed": 22301,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "a071653b4e0a13f1bdc506df3bc6974294ab286d5273c087b24ece7b0545df5e",
+      "witness_sha256": "9c02df4f9151540f72fdfaf191143134b510c2a750a34f44b328e2b0f352f7e8",
+      "witness_cost": 1548.855547261241,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns12_nt100_boundary_s21002",
+      "role": "main",
+      "stations": 12,
+      "targets": 100,
+      "distribution": "boundary",
+      "generation_seed": 22302,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "6eed79c8239b92c7e9d92098af88c6f820a1ee75687d6bfbede08f5b41d036c1",
+      "witness_sha256": "94aeda75de15d8ecca2a6087fbf638a001251f0b72e985c4856730ac63b31b48",
+      "witness_cost": 1549.6822001541395,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_uniform_s21001",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "uniform",
+      "generation_seed": 22751,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "e1fb64cee2cb810af217d7e1ce80ff67aebad0188655a700b40ab8ce200f3e18",
+      "witness_sha256": "54211a9881d9c41289327e17d0cab895e1b63d630b41178bc818fd35580c2c93",
+      "witness_cost": 1743.0372150589828,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_uniform_s21002",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "uniform",
+      "generation_seed": 22752,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "4c7551690b04951d4ec19edcef19ab72bc16fc4eab51be9ef47ca60d59b7b12f",
+      "witness_sha256": "92decb3868cefc3b2e244987b235f19e4aa47161ba8070cd80a266ae65ec442e",
+      "witness_cost": 1769.732485889252,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_clustered_s21001",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "clustered",
+      "generation_seed": 22751,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "8d820f4c78791ed81b62b685c3879e88cd1eec77567aa163fc118d74f4d6db4f",
+      "witness_sha256": "0c3da61730517a7b3f494aae9a06c58cafd5b16e3ee23130b70b6968da9b6334",
+      "witness_cost": 1564.873709529727,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_clustered_s21002",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "clustered",
+      "generation_seed": 22752,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "1966317dc9cfe8e2f2b7b4b512a3c8f9dc12865e59d2f50abf832da212a09ceb",
+      "witness_sha256": "7cfe3e1c83709a5d2b968f26ab287f764ebcd50618f01369bc2c38daa3ceba7f",
+      "witness_cost": 1571.9182948862945,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_boundary_s21001",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "boundary",
+      "generation_seed": 22751,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "c7ac8bf8faa0220c7191bd7536d4f961d6236deb86873800f8ad6c3ff2d8c6e3",
+      "witness_sha256": "b53fe7ca1c87189f9c30582eca4fe869138b7b2c543e490581fe2a60c76aa356",
+      "witness_cost": 2235.9531012583366,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns16_nt150_boundary_s21002",
+      "role": "main",
+      "stations": 16,
+      "targets": 150,
+      "distribution": "boundary",
+      "generation_seed": 22752,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "23dbd5ae216a29556bf215fd214536403007292052717a689e86ea85580fbcf7",
+      "witness_sha256": "a8007c71fdb90178ef45596deba5931b0e74bf5b3f8abfc58f35b171b7508397",
+      "witness_cost": 2238.177707159785,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_uniform_s21001",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "uniform",
+      "generation_seed": 23601,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "3d219fe75ea082609c7973d0bd93f53fa1ed208095d4f80ec94542ab148ef409",
+      "witness_sha256": "9dfcba7c266a3501bf9ffe093c6292ca441880b61e3d93756d218d8fa9571883",
+      "witness_cost": 2451.4594803074933,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_uniform_s21002",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "uniform",
+      "generation_seed": 23602,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "1663f04f8385b2ca95ef8bce376078e2da5f09efb654f7440f76db03d80e4c37",
+      "witness_sha256": "200153559f43b82121c9c7bee4ebe45a75665aa5f6d3fe669f33f1e1f84b91c2",
+      "witness_cost": 2412.444303365528,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_clustered_s21001",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "clustered",
+      "generation_seed": 23601,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "e3e4988322d9e1d72b9ce897e4c8684c883f782485b18777406086ca033fd7b5",
+      "witness_sha256": "133bed43b05dc5a0aafad94a61f53193bfcc8937e543c1ef6bdf8aa7f0c353fc",
+      "witness_cost": 2205.312918414317,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_clustered_s21002",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "clustered",
+      "generation_seed": 23602,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "2d12e8f5bf1932c80e1400df3396fcc7f28e165cd885dbabe97fa3a36c1eb810",
+      "witness_sha256": "7831181abca2916698c4ffc6be7facd4eb0ca28f70171c94e90594b9bd3f333b",
+      "witness_cost": 2195.0172467252014,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_boundary_s21001",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "boundary",
+      "generation_seed": 23601,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "5be8c4bf25d8f6b71090dd76c70dbb71eceb9c022a7ca4ffaa2f85bc65c2306c",
+      "witness_sha256": "b63331f36f1e02378d221092cd48bf6912af55f446dbd1ea1da352734e54330a",
+      "witness_cost": 3097.97717892097,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns24_nt200_boundary_s21002",
+      "role": "main",
+      "stations": 24,
+      "targets": 200,
+      "distribution": "boundary",
+      "generation_seed": 23602,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "2e2c98c7202828d700eec8d3d7a7a7f2acfbe0f8c9411a6ebe5f2ba7fcb25007",
+      "witness_sha256": "da226060b642d0ca82d054749285573ccd598d3cdc13c3ed5655557efe5bc37f",
+      "witness_cost": 3094.7259141663226,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_uniform_s21001",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "uniform",
+      "generation_seed": 24501,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "af67302668dc28246fa8963b3a503d959fa88ab2da6f1cdcf99228a59405851b",
+      "witness_sha256": "ecd7bf5a6415bb33fdec0e8f9131a24bba22a74800a066946bd6d82a9383d04d",
+      "witness_cost": 3488.842795484373,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_uniform_s21002",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "uniform",
+      "generation_seed": 24502,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        0.0,
+        3600.0
+      ],
+      "instance_sha256": "ea4acbdff50f7bc0190e924b145fa4b4bead0f4918a03492a83ce44c4395ed40",
+      "witness_sha256": "b2855138580e3c34f9a502c52ede69cfb32571b3437f2fe9f65577dd58b5aa2c",
+      "witness_cost": 3450.8496878239766,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_clustered_s21001",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "clustered",
+      "generation_seed": 24501,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "df4ad5bc3386ac55f758c2441baf3d839a87afb111b9d09e11520353a42b469f",
+      "witness_sha256": "b76040d5dd7b36f05b600dcca29d997e1d29182610c7983823edeba75d17576d",
+      "witness_cost": 3130.47795991669,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_clustered_s21002",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "clustered",
+      "generation_seed": 24502,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        250.0,
+        1200.0
+      ],
+      "instance_sha256": "35b9cacfc7566f968a9a54001fc812760f21aebab40b57c2fa419fb929ec7042",
+      "witness_sha256": "2794ad0045d95bfb0682c7398f5972bed8d33d6cb4de17687586aca064dfc913",
+      "witness_cost": 3120.452000951231,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_boundary_s21001",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "boundary",
+      "generation_seed": 24501,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "3142663cf1976d591495ae43e27c504de4145928d108d9e11bae565ebbf4e201",
+      "witness_sha256": "263a135666132126d9862d3ed68a2c5ec1b59f39c215346998bfccabed0c0c57",
+      "witness_cost": 4472.1368996303645,
+      "witness_feasible": true
+    },
+    {
+      "name": "main_ns32_nt300_boundary_s21002",
+      "role": "main",
+      "stations": 32,
+      "targets": 300,
+      "distribution": "boundary",
+      "generation_seed": 24502,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4600.0,
+        4900.0
+      ],
+      "instance_sha256": "079414f3fcdd151d6d7e45fd2622160684adfd920d8c446cd653cea4f6aa3638",
+      "witness_sha256": "cdeeaa1cc03283f7bfc69ae2692def44f2121c7c0111adebf2290b78809f5bfd",
+      "witness_cost": 4468.970807319379,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_high_density_route",
+      "role": "stress",
+      "stations": 8,
+      "targets": 300,
+      "distribution": "uniform",
+      "generation_seed": 31001,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 15.0,
+      "target_radius_band_m": [
+        0.0,
+        3900.0
+      ],
+      "instance_sha256": "d01ef928375b08270ab30148d4a0e69ba277c5dfac208aa6d6c0df31bee92a8c",
+      "witness_sha256": "00e2c0f1cf6ad8991812a43967519bc0d656e34bccda4a3f13f2ad14478a824c",
+      "witness_cost": 3268.783480168595,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_sparse_long_distance",
+      "role": "stress",
+      "stations": 8,
+      "targets": 64,
+      "distribution": "sparse",
+      "generation_seed": 31002,
+      "station_spacing_m": 22000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4500.0,
+        4950.0
+      ],
+      "instance_sha256": "117df034d5e05e7cefb0a5ed847ac4c019f3a3af9496aea0e8df6aea023c6217",
+      "witness_sha256": "85716f1496ff5aa5c9b4bb367d01e7e1b7723df0444a5d105b6c0abede2807d1",
+      "witness_cost": 1002.4077055298307,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_tight_receiver_coverage",
+      "role": "stress",
+      "stations": 16,
+      "targets": 160,
+      "distribution": "tight_coverage",
+      "generation_seed": 31003,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4850.0,
+        4980.0
+      ],
+      "instance_sha256": "465e58284751003a99db0024696fbc5ea501caec0d03a4a1aae0406e6db09d49",
+      "witness_sha256": "c6d6c48b500a9c11484814a260f60ded95f30513c7e0d6ea7e60886ac1f8b210",
+      "witness_cost": 2367.4680783972844,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_sd_ld_work_imbalance",
+      "role": "stress",
+      "stations": 8,
+      "targets": 160,
+      "distribution": "load_imbalance",
+      "generation_seed": 31004,
+      "station_spacing_m": 12000,
+      "target_energy_mode": "imbalanced",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4500.0,
+        4900.0
+      ],
+      "instance_sha256": "8a254af084e9b4b29e0ecdd30be38fff714d46e4a1d5e9091a15727c03ad59bc",
+      "witness_sha256": "ae6a5ae94f8f3c3fad8dd6f92f0694122f990c21fe34e74c24feef71a1e506c8",
+      "witness_cost": 1984.1809517975048,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_boundary_concentration",
+      "role": "stress",
+      "stations": 24,
+      "targets": 192,
+      "distribution": "boundary",
+      "generation_seed": 31005,
+      "station_spacing_m": 13000,
+      "target_energy_mode": "normal",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4800.0,
+        4980.0
+      ],
+      "instance_sha256": "5dcfaa7758de3c949f319a93a83698e2da19ba2c6a215f37e84d507ad6896cf3",
+      "witness_sha256": "f062cf23b9cc56a0ac0c4f8f703d9dce4ee86f9ae916af1d077de0745f6e1ffa",
+      "witness_cost": 3043.7969426234936,
+      "witness_feasible": true
+    },
+    {
+      "name": "stress_joint_coverage_energy",
+      "role": "stress",
+      "stations": 12,
+      "targets": 120,
+      "distribution": "combined",
+      "generation_seed": 31006,
+      "station_spacing_m": 15000,
+      "target_energy_mode": "ld_only",
+      "service_minutes_per_target": 10.0,
+      "target_radius_band_m": [
+        4900.0,
+        4990.0
+      ],
+      "instance_sha256": "7eb7491a1b02380380ecf9c122b201bffa885487e128e58da8b272cf9d69da93",
+      "witness_sha256": "efbc5c18d63e688da222501ba90a8593049019fcec608f6e2439d2fc0913d750",
+      "witness_cost": 1780.448304165157,
+      "witness_feasible": true
+    }
+  ]
+}

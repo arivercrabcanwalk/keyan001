@@ -1,0 +1,40 @@
+design c' test: n=100 cases (Liu-50 x 2 strong-wind contexts, front scenarios per case), P=100
+method                                                  J     cost  fail/day  makespan
+TSALNS (no wind, r=0, as published), plan order   1480.67   701.30    7.7937     160.6
+TSALNS (forecast wind, r=0), plan order            799.32   711.05    0.8827     168.0
+ours r=0.15, plan order                            724.73   714.03    0.1070     228.8
+NoRL static reorder @ forecast T                   718.53   711.23    0.0730     227.4
+NoRL robust SAA reorder (16 scen.)                 714.72   709.52    0.0520     226.2
+NoRL online ratio rule                             717.91   711.31    0.0660     227.6
+NoRL-model rolling SAA (online, 16 scen.)          715.33   709.56    0.0577     226.2
+RL online next-trip policy                         717.86   711.36    0.0650     227.6
+ref: clairvoyant oracle order                      708.16   705.03    0.0313     224.5
+RL - baseline (negative = RL better), Holm over 28 tests
+  vs TSALNS (no wind, r=0, as published), plan order J     diff  -762.811 (-51.52%) better/worse 100/0  p=3.90e-18  p_Holm=1.09e-16
+  vs TSALNS (no wind, r=0, as published), plan order cost  diff   +10.055 ( +1.43%) better/worse 34/66  p=8.01e-04  p_Holm=1.04e-02
+  vs TSALNS (no wind, r=0, as published), plan order fail  diff    -7.729 (-99.17%) better/worse 100/0  p=3.89e-18  p_Holm=1.09e-16
+  vs TSALNS (no wind, r=0, as published), plan order mk    diff   +66.912 (+41.65%) better/worse 4/96  p=4.34e-17  p_Holm=1.13e-15
+  vs TSALNS (forecast wind, r=0), plan order        J     diff   -81.458 (-10.19%) better/worse 80/20  p=7.43e-12  p_Holm=1.19e-10
+  vs TSALNS (forecast wind, r=0), plan order        cost  diff    +0.309 ( +0.04%) better/worse 55/45  p=4.25e-01  p_Holm=1.00e+00
+  vs TSALNS (forecast wind, r=0), plan order        fail  diff    -0.818 (-92.64%) better/worse 82/1  p=3.09e-15  p_Holm=7.10e-14
+  vs TSALNS (forecast wind, r=0), plan order        mk    diff   +59.509 (+35.41%) better/worse 12/88  p=1.87e-15  p_Holm=4.50e-14
+  vs ours r=0.15, plan order                        J     diff    -6.870 ( -0.95%) better/worse 78/21  p=1.41e-11  p_Holm=2.11e-10
+  vs ours r=0.15, plan order                        cost  diff    -2.670 ( -0.37%) better/worse 81/18  p=1.08e-13  p_Holm=2.16e-12
+  vs ours r=0.15, plan order                        fail  diff    -0.042 (-39.25%) better/worse 18/6  p=1.06e-03  p_Holm=1.27e-02
+  vs ours r=0.15, plan order                        mk    diff    -1.288 ( -0.56%) better/worse 70/26  p=1.01e-07  p_Holm=1.42e-06
+  vs NoRL static reorder @ forecast T               J     diff    -0.674 ( -0.09%) better/worse 50/49  p=8.94e-01  p_Holm=1.00e+00
+  vs NoRL static reorder @ forecast T               cost  diff    +0.126 ( +0.02%) better/worse 46/53  p=2.75e-01  p_Holm=1.00e+00
+  vs NoRL static reorder @ forecast T               fail  diff    -0.008 (-10.96%) better/worse 12/12  p=3.59e-01  p_Holm=1.00e+00
+  vs NoRL static reorder @ forecast T               mk    diff    +0.148 ( +0.07%) better/worse 43/53  p=1.97e-01  p_Holm=1.00e+00
+  vs NoRL robust SAA reorder (16 scen.)             J     diff    +3.135 ( +0.44%) better/worse 17/83  p=1.33e-13  p_Holm=2.40e-12
+  vs NoRL robust SAA reorder (16 scen.)             cost  diff    +1.835 ( +0.26%) better/worse 16/84  p=1.34e-14  p_Holm=2.95e-13
+  vs NoRL robust SAA reorder (16 scen.)             fail  diff    +0.013 (+25.00%) better/worse 2/15  p=1.92e-03  p_Holm=2.12e-02
+  vs NoRL robust SAA reorder (16 scen.)             mk    diff    +1.371 ( +0.61%) better/worse 15/83  p=1.22e-13  p_Holm=2.31e-12
+  vs NoRL online ratio rule                         J     diff    -0.052 ( -0.01%) better/worse 17/26  p=3.72e-01  p_Holm=1.00e+00
+  vs NoRL online ratio rule                         cost  diff    +0.048 ( +0.01%) better/worse 14/29  p=1.12e-02  p_Holm=1.12e-01
+  vs NoRL online ratio rule                         fail  diff    -0.001 ( -1.52%) better/worse 5/2  p=3.98e-01  p_Holm=1.00e+00
+  vs NoRL online ratio rule                         mk    diff    -0.024 ( -0.01%) better/worse 9/9  p=9.48e-01  p_Holm=1.00e+00
+  vs NoRL-model rolling SAA (online, 16 scen.)      J     diff    +2.530 ( +0.35%) better/worse 10/90  p=4.11e-14  p_Holm=8.63e-13
+  vs NoRL-model rolling SAA (online, 16 scen.)      cost  diff    +1.797 ( +0.25%) better/worse 9/91  p=1.31e-16  p_Holm=3.28e-15
+  vs NoRL-model rolling SAA (online, 16 scen.)      fail  diff    +0.007 (+12.72%) better/worse 3/15  p=2.89e-02  p_Holm=2.60e-01
+  vs NoRL-model rolling SAA (online, 16 scen.)      mk    diff    +1.314 ( +0.58%) better/worse 13/85  p=6.74e-13  p_Holm=1.15e-11

@@ -1,0 +1,26 @@
+== budget 1.0s ; per-instance means over seeds; n = instances
+metric         NoRL_v3         PPOx3
+HV5            0.09215       0.09321
+HV7            0.09478       0.09566
+MK1            0.65261       0.65606
+cost0        653.81479     652.51646
+F0.0           0.92224       0.92048
+F0.05          0.92594       0.92499
+F0.1           0.92534       0.92431
+F0.2           0.92157       0.92047
+F0.5           0.89849       0.89740
+F1.0           0.85196       0.84942
+F2.0           0.77592       0.77533
+
+-- vs NoRL_v3 (rel% of mean; better/worse/n; Wilcoxon p; Holm p over 11 tests)
+PPOx3        HV5     +1.157%  38/12/50  p=0.00035  pHolm=0.0028
+PPOx3        HV7     +0.919%  37/13/50  p=0.00015  pHolm=0.0013
+PPOx3        MK1     +0.529%  26/24/50  p=0.55  pHolm=1
+PPOx3        cost0   -0.199%  42/ 8/50  p=2.6e-09  pHolm=2.8e-08
+PPOx3        F0.0    -0.191%  42/ 8/50  p=9.8e-09  pHolm=9.8e-08
+PPOx3        F0.05   -0.102%  34/16/50  p=0.0029  pHolm=0.019
+PPOx3        F0.1    -0.112%  33/17/50  p=0.0027  pHolm=0.019
+PPOx3        F0.2    -0.119%  31/19/50  p=0.024  pHolm=0.12
+PPOx3        F0.5    -0.122%  32/18/50  p=0.082  pHolm=0.25
+PPOx3        F1.0    -0.298%  30/20/50  p=0.057  pHolm=0.23
+PPOx3        F2.0    -0.076%  24/26/50  p=0.86  pHolm=1

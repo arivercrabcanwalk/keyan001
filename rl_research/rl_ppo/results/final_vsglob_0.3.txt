@@ -1,0 +1,37 @@
+== budget 0.3s ; per-instance means over seeds; n = instances
+metric       NoRL_glob         PPOx3       Distill
+HV5            0.09018       0.09011       0.09054
+HV7            0.09246       0.09265       0.09321
+MK1            0.67119       0.67457       0.66854
+cost0        654.91382     654.13866     654.03472
+F0.0           0.92325       0.92252       0.92234
+F0.05          0.92753       0.92752       0.92703
+F0.1           0.92735       0.92756       0.92752
+F0.2           0.92503       0.92533       0.92470
+F0.5           0.90435       0.90390       0.90267
+F1.0           0.86030       0.85870       0.85727
+F2.0           0.79189       0.78827       0.79042
+
+-- vs NoRL_glob (rel% of mean; better/worse/n; Wilcoxon p; Holm p over 22 tests)
+PPOx3        HV5     -0.087%  25/25/50  p=0.61  pHolm=1
+PPOx3        HV7     +0.208%  24/26/50  p=0.92  pHolm=1
+PPOx3        MK1     +0.503%  22/28/50  p=0.1  pHolm=1
+PPOx3        cost0   -0.118%  24/25/50  p=0.64  pHolm=1
+PPOx3        F0.0    -0.079%  25/25/50  p=0.85  pHolm=1
+PPOx3        F0.05   -0.001%  22/28/50  p=0.49  pHolm=1
+PPOx3        F0.1    +0.023%  22/28/50  p=0.63  pHolm=1
+PPOx3        F0.2    +0.033%  19/31/50  p=0.24  pHolm=1
+PPOx3        F0.5    -0.050%  29/21/50  p=0.38  pHolm=1
+PPOx3        F1.0    -0.186%  28/22/50  p=0.14  pHolm=1
+PPOx3        F2.0    -0.458%  25/25/50  p=0.14  pHolm=1
+Distill      HV5     +0.397%  26/24/50  p=0.9  pHolm=1
+Distill      HV7     +0.804%  29/21/50  p=0.14  pHolm=1
+Distill      MK1     -0.396%  24/25/50  p=0.78  pHolm=1
+Distill      cost0   -0.134%  21/29/50  p=0.56  pHolm=1
+Distill      F0.0    -0.098%  21/29/50  p=0.74  pHolm=1
+Distill      F0.05   -0.054%  23/27/50  p=0.97  pHolm=1
+Distill      F0.1    +0.019%  26/24/50  p=0.95  pHolm=1
+Distill      F0.2    -0.035%  28/22/50  p=0.34  pHolm=1
+Distill      F0.5    -0.185%  31/19/50  p=0.084  pHolm=1
+Distill      F1.0    -0.352%  32/18/50  p=0.057  pHolm=1
+Distill      F2.0    -0.187%  28/22/50  p=0.42  pHolm=1

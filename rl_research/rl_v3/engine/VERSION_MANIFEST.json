@@ -1,0 +1,26 @@
+{
+  "version": "CA-RL-TSALNS-v4-training-provenance",
+  "created_utc": "2026-10-30T14:45:41.177055+00:00",
+  "git_commit": null,
+  "versioning": "content-addressed; no Git repository in this workspace",
+  "state_schema": "carl-state-v3-time-slack-per-drone-load-and-battery",
+  "action_schema": "carl-action-v3-cross-drone-cross-trip-exchange",
+  "reward_schema": "best-cost-improvement-v1",
+  "n_features": 49,
+  "n_actions": 12,
+  "official_java_source_lock_sha256": "75969858622a8f44e02dc0f269e0fd7241f409c94186a0d9e37e0e2717df6ccf",
+  "locked_v2_manifest_sha256": "ee7c2d6a45a9534c02997a27096e9a7a90db17b4abe63cd87997149cc77c7a4e",
+  "sha256sums_file_sha256": "ecafd995cfbf950b3ed567fcf64497e5e9e539e3b460ac4789d9d664a41501cb",
+  "file_count": 594,
+  "python": "3.11.14",
+  "torch": "2.9.0+cu130",
+  "numpy": "2.3.3",
+  "cpu_max": "1200000 100000",
+  "primary_configs": [
+    "configs/frozen_v6.json",
+    "configs/paper_parameters.json",
+    "configs/research_budget.json"
+  ],
+  "training_artifact_policy": "BC teacher records and per-iteration PPO rollouts/checkpoints are persisted with hashes",
+  "final_test_policy": "locked_v2 maps are not used for tuning"
+}

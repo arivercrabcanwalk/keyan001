@@ -1,0 +1,37 @@
+== budget 1.0s ; per-instance means over seeds; n = instances
+metric       NoRL_glob         PPOx3       Distill
+HV5            0.09269       0.09321       0.09321
+HV7            0.09502       0.09566       0.09552
+MK1            0.65117       0.65606       0.65437
+cost0        653.01416     652.51646     652.70398
+F0.0           0.92107       0.92048       0.92061
+F0.05          0.92561       0.92499       0.92466
+F0.1           0.92478       0.92431       0.92436
+F0.2           0.92158       0.92047       0.92043
+F0.5           0.89857       0.89740       0.89661
+F1.0           0.85174       0.84942       0.84919
+F2.0           0.77831       0.77533       0.77625
+
+-- vs NoRL_glob (rel% of mean; better/worse/n; Wilcoxon p; Holm p over 22 tests)
+PPOx3        HV5     +0.564%  29/21/50  p=0.11  pHolm=1
+PPOx3        HV7     +0.674%  30/20/50  p=0.02  pHolm=0.31
+PPOx3        MK1     +0.750%  23/26/50  p=0.18  pHolm=1
+PPOx3        cost0   -0.076%  31/18/50  p=0.094  pHolm=1
+PPOx3        F0.0    -0.064%  32/18/50  p=0.13  pHolm=1
+PPOx3        F0.05   -0.067%  29/21/50  p=0.053  pHolm=0.74
+PPOx3        F0.1    -0.051%  25/25/50  p=0.29  pHolm=1
+PPOx3        F0.2    -0.120%  33/17/50  p=0.0083  pHolm=0.17
+PPOx3        F0.5    -0.131%  29/21/50  p=0.065  pHolm=0.84
+PPOx3        F1.0    -0.272%  33/17/50  p=0.002  pHolm=0.044
+PPOx3        F2.0    -0.382%  30/20/50  p=0.084  pHolm=1
+Distill      HV5     +0.555%  29/21/50  p=0.12  pHolm=1
+Distill      HV7     +0.536%  31/19/50  p=0.044  pHolm=0.66
+Distill      MK1     +0.492%  24/23/50  p=0.7  pHolm=1
+Distill      cost0   -0.048%  27/21/50  p=0.57  pHolm=1
+Distill      F0.0    -0.050%  27/21/50  p=0.63  pHolm=1
+Distill      F0.05   -0.103%  34/16/50  p=0.003  pHolm=0.063
+Distill      F0.1    -0.045%  28/21/50  p=0.14  pHolm=1
+Distill      F0.2    -0.125%  35/15/50  p=0.012  pHolm=0.21
+Distill      F0.5    -0.218%  32/18/50  p=0.0086  pHolm=0.17
+Distill      F1.0    -0.300%  29/21/50  p=0.0083  pHolm=0.17
+Distill      F2.0    -0.265%  25/25/50  p=0.42  pHolm=1
