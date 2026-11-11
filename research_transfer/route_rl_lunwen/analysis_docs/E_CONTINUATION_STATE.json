@@ -1,0 +1,67 @@
+{
+  "status": "E_ENGINEERING_ADMISSION_PROGRESS_NOT_SCIENTIFICALLY_ADMITTED",
+  "updated_utc": "2026-11-06T08:48:09.480369+00:00",
+  "root_only": true,
+  "experiment_host": "<EXPERIMENT_SERVER>",
+  "project_complete": false,
+  "rl_superiority": false,
+  "scientific_E_training_started": false,
+  "original_D_status": "RESOURCE_TERMINATED_INCOMPLETE_RECONCILED",
+  "original_D_restart": false,
+  "draft_path": "joint_weather_emergency/20261106_multiobjective_round_E_bootstrap/ROUND_E_REGISTRATION_DRAFT.json",
+  "draft_sha256": "a7edaf9e758ad0ce667494116f4844d0fbb8adcae94b429b2744702496e4a5b9",
+  "accepted": [
+    {
+      "package": "joint_weather_emergency/20261106_E_learning_label_audit_v2",
+      "status": "PASS_E_LEARNING_LABEL_AUDIT_ENGINEERING",
+      "test_functions": 25,
+      "source_manifest_sha256": "0f58d961eb469f5c1f078d11d4a28f38fa3e3a3ff934027dadfabf0bc4b95562",
+      "result_sha256": "ddddbefc4d0a5e0428fc823ac7eba4b0d5065dbe99d6f659c881c495959536e9",
+      "verification_sha256": "885f6d990b95b9b849920467fa38a7ba2f1d2f96e9b22885844f29717622189b",
+      "report_sha256": "966b4a6e244443323799aaf7b4d9a1fc3a3ce6e5037bf2646c2ca5c87b79968d",
+      "server_files_reopened": 24,
+      "parent_cpu_s": 0.03198756,
+      "children_cpu_s": 18.893338,
+      "wall_s": 18.959033018909395
+    },
+    {
+      "package": "joint_weather_emergency/20261106_E_originalJ_author_portfolio_v2",
+      "status": "PASS_E_ORIGINAL_J_AUTHOR_PORTFOLIO_ENGINEERING",
+      "test_functions": 16,
+      "source_manifest_sha256": "37f7736c9bd6ab223345ad46f05f992084c8e87c5aaaea25445ca7c0eb215ed7",
+      "result_sha256": "f89f2e975c8f34c6a8719ba5ebaafca88a96ab0264b64827db8ef76de5821a77",
+      "verification_sha256": "aefe89317a3586cbea53aa8c96d954e48531c5a3a42d0367ee2a6a030dbdf809",
+      "report_sha256": "d9a726f8fb8a7029611c4d673935fdd438c9761de65c706b52300d0d0b826cd5",
+      "server_files_reopened": 24,
+      "parent_cpu_s": 0.03218109799999999,
+      "children_cpu_s": 34.149842,
+      "wall_s": 34.29658180428669
+    }
+  ],
+  "completed_prerequisites": [
+    "prior_D_terminal_all_intents",
+    "training_label_journal_independent_audit_strengthening",
+    "original_J_ablation_portfolio_adapter",
+    "author_dispatch_insert_portfolio_engineering"
+  ],
+  "pending": [
+    "full_new_population_storage_resource_admission",
+    "scientific_driver",
+    "fresh_exclusion_registry_with_D",
+    "typed_reserve_control_qualification",
+    "scenario_grid_generation_no_inside_NFZ",
+    "author_anchor_fidelity_scientific_source_binding",
+    "TRAIN_only_event_day_power_estimation",
+    "VAL_selection_objective_fixed",
+    "HV_fixed_reference_and_primary_contrast_family"
+  ],
+  "known_limitations": [
+    "Detached log-probability arithmetic is not independent network/gradient reconstruction.",
+    "Author adapters verified against existing implementation; actual scientific anchor provenance still required.",
+    "Original J and author policies are repeated portfolio points, not distinct policy fronts.",
+    "Prior seven-stream partial storage probe remains incomplete and unrerun.",
+    "G0 novelty, strongest nonRL superiority, static strict costcap, Formal and G8 unpassed.",
+    "Two failed engineering packages retained commands/output/test wall times but lack full process CPU receipts; successful-package CPU is not total exploration cost."
+  ],
+  "next_bounded_stage": "Resolve full storage/resource design and remaining baseline qualification before scientific driver/source/data freeze; do not restart D or simply extend old capacity probe."
+}

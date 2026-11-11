@@ -1,0 +1,932 @@
+{
+  "schema": "route_rl_lunwen_github_transfer_manifest_v1",
+  "generated_for": "GrokBot-readable research transfer",
+  "privacy_boundary": "No credentials, server addresses, private paths, compiled binaries, checkpoints or raw server logs.",
+  "file_count": 132,
+  "files": [
+    {
+      "path": "CODE_MAP.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 1677,
+      "sha256": "2cfe435b43e828c997a9ad8fe40863ea6c934d9070b7f86e844e711192e75576"
+    },
+    {
+      "path": "CURRENT_STATUS.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 2139,
+      "sha256": "afa817a342f5fbe5a584252f1a67589a18525861e8351da940c1b41328dc2b7e"
+    },
+    {
+      "path": "EXCLUDED_FILES.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 636,
+      "sha256": "9a8c3da24896a7d722b2e1c555a0ab88e5473ef82fa50cb762c1f06b9863e8c5"
+    },
+    {
+      "path": "GROKBOT_PROMPT_ZH.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 1546,
+      "sha256": "6e0769211776b738d2246e9aaf158472bb84ebe4e22d4025c7e278375e9307e0"
+    },
+    {
+      "path": "GROK_CONTEXT_EN.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 2256,
+      "sha256": "0731eb3cf91096ec558db3748a4828c55993d9a529a0a5d3b0c8ccc31ed22715"
+    },
+    {
+      "path": "GROK_CONTEXT_ZH.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 2035,
+      "sha256": "3f100ee5b3ecf0a7e8f95e0e545b4fd7d66af73060129affcb9f963a439c0883"
+    },
+    {
+      "path": "PROVENANCE.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 895,
+      "sha256": "0ae8aec04dd059bd45bc7c5bcda9b16c99e5339c4a65559a2df96e558020c185"
+    },
+    {
+      "path": "README.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 1944,
+      "sha256": "7894fc02746bf72a13b3f0a1fe5c29a22f981134e98892d20a632607d7904b52"
+    },
+    {
+      "path": "RESEARCH_PLAN.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 1661,
+      "sha256": "561c7b5aa5dce36bac7c64188823fb6ddfd38f063c34ac4649e4d667b8c7d28a"
+    },
+    {
+      "path": "RESULTS_SUMMARY.md",
+      "original_workspace_path": null,
+      "category": "transfer_document",
+      "bytes": 2152,
+      "sha256": "c71757103ab77cd8f45829b711576a8683dbc9e0427cf28bd73e2e91e99db702"
+    },
+    {
+      "path": "analysis_docs/DEEP_REVISION_REPORT.md",
+      "original_workspace_path": "joint_weather_emergency/20261105_deep_revision/REPORT.md",
+      "category": "research_document",
+      "bytes": 10643,
+      "sha256": "72ff862590dde18c681b16ce7a2188033e9afba4a124f1d20d9d953a6deaee29"
+    },
+    {
+      "path": "analysis_docs/E_CAPACITY_REPORT.md",
+      "original_workspace_path": "joint_weather_emergency/20261106_multiobjective_round_E_capacity/REPORT.md",
+      "category": "research_document",
+      "bytes": 5350,
+      "sha256": "1168536790a4ec691a6a0be447c73aa611f49604e35804acf6a59511e6a49300"
+    },
+    {
+      "path": "analysis_docs/E_CONTINUATION_STATE.json",
+      "original_workspace_path": "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json",
+      "category": "research_document",
+      "bytes": 3562,
+      "sha256": "fb381d88d6fd8c438fcae390c97d4b075fd1f2c5d9fcb122e210cf8448e3ae61"
+    },
+    {
+      "path": "analysis_docs/FULLTEXT_COMPARISON.md",
+      "original_workspace_path": "related_work/fulltext_comparison_20261102.md",
+      "category": "research_document",
+      "bytes": 13882,
+      "sha256": "ef91c3841e00d977b2df7e4905434485ec3f56847d547817439a11e2c6a460f5"
+    },
+    {
+      "path": "analysis_docs/LATEST_STATUS_SANITIZED.md",
+      "original_workspace_path": "LATEST_STATUS.md",
+      "category": "research_document",
+      "bytes": 212235,
+      "sha256": "f6681fc429ba30290d800f7c496a366c4ef031ad27b5ba67283ac1193cab144a"
+    },
+    {
+      "path": "analysis_docs/MULTIOBJECTIVE_CHECK_REPORT.md",
+      "original_workspace_path": "joint_weather_emergency/20261106_github_multiobjective_check/REPORT.md",
+      "category": "research_document",
+      "bytes": 13652,
+      "sha256": "d13d689970181502e9f7ae8d8c5ff4daafbdee16a5aad88fed5cc5ff267093c5"
+    },
+    {
+      "path": "analysis_docs/REPRO_ENVIRONMENT.md",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/REPRO_ENVIRONMENT.md",
+      "category": "research_document",
+      "bytes": 1767,
+      "sha256": "e83dae7885a229aa33ff8bceac8561f07a64900972b9c22d4ba13dc84dc7b23a"
+    },
+    {
+      "path": "analysis_docs/REPRO_PROTOCOL.md",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/REPRO_PROTOCOL.md",
+      "category": "research_document",
+      "bytes": 7187,
+      "sha256": "25b1ecbeff198b303e93879987be45091bc1b2a4fcd1b261ea5dcf57a5d6e3f3"
+    },
+    {
+      "path": "analysis_docs/RESEARCH_PLAN_ROUTE_RL.md",
+      "original_workspace_path": "RESEARCH_PLAN_ROUTE_RL.md",
+      "category": "research_document",
+      "bytes": 17411,
+      "sha256": "fcc18f3285f6f535ba1db566ca67bb84ff85e7616ea81ff53edc09e8c03991a0"
+    },
+    {
+      "path": "analysis_docs/RESEARCH_SCENARIO_DATA_PLAN_20261105.md",
+      "original_workspace_path": "RESEARCH_SCENARIO_DATA_PLAN_20261105.md",
+      "category": "research_document",
+      "bytes": 10596,
+      "sha256": "d279e069cdcc1ac26629decc410f9598082c777fbedcfd18f266bb5bb5e3db3f"
+    },
+    {
+      "path": "analysis_docs/RESEARCH_WORKSTREAMS_20261102.md",
+      "original_workspace_path": "RESEARCH_WORKSTREAMS_20261102.md",
+      "category": "research_document",
+      "bytes": 5408,
+      "sha256": "8d26e9d47d83d54ae65e0d4dd21422aacd8933ac92debe1cd6bf5b4cf02236b4"
+    },
+    {
+      "path": "analysis_docs/ROUTE_RL_EXECUTION_PLAN.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/EXECUTION_PLAN.md",
+      "category": "research_document",
+      "bytes": 5384,
+      "sha256": "2434ed26016a22a445b6481fba616589e2f35a39534ee691b04b0642082011c6"
+    },
+    {
+      "path": "analysis_docs/ROUTE_RL_REMAINING_TASKS.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/REMAINING_TASKS.md",
+      "category": "research_document",
+      "bytes": 9055,
+      "sha256": "7eb4ba55a4127b3fbdd43cec07da199e6d70037197e249c86160d6dfeca1fe40"
+    },
+    {
+      "path": "analysis_docs/ROUTE_RL_ROUND_DECISION.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/ROUND_DECISION.md",
+      "category": "research_document",
+      "bytes": 6743,
+      "sha256": "07e086d6be1eb18f6c5deba83d880fa3eb9eff9d9159829704553ff86b3a8c25"
+    },
+    {
+      "path": "analysis_docs/ROUTE_RL_STATE.json",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/STATE.json",
+      "category": "research_document",
+      "bytes": 62988,
+      "sha256": "031881e6948d3e63eb8524989768557e1b22314ba53dddd099a62395e7369e84"
+    },
+    {
+      "path": "analysis_docs/SEMFiX_FULL_RESULTS.md",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/SEMFiX_FULL_RESULTS.md",
+      "category": "research_document",
+      "bytes": 4719,
+      "sha256": "015d1f5cac67c83cb0ccfd6473777a5e2a3adb9bc2cf31c32b50e939057f5495"
+    },
+    {
+      "path": "analysis_docs/SEM_FIX_PROVENANCE.md",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/SEM_FIX_PROVENANCE.md",
+      "category": "research_document",
+      "bytes": 3344,
+      "sha256": "f47b95cb3a98fdc8ea2b67f1f0bdbb3dc4cdc7463e2f9d5f49d9bc381c6fe023"
+    },
+    {
+      "path": "analysis_docs/USER_RESEARCH_REQUIREMENTS.md",
+      "original_workspace_path": "USER_RESEARCH_REQUIREMENTS.md",
+      "category": "research_document",
+      "bytes": 8620,
+      "sha256": "526aa073c15a526b83cf980cc03a59c6b8c9abd9b14eb450efaec1992cfacd0d"
+    },
+    {
+      "path": "analysis_docs/WEATHER_DESIGN_REVIEW.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/DESIGN_REVIEW.md",
+      "category": "research_document",
+      "bytes": 24230,
+      "sha256": "d92c3fd795d9c048d69814223ec39a6f0cb787d3c13d6cd6ccbc087567cc0c06"
+    },
+    {
+      "path": "analysis_docs/WEATHER_EXPERIMENT_PROTOCOL.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/EXPERIMENT_PROTOCOL.md",
+      "category": "research_document",
+      "bytes": 3699,
+      "sha256": "25dcc21c6b388f44825f8b21abc848ad9421e2fc4f9f7770353d66279f3a6192"
+    },
+    {
+      "path": "analysis_docs/WEATHER_G0_REASSESSMENT.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/G0_REASSESSMENT_20261105.md",
+      "category": "research_document",
+      "bytes": 7581,
+      "sha256": "d086712b9b4ef440b44fb6134e0c6cb1d009642e507455d9a34a2a3b05376439"
+    },
+    {
+      "path": "analysis_docs/WEATHER_LOCAL_LITERATURE_AUDIT.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/LOCAL_LITERATURE_AUDIT.md",
+      "category": "research_document",
+      "bytes": 22705,
+      "sha256": "02778616ab097d9369ce83e0038fac67b9a494a4945abf96c534728478892962"
+    },
+    {
+      "path": "source/joint_weather_emergency/causal_task_memory.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/causal_task_memory.py",
+      "category": "source_code",
+      "bytes": 3198,
+      "sha256": "299a409a1a6e608d4e193d822b414f4b5a058a4a831af22a75ff58c74e777f01"
+    },
+    {
+      "path": "source/joint_weather_emergency/emergency_independent_replay.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/emergency_independent_replay.py",
+      "category": "source_code",
+      "bytes": 14643,
+      "sha256": "430113a22457e91652c04f17309ec5ecdae24ab62873868af158ca756a9497b7"
+    },
+    {
+      "path": "source/joint_weather_emergency/emergency_rolling_baseline.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/emergency_rolling_baseline.py",
+      "category": "source_code",
+      "bytes": 6628,
+      "sha256": "7563cfdf7d48ca7cc01fbb61d7716c77d0d3dd81edd2187fc8617b1e9d0e3bd4"
+    },
+    {
+      "path": "source/joint_weather_emergency/emergency_route_bridge.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/emergency_route_bridge.py",
+      "category": "source_code",
+      "bytes": 9935,
+      "sha256": "8c684afc4e0363bcd704c3ccf940b947b82273f2430ca1229d1b9a93cbb14dd2"
+    },
+    {
+      "path": "source/joint_weather_emergency/emergency_scenario.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/emergency_scenario.py",
+      "category": "source_code",
+      "bytes": 35930,
+      "sha256": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6"
+    },
+    {
+      "path": "source/joint_weather_emergency/joint_core.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/joint_core.py",
+      "category": "source_code",
+      "bytes": 8996,
+      "sha256": "a5f0ed991d55e76e607a81f53c6ad987ecda071855680c85b9ada12c69cd6ca9"
+    },
+    {
+      "path": "source/joint_weather_emergency/reference_environment.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/reference_environment.py",
+      "category": "source_code",
+      "bytes": 4405,
+      "sha256": "43165a8919ad481cf40c2b501b10bced46f5effc3489bc323d87e077e068784b"
+    },
+    {
+      "path": "source/joint_weather_emergency/rl_algorithms.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/rl_algorithms.py",
+      "category": "source_code",
+      "bytes": 13603,
+      "sha256": "0f6d589c81862d1ea18d565e2f2ce5b0ebdff6655c85f9298fd6ed0995c89192"
+    },
+    {
+      "path": "source/joint_weather_emergency/run_development.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/run_development.py",
+      "category": "source_code",
+      "bytes": 15462,
+      "sha256": "e11eec5b2ec3bd9a19b9e5b159d6e32195087d118dcd91ed0921ba7fb706745e"
+    },
+    {
+      "path": "source/joint_weather_emergency/shared_replay_v2.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/shared_replay_v2.py",
+      "category": "source_code",
+      "bytes": 9988,
+      "sha256": "2351a85dfae21ff9fe8b2b6dd1bdf34dfe9b16453a35064291a55aafcbc15278"
+    },
+    {
+      "path": "source/joint_weather_emergency/test_joint.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/test_joint.py",
+      "category": "source_code",
+      "bytes": 1913,
+      "sha256": "e82bb34c987b84306d01d99c5985d1e46057e24b47c81f8d3a629d721a78b20c"
+    },
+    {
+      "path": "source/joint_weather_emergency/test_training_integration.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/test_training_integration.py",
+      "category": "source_code",
+      "bytes": 1634,
+      "sha256": "3f5a609bb047c17d214ea8a87b38cb812eca2a7f489e7454c2def017028e201a"
+    },
+    {
+      "path": "source/joint_weather_emergency/weather_policy.py",
+      "original_workspace_path": "joint_weather_emergency/20261105/MODIFIED_FILE/weather_policy.py",
+      "category": "source_code",
+      "bytes": 2891,
+      "sha256": "6f15e10030b0ab7e4baef6b7c6fe5297dbf120ec606338d7198a1dfe81985826"
+    },
+    {
+      "path": "source/liu_semfix/carl/__init__.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/__init__.py",
+      "category": "source_code",
+      "bytes": 423,
+      "sha256": "464f14f766d247527364baefb53c820b968345940133bdade18a90076f11189d"
+    },
+    {
+      "path": "source/liu_semfix/carl/actions.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/actions.py",
+      "category": "source_code",
+      "bytes": 2421,
+      "sha256": "0f340bdeb6d8d19ae69cc460bb8b2d03f1018b96c2099c206eb540b07386073c"
+    },
+    {
+      "path": "source/liu_semfix/carl/bc.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/bc.py",
+      "category": "source_code",
+      "bytes": 3315,
+      "sha256": "a9c346dbbfc6eb1d82d52630ae2f386e05e139703d14a3bc2d159d961a75fbd0"
+    },
+    {
+      "path": "source/liu_semfix/carl/controllers.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/controllers.py",
+      "category": "source_code",
+      "bytes": 15926,
+      "sha256": "c67dd3510f9bfff61cedeb05d95ba10a8658123acdddd134e152b1b8794fd6a8"
+    },
+    {
+      "path": "source/liu_semfix/carl/core.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/core.py",
+      "category": "source_code",
+      "bytes": 6458,
+      "sha256": "8e050ff61723377695d5beddf2d2bf7d6569340db0aaa8d80a1c508db3106a83"
+    },
+    {
+      "path": "source/liu_semfix/carl/kernel.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/kernel.py",
+      "category": "source_code",
+      "bytes": 5502,
+      "sha256": "cdf9ebc12366fb4af103f41ac89628bc206d7c4cf7dd56dc9b9fafd34ea215bf"
+    },
+    {
+      "path": "source/liu_semfix/carl/neighborhood.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/neighborhood.py",
+      "category": "source_code",
+      "bytes": 37754,
+      "sha256": "fee6789fa4603e160edda2ce8395693ef331d4dcfc63ae41ac8f4d86b2c58df3"
+    },
+    {
+      "path": "source/liu_semfix/carl/ppo.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/ppo.py",
+      "category": "source_code",
+      "bytes": 8568,
+      "sha256": "239d5c21c877e0275b0871dce1a525a91198a119549d513df6455273066728bc"
+    },
+    {
+      "path": "source/liu_semfix/carl/runner.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/runner.py",
+      "category": "source_code",
+      "bytes": 17193,
+      "sha256": "da361a19cff248f7758cc23ead61c3c510a8246e77adebfb1163de0880738938"
+    },
+    {
+      "path": "source/liu_semfix/carl/search.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/search.py",
+      "category": "source_code",
+      "bytes": 14268,
+      "sha256": "e5bf633efb6de1a8d94e97957ab6be54c0e4e298815a736f3144beed3ed19c56"
+    },
+    {
+      "path": "source/liu_semfix/carl/state.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/state.py",
+      "category": "source_code",
+      "bytes": 9840,
+      "sha256": "9b38b0e0bc1610d649201e3b86b4c9c5927fed27d55e0412b2ea2cb08a7b8610"
+    },
+    {
+      "path": "source/liu_semfix/carl/stats.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/carl/stats.py",
+      "category": "source_code",
+      "bytes": 4762,
+      "sha256": "a42eaa5516db4c51eee0ca85676b3aa1361ae96d6a8d1bab88ae4e45cf1833bf"
+    },
+    {
+      "path": "source/liu_semfix/exact_certificates.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/exact_certificates.py",
+      "category": "source_code",
+      "bytes": 1586,
+      "sha256": "fba2cdea8cb1eaaf87fa5934710852a18567a4bd46fe3b64a80b854a0c80cd5f"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/__init__.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/__init__.py",
+      "category": "source_code",
+      "bytes": 101,
+      "sha256": "3d2731224303ea6ed0d4cb3550607561fad4ed82cbe97b3eda1f03c6ae402fd8"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/cli.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/cli.py",
+      "category": "source_code",
+      "bytes": 3018,
+      "sha256": "6f44911e4113b686d6eee56f5c2216a45b6c0a8813d7801e55fe06bf8d5b75f6"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/evaluator.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/evaluator.py",
+      "category": "source_code",
+      "bytes": 3385,
+      "sha256": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/exact.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/exact.py",
+      "category": "source_code",
+      "bytes": 4850,
+      "sha256": "44b9df964295908e697410efbf20c7fa99bd4e81aadf2ac5dac53943cf4f8c58"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/fidelity_ops.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/fidelity_ops.py",
+      "category": "source_code",
+      "bytes": 12970,
+      "sha256": "78ea4d74f77164ba687715d3187b95de5ba5b1d4e1eb2f41231b27156b67c44c"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/fidelity_ops_v4.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/fidelity_ops_v4.py",
+      "category": "source_code",
+      "bytes": 13590,
+      "sha256": "5e907379ce0bbfdd158b35f88d8d249fdf09fe10feaa52aafe58a72577eff6ca"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/fidelity_ops_v5.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/fidelity_ops_v5.py",
+      "category": "source_code",
+      "bytes": 23077,
+      "sha256": "56508b534fb9f6956da337adef84ad96e12b50cc498eef0b44a35bf3994fb4cb"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/frozen_tsalns_v2.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/frozen_tsalns_v2.py",
+      "category": "source_code",
+      "bytes": 12903,
+      "sha256": "cc5e613d6826b6b13c1bba9c1482f864bde7e1a81dcec1a518c7fd610e33a4cf"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/greedy.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/greedy.py",
+      "category": "source_code",
+      "bytes": 10554,
+      "sha256": "5706a2a8181562833ffdcd2447bbf4387325a25f92cb03885eb8846442468039"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/guard_v5.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/guard_v5.py",
+      "category": "source_code",
+      "bytes": 2583,
+      "sha256": "1457539b30f2b2b1719d8d449fb84a9e48f743d5d82a3e12c0e5292b275242d9"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/java_random.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/java_random.py",
+      "category": "source_code",
+      "bytes": 1948,
+      "sha256": "23b8a0090731e7b69c9fd9b934bd8e3d79f8cde6afe8bd6e9428db06f884b49d"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/metrics.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/metrics.py",
+      "category": "source_code",
+      "bytes": 1546,
+      "sha256": "c6448f2ab5e338d8ee42b53f2ee2f28c03730655f527580b2a67bf424167dd28"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/native_kernel.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/native_kernel.py",
+      "category": "source_code",
+      "bytes": 8999,
+      "sha256": "b4fd5ccc548e2650613755688b72aae0f86216437872fa064ea6fa9a86492c21"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/precision_audit.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/precision_audit.py",
+      "category": "source_code",
+      "bytes": 7772,
+      "sha256": "26e245aa9f96ba4616f38d90a22c9496d5040592fd1b7f7350c6c9bb2f9481f9"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/problem.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/problem.py",
+      "category": "source_code",
+      "bytes": 3936,
+      "sha256": "f03c2f4201cdea977644d84ab0ad704eb47d4c4389b06b2ac86b9d264463b1cc"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/reference_adapter.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/reference_adapter.py",
+      "category": "source_code",
+      "bytes": 1140,
+      "sha256": "871827ef0a3da08ed50ccad26b4cd7fbf79e4fe8fa7f7dc346d3f14c5d8836dd"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/round4_runtime.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/round4_runtime.py",
+      "category": "source_code",
+      "bytes": 4865,
+      "sha256": "8a957704a3ebe84edaf6b59a275ae3838f81ec835a63e1c3447d8210f2a5b334"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/round4_variants.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/round4_variants.py",
+      "category": "source_code",
+      "bytes": 1139,
+      "sha256": "3159f796d74416177aea5d9567065508bb09dda45cb722abca78a3b856344027"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/tsalns.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/tsalns.py",
+      "category": "source_code",
+      "bytes": 12916,
+      "sha256": "9cfb99e2a8154194f3e1bfd2d01aed23ce7c381e612506ee81e824465adc0112"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/tsalns_v3.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/tsalns_v3.py",
+      "category": "source_code",
+      "bytes": 7447,
+      "sha256": "7d189864d1d140e460623cbe64489b8a40bc47fbea8c0b08505cb693d37f9256"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/tsalns_v4.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/tsalns_v4.py",
+      "category": "source_code",
+      "bytes": 9674,
+      "sha256": "bb6691360d63fd425bdbc596f7709786e079eff213eb9510889ab60470db7c19"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/tsalns_v5.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/tsalns_v5.py",
+      "category": "source_code",
+      "bytes": 12068,
+      "sha256": "e0470a8c7cc810e4f0733ed3292a2a549e26cb6f085b2ab4e328665019fa455c"
+    },
+    {
+      "path": "source/liu_semfix/lrphsd/tsalns_v6.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/lrphsd/tsalns_v6.py",
+      "category": "source_code",
+      "bytes": 16321,
+      "sha256": "23ef83188846d3c0a2152a0944c8df50e559442027cf336897577129cd795f44"
+    },
+    {
+      "path": "source/liu_semfix/native/ca_kernel.c",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/native/ca_kernel.c",
+      "category": "source_code",
+      "bytes": 53974,
+      "sha256": "dc1a5b2a98349c055a88d88cd86597725ee4a654e29d972b2cea953fedbdf5d8"
+    },
+    {
+      "path": "source/liu_semfix/native/r6_kernel.c",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/native/r6_kernel.c",
+      "category": "source_code",
+      "bytes": 35016,
+      "sha256": "121aa747ebf841f91371c5d8ef19c9010eefe72fd5641d21cd5a647fe4ffa06e"
+    },
+    {
+      "path": "source/liu_semfix/run_all.sh",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/run_all.sh",
+      "category": "source_code",
+      "bytes": 1084,
+      "sha256": "97dbc00e4a620a4e9b13e5b07e1d57c6ce33f9d581b8a05bb0b295bbaad0c911"
+    },
+    {
+      "path": "source/liu_semfix/run_matrix.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/run_matrix.py",
+      "category": "source_code",
+      "bytes": 9760,
+      "sha256": "486f69b0ed839fbc6dbc415e31f3e82bc36cd1df02928535d84e2623e77b7173"
+    },
+    {
+      "path": "source/liu_semfix/run_postguard_matrix.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/run_postguard_matrix.py",
+      "category": "source_code",
+      "bytes": 3416,
+      "sha256": "1fcf156a5791ed7db5dafb4d28d4b8b37b87bf284b3c4bc0397db55bed3822f5"
+    },
+    {
+      "path": "source/liu_semfix/scripts/analyze.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/analyze.py",
+      "category": "source_code",
+      "bytes": 14628,
+      "sha256": "86e58e9865ebe5bef50dd527aca6e3086cf7c9254bb652504a355a3b804c0430"
+    },
+    {
+      "path": "source/liu_semfix/scripts/analyze_diagnostics.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/analyze_diagnostics.py",
+      "category": "source_code",
+      "bytes": 11045,
+      "sha256": "bddf1c8357a77d923faa35438268a36a1a4b6d0b2d64302113097ed4b969b05c"
+    },
+    {
+      "path": "source/liu_semfix/scripts/bc_pretrain.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/bc_pretrain.py",
+      "category": "source_code",
+      "bytes": 5470,
+      "sha256": "f18fa9d12d7a8441661e82ac5282ae68cdb543e441c7330f075fed10d1511dde"
+    },
+    {
+      "path": "source/liu_semfix/scripts/check_neighborhoods_v2.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/check_neighborhoods_v2.py",
+      "category": "source_code",
+      "bytes": 1971,
+      "sha256": "57826c419933d706a7a12c2cb28fc84d92dde0b9aafa839afd5f5ee45b3dbda1"
+    },
+    {
+      "path": "source/liu_semfix/scripts/make_locked_suite.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/make_locked_suite.py",
+      "category": "source_code",
+      "bytes": 2132,
+      "sha256": "5ebe8cd7a00a81d85a0290db21e31571b4fd6604d4b6cce84f212f2ec1ca0cc9"
+    },
+    {
+      "path": "source/liu_semfix/scripts/run_bench.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/run_bench.py",
+      "category": "source_code",
+      "bytes": 26166,
+      "sha256": "7a41ea42ededfd1f7b36030229bc6edf0323b77fe588fe0cab782179ac084141"
+    },
+    {
+      "path": "source/liu_semfix/scripts/run_locked_eval.sh",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/run_locked_eval.sh",
+      "category": "source_code",
+      "bytes": 3391,
+      "sha256": "d233bbe422a05d611afa20cb737b4c9b44d4ca384f2c25a330f75fbd7ed4f6a6"
+    },
+    {
+      "path": "source/liu_semfix/scripts/train_ppo.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/train_ppo.py",
+      "category": "source_code",
+      "bytes": 12905,
+      "sha256": "671f1f63ebb95ab8e8a3a93a70ff2941860f1485645938fc9d04ae3416723361"
+    },
+    {
+      "path": "source/liu_semfix/scripts/verify_official_greedy.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/scripts/verify_official_greedy.py",
+      "category": "source_code",
+      "bytes": 1955,
+      "sha256": "1743a50114a1b95738be8e12c29b334af93dc5763d9932f969f874766a0ced00"
+    },
+    {
+      "path": "source/liu_semfix/test_evaluator_contract.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/test_evaluator_contract.py",
+      "category": "source_code",
+      "bytes": 3478,
+      "sha256": "e7dc5b1e1eff5ab4dc0a1bfed8a731d2e320644c1922e82fbf9696c564216558"
+    },
+    {
+      "path": "source/liu_semfix/verify_exact_certificates.py",
+      "original_workspace_path": "reproduction/reviewer_package_semfix/verify_exact_certificates.py",
+      "category": "source_code",
+      "bytes": 2105,
+      "sha256": "acc247c016bf704080b1faf2ec78bf3a9bde16cf0a0ad626348eebc2565aafa8"
+    },
+    {
+      "path": "source/route_rl/return_makespan/delivery.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/delivery.py",
+      "category": "source_code",
+      "bytes": 3764,
+      "sha256": "cbf8be5dd267b3315913d0db0a904cf8562690ef0de2265e176705380141b9e0"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g23/author_baseline/author_runner.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g23/author_baseline/author_runner.py",
+      "category": "source_code",
+      "bytes": 20285,
+      "sha256": "7a829c9ac46396bc63dac9274746ac9b3916a9cc588f7aff13295f27f4df64d3"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g23/author_baseline/test_author_runner.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g23/author_baseline/test_author_runner.py",
+      "category": "source_code",
+      "bytes": 11550,
+      "sha256": "5ff78de41971aa6ede63e8807075db7b8b520436407a9ab5816ebda08988d0ce"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g23/data/generator_v2/generator_v2.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g23/data/generator_v2/generator_v2.py",
+      "category": "source_code",
+      "bytes": 21653,
+      "sha256": "7a5f2e5c06acf7c70cccc55b20a1f8f1d30c481f73b14390b2b66b77894781e8"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g23/data/generator_v2/test_generator_v2.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g23/data/generator_v2/test_generator_v2.py",
+      "category": "source_code",
+      "bytes": 12332,
+      "sha256": "ce3e8410f7971f8d70080c9418cfeb24a1b895fb3b5e172954e1db9063236ff2"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/README.md",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/README.md",
+      "category": "runtime_metadata",
+      "bytes": 6910,
+      "sha256": "faaea3df6d5a3ffa5309e6cd964d94886b0dd78306baa7b515c050f4bcccf140"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/comparison/development_runner.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/comparison/development_runner.py",
+      "category": "source_code",
+      "bytes": 58755,
+      "sha256": "3dee93b94d83544ab9f97a053d7e750f8b6b30cd8975730514ebef8d576acb0c"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/comparison/physical_baselines.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/comparison/physical_baselines.py",
+      "category": "source_code",
+      "bytes": 16635,
+      "sha256": "240667a160798ab4451201885a2e195c6a8b28c20da2f090623a305fed01167d"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/requirements-smoke-cpu.txt",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/requirements-smoke-cpu.txt",
+      "category": "runtime_metadata",
+      "bytes": 177,
+      "sha256": "2721319346bfb43e34d3869833f2f6d740bab2924c0ff35cebcf6246c5569dbb"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/rl_algorithms.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/rl_algorithms.py",
+      "category": "source_code",
+      "bytes": 11977,
+      "sha256": "a9679133e93b3d2edf613102667827ad02427d49cfcea657d930b1004eb029fd"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/run_experiment.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/run_experiment.py",
+      "category": "source_code",
+      "bytes": 9906,
+      "sha256": "7f90e6b95a0eb6a09f30f4d727b61cf30c0876a402b29bce94b0a84216e747c2"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/run_full_map_smoke.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/run_full_map_smoke.py",
+      "category": "source_code",
+      "bytes": 14186,
+      "sha256": "e77fa61cf0aaa61a85b1e1a01c5153f1f99692b9c5b90ba30d94c0bfe19831ad"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_failure_reward.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_failure_reward.py",
+      "category": "source_code",
+      "bytes": 7377,
+      "sha256": "87146bca88f5724c79ca33fd0e25a919cfdf2abca2b2950b905944f29040a3fd"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_rl_algorithms.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_rl_algorithms.py",
+      "category": "source_code",
+      "bytes": 9592,
+      "sha256": "7530faba65f4196d9325a0daed3a5ac408d63a82aaf73b371a6772304789d7d8"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_weather_author_anchor.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_weather_author_anchor.py",
+      "category": "source_code",
+      "bytes": 12621,
+      "sha256": "5514725652f95dc714ad2ea1d5d2996c0aeddc259218ba400f2e43d8828ec027"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_weather_full_map.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_weather_full_map.py",
+      "category": "source_code",
+      "bytes": 22003,
+      "sha256": "c213e437efcc3108c2a8077b5e927d7fc961820a399e367ed897f4e28595b8d7"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_weather_oracle.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_weather_oracle.py",
+      "category": "source_code",
+      "bytes": 7343,
+      "sha256": "c17e4796e94946749bc50d3aaa28dc1007e0773bccf1fdf88f49a8c819fd1d7b"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_weather_pipeline.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_weather_pipeline.py",
+      "category": "source_code",
+      "bytes": 5638,
+      "sha256": "4e99491cbdd16f02e820d91f93eec7bfeaa5deaa08873ce3d7b102a92bee084d"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/test_weather_scenario_io.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/test_weather_scenario_io.py",
+      "category": "source_code",
+      "bytes": 2289,
+      "sha256": "2df6256c20f6c39be001bd2eba90153c1fc462729017a9a877a152f7f3b80dfd"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_author_anchor.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_author_anchor.py",
+      "category": "source_code",
+      "bytes": 13662,
+      "sha256": "410b3e055416725315a4ae3f90c0b8d98627ab3d091dc194ea61c9cff24eee80"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_env.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_env.py",
+      "category": "source_code",
+      "bytes": 20464,
+      "sha256": "aead6150c5e7a91743977be6185111a9d271a317ba15c17689ca5c4cd04f1c77"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_full_map.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_full_map.py",
+      "category": "source_code",
+      "bytes": 33077,
+      "sha256": "c7db62049f8d6011153e0cf9139a9098a92d07fc62977f5359c18ffb23069b25"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_oracle.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_oracle.py",
+      "category": "source_code",
+      "bytes": 13769,
+      "sha256": "c529cae8823a9685f91ca5e5549bdd69aab2f3d13cfd5198874c38a85f8a3034"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_policy.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_policy.py",
+      "category": "source_code",
+      "bytes": 2891,
+      "sha256": "6f15e10030b0ab7e4baef6b7c6fe5297dbf120ec606338d7198a1dfe81985826"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_replay.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_replay.py",
+      "category": "source_code",
+      "bytes": 10117,
+      "sha256": "6863dd602baa7d83177b96651bbabe06235c6f47139baac5a77aef63f667a1fd"
+    },
+    {
+      "path": "source/route_rl/return_makespan/g24_weather_nfz/weather_scenario_io.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/g24_weather_nfz/weather_scenario_io.py",
+      "category": "source_code",
+      "bytes": 4697,
+      "sha256": "945e9ac991940dd3227a7f35b2e6a327b76e94b54ef442a12041267bacc0fbfa"
+    },
+    {
+      "path": "source/route_rl/return_makespan/global_env.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/global_env.py",
+      "category": "source_code",
+      "bytes": 17669,
+      "sha256": "b903f7df68cbb1d2faae6fb324ef3ed3ab1f3592c1c56aa2144eddedd54f5428"
+    },
+    {
+      "path": "source/route_rl/return_makespan/scorer.py",
+      "original_workspace_path": "route_rl_research/20261103/return_makespan/scorer.py",
+      "category": "source_code",
+      "bytes": 12870,
+      "sha256": "c6e156b2d770cec2f663eada37c2d39bff1583f672bda4116f81493484409135"
+    },
+    {
+      "path": "source/route_rl/station/run_station_g2.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/run_station_g2.py",
+      "category": "source_code",
+      "bytes": 22227,
+      "sha256": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea"
+    },
+    {
+      "path": "source/route_rl/station/station_env.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/station_env.py",
+      "category": "source_code",
+      "bytes": 7925,
+      "sha256": "9c295f0117a4d0935ea32b421513f62edf9c4a455ae11b6ba3a3af834ecd84dd"
+    },
+    {
+      "path": "source/route_rl/station/station_split_dp.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/station_split_dp.py",
+      "category": "source_code",
+      "bytes": 15742,
+      "sha256": "8f4d05da5d0a829b8d6ce0889a10e0f5e990a3e1687505b36e61b28eb1c8da06"
+    },
+    {
+      "path": "source/route_rl/station/test_g2_driver.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/test_g2_driver.py",
+      "category": "source_code",
+      "bytes": 14674,
+      "sha256": "5ad1d85ad3c9549b47da511ff96eb26d68e02e521da996e7c060db6625e72a4e"
+    },
+    {
+      "path": "source/route_rl/station/test_station_dp.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/test_station_dp.py",
+      "category": "source_code",
+      "bytes": 16431,
+      "sha256": "1ae12250b45d654c3d60f587b2edde4c908cc860d75c3fafb3c1b087e6eef87f"
+    },
+    {
+      "path": "source/route_rl/station/test_station_env.py",
+      "original_workspace_path": "route_rl_research/20261103/joint_route_env/test_station_env.py",
+      "category": "source_code",
+      "bytes": 5285,
+      "sha256": "14a7bb9a0f2aa30adc55ac91f480362f10a7d45fc61ba8b3cec9a0e559a48299"
+    },
+    {
+      "path": "source/run_syntax_check.sh",
+      "original_workspace_path": null,
+      "category": "validation_helper",
+      "bytes": 348,
+      "sha256": "acabffc5a371df43759293068a35e5c6c16980d59997656384a6a0d9f85d6809"
+    }
+  ]
+}
