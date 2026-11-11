@@ -30,3 +30,7 @@ From this folder, run:
 ```
 
 This checks Python syntax only. It does not recreate the private server experiments or certify scientific performance.
+
+## Transfer transaction audit
+
+`transfer_audit/` contains the changed-field fixture, diff, verification record and executable rollback script used to validate this export. The rollback test uses a separate copy and leaves the main `MODIFIED_FILE` changed.

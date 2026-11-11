@@ -2,7 +2,7 @@
   "schema": "route_rl_lunwen_github_transfer_manifest_v1",
   "generated_for": "GrokBot-readable research transfer",
   "privacy_boundary": "No credentials, server addresses, private paths, compiled binaries, checkpoints or raw server logs.",
-  "file_count": 132,
+  "file_count": 138,
   "files": [
     {
       "path": "CODE_MAP.md",
@@ -57,8 +57,8 @@
       "path": "README.md",
       "original_workspace_path": null,
       "category": "transfer_document",
-      "bytes": 1944,
-      "sha256": "7894fc02746bf72a13b3f0a1fe5c29a22f981134e98892d20a632607d7904b52"
+      "bytes": 2201,
+      "sha256": "706c94421c20c8a41cfb9b0866b63a298a1c38c3125abc8f519c51c5f87c98bd"
     },
     {
       "path": "RESEARCH_PLAN.md",
@@ -927,6 +927,48 @@
       "category": "validation_helper",
       "bytes": 348,
       "sha256": "acabffc5a371df43759293068a35e5c6c16980d59997656384a6a0d9f85d6809"
+    },
+    {
+      "path": "transfer_audit/DIFF_FILE",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 371,
+      "sha256": "1f3d29ec06aa468093894a187591d605e149a6779d45438e488abaf8ce774366"
+    },
+    {
+      "path": "transfer_audit/MODIFIED_FILE",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 95,
+      "sha256": "8d98f30900f6cbf920c1322c13a3d90064d6ebe0df7710750936eabd4b7c7cdc"
+    },
+    {
+      "path": "transfer_audit/ORIGINAL_COPY",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 82,
+      "sha256": "1cc6a36f64899565db5853ca179a1bc7c5f79747cad64944765226d5b1dde2ef"
+    },
+    {
+      "path": "transfer_audit/ROLLBACK.sh",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 237,
+      "sha256": "2704b84b59c7feea9bc878a0b99c94ef2c9364a217ddbec147b18f7bd9015077"
+    },
+    {
+      "path": "transfer_audit/VERIFICATION.txt",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 1519,
+      "sha256": "9b5fa4b9fa988ad13b035a8df04fcce31e4d48d9d4b021b2a791a253cded20dc"
+    },
+    {
+      "path": "transfer_audit/rollback_test/MODIFIED_FILE",
+      "original_workspace_path": null,
+      "category": "tool_transaction_artifact",
+      "bytes": 82,
+      "sha256": "1cc6a36f64899565db5853ca179a1bc7c5f79747cad64944765226d5b1dde2ef"
     }
   ]
 }

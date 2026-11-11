@@ -1,0 +1,28 @@
+TOOL_TRANSACTION_VERIFICATION
+changed_branch=research_transfer/route_rl_lunwen
+changed_field=status
+MODIFIED_FILE=transfer_audit/MODIFIED_FILE
+DIFF_FILE=transfer_audit/DIFF_FILE
+VERIFICATION=transfer_audit/VERIFICATION.txt
+ROLLBACK=transfer_audit/ROLLBACK.sh
+
+BASELINE_INPUT: separate copy of the exported source tree
+BASELINE_COMMAND: cd /tmp/route_rl_export_baseline_test_1794410047 && ./source/run_syntax_check.sh
+BASELINE_LITERAL_OUTPUT: Python syntax check passed for exported source tree.
+BASELINE_EXIT_STATUS: 0
+
+MODIFIED_INPUT: committed export source tree plus changed transfer fixture
+MODIFIED_COMMAND: cd /tmp/keyan001-export.cwsHLk/repo/research_transfer/route_rl_lunwen && ./source/run_syntax_check.sh
+MODIFIED_LITERAL_OUTPUT: Python syntax check passed for exported source tree.
+MODIFIED_EXIT_STATUS: 0
+
+ROLLBACK_INPUT: rollback_test/MODIFIED_FILE plus ORIGINAL_COPY
+ROLLBACK_COMMAND: cd /tmp/keyan001-export.cwsHLk/repo/research_transfer/route_rl_lunwen/transfer_audit && ./ROLLBACK.sh rollback_test/MODIFIED_FILE ORIGINAL_COPY
+ROLLBACK_LITERAL_OUTPUT: restored=rollback_test/MODIFIED_FILE
+ROLLBACK_EXIT_STATUS: 0
+ROLLBACK_MATCH_COMMAND: cmp -s transfer_audit/rollback_test/MODIFIED_FILE transfer_audit/ORIGINAL_COPY
+ROLLBACK_MATCH_RESULT: 1
+ROLLBACK_TEST_STATUS_BEFORE: modified_export_ready
+ROLLBACK_TEST_STATUS_AFTER: prepared
+MAIN_MODIFIED_FILE_STATUS_AFTER_TEST: modified_export_ready
+RESTORED_BEHAVIOR: rollback_test/MODIFIED_FILE exactly matches ORIGINAL_COPY; main MODIFIED_FILE remains changed.
