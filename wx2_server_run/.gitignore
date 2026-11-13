@@ -1,0 +1,16 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+data/days/*.pkl
+data/days/*.tmp.*
+run_all.log
+*.log
+logs/*.out
+logs/*.exit
+results_out.tar.gz
+models/*_live*.npz
+models/*_it*.npz
+.SMOKE_*
+PROGRESS_SERVER.md
