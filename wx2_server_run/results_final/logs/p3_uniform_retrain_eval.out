@@ -1,0 +1,101 @@
+p3 plans=test_ours n=50 days=7000..7029 mode=uniform sigma=1.0 speed=0.0 methods=['RL'] ckpts={0: '/root/keyan001/wx2_server_run/models/rl_s0_best_pomo_v2_uniform.npz'}
+todo 1500 done 7500 W=38
+p3_uniform 50/1500 fail=0 elapsed=0.4s last J=3856.2 RL_s0_pomo_v2_uniform
+p3_uniform 100/1500 fail=0 elapsed=0.6s last J=8102.3 RL_s0_pomo_v2_uniform
+p3_uniform 150/1500 fail=0 elapsed=0.8s last J=11135.9 RL_s0_pomo_v2_uniform
+p3_uniform 200/1500 fail=0 elapsed=1.0s last J=3888.2 RL_s0_pomo_v2_uniform
+p3_uniform 250/1500 fail=0 elapsed=1.2s last J=2308.2 RL_s0_pomo_v2_uniform
+p3_uniform 300/1500 fail=0 elapsed=1.4s last J=2494.7 RL_s0_pomo_v2_uniform
+p3_uniform 350/1500 fail=0 elapsed=1.7s last J=10205.7 RL_s0_pomo_v2_uniform
+p3_uniform 400/1500 fail=0 elapsed=2.0s last J=1077.4 RL_s0_pomo_v2_uniform
+p3_uniform 450/1500 fail=0 elapsed=2.3s last J=6713.6 RL_s0_pomo_v2_uniform
+p3_uniform 500/1500 fail=0 elapsed=2.7s last J=6283.3 RL_s0_pomo_v2_uniform
+p3_uniform 550/1500 fail=0 elapsed=3.0s last J=10559.3 RL_s0_pomo_v2_uniform
+p3_uniform 600/1500 fail=0 elapsed=3.4s last J=9077.3 RL_s0_pomo_v2_uniform
+p3_uniform 650/1500 fail=0 elapsed=3.8s last J=10984.2 RL_s0_pomo_v2_uniform
+p3_uniform 700/1500 fail=0 elapsed=4.2s last J=1506.3 RL_s0_pomo_v2_uniform
+p3_uniform 750/1500 fail=0 elapsed=4.6s last J=3505.9 RL_s0_pomo_v2_uniform
+p3_uniform 800/1500 fail=0 elapsed=5.0s last J=4946.1 RL_s0_pomo_v2_uniform
+p3_uniform 850/1500 fail=0 elapsed=5.4s last J=3308.5 RL_s0_pomo_v2_uniform
+p3_uniform 900/1500 fail=0 elapsed=5.9s last J=25087.3 RL_s0_pomo_v2_uniform
+p3_uniform 950/1500 fail=0 elapsed=6.3s last J=9134.2 RL_s0_pomo_v2_uniform
+p3_uniform 1000/1500 fail=0 elapsed=6.8s last J=2395.8 RL_s0_pomo_v2_uniform
+p3_uniform 1050/1500 fail=0 elapsed=7.3s last J=32793.4 RL_s0_pomo_v2_uniform
+p3_uniform 1100/1500 fail=0 elapsed=7.9s last J=2991.0 RL_s0_pomo_v2_uniform
+p3_uniform 1150/1500 fail=0 elapsed=8.4s last J=3555.6 RL_s0_pomo_v2_uniform
+p3_uniform 1200/1500 fail=0 elapsed=8.9s last J=2018.8 RL_s0_pomo_v2_uniform
+p3_uniform 1250/1500 fail=0 elapsed=9.6s last J=15004.3 RL_s0_pomo_v2_uniform
+p3_uniform 1300/1500 fail=0 elapsed=10.4s last J=5472.9 RL_s0_pomo_v2_uniform
+p3_uniform 1350/1500 fail=0 elapsed=11.2s last J=1780.4 RL_s0_pomo_v2_uniform
+p3_uniform 1400/1500 fail=0 elapsed=11.9s last J=4715.0 RL_s0_pomo_v2_uniform
+p3_uniform 1450/1500 fail=0 elapsed=12.8s last J=1512.0 RL_s0_pomo_v2_uniform
+p3_uniform 1500/1500 fail=0 elapsed=14.5s last J=21729.6 RL_s0_pomo_v2_uniform
+done ok=1500 fail=0 in 14.5s
+method               n         J     cost    ot_h    cvar  fails      mk
+RL_s1_pomo_v2     1500   7266.22  1160.66  0.7125   52.79  15.54   479.0
+RL_s0_pomo_v2     1500   7329.64  1162.29  0.7116   52.78  15.63   474.1
+RL_s0_pomo_v2_uniform  1500   7360.27  1154.28  0.6740   54.17  14.94   394.5
+RL_s2_pomo_v2     1500   7412.98  1156.55  0.6754   54.23  15.12   404.3
+N1_240            1500   7577.55  1176.41  0.6937   53.98  16.22   463.9
+A1                1500   8355.45  1163.97  0.5946   61.04  14.58   314.4
+  RL_s0_pomo_v2 vs N1_240 J: mean 7329.6413 vs 7577.5468 rel=-3.27% win=46/50 p=2.26e-10
+  RL_s0_pomo_v2 vs N1_240 ontime_h: mean 0.7116 vs 0.6937 rel=2.59% win=46/50 p=3.688e-09
+  RL_s0_pomo_v2 vs N1_240 cvar_h: mean 52.7807 vs 53.9798 rel=-2.22% win=35/50 p=0.0002407
+  RL_s0_pomo_v2 vs N1_240 cost: mean 1162.2943 vs 1176.4071 rel=-1.20% win=45/50 p=1.354e-12
+  RL_s0_pomo_v2 vs N1_240 fails: mean 15.6253 vs 16.2167 rel=-3.65% win=46/50 p=2.504e-09
+  RL_s0_pomo_v2 vs N1_240 mk: mean 474.0700 vs 463.8745 rel=2.20% win=8/50 p=9.773e-09
+  RL_s0_pomo_v2 vs A1 J: mean 7329.6413 vs 8355.4502 rel=-12.28% win=46/50 p=7.656e-12
+  RL_s0_pomo_v2 vs A1 ontime_h: mean 0.7116 vs 0.5946 rel=19.68% win=50/50 p=1.776e-15
+  RL_s0_pomo_v2 vs A1 cvar_h: mean 52.7807 vs 61.0374 rel=-13.53% win=47/50 p=4.912e-12
+  RL_s0_pomo_v2 vs A1 cost: mean 1162.2943 vs 1163.9742 rel=-0.14% win=23/50 p=0.939
+  RL_s0_pomo_v2 vs A1 fails: mean 15.6253 vs 14.5840 rel=7.14% win=3/50 p=8.183e-09
+  RL_s0_pomo_v2 vs A1 mk: mean 474.0700 vs 314.3935 rel=50.79% win=0/50 p=1.776e-15
+  RL_s2_pomo_v2 vs N1_240 J: mean 7412.9820 vs 7577.5468 rel=-2.17% win=37/50 p=2.307e-05
+  RL_s2_pomo_v2 vs N1_240 ontime_h: mean 0.6754 vs 0.6937 rel=-2.63% win=12/50 p=1.739e-07
+  RL_s2_pomo_v2 vs N1_240 cvar_h: mean 54.2263 vs 53.9798 rel=0.46% win=24/50 p=0.7814
+  RL_s2_pomo_v2 vs N1_240 cost: mean 1156.5496 vs 1176.4071 rel=-1.69% win=50/50 p=1.776e-15
+  RL_s2_pomo_v2 vs N1_240 fails: mean 15.1153 vs 16.2167 rel=-6.79% win=50/50 p=7.538e-10
+  RL_s2_pomo_v2 vs N1_240 mk: mean 404.3014 vs 463.8745 rel=-12.84% win=50/50 p=1.776e-15
+  RL_s2_pomo_v2 vs A1 J: mean 7412.9820 vs 8355.4502 rel=-11.28% win=46/50 p=2.994e-11
+  RL_s2_pomo_v2 vs A1 ontime_h: mean 0.6754 vs 0.5946 rel=13.59% win=49/50 p=3.553e-15
+  RL_s2_pomo_v2 vs A1 cvar_h: mean 54.2263 vs 61.0374 rel=-11.16% win=47/50 p=2.022e-11
+  RL_s2_pomo_v2 vs A1 cost: mean 1156.5496 vs 1163.9742 rel=-0.64% win=28/50 p=0.0461
+  RL_s2_pomo_v2 vs A1 fails: mean 15.1153 vs 14.5840 rel=3.64% win=10/50 p=3.452e-05
+  RL_s2_pomo_v2 vs A1 mk: mean 404.3014 vs 314.3935 rel=28.60% win=0/50 p=1.776e-15
+  RL_s1_pomo_v2 vs N1_240 J: mean 7266.2243 vs 7577.5468 rel=-4.11% win=45/50 p=3.882e-10
+  RL_s1_pomo_v2 vs N1_240 ontime_h: mean 0.7125 vs 0.6937 rel=2.72% win=45/50 p=1.099e-08
+  RL_s1_pomo_v2 vs N1_240 cvar_h: mean 52.7946 vs 53.9798 rel=-2.20% win=32/50 p=0.003035
+  RL_s1_pomo_v2 vs N1_240 cost: mean 1160.6640 vs 1176.4071 rel=-1.34% win=46/50 p=3.677e-13
+  RL_s1_pomo_v2 vs N1_240 fails: mean 15.5367 vs 16.2167 rel=-4.19% win=49/50 p=1.082e-09
+  RL_s1_pomo_v2 vs N1_240 mk: mean 479.0002 vs 463.8745 rel=3.26% win=7/50 p=8.06e-11
+  RL_s1_pomo_v2 vs A1 J: mean 7266.2243 vs 8355.4502 rel=-13.04% win=47/50 p=2.24e-12
+  RL_s1_pomo_v2 vs A1 ontime_h: mean 0.7125 vs 0.5946 rel=19.84% win=50/50 p=1.776e-15
+  RL_s1_pomo_v2 vs A1 cvar_h: mean 52.7946 vs 61.0374 rel=-13.50% win=45/50 p=8.843e-12
+  RL_s1_pomo_v2 vs A1 cost: mean 1160.6640 vs 1163.9742 rel=-0.28% win=24/50 p=0.5786
+  RL_s1_pomo_v2 vs A1 fails: mean 15.5367 vs 14.5840 rel=6.53% win=6/50 p=4.778e-08
+  RL_s1_pomo_v2 vs A1 mk: mean 479.0002 vs 314.3935 rel=52.36% win=0/50 p=1.776e-15
+  RL_s0_pomo_v2_uniform vs N1_240 J: mean 7360.2655 vs 7577.5468 rel=-2.87% win=35/50 p=3.818e-05
+  RL_s0_pomo_v2_uniform vs N1_240 ontime_h: mean 0.6740 vs 0.6937 rel=-2.83% win=14/50 p=6.825e-05
+  RL_s0_pomo_v2_uniform vs N1_240 cvar_h: mean 54.1745 vs 53.9798 rel=0.36% win=24/50 p=0.521
+  RL_s0_pomo_v2_uniform vs N1_240 cost: mean 1154.2758 vs 1176.4071 rel=-1.88% win=50/50 p=1.776e-15
+  RL_s0_pomo_v2_uniform vs N1_240 fails: mean 14.9433 vs 16.2167 rel=-7.85% win=49/50 p=1.109e-09
+  RL_s0_pomo_v2_uniform vs N1_240 mk: mean 394.4829 vs 463.8745 rel=-14.96% win=50/50 p=1.776e-15
+  RL_s0_pomo_v2_uniform vs A1 J: mean 7360.2655 vs 8355.4502 rel=-11.91% win=46/50 p=7.638e-14
+  RL_s0_pomo_v2_uniform vs A1 ontime_h: mean 0.6740 vs 0.5946 rel=13.35% win=50/50 p=1.776e-15
+  RL_s0_pomo_v2_uniform vs A1 cvar_h: mean 54.1745 vs 61.0374 rel=-11.24% win=47/50 p=5.862e-14
+  RL_s0_pomo_v2_uniform vs A1 cost: mean 1154.2758 vs 1163.9742 rel=-0.83% win=32/50 p=0.005237
+  RL_s0_pomo_v2_uniform vs A1 fails: mean 14.9433 vs 14.5840 rel=2.46% win=14/50 p=0.0005775
+  RL_s0_pomo_v2_uniform vs A1 mk: mean 394.4829 vs 314.3935 rel=25.47% win=0/50 p=1.776e-15
+  A1 vs N1_240 J: mean 8355.4502 vs 7577.5468 rel=10.27% win=5/50 p=3.135e-10
+  A1 vs N1_240 ontime_h: mean 0.5946 vs 0.6937 rel=-14.28% win=0/50 p=1.776e-15
+  A1 vs N1_240 cvar_h: mean 61.0374 vs 53.9798 rel=13.07% win=4/50 p=2.023e-10
+  A1 vs N1_240 cost: mean 1163.9742 vs 1176.4071 rel=-1.06% win=38/50 p=5.367e-06
+  A1 vs N1_240 fails: mean 14.5840 vs 16.2167 rel=-10.07% win=50/50 p=7.548e-10
+  A1 vs N1_240 mk: mean 314.3935 vs 463.8745 rel=-32.22% win=50/50 p=1.776e-15
+  A1 vs A1 J: mean 8355.4502 vs 8355.4502 rel=0.00% win=0/50 p=1
+  A1 vs A1 ontime_h: mean 0.5946 vs 0.5946 rel=0.00% win=0/50 p=1
+  A1 vs A1 cvar_h: mean 61.0374 vs 61.0374 rel=0.00% win=0/50 p=1
+  A1 vs A1 cost: mean 1163.9742 vs 1163.9742 rel=0.00% win=0/50 p=1
+  A1 vs A1 fails: mean 14.5840 vs 14.5840 rel=0.00% win=0/50 p=1
+  A1 vs A1 mk: mean 314.3935 vs 314.3935 rel=0.00% win=0/50 p=1
+wrote /root/keyan001/wx2_server_run/wx_e/results/p3_uniform_STATS.json

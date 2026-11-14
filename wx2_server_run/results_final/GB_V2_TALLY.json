@@ -1,0 +1,46 @@
+{
+  "passed": 2,
+  "done": 3,
+  "official_testa": true,
+  "seeds": [
+    {
+      "seed": 0,
+      "G_b": true,
+      "G_c": false,
+      "G_b_J": true,
+      "G_b_ot": false,
+      "dev_J": 4987.0079203568675,
+      "gap": -1.2623974718153022,
+      "d_ot_pp": 0.9057844932845005,
+      "KL": 1.0515750236849715,
+      "frac_diff": 0.037029720356467864,
+      "best_ckpt": "models/rl_s0_best_pomo_v2.npz"
+    },
+    {
+      "seed": 1,
+      "G_b": true,
+      "G_c": true,
+      "G_b_J": true,
+      "G_b_ot": true,
+      "dev_J": 4939.532966268651,
+      "gap": -2.2023524952817013,
+      "d_ot_pp": 1.6702075702075714,
+      "KL": 0.9782037898946843,
+      "frac_diff": 0.05728335142729299,
+      "best_ckpt": "/root/keyan001/wx2_server_run/models/rl_s1_best_pomo_v2.npz"
+    },
+    {
+      "seed": 2,
+      "G_b": true,
+      "G_c": true,
+      "G_b_J": true,
+      "G_b_ot": false,
+      "dev_J": 4923.994498724012,
+      "gap": -2.509998092967021,
+      "d_ot_pp": -1.1043040293040485,
+      "KL": 1.4259075341247398,
+      "frac_diff": 0.07160676337429328,
+      "best_ckpt": "/root/keyan001/wx2_server_run/models/rl_s2_best_pomo_v2.npz"
+    }
+  ]
+}

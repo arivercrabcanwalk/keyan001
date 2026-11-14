@@ -1,0 +1,4 @@
+value collect 280 days ckpt=/root/keyan001/wx2_server_run/models/rl_s2_best_pomo_v2.npz W=19
+data 46413 states, J mean=6057.1 std=5873.5 sec=6.6
+fit mae=2508.6 corr=0.753 last={'loss': 0.3007462665009987, 'mae': 0.4069565040702861}
+wrote /root/keyan001/wx2_server_run/models/value_best_pomo_v2.npz

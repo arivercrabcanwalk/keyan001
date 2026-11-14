@@ -1,0 +1,63 @@
+{
+  "criterion_share": 0.7,
+  "criterion_shrink": 0.5,
+  "synthetic": true,
+  "storm_eval": {
+    "file": "/root/keyan001/wx2_server_run/wx_e/results/testA.jsonl",
+    "method": "RL_s0_pomo_v2",
+    "share": {
+      "n": 1500,
+      "n_storm": 800,
+      "n_calm": 700,
+      "mean_delta": 290.37511124913,
+      "mean_delta_storm": 380.88276705072946,
+      "mean_delta_calm": 186.93779033301632,
+      "sum_delta": 435562.666873695,
+      "sum_delta_storm": 304706.21364058356,
+      "sum_delta_calm": 130856.45323311142,
+      "storm_share": 0.6995691706721565,
+      "J_rl": 7625.9111888867565,
+      "J_n1": 7916.286300135887,
+      "pass_70": false
+    },
+    "advantage": {
+      "n": 1500,
+      "J_rl": 7625.9111888867565,
+      "J_n1": 7916.286300135887,
+      "dJ_pct": -3.668072379395202,
+      "mean_delta": 290.3751112491309
+    }
+  },
+  "uniform_eval_storm_trained": {
+    "file": "/root/keyan001/wx2_server_run/wx_e/results/p3_uniform.jsonl",
+    "method": "RL_s0_pomo_v2",
+    "advantage": {
+      "n": 1500,
+      "J_rl": 7329.641290066234,
+      "J_n1": 7577.54676629365,
+      "dJ_pct": -3.271579626933422,
+      "mean_delta": 247.90547622741542
+    }
+  },
+  "uniform_retrain": {
+    "file": "/root/keyan001/wx2_server_run/wx_e/results/p3_uniform.jsonl",
+    "method": "RL_s0_pomo_v2_uniform",
+    "advantage": {
+      "n": 1500,
+      "J_rl": 7360.265524325239,
+      "J_n1": 7577.54676629365,
+      "dJ_pct": -2.8674351827812963,
+      "mean_delta": 217.28124196841054
+    }
+  },
+  "shrink": {
+    "storm_mean_delta": 290.3751112491309,
+    "uniform_mean_delta": 217.28124196841054,
+    "remaining_ratio": 0.7482777743371795,
+    "pass_half": false,
+    "used": "uniform_retrain"
+  },
+  "P3_pass": false,
+  "P3_share_pass": false,
+  "P3_shrink_pass": false
+}

@@ -1,0 +1,39 @@
+Python: Python 3.10.12 at /usr/bin/python3
+Creating .venv (system-site-packages, so the image's numpy/scipy can be reused)
+Installing requirements (this is tolerant of already-satisfied packages)
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Requirement already satisfied: pip in ./.venv/lib/python3.10/site-packages (22.0.2)
+Collecting pip
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/07/25/ee8c38ae72d66b844ce8eb9711ba905dba21ca1a8a0c960057c41cd23337/pip-26.3-py3-none-any.whl (2.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 2.3 MB/s eta 0:00:00
+Requirement already satisfied: setuptools in ./.venv/lib/python3.10/site-packages (59.6.0)
+Collecting setuptools
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/ef/55/6dc6d6bb953bdfc52519a0059592c52b6e3b8ad51cf8256dffceb55b0610/setuptools-84.2.1-py3-none-any.whl (876 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 KB 15.1 MB/s eta 0:00:00
+Collecting wheel
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/2e/29/69cfbb602cd91690c55d38ba9fe53e6a7e76a6fa647bf38f19c138d25449/wheel-0.48.0-py3-none-any.whl (33 kB)
+Collecting packaging>=24.0
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl (129 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 KB 29.8 MB/s eta 0:00:00
+Installing collected packages: setuptools, pip, packaging, wheel
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 59.6.0
+    Uninstalling setuptools-59.6.0:
+      Successfully uninstalled setuptools-59.6.0
+  Attempting uninstall: pip
+    Found existing installation: pip 22.0.2
+    Uninstalling pip-22.0.2:
+      Successfully uninstalled pip-22.0.2
+Successfully installed packaging-26.3 pip-26.3 setuptools-84.2.1 wheel-0.48.0
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Collecting numpy>=1.24 (from -r /root/keyan001/wx2_server_run/requirements.txt (line 2))
+  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 13.5 MB/s  0:00:01
+Collecting scipy>=1.10 (from -r /root/keyan001/wx2_server_run/requirements.txt (line 3))
+  Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 11.7 MB/s  0:00:03
+Installing collected packages: numpy, scipy
+
+Successfully installed numpy-2.2.6 scipy-1.15.3
+numpy 2.2.6 scipy 1.15.3
+setup OK. Next:  nohup bash run_all.sh > run_all.log 2>&1 &

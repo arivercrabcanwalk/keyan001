@@ -1,0 +1,313 @@
+============================================================
+STAGE2 start 2026-11-13 09:39:36 +0000 seed 1 rule N1_240 mode storm tag _pomo_v2 variant pomo_v2 sanity False hours 2.0 skip_pretrain False
+freeze {"best_n": "N1_240", "J_n": 5050.768696691135, "ot_n": 0.7640699994449994, "ga_o": true, "ga_n4": true, "verdict": "GO"}
+BC collecting 400 days
+BC data 91288 decisions, rule J_train=7714.5, acc-base n/a, hold_frac=0.753 serve_frac=0.088 sec=14.3
+bc ep0 n=91288 loss=0.0952 acc=0.965 ent=0.119
+bc ep1 n=91288 loss=0.0252 acc=0.991 ent=0.028
+bc ep2 n=91288 loss=0.0227 acc=0.992 ent=0.022
+BC dev J=5116.71 ot=0.7671 cvar=46.44 fails=8.90 holds=170.8 vs rule N1_240 J_n=5050.77
+DAgger round 0: 200 days, M=8
+DAgger r0 labels=15085 sec=1929.1
+bc ep0 n=106373 loss=0.2575 acc=0.931 ent=0.234
+bc ep1 n=106373 loss=0.2424 acc=0.932 ent=0.242
+DAgger r0 dev J=5052.41 ot=0.7670 cvar=45.22 fails=8.85 holds=178.4
+DAgger round 1: 200 days, M=8
+DAgger r1 labels=16042 sec=2597.7
+bc ep0 n=122415 loss=0.3518 acc=0.884 ent=0.348
+bc ep1 n=122415 loss=0.3487 acc=0.884 ent=0.349
+DAgger r1 dev J=5005.57 ot=0.7744 cvar=44.63 fails=8.79 holds=185.4
+init skip missing dagger_r0 /root/keyan001/wx2_server_run/models/dagger_s1_r0.npz
+init skip missing dagger_r1 /root/keyan001/wx2_server_run/models/dagger_s1_r1.npz
+init skip missing bc /root/keyan001/wx2_server_run/models/bc_s1.npz
+init cand dagger_r0_tag J=5052.4110 ot=0.7670 holds=178.45 /root/keyan001/wx2_server_run/models/dagger_s1_r0_pomo_v2.npz
+init cand dagger_r1_tag J=5005.5680 ot=0.7744 holds=185.38 /root/keyan001/wx2_server_run/models/dagger_s1_r1_pomo_v2.npz
+init cand bc_tag J=5116.7083 ot=0.7671 holds=170.81 /root/keyan001/wx2_server_run/models/bc_s1_pomo_v2.npz
+init SELECT dagger_r1_tag J=5005.5680
+{"it": 0, "dev_J": 5005.5680422752375, "dev_ot": 0.7743580031080032, "dev_cvar": 44.62517605447253, "dev_fails": 8.795, "dev_holds": 185.375, "gap_vs_bestN": -0.8949262405445233, "sec": 0.0, "phase": "rl_pomo_v2", "init": "dagger_r1_tag", "accepted": true}
+NEW BEST (init) 5005.5680422752375 ot 0.7743580031080032 dagger_r1_tag
+rlv2 it1 batchJ=13360.4 H=110.4 gn=0.0219 ent=0.334 kl_s=0.0000 kl_r=0.0000 accpt=True rej=0 frac_clip=0.000 sec=10
+rlv2 it6 batchJ=6561.1 H=105.0 gn=0.0397 ent=0.361 kl_s=0.0002 kl_r=0.0042 accpt=True rej=0 frac_clip=0.000 sec=60
+{"it": 10, "dev_J": 5049.725045334704, "dev_ot": 0.7706652375402376, "dev_cvar": 44.887338616904344, "dev_fails": 8.885, "dev_holds": 177.605, "gap_vs_bestN": -0.02066321819715573, "sec": 93.65476274490356, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it11 batchJ=6352.9 H=94.4 gn=0.0227 ent=0.390 kl_s=0.0001 kl_r=0.0163 accpt=True rej=0 frac_clip=0.000 sec=100
+rlv2 it16 batchJ=9257.2 H=77.9 gn=0.0480 ent=0.411 kl_s=0.0000 kl_r=0.0232 accpt=True rej=0 frac_clip=0.000 sec=140
+{"it": 20, "dev_J": 5058.531493078954, "dev_ot": 0.7682069042069043, "dev_cvar": 44.88672708891606, "dev_fails": 8.9, "dev_holds": 176.765, "gap_vs_bestN": 0.15369534528286943, "sec": 173.6817078590393, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it21 batchJ=5656.0 H=70.9 gn=0.0422 ent=0.430 kl_s=0.0000 kl_r=0.0261 accpt=True rej=0 frac_clip=0.000 sec=179
+rlv2 it26 batchJ=6136.2 H=72.6 gn=0.0270 ent=0.417 kl_s=0.0000 kl_r=0.0249 accpt=True rej=0 frac_clip=0.000 sec=218
+{"it": 30, "dev_J": 5056.626505495832, "dev_ot": 0.7706652375402376, "dev_cvar": 45.011496379969806, "dev_fails": 8.9, "dev_holds": 177.315, "gap_vs_bestN": 0.11597856002660721, "sec": 252.23561120033264, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it31 batchJ=8356.1 H=85.0 gn=0.0322 ent=0.426 kl_s=0.0000 kl_r=0.0239 accpt=True rej=0 frac_clip=0.000 sec=261
+rlv2 it36 batchJ=8212.8 H=84.5 gn=0.0351 ent=0.411 kl_s=0.0000 kl_r=0.0210 accpt=True rej=0 frac_clip=0.000 sec=309
+{"it": 40, "dev_J": 5032.200248367632, "dev_ot": 0.7720306221556222, "dev_cvar": 44.8517084651398, "dev_fails": 8.825, "dev_holds": 179.405, "gap_vs_bestN": -0.3676360854866961, "sec": 340.32157468795776, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it41 batchJ=3447.7 H=63.6 gn=0.0259 ent=0.428 kl_s=0.0000 kl_r=0.0270 accpt=True rej=0 frac_clip=0.000 sec=344
+rlv2 it46 batchJ=7326.3 H=73.7 gn=0.0315 ent=0.422 kl_s=0.0000 kl_r=0.0276 accpt=True rej=0 frac_clip=0.000 sec=388
+{"it": 50, "dev_J": 5030.001111339419, "dev_ot": 0.7744056221556223, "dev_cvar": 45.00764712600316, "dev_fails": 8.855, "dev_holds": 180.35, "gap_vs_bestN": -0.41117672573921343, "sec": 419.3360357284546, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it51 batchJ=8049.2 H=77.3 gn=0.0178 ent=0.404 kl_s=0.0000 kl_r=0.0205 accpt=True rej=0 frac_clip=0.000 sec=427
+rlv2 it56 batchJ=6902.5 H=87.3 gn=0.0254 ent=0.398 kl_s=0.0000 kl_r=0.0164 accpt=True rej=0 frac_clip=0.000 sec=483
+{"it": 60, "dev_J": 4999.789050894938, "dev_ot": 0.771669511044511, "dev_cvar": 44.264494335094575, "dev_fails": 8.825, "dev_holds": 183.145, "gap_vs_bestN": -1.009344297029387, "sec": 515.5403738021851, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+NEW BEST 4999.789050894938 gap -1.009344297029387 ot 0.771669511044511
+rlv2 it61 batchJ=7041.1 H=97.4 gn=0.0643 ent=0.386 kl_s=0.0001 kl_r=0.0121 accpt=True rej=0 frac_clip=0.000 sec=521
+rlv2 it66 batchJ=6125.1 H=86.2 gn=0.0238 ent=0.392 kl_s=0.0000 kl_r=0.0112 accpt=True rej=0 frac_clip=0.000 sec=566
+{"it": 70, "dev_J": 4989.707143970652, "dev_ot": 0.7728874597624598, "dev_cvar": 44.27680991370243, "dev_fails": 8.76, "dev_holds": 183.76, "gap_vs_bestN": -1.2089556340302305, "sec": 603.5374248027802, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+NEW BEST 4989.707143970652 gap -1.2089556340302305 ot 0.7728874597624598
+rlv2 it71 batchJ=5226.7 H=95.4 gn=0.1038 ent=0.399 kl_s=0.0000 kl_r=0.0134 accpt=True rej=0 frac_clip=0.000 sec=610
+rlv2 it76 batchJ=11175.9 H=91.7 gn=0.0199 ent=0.397 kl_s=0.0000 kl_r=0.0137 accpt=True rej=0 frac_clip=0.000 sec=645
+{"it": 80, "dev_J": 5001.980740171511, "dev_ot": 0.7701695110445111, "dev_cvar": 44.469621257612765, "dev_fails": 8.81, "dev_holds": 181.705, "gap_vs_bestN": -0.9659511145617592, "sec": 676.5102038383484, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it81 batchJ=10495.0 H=100.0 gn=0.0213 ent=0.378 kl_s=0.0000 kl_r=0.0156 accpt=True rej=0 frac_clip=0.000 sec=685
+rlv2 it86 batchJ=9495.6 H=83.4 gn=0.0407 ent=0.418 kl_s=0.0000 kl_r=0.0256 accpt=True rej=0 frac_clip=0.000 sec=722
+{"it": 90, "dev_J": 5022.605653665387, "dev_ot": 0.7696139554889555, "dev_cvar": 45.05427152565023, "dev_fails": 8.785, "dev_holds": 181.515, "gap_vs_bestN": -0.5575991441500472, "sec": 758.0809557437897, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it91 batchJ=7350.4 H=89.6 gn=0.0991 ent=0.401 kl_s=0.0002 kl_r=0.0160 accpt=True rej=0 frac_clip=0.000 sec=764
+rlv2 it96 batchJ=7399.4 H=90.2 gn=0.0226 ent=0.385 kl_s=0.0000 kl_r=0.0120 accpt=True rej=0 frac_clip=0.000 sec=802
+{"it": 100, "dev_J": 4971.066552339575, "dev_ot": 0.7754744560994561, "dev_cvar": 44.561589530270915, "dev_fails": 8.76, "dev_holds": 185.255, "gap_vs_bestN": -1.5780200824435902, "sec": 833.0614635944366, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+NEW BEST 4971.066552339575 gap -1.5780200824435902 ot 0.7754744560994561
+rlv2 it101 batchJ=10197.8 H=110.1 gn=0.0348 ent=0.364 kl_s=0.0000 kl_r=0.0095 accpt=True rej=0 frac_clip=0.000 sec=842
+rlv2 it106 batchJ=10168.9 H=99.4 gn=0.0482 ent=0.397 kl_s=0.0000 kl_r=0.0183 accpt=True rej=0 frac_clip=0.000 sec=887
+{"it": 110, "dev_J": 4978.219120804936, "dev_ot": 0.7695861777111778, "dev_cvar": 44.45786531055831, "dev_fails": 8.78, "dev_holds": 182.845, "gap_vs_bestN": -1.4364066193276217, "sec": 925.6816601753235, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it111 batchJ=5349.5 H=80.4 gn=0.0485 ent=0.424 kl_s=0.0000 kl_r=0.0280 accpt=True rej=0 frac_clip=0.000 sec=932
+rlv2 it116 batchJ=5755.7 H=80.2 gn=0.0328 ent=0.434 kl_s=0.0000 kl_r=0.0329 accpt=True rej=0 frac_clip=0.000 sec=966
+{"it": 120, "dev_J": 4998.038108383323, "dev_ot": 0.7718361777111779, "dev_cvar": 44.44101054778025, "dev_fails": 8.78, "dev_holds": 181.05, "gap_vs_bestN": -1.0440111490822652, "sec": 1000.0801544189453, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it121 batchJ=14284.9 H=94.2 gn=0.0419 ent=0.408 kl_s=0.0001 kl_r=0.0225 accpt=True rej=0 frac_clip=0.000 sec=1010
+rlv2 it126 batchJ=11875.7 H=102.1 gn=0.0375 ent=0.386 kl_s=0.0000 kl_r=0.0161 accpt=True rej=0 frac_clip=0.000 sec=1050
+{"it": 130, "dev_J": 4973.9911407188665, "dev_ot": 0.7714611777111778, "dev_cvar": 44.432489193624896, "dev_fails": 8.76, "dev_holds": 184.215, "gap_vs_bestN": -1.5201162552260055, "sec": 1089.7254872322083, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it131 batchJ=6838.8 H=92.0 gn=0.0230 ent=0.397 kl_s=0.0000 kl_r=0.0179 accpt=True rej=0 frac_clip=0.000 sec=1096
+rlv2 it136 batchJ=6807.8 H=84.6 gn=0.0540 ent=0.408 kl_s=0.0000 kl_r=0.0202 accpt=True rej=0 frac_clip=0.000 sec=1133
+{"it": 140, "dev_J": 4979.609268017751, "dev_ot": 0.7708361777111779, "dev_cvar": 44.432489193624896, "dev_fails": 8.785, "dev_holds": 184.015, "gap_vs_bestN": -1.4088831412929759, "sec": 1168.6749982833862, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it141 batchJ=8583.3 H=95.4 gn=0.0217 ent=0.408 kl_s=0.0000 kl_r=0.0207 accpt=True rej=0 frac_clip=0.000 sec=1176
+rlv2 it146 batchJ=7147.4 H=106.2 gn=0.0785 ent=0.380 kl_s=0.0001 kl_r=0.0151 accpt=True rej=0 frac_clip=0.000 sec=1223
+{"it": 150, "dev_J": 4963.086264195421, "dev_ot": 0.7708361777111779, "dev_cvar": 44.22327756759618, "dev_fails": 8.72, "dev_holds": 184.56, "gap_vs_bestN": -1.7360215397144763, "sec": 1260.8582673072815, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+NEW BEST 4963.086264195421 gap -1.7360215397144763 ot 0.7708361777111779
+rlv2 it151 batchJ=7005.9 H=86.0 gn=0.0355 ent=0.402 kl_s=0.0000 kl_r=0.0204 accpt=True rej=0 frac_clip=0.000 sec=1272
+rlv2 it156 batchJ=7176.0 H=91.0 gn=0.0340 ent=0.387 kl_s=0.0000 kl_r=0.0166 accpt=True rej=0 frac_clip=0.000 sec=1307
+{"it": 160, "dev_J": 4939.532966268651, "dev_ot": 0.7807720751470751, "dev_cvar": 44.10647937718773, "dev_fails": 8.635, "dev_holds": 188.65, "gap_vs_bestN": -2.2023524952817013, "sec": 1340.7428240776062, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+NEW BEST 4939.532966268651 gap -2.2023524952817013 ot 0.7807720751470751
+rlv2 it161 batchJ=6947.9 H=105.5 gn=0.0771 ent=0.369 kl_s=0.0000 kl_r=0.0148 accpt=True rej=0 frac_clip=0.000 sec=1346
+rlv2 it166 batchJ=4243.5 H=97.7 gn=0.0279 ent=0.396 kl_s=0.0001 kl_r=0.0201 accpt=True rej=0 frac_clip=0.000 sec=1381
+{"it": 170, "dev_J": 4969.50773089418, "dev_ot": 0.7759552253302253, "dev_cvar": 44.531346800800044, "dev_fails": 8.7, "dev_holds": 185.97, "gap_vs_bestN": -1.6088831359509872, "sec": 1416.9939517974854, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it171 batchJ=10085.3 H=95.6 gn=0.0516 ent=0.386 kl_s=0.0000 kl_r=0.0221 accpt=True rej=0 frac_clip=0.000 sec=1424
+rlv2 it176 batchJ=5165.6 H=89.7 gn=0.0748 ent=0.381 kl_s=0.0000 kl_r=0.0194 accpt=True rej=0 frac_clip=0.000 sec=1461
+{"it": 180, "dev_J": 4967.8042240288405, "dev_ot": 0.7751218919968921, "dev_cvar": 44.46956945583384, "dev_fails": 8.725, "dev_holds": 185.56, "gap_vs_bestN": -1.642610811234464, "sec": 1500.1314446926117, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it181 batchJ=8062.8 H=113.5 gn=0.0500 ent=0.374 kl_s=0.0000 kl_r=0.0198 accpt=True rej=0 frac_clip=0.000 sec=1516
+rlv2 it186 batchJ=9900.2 H=83.5 gn=0.0214 ent=0.392 kl_s=0.0000 kl_r=0.0223 accpt=True rej=0 frac_clip=0.000 sec=1553
+{"it": 190, "dev_J": 4960.013261744378, "dev_ot": 0.773720793095793, "dev_cvar": 44.23019837223625, "dev_fails": 8.675, "dev_holds": 185.09, "gap_vs_bestN": -1.7968638121601785, "sec": 1586.5565655231476, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it191 batchJ=7825.1 H=92.8 gn=0.1015 ent=0.374 kl_s=0.0000 kl_r=0.0179 accpt=True rej=0 frac_clip=0.000 sec=1595
+rlv2 it196 batchJ=4978.3 H=93.3 gn=0.0196 ent=0.376 kl_s=0.0000 kl_r=0.0182 accpt=True rej=0 frac_clip=0.000 sec=1634
+{"it": 200, "dev_J": 5000.564729457879, "dev_ot": 0.7735124597624597, "dev_cvar": 44.42060205975606, "dev_fails": 8.785, "dev_holds": 183.095, "gap_vs_bestN": -0.993986663181496, "sec": 1665.9567630290985, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it201 batchJ=7309.0 H=120.8 gn=0.0210 ent=0.354 kl_s=0.0000 kl_r=0.0147 accpt=True rej=0 frac_clip=0.000 sec=1676
+rlv2 it206 batchJ=10403.8 H=113.5 gn=0.0390 ent=0.367 kl_s=0.0000 kl_r=0.0175 accpt=True rej=0 frac_clip=0.000 sec=1718
+{"it": 210, "dev_J": 5030.774784104278, "dev_ot": 0.7659985708735709, "dev_cvar": 44.82806241547982, "dev_fails": 8.825, "dev_holds": 176.925, "gap_vs_bestN": -0.39585880462028, "sec": 1754.9631924629211, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it211 batchJ=8860.0 H=89.7 gn=0.0316 ent=0.360 kl_s=0.0001 kl_r=0.0277 accpt=True rej=0 frac_clip=0.000 sec=1761
+rlv2 it216 batchJ=6819.0 H=73.6 gn=0.0410 ent=0.423 kl_s=0.0000 kl_r=0.0474 accpt=True rej=0 frac_clip=0.000 sec=1803
+{"it": 220, "dev_J": 5048.470054767997, "dev_ot": 0.7699985708735708, "dev_cvar": 44.88879053419431, "dev_fails": 8.82, "dev_holds": 176.07, "gap_vs_bestN": -0.04551073432929599, "sec": 1837.3489055633545, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it221 batchJ=5692.0 H=81.4 gn=0.0369 ent=0.404 kl_s=0.0001 kl_r=0.0348 accpt=True rej=0 frac_clip=0.000 sec=1845
+rlv2 it226 batchJ=5604.6 H=102.2 gn=0.0310 ent=0.383 kl_s=0.0001 kl_r=0.0249 accpt=True rej=0 frac_clip=0.000 sec=1884
+{"it": 230, "dev_J": 4993.551537915444, "dev_ot": 0.7731850788100789, "dev_cvar": 44.496915017626286, "dev_fails": 8.745, "dev_holds": 183.175, "gap_vs_bestN": -1.1328406072757855, "sec": 1919.1338846683502, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it231 batchJ=4199.5 H=89.8 gn=0.0305 ent=0.376 kl_s=0.0001 kl_r=0.0189 accpt=True rej=0 frac_clip=0.000 sec=1925
+rlv2 it236 batchJ=5161.8 H=100.8 gn=0.0307 ent=0.356 kl_s=0.0000 kl_r=0.0162 accpt=True rej=0 frac_clip=0.000 sec=1970
+{"it": 240, "dev_J": 5014.214744940586, "dev_ot": 0.770893412143412, "dev_cvar": 44.388097567538914, "dev_fails": 8.795, "dev_holds": 183.385, "gap_vs_bestN": -0.7237304645230878, "sec": 2014.3463711738586, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it241 batchJ=9993.5 H=112.0 gn=0.0579 ent=0.340 kl_s=0.0000 kl_r=0.0174 accpt=True rej=0 frac_clip=0.000 sec=2025
+rlv2 it246 batchJ=7963.4 H=100.5 gn=0.0301 ent=0.351 kl_s=0.0001 kl_r=0.0233 accpt=True rej=0 frac_clip=0.000 sec=2067
+{"it": 250, "dev_J": 5003.769267273983, "dev_ot": 0.7693041264291264, "dev_cvar": 44.7777919221531, "dev_fails": 8.76, "dev_holds": 178.02, "gap_vs_bestN": -0.9305401264552524, "sec": 2103.555648803711, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it251 batchJ=6698.9 H=89.4 gn=0.0812 ent=0.367 kl_s=0.0001 kl_r=0.0234 accpt=True rej=0 frac_clip=0.000 sec=2111
+rlv2 it256 batchJ=4141.9 H=104.8 gn=0.0386 ent=0.368 kl_s=0.0000 kl_r=0.0238 accpt=True rej=0 frac_clip=0.000 sec=2155
+{"it": 260, "dev_J": 5008.026704401945, "dev_ot": 0.7718041264291264, "dev_cvar": 44.378106567635314, "dev_fails": 8.795, "dev_holds": 180.42, "gap_vs_bestN": -0.8462472715725746, "sec": 2200.581509590149, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it261 batchJ=5814.6 H=100.1 gn=0.0253 ent=0.366 kl_s=0.0000 kl_r=0.0237 accpt=True rej=0 frac_clip=0.000 sec=2209
+rlv2 it266 batchJ=11660.6 H=117.3 gn=0.0845 ent=0.326 kl_s=0.0000 kl_r=0.0185 accpt=True rej=0 frac_clip=0.000 sec=2248
+{"it": 270, "dev_J": 5006.865152325288, "dev_ot": 0.7725184121434121, "dev_cvar": 44.378106567635314, "dev_fails": 8.765, "dev_holds": 181.075, "gap_vs_bestN": -0.869244802174546, "sec": 2280.149147748947, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it271 batchJ=5922.1 H=107.4 gn=0.0295 ent=0.345 kl_s=0.0000 kl_r=0.0226 accpt=True rej=0 frac_clip=0.000 sec=2289
+rlv2 it276 batchJ=7320.6 H=91.3 gn=0.0278 ent=0.351 kl_s=0.0000 kl_r=0.0260 accpt=True rej=0 frac_clip=0.000 sec=2336
+{"it": 280, "dev_J": 5008.850640380365, "dev_ot": 0.7683041264291265, "dev_cvar": 44.76837146448215, "dev_fails": 8.765, "dev_holds": 177.67, "gap_vs_bestN": -0.8299341907743989, "sec": 2366.39151597023, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it281 batchJ=8639.4 H=88.7 gn=0.0398 ent=0.368 kl_s=0.0000 kl_r=0.0352 accpt=True rej=0 frac_clip=0.000 sec=2372
+rlv2 it286 batchJ=5789.2 H=95.4 gn=0.0818 ent=0.347 kl_s=0.0000 kl_r=0.0345 accpt=True rej=0 frac_clip=0.000 sec=2420
+{"it": 290, "dev_J": 4965.741749592028, "dev_ot": 0.7752763486513488, "dev_cvar": 43.89583405201998, "dev_fails": 8.75, "dev_holds": 179.68, "gap_vs_bestN": -1.6834456734241259, "sec": 2449.7817339897156, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it291 batchJ=5684.7 H=98.4 gn=0.0428 ent=0.373 kl_s=0.0000 kl_r=0.0320 accpt=True rej=0 frac_clip=0.000 sec=2456
+rlv2 it296 batchJ=4599.2 H=77.2 gn=0.0297 ent=0.350 kl_s=0.0000 kl_r=0.0364 accpt=True rej=0 frac_clip=0.000 sec=2498
+{"it": 300, "dev_J": 5016.081437354954, "dev_ot": 0.7718041264291264, "dev_cvar": 44.48080483941155, "dev_fails": 8.82, "dev_holds": 181.535, "gap_vs_bestN": -0.6867718840283796, "sec": 2541.704127073288, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it301 batchJ=8607.2 H=103.6 gn=0.0887 ent=0.352 kl_s=0.0001 kl_r=0.0318 accpt=True rej=0 frac_clip=0.000 sec=2552
+rlv2 it306 batchJ=5386.9 H=80.0 gn=0.0650 ent=0.383 kl_s=0.0000 kl_r=0.0436 accpt=True rej=0 frac_clip=0.000 sec=2595
+{"it": 310, "dev_J": 4961.734212586104, "dev_ot": 0.774095793095793, "dev_cvar": 43.8626355937514, "dev_fails": 8.78, "dev_holds": 180.995, "gap_vs_bestN": -1.7627907641733689, "sec": 2632.2717418670654, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it311 batchJ=7121.8 H=111.3 gn=0.0468 ent=0.342 kl_s=0.0000 kl_r=0.0324 accpt=True rej=0 frac_clip=0.000 sec=2643
+rlv2 it316 batchJ=7419.7 H=80.8 gn=0.0825 ent=0.377 kl_s=0.0001 kl_r=0.0423 accpt=True rej=0 frac_clip=0.000 sec=2702
+{"it": 320, "dev_J": 4974.392438523699, "dev_ot": 0.773470793095793, "dev_cvar": 44.13993176518561, "dev_fails": 8.785, "dev_holds": 180.295, "gap_vs_bestN": -1.5121709734494888, "sec": 2741.504622220993, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it321 batchJ=6469.9 H=84.6 gn=0.0370 ent=0.363 kl_s=0.0000 kl_r=0.0431 accpt=True rej=0 frac_clip=0.000 sec=2748
+rlv2 it326 batchJ=11865.2 H=114.6 gn=0.0589 ent=0.325 kl_s=0.0000 kl_r=0.0302 accpt=True rej=0 frac_clip=0.000 sec=2796
+{"it": 330, "dev_J": 5007.759668654769, "dev_ot": 0.7681374597624597, "dev_cvar": 45.00819008978151, "dev_fails": 8.785, "dev_holds": 178.095, "gap_vs_bestN": -0.8515343033733195, "sec": 2831.296585559845, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it331 batchJ=6314.7 H=79.9 gn=0.0385 ent=0.398 kl_s=0.0003 kl_r=0.0590 accpt=True rej=0 frac_clip=0.000 sec=2836
+rlv2 it336 batchJ=6670.3 H=60.2 gn=0.1240 ent=0.430 kl_s=0.0000 kl_r=0.0949 accpt=True rej=0 frac_clip=0.000 sec=2871
+{"it": 340, "dev_J": 4996.507797380672, "dev_ot": 0.7681374597624597, "dev_cvar": 44.76182320877311, "dev_fails": 8.815, "dev_holds": 179.145, "gap_vs_bestN": -1.074309725290145, "sec": 2901.4606761932373, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it341 batchJ=6439.0 H=91.4 gn=0.0329 ent=0.364 kl_s=0.0003 kl_r=0.0318 accpt=True rej=0 frac_clip=0.000 sec=2907
+rlv2 it346 batchJ=9914.7 H=92.1 gn=0.0291 ent=0.360 kl_s=0.0000 kl_r=0.0385 accpt=True rej=0 frac_clip=0.000 sec=2945
+{"it": 350, "dev_J": 4970.587763378651, "dev_ot": 0.7729767454767454, "dev_cvar": 44.49469144689745, "dev_fails": 8.665, "dev_holds": 183.61, "gap_vs_bestN": -1.5874996090201487, "sec": 2977.691291809082, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it351 batchJ=5920.4 H=104.0 gn=0.0403 ent=0.351 kl_s=0.0000 kl_r=0.0323 accpt=True rej=0 frac_clip=0.000 sec=2986
+rlv2 it356 batchJ=6063.8 H=93.4 gn=0.0663 ent=0.346 kl_s=0.0000 kl_r=0.0340 accpt=True rej=0 frac_clip=0.000 sec=3022
+{"it": 360, "dev_J": 4962.179537541344, "dev_ot": 0.774643412143412, "dev_cvar": 44.44254797012533, "dev_fails": 8.64, "dev_holds": 183.72, "gap_vs_bestN": -1.7539737903228034, "sec": 3059.193705558777, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it361 batchJ=4185.1 H=95.7 gn=0.0610 ent=0.362 kl_s=0.0000 kl_r=0.0360 accpt=True rej=0 frac_clip=0.000 sec=3066
+rlv2 it366 batchJ=5116.1 H=80.3 gn=0.0489 ent=0.403 kl_s=0.0001 kl_r=0.0599 accpt=True rej=0 frac_clip=0.000 sec=3113
+{"it": 370, "dev_J": 4983.398489469325, "dev_ot": 0.7711017454767455, "dev_cvar": 43.96380843091401, "dev_fails": 8.775, "dev_holds": 180.27, "gap_vs_bestN": -1.3338604728810066, "sec": 3143.5525908470154, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it371 batchJ=7727.4 H=82.9 gn=0.0255 ent=0.378 kl_s=0.0000 kl_r=0.0507 accpt=True rej=0 frac_clip=0.000 sec=3151
+rlv2 it376 batchJ=9675.4 H=95.7 gn=0.0997 ent=0.356 kl_s=0.0001 kl_r=0.0393 accpt=True rej=0 frac_clip=0.000 sec=3201
+{"it": 380, "dev_J": 4956.865745272376, "dev_ot": 0.7764350788100788, "dev_cvar": 44.38080694603734, "dev_fails": 8.62, "dev_holds": 184.03, "gap_vs_bestN": -1.859181385207295, "sec": 3233.747132062912, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it381 batchJ=8386.4 H=66.3 gn=0.1350 ent=0.391 kl_s=0.0000 kl_r=0.0562 accpt=True rej=0 frac_clip=0.000 sec=3245
+rlv2 it386 batchJ=7319.9 H=97.1 gn=0.0810 ent=0.365 kl_s=0.0000 kl_r=0.0374 accpt=True rej=0 frac_clip=0.000 sec=3294
+{"it": 390, "dev_J": 4959.350492386236, "dev_ot": 0.7743100788100787, "dev_cvar": 44.426006384641695, "dev_fails": 8.625, "dev_holds": 186.45, "gap_vs_bestN": -1.8099859604497333, "sec": 3330.1557264328003, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it391 batchJ=4930.2 H=104.7 gn=0.0181 ent=0.345 kl_s=0.0001 kl_r=0.0343 accpt=True rej=0 frac_clip=0.000 sec=3337
+rlv2 it396 batchJ=4921.2 H=83.0 gn=0.1109 ent=0.388 kl_s=0.0003 kl_r=0.0474 accpt=True rej=0 frac_clip=0.000 sec=3377
+{"it": 400, "dev_J": 5003.149246436869, "dev_ot": 0.7688100788100789, "dev_cvar": 44.322558727240846, "dev_fails": 8.81, "dev_holds": 179.295, "gap_vs_bestN": -0.9428158982109448, "sec": 3407.203582763672, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it401 batchJ=8420.6 H=84.5 gn=0.0502 ent=0.365 kl_s=0.0000 kl_r=0.0545 accpt=True rej=0 frac_clip=0.000 sec=3418
+rlv2 it406 batchJ=5763.0 H=67.9 gn=0.0380 ent=0.408 kl_s=0.0000 kl_r=0.0722 accpt=True rej=0 frac_clip=0.000 sec=3462
+{"it": 410, "dev_J": 4957.375492820609, "dev_ot": 0.7772267454767455, "dev_cvar": 44.38080694603734, "dev_fails": 8.645, "dev_holds": 184.635, "gap_vs_bestN": -1.849088910599093, "sec": 3501.093414783478, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it411 batchJ=4605.8 H=90.5 gn=0.1325 ent=0.367 kl_s=0.0000 kl_r=0.0485 accpt=True rej=0 frac_clip=0.000 sec=3512
+rlv2 it416 batchJ=9187.3 H=80.8 gn=0.0980 ent=0.377 kl_s=0.0002 kl_r=0.0561 accpt=True rej=0 frac_clip=0.000 sec=3564
+{"it": 420, "dev_J": 4987.598924417776, "dev_ot": 0.771873570873571, "dev_cvar": 44.17693611169089, "dev_fails": 8.765, "dev_holds": 179.12, "gap_vs_bestN": -1.2506962022383379, "sec": 3598.929011106491, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it421 batchJ=4578.4 H=78.2 gn=0.0906 ent=0.375 kl_s=0.0000 kl_r=0.0651 accpt=True rej=0 frac_clip=0.000 sec=3605
+rlv2 it426 batchJ=4393.6 H=68.9 gn=0.0359 ent=0.379 kl_s=0.0001 kl_r=0.0491 accpt=True rej=0 frac_clip=0.000 sec=3647
+{"it": 430, "dev_J": 4981.787577898957, "dev_ot": 0.7701850788100788, "dev_cvar": 44.477017928304356, "dev_fails": 8.685, "dev_holds": 181.16, "gap_vs_bestN": -1.365754857025402, "sec": 3679.8060550689697, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it431 batchJ=5296.4 H=90.4 gn=0.0558 ent=0.370 kl_s=0.0001 kl_r=0.0420 accpt=True rej=0 frac_clip=0.000 sec=3689
+rlv2 it436 batchJ=9235.2 H=76.0 gn=0.0530 ent=0.371 kl_s=0.0000 kl_r=0.0607 accpt=True rej=0 frac_clip=0.000 sec=3739
+{"it": 440, "dev_J": 5012.936501404973, "dev_ot": 0.7717842851592852, "dev_cvar": 45.100501232363065, "dev_fails": 8.735, "dev_holds": 175.225, "gap_vs_bestN": -0.7490383654065792, "sec": 3769.2374482154846, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it441 batchJ=5391.6 H=85.4 gn=0.1150 ent=0.381 kl_s=0.0000 kl_r=0.0521 accpt=True rej=0 frac_clip=0.000 sec=3778
+rlv2 it446 batchJ=7978.0 H=84.4 gn=0.0245 ent=0.356 kl_s=0.0000 kl_r=0.0515 accpt=True rej=0 frac_clip=0.000 sec=3817
+{"it": 450, "dev_J": 5011.605717603604, "dev_ot": 0.7700819042069043, "dev_cvar": 44.4998557629678, "dev_fails": 8.79, "dev_holds": 178.175, "gap_vs_bestN": -0.7753865092493307, "sec": 3856.519034385681, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it451 batchJ=6814.4 H=71.7 gn=0.0225 ent=0.381 kl_s=0.0000 kl_r=0.0583 accpt=True rej=0 frac_clip=0.000 sec=3862
+rlv2 it456 batchJ=6773.7 H=93.8 gn=0.0859 ent=0.363 kl_s=0.0000 kl_r=0.0514 accpt=True rej=0 frac_clip=0.000 sec=3914
+{"it": 460, "dev_J": 4997.976167136891, "dev_ot": 0.7692485708735708, "dev_cvar": 44.45773462188221, "dev_fails": 8.775, "dev_holds": 178.93, "gap_vs_bestN": -1.0452375217425822, "sec": 3954.2267594337463, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it461 batchJ=8758.8 H=83.3 gn=0.0362 ent=0.355 kl_s=0.0001 kl_r=0.0545 accpt=True rej=0 frac_clip=0.000 sec=3964
+rlv2 it466 batchJ=7053.4 H=84.7 gn=0.0542 ent=0.369 kl_s=0.0000 kl_r=0.0490 accpt=True rej=0 frac_clip=0.000 sec=4003
+{"it": 470, "dev_J": 5003.292621304745, "dev_ot": 0.7691791264291266, "dev_cvar": 44.569950107860315, "dev_fails": 8.775, "dev_holds": 178.625, "gap_vs_bestN": -0.9399772240113232, "sec": 4042.3244309425354, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it471 batchJ=6185.3 H=84.0 gn=0.0356 ent=0.371 kl_s=0.0000 kl_r=0.0404 accpt=True rej=0 frac_clip=0.000 sec=4058
+rlv2 it476 batchJ=7723.2 H=93.0 gn=0.0335 ent=0.348 kl_s=0.0000 kl_r=0.0387 accpt=True rej=0 frac_clip=0.000 sec=4112
+{"it": 480, "dev_J": 4982.478072382397, "dev_ot": 0.7775957930957931, "dev_cvar": 44.38081463287517, "dev_fails": 8.755, "dev_holds": 182.425, "gap_vs_bestN": -1.3520837799101117, "sec": 4142.995789527893, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it481 batchJ=5386.5 H=97.8 gn=0.0279 ent=0.358 kl_s=0.0000 kl_r=0.0404 accpt=True rej=0 frac_clip=0.000 sec=4152
+rlv2 it486 batchJ=5209.2 H=95.3 gn=0.0371 ent=0.348 kl_s=0.0000 kl_r=0.0434 accpt=True rej=0 frac_clip=0.000 sec=4193
+{"it": 490, "dev_J": 4978.346047533126, "dev_ot": 0.7728874597624598, "dev_cvar": 44.11119204886112, "dev_fails": 8.745, "dev_holds": 180.495, "gap_vs_bestN": -1.4338936012938968, "sec": 4231.89474606514, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it491 batchJ=8762.3 H=116.9 gn=0.0600 ent=0.317 kl_s=0.0000 kl_r=0.0341 accpt=True rej=0 frac_clip=0.000 sec=4240
+rlv2 it496 batchJ=8421.3 H=106.2 gn=0.0617 ent=0.335 kl_s=0.0000 kl_r=0.0464 accpt=True rej=0 frac_clip=0.000 sec=4281
+{"it": 500, "dev_J": 4979.744583461204, "dev_ot": 0.7714291264291265, "dev_cvar": 44.13588334141623, "dev_fails": 8.75, "dev_holds": 180.555, "gap_vs_bestN": -1.4062040353671506, "sec": 4318.068002700806, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it501 batchJ=5789.0 H=79.9 gn=0.0253 ent=0.368 kl_s=0.0000 kl_r=0.0545 accpt=True rej=0 frac_clip=0.000 sec=4323
+rlv2 it506 batchJ=5569.7 H=76.2 gn=0.0431 ent=0.385 kl_s=0.0002 kl_r=0.0595 accpt=True rej=0 frac_clip=0.000 sec=4364
+{"it": 510, "dev_J": 4991.370922577283, "dev_ot": 0.7769863608613609, "dev_cvar": 44.68264309187703, "dev_fails": 8.635, "dev_holds": 184.55, "gap_vs_bestN": -1.1760145372082693, "sec": 4395.530234575272, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it511 batchJ=4070.9 H=102.5 gn=0.0456 ent=0.349 kl_s=0.0000 kl_r=0.0424 accpt=True rej=0 frac_clip=0.000 sec=4404
+rlv2 it516 batchJ=7343.1 H=107.6 gn=0.0223 ent=0.357 kl_s=0.0000 kl_r=0.0428 accpt=True rej=0 frac_clip=0.000 sec=4461
+{"it": 520, "dev_J": 5004.4993966240845, "dev_ot": 0.7739446941946941, "dev_cvar": 44.6096095154729, "dev_fails": 8.685, "dev_holds": 182.21, "gap_vs_bestN": -0.9160843199444592, "sec": 4502.344302177429, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it521 batchJ=7788.0 H=118.9 gn=0.0385 ent=0.320 kl_s=0.0001 kl_r=0.0355 accpt=True rej=0 frac_clip=0.000 sec=4511
+rlv2 it526 batchJ=14420.5 H=108.8 gn=0.0721 ent=0.332 kl_s=0.0001 kl_r=0.0523 accpt=True rej=0 frac_clip=0.000 sec=4556
+{"it": 530, "dev_J": 5060.412401646336, "dev_ot": 0.7675819042069043, "dev_cvar": 45.525327488521434, "dev_fails": 8.73, "dev_holds": 176.25, "gap_vs_bestN": 0.19093539091422487, "sec": 4596.096393823624, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it531 batchJ=4863.3 H=80.8 gn=0.0394 ent=0.374 kl_s=0.0001 kl_r=0.0610 accpt=True rej=0 frac_clip=0.000 sec=4601
+rlv2 it536 batchJ=4309.8 H=70.2 gn=0.0588 ent=0.383 kl_s=0.0001 kl_r=0.0702 accpt=True rej=0 frac_clip=0.000 sec=4633
+{"it": 540, "dev_J": 5017.505531651437, "dev_ot": 0.7671156343656343, "dev_cvar": 44.969986390361264, "dev_fails": 8.72, "dev_holds": 178.515, "gap_vs_bestN": -0.6585762888229137, "sec": 4660.465397596359, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it541 batchJ=6549.0 H=93.9 gn=0.0327 ent=0.323 kl_s=0.0000 kl_r=0.0337 accpt=True rej=0 frac_clip=0.000 sec=4666
+rlv2 it546 batchJ=7114.0 H=102.7 gn=0.0280 ent=0.351 kl_s=0.0000 kl_r=0.0469 accpt=True rej=0 frac_clip=0.000 sec=4711
+{"it": 550, "dev_J": 5039.008908616372, "dev_ot": 0.7695402375402375, "dev_cvar": 45.206773234708095, "dev_fails": 8.73, "dev_holds": 173.885, "gap_vs_bestN": -0.2328316496153858, "sec": 4748.569924116135, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it551 batchJ=7701.7 H=99.0 gn=0.0419 ent=0.346 kl_s=0.0000 kl_r=0.0538 accpt=True rej=0 frac_clip=0.000 sec=4756
+rlv2 it556 batchJ=6261.6 H=100.4 gn=0.0524 ent=0.346 kl_s=0.0000 kl_r=0.0451 accpt=True rej=0 frac_clip=0.000 sec=4794
+{"it": 560, "dev_J": 5052.380988747369, "dev_ot": 0.7664985708735708, "dev_cvar": 45.38118894151934, "dev_fails": 8.825, "dev_holds": 177.135, "gap_vs_bestN": 0.031921716337754716, "sec": 4831.0282871723175, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it561 batchJ=7871.1 H=110.1 gn=0.0630 ent=0.328 kl_s=0.0001 kl_r=0.0341 accpt=True rej=0 frac_clip=0.000 sec=4841
+rlv2 it566 batchJ=7863.4 H=92.3 gn=0.0301 ent=0.340 kl_s=0.0000 kl_r=0.0408 accpt=True rej=0 frac_clip=0.000 sec=4886
+{"it": 570, "dev_J": 5022.903053820354, "dev_ot": 0.7683239676989677, "dev_cvar": 44.8115547300282, "dev_fails": 8.81, "dev_holds": 179.155, "gap_vs_bestN": -0.5517109284580043, "sec": 4920.5596759319305, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it571 batchJ=8214.6 H=101.2 gn=0.0283 ent=0.348 kl_s=0.0003 kl_r=0.0452 accpt=True rej=0 frac_clip=0.000 sec=4927
+rlv2 it576 batchJ=6487.0 H=81.0 gn=0.0855 ent=0.386 kl_s=0.0000 kl_r=0.0666 accpt=True rej=0 frac_clip=0.000 sec=4969
+{"it": 580, "dev_J": 5069.145415253441, "dev_ot": 0.7631711899211899, "dev_cvar": 45.681750976994266, "dev_fails": 8.71, "dev_holds": 172.19, "gap_vs_bestN": 0.3638400343762429, "sec": 5007.492980957031, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it581 batchJ=4691.0 H=74.7 gn=0.0565 ent=0.380 kl_s=0.0001 kl_r=0.0733 accpt=True rej=0 frac_clip=0.000 sec=5018
+rlv2 it586 batchJ=11880.5 H=111.8 gn=0.0514 ent=0.327 kl_s=0.0000 kl_r=0.0451 accpt=True rej=0 frac_clip=0.000 sec=5070
+{"it": 590, "dev_J": 5060.763141886676, "dev_ot": 0.7715819042069043, "dev_cvar": 45.54307145875702, "dev_fails": 8.79, "dev_holds": 175.68, "gap_vs_bestN": 0.1978796851672953, "sec": 5107.370013952255, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it591 batchJ=5947.1 H=85.4 gn=0.0393 ent=0.353 kl_s=0.0001 kl_r=0.0492 accpt=True rej=0 frac_clip=0.000 sec=5114
+rlv2 it596 batchJ=5655.5 H=113.8 gn=0.0253 ent=0.325 kl_s=0.0001 kl_r=0.0334 accpt=True rej=0 frac_clip=0.000 sec=5151
+{"it": 600, "dev_J": 4999.893571774403, "dev_ot": 0.7687684121434121, "dev_cvar": 44.71701688862147, "dev_fails": 8.765, "dev_holds": 181.285, "gap_vs_bestN": -1.0072748916429504, "sec": 5186.694962501526, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it601 batchJ=7257.2 H=96.7 gn=0.0846 ent=0.339 kl_s=0.0000 kl_r=0.0334 accpt=True rej=0 frac_clip=0.000 sec=5196
+rlv2 it606 batchJ=8920.7 H=97.7 gn=0.0436 ent=0.329 kl_s=0.0000 kl_r=0.0418 accpt=True rej=0 frac_clip=0.000 sec=5240
+{"it": 610, "dev_J": 5053.823576776576, "dev_ot": 0.7680081862581862, "dev_cvar": 45.595874062886494, "dev_fails": 8.77, "dev_holds": 175.36, "gap_vs_bestN": 0.0604834683370587, "sec": 5276.739192247391, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it611 batchJ=13020.1 H=111.4 gn=0.0389 ent=0.303 kl_s=0.0000 kl_r=0.0330 accpt=True rej=0 frac_clip=0.000 sec=5285
+rlv2 it616 batchJ=6787.6 H=89.3 gn=0.0254 ent=0.368 kl_s=0.0000 kl_r=0.0464 accpt=True rej=0 frac_clip=0.000 sec=5337
+{"it": 620, "dev_J": 5034.033456201794, "dev_ot": 0.7698874597624598, "dev_cvar": 45.413602991746856, "dev_fails": 8.755, "dev_holds": 179.325, "gap_vs_bestN": -0.33134046507226667, "sec": 5365.3346700668335, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it621 batchJ=4488.9 H=103.0 gn=0.0235 ent=0.345 kl_s=0.0000 kl_r=0.0405 accpt=True rej=0 frac_clip=0.000 sec=5378
+rlv2 it626 batchJ=6794.0 H=103.4 gn=0.0414 ent=0.319 kl_s=0.0000 kl_r=0.0329 accpt=True rej=0 frac_clip=0.000 sec=5420
+{"it": 630, "dev_J": 5029.625767072265, "dev_ot": 0.7698874597624598, "dev_cvar": 44.894171584843065, "dev_fails": 8.76, "dev_holds": 182.235, "gap_vs_bestN": -0.4186081542938412, "sec": 5448.533610582352, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it631 batchJ=9978.6 H=126.1 gn=0.0408 ent=0.289 kl_s=0.0000 kl_r=0.0303 accpt=True rej=0 frac_clip=0.000 sec=5459
+rlv2 it636 batchJ=6365.1 H=119.4 gn=0.0363 ent=0.310 kl_s=0.0000 kl_r=0.0299 accpt=True rej=0 frac_clip=0.000 sec=5494
+{"it": 640, "dev_J": 5051.075477159654, "dev_ot": 0.7690124597624597, "dev_cvar": 45.54941715803056, "dev_fails": 8.77, "dev_holds": 176.12, "gap_vs_bestN": 0.0060739362053896405, "sec": 5527.440317630768, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it641 batchJ=8263.6 H=121.3 gn=0.0314 ent=0.301 kl_s=0.0001 kl_r=0.0311 accpt=True rej=0 frac_clip=0.000 sec=5534
+rlv2 it646 batchJ=6318.1 H=109.7 gn=0.0203 ent=0.325 kl_s=0.0000 kl_r=0.0408 accpt=True rej=0 frac_clip=0.000 sec=5574
+{"it": 650, "dev_J": 5029.250021240944, "dev_ot": 0.7624569042069043, "dev_cvar": 45.04007449875526, "dev_fails": 8.675, "dev_holds": 170.4, "gap_vs_bestN": -0.4260475334039426, "sec": 5614.66782283783, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it651 batchJ=7941.4 H=82.3 gn=0.0536 ent=0.358 kl_s=0.0000 kl_r=0.0693 accpt=True rej=0 frac_clip=0.000 sec=5622
+rlv2 it656 batchJ=5989.0 H=91.5 gn=0.0350 ent=0.340 kl_s=0.0000 kl_r=0.0502 accpt=True rej=0 frac_clip=0.000 sec=5653
+{"it": 660, "dev_J": 5092.457690013681, "dev_ot": 0.7659509518259517, "dev_cvar": 45.79751159568239, "dev_fails": 8.8, "dev_holds": 173.485, "gap_vs_bestN": 0.8253989803543572, "sec": 5684.207693815231, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it661 batchJ=6536.8 H=114.5 gn=0.0419 ent=0.339 kl_s=0.0000 kl_r=0.0399 accpt=True rej=0 frac_clip=0.000 sec=5694
+rlv2 it666 batchJ=11273.2 H=94.5 gn=0.0361 ent=0.332 kl_s=0.0000 kl_r=0.0416 accpt=True rej=0 frac_clip=0.000 sec=5732
+{"it": 670, "dev_J": 5070.3616450305335, "dev_ot": 0.7601870629370631, "dev_cvar": 45.261551108642486, "dev_fails": 8.685, "dev_holds": 171.005, "gap_vs_bestN": 0.3879201269350177, "sec": 5771.185995340347, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it671 batchJ=6031.1 H=79.6 gn=0.0454 ent=0.363 kl_s=0.0001 kl_r=0.0610 accpt=True rej=0 frac_clip=0.000 sec=5779
+rlv2 it676 batchJ=5350.2 H=78.5 gn=0.0263 ent=0.377 kl_s=0.0000 kl_r=0.0728 accpt=True rej=0 frac_clip=0.000 sec=5818
+{"it": 680, "dev_J": 5036.507927475751, "dev_ot": 0.765700951825952, "dev_cvar": 45.64130528448923, "dev_fails": 8.62, "dev_holds": 169.15, "gap_vs_bestN": -0.2823484913242369, "sec": 5845.018210411072, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it681 batchJ=7256.0 H=97.8 gn=0.0301 ent=0.347 kl_s=0.0000 kl_r=0.0512 accpt=True rej=0 frac_clip=0.000 sec=5853
+rlv2 it686 batchJ=6429.5 H=83.8 gn=0.0319 ent=0.373 kl_s=0.0000 kl_r=0.0673 accpt=True rej=0 frac_clip=0.000 sec=5889
+{"it": 690, "dev_J": 5047.434016115842, "dev_ot": 0.7666930153180154, "dev_cvar": 45.79442146982851, "dev_fails": 8.57, "dev_holds": 165.805, "gap_vs_bestN": -0.06602322884986105, "sec": 5922.001646518707, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it691 batchJ=8795.6 H=97.4 gn=0.1167 ent=0.330 kl_s=0.0001 kl_r=0.0521 accpt=True rej=0 frac_clip=0.000 sec=5933
+rlv2 it696 batchJ=8092.5 H=90.1 gn=0.0794 ent=0.345 kl_s=0.0003 kl_r=0.0439 accpt=True rej=0 frac_clip=0.000 sec=5979
+{"it": 700, "dev_J": 5053.728425204276, "dev_ot": 0.7720203962703962, "dev_cvar": 45.869407248284986, "dev_fails": 8.73, "dev_holds": 178.88, "gap_vs_bestN": 0.058599565548908474, "sec": 6013.421209335327, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it701 batchJ=8559.1 H=108.0 gn=0.0964 ent=0.315 kl_s=0.0001 kl_r=0.0454 accpt=True rej=0 frac_clip=0.000 sec=6024
+rlv2 it706 batchJ=4004.1 H=86.3 gn=0.0622 ent=0.379 kl_s=0.0000 kl_r=0.0522 accpt=True rej=0 frac_clip=0.000 sec=6065
+{"it": 710, "dev_J": 5068.498090873338, "dev_ot": 0.7621711899211899, "dev_cvar": 45.75459499123842, "dev_fails": 8.7, "dev_holds": 173.13, "gap_vs_bestN": 0.3510236806887943, "sec": 6098.504720926285, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it711 batchJ=9055.1 H=87.5 gn=0.0573 ent=0.356 kl_s=0.0000 kl_r=0.0569 accpt=True rej=0 frac_clip=0.000 sec=6108
+rlv2 it716 batchJ=8114.9 H=71.8 gn=0.0285 ent=0.378 kl_s=0.0000 kl_r=0.0660 accpt=True rej=0 frac_clip=0.000 sec=6155
+{"it": 720, "dev_J": 5042.142918962112, "dev_ot": 0.7735994560994561, "dev_cvar": 45.7707760601355, "dev_fails": 8.75, "dev_holds": 179.17, "gap_vs_bestN": -0.170781483909051, "sec": 6192.680971860886, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it721 batchJ=8216.9 H=88.7 gn=0.0529 ent=0.335 kl_s=0.0000 kl_r=0.0522 accpt=True rej=0 frac_clip=0.000 sec=6201
+rlv2 it726 batchJ=7690.1 H=89.9 gn=0.0539 ent=0.346 kl_s=0.0002 kl_r=0.0504 accpt=True rej=0 frac_clip=0.000 sec=6248
+{"it": 730, "dev_J": 5059.495778465118, "dev_ot": 0.7603259518259518, "dev_cvar": 45.98045191572195, "dev_fails": 8.675, "dev_holds": 166.56, "gap_vs_bestN": 0.17278719929701022, "sec": 6283.601012468338, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it731 batchJ=6053.3 H=66.1 gn=0.0795 ent=0.361 kl_s=0.0000 kl_r=0.0830 accpt=True rej=0 frac_clip=0.000 sec=6288
+rlv2 it736 batchJ=7479.3 H=84.9 gn=0.0673 ent=0.340 kl_s=0.0001 kl_r=0.0513 accpt=True rej=0 frac_clip=0.000 sec=6317
+{"it": 740, "dev_J": 5024.94744993346, "dev_ot": 0.7758692973692973, "dev_cvar": 45.038653243687314, "dev_fails": 8.72, "dev_holds": 181.795, "gap_vs_bestN": -0.5112339983929781, "sec": 6351.991721630096, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it741 batchJ=3695.5 H=91.4 gn=0.0651 ent=0.327 kl_s=0.0001 kl_r=0.0421 accpt=True rej=0 frac_clip=0.000 sec=6360
+rlv2 it746 batchJ=9575.5 H=140.2 gn=0.0235 ent=0.294 kl_s=0.0000 kl_r=0.0358 accpt=True rej=0 frac_clip=0.000 sec=6416
+{"it": 750, "dev_J": 4962.320769500482, "dev_ot": 0.7755280275280275, "dev_cvar": 44.86840698781307, "dev_fails": 8.57, "dev_holds": 188.705, "gap_vs_bestN": -1.75117754350139, "sec": 6455.744085788727, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it751 batchJ=4975.7 H=81.0 gn=0.0273 ent=0.337 kl_s=0.0000 kl_r=0.0425 accpt=True rej=0 frac_clip=0.000 sec=6462
+rlv2 it756 batchJ=8475.0 H=124.2 gn=0.0317 ent=0.318 kl_s=0.0001 kl_r=0.0335 accpt=True rej=0 frac_clip=0.000 sec=6509
+{"it": 760, "dev_J": 5002.144247668307, "dev_ot": 0.7771470751470753, "dev_cvar": 44.90873480452086, "dev_fails": 8.705, "dev_holds": 183.72, "gap_vs_bestN": -0.9627138351174769, "sec": 6551.173796415329, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it761 batchJ=7820.9 H=117.8 gn=0.0276 ent=0.315 kl_s=0.0000 kl_r=0.0400 accpt=True rej=0 frac_clip=0.000 sec=6562
+rlv2 it766 batchJ=6870.0 H=104.9 gn=0.0686 ent=0.319 kl_s=0.0001 kl_r=0.0404 accpt=True rej=0 frac_clip=0.000 sec=6613
+{"it": 770, "dev_J": 5025.918322162361, "dev_ot": 0.7732720751470752, "dev_cvar": 45.41252590982997, "dev_fails": 8.735, "dev_holds": 178.67, "gap_vs_bestN": -0.49201173170045215, "sec": 6646.753256082535, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it771 batchJ=6772.0 H=97.1 gn=0.0498 ent=0.313 kl_s=0.0000 kl_r=0.0484 accpt=True rej=0 frac_clip=0.000 sec=6658
+rlv2 it776 batchJ=7806.4 H=100.3 gn=0.0357 ent=0.356 kl_s=0.0000 kl_r=0.0595 accpt=True rej=0 frac_clip=0.000 sec=6700
+{"it": 780, "dev_J": 5039.264009928269, "dev_ot": 0.7693457930957931, "dev_cvar": 45.56833250113456, "dev_fails": 8.635, "dev_holds": 173.765, "gap_vs_bestN": -0.227780907298391, "sec": 6742.939144849777, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it781 batchJ=7617.8 H=100.6 gn=0.0410 ent=0.335 kl_s=0.0000 kl_r=0.0447 accpt=True rej=0 frac_clip=0.000 sec=6751
+rlv2 it786 batchJ=7048.2 H=95.6 gn=0.0264 ent=0.347 kl_s=0.0000 kl_r=0.0554 accpt=True rej=0 frac_clip=0.000 sec=6798
+{"it": 790, "dev_J": 5033.5486363438795, "dev_ot": 0.7733415195915196, "dev_cvar": 45.21673960965928, "dev_fails": 8.665, "dev_holds": 178.795, "gap_vs_bestN": -0.34093939717605487, "sec": 6838.748736381531, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it791 batchJ=6276.6 H=80.4 gn=0.0382 ent=0.380 kl_s=0.0000 kl_r=0.0774 accpt=True rej=0 frac_clip=0.000 sec=6849
+rlv2 it796 batchJ=8166.3 H=103.4 gn=0.1259 ent=0.312 kl_s=0.0001 kl_r=0.0509 accpt=True rej=0 frac_clip=0.000 sec=6900
+{"it": 800, "dev_J": 5043.437512598957, "dev_ot": 0.7680280275280275, "dev_cvar": 45.04885975022803, "dev_fails": 8.755, "dev_holds": 182.73, "gap_vs_bestN": -0.14514986791972231, "sec": 6930.307835817337, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it801 batchJ=7650.6 H=96.9 gn=0.0290 ent=0.314 kl_s=0.0003 kl_r=0.0425 accpt=True rej=0 frac_clip=0.000 sec=6938
+rlv2 it806 batchJ=9282.5 H=183.8 gn=0.0569 ent=0.263 kl_s=0.0001 kl_r=0.0306 accpt=True rej=0 frac_clip=0.000 sec=6988
+{"it": 810, "dev_J": 4997.980587556302, "dev_ot": 0.7739030275280274, "dev_cvar": 44.76663442345147, "dev_fails": 8.655, "dev_holds": 186.05, "gap_vs_bestN": -1.0451500020069275, "sec": 7020.156659126282, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it811 batchJ=7548.8 H=110.5 gn=0.0284 ent=0.319 kl_s=0.0005 kl_r=0.0429 accpt=True rej=0 frac_clip=0.000 sec=7035
+rlv2 it816 batchJ=7280.1 H=88.2 gn=0.1498 ent=0.335 kl_s=0.0000 kl_r=0.0822 accpt=True rej=0 frac_clip=0.000 sec=7081
+{"it": 820, "dev_J": 5040.854102887269, "dev_ot": 0.7654387418137418, "dev_cvar": 44.864237528912874, "dev_fails": 8.715, "dev_holds": 181.27, "gap_vs_bestN": -0.196298710142115, "sec": 7112.568163633347, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+rlv2 it821 batchJ=5988.2 H=105.0 gn=0.0313 ent=0.301 kl_s=0.0003 kl_r=0.0463 accpt=True rej=0 frac_clip=0.000 sec=7118
+rlv2 it826 batchJ=8424.8 H=111.4 gn=0.0374 ent=0.298 kl_s=0.0000 kl_r=0.0362 accpt=True rej=0 frac_clip=0.000 sec=7164
+{"it": 830, "dev_J": 4988.09058101308, "dev_ot": 0.7706946941946942, "dev_cvar": 44.843703660101276, "dev_fails": 8.655, "dev_holds": 184.845, "gap_vs_bestN": -1.240961909800325, "sec": 7211.617537498474, "phase": "rl_pomo_v2", "n_reject": 0, "lr": 0.0001}
+SEED RESULT {
+  "seed": 1,
+  "rule": "N1_240",
+  "variant": "pomo_v2",
+  "sanity": false,
+  "tag": "_pomo_v2",
+  "init": "dagger_r1_tag",
+  "init_J": 5005.5680422752375,
+  "init_path": "/root/keyan001/wx2_server_run/models/dagger_s1_r1_pomo_v2.npz",
+  "dev_J": 4939.532966268651,
+  "dev_ot": 0.7807720751470751,
+  "dev_cvar": 44.10647937718773,
+  "dev_fails": 8.635,
+  "dev_holds": 188.65,
+  "gap_vs_bestN": -2.2023524952817013,
+  "d_ot_pp": 1.6702075702075714,
+  "G_b": true,
+  "G_b_J": true,
+  "G_b_ot": true,
+  "G_c": true,
+  "KL": 0.9782037898946843,
+  "frac_diff": 0.05728335142729299,
+  "gc_kl": true,
+  "gc_diff": true,
+  "best_ckpt": "/root/keyan001/wx2_server_run/models/rl_s1_best_pomo_v2.npz",
+  "hours": 2.0,
+  "J_n": 5050.768696691135,
+  "ot_n": 0.7640699994449994,
+  "bc_path": "/root/keyan001/wx2_server_run/models/bc_s1_pomo_v2.npz"
+}
+wrote /root/keyan001/wx2_server_run/wx_e/GB_s1_pomo_v2.json

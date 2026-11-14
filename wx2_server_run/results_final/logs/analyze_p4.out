@@ -1,0 +1,45 @@
+{
+  "rule": "N1_240",
+  "rl_method": "RL_s0_pomo_v2",
+  "synthetic": true,
+  "cases": {
+    "sigma_x1.5": {
+      "file": "/root/keyan001/wx2_server_run/wx_e/results/p4_s1.5_v0.0.jsonl",
+      "N1": {
+        "n": 1500,
+        "J_base": 7916.286300135887,
+        "J_p4": 10285.394509228918,
+        "deg": 0.2992701526032937,
+        "deg_pct": 29.92701526032937
+      },
+      "RL": {
+        "n": 1500,
+        "J_base": 7625.9111888867565,
+        "J_p4": 9921.898161207318,
+        "deg": 0.3010770667859999,
+        "deg_pct": 30.10770667859999
+      },
+      "pass_": false
+    },
+    "speed_plus30": {
+      "file": "/root/keyan001/wx2_server_run/wx_e/results/p4_s1.0_v0.3.jsonl",
+      "N1": {
+        "n": 1500,
+        "J_base": 7916.286300135887,
+        "J_p4": 7315.97248179846,
+        "deg": -0.07583275737856056,
+        "deg_pct": -7.583275737856056
+      },
+      "RL": {
+        "n": 1500,
+        "J_base": 7625.9111888867565,
+        "J_p4": 7048.428261907493,
+        "deg": -0.0757264165128004,
+        "deg_pct": -7.5726416512800405
+      },
+      "pass_": false
+    }
+  },
+  "P4_pass": false
+}
+wrote /root/keyan001/wx2_server_run/results_final/P4_ANALYSIS.json

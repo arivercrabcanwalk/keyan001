@@ -1,0 +1,208 @@
+p3 plans=test_ours n=50 days=7000..7029 mode=uniform sigma=1.0 speed=0.0 methods=['N1_240', 'A1', 'RL'] ckpts={0: '/root/keyan001/wx2_server_run/models/rl_s0_best_pomo_v2.npz', 1: '/root/keyan001/wx2_server_run/models/rl_s1_best_pomo_v2.npz', 2: '/root/keyan001/wx2_server_run/models/rl_s2_best_pomo_v2.npz'}
+todo 7500 done 0 W=19
+p3_uniform 50/7500 fail=0 elapsed=1.0s last J=1366.3 A1
+p3_uniform 100/7500 fail=0 elapsed=1.7s last J=6764.1 RL_s1_pomo_v2
+p3_uniform 150/7500 fail=0 elapsed=2.5s last J=2929.0 A1
+p3_uniform 200/7500 fail=0 elapsed=3.3s last J=3317.7 N1_240
+p3_uniform 250/7500 fail=0 elapsed=3.9s last J=4091.7 RL_s0_pomo_v2
+p3_uniform 300/7500 fail=0 elapsed=4.9s last J=1544.4 RL_s0_pomo_v2
+p3_uniform 350/7500 fail=0 elapsed=5.6s last J=1059.9 A1
+p3_uniform 400/7500 fail=0 elapsed=6.3s last J=22540.1 N1_240
+p3_uniform 450/7500 fail=0 elapsed=7.0s last J=4676.6 A1
+p3_uniform 500/7500 fail=0 elapsed=7.7s last J=762.9 A1
+p3_uniform 550/7500 fail=0 elapsed=8.4s last J=5170.1 A1
+p3_uniform 600/7500 fail=0 elapsed=9.2s last J=1958.6 RL_s0_pomo_v2
+p3_uniform 650/7500 fail=0 elapsed=10.0s last J=1041.6 A1
+p3_uniform 700/7500 fail=0 elapsed=10.6s last J=8151.1 RL_s1_pomo_v2
+p3_uniform 750/7500 fail=0 elapsed=11.4s last J=1710.7 N1_240
+p3_uniform 800/7500 fail=0 elapsed=12.2s last J=5144.1 A1
+p3_uniform 850/7500 fail=0 elapsed=12.9s last J=775.5 N1_240
+p3_uniform 900/7500 fail=0 elapsed=13.8s last J=1398.0 RL_s0_pomo_v2
+p3_uniform 950/7500 fail=0 elapsed=14.5s last J=5792.3 N1_240
+p3_uniform 1000/7500 fail=0 elapsed=15.2s last J=4427.5 RL_s2_pomo_v2
+p3_uniform 1050/7500 fail=0 elapsed=16.1s last J=9281.1 RL_s0_pomo_v2
+p3_uniform 1100/7500 fail=0 elapsed=16.9s last J=823.5 A1
+p3_uniform 1150/7500 fail=0 elapsed=17.7s last J=3768.8 N1_240
+p3_uniform 1200/7500 fail=0 elapsed=18.7s last J=1909.4 RL_s2_pomo_v2
+p3_uniform 1250/7500 fail=0 elapsed=19.5s last J=1353.5 N1_240
+p3_uniform 1300/7500 fail=0 elapsed=20.1s last J=2706.7 RL_s1_pomo_v2
+p3_uniform 1350/7500 fail=0 elapsed=21.0s last J=8069.3 A1
+p3_uniform 1400/7500 fail=0 elapsed=21.8s last J=3973.3 RL_s2_pomo_v2
+p3_uniform 1450/7500 fail=0 elapsed=22.5s last J=5571.6 RL_s1_pomo_v2
+p3_uniform 1500/7500 fail=0 elapsed=23.5s last J=2973.0 N1_240
+p3_uniform 1550/7500 fail=0 elapsed=24.6s last J=16026.4 A1
+p3_uniform 1600/7500 fail=0 elapsed=25.7s last J=3974.1 RL_s1_pomo_v2
+p3_uniform 1650/7500 fail=0 elapsed=27.0s last J=3325.0 RL_s2_pomo_v2
+p3_uniform 1700/7500 fail=0 elapsed=28.2s last J=8026.1 A1
+p3_uniform 1750/7500 fail=0 elapsed=29.2s last J=24994.9 RL_s1_pomo_v2
+p3_uniform 1800/7500 fail=0 elapsed=30.6s last J=14262.8 RL_s0_pomo_v2
+p3_uniform 1850/7500 fail=0 elapsed=31.8s last J=3822.4 N1_240
+p3_uniform 1900/7500 fail=0 elapsed=32.8s last J=18643.0 A1
+p3_uniform 1950/7500 fail=0 elapsed=34.2s last J=20412.3 RL_s1_pomo_v2
+p3_uniform 2000/7500 fail=0 elapsed=35.6s last J=879.0 A1
+p3_uniform 2050/7500 fail=0 elapsed=36.7s last J=17479.3 RL_s2_pomo_v2
+p3_uniform 2100/7500 fail=0 elapsed=38.2s last J=8227.1 RL_s2_pomo_v2
+p3_uniform 2150/7500 fail=0 elapsed=39.4s last J=17391.4 N1_240
+p3_uniform 2200/7500 fail=0 elapsed=40.5s last J=5359.5 RL_s1_pomo_v2
+p3_uniform 2250/7500 fail=0 elapsed=41.9s last J=8219.4 A1
+p3_uniform 2300/7500 fail=0 elapsed=43.2s last J=9551.9 RL_s0_pomo_v2
+p3_uniform 2350/7500 fail=0 elapsed=44.4s last J=10948.2 N1_240
+p3_uniform 2400/7500 fail=0 elapsed=45.9s last J=2653.1 A1
+p3_uniform 2450/7500 fail=0 elapsed=47.2s last J=36663.5 N1_240
+p3_uniform 2500/7500 fail=0 elapsed=48.3s last J=11352.2 RL_s0_pomo_v2
+p3_uniform 2550/7500 fail=0 elapsed=49.7s last J=1799.6 N1_240
+p3_uniform 2600/7500 fail=0 elapsed=51.1s last J=2075.9 N1_240
+p3_uniform 2650/7500 fail=0 elapsed=52.2s last J=7533.0 A1
+p3_uniform 2700/7500 fail=0 elapsed=53.7s last J=36757.8 A1
+p3_uniform 2750/7500 fail=0 elapsed=55.0s last J=7682.9 RL_s0_pomo_v2
+p3_uniform 2800/7500 fail=0 elapsed=56.2s last J=30533.1 RL_s0_pomo_v2
+p3_uniform 2850/7500 fail=0 elapsed=57.7s last J=11076.4 A1
+p3_uniform 2900/7500 fail=0 elapsed=58.9s last J=4342.4 RL_s0_pomo_v2
+p3_uniform 2950/7500 fail=0 elapsed=60.0s last J=6930.8 RL_s2_pomo_v2
+p3_uniform 3000/7500 fail=0 elapsed=61.7s last J=6343.9 RL_s0_pomo_v2
+p3_uniform 3050/7500 fail=0 elapsed=63.4s last J=7232.8 RL_s2_pomo_v2
+p3_uniform 3100/7500 fail=0 elapsed=65.0s last J=10283.6 RL_s1_pomo_v2
+p3_uniform 3150/7500 fail=0 elapsed=67.2s last J=4902.7 N1_240
+p3_uniform 3200/7500 fail=0 elapsed=69.1s last J=6676.0 RL_s0_pomo_v2
+p3_uniform 3250/7500 fail=0 elapsed=70.7s last J=11927.3 RL_s1_pomo_v2
+p3_uniform 3300/7500 fail=0 elapsed=72.9s last J=2898.6 RL_s0_pomo_v2
+p3_uniform 3350/7500 fail=0 elapsed=74.7s last J=24718.8 N1_240
+p3_uniform 3400/7500 fail=0 elapsed=76.2s last J=11891.5 RL_s1_pomo_v2
+p3_uniform 3450/7500 fail=0 elapsed=78.3s last J=13743.6 A1
+p3_uniform 3500/7500 fail=0 elapsed=80.2s last J=5131.8 RL_s1_pomo_v2
+p3_uniform 3550/7500 fail=0 elapsed=81.7s last J=1630.3 RL_s2_pomo_v2
+p3_uniform 3600/7500 fail=0 elapsed=83.8s last J=4871.7 N1_240
+p3_uniform 3650/7500 fail=0 elapsed=85.6s last J=21969.2 N1_240
+p3_uniform 3700/7500 fail=0 elapsed=87.2s last J=6015.4 RL_s1_pomo_v2
+p3_uniform 3750/7500 fail=0 elapsed=89.3s last J=12767.5 RL_s2_pomo_v2
+p3_uniform 3800/7500 fail=0 elapsed=91.0s last J=3661.0 RL_s0_pomo_v2
+p3_uniform 3850/7500 fail=0 elapsed=92.6s last J=49153.0 RL_s0_pomo_v2
+p3_uniform 3900/7500 fail=0 elapsed=94.7s last J=1785.5 N1_240
+p3_uniform 3950/7500 fail=0 elapsed=96.6s last J=5539.3 RL_s1_pomo_v2
+p3_uniform 4000/7500 fail=0 elapsed=98.3s last J=4472.3 A1
+p3_uniform 4050/7500 fail=0 elapsed=100.6s last J=10498.7 RL_s1_pomo_v2
+p3_uniform 4100/7500 fail=0 elapsed=102.6s last J=4331.3 RL_s0_pomo_v2
+p3_uniform 4150/7500 fail=0 elapsed=104.2s last J=3289.7 A1
+p3_uniform 4200/7500 fail=0 elapsed=106.4s last J=4450.1 RL_s1_pomo_v2
+p3_uniform 4250/7500 fail=0 elapsed=108.5s last J=18388.0 RL_s1_pomo_v2
+p3_uniform 4300/7500 fail=0 elapsed=110.1s last J=13238.3 RL_s1_pomo_v2
+p3_uniform 4350/7500 fail=0 elapsed=112.3s last J=35760.6 N1_240
+p3_uniform 4400/7500 fail=0 elapsed=114.3s last J=4870.0 RL_s1_pomo_v2
+p3_uniform 4450/7500 fail=0 elapsed=115.8s last J=9227.5 RL_s0_pomo_v2
+p3_uniform 4500/7500 fail=0 elapsed=118.2s last J=11657.3 RL_s0_pomo_v2
+p3_uniform 4550/7500 fail=0 elapsed=120.4s last J=23943.4 RL_s0_pomo_v2
+p3_uniform 4600/7500 fail=0 elapsed=122.4s last J=4477.1 RL_s2_pomo_v2
+p3_uniform 4650/7500 fail=0 elapsed=125.1s last J=11824.4 A1
+p3_uniform 4700/7500 fail=0 elapsed=127.4s last J=11295.5 RL_s1_pomo_v2
+p3_uniform 4750/7500 fail=0 elapsed=129.3s last J=1775.5 RL_s2_pomo_v2
+p3_uniform 4800/7500 fail=0 elapsed=132.0s last J=6555.3 RL_s1_pomo_v2
+p3_uniform 4850/7500 fail=0 elapsed=134.6s last J=6080.7 RL_s0_pomo_v2
+p3_uniform 4900/7500 fail=0 elapsed=136.6s last J=40301.1 RL_s1_pomo_v2
+p3_uniform 4950/7500 fail=0 elapsed=139.6s last J=5691.1 RL_s0_pomo_v2
+p3_uniform 5000/7500 fail=0 elapsed=142.1s last J=2453.5 N1_240
+p3_uniform 5050/7500 fail=0 elapsed=144.2s last J=16887.0 RL_s1_pomo_v2
+p3_uniform 5100/7500 fail=0 elapsed=147.1s last J=49328.2 A1
+p3_uniform 5150/7500 fail=0 elapsed=150.0s last J=5483.4 RL_s0_pomo_v2
+p3_uniform 5200/7500 fail=0 elapsed=152.3s last J=2094.4 RL_s2_pomo_v2
+p3_uniform 5250/7500 fail=0 elapsed=155.4s last J=5116.5 N1_240
+p3_uniform 5300/7500 fail=0 elapsed=158.1s last J=6952.2 RL_s1_pomo_v2
+p3_uniform 5350/7500 fail=0 elapsed=160.5s last J=1535.7 RL_s2_pomo_v2
+p3_uniform 5400/7500 fail=0 elapsed=163.7s last J=20304.3 N1_240
+p3_uniform 5450/7500 fail=0 elapsed=166.3s last J=9534.6 RL_s0_pomo_v2
+p3_uniform 5500/7500 fail=0 elapsed=168.4s last J=1509.6 RL_s2_pomo_v2
+p3_uniform 5550/7500 fail=0 elapsed=171.5s last J=4812.0 RL_s0_pomo_v2
+p3_uniform 5600/7500 fail=0 elapsed=174.0s last J=7163.5 RL_s0_pomo_v2
+p3_uniform 5650/7500 fail=0 elapsed=176.1s last J=18436.1 RL_s1_pomo_v2
+p3_uniform 5700/7500 fail=0 elapsed=179.1s last J=4981.4 RL_s0_pomo_v2
+p3_uniform 5750/7500 fail=0 elapsed=181.7s last J=11698.6 RL_s0_pomo_v2
+p3_uniform 5800/7500 fail=0 elapsed=183.8s last J=2561.4 RL_s2_pomo_v2
+p3_uniform 5850/7500 fail=0 elapsed=186.9s last J=32397.4 N1_240
+p3_uniform 5900/7500 fail=0 elapsed=189.4s last J=10385.6 RL_s0_pomo_v2
+p3_uniform 5950/7500 fail=0 elapsed=191.5s last J=14174.1 RL_s2_pomo_v2
+p3_uniform 6000/7500 fail=0 elapsed=194.9s last J=6270.1 A1
+p3_uniform 6050/7500 fail=0 elapsed=198.7s last J=4872.1 N1_240
+p3_uniform 6100/7500 fail=0 elapsed=202.0s last J=6834.5 RL_s1_pomo_v2
+p3_uniform 6150/7500 fail=0 elapsed=206.6s last J=13514.3 A1
+p3_uniform 6200/7500 fail=0 elapsed=210.3s last J=8011.3 RL_s0_pomo_v2
+p3_uniform 6250/7500 fail=0 elapsed=213.4s last J=21257.6 RL_s2_pomo_v2
+p3_uniform 6300/7500 fail=0 elapsed=218.1s last J=20920.2 N1_240
+p3_uniform 6350/7500 fail=0 elapsed=222.4s last J=27584.9 A1
+p3_uniform 6400/7500 fail=0 elapsed=226.2s last J=18883.3 RL_s1_pomo_v2
+p3_uniform 6450/7500 fail=0 elapsed=230.9s last J=7855.3 N1_240
+p3_uniform 6500/7500 fail=0 elapsed=234.7s last J=9660.9 RL_s0_pomo_v2
+p3_uniform 6550/7500 fail=0 elapsed=237.9s last J=8027.6 RL_s1_pomo_v2
+p3_uniform 6600/7500 fail=0 elapsed=242.5s last J=11621.5 A1
+p3_uniform 6650/7500 fail=0 elapsed=246.7s last J=21462.4 A1
+p3_uniform 6700/7500 fail=0 elapsed=250.4s last J=28307.0 RL_s1_pomo_v2
+p3_uniform 6750/7500 fail=0 elapsed=254.7s last J=8747.8 RL_s0_pomo_v2
+p3_uniform 6800/7500 fail=0 elapsed=258.3s last J=38198.0 A1
+p3_uniform 6850/7500 fail=0 elapsed=261.3s last J=44928.1 RL_s2_pomo_v2
+p3_uniform 6900/7500 fail=0 elapsed=265.3s last J=47079.0 A1
+p3_uniform 6950/7500 fail=0 elapsed=269.1s last J=8786.9 RL_s0_pomo_v2
+p3_uniform 7000/7500 fail=0 elapsed=272.4s last J=17159.2 RL_s2_pomo_v2
+p3_uniform 7050/7500 fail=0 elapsed=276.5s last J=36215.7 N1_240
+p3_uniform 7100/7500 fail=0 elapsed=280.4s last J=11957.8 RL_s0_pomo_v2
+p3_uniform 7150/7500 fail=0 elapsed=283.6s last J=7919.4 RL_s1_pomo_v2
+p3_uniform 7200/7500 fail=0 elapsed=287.8s last J=23703.2 A1
+p3_uniform 7250/7500 fail=0 elapsed=291.6s last J=10226.9 RL_s0_pomo_v2
+p3_uniform 7300/7500 fail=0 elapsed=294.9s last J=23868.9 RL_s2_pomo_v2
+p3_uniform 7350/7500 fail=0 elapsed=299.0s last J=14491.2 N1_240
+p3_uniform 7400/7500 fail=0 elapsed=302.9s last J=6473.5 RL_s0_pomo_v2
+p3_uniform 7450/7500 fail=0 elapsed=306.0s last J=19069.0 RL_s2_pomo_v2
+p3_uniform 7500/7500 fail=0 elapsed=311.0s last J=30613.4 RL_s1_pomo_v2
+done ok=7500 fail=0 in 311.0s
+method               n         J     cost    ot_h    cvar  fails      mk
+RL_s1_pomo_v2     1500   7266.22  1160.66  0.7125   52.79  15.54   479.0
+RL_s0_pomo_v2     1500   7329.64  1162.29  0.7116   52.78  15.63   474.1
+RL_s2_pomo_v2     1500   7412.98  1156.55  0.6754   54.23  15.12   404.3
+N1_240            1500   7577.55  1176.41  0.6937   53.98  16.22   463.9
+A1                1500   8355.45  1163.97  0.5946   61.04  14.58   314.4
+  RL_s0_pomo_v2 vs N1_240 J: mean 7329.6413 vs 7577.5468 rel=-3.27% win=46/50 p=2.26e-10
+  RL_s0_pomo_v2 vs N1_240 ontime_h: mean 0.7116 vs 0.6937 rel=2.59% win=46/50 p=3.688e-09
+  RL_s0_pomo_v2 vs N1_240 cvar_h: mean 52.7807 vs 53.9798 rel=-2.22% win=35/50 p=0.0002407
+  RL_s0_pomo_v2 vs N1_240 cost: mean 1162.2943 vs 1176.4071 rel=-1.20% win=45/50 p=1.354e-12
+  RL_s0_pomo_v2 vs N1_240 fails: mean 15.6253 vs 16.2167 rel=-3.65% win=46/50 p=2.504e-09
+  RL_s0_pomo_v2 vs N1_240 mk: mean 474.0700 vs 463.8745 rel=2.20% win=8/50 p=9.773e-09
+  RL_s0_pomo_v2 vs A1 J: mean 7329.6413 vs 8355.4502 rel=-12.28% win=46/50 p=7.656e-12
+  RL_s0_pomo_v2 vs A1 ontime_h: mean 0.7116 vs 0.5946 rel=19.68% win=50/50 p=1.776e-15
+  RL_s0_pomo_v2 vs A1 cvar_h: mean 52.7807 vs 61.0374 rel=-13.53% win=47/50 p=4.912e-12
+  RL_s0_pomo_v2 vs A1 cost: mean 1162.2943 vs 1163.9742 rel=-0.14% win=23/50 p=0.939
+  RL_s0_pomo_v2 vs A1 fails: mean 15.6253 vs 14.5840 rel=7.14% win=3/50 p=8.183e-09
+  RL_s0_pomo_v2 vs A1 mk: mean 474.0700 vs 314.3935 rel=50.79% win=0/50 p=1.776e-15
+  RL_s2_pomo_v2 vs N1_240 J: mean 7412.9820 vs 7577.5468 rel=-2.17% win=37/50 p=2.307e-05
+  RL_s2_pomo_v2 vs N1_240 ontime_h: mean 0.6754 vs 0.6937 rel=-2.63% win=12/50 p=1.739e-07
+  RL_s2_pomo_v2 vs N1_240 cvar_h: mean 54.2263 vs 53.9798 rel=0.46% win=24/50 p=0.7814
+  RL_s2_pomo_v2 vs N1_240 cost: mean 1156.5496 vs 1176.4071 rel=-1.69% win=50/50 p=1.776e-15
+  RL_s2_pomo_v2 vs N1_240 fails: mean 15.1153 vs 16.2167 rel=-6.79% win=50/50 p=7.538e-10
+  RL_s2_pomo_v2 vs N1_240 mk: mean 404.3014 vs 463.8745 rel=-12.84% win=50/50 p=1.776e-15
+  RL_s2_pomo_v2 vs A1 J: mean 7412.9820 vs 8355.4502 rel=-11.28% win=46/50 p=2.994e-11
+  RL_s2_pomo_v2 vs A1 ontime_h: mean 0.6754 vs 0.5946 rel=13.59% win=49/50 p=3.553e-15
+  RL_s2_pomo_v2 vs A1 cvar_h: mean 54.2263 vs 61.0374 rel=-11.16% win=47/50 p=2.022e-11
+  RL_s2_pomo_v2 vs A1 cost: mean 1156.5496 vs 1163.9742 rel=-0.64% win=28/50 p=0.0461
+  RL_s2_pomo_v2 vs A1 fails: mean 15.1153 vs 14.5840 rel=3.64% win=10/50 p=3.452e-05
+  RL_s2_pomo_v2 vs A1 mk: mean 404.3014 vs 314.3935 rel=28.60% win=0/50 p=1.776e-15
+  RL_s1_pomo_v2 vs N1_240 J: mean 7266.2243 vs 7577.5468 rel=-4.11% win=45/50 p=3.882e-10
+  RL_s1_pomo_v2 vs N1_240 ontime_h: mean 0.7125 vs 0.6937 rel=2.72% win=45/50 p=1.099e-08
+  RL_s1_pomo_v2 vs N1_240 cvar_h: mean 52.7946 vs 53.9798 rel=-2.20% win=32/50 p=0.003035
+  RL_s1_pomo_v2 vs N1_240 cost: mean 1160.6640 vs 1176.4071 rel=-1.34% win=46/50 p=3.677e-13
+  RL_s1_pomo_v2 vs N1_240 fails: mean 15.5367 vs 16.2167 rel=-4.19% win=49/50 p=1.082e-09
+  RL_s1_pomo_v2 vs N1_240 mk: mean 479.0002 vs 463.8745 rel=3.26% win=7/50 p=8.06e-11
+  RL_s1_pomo_v2 vs A1 J: mean 7266.2243 vs 8355.4502 rel=-13.04% win=47/50 p=2.24e-12
+  RL_s1_pomo_v2 vs A1 ontime_h: mean 0.7125 vs 0.5946 rel=19.84% win=50/50 p=1.776e-15
+  RL_s1_pomo_v2 vs A1 cvar_h: mean 52.7946 vs 61.0374 rel=-13.50% win=45/50 p=8.843e-12
+  RL_s1_pomo_v2 vs A1 cost: mean 1160.6640 vs 1163.9742 rel=-0.28% win=24/50 p=0.5786
+  RL_s1_pomo_v2 vs A1 fails: mean 15.5367 vs 14.5840 rel=6.53% win=6/50 p=4.778e-08
+  RL_s1_pomo_v2 vs A1 mk: mean 479.0002 vs 314.3935 rel=52.36% win=0/50 p=1.776e-15
+  A1 vs N1_240 J: mean 8355.4502 vs 7577.5468 rel=10.27% win=5/50 p=3.135e-10
+  A1 vs N1_240 ontime_h: mean 0.5946 vs 0.6937 rel=-14.28% win=0/50 p=1.776e-15
+  A1 vs N1_240 cvar_h: mean 61.0374 vs 53.9798 rel=13.07% win=4/50 p=2.023e-10
+  A1 vs N1_240 cost: mean 1163.9742 vs 1176.4071 rel=-1.06% win=38/50 p=5.367e-06
+  A1 vs N1_240 fails: mean 14.5840 vs 16.2167 rel=-10.07% win=50/50 p=7.548e-10
+  A1 vs N1_240 mk: mean 314.3935 vs 463.8745 rel=-32.22% win=50/50 p=1.776e-15
+  A1 vs A1 J: mean 8355.4502 vs 8355.4502 rel=0.00% win=0/50 p=1
+  A1 vs A1 ontime_h: mean 0.5946 vs 0.5946 rel=0.00% win=0/50 p=1
+  A1 vs A1 cvar_h: mean 61.0374 vs 61.0374 rel=0.00% win=0/50 p=1
+  A1 vs A1 cost: mean 1163.9742 vs 1163.9742 rel=0.00% win=0/50 p=1
+  A1 vs A1 fails: mean 14.5840 vs 14.5840 rel=0.00% win=0/50 p=1
+  A1 vs A1 mk: mean 314.3935 vs 314.3935 rel=0.00% win=0/50 p=1
+wrote /root/keyan001/wx2_server_run/wx_e/results/p3_uniform_STATS.json
