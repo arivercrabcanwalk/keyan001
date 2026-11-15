@@ -1,7 +1,7 @@
 {
  "testA_v4.jsonl": {
   "file": "testA_v4.jsonl",
-  "n_rows": 61000,
+  "n_rows": 61400,
   "gate": {
    "N4fd_32_100ms": {
     "n": 5000,
@@ -144,6 +144,28 @@
     "urg_miss": 0.0,
     "n_unservable_struct": 0.269,
     "forced": 3.381,
+    "pass": true
+   },
+   "N4p_M32": {
+    "n": 200,
+    "complete": 1.0,
+    "comp_plan": 1.0,
+    "comp_urg": 1.0,
+    "unfinished": 0.0,
+    "urg_miss": 0.0,
+    "n_unservable_struct": 0.255,
+    "forced": 1.905,
+    "pass": true
+   },
+   "N4f_M32": {
+    "n": 200,
+    "complete": 1.0,
+    "comp_plan": 1.0,
+    "comp_urg": 1.0,
+    "unfinished": 0.0,
+    "urg_miss": 0.0,
+    "n_unservable_struct": 0.255,
+    "forced": 1.975,
     "pass": true
    },
    "RL4_mean": {
@@ -2224,6 +2246,190 @@
     "sig_worse": false,
     "confirmed": true
    }
+  ],
+  "vs_N4f_M32": [
+   {
+    "a": "RL4_mean",
+    "b": "N4f_M32",
+    "metric": "J",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     -22.311363873721238,
+     7.350576319098837
+    ],
+    "mean_a": 4927.152004933174,
+    "mean_b": 5131.395884994449,
+    "diff": -204.24388006127447,
+    "rel_pct": -3.980279141169701,
+    "ci_rel": [
+     -8.448644457369554,
+     0.6539124390552453
+    ],
+    "win": 26,
+    "loss": 24,
+    "r_rb": 0.21254901960784314,
+    "p": 0.19427670053532076,
+    "better_dir": -1,
+    "p_holm": 0.19427670053532076,
+    "sig_better": false,
+    "sig_worse": false,
+    "confirmed": false
+   },
+   {
+    "a": "RL4_mean",
+    "b": "N4f_M32",
+    "metric": "mk",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     61.531880355891566,
+     187.5701683616104
+    ],
+    "mean_a": 590.2442783474801,
+    "mean_b": 291.5241276699733,
+    "diff": 298.72015067750664,
+    "rel_pct": 102.46841421499072,
+    "ci_rel": [
+     90.68225471529243,
+     116.13177770314654
+    ],
+    "win": 0,
+    "loss": 50,
+    "r_rb": -1.0,
+    "p": 1.7763568394002505e-15,
+    "better_dir": -1,
+    "p_holm": 5.329070518200751e-15,
+    "sig_better": false,
+    "sig_worse": true,
+    "confirmed": false
+   },
+   {
+    "a": "RL4_mean",
+    "b": "N4f_M32",
+    "metric": "fails",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     -59.075484300728036,
+     -5.985036119711033
+    ],
+    "mean_a": 3.101666666666666,
+    "mean_b": 4.965,
+    "diff": -1.8633333333333335,
+    "rel_pct": -37.5293722725747,
+    "ci_rel": [
+     -42.19778966526592,
+     -32.570775638860745
+    ],
+    "win": 48,
+    "loss": 2,
+    "r_rb": 0.9850980392156863,
+    "p": 1.333119391417812e-09,
+    "better_dir": -1,
+    "p_holm": 2.666238782835624e-09,
+    "sig_better": true,
+    "sig_worse": false,
+    "confirmed": false
+   }
+  ],
+  "vs_N4p_M32": [
+   {
+    "a": "RL4_mean",
+    "b": "N4p_M32",
+    "metric": "J",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     9.969810739790509,
+     28.054195178627246
+    ],
+    "mean_a": 4927.152004933174,
+    "mean_b": 4247.109735433933,
+    "diff": 680.0422694992411,
+    "rel_pct": 16.01188365409071,
+    "ci_rel": [
+     12.28656079520786,
+     20.106555693603838
+    ],
+    "win": 5,
+    "loss": 45,
+    "r_rb": -0.9576470588235294,
+    "p": 2.239985974483716e-12,
+    "better_dir": -1,
+    "p_holm": 4.479971948967432e-12,
+    "sig_better": false,
+    "sig_worse": true,
+    "confirmed": false
+   },
+   {
+    "a": "RL4_mean",
+    "b": "N4p_M32",
+    "metric": "mk",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     91.92181589006947,
+     222.52994573393588
+    ],
+    "mean_a": 590.2442783474801,
+    "mean_b": 243.9429564591766,
+    "diff": 346.30132188830333,
+    "rel_pct": 141.9599593752797,
+    "ci_rel": [
+     128.4806902786088,
+     156.92269343007573
+    ],
+    "win": 0,
+    "loss": 50,
+    "r_rb": -1.0,
+    "p": 1.7763568394002505e-15,
+    "better_dir": -1,
+    "p_holm": 5.329070518200751e-15,
+    "sig_better": false,
+    "sig_worse": true,
+    "confirmed": false
+   },
+   {
+    "a": "RL4_mean",
+    "b": "N4p_M32",
+    "metric": "fails",
+    "n_inst": 50,
+    "n_days": 200,
+    "n_wx_days": 4,
+    "p_day": 1.0,
+    "ci_cross": [
+     5.998953301127214,
+     59.02107825314098
+    ],
+    "mean_a": 3.101666666666666,
+    "mean_b": 2.405,
+    "diff": 0.6966666666666664,
+    "rel_pct": 28.96742896742896,
+    "ci_rel": [
+     18.935744571112174,
+     40.78379379409106
+    ],
+    "win": 7,
+    "loss": 40,
+    "r_rb": -0.7854609929078015,
+    "p": 2.7010839095494307e-06,
+    "better_dir": -1,
+    "p_holm": 2.7010839095494307e-06,
+    "sig_better": false,
+    "sig_worse": true,
+    "confirmed": false
+   }
   ]
  },
  "testB_v4.jsonl": {
@@ -2343,7 +2549,7 @@
    "RL4_mean": {
     "n": 5000,
     "complete": 0.9992,
-    "comp_plan": 0.9999790384615383,
+    "comp_plan": 0.9999790384615386,
     "comp_urg": 1.0,
     "unfinished": 0.0014,
     "urg_miss": 0.0,
@@ -2359,7 +2565,7 @@
     "unfinished": 0.002133333333333333,
     "urg_miss": 0.0,
     "n_unservable_struct": 0.3344,
-    "forced": 8.939733333333333,
+    "forced": 8.939733333333335,
     "pass": false
    }
   },
@@ -4271,7 +4477,7 @@
     "unfinished": 0.0,
     "urg_miss": 0.0,
     "n_unservable_struct": 0.2714,
-    "forced": 9.924066666666667,
+    "forced": 9.924066666666665,
     "pass": true
    }
   },
@@ -6178,7 +6384,7 @@
     "unfinished": 0.005,
     "urg_miss": 0.0,
     "n_unservable_struct": 0.229,
-    "forced": 26.104333333333336,
+    "forced": 26.104333333333333,
     "pass": false
    },
    "POMO_mean": {
@@ -6189,7 +6395,7 @@
     "unfinished": 0.007333333333333333,
     "urg_miss": 0.0,
     "n_unservable_struct": 0.229,
-    "forced": 12.709666666666667,
+    "forced": 12.709666666666665,
     "pass": false
    }
   },
@@ -8090,7 +8296,7 @@
     "unfinished": 0.0,
     "urg_miss": 0.0,
     "n_unservable_struct": 0.2942,
-    "forced": 27.708466666666663,
+    "forced": 27.70846666666667,
     "pass": true
    },
    "POMO_mean": {
