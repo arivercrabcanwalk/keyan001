@@ -1,0 +1,98 @@
+diff -ru LRPHSD/code/TSALNS/ALNSSolver.java tsalns_run/src3/ALNSSolver.java
+--- LRPHSD/code/TSALNS/ALNSSolver.java	2026-11-13 17:41:15.192082615 +0000
++++ tsalns_run/src3/ALNSSolver.java	2026-11-13 17:41:09.232082615 +0000
+@@ -49,7 +49,7 @@
+         List<List<List<List<Node>>>> currentRoute = deepCopyPaths(initialRoute);
+         List<List<List<List<Node>>>> bestRoute = deepCopyPaths(initialRoute);
+ 
+-        double currentCost = calculateTotalCost(currentRoute, droneSpeed);
++        double currentCost = calculateTotalCost(currentRoute, droneSpeed)+Main.LAM*Main.mkfix(currentRoute, stationTypes, droneSpeed);
+         double bestCost = currentCost;
+         double temperature = initialTemp;
+ 
+@@ -81,7 +81,7 @@
+             );
+ 
+             // 4. Compute cost and improvement
+-            double newCost = calculateTotalCost(newRoute, droneSpeed);
++            double newCost = calculateTotalCost(newRoute, droneSpeed)+Main.LAM*Main.mkfix(newRoute, stationTypes, droneSpeed);
+             boolean accepted = acceptNewSolution(currentCost, newCost, temperature);
+             double improvement = bestCost - newCost;
+ 
+diff -ru LRPHSD/code/TSALNS/Main.java tsalns_run/src3/Main.java
+--- LRPHSD/code/TSALNS/Main.java	2026-11-13 17:41:15.192082615 +0000
++++ tsalns_run/src3/Main.java	2026-11-13 17:40:28.848082615 +0000
+@@ -13,8 +13,8 @@
+     public static final double SMALL_STATION_TIME = 480; // Operating duration limit of a small station (min)
+     public static final double LARGE_STATION_TIME = 600; // Operating duration limit of a large station (min)
+ 
+-    public static final double SMALL_DRONE_BATTERY = 0.81; // Battery capacity of a small drone
+-    public static final double LARGE_DRONE_BATTERY = 1; // Battery capacity of a large drone
++    public static final double SMALL_DRONE_BATTERY = 0.81/(1+Double.parseDouble(System.getProperty("reserve","0"))); // Battery capacity of a small drone
++    public static final double LARGE_DRONE_BATTERY = 1.0/(1+Double.parseDouble(System.getProperty("reserve","0"))); // Battery capacity of a large drone
+ 
+     public static final double HOVER_ENERGY_PER_MIN = 0.02; // This parameter is integrated into the instance data
+ 
+@@ -29,7 +29,10 @@
+     public static final double FLIGHT_COST_PER_MIN = 0.5; // Flight cost per minute
+ 
+     // Algorithm-related parameters
+-    private static final int MAX_ITERATIONS = 500; // Maximum number of iterations
++    private static final int MAX_ITERATIONS = Integer.getInteger("iters",500);
++    public static final double LAM = Double.parseDouble(System.getProperty("lam","0"));
++    private static final double SECS = Double.parseDouble(System.getProperty("secs","0"));
++    public static double mkfix(List<List<List<List<Node>>>> r, int[] t, double sp){ double mk=0; for(int s=0;s<r.size();s++){ double sum=0; for(List<List<Node>> d: r.get(s)){ double x=Check.calculateDroneTime(d,sp); sum+=x; mk=Math.max(mk,x);} if(t[s]==1) mk=Math.max(mk,sum);} return mk; } // Maximum number of iterations
+     private static final double INITIAL_TEMPERATURE = 1000.0; // Initial temperature
+     private static final double COOLING_RATE = 0.95; // Cooling rate
+ 
+@@ -39,7 +42,7 @@
+ 
+ 
+         // your file path
+-        String filePath = "PATH";
++        String filePath = args[0];
+         List<Node> allNodes = FileReaderUtil.readNodesFromFile(filePath);
+ 
+ 
+@@ -123,7 +126,7 @@
+ 
+ 
+         /*        double currentCost = Calculator.calculateLRP(currentSolution.getNodeMatrix(),currentSolution.getStationTypes(),use,LRPstationCost,1);*/
+-        double currentCost=Check.calculateTotalCost(initRoute,initStationType,LARGE_SITE_COST,SMALL_SITE_COST,LARGE_DRONE_COST,SMALL_DRONE_COST,FLIGHT_COST_PER_MIN,DRONE_SPEED);
++        double currentCost=Check.calculateTotalCost(initRoute,initStationType,LARGE_SITE_COST,SMALL_SITE_COST,LARGE_DRONE_COST,SMALL_DRONE_COST,FLIGHT_COST_PER_MIN,DRONE_SPEED)+LAM*mkfix(initRoute,initStationType,DRONE_SPEED);
+ 
+         double bestCost = currentCost;
+ 
+@@ -138,7 +141,10 @@
+ 
+         double temperature = INITIAL_TEMPERATURE;
+ 
++        int outerIters=0;
+         for (int iter = 0; iter < MAX_ITERATIONS; iter++) {
++            if (SECS>0 && (System.currentTimeMillis()-startTime)/1000.0 >= SECS) break;
++            outerIters++;
+             //System.out.println(iter);
+             // **1. select new station **
+             int[] newStationType = LocationOperator.applyRandomNeighborhood(currentSolution.getStationTypes());
+@@ -211,7 +217,7 @@
+                     stationNodes);
+ 
+ 
+-            double newCost = Check.calculateTotalCost(newRoutes,newStationType,LARGE_SITE_COST,SMALL_SITE_COST,LARGE_DRONE_COST,SMALL_DRONE_COST,FLIGHT_COST_PER_MIN,DRONE_SPEED);
++            double newCost = Check.calculateTotalCost(newRoutes,newStationType,LARGE_SITE_COST,SMALL_SITE_COST,LARGE_DRONE_COST,SMALL_DRONE_COST,FLIGHT_COST_PER_MIN,DRONE_SPEED)+LAM*mkfix(newRoutes,newStationType,DRONE_SPEED);
+             /*            double newCost = Calculator.calculateLRP(newRoutes,newStationType,use,LRPstationCost,1);*/
+             //System.out.println("Current Obj"+newCost);
+ 
+@@ -288,6 +294,12 @@
+         long totalTime = endTime - startTime;
+         //System.out.println("Algorithm: " + totalTime + " ms");
+         System.out.println("The time of algorithm execution: " + (totalTime / 1000.0) + " s");
++
++        StringBuilder sb=new StringBuilder();
++        List<List<List<List<Node>>>> nm=bestSolution1.getNodeMatrix();
++        for(int a=0;a<nm.size();a++)for(int b=0;b<nm.get(a).size();b++)for(List<Node> sp:nm.get(a).get(b)){sb.append("TRIP ").append(a).append(" ").append(b).append(" ").append(bestSolution1.getStationTypes()[a]).append(":");for(Node n:sp)sb.append(" ").append(n.getNodeNo());sb.append("\n");}
++        System.out.print(sb);
++        System.out.println("RESULT outer="+outerIters+" obj="+bestCost+" latest="+latestTime+" time="+(totalTime/1000.0));
+         System.out.println("Initial solution: ");
+         System.out.println(Check.calculateTotalCost(initSolution.getNodeMatrix(),initStationType,LARGE_SITE_COST,
+                 SMALL_SITE_COST,LARGE_DRONE_COST,SMALL_DRONE_COST,FLIGHT_COST_PER_MIN,DRONE_SPEED));
