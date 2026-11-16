@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+runs/
+runs_*/
+logs/
+logs_*.log
+results/
+PROGRESS_SERVER.md
+third_party/
+baselines/tsalns_java/build/
+data/plans/test_ts[0-9]*.jsonl
+data/plans/fresh_ts*.jsonl
+data/plans/large_ts*.jsonl
+nohup.out
+data/plans/dev_ts[0-9]*.jsonl
