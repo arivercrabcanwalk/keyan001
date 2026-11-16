@@ -1,0 +1,64 @@
+{
+ "name": "es5_s0",
+ "candidates": [
+  {
+   "kind": "best",
+   "ckpt": "models5/es_best_es5_s0.npz",
+   "dev": {
+    "J": 8013.130026562132,
+    "J_v4": 8062.738754918507,
+    "cost": 1105.7051506229295,
+    "mk": 456.1264564736554,
+    "ot_min": 178.45449988045348,
+    "ontime": 0.7749780241016094,
+    "ontime_h": 0.7151132978949155,
+    "fails": 6.41,
+    "cvar_h": 54.7637096716368,
+    "complete": 1.0,
+    "unfinished": 0.0,
+    "n": 400
+   }
+  },
+  {
+   "kind": "final",
+   "ckpt": "models5/es_final_es5_s0.npz",
+   "dev": {
+    "J": 8114.181425259897,
+    "J_v4": 8164.546702738729,
+    "cost": 1109.8946786147121,
+    "mk": 485.705973170859,
+    "ot_min": 192.48770910659732,
+    "ontime": 0.7743510664289687,
+    "ontime_h": 0.712900354955502,
+    "fails": 6.43,
+    "cvar_h": 55.4068276073208,
+    "complete": 1.0,
+    "unfinished": 0.0,
+    "n": 400
+   }
+  }
+ ],
+ "picked": {
+  "kind": "best",
+  "ckpt": "models5/es_best_es5_s0.npz",
+  "dev": {
+   "J": 8013.130026562132,
+   "J_v4": 8062.738754918507,
+   "cost": 1105.7051506229295,
+   "mk": 456.1264564736554,
+   "ot_min": 178.45449988045348,
+   "ontime": 0.7749780241016094,
+   "ontime_h": 0.7151132978949155,
+   "fails": 6.41,
+   "cvar_h": 54.7637096716368,
+   "complete": 1.0,
+   "unfinished": 0.0,
+   "n": 400
+  }
+ },
+ "feasible": true,
+ "ot_budget": 0.0,
+ "ot_ref": "N6_90_0.25",
+ "ref_dev_ot": 197.6426649084752,
+ "rule": "min dev J5 s.t. complete==1 and dev ot_min<=ot_min(frozen N6_best)+budget (constrained variants); else min J5 among complete (flagged)"
+}

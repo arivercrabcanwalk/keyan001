@@ -1,0 +1,64 @@
+{
+ "name": "es5_s0_noemerg",
+ "candidates": [
+  {
+   "kind": "best",
+   "ckpt": "models5/es_best_es5_s0_noemerg.npz",
+   "dev": {
+    "J": 8191.7871415756235,
+    "J_v4": 8266.850033453784,
+    "cost": 1139.9030058531482,
+    "mk": 494.07173413647536,
+    "ot_min": 171.9729751900769,
+    "ontime": 0.7712674308197726,
+    "ontime_h": 0.7091722803340451,
+    "fails": 7.205,
+    "cvar_h": 55.11775219309195,
+    "complete": 1.0,
+    "unfinished": 0.0,
+    "n": 400
+   }
+  },
+  {
+   "kind": "final",
+   "ckpt": "models5/es_final_es5_s0_noemerg.npz",
+   "dev": {
+    "J": 8191.7871415756235,
+    "J_v4": 8266.850033453784,
+    "cost": 1139.9030058531482,
+    "mk": 494.07173413647536,
+    "ot_min": 171.9729751900769,
+    "ontime": 0.7712674308197726,
+    "ontime_h": 0.7091722803340451,
+    "fails": 7.205,
+    "cvar_h": 55.11775219309195,
+    "complete": 1.0,
+    "unfinished": 0.0,
+    "n": 400
+   }
+  }
+ ],
+ "picked": {
+  "kind": "best",
+  "ckpt": "models5/es_best_es5_s0_noemerg.npz",
+  "dev": {
+   "J": 8191.7871415756235,
+   "J_v4": 8266.850033453784,
+   "cost": 1139.9030058531482,
+   "mk": 494.07173413647536,
+   "ot_min": 171.9729751900769,
+   "ontime": 0.7712674308197726,
+   "ontime_h": 0.7091722803340451,
+   "fails": 7.205,
+   "cvar_h": 55.11775219309195,
+   "complete": 1.0,
+   "unfinished": 0.0,
+   "n": 400
+  }
+ },
+ "feasible": true,
+ "ot_budget": 0.0,
+ "ot_ref": "N6_90_0.25",
+ "ref_dev_ot": 197.6426649084752,
+ "rule": "min dev J5 s.t. complete==1 and dev ot_min<=ot_min(frozen N6_best)+budget (constrained variants); else min J5 among complete (flagged)"
+}
