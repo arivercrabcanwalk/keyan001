@@ -1,0 +1,9 @@
+# PROGRESS_LOCAL (v3 build, executor notes)
+- DONE code: e2e/coverage.py, author_adapt.py, verify_coverage.py, exec_v3.py (OFFLOAD, once-per-trip guard), exec_train_v3.py (ExIt->ES/PPO, RL5-init exact), plan_v3.py (mincov/plan:/site:, greedy/pomo/anytime/j5rr), lns.improve_v3, route_j5.py, site_v3.py (+SimOpt), analyze_v3.py, gates_v3.json, run_all.sh v3, dyn_eval specs (v3:, v3s:, OFF+, RLR:, N4fd:, day timeout)
+- run_tsalns.py: restores opened-but-unused stations (fix/cc) -> fixes 5_35_8 G0 issue
+- Pilot (v3_work/pilot_dyn.jsonl, 50 maps x 4 days 21700-3): all author arms strict 100%; RL5 J: tscr 8328, tsfix 8493, tscc 8468, pad 8178; N6 ~10.9k; rule OFF+ hurts +1-2%
+- G0 (new days): tsfix/tscc/tscr/pad all PASS
+- TODO: smoke (SMOKE=1), docs DESIGN/PREREG/README, fresh-clone smoke, push, PAPER_FINDINGS, report
+- Wed Nov 18 14:51:04 UTC 2026 smoke restarted clean (smoke2.log); earlier duplicate run_all instances killed
+- Wed Nov 18 15:05:03 UTC 2026 fixed site_v3 cov_mats unpack; smoke resumed
+- Wed Nov 18 15:12:33 UTC 2026 smoke BUDGETS=10, analysis static filter; resumed

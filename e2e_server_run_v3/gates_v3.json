@@ -1,0 +1,54 @@
+{
+ "_doc": "Pre-registered comparisons of PREREG_E2E_V3.md. '{s}' = seed (5 seeds; seed-mean per map x day; >=4/5 seeds must agree for superiority). type sup = superiority (Holm-adjusted one-sided Wilcoxon on per-map means, p<0.05, mean diff<0); type noninf = upper 95% bootstrap CI of the relative difference < margin_pct.",
+ "strict_arms": [".*"],
+ "families": {
+  "G1_static_matched_budget": [
+   {"kind": "static", "a": "v3_1_s{s}",  "b": "tsfix1"},
+   {"kind": "static", "a": "v3_3_s{s}",  "b": "tsfix3"},
+   {"kind": "static", "a": "v3_10_s{s}", "b": "tsfix10"},
+   {"kind": "static", "a": "v3_30_s{s}", "b": "tsfix30"},
+   {"kind": "static", "a": "v3_60_s{s}", "b": "tsfix60"},
+   {"kind": "static", "a": "fresh_v3_10_s{s}", "b": "fresh_tsfix10"},
+   {"kind": "static", "a": "fresh_v3_60_s{s}", "b": "fresh_tsfix60"},
+   {"kind": "static", "a": "large_v3_10_s{s}", "b": "large_tsfix10"},
+   {"kind": "static", "a": "large_v3_60_s{s}", "b": "large_tsfix60"}
+  ],
+  "G2_main_vs_author_nonRL": [
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|N6"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|Rfc"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|RfcP"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tscc10|Rfc"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tscr10|Rfc"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "pad10|Rfc"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|N6", "scenario": "stress"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|Rfc", "scenario": "stress"}
+  ],
+  "G4_vs_v5": [
+   {"a": "tsfix10|OURS_s{s}", "b": "tsfix10|RL5"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "v3j5_s{s}|RL5"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|RL5"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "pad10|RL5"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|RL5", "scenario": "stress"}
+  ],
+  "G4b_search_compute_matched": [
+   {"a": "tsfix10|OURSS_s{s}", "b": "tsfix10|RLR"}
+  ],
+  "G5_overtime_noninferiority": [
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "tsfix10|RL5", "key": "ot", "type": "noninf", "margin_pct": 10.0},
+   {"a": "tsfix10|OURS_s{s}", "b": "tsfix10|RL5", "key": "ot", "type": "noninf", "margin_pct": 10.0}
+  ],
+  "G7_layer_contributions": [
+   {"a": "v3_10_s{s}|OURS_s{s}", "b": "tsfix10|OURS_s{s}"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "v3_10_s{s}|OURS_s{s}"},
+   {"a": "v3j5_s{s}|OURS_s{s}", "b": "v3j5_s{s}|OURSnooff_s{s}"},
+   {"a": "v3j5_s{s}|RL5", "b": "tsfix10|RL5"}
+  ],
+  "G8_siting_large": [
+   {"a": "large_v3site_s{s}|OURS_s{s}", "b": "large_v3_10_s{s}|OURS_s{s}", "scenario": "base"},
+   {"a": "large_v3site_s{s}|OURS_s{s}", "b": "large_tscc10|OURS_s{s}", "scenario": "base"},
+   {"a": "large_v3site_s{s}|OURS_s{s}", "b": "large_v3simopt_s{s}|OURS_s{s}", "scenario": "base", "type": "noninf", "margin_pct": 1.0}
+  ]
+ },
+ "factorial": {"scenario": "base", "rows": ["tsfix10", "tscr10", "pad10", "v3_10_s{s}", "v3j5_s{s}"],
+               "cols": ["A1", "N6", "Rfc", "RL5", "OURSnooff_s{s}", "OURS_s{s}"]}
+}
