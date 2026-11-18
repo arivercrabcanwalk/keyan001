@@ -7,3 +7,5 @@
 - Wed Nov 18 14:51:04 UTC 2026 smoke restarted clean (smoke2.log); earlier duplicate run_all instances killed
 - Wed Nov 18 15:05:03 UTC 2026 fixed site_v3 cov_mats unpack; smoke resumed
 - Wed Nov 18 15:12:33 UTC 2026 smoke BUDGETS=10, analysis static filter; resumed
+- Wed Nov 18 15:24:50 UTC 2026 local commit made; fresh-clone smoke running in /tmp/fresh_v3 (smoke_fresh.log)
+- Wed Nov 18 15:33:59 UTC 2026 fresh smoke: TSALNS Java hang (f5_35_1 fix 10s) -> run_tsalns retry x3 w/ timeout 3*secs+30; will resume fresh smoke

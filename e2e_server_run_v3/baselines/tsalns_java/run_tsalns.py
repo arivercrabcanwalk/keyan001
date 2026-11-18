@@ -47,8 +47,19 @@ def one(args):
     ru0 = resource.getrusage(resource.RUSAGE_CHILDREN)
     # REVIEW FIX (R-tsjvm): one JVM per core -> serial GC + limited JIT threads, so 38 concurrent JVMs do not
     # oversubscribe the CPU (which would silently cripple the baseline); CPU seconds are recorded.
-    out = subprocess.run([java, "-XX:+UseSerialGC", "-XX:CICompilerCount=2", f"-Dsecs={secs}", f"-Dreserve={reserve}", "-Diters=100000000"] + extra + ["-cp", cp, "test1.Main", os.path.join(ROOT, path)],
-                         capture_output=True, text=True, timeout=max(120, 20 * secs))
+    # v3: the author's Java occasionally does not return (an outer iteration that never ends; non-deterministic since
+    # the code is unseeded). Retry up to 3 times with a fresh JVM; the retry count is recorded in the row.
+    n_retry = 0
+    while True:
+        try:
+            out = subprocess.run([java, "-XX:+UseSerialGC", "-XX:CICompilerCount=2", f"-Dsecs={secs}", f"-Dreserve={reserve}", "-Diters=100000000"] + extra + ["-cp", cp, "test1.Main", os.path.join(ROOT, path)],
+                                 capture_output=True, text=True, timeout=max(60, 3 * secs + 30))
+            break
+        except subprocess.TimeoutExpired:
+            n_retry += 1
+            print(f"[tsalns] TIMEOUT {path} (retry {n_retry})", flush=True)
+            if n_retry >= 3:
+                raise
     if cov:
         os.unlink(cf)
     ru1 = resource.getrusage(resource.RUSAGE_CHILDREN)
@@ -67,7 +78,7 @@ def one(args):
         n_restored = sum(1 for a, b in zip(sol["station_types"], rt) if a != b); sol["station_types"] = rt
     ev = evaluate(ins, sol)
     row = dict(path=path, method="tsalns" + (f"_r{reserve}" if reserve else "") + (f"_{tag}" if tag else ""), sec=secs, reserve=reserve, wall=time.time() - t0, cpu_s=cpu_s, plan_obj=ev["cost"], cost=ev["cost"],
-                feasible=ev["feasible"], issues=ev["issues"][:5], solution=sol)
+                feasible=ev["feasible"], issues=ev["issues"][:5], solution=sol, n_retry=n_retry)
     if cov or fix:
         row["cov_feasible"] = CV.feasible(sol["station_types"], cS, cD); row["n_dabs"] = int(sum(1 for t in sol["station_types"] if t == 2))
         row["fixed_cost"] = CV.fixed_cost(sol["station_types"]); row["n_restored"] = n_restored
