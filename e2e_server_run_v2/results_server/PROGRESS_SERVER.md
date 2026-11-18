@@ -1,0 +1,191 @@
+- 2026-11-16 15:02:37 Asia run_all start SMOKE=0 W=18 seeds=[0 1 2] gpu=True java_tsalns=1
+- 2026-11-16 15:02:37 Asia START s0_fresh
+- 2026-11-16 15:02:39 Asia DONE s0_fresh (2s)
+- 2026-11-16 15:02:39 Asia START s1_ts_test_1
+- 2026-11-16 15:02:42 Asia FAIL s1_ts_test_1 rc=1 (see logs/s1_ts_test_1.log)
+- 2026-11-16 15:02:42 Asia START s1_ts_fresh_1
+- 2026-11-16 15:02:44 Asia FAIL s1_ts_fresh_1 rc=1 (see logs/s1_ts_fresh_1.log)
+- 2026-11-16 15:02:44 Asia START s1_ts_test_3
+- 2026-11-16 15:02:46 Asia FAIL s1_ts_test_3 rc=1 (see logs/s1_ts_test_3.log)
+- 2026-11-16 15:02:46 Asia START s1_ts_fresh_3
+- 2026-11-16 15:02:48 Asia FAIL s1_ts_fresh_3 rc=1 (see logs/s1_ts_fresh_3.log)
+- 2026-11-16 15:02:48 Asia START s1_ts_test_10
+- 2026-11-16 15:02:50 Asia FAIL s1_ts_test_10 rc=1 (see logs/s1_ts_test_10.log)
+- 2026-11-16 15:02:50 Asia START s1_ts_fresh_10
+- 2026-11-16 15:03:12 Asia run_all start SMOKE=0 W=18 seeds=[0 1 2] gpu=True java_tsalns=1
+- 2026-11-16 15:03:12 Asia START s1_ts_test_1
+- 2026-11-16 15:03:19 Asia DONE s1_ts_test_1 (7s)
+- 2026-11-16 15:03:19 Asia START s1_ts_fresh_1
+- 2026-11-16 15:03:25 Asia DONE s1_ts_fresh_1 (6s)
+- 2026-11-16 15:03:25 Asia START s1_ts_test_3
+- 2026-11-16 15:03:38 Asia DONE s1_ts_test_3 (13s)
+- 2026-11-16 15:03:38 Asia START s1_ts_fresh_3
+- 2026-11-16 15:03:51 Asia DONE s1_ts_fresh_3 (13s)
+- 2026-11-16 15:03:51 Asia START s1_ts_test_10
+- 2026-11-16 15:04:25 Asia DONE s1_ts_test_10 (34s)
+- 2026-11-16 15:04:25 Asia START s1_ts_fresh_10
+- 2026-11-16 15:04:59 Asia DONE s1_ts_fresh_10 (34s)
+- 2026-11-16 15:04:59 Asia START s1_ts_test_30
+- 2026-11-16 15:06:32 Asia DONE s1_ts_test_30 (93s)
+- 2026-11-16 15:06:32 Asia START s1_ts_fresh_30
+- 2026-11-16 15:08:06 Asia DONE s1_ts_fresh_30 (94s)
+- 2026-11-16 15:08:06 Asia START s1_ts_large
+- 2026-11-16 15:08:19 Asia DONE s1_ts_large (13s)
+- 2026-11-16 15:08:19 Asia START s1_ts_res10
+- 2026-11-16 15:08:53 Asia DONE s1_ts_res10 (34s)
+- 2026-11-16 15:08:53 Asia START s1_ts_res20
+- 2026-11-16 15:09:27 Asia DONE s1_ts_res20 (34s)
+- 2026-11-16 15:09:27 Asia START s1_ts_dev_r0
+- 2026-11-16 15:09:50 Asia DONE s1_ts_dev_r0 (23s)
+- 2026-11-16 15:09:50 Asia START s1_ts_dev_r01
+- 2026-11-16 15:10:13 Asia DONE s1_ts_dev_r01 (23s)
+- 2026-11-16 15:10:13 Asia START s1_ts_dev_r02
+- 2026-11-16 15:10:37 Asia DONE s1_ts_dev_r02 (24s)
+- 2026-11-16 15:10:37 Asia START s2a_route_gate_segment
+- 2026-11-16 16:00:06 Asia route_train runs/route done: it=2502 best_val=-0.960211787064213
+- 2026-11-16 16:00:07 Asia DONE s2a_route_gate_segment (2970s)
+- 2026-11-16 16:00:08 Asia GATE pass: {"decision":"CONTINUE","pred_gap_at_target":-1.0505423061402293,"asymptote":-1.624426751538155,"c":0.2,"last":-0.8459156989551192,"best":-0.960211787064213,"improving":true,"n":51,"target_h":12.0,"gate":1.0}
+- 2026-11-16 16:00:08 Asia START s2b_route_full
+- 2026-11-17 02:00:28 Asia route_train runs/route done: it=10363 best_val=-1.1401348318444655
+- 2026-11-17 02:00:29 Asia DONE s2b_route_full (36021s)
+- 2026-11-17 02:00:29 Asia START s2c_route_small
+- 2026-11-17 03:30:48 Asia route_train runs/route_small done: it=2893 best_val=-0.9500370437204891
+- 2026-11-17 03:30:49 Asia DONE s2c_route_small (5420s)
+- 2026-11-17 03:30:49 Asia START s3_site
+- 2026-11-17 06:30:52 Asia site_train runs/site (static) done it=6335
+- 2026-11-17 06:30:53 Asia DONE s3_site (10804s)
+- 2026-11-17 06:30:53 Asia START s4_plans_train
+- 2026-11-17 06:50:58 Asia DONE s4_plans_train (1205s)
+- 2026-11-17 06:50:58 Asia START s4_plans_dev
+- 2026-11-17 06:54:45 Asia DONE s4_plans_dev (227s)
+- 2026-11-17 06:54:45 Asia START s5_exec_s0
+- 2026-11-17 08:54:58 Asia exec_ppo runs/exec_s0: WARNING no validation checkpoint met ot<=N6+1; best.pt = min penalised-J checkpoint
+- 2026-11-17 08:54:58 Asia exec_ppo runs/exec_s0 done it=334 best_val_J=None
+- 2026-11-17 08:55:00 Asia DONE s5_exec_s0 (7215s)
+- 2026-11-17 08:55:00 Asia START s6_sitej5_s0
+- 2026-11-17 10:55:38 Asia site_train runs/site_j5_s0 (j5) done it=149
+- 2026-11-17 10:55:39 Asia DONE s6_sitej5_s0 (7239s)
+- 2026-11-17 10:55:39 Asia START s5_exec_s1
+- 2026-11-17 12:55:58 Asia exec_ppo runs/exec_s1: WARNING no validation checkpoint met ot<=N6+1; best.pt = min penalised-J checkpoint
+- 2026-11-17 12:55:58 Asia exec_ppo runs/exec_s1 done it=326 best_val_J=None
+- 2026-11-17 12:56:00 Asia DONE s5_exec_s1 (7221s)
+- 2026-11-17 12:56:00 Asia START s6_sitej5_s1
+- 2026-11-17 14:56:50 Asia site_train runs/site_j5_s1 (j5) done it=164
+- 2026-11-17 14:56:52 Asia DONE s6_sitej5_s1 (7252s)
+- 2026-11-17 14:56:52 Asia START s5_exec_s2
+- 2026-11-17 16:57:04 Asia exec_ppo runs/exec_s2: WARNING no validation checkpoint met ot<=N6+1; best.pt = min penalised-J checkpoint
+- 2026-11-17 16:57:05 Asia exec_ppo runs/exec_s2 done it=326 best_val_J=None
+- 2026-11-17 16:57:06 Asia DONE s5_exec_s2 (7214s)
+- 2026-11-17 16:57:06 Asia START s6_sitej5_s2
+- 2026-11-17 18:57:18 Asia site_train runs/site_j5_s2 (j5) done it=147
+- 2026-11-17 18:57:19 Asia DONE s6_sitej5_s2 (7213s)
+- 2026-11-17 18:57:19 Asia START s5_exec_scratch_s0
+- 2026-11-17 20:57:28 Asia exec_ppo runs/exec_scratch_s0: WARNING no validation checkpoint met ot<=N6+1; best.pt = min penalised-J checkpoint
+- 2026-11-17 20:57:28 Asia exec_ppo runs/exec_scratch_s0 done it=304 best_val_J=None
+- 2026-11-17 20:57:29 Asia DONE s5_exec_scratch_s0 (7210s)
+- 2026-11-17 20:57:29 Asia START s7_plans_test_s0
+- 2026-11-17 21:12:06 Asia DONE s7_plans_test_s0 (877s)
+- 2026-11-17 21:12:06 Asia START s7_plans_large_s0
+- 2026-11-17 21:21:04 Asia DONE s7_plans_large_s0 (538s)
+- 2026-11-17 21:21:04 Asia START s7_plans_test_s1
+- 2026-11-17 21:36:23 Asia DONE s7_plans_test_s1 (919s)
+- 2026-11-17 21:36:23 Asia START s7_plans_large_s1
+- 2026-11-17 21:45:27 Asia DONE s7_plans_large_s1 (544s)
+- 2026-11-17 21:45:27 Asia START s7_plans_test_s2
+- 2026-11-17 21:59:53 Asia DONE s7_plans_test_s2 (866s)
+- 2026-11-17 21:59:53 Asia START s7_plans_large_s2
+- 2026-11-17 22:09:18 Asia DONE s7_plans_large_s2 (565s)
+- 2026-11-17 22:09:18 Asia START s7_static_test_full_1
+- 2026-11-17 22:10:32 Asia DONE s7_static_test_full_1 (74s)
+- 2026-11-17 22:10:32 Asia START s7_static_fresh_full_1
+- 2026-11-17 22:11:46 Asia DONE s7_static_fresh_full_1 (74s)
+- 2026-11-17 22:11:46 Asia START s7_static_test_full_3
+- 2026-11-17 22:15:03 Asia DONE s7_static_test_full_3 (197s)
+- 2026-11-17 22:15:03 Asia START s7_static_fresh_full_3
+- 2026-11-17 22:18:15 Asia DONE s7_static_fresh_full_3 (192s)
+- 2026-11-17 22:18:15 Asia START s7_static_test_full_10
+- 2026-11-17 22:27:46 Asia DONE s7_static_test_full_10 (571s)
+- 2026-11-17 22:27:46 Asia START s7_static_fresh_full_10
+- 2026-11-17 22:37:15 Asia DONE s7_static_fresh_full_10 (569s)
+- 2026-11-17 22:37:15 Asia START s7_static_test_full_30
+- 2026-11-17 23:03:07 Asia DONE s7_static_test_full_30 (1552s)
+- 2026-11-17 23:03:07 Asia START s7_static_fresh_full_30
+- 2026-11-17 23:28:58 Asia DONE s7_static_fresh_full_30 (1551s)
+- 2026-11-17 23:28:58 Asia START s7_static_pure
+- 2026-11-17 23:29:22 Asia DONE s7_static_pure (24s)
+- 2026-11-17 23:29:22 Asia START s7_static_sample
+- 2026-11-17 23:30:11 Asia DONE s7_static_sample (49s)
+- 2026-11-17 23:30:11 Asia START s7_static_noeas
+- 2026-11-17 23:31:40 Asia DONE s7_static_noeas (89s)
+- 2026-11-17 23:31:40 Asia START s7_static_lns
+- 2026-11-17 23:45:33 Asia DONE s7_static_lns (833s)
+- 2026-11-17 23:45:33 Asia START s7_static_cpu
+- 2026-11-18 00:02:32 Asia DONE s7_static_cpu (1019s)
+- 2026-11-18 00:02:32 Asia START s7_static_fresh_pure
+- 2026-11-18 00:02:56 Asia DONE s7_static_fresh_pure (24s)
+- 2026-11-18 00:02:56 Asia START s8_static_test
+- 2026-11-18 00:02:57 Asia DONE s8_static_test (1s)
+- 2026-11-18 00:02:57 Asia START s8_static_matched_1
+- 2026-11-18 00:02:58 Asia DONE s8_static_matched_1 (1s)
+- 2026-11-18 00:02:58 Asia START s8_static_fresh_1
+- 2026-11-18 00:02:59 Asia DONE s8_static_fresh_1 (1s)
+- 2026-11-18 00:02:59 Asia START s8_static_matched_3
+- 2026-11-18 00:03:01 Asia DONE s8_static_matched_3 (2s)
+- 2026-11-18 00:03:01 Asia START s8_static_fresh_3
+- 2026-11-18 00:03:02 Asia DONE s8_static_fresh_3 (1s)
+- 2026-11-18 00:03:02 Asia START s8_static_matched_10
+- 2026-11-18 00:03:03 Asia DONE s8_static_matched_10 (1s)
+- 2026-11-18 00:03:03 Asia START s8_static_fresh_10
+- 2026-11-18 00:03:04 Asia DONE s8_static_fresh_10 (1s)
+- 2026-11-18 00:03:04 Asia START s8_static_matched_30
+- 2026-11-18 00:03:06 Asia DONE s8_static_matched_30 (2s)
+- 2026-11-18 00:03:06 Asia START s8_static_fresh_30
+- 2026-11-18 00:03:07 Asia DONE s8_static_fresh_30 (1s)
+- 2026-11-18 00:03:07 Asia START s8b_dev_r0
+- 2026-11-18 00:08:45 Asia DONE s8b_dev_r0 (338s)
+- 2026-11-18 00:08:45 Asia START s8b_dev_r01
+- 2026-11-18 00:14:28 Asia DONE s8b_dev_r01 (343s)
+- 2026-11-18 00:14:28 Asia START s8b_dev_r02
+- 2026-11-18 00:20:08 Asia DONE s8b_dev_r02 (340s)
+- 2026-11-18 00:20:08 Asia START s8b_select
+- 2026-11-18 00:20:09 Asia DONE s8b_select (1s)
+- 2026-11-18 00:20:09 Asia START s8c_ts_j5sel
+- 2026-11-18 00:20:36 Asia DONE s8c_ts_j5sel (27s)
+- 2026-11-18 00:20:36 Asia START s9_dyn_ts_base
+- 2026-11-18 01:19:57 Asia DONE s9_dyn_ts_base (3561s)
+- 2026-11-18 01:19:57 Asia START s9_dyn_tsres10_base
+- 2026-11-18 02:13:48 Asia DONE s9_dyn_tsres10_base (3231s)
+- 2026-11-18 02:13:48 Asia START s9_dyn_tsres20_base
+- 2026-11-18 03:06:47 Asia DONE s9_dyn_tsres20_base (3179s)
+- 2026-11-18 03:06:47 Asia START s9_dyn_tsj5_base
+- 2026-11-18 03:19:11 Asia DONE s9_dyn_tsj5_base (744s)
+- 2026-11-18 03:19:11 Asia START s9_dyn_ours_base_s0
+- 2026-11-18 03:24:35 Asia DONE s9_dyn_ours_base_s0 (324s)
+- 2026-11-18 03:24:35 Asia START s9_dyn_tsours_base_s0
+- 2026-11-18 03:31:04 Asia DONE s9_dyn_tsours_base_s0 (389s)
+- 2026-11-18 03:31:04 Asia START s9_dyn_oursbase_base_s0
+- 2026-11-18 03:42:05 Asia DONE s9_dyn_oursbase_base_s0 (661s)
+- 2026-11-18 03:42:05 Asia START s9_dyn_ours_base_s1
+- 2026-11-18 03:47:38 Asia DONE s9_dyn_ours_base_s1 (333s)
+- 2026-11-18 03:47:38 Asia START s9_dyn_tsours_base_s1
+- 2026-11-18 03:54:11 Asia DONE s9_dyn_tsours_base_s1 (393s)
+- 2026-11-18 03:54:11 Asia START s9_dyn_oursbase_base_s1
+- 2026-11-18 04:05:05 Asia DONE s9_dyn_oursbase_base_s1 (654s)
+- 2026-11-18 04:05:05 Asia START s9_dyn_ours_base_s2
+- 2026-11-18 04:10:39 Asia DONE s9_dyn_ours_base_s2 (334s)
+- 2026-11-18 04:10:39 Asia START s9_dyn_tsours_base_s2
+- 2026-11-18 04:17:27 Asia DONE s9_dyn_tsours_base_s2 (408s)
+- 2026-11-18 04:17:27 Asia START s9_dyn_oursbase_base_s2
+- 2026-11-18 04:28:19 Asia DONE s9_dyn_oursbase_base_s2 (652s)
+- 2026-11-18 04:28:20 Asia START s9_dyn_abl_base
+- 2026-11-18 04:53:12 Asia DONE s9_dyn_abl_base (1492s)
+- 2026-11-18 04:53:12 Asia START s9_dyn_ablheur_base
+- 2026-11-18 04:56:25 Asia DONE s9_dyn_ablheur_base (193s)
+- 2026-11-18 04:56:25 Asia START s9_dyn_ablplan_test_full_b10_base
+- 2026-11-18 05:03:12 Asia DONE s9_dyn_ablplan_test_full_b10_base (407s)
+- 2026-11-18 05:03:12 Asia START s9_dyn_ablplan_test_pure_base
+- 2026-11-18 05:09:32 Asia DONE s9_dyn_ablplan_test_pure_base (380s)
+- 2026-11-18 05:09:32 Asia START s9_dyn_ablplan_test_noeas_base
+- 2026-11-18 05:16:12 Asia DONE s9_dyn_ablplan_test_noeas_base (400s)
+- 2026-11-18 05:16:12 Asia START s9_dyn_ts_sigma15
+- 2026-11-18 CPU 40-core box: sigma15/ncbias/stress/uniform + large maps complete; primary_baseline=TS_RfcP
