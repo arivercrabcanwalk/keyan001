@@ -1,0 +1,55 @@
+{
+  "phase": "development",
+  "primary_condition": "emerg_clustered_mid",
+  "package": "rlv3_emergency",
+  "site": "hn01",
+  "ticket_id": "REPLACE_WITH_APPROVED_ID",
+  "approved_machine_sha256": "<hn01 sha256 of /etc/machine-id file>",
+  "mechanism_receipt": "/approved/g0.json",
+  "comparison_receipt": "/approved/g3.json",
+  "population_registry": "/approved/exclusions-and-roster.json",
+  "train_plans": "/approved/new/train.jsonl",
+  "val_plans": "/approved/new/val.jsonl",
+  "train_scenario": "emerg_clustered_mid",
+  "pilot_plans": {
+    "emerg_random_low": "/approved/new/emerg_random_low.jsonl",
+    "emerg_random_mid": "/approved/new/emerg_random_mid.jsonl",
+    "emerg_random_high": "/approved/new/emerg_random_high.jsonl",
+    "emerg_clustered_low": "/approved/new/emerg_clustered_low.jsonl",
+    "emerg_clustered_mid": "/approved/new/emerg_clustered_mid.jsonl",
+    "emerg_clustered_high": "/approved/new/emerg_clustered_high.jsonl"
+  },
+  "evaluation": [
+    "emerg_random_low",
+    "emerg_random_mid",
+    "emerg_random_high",
+    "emerg_clustered_low",
+    "emerg_clustered_mid",
+    "emerg_clustered_high"
+  ],
+  "eval_days": "100000:100020",
+  "cost_manifests": {
+    "emerg_random_low": "/approved/new/caps_emerg_random_low.json",
+    "emerg_random_mid": "/approved/new/caps_emerg_random_mid.json",
+    "emerg_random_high": "/approved/new/caps_emerg_random_high.json",
+    "emerg_clustered_low": "/approved/new/caps_emerg_clustered_low.json",
+    "emerg_clustered_mid": "/approved/new/caps_emerg_clustered_mid.json",
+    "emerg_clustered_high": "/approved/new/caps_emerg_clustered_high.json"
+  },
+  "comparators": [
+    "A1",
+    "GREEDY",
+    "REOPT"
+  ],
+  "primary_reference": "TUNED_OVERALL",
+  "seeds": [
+    103,
+    211,
+    307
+  ],
+  "device": "cuda",
+  "train_hours": 3,
+  "rl_hours": 1,
+  "episode_wall_s": 30,
+  "campaign_hours": 36
+}

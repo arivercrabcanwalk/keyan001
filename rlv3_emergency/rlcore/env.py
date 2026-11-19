@@ -1,414 +1,412 @@
-"""Event-driven arc-level simulator shared by both rlv3 papers.
+"""Finite-day node-decision simulator: no skip, rescue, or completion guarantee.
 
-World = Liu et al. (2026) LRPHSD: the AUTHOR's stations / drones / target-to-station assignment (TSALNS plan) are fixed,
-so #stations and fixed cost are identical for every method by construction.
-Every drone, whenever it is at a node, chooses its next node: a task of its own station's pool
-(paper A) / own pool or an eligible emergency request (paper B), RETURN to swap battery, or WAIT (at station only).
-
-Shared feasibility layer ("shield", identical for all methods):
-  * energy conservation mask (design 8.3): forecast c_ij + h_j + c_jD  <= (cap - e_used) / (1 + margin), margin = 0
-    by default; heuristics add their own dev-tuned risk buffer, the RL policy learns its own buffer
-  * thunderstorm mask: the legs i->j and j->D must clear the extrapolated nowcast cells (+buffer)
-  * wind limit: no launch / continuation while forecast wind > W_LIMIT (manufacturer limit)
-  * completion: no 'skip' action exists; the episode ends only when every planned target and every released request
-    has been served -> strict 100 % completion is structural.  After T_HARD a late fallback relaxes margin / wind limit
-    (flag `fallback` in the result; gate requires 0 for all reported methods' averages to be comparable).
-Truth execution (paper A): leg integrated in 0.5-min steps with the TRUE spatio-temporal wind + gusts + outflow,
-  physics energy P(v_a)*dt while flying and P(|w|)*dt while hovering; smart return-to-home (RTH) when remaining energy
-  drops to the truth return need (+reserve) -> task not served, re-queued (abort); entering a true storm core
-  = safety incident + RTH; battery depleted on the way home = forced landing incident (+60 min recovery).
+Requests release independently of routes. Flight and service are non-preemptive;
+all aircraft advance on one public clock. Energy and cumulative operating duty
+are hard constraints. Failed missions retain their original denominators.
 """
-import math, heapq
+import math
+import heapq
 import numpy as np
 from . import phys
 from .common import P1, P2, TIME_COST, VA_MS
 from .weather import nowcast_hits
 
 DT_FLY = 0.5
-RTH_RES = 0.0           # author capacity Q is read as USABLE energy above the manufacturer critical-battery reserve
-FAIL_GROUND = 60.0
+RTH_RES = 0.0
 WAIT_STEP = 10.0
-T_DAY = 600.0           # 10-h working day (DABS endurance as clock limit)
-T_HARD = 660.0
-T_ABORT = 1400.0        # absolute safety stop (never reached in tests; result flagged)
-C_OT = 1.0              # RMB per drone-minute beyond the author's per-drone operating limit and per station-minute after T_DAY
-C_INC = 200.0           # RMB per safety incident (cell incursion / forced landing) - J only
-K_MAX = 48              # max task candidates shown to a policy (nearest first)
-
+T_DAY = 600.0
+T_HARD = T_DAY
+T_ABORT = T_DAY
+C_OT = 1.0
+C_INC = 200.0
+C_UNSERVED = 1000.0
+C_FAIL = 1000.0
+K_MAX = None                   # dynamic attention/collation; no candidate truncation
 ACT_RETURN, ACT_WAIT = -1, -2
 
 
 class Env:
-    def __init__(self, layout, wx=None, requests=None, margin=None, use_cells=True, wind_limit=True,
-                 urgent_w=None, record=False):
-        self.L = layout
-        self.wx = wx
-        self.calm = (wx is None) or getattr(wx, "calm", False)
-        # shield margin: 0 = exactly design 8.3 (forecast energy conservation); methods may add their own buffer
+    def __init__(self, layout, wx=None, requests=None, margin=None, use_cells=True,
+                 wind_limit=True, urgent_w=None, record=False):
+        self.L, self.wx = layout, wx
+        self.calm = wx is None or getattr(wx, "calm", False)
+        self.author_simple = self.calm or getattr(wx, "energy_model", None) == "author_simple"
         self.margin = 0.0 if margin is None else float(margin)
-        self.use_cells = use_cells and (wx is not None) and getattr(wx, "ncell", 0) > 0
-        self.wind_limit = wind_limit and not self.calm
-        self.record = record
-        self.trace = []
-        st = layout["stations"]
-        self.st = st
-        # tasks: planned targets first
+        if not math.isfinite(self.margin) or self.margin < 0:
+            raise ValueError("invalid nonnegative energy margin")
+        self.use_cells = bool(use_cells and wx is not None and getattr(wx, "ncell", 0))
+        self.wind_limit = bool(wind_limit and not self.calm)
+        self.record, self.trace, self.event_trace = record, [], []
+        self.st = layout["stations"]
+        if [s["k"] for s in self.st] != list(range(len(self.st))):
+            raise ValueError("station indices must be contiguous")
+        if [d["i"] for d in layout["drones"]] != list(range(len(layout["drones"]))):
+            raise ValueError("drone indices must be contiguous")
+        if set(layout["assign"]) != set(layout["targets"]):
+            raise ValueError("every routine target must have exactly one fixed assignment")
         self.tasks = []
         for tid, k in sorted(layout["assign"].items()):
             x, y, svc, en = layout["targets"][tid]
-            self.tasks.append(dict(j=len(self.tasks), tid=tid, x=x, y=y, svc=svc, en=en, urgent=0, st=k,
-                                   elig=(k,), rel=0.0, dl=None, prio=0, w=0.0, done=False, claim=-1, t_done=None))
+            self.tasks.append(dict(j=len(self.tasks), tid=tid, x=x, y=y, svc=svc,
+                en=en, urgent=0, st=k, elig=(k,), rel=0.0, dl=None, prio=0,
+                w=0.0, done=False, claim=-1, t_arrival=None, t_done=None))
         self.n_planned = len(self.tasks)
-        self.requests = sorted(requests or [], key=lambda r: r["t"])
         from .urgent import W_LATE
-        self.W_LATE = urgent_w or W_LATE
-        self.req_gen = None          # (targets, level) set by scen.make_env; used only by resample_future
+        self.W_LATE = W_LATE if urgent_w is None else urgent_w
+        self.requests = sorted(requests or [], key=lambda r: (r["t"], r["rid"]))
+        if len({r["rid"] for r in self.requests}) != len(self.requests):
+            raise ValueError("request ids must be unique")
         for r in self.requests:
+            if (not all(math.isfinite(float(r[z])) for z in ("x", "y", "t", "dl", "svc", "energy"))
+                    or not 0 <= r["t"] <= T_DAY or r["dl"] < r["t"]
+                    or r["svc"] <= 0 or r["energy"] < 0 or r["prio"] not in (0, 1)):
+                raise ValueError("unsupported request: finite day/time/service/priority required")
             self.tasks.append(self._req_task(r))
-        self.n_unserviceable = sum(1 for t in self.tasks if t["urgent"] and not t["elig"])
-        # planned order rank per station (author's sequence) and per-drone planned queues (for A1 + features)
+        self.n_unserviceable = sum(x["urgent"] and not x["elig"] for x in self.tasks)
+        self.req_gen = None
         self.rank = {}
         for d in layout["drones"]:
             seq = [tid for tr in d["trips"] for tid in tr]
-            for r_, tid in enumerate(seq):
-                self.rank[tid] = (d["i"], r_, len(seq))
-        self.tid2j = {t["tid"]: t["j"] for t in self.tasks if not t["urgent"]}
+            for r, tid in enumerate(seq):
+                self.rank[tid] = (d["i"], r, len(seq))
+        self.tid2j = {x["tid"]: x["j"] for x in self.tasks if not x["urgent"]}
         self.dr = []
         for d in layout["drones"]:
-            s = st[d["st"]]
-            self.dr.append(dict(i=d["i"], st=d["st"], di=d["di"], cap=d["cap"], limit=d["limit"], x=s["x"], y=s["y"],
-                                at_st=True, node=-1, e=0.0, t=0.0, busy=0.0, flight=0.0, hover=0.0, dist=0.0,
-                                launches=0, aborts=0, inc_cell=0, inc_land=0, retired=False, t_last=0.0, ntrip=0))
+            s = self.st[d["st"]]
+            self.dr.append(dict(i=d["i"], st=d["st"], di=d["di"], cap=d["cap"],
+                limit=d["limit"], x=s["x"], y=s["y"], at_st=True, node=-1,
+                e=0.0, t=0.0, busy=0.0, flight=0.0, hover=0.0, dist=0.0,
+                launches=0, aborts=0, inc_cell=0, inc_land=0, retired=False,
+                t_last=0.0, ntrip=0, mode="idle", failed=False, last_return=0.0,
+                target=None, service_left=0.0, slp=False, failure_reason=None))
         self.heap = [(0.0, d["i"]) for d in self.dr]
         heapq.heapify(self.heap)
-        self.t = 0.0
-        self.next_rel = 0
-        self.fallback = False
-        self.cur = None
-        self.done = False
-        self.n_dec = 0
-        self.timeout = False
+        self.t, self.cur, self.done, self.n_dec = 0.0, None, False, 0
+        self.fallback, self.timeout = False, False
+        self.termination_reason = None
+        self._release_seen = set()
 
     def _req_task(self, r):
-        elig = tuple(s["k"] for s in self.st if math.hypot(s["x"] - r["x"], s["y"] - r["y"]) <= s["R"] + 1e-7)
-        return dict(j=len(self.tasks), tid=r["tid"], x=r["x"], y=r["y"], svc=r["svc"], en=r["energy"],
-                    urgent=1, st=-1, elig=elig, rel=r["t"], dl=r["dl"], prio=r["prio"],
-                    w=self.W_LATE[r["prio"]], done=False, claim=-1, t_done=None, rid=r["rid"])
+        elig = tuple(s["k"] for s in self.st if math.hypot(s["x"]-r["x"], s["y"]-r["y"]) <= s["R"]+1e-7)
+        return dict(j=len(self.tasks), tid=r["tid"], x=r["x"], y=r["y"],
+            svc=r["svc"], en=r["energy"], urgent=1, st=-1, elig=elig,
+            rel=r["t"], dl=r["dl"], prio=r["prio"], w=self.W_LATE[r["prio"]],
+            done=False, claim=-1, t_arrival=None, t_done=None, rid=r["rid"])
 
     def resample_future(self, seed):
-        """Redraw everything not yet observable at self.t (weather after t / requests released after t) from the
-        generative model.  Call on a COPY of the env (rollout-improvement labels without hindsight bias)."""
+        """Simulator-state conditional redraw; not a public-history belief sampler."""
         if self.wx is not None and not self.calm:
             self.wx = self.wx.resample_future(self.t, seed)
         if self.req_gen is None:
             return
         from .urgent import make_requests
-        targets, level = self.req_gen
-        keep = [x for x in self.tasks[self.n_planned:] if x["rel"] <= self.t + 1e-9]
-        self.tasks = self.tasks[:self.n_planned] + keep
-        assert all(x["j"] == k for k, x in enumerate(self.tasks))
-        new = []
-        for r in make_requests(10 ** 9 + int(seed), targets, level):
-            if r["t"] > self.t + 1e-9:
-                r = dict(r, rid=10 ** 6 + r["rid"]); x = self._req_task(r); self.tasks.append(x); new.append(x)
-        ent = {i: t for t, i in self.heap}
-        for d in self.dr:
-            rels = [x["rel"] for x in new if d["st"] in x["elig"]]
-            if not rels:
-                continue
-            r0 = min(rels)
-            if d["retired"]:
-                d["retired"] = False; d["slp"] = False; d["t"] = max(r0, d["t"]); ent[d["i"]] = d["t"]
-            elif d.get("slp") and d["i"] in ent and ent[d["i"]] > r0:
-                d["t"] = r0; ent[d["i"]] = r0
-        self.heap = [(t, i) for i, t in ent.items()]
-        heapq.heapify(self.heap)
+        targets, level, pattern = self.req_gen
+        self.tasks = [x for x in self.tasks if not x["urgent"] or x["rel"] <= self.t+1e-9]
+        next_rid = max((x["rid"] for x in self.tasks if x["urgent"]), default=-1)+1
+        for r in make_requests(10**9+int(seed), targets, level, pattern=pattern):
+            if r["t"] > self.t+1e-9:
+                r = dict(r, rid=next_rid)
+                next_rid += 1
+                self.tasks.append(self._req_task(r))
+        self.n_unserviceable = sum(x["urgent"] and not x["elig"] for x in self.tasks)
 
-    # ---------------------------------------------------------------- helpers
     def _released(self, t):
-        return [x for x in self.tasks if x["urgent"] and x["rel"] <= t + 1e-9]
+        return [x for x in self.tasks if x["urgent"] and x["rel"] <= t+1e-9]
 
     def _fc(self, t):
-        if self.calm:
-            return 0.0, 0.0
-        return self.wx.forecast_wind(self.t, t)
+        return (0.0, 0.0) if self.calm else self.wx.forecast_wind(self.t, t)
 
     def leg_pred(self, x1, y1, x2, y2, t0):
-        """forecast physics energy / minutes / feasible of a leg (design 8.1 revised)."""
         if self.calm:
-            d = math.hypot(x2 - x1, y2 - y1); tm = d / (VA_MS * 60.0)
-            return P1 * tm, tm, True
-        wx, wy = self._fc(t0)
-        return phys.leg_cost(x1, y1, x2, y2, wx, wy)
+            tm = math.hypot(x2-x1, y2-y1)/(VA_MS*60)
+            return P1*tm, tm, True
+        return phys.leg_cost(x1, y1, x2, y2, *self._fc(t0))
 
     def hover_pred(self, t0, svc):
-        if self.calm:
-            return P2 * svc
-        wx, wy = self._fc(t0)
-        return phys.p_hover(math.hypot(wx, wy)) * svc
+        return P2*svc if self.calm else phys.p_hover(math.hypot(*self._fc(t0)))*svc
 
     def unfinished(self):
         return [x for x in self.tasks if not x["done"]]
 
     def avail_tasks(self, d):
-        """tasks the drone may pick now (released, unserved, unclaimed, eligible)."""
-        out = []
-        for x in self.tasks:
-            if x["done"] or x["claim"] >= 0 or x.get("free_at", 0.0) > self.t + 1e-9:
-                continue
-            if x["urgent"]:
-                if x["rel"] > self.t + 1e-9 or d["st"] not in x["elig"]:
-                    continue
-            elif x["st"] != d["st"]:
-                continue
-            out.append(x)
-        return out
+        return [x for x in self.tasks if not x["done"] and x["claim"] < 0
+            and x.get("free_at", 0.0) <= self.t+1e-9 and x["rel"] <= self.t+1e-9
+            and d["st"] in x["elig"]]
 
     def task_check(self, d, x):
-        """shield for one candidate task -> (feasible, info dict)."""
         s = self.st[d["st"]]
-        relax = self.t >= T_HARD
         e1, t1, ok1 = self.leg_pred(d["x"], d["y"], x["x"], x["y"], self.t)
-        h = self.hover_pred(self.t + t1, x["svc"]) if not self.calm else x["en"]
-        e2, t2, ok2 = self.leg_pred(x["x"], x["y"], s["x"], s["y"], self.t + t1 + x["svc"])
-        need = e1 + h + e2
-        m = 0.0 if relax else self.margin
-        feas = ok1 and ok2 and (need * (1 + m) <= d["cap"] - d["e"] + 1e-9)
+        inf = dict(e1=e1, t1=t1, h=float("inf"), e2=float("inf"),
+                   t2=float("inf"), need=float("inf"), cell=False, duty=float("inf"))
+        if not ok1 or not math.isfinite(t1) or self.t+t1+x["svc"] > T_DAY+1e-9:
+            return False, inf
+        h = x["en"] if self.author_simple else self.hover_pred(self.t+t1, x["svc"])
+        e2, t2, ok2 = self.leg_pred(x["x"], x["y"], s["x"], s["y"], self.t+t1+x["svc"])
+        need, duty = e1+h+e2, t1+x["svc"]+t2
+        feas = (ok2 and math.isfinite(duty) and not d["failed"]
+            and need*(1+self.margin) <= d["cap"]-d["e"]+1e-9
+            and d["busy"]+duty <= d["limit"]+1e-9 and self.t+duty <= T_DAY+1e-9)
         cell = False
-        if feas and self.use_cells and not relax:
+        if feas and self.use_cells:
             nc = self._nc()
-            cell = nowcast_hits(nc, d["x"], d["y"], x["x"], x["y"], self.t, t1) or \
-                nowcast_hits(nc, x["x"], x["y"], s["x"], s["y"], self.t + t1 + x["svc"], t2)
+            cell = (nowcast_hits(nc, d["x"], d["y"], x["x"], x["y"], self.t, t1)
+                or nowcast_hits(nc, x["x"], x["y"], x["x"], x["y"], self.t+t1, x["svc"])
+                or nowcast_hits(nc, x["x"], x["y"], s["x"], s["y"], self.t+t1+x["svc"], t2))
             feas = not cell
-        if feas and self.wind_limit and not relax:
-            wx, wy = self._fc(self.t)
-            if math.hypot(wx, wy) > phys.W_LIMIT:
-                feas = False
-        return feas, dict(e1=e1, t1=t1, h=h, e2=e2, t2=t2, need=need, cell=cell)
+        if feas and self.wind_limit:
+            feas = all(math.hypot(*self._fc(tt)) <= phys.W_LIMIT for tt in
+                       (self.t, self.t+t1, self.t+t1+x["svc"], self.t+duty))
+        inf.update(h=h, e2=e2, t2=t2, need=need, cell=cell, duty=duty)
+        return bool(feas), inf
 
     def _nc(self):
-        key = round(self.t, 3)
-        if getattr(self, "_nc_key", None) != key:
-            self._nc_key = key
-            self._nc_val = self.wx.nowcast(self.t) if self.use_cells else []
+        if getattr(self, "_nc_key", None) != self.t:
+            self._nc_key, self._nc_val = self.t, self.wx.nowcast(self.t) if self.use_cells else []
         return self._nc_val
 
-    # ---------------------------------------------------------------- decision interface
-    def next_decision(self):
-        """Advance to the next drone decision with >1 legal action.  Returns (drone, cand, info) or None when done.
-        Decisions with exactly one legal action are applied automatically."""
-        while True:
-            if not self.heap:
-                self.done = True
-                return None
-            t, i = heapq.heappop(self.heap)
-            d = self.dr[i]
-            self.t = max(self.t, t)
-            if self.t > T_ABORT:
-                self.timeout = True; self.done = True
-                return None
-            if self.t >= T_HARD and not self.fallback and self.unfinished():
-                self.fallback = True
-            av = self.avail_tasks(d)
-            if not av:
-                if not d["at_st"]:
-                    self._apply(d, ACT_RETURN, None); continue
-                # idle at station: sleep until next release that could concern anyone, or retire
-                fut = [x["rel"] for x in self.tasks if x["urgent"] and not x["done"] and x["rel"] > self.t + 1e-9
-                       and d["st"] in x["elig"]]
-                pend = [x for x in self.tasks if not x["done"] and
-                        ((x["urgent"] and d["st"] in x["elig"]) or (not x["urgent"] and x["st"] == d["st"]))]
-                if fut:
-                    d["t"] = min(fut); d["slp"] = True; heapq.heappush(self.heap, (d["t"], i)); continue
-                if pend:
-                    # tasks of my pool are claimed by my sibling (may be released after abort) -> check again later
-                    d["t"] = self.t + WAIT_STEP; heapq.heappush(self.heap, (d["t"], i)); continue
-                d["retired"] = True
+    def _return_check(self, d):
+        if d["at_st"] or d["failed"]:
+            return False
+        s = self.st[d["st"]]
+        e, tm, ok = self.leg_pred(d["x"], d["y"], s["x"], s["y"], self.t)
+        if (not ok or not math.isfinite(tm) or e > d["cap"]-d["e"]+1e-9
+                or d["busy"]+tm > d["limit"]+1e-9 or self.t+tm > T_DAY+1e-9):
+            return False
+        if self.wind_limit and any(math.hypot(*self._fc(tt)) > phys.W_LIMIT
+                                   for tt in (self.t, self.t+tm)):
+            return False
+        return not (self.use_cells and nowcast_hits(self._nc(), d["x"], d["y"],
+                            s["x"], s["y"], self.t, tm))
+
+    def _queue(self, d, t):
+        d["retired"] = False
+        heapq.heappush(self.heap, (t, d["i"]))
+
+    def _fail(self, d, reason):
+        d.update(failed=True, failure_reason=reason, mode="failed", retired=True)
+        if d["target"] is not None:
+            x = self.tasks[d["target"]]
+            if not x["done"]:
+                x["claim"], x["free_at"] = -1, d["t"]
+                d["aborts"] += 1
+        if reason == "energy":
+            d["inc_land"] += 1
+        if self.record:
+            self.event_trace.append((d["t"], "failure", d["i"], reason))
+
+    def _motion(self, d):
+        s = self.st[d["st"]]
+        x2, y2 = (s["x"], s["y"]) if d["mode"] == "return" else (self.tasks[d["target"]]["x"], self.tasks[d["target"]]["y"])
+        dist = math.hypot(x2-d["x"], y2-d["y"])
+        if self.calm or dist <= 1e-9:
+            vg = VA_MS*60
+        else:
+            wx, wy = self.wx.truth_wind(d["x"], d["y"], d["t"])
+            vg = phys.ground_speed(wx, wy, (x2-d["x"])/dist, (y2-d["y"])/dist)*60
+        return x2, y2, dist, vg
+
+    def _next_active_event(self, d):
+        if d["mode"] == "service":
+            return d["t"]+min(DT_FLY, d["service_left"])
+        if d["mode"] in ("fly", "return"):
+            _, _, dist, vg = self._motion(d)
+            return d["t"]+min(DT_FLY, dist/vg) if vg > 0 else d["t"]
+        return float("inf")
+
+    def _advance_active(self, t):
+        for d in self.dr:
+            if d["mode"] not in ("fly", "return", "service"):
                 continue
-            av.sort(key=lambda x: (x["x"] - d["x"]) ** 2 + (x["y"] - d["y"]) ** 2)
-            av = av[:K_MAX]
-            feas, infos = [], []
-            for x in av:
-                f, inf = self.task_check(d, x)
-                feas.append(f); infos.append(inf)
-            nfeas = sum(feas)
-            can_ret = not d["at_st"]
-            can_wait = d["at_st"] and not (self.t >= T_HARD and nfeas > 0)   # completion guarantee: no idling late
-            if nfeas == 0:
-                if can_ret:
-                    self._apply(d, ACT_RETURN, None); continue
-                self._apply(d, ACT_WAIT, None); continue
-            if nfeas == 1 and not can_ret and not can_wait:
-                k = feas.index(True); self._apply(d, av[k]["j"], infos[k]); continue
-            self.cur = (d, av, feas, infos, can_ret, can_wait)
-            return self.cur
+            dt, mode = t-d["t"], d["mode"]
+            if dt < -1e-9:
+                raise RuntimeError("event clock moved backwards")
+            x0, y0, t0 = d["x"], d["y"], d["t"]
+            wx, wy = (0.0, 0.0) if self.calm else self.wx.truth_wind(x0, y0, t0)
+            if not self.calm and math.hypot(wx, wy) > phys.W_LIMIT+1e-9:
+                self._fail(d, "truth_wind_limit"); continue
+            if mode == "service":
+                x = self.tasks[d["target"]]
+                power = x["en"]/x["svc"] if self.author_simple else phys.p_hover(math.hypot(wx, wy))
+                x2, y2, dist, vg = x0, y0, 0.0, 0.0
+            else:
+                x2, y2, dist, vg = self._motion(d)
+                power = P1 if self.calm else phys.P_CRUISE
+                if dist > 1e-9 and vg < phys.VG_MIN*60-1e-9:
+                    self._fail(d, "truth_heading_limit"); continue
+            permitted = min(dt, max(0.0, d["limit"]-d["busy"]),
+                            max(0.0, (d["cap"]-d["e"])/power) if power > 0 else dt)
+            frac = 0.0 if dist <= 1e-9 else min(1.0, vg*permitted/dist)
+            xn, yn = x0+(x2-x0)*frac, y0+(y2-y0)*frac
+            if mode == "service":
+                xn, yn = x0, y0
+            d["e"] += power*permitted
+            d["t"] += permitted
+            d["busy"] += permitted
+            d["x"], d["y"] = xn, yn
+            if mode == "service":
+                d["hover"] += permitted; d["service_left"] -= permitted
+            else:
+                d["flight"] += permitted; d["dist"] += dist*frac
+            if self.wx is not None and getattr(self.wx, "ncell", 0) and self.wx.truth_segment_hits(x0, y0, xn, yn, t0, permitted):
+                d["inc_cell"] += 1; self._fail(d, "storm_intersection"); continue
+            if permitted < dt-1e-9:
+                self._fail(d, "energy" if d["cap"]-d["e"] <= 1e-8 else "duty"); continue
+            if mode == "service" and d["service_left"] <= 1e-9:
+                x = self.tasks[d["target"]]
+                x["done"], x["t_done"] = True, t
+                d["node"], d["mode"] = x["j"], "idle"
+                self._queue(d, t)
+                if self.record: self.event_trace.append((t, "service_done", d["i"], x["j"]))
+            elif mode in ("fly", "return") and math.hypot(x2-d["x"], y2-d["y"]) <= 1e-7:
+                d["x"], d["y"] = x2, y2
+                if mode == "return":
+                    d.update(mode="idle", at_st=True, node=-1, e=0.0, target=None, last_return=t)
+                    self._queue(d, t)
+                    if self.record: self.event_trace.append((t, "returned", d["i"], None))
+                else:
+                    x = self.tasks[d["target"]]
+                    x["t_arrival"] = t
+                    d.update(mode="service", service_left=x["svc"])
+                    if self.record: self.event_trace.append((t, "arrival", d["i"], x["j"]))
+
+    def _publish(self):
+        fresh = [x for x in self._released(self.t) if x["rid"] not in self._release_seen]
+        for x in fresh:
+            self._release_seen.add(x["rid"])
+            if self.record: self.event_trace.append((self.t, "release", None, x["rid"]))
+        if fresh:
+            active_ids = {i for t, i in self.heap if t <= self.t+1e-9}
+            for d in self.dr:
+                if d["mode"] == "idle" and d["at_st"] and d["i"] not in active_ids:
+                    self.heap = [(tt, i) for tt, i in self.heap if i != d["i"]]
+                    self._queue(d, self.t)
+            heapq.heapify(self.heap)
+
+    def next_decision(self):
+        """Return a decision at a node; committed transit/service exposes no future state."""
+        if self.cur is not None:
+            raise RuntimeError("step the current decision first")
+        while not self.done:
+            self._publish()
+            if self.heap and self.heap[0][0] <= self.t+1e-9:
+                _, i = heapq.heappop(self.heap)
+                d = self.dr[i]
+                if d["mode"] != "idle" or d["failed"]:
+                    continue
+                d["t"] = self.t
+                av = self.avail_tasks(d)
+                av.sort(key=lambda x: (not x["urgent"], x["dl"] or float("inf"),
+                    (x["x"]-d["x"])**2+(x["y"]-d["y"])**2, x["j"]))
+                checked = [self.task_check(d, x) for x in av]
+                feas = [a for a, b in checked]; infos = [b for a, b in checked]
+                can_return = self._return_check(d)
+                if not any(feas):
+                    if not d["at_st"]:
+                        if can_return:
+                            self._apply(d, ACT_RETURN, None)
+                        else:
+                            self._fail(d, "no_feasible_return")
+                    else:
+                        d["retired"] = True
+                        if (not self.calm and av) or any(o["mode"] in ("fly", "return", "service") for o in self.dr):
+                            if self.t < T_DAY-1e-9:
+                                self._queue(d, min(self.t+WAIT_STEP, T_DAY))
+                    continue
+                self.cur = (d, av, feas, infos, can_return, d["at_st"])
+                return self.cur
+            future = [x["rel"] for x in self.tasks if x["urgent"] and x["rel"] > self.t+1e-9]
+            times = [self._next_active_event(d) for d in self.dr]
+            if self.heap: times.append(self.heap[0][0])
+            if future: times.append(min(future))
+            nxt = min(times, default=float("inf"))
+            horizon = min(T_DAY, getattr(self.wx, "horizon", T_DAY))
+            if not math.isfinite(nxt) or self.t >= horizon-1e-9:
+                self.done = True
+                self.timeout = bool(self.unfinished() or any(not d["at_st"] for d in self.dr))
+                self.termination_reason = "day_horizon" if self.t >= horizon-1e-9 else ("no_feasible_continuation" if self.unfinished() else "completed")
+                return None
+            nxt = min(nxt, horizon)
+            if nxt < self.t-1e-9:
+                raise RuntimeError("invalid event ordering")
+            self._advance_active(nxt)
+            self.t = nxt
+        return None
 
     def step(self, action):
-        """action: task index j (must be feasible in the current candidate list), ACT_RETURN or ACT_WAIT."""
+        if self.cur is None:
+            raise RuntimeError("no current decision")
         d, av, feas, infos, can_ret, can_wait = self.cur
-        self.n_dec += 1
         if action == ACT_RETURN:
-            assert can_ret
-            self._apply(d, ACT_RETURN, None)
+            if not can_ret: raise ValueError("return is masked")
+            inf = None
         elif action == ACT_WAIT:
-            assert can_wait
-            self._apply(d, ACT_WAIT, None)
+            if not can_wait: raise ValueError("wait is masked")
+            inf = None
         else:
-            k = [x["j"] for x in av].index(action)
-            assert feas[k], "policy chose a masked task"
-            self._apply(d, action, infos[k])
+            ids = [x["j"] for x in av]
+            if action not in ids or not feas[ids.index(action)]:
+                raise ValueError("task action is masked")
+            inf = infos[ids.index(action)]
+        self.n_dec += 1
         self.cur = None
-
-    # ---------------------------------------------------------------- truth execution
-    def _fly(self, d, x2, y2, allow_rth=True):
-        """integrate a straight leg under truth; returns 'ok' | 'rth' | 'cell' | 'land'."""
-        if self.calm:
-            dd = math.hypot(x2 - d["x"], y2 - d["y"]); tm = dd / (VA_MS * 60.0)
-            d["e"] += P1 * tm; d["t"] += tm; d["flight"] += tm; d["dist"] += dd
-            d["x"], d["y"] = x2, y2
-            return "ok"
-        s = self.st[d["st"]]
-        while True:
-            dx, dy = x2 - d["x"], y2 - d["y"]; dd = math.hypot(dx, dy)
-            if dd < 1.0:
-                d["x"], d["y"] = x2, y2
-                return "ok"
-            ux, uy = dx / dd, dy / dd
-            wx, wy = self.wx.truth_wind(d["x"], d["y"], d["t"])
-            vg = phys.ground_speed(wx, wy, ux, uy) * 60.0
-            if vg < 30.0:
-                vg = 30.0          # crawl (unsustainable heading); energy keeps draining
-            dt = min(DT_FLY, dd / vg)
-            d["e"] += phys.P_CRUISE * dt
-            d["x"] += ux * vg * dt; d["y"] += uy * vg * dt; d["t"] += dt; d["flight"] += dt; d["dist"] += vg * dt
-            if self.wx.ncell and self.wx.in_cell(d["x"], d["y"], d["t"]):
-                d["inc_cell"] += 1
-                return "cell"
-            if d["e"] > d["cap"] + 1e-9:
-                return "land"
-            if allow_rth:
-                er = self._ret_need_truth(d, s)
-                if d["cap"] - d["e"] < er + RTH_RES:
-                    return "rth"
-
-    def _ret_need_truth(self, d, s):
-        """flight-controller return-energy estimate with a wind-proportional safety factor (1 + |w|/v_a);
-        factor = 1 at zero wind, so author-feasible trips never trigger RTH in calm air."""
-        dd = math.hypot(s["x"] - d["x"], s["y"] - d["y"])
-        if dd < 1.0:
-            return 0.0
-        wx, wy = self.wx.truth_wind(d["x"], d["y"], d["t"])
-        vg = max(phys.ground_speed(wx, wy, (s["x"] - d["x"]) / dd, (s["y"] - d["y"]) / dd), 0.5)
-        return phys.P_CRUISE * dd / (vg * 60.0) * (1.0 + math.hypot(wx, wy) / VA_MS)
-
-    def _hover(self, d, x):
-        """service hover under truth; returns 'ok' | 'rth' | 'cell'."""
-        if self.calm:
-            d["e"] += x["en"]; d["t"] += x["svc"]; d["hover"] += x["svc"]
-            return "ok"
-        s = self.st[d["st"]]
-        rem = x["svc"]
-        while rem > 1e-9:
-            dt = min(DT_FLY, rem)
-            wx, wy = self.wx.truth_wind(d["x"], d["y"], d["t"])
-            d["e"] += phys.p_hover(math.hypot(wx, wy)) * dt
-            d["t"] += dt; d["hover"] += dt; rem -= dt
-            if self.wx.ncell and self.wx.in_cell(d["x"], d["y"], d["t"]):
-                d["inc_cell"] += 1
-                return "cell"
-            if d["cap"] - d["e"] < self._ret_need_truth(d, s) + RTH_RES:
-                return "rth"
-        return "ok"
-
-    def _go_home(self, d):
-        s = self.st[d["st"]]
-        t0, f0, h0 = d["t"], d["flight"], d["hover"]
-        r = self._fly(d, s["x"], s["y"], allow_rth=False)
-        while r == "cell":           # keep flying home through the core (incident already counted)
-            r = self._fly(d, s["x"], s["y"], allow_rth=False)
-        if r == "land":
-            d["inc_land"] += 1
-            # forced landing: drone recovered by crew, counted as flight to station distance
-            dd = math.hypot(s["x"] - d["x"], s["y"] - d["y"])
-            d["x"], d["y"] = s["x"], s["y"]
-            d["t"] += FAIL_GROUND
-        d["busy"] += (d["flight"] - f0) + (d["hover"] - h0)
-        d["e"] = 0.0; d["at_st"] = True; d["node"] = -1
+        self._apply(d, action, inf)
 
     def _apply(self, d, a, info):
-        i = d["i"]
-        if self.record:
-            self.trace.append((round(self.t, 3), i, a))
+        if self.record: self.trace.append((self.t, d["i"], a))
         if a == ACT_WAIT:
-            fut = [x["rel"] for x in self.tasks if x["urgent"] and x["rel"] > self.t + 1e-9]
-            d["t"] = min([self.t + WAIT_STEP] + fut); d["slp"] = True
-            heapq.heappush(self.heap, (d["t"], i)); return
+            self._queue(d, min(self.t+WAIT_STEP, T_DAY)); d["slp"] = True
+            return
         d["slp"] = False
         if a == ACT_RETURN:
-            self._go_home(d)
-            heapq.heappush(self.heap, (d["t"], i)); return
+            d.update(mode="return", target=None)
+            return
         x = self.tasks[a]
         if d["at_st"]:
             d["launches"] += 1; d["ntrip"] += 1
-        d["at_st"] = False
-        x["claim"] = i
-        f0, h0 = d["flight"], d["hover"]
-        r = self._fly(d, x["x"], x["y"])
-        if r == "ok":
-            r = self._hover(d, x)
-        d["busy"] += (d["flight"] - f0) + (d["hover"] - h0)
-        if r == "ok":
-            x["done"] = True; x["t_done"] = d["t"]; d["node"] = a
-            heapq.heappush(self.heap, (d["t"], i)); return
-        # abort: task released again (visible to others only from the abort time on), drone returns home
-        x["claim"] = -1; x["free_at"] = d["t"]
-        d["aborts"] += 1
-        self._go_home(d)
-        heapq.heappush(self.heap, (d["t"], i))
+        d.update(mode="fly", at_st=False, target=a)
+        x["claim"] = d["i"]
 
-    # ---------------------------------------------------------------- results
     def result(self):
-        L = self.L
         fl = sum(d["flight"] for d in self.dr); hv = sum(d["hover"] for d in self.dr)
-        busy_ot = sum(max(0.0, d["busy"] - d["limit"]) for d in self.dr)
-        st_end = {}
-        for d in self.dr:
-            st_end[d["st"]] = max(st_end.get(d["st"], 0.0), d["t"])
-        clock_ot = sum(max(0.0, v - T_DAY) for v in st_end.values())
-        late = 0.0; late_pen = 0.0; n_u = 0; ontime = {0: [0, 0], 1: [0, 0]}; resp = []
-        for x in self.tasks:
-            if not x["urgent"] or not x["elig"]:
-                continue
-            n_u += 1
-            if x["done"]:
-                lt = max(0.0, x["t_done"] - x["dl"]); late += lt; late_pen += x["w"] * lt
-                ontime[x["prio"]][0] += int(lt <= 1e-9); ontime[x["prio"]][1] += 1
-                resp.append(x["t_done"] - x["rel"])
-        n_pl_done = sum(1 for x in self.tasks[:self.n_planned] if x["done"])
-        n_u_done = sum(1 for x in self.tasks[self.n_planned:] if x["done"])
-        inc = sum(d["inc_cell"] + d["inc_land"] for d in self.dr)
-        author = L["fixed"] + TIME_COST * (fl + hv)
-        J = author + C_OT * (busy_ot + clock_ot) + C_INC * inc + late_pen
-        per_st = {}
-        for d in self.dr:
-            p = per_st.setdefault(d["st"], dict(op=0.0, busy_ot=0.0, inc=0))
-            p["op"] += d["flight"] + d["hover"]; p["busy_ot"] += max(0.0, d["busy"] - d["limit"])
-            p["inc"] += d["inc_cell"] + d["inc_land"]
-        per_st_J = {k: TIME_COST * v["op"] + C_OT * (v["busy_ot"] + max(0.0, st_end[k] - T_DAY)) + C_INC * v["inc"]
-                    for k, v in per_st.items()}
-        return dict(
-            J=J, cost=author, fixed=L["fixed"], n_open=L["n_open"], n_dabs=L["n_dabs"],
-            n_drones=len(self.dr), flight_min=fl, service_min=hv, op_min=fl + hv,
-            dist_km=sum(d["dist"] for d in self.dr) / 1000.0,
-            launches=sum(d["launches"] for d in self.dr), aborts=sum(d["aborts"] for d in self.dr),
-            inc_cell=sum(d["inc_cell"] for d in self.dr), inc_land=sum(d["inc_land"] for d in self.dr),
-            busy_ot=busy_ot, clock_ot=clock_ot, makespan=max(st_end.values()) if st_end else 0.0,
-            n_planned=self.n_planned, planned_done=n_pl_done,
-            completion=(n_pl_done + n_u_done) / max(1, self.n_planned + n_u),
-            complete_strict=int(n_pl_done == self.n_planned and n_u_done == n_u),
-            n_urgent=n_u, urgent_done=n_u_done, n_unserviceable=self.n_unserviceable,
+        routine = self.tasks[:self.n_planned]; urgent = self.tasks[self.n_planned:]
+        n_pl_done = sum(x["done"] for x in routine); n_u_done = sum(x["done"] for x in urgent)
+        ot = {p: [sum(x["done"] and x["t_arrival"] is not None and x["t_arrival"] <= x["dl"]+1e-9 for x in urgent if x["prio"] == p),
+                  sum(x["prio"] == p for x in urgent)] for p in (0, 1)}
+        arrivals = [x["t_arrival"]-x["rel"] for x in urgent if x["t_arrival"] is not None]
+        completions = [x["t_done"]-x["rel"] for x in urgent if x["done"]]
+        late = sum(max(0.0, x["t_arrival"]-x["dl"]) for x in urgent if x["t_arrival"] is not None)
+        late_pen = sum(x["w"]*max(0.0, x["t_arrival"]-x["dl"]) for x in urgent if x["t_arrival"] is not None)
+        failed = sum(d["failed"] for d in self.dr)
+        unserved = len(self.tasks)-n_pl_done-n_u_done
+        all_returned = all(d["at_st"] and not d["failed"] for d in self.dr)
+        feasible = (not failed and all_returned and all(d["busy"] <= d["limit"]+1e-8 and d["e"] <= d["cap"]+1e-8 for d in self.dr))
+        strict = int(unserved == 0 and feasible and not self.timeout)
+        busy_ot = sum(max(0.0, d["busy"]-d["limit"]) for d in self.dr)
+        author = self.L["fixed"]+TIME_COST*(fl+hv)
+        failure_pen = C_UNSERVED*unserved+C_FAIL*failed
+        inc = sum(d["inc_cell"]+d["inc_land"] for d in self.dr)
+        per_st_J = {s["k"]: sum(TIME_COST*(d["flight"]+d["hover"])+C_FAIL*d["failed"]+
+            C_INC*(d["inc_cell"]+d["inc_land"]) for d in self.dr if d["st"] == s["k"])
+            + C_UNSERVED*sum(not x["done"] for x in routine if x["st"] == s["k"]) for s in self.st}
+        m_return = max((d["last_return"] for d in self.dr), default=0.0) if all_returned else None
+        return dict(J=author+C_INC*inc+late_pen+failure_pen, cost=author,
+            fixed=self.L["fixed"], n_open=self.L["n_open"], n_dabs=self.L["n_dabs"],
+            n_drones=len(self.dr), flight_min=fl, service_min=hv, op_min=fl+hv,
+            dist_km=sum(d["dist"] for d in self.dr)/1000, launches=sum(d["launches"] for d in self.dr),
+            aborts=sum(d["aborts"] for d in self.dr), inc_cell=sum(d["inc_cell"] for d in self.dr),
+            inc_land=sum(d["inc_land"] for d in self.dr), busy_ot=busy_ot, clock_ot=0.0,
+            makespan=self.t, M_return=m_return, all_returned=int(all_returned), physically_feasible=int(feasible),
+            n_planned=self.n_planned, planned_done=n_pl_done, routine_total=self.n_planned, routine_done=n_pl_done,
+            completion=(n_pl_done+n_u_done)/len(self.tasks) if self.tasks else 1.0, complete_strict=strict,
+            n_urgent=len(urgent), urgent_done=n_u_done, n_unserviceable=self.n_unserviceable,
+            high_on_time=ot[1][0], high_total=ot[1][1], norm_on_time=ot[0][0], norm_total=ot[0][1],
+            ontime_high=ot[1][0]/ot[1][1] if ot[1][1] else None,
+            ontime_norm=ot[0][0]/ot[0][1] if ot[0][1] else None,
             late_min=late, late_pen=late_pen,
-            ontime_high=(ontime[1][0] / ontime[1][1]) if ontime[1][1] else None,
-            ontime_norm=(ontime[0][0] / ontime[0][1]) if ontime[0][1] else None,
-            resp_mean=float(np.mean(resp)) if resp else None, resp_p95=float(np.percentile(resp, 95)) if resp else None,
-            fallback=int(self.fallback), timeout=int(self.timeout), n_dec=self.n_dec, per_st_J=per_st_J)
+            resp_mean=float(np.mean(arrivals)) if arrivals else None,
+            resp_p95=float(np.percentile(arrivals, 95)) if arrivals else None,
+            response_observed=len(arrivals), response_missing=len(urgent)-len(arrivals),
+            completion_response_mean=float(np.mean(completions)) if completions else None,
+            failure_penalty=failure_pen, unserved=unserved, failed=failed,
+            fallback=0, timeout=int(self.timeout), termination_reason=self.termination_reason,
+            n_dec=self.n_dec, per_st_J=per_st_J)

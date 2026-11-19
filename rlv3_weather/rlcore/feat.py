@@ -1,5 +1,5 @@
 """State features (design 8.2: physics feature eta injected into the state).
-Only information observable at decision time is used: forecast (issued <= now), onboard measured wind at the drone
+The environment contract supplies only information observable at decision time: forecast (issued <= now), onboard measured wind at the drone
 (flight-controller wind estimate), nowcast cells, task list, own/sibling drone status. Hidden gusts / true future
 wind / future requests are never visible."""
 import math
@@ -37,6 +37,8 @@ def featurize(env, cur, suggest=None):
     s = env.st[d["st"]]
     t = env.t
     cap = d["cap"]
+    if not np.isfinite(cap) or cap <= 0:
+        raise ValueError("drone energy capacity must be finite and positive")
     if env.calm:
         wf = wf30 = wf60 = wm = (0.0, 0.0)
         nc = []
@@ -73,7 +75,7 @@ def featurize(env, cur, suggest=None):
         r[23] = 1.0 if (rk and rk[0] == d["i"]) else 0.0
         r[24] = float(x["urgent"]); r[25] = float(x["prio"])
         if x["urgent"]:
-            r[26] = np.clip((x["dl"] - t - inf["t1"] - x["svc"]) / 60.0, -3, 3)
+            r[26] = np.clip((x["dl"] - t - inf["t1"]) / 60.0, -3, 3)  # arrival SLA
             r[27] = min((t - x["rel"]) / 60.0, 3.0)
             r[28] = x["w"] / 5.0
         r[29] = sum(1 for y in av if (y["x"] - x["x"]) ** 2 + (y["y"] - x["y"]) ** 2 < 4e6) / 10.0
@@ -92,6 +94,11 @@ def featurize(env, cur, suggest=None):
         r[13] = math.hypot(*wf) / VA_MS; r[17] = math.hypot(*wf60) / VA_MS; r[18] = math.hypot(*wm) / VA_MS
         r[31] = -1.0; mask[n + 1] = True
     acts = ids_av + [ACT_RETURN, ACT_WAIT]
+    if not mask.any():
+        raise ValueError("environment exposed a state with no legal physical action")
+    # Infeasible forecast legs can correctly have infinite cost/duration. Their
+    # tokens are excluded from attention, and must not inject NaNs via projection.
+    tok[~mask] = 0.0
     if suggest is not None and suggest in acts:
         tok[acts.index(suggest), 32] = 1.0
     # context
@@ -111,4 +118,6 @@ def featurize(env, cur, suggest=None):
     c[18] = np.clip(work / max(1.0, len(s["drones"]) * (T_DAY - t)), 0, 5)
     c[19] = float(env.calm); c[20] = env.margin
     c[21] = float(t >= 480.0); c[22] = d["ntrip"] / 20.0; c[23] = len(av) / 20.0
+    if not np.isfinite(tok).all() or not np.isfinite(c).all():
+        raise ValueError("non-finite public observation")
     return tok, c, mask, acts

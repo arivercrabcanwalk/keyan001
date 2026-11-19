@@ -2,11 +2,13 @@
   A1      author TSALNS plan executed as planned (per-drone trip order); shield-blocked target -> return / wait;
           emergency requests (paper B): first-come-first-served by the first drone idle at a covering station.
   GREEDY  physics-aware myopic: EDF for emergencies, otherwise the task with least predicted energy (wind-aware NN).
-  REOPT   rolling-horizon re-optimisation of the station's remaining work at every trip start / new request with
-          forecast physics costs (solver.py) - the strongest non-RL baseline ("author method adapted: re-optimise on event").
+  REOPT   custom insertion/relocate/2-opt/merge heuristic at trip starts, with
+          EDF head insertion for newly released requests at node decisions.
+          It is not the author's TSALNS, ALNS, or a certified strongest baseline.
           theta: optional wind-wait threshold (m/s), tuned on dev (REOPT-W).
 """
 import math
+import time
 import numpy as np
 from .env import ACT_RETURN, ACT_WAIT, T_DAY, T_HARD
 from . import solver as S
@@ -15,7 +17,7 @@ from . import solver as S
 def _buf(cur, m):
     """method-specific risk buffer on top of the shared shield: need*(1+m) <= cap - e."""
     d, av, feas, infos, can_ret, can_wait = cur
-    if m <= 0 or not can_wait and d["at_st"]:
+    if m <= 0:
         return cur
     f2 = [f and inf["need"] * (1 + m) <= d["cap"] - d["e"] + 1e-9 for f, inf in zip(feas, infos)]
     return (d, av, f2, infos, can_ret, can_wait)
@@ -29,6 +31,8 @@ def _idle(cur):
     if can_ret:
         return ACT_RETURN
     fe = [x for x, f in zip(av, feas) if f]
+    if not fe:
+        raise ValueError("method risk buffer removed every available physical action")
     return min(fe, key=lambda x: (x["x"] - d["x"]) ** 2 + (x["y"] - d["y"]) ** 2)["j"]
 
 
@@ -62,7 +66,7 @@ class A1:
             self.cur_trip[i] = tr
             if tr and _pick(cur, tr[0]) is not None:
                 return tr[0]
-            return ACT_RETURN
+            return ACT_RETURN if can_ret else _idle(cur)
         # at station: emergencies first (FCFS by release time)
         urg = [x for x, f in zip(av, feas) if f and x["urgent"]]
         if urg:
@@ -107,6 +111,7 @@ class Reopt:
     def reset(self, env):
         self.trip = {d["i"]: [] for d in env.dr}
         self.seen_rel = {d["i"]: 0 for d in env.dr}
+        self.planning_records = []
 
     def _reserved(self, env, i):
         r = set()
@@ -116,24 +121,29 @@ class Reopt:
         return r
 
     def _plan_station(self, env, d, av):
+        started = time.perf_counter()
         s = env.st[d["st"]]
         res = self._reserved(env, d["i"])
         tasks = [x for x in av if x["j"] not in res]
         if not tasks:
             return []
-        sibs = [env.dr[k] for k in s["drones"]]
+        # In-transit siblings do not have a known future home-ready state.
+        sibs = [env.dr[k] for k in s["drones"] if env.dr[k]["at_st"]
+                and env.dr[k].get("mode", "idle") == "idle" and not env.dr[k].get("failed", False)]
         pts = [(s["x"], s["y"])] + [(x["x"], x["y"]) for x in tasks]
         wind = (0.0, 0.0) if env.calm else env.wx.forecast_wind(env.t, env.t + 30.0)
         E, T, F = S.cost_matrix(pts, wind, env.calm)
         n = len(tasks)
         hen = np.zeros(n + 1); svc = np.zeros(n + 1); rel = np.zeros(n + 1); dl = np.zeros(n + 1); w = np.zeros(n + 1)
         for k, x in enumerate(tasks, 1):
-            svc[k] = x["svc"]; hen[k] = env.hover_pred(env.t, x["svc"]) if not env.calm else x["en"]
+            svc[k] = x["svc"]; hen[k] = x["en"] if env.author_simple else env.hover_pred(env.t, x["svc"])
             rel[k] = x["rel"]; dl[k] = x["dl"] if x["dl"] is not None else 1e9; w[k] = x["w"]
         order = [d] + [o for o in sibs if o["i"] != d["i"]]
         caps = [o["cap"] for o in order]
-        t_ready = [env.t] + [max(env.t, o["t"]) + (0.0 if o["at_st"] else 15.0) for o in order[1:]]
-        P = S.Prob(E, T, F, svc, hen, rel, dl, w, caps, t_ready, max(env.margin, self.m), env.t, T_DAY)
+        t_ready = [env.t for o in order]
+        P = S.Prob(E, T, F, svc, hen, rel, dl, w, caps, t_ready,
+                   max(env.margin, self.m), env.t, T_DAY,
+                   duty_left=[max(0.0, o["limit"]-o["busy"]) for o in order])
         # warm start = the author's remaining plan (per drone, planned order), repacked into forecast-feasible trips
         loc = {x["j"]: k for k, x in enumerate(tasks, 1)}
         init = []
@@ -154,9 +164,12 @@ class Reopt:
                 if cur_t:
                     trips.append(cur_t)
             init.append(trips)
-        routes = S.solve(P, init_routes=init, budget_s=self.budget)
-        if not routes[0] and len(routes) > 1 and len(routes[1]) >= 2:
-            routes[0] = [routes[1][-1]]          # keep both drones busy (parallelism) instead of idling
+        # A cooperative per-replan deadline includes matrix/warm-start setup;
+        # Python cannot certify a hard wall-clock cap. Record actual complete time.
+        remaining = max(0.0, self.budget-(time.perf_counter()-started))
+        routes = S.solve(P, init_routes=init, budget_s=remaining)
+        self.planning_records.append(dict(P.last_solve, total_elapsed_s=time.perf_counter()-started,
+                                          nominal_replan_budget_s=self.budget))
         first = routes[0][0] if routes[0] else []
         return [tasks[k - 1]["j"] for k in first]
 
@@ -177,7 +190,7 @@ class Reopt:
                 self.trip[i] = tr[1:]
                 return tr[0]
             self.trip[i] = []
-            return ACT_RETURN
+            return ACT_RETURN if can_ret else _idle(cur)
         if self.theta is not None and not env.calm:
             wx, wy = env.wx.forecast_wind(env.t, env.t)
             if math.hypot(wx, wy) > self.theta and env.t < 0.6 * T_DAY and can_wait:
@@ -188,11 +201,6 @@ class Reopt:
                 self.trip[i] = tr[k + 1:]
                 return j
         fe = [x for x, f in zip(av, feas) if f and x["j"] not in self._reserved(env, i)]
-        sib_busy = any(env.dr[k]["i"] != i for k in env.st[d["st"]]["drones"])
-        if fe and not tr and not sib_busy:
-            x = min(fe, key=lambda x: (x["x"] - d["x"]) ** 2 + (x["y"] - d["y"]) ** 2)
-            self.trip[i] = []
-            return x["j"]
         return _idle(cur)
 
 
@@ -213,9 +221,18 @@ def make(name):
 
 def run_episode(env, pol):
     pol.reset(env)
+    policy_s = 0.0
     while True:
         cur = env.next_decision()
         if cur is None:
             break
-        env.step(pol.act(env, cur))
-    return env.result()
+        started = time.perf_counter()
+        action = pol.act(env, cur)
+        policy_s += time.perf_counter()-started
+        env.step(action)
+    res = env.result()
+    res["policy_compute_s"] = policy_s
+    if hasattr(pol, "planning_records"):
+        res["planner_records"] = pol.planning_records
+        res["planner_algorithm"] = "insertion_relocate_2opt_merge"
+    return res

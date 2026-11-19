@@ -1,6 +1,8 @@
-"""Attention pointer policy over the candidate set (Kool et al. 2019 / POMO-style encoder-decoder, re-encoded at every
-decision because all features are dynamic).  Invalid actions are removed by masking logits (Huang & Ontanon 2022) -
-the mask is the physics shield, so the policy can never select an energy-infeasible or storm-blocked node."""
+"""Dynamic attention pointer over physical task / RETURN / WAIT actions.
+
+The shared forecast shield masks actions. Mask legality is not a guarantee about
+unobserved weather or successful completion. IID rollouts are not POMO starts.
+"""
 import torch, torch.nn as nn
 from .feat import F_T, F_C
 
@@ -17,6 +19,10 @@ class Policy(nn.Module):
 
     def forward(self, tok, ctx, mask):
         """tok (B,N,F_T) ctx (B,F_C) mask (B,N) bool (True = legal; padded = False). returns logits (B,N)."""
+        if mask.ndim != 2 or mask.dtype != torch.bool or not mask.any(dim=1).all():
+            raise ValueError("policy requires at least one legal physical action per state")
+        if not torch.isfinite(tok).all() or not torch.isfinite(ctx).all():
+            raise ValueError("non-finite policy observation")
         h = self.tok(tok)
         c = self.ctx(ctx).unsqueeze(1)
         x = torch.cat([c, h], 1)
@@ -33,6 +39,13 @@ class Policy(nn.Module):
 def collate(samples, device=None):
     """samples: list of (tok, ctx, mask) numpy -> padded tensors."""
     import numpy as np
+    if not samples:
+        raise ValueError("empty policy batch")
+    for t, c, mk in samples:
+        if t.ndim != 2 or t.shape[1] != F_T or c.shape != (F_C,) or mk.shape != (len(t),):
+            raise ValueError("invalid policy observation dimensions")
+        if not np.asarray(mk, dtype=bool).any():
+            raise ValueError("state has no legal physical action")
     B = len(samples); N = max(s[0].shape[0] for s in samples)
     tok = np.zeros((B, N, F_T), np.float32); ctx = np.zeros((B, F_C), np.float32); m = np.zeros((B, N), bool)
     for b, (t, c, mk) in enumerate(samples):

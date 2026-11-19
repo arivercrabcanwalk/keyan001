@@ -24,4 +24,5 @@ if ! command -v javac >/dev/null 2>&1; then
   echo "[setup] javac not found. The author's TSALNS (Java) is needed for the training-map plans:"
   echo "        sudo apt-get install -y openjdk-17-jdk-headless   (or set PATH to a JDK >= 11)"
 fi
-echo "[setup] OK  ->  SMOKE=1 bash run_all.sh   then   bash run_all.sh"
+python -m pip freeze --all > .venv/rlv3-environment.txt
+echo "[setup] environment captured. MODE=check bash run_all.sh runs synthetic engineering checks only."

@@ -1,0 +1,50 @@
+{
+  "phase": "development",
+  "primary_condition": "fixed_e4",
+  "package": "rlv3_weather",
+  "site": "hn01",
+  "ticket_id": "REPLACE_WITH_APPROVED_ID",
+  "approved_machine_sha256": "<hn01 sha256 of /etc/machine-id file>",
+  "mechanism_receipt": "/approved/g0.json",
+  "comparison_receipt": "/approved/g3.json",
+  "population_registry": "/approved/exclusions-and-roster.json",
+  "train_plans": "/approved/new/train.jsonl",
+  "val_plans": "/approved/new/val.jsonl",
+  "train_scenario": "fixed_e4",
+  "selection_anchor_manifests": {
+    "train_plans": "/approved/new/train_same_wind_anchors.json",
+    "val_plans": "/approved/new/val_same_wind_anchors.json"
+  },
+  "pilot_plans": {
+    "nowind": "/approved/new/nowind.jsonl",
+    "fixed_e4": "/approved/new/fixed_e4.jsonl",
+    "fixed_n8": "/approved/new/fixed_n8.jsonl"
+  },
+  "evaluation": [
+    "nowind",
+    "fixed_e4",
+    "fixed_n8"
+  ],
+  "eval_days": "100000:100020",
+  "cost_manifests": {
+    "nowind": "/approved/new/caps_nowind.json",
+    "fixed_e4": "/approved/new/caps_fixed_e4.json",
+    "fixed_n8": "/approved/new/caps_fixed_n8.json"
+  },
+  "comparators": [
+    "A1",
+    "GREEDY",
+    "REOPT"
+  ],
+  "primary_reference": "TUNED_OVERALL",
+  "seeds": [
+    103,
+    211,
+    307
+  ],
+  "device": "cuda",
+  "train_hours": 3,
+  "rl_hours": 1,
+  "episode_wall_s": 30,
+  "campaign_hours": 36
+}

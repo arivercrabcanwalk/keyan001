@@ -1,171 +1,236 @@
-"""Analysis + pre-registered gates.  Only numbers present in the result files are reported (never imputed).
-Usage: python rlcore/analyze.py --res results/test_weather.jsonl --scen weather --tuned results/tuned_weather.json --out results/report_weather"""
-import os, sys, json, argparse, math
+"""Strict paired development reporting. No complete-case intersection; no formal claim from an exposed pilot."""
+import argparse
+import csv
+import json
+import math
+from pathlib import Path
+import re
+import sys
 import numpy as np
-HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if HERE not in sys.path:
-    sys.path.insert(0, HERE)
 
-COLS = [("cost", "总成本"), ("fixed", "固定成本"), ("n_open", "开站数"), ("n_dabs", "DABS"), ("n_drones", "无人机"),
-        ("dist_km", "飞行距离(km)"), ("launches", "架次"), ("op_min", "飞行+巡检(min)"), ("completion", "完成率"),
-        ("aborts", "中止"), ("inc", "安全事件"), ("ot", "超时(min)"), ("J", "J")]
-COLS_U = [("n_urgent", "紧急任务"), ("ontime_high", "高优先准时率"), ("ontime_norm", "普通准时率"),
-          ("resp_mean", "平均响应(min)"), ("late_pen", "迟到惩罚")]
+HERE=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(HERE))
+from rlcore.registration import read_manifest, read_rows, index, publish
+
+ACCOUNTED_STATUSES = {"PILOT_ACCOUNTED", "ENGINEERING_ACCOUNTED"}
 
 
-def load(paths):
-    rows, errs = [], []
-    for p in paths:
-        if not os.path.exists(p):
+def report_exit_code(out):
+    return 0 if out["status"] in ACCOUNTED_STATUSES else 2
+
+
+def values(b, ix, method):
+    """Sufficient statistics [map, within-map day, numerator/denominator]."""
+    return np.asarray([[(lambda r: (r["M_return"],1) if b["kind"]=="wx" else
+                                    (r["high_on_time"],r["high_total"]))(ix[m,d,method])
+                        for d in b["days"]] for m in b["maps"]], dtype=float)
+
+
+def estimate(x):
+    # Weather: balanced map then fixed conditions/days; B: ratio over all released high-priority jobs.
+    den=x[...,1].sum()
+    return float(x[...,0].sum()/den) if den>0 else None
+
+
+def contrast(a,r,design, *, seeds=20261119, draws=2000):
+    vals=[estimate(x) for x in (a,r)]
+    if None in vals:
+        return dict(difference=None,ci95=None,reason="undefined rate: zero released high-priority jobs")
+    diff=vals[0]-vals[1]
+    if a.shape[0]<2:
+        return dict(difference=diff,ci95=None,reason="fewer than two independent maps")
+    rng=np.random.default_rng(seeds); reps=[]; undefined=0
+    n,t=a.shape[:2]
+    for _ in range(draws):
+        m=rng.integers(n,size=n)[:,None]
+        if design=="independent_within_map": ds=rng.integers(t,size=(n,t))
+        elif design=="crossed_shared_day": ds=rng.integers(t,size=(1,t))
+        elif design=="fixed_conditions": ds=np.arange(t)[None,:]
+        else: raise ValueError("unknown registered day design")
+        x,y=estimate(a[m,ds]),estimate(r[m,ds])
+        if x is None or y is None: undefined+=1
+        else: reps.append(x-y)
+    return dict(difference=diff,ci95=None if undefined else np.percentile(reps,[2.5,97.5]).tolist(),
+                undefined_draws=undefined,draws=draws,inference="exploratory, conditional on listed checkpoints")
+
+
+def _number(value):
+    return type(value) in (int, float) and math.isfinite(value) and value >= 0
+
+
+def _author_comparison(b, ix, method):
+    """Descriptive paired minutes against frozen full author, never an A1 row."""
+    if any(not _number(meta.get("author_M_return")) for meta in b["maps"].values()):
+        return dict(author_mean_M_return=None, mean_difference_min=None, per_map=[], ci95=None,
+                    reason="missing registered full-author M_return for one or more maps")
+    pairs=[]
+    for path, meta in b["maps"].items():
+        measured=float(np.mean([ix[path, d, method]["M_return"] for d in b["days"]]))
+        author=float(meta["author_M_return"])
+        pairs.append(dict(path=path, method_M_return=measured, author_M_return=author,
+                          difference_min=measured-author, absolute_difference_min=abs(measured-author)))
+    return dict(author_mean_M_return=float(np.mean([p["author_M_return"] for p in pairs])),
+                mean_difference_min=float(np.mean([p["difference_min"] for p in pairs])),
+                mean_absolute_difference_min=float(np.mean([p["absolute_difference_min"] for p in pairs])),
+                paired_maps=len(pairs), per_map=pairs, unit="minutes", difference="method minus full author",
+                ci95=None, inference="descriptive full-population paired differences only")
+
+
+def _sum_count(rows, field):
+    if any(type(row.get(field)) is not int or row[field] < 0 for row in rows):
+        return None
+    return sum(row[field] for row in rows)
+
+
+def _method_accounting(b, raw, problems, missing):
+    expected=len(b["maps"])*len(b["days"])
+    def over_cap(row):
+        path=row.get("path")
+        meta=b["maps"].get(path, {}) if isinstance(path, str) else {}
+        cap=meta.get("caps", {}).get(str(row.get("day")))
+        tolerance=1e-7 if b.get("cap_role")=="FULL_SAME_WIND_AUTHOR" else 0
+        return _number(cap) and _number(row.get("cost")) and row["cost"]>cap+tolerance
+    return dict(registered=expected, received=len(raw), qualified_population=not problems and not missing,
+                missing_count=len(missing), missing_cells=[list(key) for key in sorted(missing)],
+                validation_problems=problems, validation_problem_count=len(problems),
+                execution_errors=sum("error" in r or r.get("status")!="OK" for r in raw),
+                physical_failures=sum(r.get("physically_feasible")==0 for r in raw),
+                return_failures=sum(r.get("all_returned")==0 for r in raw),
+                routine_failures=sum(r.get("routine_done")!=r.get("routine_total") for r in raw),
+                time_budget_failures=sum(r.get("status")=="TIMEOUT" or
+                    (_number(r.get("wall")) and r["wall"]>b["wall_s"]) for r in raw),
+                cost_cap_failures=sum(over_cap(r) for r in raw),
+                simulator_timeouts=sum(r.get("timeout")==1 for r in raw),
+                all_work_completed=sum(r.get("complete_strict")==1 for r in raw))
+
+
+def report(doc,rows):
+    b=doc["body"]; ix,problems,missing=index(doc,rows); names=list(b["methods"])
+    expected=len(b["maps"])*len(b["days"])
+    costs_declared=b.get("cap_role", "NOT_REGISTERED")!="NOT_REGISTERED"
+    costs_complete=costs_declared and all(_number(meta.get("caps", {}).get(str(day)))
+                                        for meta in b["maps"].values() for day in b["days"])
+    if costs_declared and not costs_complete:
+        problems.append("registered cost-cap matrix is incomplete")
+    if not problems and not missing and b["kind"]=="urg":
+        for m in b["maps"]:
+            for d in b["days"]:
+                if len({(ix[m,d,k]["high_total"],ix[m,d,k]["norm_total"]) for k in names})!=1:
+                    problems.append(f"unmatched release denominators {m} {d}")
+    status="BLOCKED" if problems or missing else "PILOT_ACCOUNTED" if costs_complete else "ENGINEERING_ACCOUNTED"
+    outcome=dict(status=status, formal=False, superiority_claim=False,
+                 cost_reference=b.get("cap_role", "NOT_REGISTERED"), cost_registered=costs_complete,
+                 problems=problems, missing=[list(x) for x in sorted(missing)],
+                 registered_cells_per_method=expected, methods={}, comparisons={},
+                 primary="final return, min" if b["kind"]=="wx" else "completed and arrived by SLA / all released high-priority",
+                 reference=b["reference"], day_design=b["day_design"],
+                 description_scope="each qualified method over every registered map/day; no success intersection",
+                 inference="exploratory, conditional on listed checkpoints" if status=="PILOT_ACCOUNTED" else
+                           "not performed: blocked matrix or engineering-only accounting")
+    data={}
+    for method in names:
+        # Validate the original manifest separately for each whole method. Missing
+        # cells of other methods do not erase this method's complete population.
+        raw=[r for r in rows if r.get("method")==method]
+        local_ix, local_problems, local_missing=index(doc,raw)
+        local_missing={key for key in local_missing if key[2]==method}
+        summary=_method_accounting(b,raw,local_problems,local_missing)
+        outcome["methods"][method]=summary
+        if not summary["qualified_population"]:
             continue
-        for l in open(p):
-            try:
-                r = json.loads(l)
-            except Exception:
-                continue
-            (errs if "error" in r else rows).append(r)
-    for r in rows:
-        r["inc"] = r.get("inc_cell", 0) + r.get("inc_land", 0)
-        r["ot"] = r.get("busy_ot", 0) + r.get("clock_ot", 0)
-    return rows, errs
+        rr=[local_ix[m,d,method] for m in b["maps"] for d in b["days"]]
+        x=values(b,local_ix,method); data[method]=x
+        summary.update(primary=estimate(x), cost=float(np.mean([r["cost"] for r in rr])),
+                       J=float(np.mean([r["J"] for r in rr])), wall_mean_s=float(np.mean([r["wall"] for r in rr])))
+        if b["kind"]=="wx" and b["day_design"]=="fixed_conditions":
+            summary["author_comparison"]=_author_comparison(b,local_ix,method)
+        if b["kind"]=="urg":
+            for field in ("routine_done", "routine_total", "high_on_time", "high_total", "norm_on_time", "norm_total",
+                          "urgent_done", "n_urgent", "unserved", "response_observed", "response_missing"):
+                summary[field]=_sum_count(rr,field)
+            summary["service_total"]=summary["routine_total"]+summary["n_urgent"]
+            summary["service_done"]=(None if summary["urgent_done"] is None else
+                                     summary["routine_done"]+summary["urgent_done"])
+            summary["overall_completion"]=(None if summary["service_done"] is None or not summary["service_total"] else
+                                            summary["service_done"]/summary["service_total"])
+    # A failed or missing registered arm blocks every global contrast and CI.
+    # No complete-case intersection or surviving-seed average is substituted.
+    if status!="PILOT_ACCOUNTED":
+        return outcome
+    ref=data[b["reference"]]
+    for method,x in data.items():
+        if method!=b["reference"]: outcome["comparisons"][method]=contrast(x,ref,b["day_design"])
+    rl=[x for k,x in data.items() if re.fullmatch(r"RL_s[0-9]+",k)]
+    if rl:
+        outcome["registered_seed_average_v_reference"]=contrast(np.mean(rl,axis=0),ref,b["day_design"])
+    return outcome
 
 
-def wilcoxon_p(d):
-    d = np.asarray(d, float)
-    d = d[np.abs(d) > 1e-12]
-    if len(d) < 5:
-        return 1.0
-    try:
-        from scipy.stats import wilcoxon
-        return float(wilcoxon(d).pvalue)
-    except Exception:
-        n = len(d); r = np.argsort(np.argsort(np.abs(d))) + 1
-        W = r[d > 0].sum(); mu = n * (n + 1) / 4; sd = math.sqrt(n * (n + 1) * (2 * n + 1) / 24)
-        z = (W - mu) / sd
-        return float(math.erfc(abs(z) / math.sqrt(2)))
-
-
-def cluster_boot(diff_by_map, B=2000, seed=0):
-    rng = np.random.default_rng(seed)
-    keys = list(diff_by_map); arr = [np.asarray(diff_by_map[k]) for k in keys]
-    ms = []
-    for _ in range(B):
-        idx = rng.integers(len(arr), size=len(arr))
-        v = np.concatenate([arr[i][rng.integers(len(arr[i]), size=len(arr[i]))] for i in idx])
-        ms.append(v.mean())
-    return float(np.percentile(ms, 2.5)), float(np.percentile(ms, 97.5))
+def render(out, rows, folder):
+    p=Path(folder);p.mkdir(parents=True,exist_ok=True)
+    publish(p/"gates.json",out)
+    def display(x): return "N/A" if x is None else (f"{x:.5g}" if type(x) is float else str(x))
+    lines=[f"# {out['status']}: development only", "", "Primary: "+out["primary"],"Reference: "+out["reference"],
+           "Formal qualification / superiority: NOT ESTABLISHED. Lower cost alone is not a win.",
+           "Population: "+out["description_scope"], "Inference: "+out["inference"],
+           "Registered cost caps: "+str(out["cost_registered"])+" ("+out["cost_reference"]+")", ""]
+    tex=[]
+    def table(title,cols):
+        lines.extend([title,"", "| method | "+" | ".join(cols)+" |","|"+"---|"*(len(cols)+1)])
+        tex.extend([r"\begin{tabular}{l"+"r"*len(cols)+"}", "method & "+" & ".join(c.replace("_",r"\_") for c in cols)+r" \\"])
+        for k,s in out["methods"].items():
+            vs=[display(s.get(c)) for c in cols]
+            lines.append("| "+" | ".join([k]+vs)+" |")
+            tex.append(" & ".join([k.replace("_",r"\_")]+vs)+r" \\")
+        lines.append("");tex.append(r"\end{tabular}")
+    table("Complete-population method descriptions (N/A when the method fails any registered cell).",
+          ("qualified_population","primary","cost","J","wall_mean_s"))
+    table("Attempt and qualification accounting (all received attempts; missing cells remain explicit).",
+          ("registered","received","execution_errors","physical_failures","return_failures","routine_failures",
+           "time_budget_failures","cost_cap_failures","missing_count","all_work_completed"))
+    if any("high_total" in summary for summary in out["methods"].values()):
+        table("Emergency counts over all registered releases; service_done counts completed routine and urgent work.",
+              ("routine_done","routine_total","high_on_time","high_total","norm_on_time","norm_total",
+               "urgent_done","n_urgent","service_done","service_total","unserved","overall_completion"))
+    for method,summary in out["methods"].items():
+        author=summary.get("author_comparison")
+        if author is None:
+            continue
+        lines.extend(["Full-author paired minutes: "+method,
+                      "Author mean M_return: "+display(author["author_mean_M_return"])+" min; mean method-minus-author: "+display(author["mean_difference_min"])+" min. Descriptive only; no CI.", ""])
+        tex.extend([r"\par Full-author paired minutes: "+method.replace("_",r"\_")+r"\par",
+                    "Author mean: "+display(author["author_mean_M_return"])+" min; mean method-minus-author: "+
+                    display(author["mean_difference_min"])+r" min. Descriptive only; no CI.\par"])
+        if author.get("reason"):
+            lines.extend([author["reason"],""]);continue
+        lines.extend(["| map | method M_return | full author M_return | method - author (min) | absolute difference (min) |",
+                      "|---|---|---|---|---|"])
+        tex.extend([r"\begin{tabular}{lrrrr}",r"map & method & full author & difference (min) & absolute difference (min) \\"])
+        for pair in author["per_map"]:
+            lines.append("| "+" | ".join([pair["path"]]+[display(pair[k]) for k in
+                         ("method_M_return","author_M_return","difference_min","absolute_difference_min")])+" |")
+            tex.append(" & ".join([pair["path"].replace("_",r"\_")]+[display(pair[k]) for k in
+                       ("method_M_return","author_M_return","difference_min","absolute_difference_min")])+r" \\")
+        lines.append("");tex.append(r"\end{tabular}")
+    lines+=["",f"Missing: {len(out['missing'])}. Problems: {len(out['problems'])}. See gates.json for all keys and conditional paired differences."]
+    (p/"REPORT.md").write_text("\n".join(lines)+"\n")
+    (p/"table.tex").write_text("\n".join(tex)+"\n")
+    cols=["path","day","scen","method","status","error","physically_feasible","all_returned","routine_done","routine_total",
+          "M_return","high_on_time","high_total","norm_on_time","norm_total","urgent_done","n_urgent","unserved",
+          "response_observed","response_missing","failed","timeout","complete_strict","cost","J","wall","manifest_sha256","input_sha256"]
+    with (p/"per_episode.csv").open("w",newline="") as f:
+        w=csv.DictWriter(f,fieldnames=cols,extrasaction="ignore");w.writeheader();w.writerows(rows)
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--res", required=True, help="comma list of jsonl"); ap.add_argument("--scen", required=True)
-    ap.add_argument("--tuned", default=""); ap.add_argument("--out", required=True)
-    ap.add_argument("--rl_prefix", default="RL_s"); ap.add_argument("--ref", default="A1")
-    a = ap.parse_args()
-    rows, errs = load(a.res.split(","))
-    rows = [r for r in rows if r["scen"] == a.scen]
-    os.makedirs(a.out, exist_ok=True)
-    meths = sorted(set(r["method"] for r in rows), key=lambda m: (m.startswith(a.rl_prefix), m))
-    by = {m: {(r["path"], r["day"]): r for r in rows if r["method"] == m} for m in meths}
-    common = set.intersection(*[set(v) for v in by.values()]) if by else set()
-    urg = a.scen.startswith("emerg")
-    cols = COLS + (COLS_U if urg else [])
-    tuned = json.load(open(a.tuned)) if a.tuned and os.path.exists(a.tuned) else None
-    best_non_rl = None
-    if tuned:
-        cands = [k for k in tuned["best"] if k in by]
-        if cands:
-            best_non_rl = min(cands, key=lambda k: tuned["grid"][tuned["best"][k]]["J"])   # chosen on DEV, not test
-    ref = a.ref if a.ref in by else None
-    summ = {}
-    for m in meths:
-        rr = [by[m][k] for k in common]
-        s = {}
-        for c, _ in cols:
-            v = [r[c] for r in rr if r.get(c) is not None]
-            s[c] = float(np.mean(v)) if v else None
-        s["strict_all"] = bool(all(r["complete_strict"] for r in rr)) if rr else False
-        s["n"] = len(rr)
-        s["fallback"] = float(np.mean([r["fallback"] for r in rr])) if rr else None
-        summ[m] = s
-    # gates
-    gates = dict(scen=a.scen, n_episodes=len(common), errors=len(errs), best_non_rl_dev=best_non_rl, ref=ref)
-    gates["G0_completion_100"] = all(summ[m]["strict_all"] for m in meths)
-    fx = {}
-    okfix = True
-    for m in meths:
-        for k, r in by[m].items():
-            key = k[0]
-            v = (r["fixed"], r["n_open"], r["n_dabs"], r["n_drones"])
-            if key in fx and fx[key] != v:
-                okfix = False
-            fx[key] = v
-    gates["G1_same_stations_fixed_cost"] = okfix
-    comps = []
-    rls = [m for m in meths if m.startswith(a.rl_prefix)]
-    for m in rls:
-        for base in [b for b in (ref, best_non_rl) if b]:
-            d = [by[m][k]["J"] - by[base][k]["J"] for k in common]
-            dm = {}
-            for k in common:
-                dm.setdefault(k[0], []).append(by[m][k]["J"] - by[base][k]["J"])
-            lo, hi = cluster_boot(dm) if dm else (None, None)
-            comps.append(dict(rl=m, base=base, meanJ_rl=summ[m]["J"], meanJ_base=summ[base]["J"],
-                              diff=float(np.mean(d)) if d else None,
-                              rel=float(np.mean(d) / summ[base]["J"] * 100) if d else None,
-                              p=wilcoxon_p(d), ci95=(lo, hi), win_rate=float(np.mean([x < 0 for x in d])) if d else None))
-    # Holm within each RL seed
-    for m in rls:
-        cs = sorted([c for c in comps if c["rl"] == m], key=lambda c: c["p"])
-        for i, c in enumerate(cs):
-            c["p_holm"] = min(1.0, max(c["p"] * (len(cs) - i), cs[i - 1]["p_holm"] if i else 0.0))
-    gates["comparisons"] = comps
-    def sup(base):
-        cs = [c for c in comps if c["base"] == base]
-        return bool(cs) and sum(1 for c in cs if c["diff"] < 0 and c["p_holm"] < 0.05) >= max(1, math.ceil(0.67 * len(cs)))
-    gates["G2_RL_beats_A1"] = sup(ref) if ref else None
-    gates["G3_RL_beats_best_nonRL"] = sup(best_non_rl) if best_non_rl else None
-    if best_non_rl:
-        gates["G4_safety_noninferior"] = all(summ[m]["inc"] <= summ[best_non_rl]["inc"] + 0.01 for m in rls) if rls else None
-    json.dump(dict(summary=summ, gates=gates), open(os.path.join(a.out, "gates.json"), "w"), indent=1)
-    # markdown + latex
-    def fmt(v, c):
-        if v is None:
-            return "-"
-        if c in ("completion", "ontime_high", "ontime_norm"):
-            return f"{100 * v:.1f}%"
-        if c in ("n_open", "n_dabs", "n_drones", "launches", "aborts", "inc", "n_urgent"):
-            return f"{v:.2f}"
-        return f"{v:.1f}"
-    hdr = ["方法"] + [h for _, h in cols] + ["ΔJ vs A1"]
-    lines = ["| " + " | ".join(hdr) + " |", "|" + "---|" * len(hdr)]
-    tex = ["\\begin{tabular}{l" + "r" * (len(hdr) - 1) + "}", "\\toprule", " & ".join(hdr) + " \\\\", "\\midrule"]
-    for m in meths:
-        s = summ[m]
-        rel = (f"{(s['J'] - summ[ref]['J']) / summ[ref]['J'] * 100:+.2f}%" if ref and s["J"] is not None else "-")
-        cells = [m] + [fmt(s[c], c) for c, _ in cols] + [rel]
-        lines.append("| " + " | ".join(cells) + " |")
-        tex.append(" & ".join(x.replace("%", "\\%") for x in cells) + " \\\\")
-    tex += ["\\bottomrule", "\\end{tabular}"]
-    md = [f"# 结果 {a.scen}", "", f"episodes (map×day 配对) = {len(common)}; error rows = {len(errs)}", ""] + lines + ["", "## 预注册闸门", ""]
-    for k, v in gates.items():
-        if k != "comparisons":
-            md.append(f"- {k}: {v}")
-    md += ["", "## 配对比较 (J, Wilcoxon + Holm, map 聚类 bootstrap 95% CI)", "",
-           "| RL | 对照 | RL 均值 | 对照均值 | 差 | 相对 | p_holm | CI95 | 胜率 |", "|---|---|---|---|---|---|---|---|---|"]
-    for c in comps:
-        md.append(f"| {c['rl']} | {c['base']} | {c['meanJ_rl']:.2f} | {c['meanJ_base']:.2f} | {c['diff']:+.2f} | {c['rel']:+.2f}% | "
-                  f"{c['p_holm']:.3g} | [{c['ci95'][0]:+.2f}, {c['ci95'][1]:+.2f}] | {100 * c['win_rate']:.1f}% |")
-    open(os.path.join(a.out, "REPORT.md"), "w").write("\n".join(md) + "\n")
-    open(os.path.join(a.out, "table.tex"), "w").write("\n".join(tex) + "\n")
-    with open(os.path.join(a.out, "per_episode.csv"), "w") as f:
-        keys = ["path", "day", "method", "J", "cost", "fixed", "n_open", "n_dabs", "op_min", "dist_km", "launches", "aborts",
-                "inc", "ot", "complete_strict", "fallback"] + ([c for c, _ in COLS_U] if urg else [])
-        f.write(",".join(keys) + "\n")
-        for r in rows:
-            f.write(",".join(str(r.get(k, "")) for k in keys) + "\n")
-    print("\n".join(md))
+    p=argparse.ArgumentParser(description=__doc__)
+    for field in ("res","scen","out"): p.add_argument("--"+field,required=True)
+    p.add_argument("--registry"); p.add_argument("--tuned",help="deprecated; reference frozen in registry")
+    a=p.parse_args(); doc=read_manifest(a.registry or a.res+".registry.json")
+    if a.scen!=doc["body"]["scenario"]: raise ValueError("wrong scenario")
+    rows=read_rows(a.res); out=report(doc,rows); render(out,rows,a.out)
+    print(out["status"],"; formal=False; report:",a.out)
+    return report_exit_code(out)
 
 
-if __name__ == "__main__":
-    main()
+if __name__=="__main__": sys.exit(main())

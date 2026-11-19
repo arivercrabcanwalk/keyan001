@@ -1,6 +1,8 @@
 # keyan001
 
-RL / LRPHSD experiment snapshot (read-only pack).
+当前审后实验入口：[论文 A 天气](rlv3_weather/README_ZH.md) · [论文 B 紧急复检](rlv3_emergency/README_ZH.md) · [审查与实验协议](rlv3_review/REVIEW_ZH.md) · [工程验收](rlv3_review/ACCEPTANCE.md) · [来源与适用边界](rlv3_review/SOURCES_ZH.md)。
+
+下列历史快照只读，不是本版运行入口。
 
 ## rl_project_pack.tar.gz
 

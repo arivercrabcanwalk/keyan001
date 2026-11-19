@@ -48,14 +48,20 @@ def load_ins(path):
 
 def load_plans(path):
     rows = []
-    for l in open(rel(path)):
+    seen = set()
+    for l in open(rel(path), encoding="utf-8"):
         l = l.strip()
         if not l:
             continue
         r = json.loads(l)
-        if "error" in r:
-            continue
+        if "error" in r or not isinstance(r.get("solution"), dict) or not r.get("path"):
+            raise ValueError("missing/failed author anchor in plan file: " + str(r.get("path")))
+        if r["path"] in seen:
+            raise ValueError("duplicate plan/attempt: " + r["path"])
+        seen.add(r["path"])
         rows.append(r)
+    if not rows:
+        raise ValueError("empty author plan population")
     return rows
 
 
@@ -66,7 +72,13 @@ def fixed_cost(types):
 def plan_layout(ins, sol):
     """Materialise stations / drones / planned trips from an official solution (author TSALNS plan).
     Returns dict(stations=[...], drones=[...], assign={tid: station_index}, fixed=float, n_open=int)."""
-    nodes = {n.id: n for n in list(ins.targets) + list(ins.stations)}
+    if sol.get("instance_sha256") != ins.sha256:
+        raise ValueError("author anchor is not bound to this map")
+    if any(t.service <= 0 for t in ins.targets):
+        raise ValueError("the timed service model requires positive inspection duration")
+    official = evaluate(ins, sol)
+    if not official["feasible"]:
+        raise ValueError("infeasible author anchor: " + repr(official["issues"]))
     stations, drones, assign = [], [], {}
     for si, kind in enumerate(sol["station_types"]):
         if not kind:
@@ -76,7 +88,7 @@ def plan_layout(ins, sol):
         stations.append(dict(k=k, si=si, x=s.x, y=s.y, kind=int(kind), R=ins.radius(kind), drones=[]))
         for di in ((0, 1) if kind == 2 else (1,)):
             trips = [list(t) for t in sol["routes"][si][di] if t]
-            d = dict(i=len(drones), st=k, di=di, cap=CAP[di], limit=LIMIT[di], trips=trips)
+            d = dict(i=len(drones), st=k, di=di, cap=ins.capacity(di), limit=ins.duration(kind), trips=trips)
             stations[k]["drones"].append(d["i"])
             drones.append(d)
             for tr in trips:
@@ -84,7 +96,7 @@ def plan_layout(ins, sol):
                     assign[tid] = k
     tg = {t.id: (t.x, t.y, t.service, t.energy) for t in ins.targets}
     return dict(stations=stations, drones=drones, assign=assign, targets=tg,
-                fixed=fixed_cost(sol["station_types"]), n_open=len(stations),
+                fixed=official["fixed_cost"], n_open=len(stations),
                 n_dabs=sum(1 for s in stations if s["kind"] == 2), types=list(sol["station_types"]))
 
 
