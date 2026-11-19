@@ -1,0 +1,372 @@
+--- /dev/null	2026-11-04 17:15:20
++++ development_runner.py	2026-11-04 17:14:16
+@@ -0,0 +1,369 @@
++#!/usr/bin/env python3
++"""Prospective, bounded weather-route DEVELOPMENT comparison; never formal evidence."""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import platform
++import random
++import sys
++import time
++from pathlib import Path
++
++HERE = Path(__file__).resolve().parent
++G24 = HERE.parent
++RM = G24.parent
++ROOT = RM.parents[2]
++GEN = RM / "g23<EXECUTION_PATH>"
++AUTHOR = RM / "g23/author_baseline"
++REPRO = ROOT / "reproduction/reviewer_package_semfix"
++for p in (G24, RM, GEN, AUTHOR, REPRO):
++    sys.path.insert(0, str(p))
++
++import generator_v2 as generator
++import author_runner
++from lrphsd.problem import read_instance
++from scorer import CostAnchor
++from weather_scenario_io import load_weather_scenario
++from weather_author_anchor import prepare_author_weather_anchor
++from weather_full_map import WeatherFullMapEnv
++
++SCHEMA = "weather_common_map_development_v1"
++SEEDS = (103, 211, 307)
++SLOTS = [("train", "opportunity", i) for i in range(1, 5)] + [
++    ("validation", "calibration", 1), ("heldout_development", "validation", 1)]
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def write(path, value):
++    path = Path(path)
++    path.parent.mkdir(parents=True, exist_ok=True)
++    with path.open("x", encoding="utf-8") as handle:
++        json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
++        handle.write("\n")
++
++
++def read(path):
++    return json.loads(Path(path).read_text(encoding="utf-8"))
++
++
++def dependencies():
++    paths = [Path(__file__), GEN / "generator_v2.py", AUTHOR / "author_runner.py",
++             G24 / "weather_author_anchor.py", G24 / "weather_scenario_io.py",
++             G24 / "weather_full_map.py", G24 / "weather_oracle.py", G24 / "weather_replay.py",
++             G24 / "weather_policy.py", G24 / "rl_algorithms.py", G24 / "run_full_map_smoke.py",
++             RM / "scorer.py", REPRO / "lrphsd/problem.py", REPRO / "lrphsd/evaluator.py",
++             REPRO / "lrphsd/__init__.py"]
++    paths += list(generator.default_exclusion_paths())
++    return {str(p.relative_to(ROOT)): sha(p) for p in paths}
++
++
++def register(path, namespace, updates, episodes):
++    if not namespace or updates < 1 or episodes < 1 or updates > 100 or episodes > 32:
++        raise ValueError("namespace required; updates 1..100 and episodes 1..32")
++    registration = {"schema": SCHEMA, "namespace": namespace, "family": [3, 20],
++                    "slots": [{"id": f"{p}_{n}", "split": split, "partition": p, "ordinal": n}
++                              for split, p, n in SLOTS],
++                    "seeds": list(SEEDS), "algorithms": ["PPO", "A2C"],
++                    "updates": updates, "episodes_per_update": episodes,
++                    "checkpoint_rule": "last update, no validation selection",
++                    "author_profile": "J1b", "author_timeout_s": 180,
++                    "author_seed_namespace": namespace + ":J1b",
++                    "scenario_rule": "fixed-global-square-and-wind-v1",
++                    "budgets_s": [6, 12], "original_cost_tolerance": 1e-7,
++                    "weather_cost_tolerance": 1e-7,
++                    "dependencies": dependencies(),
++                    "status": "development_only_not_formal_no_replacement",
++                    "map_generation_performed": False}
++    write(path, registration)
++    return registration
++
++
++def verify(registration):
++    r = read(registration)
++    if r.get("schema") != SCHEMA or r.get("dependencies") != dependencies():
++        raise ValueError("registration schema or frozen source/dependency hash mismatch")
++    if r.get("slots") != [{"id": f"{p}_{n}", "split": s, "partition": p, "ordinal": n}
++                          for s, p, n in SLOTS]:
++        raise ValueError("unexpected allocation")
++    if r.get("family") != [3, 20] or r.get("seeds") != list(SEEDS):
++        raise ValueError("unexpected registered family/seeds")
++    return r
++
++
++def scenario(instance_hash):
++    return {"schema": "weather_map_scenario_v1", "name": "fixed-global-square-and-wind-v1",
++            "instance_sha256": instance_hash,
++            "wind_knots": [{"time_s": 0, "east_mps": 1, "north_mps": 0},
++                           {"time_s": 900, "east_mps": -1, "north_mps": 1},
++                           {"time_s": 1800, "east_mps": 0, "north_mps": -1}],
++            "no_fly_zone": {"vertices_m": [[6750, 6750], [7250, 6750], [7250, 7250], [6750, 7250]],
++                            "on_s": 300, "off_s": 1200},
++            "flight": {"speed_m_per_min": 900, "flight_energy_per_min": 0.018}}
++
++
++def materialize(registration, out):
++    r = verify(registration)
++    out = Path(out).resolve()
++    out.mkdir(parents=True, exist_ok=False)
++    exclusions = generator.load_required_exclusions()
++    seen_raw, seen_geometry = set(), set()
++    ledger = []
++    for slot in r["slots"]:
++        started = time.perf_counter()
++        row = generator.generate_allocated_instance(3, 20, namespace=r["namespace"],
++                    partition=slot["partition"], ordinal=slot["ordinal"], exclusions=exclusions)
++        if row["raw_sha256"] in seen_raw or row["canonical_geometry_sha256"] in seen_geometry:
++            row["status"], row["failure_reason"] = "generation_failed", "within_allocation_identity_collision"
++        seen_raw.add(row["raw_sha256"]); seen_geometry.add(row["canonical_geometry_sha256"])
++        d = out / slot["id"]
++        d.mkdir()
++        write(d / "generation.json", row)
++        if row["status"] == "generated":
++            (d / "instance.txt").write_text(row["solver_input_text"], encoding="utf-8", newline="\n")
++            if sha(d / "instance.txt") != row["raw_sha256"]:
++                raise RuntimeError("instance byte identity mismatch")
++            write(d / "scenario.json", scenario(row["raw_sha256"]))
++        ledger.append({**slot, "status": row["status"], "reason": row["failure_reason"],
++                       "raw_sha256": row["raw_sha256"], "geometry_sha256": row["canonical_geometry_sha256"],
++                       "elapsed_s": time.perf_counter() - started})
++    write(out / "MATERIALIZATION.json", {"schema": SCHEMA, "registration_sha256": sha(registration), "slots": ledger})
++
++
++def validate_materialization(registration, out):
++    r = verify(registration)
++    material = read(Path(out) / "MATERIALIZATION.json")
++    if material["registration_sha256"] != sha(registration):
++        raise ValueError("registration changed since materialization")
++    if [row["id"] for row in material["slots"]] != [row["id"] for row in r["slots"]]:
++        raise ValueError("materialization slot identity mismatch")
++    for row in material["slots"]:
++        d = Path(out) / row["id"]
++        g = read(d / "generation.json")
++        if g["status"] != row["status"] or g["raw_sha256"] != row["raw_sha256"]:
++            raise ValueError("generation receipt mismatch")
++        if row["status"] == "generated":
++            if sha(d / "instance.txt") != row["raw_sha256"]:
++                raise ValueError("instance hash mismatch")
++            if read(d / "scenario.json") != scenario(row["raw_sha256"]):
++                raise ValueError("scenario mismatch")
++    return r, material
++
++
++def anchors(registration, out, java_home, build_dir):
++    r, material = validate_materialization(registration, out)
++    out = Path(out).resolve()
++    if (out / "ANCHORS.json").exists():
++        raise FileExistsError("anchor batch already exists")
++    author_runner.verify_build(REPRO, "J1b", Path(java_home), Path(build_dir))
++    rows = []
++    for slot in material["slots"]:
++        row = {"id": slot["id"], "status": slot["status"], "reason": slot["reason"]}
++        started = time.perf_counter()
++        d = out / slot["id"]
++        if row["status"] == "generated":
++            try:
++                seed = author_runner.seed_for_input(slot["raw_sha256"], r["author_seed_namespace"])
++                result = author_runner.run_one(d / "instance.txt", "J1b", seed, d / "author", REPRO,
++                                               RM / "scorer.py", Path(java_home), Path(build_dir), 180)
++                row.update(author_seed=seed, author_status=result["status"])
++                if not result["anchor_eligible"]:
++                    raise ValueError("author_anchor_ineligible")
++                receipt = prepare_author_weather_anchor(d / "instance.txt", d / "author", d / "scenario.json")
++                write(d / "weather_anchor.json", receipt)
++                row.update(status="eligible", reason=None,
++                           artifact_hashes={str(p.relative_to(d)): sha(p) for p in
++                                            (d / "weather_anchor.json", d / "author/RUN.json",
++                                             d / "author/solution.json", d / "scenario.json")})
++            except Exception as error:
++                row.update(status="anchor_failed", reason=f"{type(error).__name__}: {error}")
++        row["elapsed_s"] = time.perf_counter() - started
++        rows.append(row)
++    write(out / "ANCHORS.json", {"schema": SCHEMA, "registration_sha256": sha(registration), "slots": rows})
++
++
++def load_case(directory):
++    directory = Path(directory)
++    instance = read_instance(directory / "instance.txt")
++    solution = read(directory / "author/solution.json")
++    anchor = CostAnchor.from_solution(instance, solution)
++    weather, _ = load_weather_scenario(directory / "scenario.json", expected_instance_sha256=instance.sha256)
++    receipt = read(directory / "weather_anchor.json")
++    return instance, anchor, weather, receipt["weather_cost_cap"]
++
++
++def run_episode(case, model=None, *, stochastic=False, deadline=None):
++    import torch
++    from rl_algorithms import masked_policy_distribution
++    from run_full_map_smoke import failure_reward_penalty
++    start = time.perf_counter()
++    env = WeatherFullMapEnv(*case[:3], weather_cost_cap=case[3])
++    events, transitions = [], []
++    while not env.terminated:
++        if deadline is not None and time.perf_counter() - start >= deadline:
++            return {"complete": False, "failure": "deadline", "events": events,
++                    "transitions": transitions, "elapsed_s": time.perf_counter() - start}
++        obs = env.observation()
++        legal = [i for i, allowed in enumerate(obs["mask"]) if allowed]
++        if model is None:
++            targets = [i for i in legal if not obs["actions"][i].is_return]
++            index = min(targets, key=lambda i: (float(obs["candidates"][i, 5]), i)) if targets else legal[0]
++            value = old_logp = 0.0
++        else:
++            with torch.no_grad():
++                dist, v = masked_policy_distribution(model, obs)
++                index = int(dist.sample().item()) if stochastic else int(torch.argmax(dist.logits))
++                old_logp = float(dist.log_prob(torch.tensor(index)).item()); value = float(v)
++        a = obs["actions"][index]
++        _, reward, done, info = env.step(a)
++        if info["failure"] is not None:
++            reward -= failure_reward_penalty(env.instance)
++        transitions.append({"global": obs["global"], "candidates": obs["candidates"], "mask": obs["mask"],
++                            "action": index, "reward": reward, "done": done, "value": value, "old_logp": old_logp})
++        events.append({"station_idx": a.station_idx, "slot": a.slot,
++                       "target": "RETURN" if a.is_return else a.target_id, "reward": reward,
++                       "completion_min": info.get("completion_min"), "failure": info["failure"],
++                       "elapsed_s": time.perf_counter() - start})
++    elapsed = time.perf_counter() - start
++    complete = env.done and env.failure is None and (deadline is None or elapsed <= deadline)
++    return {"complete": complete, "failure": env.failure if elapsed <= (deadline or float("inf")) else "deadline",
++            "events": events, "transitions": transitions, "elapsed_s": elapsed,
++            "result": env.result() if complete else None}
++
++
++def experiment(registration, out):
++    import numpy as np
++    import torch
++    from weather_policy import WeatherPointerActorCritic
++    from rl_algorithms import ppo_update, a2c_update
++    from run_full_map_smoke import _seed
++    r, material = validate_materialization(registration, out)
++    out = Path(out).resolve()
++    anchor_rows = read(out / "ANCHORS.json")
++    if anchor_rows["registration_sha256"] != sha(registration):
++        raise ValueError("anchor registration mismatch")
++    if [x["id"] for x in anchor_rows["slots"]] != [x["id"] for x in material["slots"]]:
++        raise ValueError("anchor allocation mismatch")
++    for row in anchor_rows["slots"]:
++        if row["status"] == "eligible":
++            for name, expected in row["artifact_hashes"].items():
++                if sha(out / row["id"] / name) != expected:
++                    raise ValueError(f"anchor artifact changed: {row['id']}/{name}")
++    results_dir = out / "experiment"
++    results_dir.mkdir(exist_ok=False)
++    split = {x["id"]: x["split"] for x in material["slots"]}
++    eligible = [x["id"] for x in anchor_rows["slots"] if x["status"] == "eligible"]
++    cases = {name: load_case(out / name) for name in eligible}
++    train_ids = [name for name in eligible if split[name] == "train"]
++    report = {"schema": SCHEMA, "scope": "development only; no formal or novelty claim",
++              "registration_sha256": sha(registration), "anchor_ledger": anchor_rows["slots"],
++              "runtime": {"python": sys.version, "platform": platform.platform(),
++                          "numpy": np.__version__, "torch": str(torch.__version__),
++                          "torch_threads": torch.get_num_threads()},
++              "training": [], "comparisons": []}
++    if not train_ids:
++        report["status"] = "no_eligible_training_maps"
++        write(results_dir / "RESULTS.json", report)
++        return
++    for algorithm in r["algorithms"]:
++        for seed in r["seeds"]:
++            _seed(seed)
++            model = WeatherPointerActorCritic(global_dim=WeatherFullMapEnv.global_dim,
++                                              candidate_dim=WeatherFullMapEnv.candidate_dim)
++            optimizer = torch.optim.Adam(model.parameters(), lr=3e-3)
++            started = time.perf_counter(); history = []; total_transitions = 0
++            try:
++                for update in range(r["updates"]):
++                    episodes = []
++                    for i in range(r["episodes_per_update"]):
++                        map_id = train_ids[(update * r["episodes_per_update"] + i) % len(train_ids)]
++                        episode = run_episode(cases[map_id], model, stochastic=True)
++                        episode["map"] = map_id
++                        episodes.append(episode)
++                    batch = [e for e in episodes if e["transitions"]]
++                    total_transitions += sum(len(e["transitions"]) for e in episodes)
++                    stats = ({"skipped_no_transitions": True} if not batch else
++                             ppo_update(model, optimizer, batch, epochs=2, minibatch=32, gamma=1.0, lam=1.0,
++                                        rng=random.Random(seed * 1000 + update)) if algorithm == "PPO" else
++                             a2c_update(model, optimizer, batch, gamma=1.0, lam=1.0))
++                    history.append({"update": update, "episodes": [{k: v for k, v in e.items() if k != "transitions"}
++                                                                     for e in episodes], "stats": stats})
++                if total_transitions == 0:
++                    raise RuntimeError("no_trainable_transitions")
++                checkpoint = results_dir / f"{algorithm.lower()}_{seed}.pt"
++                torch.save({"state_dict": model.state_dict(), "global_dim": WeatherFullMapEnv.global_dim,
++                            "candidate_dim": WeatherFullMapEnv.candidate_dim, "hidden_dim": model.hidden_dim,
++                            "algorithm": algorithm, "seed": seed}, checkpoint)
++                record = {"status": "ok", "checkpoint": checkpoint.name, "checkpoint_sha256": sha(checkpoint)}
++            except Exception as error:
++                record = {"status": "training_failed", "error": f"{type(error).__name__}: {error}"}
++            record.update({"algorithm": algorithm, "seed": seed, "train_ids": train_ids,
++                           "elapsed_s": time.perf_counter() - started, "history": history,
++                           "total_transitions": total_transitions})
++            report["training"].append(record)
++            write(results_dir / f"training_{algorithm.lower()}_{seed}.json", record)
++    for row in material["slots"]:
++        if row["split"] == "train":
++            continue
++        name = row["id"]
++        if name not in cases:
++            report["comparisons"].append({"map": name, "status": "anchor_or_generation_failed"})
++            continue
++        case = cases[name]
++        anchor = read(out / name / "weather_anchor.json")["author_weather_replay"]
++        for budget in r["budgets_s"]:
++            # Each method has the same fresh process-local wall-clock budget.
++            methods = [("physical_greedy", None)] + [(f"{t['algorithm']}_{t['seed']}", t) for t in report["training"]]
++            for method, trained in methods:
++                started = time.perf_counter()
++                try:
++                    model = None
++                    if trained:
++                        if trained["status"] != "ok":
++                            raise RuntimeError("training_failed")
++                        if sha(results_dir / trained["checkpoint"]) != trained["checkpoint_sha256"]:
++                            raise RuntimeError("checkpoint_hash_mismatch")
++                        ckpt = torch.load(results_dir / trained["checkpoint"], map_location="cpu", weights_only=True)
++                        model = WeatherPointerActorCritic(global_dim=ckpt["global_dim"],
++                                                         candidate_dim=ckpt["candidate_dim"], hidden_dim=ckpt["hidden_dim"])
++                        model.load_state_dict(ckpt["state_dict"], strict=True)
++                    remaining = budget - (time.perf_counter() - started)
++                    episode = run_episode(case, model, deadline=max(0, remaining))
++                    total = time.perf_counter() - started
++                    if total > budget:
++                        episode.update(complete=False, failure="deadline", result=None)
++                    episode.pop("transitions")
++                except Exception as error:
++                    total = time.perf_counter() - started
++                    episode = {"complete": False, "failure": f"{type(error).__name__}: {error}", "events": []}
++                improves = episode["complete"] and episode["result"]["replay"]["M_return"] < anchor["M_return"]
++                report["comparisons"].append({"map": name, "split": row["split"], "budget_s": budget,
++                    "method": method, "elapsed_total_s": total, "anchor": anchor,
++                    "candidate": episode, "selected": "candidate" if improves else "author_anchor",
++                    "selected_score": episode["result"]["replay"] if improves else anchor})
++    report["status"] = "completed"
++    write(results_dir / "RESULTS.json", report)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    sub = parser.add_subparsers(dest="command", required=True)
++    p = sub.add_parser("register"); p.add_argument("--registration", required=True); p.add_argument("--namespace", required=True)
++    p.add_argument("--updates", type=int, default=20); p.add_argument("--episodes", type=int, default=8)
++    for name in ("materialize", "anchors", "experiment"):
++        p = sub.add_parser(name); p.add_argument("--registration", required=True); p.add_argument("--out", required=True)
++        if name == "anchors":
++            p.add_argument("--java-home", required=True); p.add_argument("--build-dir", required=True)
++    a = parser.parse_args()
++    if a.command == "register": register(a.registration, a.namespace, a.updates, a.episodes)
++    elif a.command == "materialize": materialize(a.registration, a.out)
++    elif a.command == "anchors": anchors(a.registration, a.out, a.java_home, a.build_dir)
++    else: experiment(a.registration, a.out)
++
++
++if __name__ == "__main__":
++    main()

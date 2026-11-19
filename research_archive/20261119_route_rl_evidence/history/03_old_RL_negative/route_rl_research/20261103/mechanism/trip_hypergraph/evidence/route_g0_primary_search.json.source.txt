@@ -1,0 +1,494 @@
+Heterogeneous drone-truck routing problem with En-route operations - ScienceDirect (https://www.sciencedirect.com/science/article/abs/pii/S1366554526004527)
+citeturn13search0 [wordlim: 200] Crawled: last week; Reinforcement learning ... Second, advancements in battery density now allow commercial drones to service multiple customers in a single sortie before returning to the truck, yet many models restrict drones to a single customer per trip, ignoring the endurance capabilities of modern UAVs (Bruni et al., 2023, Luo et al., 2024). ... Motivated by these gaps, this paper proposes the Heterogeneous Drone-Truck Routing Problem with En-route Launch and Recovery (HDTRP-ELR). ... We formulate an MISOCP model for the HDTRP-ELR, which rigorously defines the synchronization constraints required for launching and recovering heterogeneous drones on arcs rather than strictly at nodes, and incorporates a multi-visit mechanism allowing drones to serve multiple customers per sortie and a realistic energy consumption model with payload-dependent discharge rates.
+## Keywords
+
+Truck-drone routing
+
+;
+
+En-route operations
+
+;
+
+Multi-visit
+
+;
+
+Heterogeneous drones
+
+;
+
+Reinforcement learning
+
+;
+
+Adaptive large neighborhood search
+
+## Introduction
+
+In the contemporary logistics landscape, the rapid expansion of e-commerce has placed unprecedented pressure on last-mile delivery systems. As urbanization intensifies, traditional delivery models relying solely on heavy trucks face severe challenges, including escalating traffic congestion and stringent carbon emission regulations in metropolitan areas (Savelsbergh and Van Woensel, 2016). These ground-based limitations often result in delivery delays and increased operational costs, making it difficult to meet the growing customer demand for same-day or instant delivery services. Consequently, the integration of drones into logistics networks has emerged. For instance, Amazon’s Prime Air program aims to complete customer orders within 30 min (Pierce, 2013). Similarly, UPS Flight Forward has been delivering vaccines using drones (Wolf, 2021). 
+Motivated by these gaps, this paper proposes the Heterogeneous Drone-Truck Routing Problem with En-route Launch and Recovery (HDTRP-ELR). Our model is the first to simultaneously integrate ELR, multi-visit capabilities, and heterogeneous fleet management within a single framework, together with a comprehensive energy consumption function that accounts for payload-dependent discharge dynamics. The primary contributions of this work are summarized as follows:
+
+  * 1)
+
+We formulate an MISOCP model for the HDTRP-ELR, which rigorously defines the synchronization constraints required for launching and recovering heterogeneous drones on arcs rather than strictly at nodes, and incorporates a multi-visit mechanism allowing drones to serve multiple customers per sortie and a realistic energy consumption model with payload-dependent discharge rates.
+
+  * 2)
+
+A Reinforcement Learning-guided Decoupled Adaptive Large Neighborhood Search (RLD-ALNS) algorithm is developed to solve this NP-hard problem efficiently. The algorithm embeds a Deep Q-Network (DQN) agent that dynamically selects destruction operators and intensities based on the structural features of the current solution, and employs a dual-head MLP proxy to filter unpromising candidate solutions before exact evaluation.
+--------------------------------------------------------------------------------
+A Reinforcement Learning Hyper-He... preview & related info | Mendeley (https://www.mendeley.com/catalogue/23cfbb52-3118-3723-8999-e7ce0e0b50f8/)
+citeturn13search1 [wordlim: 200] Published: 1.2 years ago; Crawled: 2 weeks ago; # A Reinforcement Learning Hyper-Heuristic with Cumulative Rewards for Dual-Peak Time-Varying Network Optimization in Heterogeneous Multi-Trip Vehicle Routing
+Journal Article OPEN ACCESS
+
+# A Reinforcement Learning Hyper-Heuristic with Cumulative Rewards for Dual-Peak Time-Varying Network Optimization in Heterogeneous Multi-Trip Vehicle Routing
+
+  * Wang X
+  * Li N
+  * Jin X
+  * Algorithms (2025) 18(9)
+
+DOI: 10.3390/a18090536
+
+2 Citations
+
+Citations of this article
+
+9 Readers
+
+Mendeley users who have this article in their library.
+
+  * Abstract
+  * Keywords (6)
+
+#### Abstract
+
+Urban logistics face complexity due to traffic congestion, fleet heterogeneity, warehouse constraints, and driver workload balancing, especially in the Heterogeneous Multi-Trip Vehicle Routing Problem with Time Windows and Time-Varying Networks (HMTVRPTW-TVN). We develop a mixed-integer linear programming (MILP) model with dual-peak time discretization and exact linearization for heterogeneous fleet coordination. Given the NP-hard nature, we propose a Hyper-Heuristic based on Cumulative Reward Q-Learning (HHCRQL), integrating reinforcement learning with heuristic operators in a Markov Decision Process (MDP). The algorithm dynamically selects operators using a four-dimensional state space and a cumulative reward function combining timestep and fitness. Experiments show that, for small instances, HHCRQL achieves solutions within 3% of Gurobi’s optimum when customer nodes exceed 15, outperforming Large Neighborhood Search (LNS) and LNS with Simulated Annealing (LNSSA) with stable, shorter runtime. For large-scale instances, HHCRQL reduces gaps by up to 9.17% versus Iterated Local Search (ILS), 6.74% versus LNS, and 5.95% versus LNSSA, while maintaining relatively stable runtime. Real-world validation using Shanghai logistics data reduces waiting times by 35.36% and total transportation times by 24.68%, confirming HHCRQL’s effectiveness, robustness, and scalability.
+
+#### Author supplied keywords
+
+  * Q-learning
+  * heterogeneous fleets
+  * hyper-heuristic
+  * multi-trip
+  * routing
+  * time-varying road networks
+
+#### Cite
+
+CITATION STYLE
+
+APA
+
+[Input]
+
+Wang, X., Li, N., & Jin, X. (2025). A Reinforcement Learning Hyper-Heuristic with Cumulative Rewards for Dual-Peak Time-Varying Network Optimization in Heterogeneous Multi-Trip Vehicle Routing. Algorithms, 18(9). https://doi.org/10.3390/a18090536--------------------------------------------------------------------------------
+基于多智能体强化学习的多无人机协同交通监控路径优化 (https://transport.chd.edu.cn/cn/article/doi/10.19818/j.cnki.1671-1637.2026.161)
+citeturn13search2 [wordlim: 200] Crawled: 3 days ago; Abstract: To optimize the multiple unmanned aerial vehicles (multi-UAVs) cooperative traffic monitoring path planning with battery replacement station constraints, a mixed-integer linear programming model based on the UAV team orienteering problem was constructed, and a clustering method was adopted to determine the battery replacement stations' locations to achieve uniform distribution. ... Compared with the commercial solver, the average cumulative reward increases by 9.77%-28.77% in small- and medium-scale scenarios and by 9.34%-14.84% in large-scale scenarios, while that of the genetic algorithm and tabu search decreases by 28%-41% in large-scale scenarios. ...     * deep reinforcement learning /
+A structured masking mechanism was introduced to eliminate subcircuits, repeated visits, and path conflicts, ensuring solution feasibility. Numerical experiments were conducted in scenarios of 9 types of scale with varying numbers of target nodes, battery replacement stations, and UAVs. The results show that MTRL obtains high-quality feasible solutions in all 9 types of scenarios with stable training convergence. Compared with the commercial solver, the average cumulative reward increases by 9.77%-28.77% in small- and medium-scale scenarios and by 9.34%-14.84% in large-scale scenarios, while that of the genetic algorithm and tabu search decreases by 28%-41% in large-scale scenarios. The inference time remains at the millisecond level. In 18 groups of cross-distribution generalization experiments, the relative error is controlled within 1%. The proposed framework provides an efficient solution for UAV swarm mission planning, intelligent transportation path optimization, and logistics distribution scheduling. In addition, it offers a methodological reference for the application of multi-agent reinforcement learning to complex constrained optimization problems.
+
+Key words:
+    * low-altitude traffic / 
+    * unmanned aerial vehicle / 
+    * path optimization / 
+    * deep reinforcement learning / 
+    * team orienteering problem / 
+    * traffic monitoring 
+
+  *   * 图  1  含电池更换站的无人机协同交通监控路径示例
+
+Figure  1.  Example paths for cooperative UAV traffic monitoring with battery replacement stations
+
+--------------------------------------------------------------------------------
+Multiagent Environments for Vehicle Routing Problems | INFORMS Journal on Computing (https://doi.org/10.1287/ijoc.2025.1211)
+citeturn13search3 [wordlim: 200] Published: 4 months ago; Crawled: 3 days ago; # Multiagent Environments for Vehicle Routing Problems ... Research on reinforcement learning (RL) approaches for discrete optimization problems has increased considerably, extending RL to areas classically dominated by operations research (OR).
+  * Hugo L. Fernandes
+
+Hugo L. Fernandes
+
+<EMAIL_REMOVED>
+
+Singuli, Brooklyn, New York 11217
+
+Published Online:23 Jun 2026https://doi.org/10.1287/ijoc.2025.1211
+
+## Abstract
+
+Research on reinforcement learning (RL) approaches for discrete optimization problems has increased considerably, extending RL to areas classically dominated by operations research (OR). Vehicle routing problems are a good example of discrete optimization problems with high practical relevance for which RL techniques have achieved notable success. Despite these advances, open-source development frameworks remain scarce, hindering both algorithm testing and objective comparison of results. This situation ultimately slows down progress in the field and limits the exchange of ideas between the RL and OR communities. Here, we propose MAEnvs4VRP library, a unified framework for multiagent vehicle routing environments that supports classical, dynamic, stochastic, and multitask problem variants within a single modular design. --------------------------------------------------------------------------------
+(PDF) Deep Reinforcement Learning for Solving the Heterogeneous Capacitated Vehicle Routing Problem (https://www.researchgate.net/publication/354354946_Deep_Reinforcement_Learning_for_Solving_the_Heterogeneous_Capacitated_Vehicle_Routing_Problem)
+citeturn13search4 [wordlim: 200] Crawled: 2 months ago; # Deep Reinforcement Learning for Solving the Heterogeneous Capacitated Vehicle Routing Problem
+Article PDF Available
+
+# Deep Reinforcement Learning for Solving the Heterogeneous Capacitated Vehicle Routing Problem
+
+  * September 2021
+  * IEEE Transactions on Cybernetics 52(12):13572-13585
+
+DOI:10.1109/TCYB.2021.3111082
+
+Authors:
+
+Li Jingwen
+
+  * NUS
+
+Yining Ma
+
+  * Massachusetts Institute of Technology
+
+Ruize Gao
+
+  * National University of Singapore
+
+Zhiguang Cao
+
+  * Singapore Management University
+
+Show all 7 authors Hide
+
+Image
+
+Download full-text PDFRead full-text
+
+## Abstract and Figures
+
+Existing deep reinforcement learning (DRL) based methods for solving the capacitated vehicle routing problem (CVRP) intrinsically cope with homogeneous vehicle fleet, in which the fleet is assumed as repetitions of a single vehicle. Hence, their key to construct a solution solely lies in the selection of the next node (customer) to visit excluding the selection of vehicle.   * 2.3+ billion citations
+Join for free
+
+Public Full-text 1
+
+Content uploaded by Yining Ma
+
+Author content
+
+All content in this area was uploaded by Yining Ma on Sep 13, 2021
+
+Content may be subject to copyright.
+
+IEEE TRANSACTIONS ON CYBERNETICS 1
+
+Deep Reinforcement Learning for Solving the
+
+Heterogeneous Capacitated Vehicle Routing
+
+Problem
+
+Jingwen Li, Yining Ma, Ruize Gao, Zhiguang Cao†, Andrew Lim, Wen Song, Jie Zhang
+
+Abstract—Existing deep reinforcement learning (DRL) based
+
+methods for solving the capacitated vehicle routing problem
+
+(CVRP) intrinsically cope with homogeneous vehicle ﬂeet, in
+
+which the ﬂeet is assumed as repetitions of a single vehicle.
+
+Hence, their key to construct a solution solely lies in the selection
+
+of the next node (customer) to visit excluding the selection
+
+of vehicle. However, vehicles in real-world scenarios are likely
+
+to be heterogeneous with different characteristics that affect
+
+their capacity (or travel speed), rendering existing DRL methods
+
+less effective. In this paper, we tackle heterogeneous CVRP
+
+(HCVRP), where vehicles are mainly characterized by different
+
+capacities. We consider both min-max and min-sum objectives
+
+for HCVRP, which aim to minimize the longest or total travel
+
+time of the vehicle(s) in the ﬂeet. To solve those problems, we
+
+propose a DRL method based on the attention mechanism with
+
+a vehicle selection decoder accounting for the heterogeneous
+
+ﬂeet constraint and a node selection decoder accounting for
+
+--------------------------------------------------------------------------------
+Battery‑Aware Energy‑Efficient Routing in Delivery Drone Swarms via Graph Neural Network‑Driven Reinforcement Learning — FREEDERIA (https://freederia.com/battery-aware-energy-efficient-routing-in-delivery-drone-swarms-via-graph-neural-network-driven-reinforcement-learning/)
+citeturn13search5 [wordlim: 200] Crawled: 3 weeks ago; # Battery‑Aware Energy‑Efficient Routing in Delivery Drone Swarms via Graph Neural Network‑Driven Reinforcement Learning ... The objective is to generate a set of continuous control policies \( \pi_i = \pi(\mathbf{x}_i, c_i, \mathcal{G} ) \) such that the cumulative mission energy consumption
+
+Legacy public archiveThis is a public legacy or synthetic research record presented through FREEDERIA. It is not a validated RCRI research object, governed structured package, or paid data product.
+
+# Battery‑Aware Energy‑Efficient Routing in Delivery Drone Swarms via Graph Neural Network‑Driven Reinforcement Learning
+
+Use boundary: This page is a migrated Freederia public technical record. The machine-readable paid API record remains available at `https://api.freederia.com/v1/posts/541441`. Records are synthetic, simulated, projected, or exploratory unless independently verified.
+
+Record ID: wp-541441 · Legacy WordPress ID: 541441 · Type: wordpress_migrated_post · Category: 759251297
+
+—
+
+### Abstract
+
+This paper presents a fully validated, commercially ready methodology for minimizing energy consumption in autonomous delivery quadrotor swarms operating in urban environments. By integrating a battery‑health‑aware graph neural network (GNN) that represents the swarm’s mission topology with a deep‑reinforcement‑learning (DRL) agent that adapts routing in real‑time, we achieve a 23 % reduction in total energy expenditure and a 17 % increase in on‑time delivery rate compared to state‑of‑the‑art heuristic approaches. --------------------------------------------------------------------------------
+Transportation Research Part C 157 (2023) 104401 (https://ris.utwente.nl/ws/portalfiles/portal/329778492/1-s2.0-S0968090X23003911-main.pdf)
+citeturn13search12 [wordlim: 200] Published: 1.1 years ago; Reinforcement learning in humanitarian logistics ... distribution problem with a heterogeneous fleet with multiple trucks and UAVs and continuous stochastic travel times, and formulate ... In this section, we describe the multi-vehicle, multi-trip, split-delivery vehicle routing problem with soft time windows and
+2.5. Contributions to literature
+Summarizing the literature review, our work features the following contributions to literature: (i) We address a last-mile
+distribution problem with a heterogeneous fleet with multiple trucks and UAVs and continuous stochastic travel times, and formulate
+this problem as a stochastic dynamic program. (ii) We perform a computational study to provide insight into the performance and
+robustness of deep reinforcement learning methods in comparison with dynamic heuristics and the static solutions of a commercial
+solver. (iii) Through this computational study, we analyze the impact of travel time uncertainty in humanitarian logistics operations,
+and (iv) analyze the added value of deploying UAVs to mitigate these uncertainties in the transportation network. Lastly, (v)
+we provide experimental insights considering stylized benchmark instances as well as two real-world cases, using realistic UAV
+specifications.
+3. Problem description
+In this section, we describe the multi-vehicle, multi-trip, split-delivery vehicle routing problem with soft time windows and
+stochastic travel times. The problem setting is a disaster area where last-mile distribution takes place via a local distribution center
+towards points of distribution. The local distribution center, hereafter referred to as the depot, is a location that consolidates relief
+goods from suppliers and serves as the departure and return point for the fleet of vehicles, in our case constituted of trucks and
+5--------------------------------------------------------------------------------
+Coordinated multi‐agent hierarchical deep reinforcement learning to solve multi‐trip vehicle routing problems with soft time windows - Zhang - 2023 - IET Intelligent Transport Systems - Wiley Online Library (https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/itr2.12394)
+citeturn13search6 [wordlim: 200] Published: 3.4 years ago; Crawled: last month; # Coordinated multi-agent hierarchical deep reinforcement learning to solve multi-trip vehicle routing problems with soft time windows
+
+Volume 17, Issue 10 pp. 2034-2051
+
+ORIGINAL RESEARCH
+
+Open Access
+
+# Coordinated multi-agent hierarchical deep reinforcement learning to solve multi-trip vehicle routing problems with soft time windows
+
+Zixian Zhang, 
+
+Zixian Zhang
+
+Key Laboratory of Transport Industry of Big Data Application Technologies for Comprehensive Transport, Ministry of Transport, Beijing, China
+
+Contribution: ​Investigation, Methodology, Visualization, Writing - original draft, Writing - review & editing
+
+Geqi Qi, 
+
+Geqi Qi
+
+Key Laboratory of Transport Industry of Big Data Application Technologies for Comprehensive Transport, Ministry of Transport, Beijing, China
+
+Contribution: ​Investigation, Methodology, Writing - review & editing
+
+Wei Guan, 
+
+Corresponding Author
+
+Wei Guan
+
+  * <EMAIL_REMOVED>
+
+  * orcid.org/0000-0003-0038-4369
+
+Key Laboratory of Transport Industry of Big Data Application Technologies for Comprehensive Transport, Ministry of Transport, Beijing, China
+
+Correspondence
+
+Wei Guan, Key Laboratory of Transport Industry of Big Data Application Technologies for Comprehensive Transport, Ministry of Transport, Beijing Jiaotong University, Beijing 100044, China.
+
+Email: <EMAIL_REMOVED>
+
+Contribution: Funding acquisition, Methodology, Project administration, Writing - review & editing
+
+First published: 20 June 2023
+
+https://doi.org/10.1049/itr2.12394Digital Object Identifier (DOI)
+
+## Abstract
+
+Vehicle Routing Problem (VRP) is a widespread problem in the transportation field, which challenges the intelligent level of vehicle decisions. Multi-Trip Vehicle Routing Problem with Time Windows (MTVRPTW), as a further evolved problem of VRP considering multiple departures from one depot and temporal constraint of visiting nodes, has developed into one of the critical issues in the scheduling of logistics, bus transit, railway, and aviation. Traditionally, MTVRPTW is solved by the heuristic algorithm, which is generally time-consuming and of non-steady results. --------------------------------------------------------------------------------
+Deep reinforcement learning-based routing framework for bidirectional communication in UAV-UGV networks - ScienceDirect (https://doi.org/10.1016/j.cogr.2025.06.003)
+citeturn13search7 [wordlim: 200] Published: 1.4 years ago; Crawled: 2 weeks ago; Remaining Battery Power of each node. ... Energy-Aware Routing: Selects routes that is having sufficient energy for further processing. ... DRL augment GPSR by continuously learning from the network conditions and environment.
+State Space Representation
+
+The state vector for the DRL model includes:
+
+  * •
+
+Source Node Position (x, y, z) for UAVs and (x, y) for UGVs.
+
+  * •
+
+Destination Node Position (x, y, z) for UAVs and (x, y) for UGVs.
+
+  * •
+
+Velocity & Direction of UAVs/UGVs.
+
+  * •
+
+No of vicinity nodes.
+
+  * •
+
+Remaining Battery Power of each node.
+
+  * •
+
+Validity of available communication link.
+
+  * •
+
+Distance to Destination
+
+Action Space
+
+The DRL model selects the next-hop node based on:
+
+  * •
+
+Greedy Forwarding: Chooses the neighbor closest to the destination.
+
+  * •
+
+Perimeter Forwarding: Used when greedy forwarding fails (e.g., obstacles, voids).
+
+  * •
+
+Energy-Aware Routing: Selects routes that is having sufficient energy for further processing.
+
+Reward Function
+
+The DRL agent is trained using a custom reward function that balances:
+
+  * •
+
+Minimizing Delay (D) - Reward for selecting the fastest path.
+
+  * •
+
+Energy Efficiency (EE) - Penalty for selecting low-energy nodes.
+
+  * •
+--------------------------------------------------------------------------------
+Feature Fusion Attention‐Based Deep Reinforcement Learning for Multidepot O2O Food Delivery Route Optimization - Zou - 2026 - International Journal of Intelligent Systems - Wiley Online Library (https://onlinelibrary.wiley.com/doi/full/10.1155/int/3716055)
+citeturn13search8 [wordlim: 200] Published: 8 months ago; Crawled: last month; # Feature Fusion Attention-Based Deep Reinforcement Learning for Multidepot O2O Food Delivery Route Optimization ... This paper proposes a novel feature fusion attention-based deep reinforcement learning model to address such constrained routing problems.
+
+Search for more papers by this author
+
+First published: 26 February 2026
+
+https://doi.org/10.1155/int/3716055Digital Object Identifier (DOI)
+
+## Abstract
+
+The online-to-offline (O2O) business model has facilitated millions of daily transactions on popular online food ordering platforms. Online food delivery route planning presents a complex multidepot vehicle routing problem (VRP) with capacity limits, pickup–delivery, and time-window constraints. However, the vast volume of transactions and computational complexities of delivery routes pose significant challenges. This paper proposes a novel feature fusion attention-based deep reinforcement learning model to address such constrained routing problems. The innovative encoding and masking scheme with a self-attention-guided order relocation operator efficiently handles multidepot and multiconstraint scenarios. Additionally, incorporating self-attention with a graph neural network (GNN) framework extends existing research from static unit square environments to dynamic real road networks. --------------------------------------------------------------------------------
+Cooperate to Generalize: Deep Reinforcement Learning for Real-time Ad Hoc Team Routing (https://assets-eu.researchsquare.com/files/rs-7896001/v1_covered_3b6875be-5529-444a-8966-faddfe49398f.pdf?c=1772113231)
+citeturn13search13 [wordlim: 200] Published: 5 months ago; loss of optimality when faced with multi-trip VRPs, espe- ... shown in Fig. 2d, which consists of two heterogeneous ... participate in the routing under the optimal solution, ... with ﬁxed heterogeneous teams [49].
+nodes may be ignored. This drawback will magnify the
+loss of optimality when faced with multi-trip VRPs, espe-
+cially those involving multiple members. Building on
+this insight, we propose a multi-starting-member tech-
+nique, which encourages diversity in the choice of the
+initial acting team member. Unlike POMO, our proposed
+method avoids restricting starting positions to a ﬁxed
+subset of nodes. Instead, it leverages team-level symme-
+try to promote broader exploration while maintaining
+solution optimality. By integrating cooperative decision-
+making with this symmetry, our approach fosters diverse
+collaborative strategies and facilitates a more compre-
+hensive exploration of the solution space. An example is
+shown in Fig. 2d, which consists of two heterogeneous
+members and their optimal routes. By prioritizing dif-
+ferent members in the early stages of decision-making,
+we encourage exploration of the solution space from
+diverse perspectives. This approach is expected to help
+the policy develop a more comprehensive understanding
+--------------------------------------------------------------------------------
+Modular constraint based simulation and reinforcement learning environment of a truck-drone co-ordinated delivery logistics system with micro hubs - ScienceDirect (https://www.sciencedirect.com/science/article/pii/S2666827026002215)
+citeturn13search9 [wordlim: 200] Published: last week; Crawled: 6 days ago; To address this need, this paper presents a Python-native, modular simulation and reinforcement learning environment specifically formulated for coordinated truck-drone delivery systems with intermediate micro-hubs. ... Formulations such as the Traveling Salesman Problem with Drones (TSP-D) and Vehicle Routing Problem with Drones (VRP-D) encode interdependent constraints governing vehicle range, spatial operating zones, and rendezvous synchronization (Agatz et al., 2018, Kitjacharoenchai et al., 2019, Murray and Chu, 2015, Poikonen et al., 2019, Wang et al., 2017).
+
+## Machine Learning with Applications
+
+Available online 24 October 2026, 101056
+
+In Press, Journal Pre-proofWhat’s this?
+
+# Modular constraint based simulation and reinforcement learning environment of a truck-drone co-ordinated delivery logistics system with micro hubs
+
+https://doi.org/10.1016/j.mlwa.2026.101056Get rights and contentView accessibility information
+
+Under a Creative Commons license
+
+## Highlights
+
+  * •
+
+Simulation and Reinforcement Learning Environment for multi-modal delivery logistics system.
+
+  * •
+
+Modular constraint masking dynamically enforces feasibility.
+
+  * •
+
+Event-driven architecture efficiently synchronizes heterogeneous fleet operations.
+
+  * •
+
+Empirically demonstrates and validates constraint-aware Maskable PPO for truck-drone routing.
+
+## Abstract
+
+The integration of autonomous aerial drones with traditional ground vehicle fleets offers substantial potential for multi-echelon last-mile delivery networks. However, coordinating multi-modal fleets under operational constraints presents an underlying challenge: bridging discrete routing decisions with the continuous spatio-temporal progression of physical transport. While Deep Reinforcement Learning (DRL) provides an adaptive paradigm for dynamic dispatching, evaluating learned policies requires simulation environments that accurately synchronize discrete allocation logic with the continuous operational state progression of logistical entities. To address this need, this paper presents a Python-native, modular simulation and reinforcement learning environment specifically formulated for coordinated truck-drone delivery systems with intermediate micro-hubs. The core contributions are threefold: (1) a hybrid modeling framework that couples discrete event-based dispatching with the continuous spatio-temporal operational simulation of logistical entities; (2) an extensible, event-driven constraint manager that dynamically enforces defined logistical feasibility, including vehicle payload limits, spatial operating boundaries, and inter-vehicle synchronization, while constraining the combinatorial action space through invalid-action masking and a structured node-pair representation; and (3) an empirical evaluation benchmarking a Maskable Proximal Policy Optimization (PPO) agent against classical dispatch heuristics and unmasked learning configurations across varying operational scales. By offering a standardized and reproducible benchmarking platform, this work provides a practical simulation infrastructure for developing and evaluating constraint-aware reinforcement learning algorithms for operational planning in synchronized multi-modal freight logistics.
+--------------------------------------------------------------------------------
+A unified deep reinforcement learning framework for solving the heterogeneous fleet vehicle routing problem (https://eurekamag.com/research/110/961/110961042.php)
+citeturn13search10 [wordlim: 200] Published: 10 months ago; Crawled: last month; # A unified deep reinforcement learning framework for solving the heterogeneous fleet vehicle routing problem ... 2025: SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem Using Deep Reinforcement Learning ACM Transactions on Knowledge Discovery from Data 19(5): 98
+
+# A unified deep reinforcement learning framework for solving the heterogeneous fleet vehicle routing problem
+
+##### Huang, S.; Wang, S.; Gao, L.; Ma, H.; Zhang, Z.; Zhang, F.; Zhou, W.
+
+#### Transportation Research Part E Logistics and Transportation Review: 105248
+
+#### 2026
+
+* * *
+
+ISSN/ISBN: 1366-5545
+
+DOI: 10.1016/j.tre.2026.105248
+Accession: 110961042
+
+##### Summary
+
+The Heterogeneous Fleet Vehicle Routing Problem (HFVRP) incorporates diverse vehicle capacities, fixed costs, and variable travel costs, making routing decisions highly sensitive to vehicle selection. Most existing Deep Reinforcement Learning (DRL) methods assume homogeneous fleets, leading to suboptimal performance when applied to HFVRP. To address this, we investigate HFVRP under complex constraints and develop a unified DRL framework capable of solving the problem across diverse settings. We formulate a Mode-Switching Markov Decision Process, modeling the generation of HFVRP solutions as a single-stage autoregressive decision process. --------------------------------------------------------------------------------
+Energy-Saving Multi-Agent Deep Reinforcement Learning Algorithm for Drone Routing Problem (https://www.mdpi.com/1424-8220/24/20/6698)
+citeturn13search11 [wordlim: 200] Published: 2.0 years ago; Crawled: last month; The drone routing problem with a focus on energy consumption is delineated as follows: A set of customer nodes with specified demands exists alongside multiple distribution regions. ... The linear approximation equation of the n-rotor drone power consumption in Equation (2) can be expressed as p\left(m\right)=\alpha m+\beta , where \alpha represents the energy consumed per kg of battery, m is the payload, \beta is the energy required to keep the six-rotor drone frame in the air.
+This figure delineates four distinct stages of battery consumption, indicating that each parcel delivered corresponds to a specific stage of energy usage. Figure 1b further complements this analysis by depicting the changes in the remaining battery capacity along this route, thus providing a comprehensive overview of the energy dynamics inherent to the drone’s operational framework.
+
+According to the energy consumption model of a drone [40], in the actual operation scenario, its consumed power is approximately linearly proportional to the weight and load of the battery. We calculated the energy consumed by the multi-rotor drone during flight but not during takeoff or landing. We assumed that the drone was a six-axis aircraft, and the single-rotor helicopter’s power P* (in watts) could be calculated as follows:
+
+{P}^{*}={\displaystyle \frac{{T}^{3/2}}{\sqrt{2\rho \zeta }}}
+
+(1)
+
+where T is the thrust (in newtons), \rho is the fluid density of the air (in kg/m^{3}), and \zeta is the area of rotating blade disc (in m^{2}). --------------------------------------------------------------------------------
+Dynamic Stochastic Electric Vehicle Routing with Safe Reinforcement Learning (https://research.chalmers.se/publication/527406/file/527406_Fulltext.pdf)
+citeturn13search14 [wordlim: 200] Published: 4.9 years ago; Crawled: 5 months ago; In Adler and Mirchandani (2014) an ADP method is developed to solve online routing of electric vehicles and make battery reservations minimizing time. ... It is also novel the use of Safe Reinforcement Learning as a solution method to plan the route predictively and ensure that the vehicle will not run out of energy while driving. ... It aims at learning the cumulative energy cost and risk of failure (i.e. battery depletion) from a certain state when taking a certain action, and following the process until terminated (e.g. reaching back to the terminal).
+--------------------------------------------------------------------------------
+A Real-Time Energy Consumption Minimization Framework for Electric Vehicles Routing Optimization Based on SARSA Reinforcement Learning (https://digitalcommons.fiu.edu/nanna/record/8984/files/FIDC010533.pdf?registerDownload=1&version=1&withMetadata=0&withWatermark=0)
+citeturn13search15 [wordlim: 200] Published: 4.0 years ago; Application of the SARSA Algorithm to Solve the EV Routing Optimization
+By utilizing the concept of cumulative rewards instead of immediate ones, RL could ... EV power demand, battery status, and driving conditions, including the number of stops, ... in the learning process represents the feasible routes with the least energy requirements.
+--------------------------------------------------------------------------------
+A Comparative Analysis of Task Allocation (https://researchportal.helsinki.fi/files/768230368/ICNSC2025_paper_119-2.pdf)
+citeturn13search16 [wordlim: 200] Published: last year; c) Reinforcement Learning Strategy: ... trained to maximize a cumulative reward signal. ... task allocation strategies for drone swarms: a greedy heuristic, ... efficiency), and Energy Depletion (average battery use).
+--------------------------------------------------------------------------------
+Integrated reinforcement learning of automated guided vehicles dynamic path planning for smart logistics and operations (https://ira.lib.polyu.edu.hk/bitstream/10397/112720/1/1-s2.0-S1366554525000493-main.pdf)
+citeturn13search17 [wordlim: 200] Published: 1.7 years ago; Crawled: 1.7 years ago; \(X_{ij}^v\) denotes the binary variable denoting the routing sequence. ... The battery charged in between node \(i\) is denoted as \(BC_i^v\), the cumulative battery charged is \(CBC_i^v\).
+--------------------------------------------------------------------------------
+Reinforcement Learning for Secrecy Optimization in Underwater Energy Harvesting Relay Network (https://arxiv.org/abs/2603.06046)
+citeturn13academia18 [wordlim: 200] Published: 8 months ago; A model-based reinforcement learning (RL) driven optimal power allocation (OPA) strategy is proposed to maximize long-term cumulative secrecy performance until the network stops functioning. ... Simulation results show that the RL based OPA adapts effectively to battery dynamics, varying channel conditions, and optical link availability, achieving the highest secure data transmission, while GA performs reasonably and NA performs poorly due to its short-sighted decisions.
+--------------------------------------------------------------------------------
+Reinforcement Learning-based Home Energy Management with Heterogeneous Batteries and Stochastic EV Behaviour (https://arxiv.org/abs/2602.04578)
+citeturn13academia19 [wordlim: 200] Published: 9 months ago; This paper proposes a novel home energy management framework based on deep reinforcement learning (DRL) that can jointly minimise energy expenditure and battery degradation while guaranteeing occupant comfort and EV charging requirements. ... Specifically, the method reduces the cumulative operating cost substantially compared to two standard rule-based baselines while simultaneously decreasing battery degradation costs by 8.44%.
+--------------------------------------------------------------------------------
+Price Aware Power Split Control in Heterogeneous Battery Storage Systems (https://arxiv.org/abs/2507.00628)
+citeturn13academia20 [wordlim: 200] Published: 1.3 years ago; This paper presents a unified framework for the optimal scheduling of battery dispatch and internal power allocation in Battery energy storage systems (BESS). ... This work compares both model-based Linear Programming (LP) and model-free Reinforcement Learning (RL) approaches for optimization under varying forecast assumptions, using a custom Gym-based simulation environment. ... In summary, the long-term results show that the RL approach achieved 10% higher system efficiency compared to LP, whereas the latter yielded 33% greater cumulative savings.
+--------------------------------------------------------------------------------
+Joint Transmit and Jamming Power Optimization for Secrecy in Energy Harvesting Networks: A Reinforcement Learning Approach (https://arxiv.org/abs/2407.17435)
+citeturn13academia21 [wordlim: 200] Published: 2.3 years ago; Title: Joint Transmit and Jamming Power Optimization for Secrecy in Energy Harvesting Networks: A Reinforcement Learning Approach ... In this paper, we address the problem of joint allocation of transmit and jamming power at the source and destination, respectively, to enhance the long-term cumulative secrecy performance of an energy-harvesting wireless communication system until it stops functioning in the presence of an eavesdropper. The source and destination have energy-harvesting devices with limited battery capacities.
+--------------------------------------------------------------------------------
+Reinforcement learning (https://en.wikipedia.org/wiki/Reinforcement_learning)
+citeturn13search22 [wordlim: 200] Crawled: last week; The purpose of reinforcement learning is for the agent to learn an optimal (or near-optimal) policy that maximizes the reward function or other user-provided reinforcement signal that accumulates from immediate rewards. ... that maximizes the expected cumulative reward. ... Even if the issue of exploration is disregarded and even if the state was observable (assumed hereafter), the problem remains to use past experience to find out which actions lead to higher cumulative rewards. ... "Community energy storage operation via reinforcement learning with eligibility traces".
+

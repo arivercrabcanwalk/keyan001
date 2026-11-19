@@ -1,0 +1,7629 @@
+{
+  "schema": "g2_saved_greedy_parents_v1",
+  "source_manifest_path": "<LOCAL_PATH>",
+  "source_manifest_sha256": "487f32fdb3aab73e174c9eca9d686dc10da0ace5d3d31b2686f4936ddc71d1ad",
+  "maps": [
+    {
+      "map": "10_110_7",
+      "input_sha256": "09e0c708493a60a070f5c6be39f48cea5c3bfc6e6d6a44d2e91f9c4d8910750f",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "591044cb19d2cbc16a43979304026fb343cb46e10c9c8b76ee8890fecb9b0ebe"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "9986a912a477a165cd95caf44bbd2f5eca6d5174f40ed9861d50887ee68429bf"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ff5d7934bcdf4a33d84b70382ee7210b6bef4c7391bde2559602b479ab628b17"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "2ee531835e8c0e8e9bcfb01575c213c2ec1a286798112d0601adfc15f9bba958"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "43079d641f2a154bcd45f72134a72ce62fb17018e466b2fe68b5499b52471690"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4f3182c118ee10b549030d2347fec7c6788906663c40ad193361a089eab8fea4"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "10_110_7",
+        "instance_sha256": "09e0c708493a60a070f5c6be39f48cea5c3bfc6e6d6a44d2e91f9c4d8910750f",
+        "station_types": [
+          1,
+          0,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            [
+              [
+                101,
+                62,
+                109
+              ],
+              [
+                17,
+                80,
+                99
+              ],
+              [
+                18,
+                85
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                44,
+                34,
+                36,
+                63
+              ],
+              [
+                47,
+                73,
+                93
+              ],
+              [
+                4,
+                70
+              ]
+            ],
+            [
+              [
+                39,
+                45,
+                88
+              ],
+              [
+                3,
+                37,
+                83
+              ],
+              [
+                28,
+                97
+              ],
+              [
+                46
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                30,
+                38,
+                68,
+                89
+              ],
+              [
+                19
+              ]
+            ],
+            [
+              [
+                95,
+                103,
+                106
+              ],
+              [
+                5
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                102,
+                54,
+                15,
+                81
+              ],
+              [
+                110,
+                22
+              ]
+            ],
+            [
+              [
+                6,
+                24,
+                55
+              ],
+              [
+                71,
+                33
+              ],
+              [
+                9
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                100,
+                75,
+                104,
+                2
+              ],
+              [
+                50,
+                8,
+                96
+              ],
+              [
+                48,
+                23,
+                53
+              ]
+            ],
+            [
+              [
+                91,
+                10,
+                72
+              ],
+              [
+                61,
+                107
+              ],
+              [
+                105,
+                94,
+                52
+              ],
+              [
+                43
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                66,
+                21,
+                41,
+                40
+              ],
+              [
+                31,
+                64,
+                98
+              ]
+            ],
+            [
+              [
+                1,
+                92,
+                7
+              ],
+              [
+                78,
+                86
+              ],
+              [
+                76
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                11,
+                13,
+                25,
+                14
+              ],
+              [
+                108,
+                27,
+                42
+              ],
+              [
+                57,
+                84,
+                20
+              ]
+            ],
+            [
+              [
+                87,
+                69,
+                29
+              ],
+              [
+                74,
+                58,
+                35
+              ],
+              [
+                49,
+                67
+              ],
+              [
+                32,
+                82
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                26,
+                56,
+                16
+              ],
+              [
+                12,
+                65,
+                59
+              ]
+            ],
+            [
+              [
+                51,
+                60,
+                90
+              ],
+              [
+                79,
+                77
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "462b25ab6ccac01a7a7815294f782f76af3be707a0e4bd749b98ba280d68e899",
+      "stored_greedy_cost": 1095.5503008591243,
+      "station_targets": [
+        [
+          17,
+          18,
+          62,
+          80,
+          85,
+          99,
+          101,
+          109
+        ],
+        [],
+        [
+          3,
+          4,
+          28,
+          34,
+          36,
+          37,
+          39,
+          44,
+          45,
+          46,
+          47,
+          63,
+          70,
+          73,
+          83,
+          88,
+          93,
+          97
+        ],
+        [],
+        [
+          5,
+          19,
+          30,
+          38,
+          68,
+          89,
+          95,
+          103,
+          106
+        ],
+        [
+          6,
+          9,
+          15,
+          22,
+          24,
+          33,
+          54,
+          55,
+          71,
+          81,
+          102,
+          110
+        ],
+        [
+          2,
+          8,
+          10,
+          23,
+          43,
+          48,
+          50,
+          52,
+          53,
+          61,
+          72,
+          75,
+          91,
+          94,
+          96,
+          100,
+          104,
+          105,
+          107
+        ],
+        [
+          1,
+          7,
+          21,
+          31,
+          40,
+          41,
+          64,
+          66,
+          76,
+          78,
+          86,
+          92,
+          98
+        ],
+        [
+          11,
+          13,
+          14,
+          20,
+          25,
+          27,
+          29,
+          32,
+          35,
+          42,
+          49,
+          57,
+          58,
+          67,
+          69,
+          74,
+          82,
+          84,
+          87,
+          108
+        ],
+        [
+          12,
+          16,
+          26,
+          51,
+          56,
+          59,
+          60,
+          65,
+          77,
+          79,
+          90
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          [
+            17,
+            18,
+            62,
+            80,
+            85,
+            99,
+            101,
+            109
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            4,
+            34,
+            36,
+            44,
+            47,
+            63,
+            70,
+            73,
+            93
+          ],
+          [
+            3,
+            28,
+            37,
+            39,
+            45,
+            46,
+            83,
+            88,
+            97
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            19,
+            30,
+            38,
+            68,
+            89
+          ],
+          [
+            5,
+            95,
+            103,
+            106
+          ]
+        ],
+        [
+          [
+            15,
+            22,
+            54,
+            81,
+            102,
+            110
+          ],
+          [
+            6,
+            9,
+            24,
+            33,
+            55,
+            71
+          ]
+        ],
+        [
+          [
+            2,
+            8,
+            23,
+            48,
+            50,
+            53,
+            75,
+            96,
+            100,
+            104
+          ],
+          [
+            10,
+            43,
+            52,
+            61,
+            72,
+            91,
+            94,
+            105,
+            107
+          ]
+        ],
+        [
+          [
+            21,
+            31,
+            40,
+            41,
+            64,
+            66,
+            98
+          ],
+          [
+            1,
+            7,
+            76,
+            78,
+            86,
+            92
+          ]
+        ],
+        [
+          [
+            11,
+            13,
+            14,
+            20,
+            25,
+            27,
+            42,
+            57,
+            84,
+            108
+          ],
+          [
+            29,
+            32,
+            35,
+            49,
+            58,
+            67,
+            69,
+            74,
+            82,
+            87
+          ]
+        ],
+        [
+          [
+            12,
+            16,
+            26,
+            56,
+            59,
+            65
+          ],
+          [
+            51,
+            60,
+            77,
+            79,
+            90
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "10_110_8",
+      "input_sha256": "8d242bcd39f2698442346b58b559cd02e36a4f9721454a78070fc97e49569ca6",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "9335df426573a4e872d4585a522e8ff73a36d4b386b765df3b9dbda7e169333d"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d95705be30f1df617c98edded55ef2e993cb4e431ce21813de117c33496bfe6e"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3a3734b02bd0303be6d0bc9961646bbceb7d4adaab931b6dc6786e47fbab3f3e"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "13d8a705ac2c4f8db8c2ba86afd52c6c26c5f44d77800be9deef7e94f30693a8"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "522d121e7ce50a959ad64badb2b51d8303a1c8d4a1b2e75110ddcaef828e7558"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ce6ffc576595186f59708b2994e1476a1445282ab085a8722e1c560c6db00bc0"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "10_110_8",
+        "instance_sha256": "8d242bcd39f2698442346b58b559cd02e36a4f9721454a78070fc97e49569ca6",
+        "station_types": [
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            [
+              [
+                92,
+                31,
+                5
+              ],
+              [
+                22,
+                87,
+                94
+              ],
+              [
+                91,
+                42
+              ],
+              [
+                61
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                41,
+                97,
+                33
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3,
+                106,
+                72
+              ],
+              [
+                78,
+                8,
+                59
+              ]
+            ],
+            [
+              [
+                83,
+                25,
+                66
+              ],
+              [
+                110,
+                70
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                26,
+                39,
+                17,
+                93
+              ],
+              [
+                29,
+                75,
+                51
+              ],
+              [
+                86
+              ]
+            ],
+            [
+              [
+                96,
+                2,
+                84
+              ],
+              [
+                100,
+                49,
+                68
+              ],
+              [
+                4,
+                85
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                34,
+                47,
+                95,
+                18
+              ],
+              [
+                62,
+                63,
+                53
+              ],
+              [
+                67,
+                64
+              ]
+            ],
+            [
+              [
+                19,
+                16,
+                98
+              ],
+              [
+                32,
+                24,
+                55
+              ],
+              [
+                48,
+                80
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                88,
+                108,
+                57,
+                76
+              ],
+              [
+                36,
+                40,
+                105
+              ],
+              [
+                65
+              ]
+            ],
+            [
+              [
+                45,
+                35,
+                12
+              ],
+              [
+                15,
+                1,
+                11
+              ],
+              [
+                69
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                28,
+                58,
+                9,
+                107
+              ],
+              [
+                20,
+                13,
+                79
+              ],
+              [
+                38,
+                23
+              ]
+            ],
+            [
+              [
+                71,
+                56,
+                30
+              ],
+              [
+                54,
+                82
+              ],
+              [
+                14,
+                102
+              ],
+              [
+                27,
+                89
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                50,
+                46,
+                99
+              ],
+              [
+                43,
+                52,
+                10
+              ],
+              [
+                7
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                74,
+                103,
+                21,
+                6
+              ],
+              [
+                81,
+                90,
+                37
+              ]
+            ],
+            [
+              [
+                109,
+                60,
+                104
+              ],
+              [
+                77,
+                44
+              ],
+              [
+                101,
+                73
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "d4245f33a9a4b14dea4044da9e2c542e7b8cf013a5b8f400415acad992a6abb6",
+      "stored_greedy_cost": 1100.1292881406343,
+      "station_targets": [
+        [],
+        [
+          5,
+          22,
+          31,
+          42,
+          61,
+          87,
+          91,
+          92,
+          94
+        ],
+        [
+          33,
+          41,
+          97
+        ],
+        [
+          3,
+          8,
+          25,
+          59,
+          66,
+          70,
+          72,
+          78,
+          83,
+          106,
+          110
+        ],
+        [
+          2,
+          4,
+          17,
+          26,
+          29,
+          39,
+          49,
+          51,
+          68,
+          75,
+          84,
+          85,
+          86,
+          93,
+          96,
+          100
+        ],
+        [
+          16,
+          18,
+          19,
+          24,
+          32,
+          34,
+          47,
+          48,
+          53,
+          55,
+          62,
+          63,
+          64,
+          67,
+          80,
+          95,
+          98
+        ],
+        [
+          1,
+          11,
+          12,
+          15,
+          35,
+          36,
+          40,
+          45,
+          57,
+          65,
+          69,
+          76,
+          88,
+          105,
+          108
+        ],
+        [
+          9,
+          13,
+          14,
+          20,
+          23,
+          27,
+          28,
+          30,
+          38,
+          54,
+          56,
+          58,
+          71,
+          79,
+          82,
+          89,
+          102,
+          107
+        ],
+        [
+          7,
+          10,
+          43,
+          46,
+          50,
+          52,
+          99
+        ],
+        [
+          6,
+          21,
+          37,
+          44,
+          60,
+          73,
+          74,
+          77,
+          81,
+          90,
+          101,
+          103,
+          104,
+          109
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          [
+            5,
+            22,
+            31,
+            42,
+            61,
+            87,
+            91,
+            92,
+            94
+          ]
+        ],
+        [
+          [],
+          [
+            33,
+            41,
+            97
+          ]
+        ],
+        [
+          [
+            3,
+            8,
+            59,
+            72,
+            78,
+            106
+          ],
+          [
+            25,
+            66,
+            70,
+            83,
+            110
+          ]
+        ],
+        [
+          [
+            17,
+            26,
+            29,
+            39,
+            51,
+            75,
+            86,
+            93
+          ],
+          [
+            2,
+            4,
+            49,
+            68,
+            84,
+            85,
+            96,
+            100
+          ]
+        ],
+        [
+          [
+            18,
+            34,
+            47,
+            53,
+            62,
+            63,
+            64,
+            67,
+            95
+          ],
+          [
+            16,
+            19,
+            24,
+            32,
+            48,
+            55,
+            80,
+            98
+          ]
+        ],
+        [
+          [
+            36,
+            40,
+            57,
+            65,
+            76,
+            88,
+            105,
+            108
+          ],
+          [
+            1,
+            11,
+            12,
+            15,
+            35,
+            45,
+            69
+          ]
+        ],
+        [
+          [
+            9,
+            13,
+            20,
+            23,
+            28,
+            38,
+            58,
+            79,
+            107
+          ],
+          [
+            14,
+            27,
+            30,
+            54,
+            56,
+            71,
+            82,
+            89,
+            102
+          ]
+        ],
+        [
+          [],
+          [
+            7,
+            10,
+            43,
+            46,
+            50,
+            52,
+            99
+          ]
+        ],
+        [
+          [
+            6,
+            21,
+            37,
+            74,
+            81,
+            90,
+            103
+          ],
+          [
+            44,
+            60,
+            73,
+            77,
+            101,
+            104,
+            109
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "3_10_7",
+      "input_sha256": "240ba197fb487be42231ee2520aa6d18341b93ded7a98505e01184b21a70e65f",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3508cb1d236de13f10d577c63aa405c94e64f2803f0485b9021890d126d3058b"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ca2a1b7540b9088f855b503069a2224132991b9e22dae205c40d9f2c2b7c0d9a"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "6141d785706267d5b1eaa3de332f09fbca81510fd91501e42bc9e810c39384fb"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "0bb546a897a23774c1911fa7c4e983dd118dfd77553c0d699051c8dd33e40c6c"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c461a120dfc6cf49429335efe2e29b744f249ab98c9f36de6187090dbbb34f5f"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "90012995752374d972fefb827c51488ff62fcbb292c4cb8f985c5e89dfdc3456"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_10_7",
+        "instance_sha256": "240ba197fb487be42231ee2520aa6d18341b93ded7a98505e01184b21a70e65f",
+        "station_types": [
+          2,
+          1,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                10,
+                3,
+                1
+              ],
+              [
+                5
+              ]
+            ],
+            [
+              [
+                9,
+                7,
+                4
+              ],
+              [
+                6
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                8,
+                2
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "23104389623f3db426af78482feace36e95d495fb520d1430a19235c4ee863c8",
+      "stored_greedy_cost": 143.47643272255698,
+      "station_targets": [
+        [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10
+        ],
+        [
+          2,
+          8
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            1,
+            3,
+            5,
+            10
+          ],
+          [
+            4,
+            6,
+            7,
+            9
+          ]
+        ],
+        [
+          [],
+          [
+            2,
+            8
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "3_10_8",
+      "input_sha256": "0231dbba662b8da6937b1a56532b9fc964151ca0b87e747500d19b45771dba0d",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5adf3470e9133c55c5981c18300f860bc13e172ad7ee304c5a624e5f9f75ca19"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "15c90e9ef0e6fea83463337719c2e965da43bc202fef42fce591de6ce993c595"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8d96dd7c8d57af6588f6dedf520a16130ab8d38ed6fbaab73a941c7c4a134e3f"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "eb9409e2139083bac0a717a27a437b269ce1d01aa8908b458cbb7c60c69fb119"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "889a75ce10014e970a3f958bdceb323ebff2f28e304716a3510775d3871bec90"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4447db64584438a1c7812492e1bfddc7fa33257a9067536b91be4ebca14fa90a"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_10_8",
+        "instance_sha256": "0231dbba662b8da6937b1a56532b9fc964151ca0b87e747500d19b45771dba0d",
+        "station_types": [
+          0,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                2,
+                4,
+                7
+              ],
+              [
+                10
+              ]
+            ],
+            [
+              [
+                6,
+                8,
+                1
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                9,
+                3
+              ]
+            ],
+            [
+              [
+                5
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "48db48f7a9966fd2f75d768c15037e5193d532e3fdb6d6e87c11cf551cf9abe5",
+      "stored_greedy_cost": 162.90502033912742,
+      "station_targets": [
+        [],
+        [
+          1,
+          2,
+          4,
+          6,
+          7,
+          8,
+          10
+        ],
+        [
+          3,
+          5,
+          9
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            2,
+            4,
+            7,
+            10
+          ],
+          [
+            1,
+            6,
+            8
+          ]
+        ],
+        [
+          [
+            3,
+            9
+          ],
+          [
+            5
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "3_15_7",
+      "input_sha256": "0072b6304746fd23329e5e30b78101a36ea78187e81cc8a9f0ecb170a7cd38b0",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a99cf05182840dca20ca71a64c18dd224ba80dd229f015caaf51b8f5ecefd5b6"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "760824727b23928f618804cdc67dd2196d858c5748027cb0adb24470d5029d9e"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8ed67b8dc3cbb573a24f9ae2475fcf2cfa71ebfacadbeff98fc183075401786a"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "244c26361d20569148f37fdd716edf23ae2ed35f806566a94cf2fbdd29815c1e"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d98f267a814a59832b025192ddd0b096f3ab3dbad7ccb8cc23283749397a00c7"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7d26762c0c3c9d4558494bf70b252d38965d59207627a287fc1ec068b91c03a4"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_15_7",
+        "instance_sha256": "0072b6304746fd23329e5e30b78101a36ea78187e81cc8a9f0ecb170a7cd38b0",
+        "station_types": [
+          1,
+          0,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            [
+              [
+                6,
+                4,
+                5
+              ],
+              [
+                12
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                14,
+                9,
+                11
+              ],
+              [
+                10,
+                7,
+                8
+              ]
+            ],
+            [
+              [
+                15,
+                3
+              ],
+              [
+                13,
+                2
+              ],
+              [
+                1
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "b083f691d6d4416fbde21d816a629bba0f0d58323f0e05df20b7526f6aaa1c75",
+      "stored_greedy_cost": 185.29757959348757,
+      "station_targets": [
+        [
+          4,
+          5,
+          6,
+          12
+        ],
+        [],
+        [
+          1,
+          2,
+          3,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          [
+            4,
+            5,
+            6,
+            12
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            7,
+            8,
+            9,
+            10,
+            11,
+            14
+          ],
+          [
+            1,
+            2,
+            3,
+            13,
+            15
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "3_15_8",
+      "input_sha256": "f8f288c9f3167174a1c00cfd9022ed59d7cb7cc90f6b3131e506612dd6d5201a",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "99a1d60a970329927096ba0c467af458e78d5e8ed24990a83ab6f1309980e749"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "973e7d0f903b5a0895c7416596c78ee7fc4635af5bd0eed9052d92fb9f2c7d03"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d6251b1e51e85097ae480682a9b8bcf20b0c9df6f4e1ad55e3e17e164b1f8264"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "fa39cd70b239e5867dc490fc46aefa236131652780ae2aae2b2d020b4b891d7f"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1f40c96d3437a22319a52f179dbe63e2e36a67f7f7074b115c857c8ba3dfcd4b"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ccd900ffdae5f165578da5493537865a9cff41f0341a50a8e33c940ca6d76582"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_15_8",
+        "instance_sha256": "f8f288c9f3167174a1c00cfd9022ed59d7cb7cc90f6b3131e506612dd6d5201a",
+        "station_types": [
+          0,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                1,
+                15,
+                8
+              ],
+              [
+                2,
+                4
+              ]
+            ],
+            [
+              [
+                11,
+                6,
+                5
+              ],
+              [
+                3
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                10,
+                9,
+                14
+              ]
+            ],
+            [
+              [
+                13,
+                12
+              ],
+              [
+                7
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "e36cc1b7dcdea7f4b73cdd18b2c4d7aa4a8d6d1a1df9e8dbcaa93208c55a2134",
+      "stored_greedy_cost": 200.1291176686605,
+      "station_targets": [
+        [],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          11,
+          15
+        ],
+        [
+          7,
+          9,
+          10,
+          12,
+          13,
+          14
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            1,
+            2,
+            4,
+            8,
+            15
+          ],
+          [
+            3,
+            5,
+            6,
+            11
+          ]
+        ],
+        [
+          [
+            9,
+            10,
+            14
+          ],
+          [
+            7,
+            12,
+            13
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "3_20_7",
+      "input_sha256": "3e728b6241ffbab633effb6c71b57ee0cc9ae55b390f4ef5c2bf5a77b433b441",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "cf5e6e7016a076938ee0d511a5a60287f866b09de671192f9bca4d7ddd408cca"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5c8c07d76dfad80444a8da5063bce2155d842c7d84c5e71913a6f8a02842d595"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "970412e04aef273db7677108f35abed624693d4360c0d856e52b24358548de05"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7e31b007a1fa12426bdff44b761c895050b2195cbe93e7ab04a630a4bb068956"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c82f561ae9eb10743e98fa352559cadcb090321df80e859641291e99ec4a0260"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "eb4a8ee490927188d2914b07b9ee85e83d9037d20bcebbc70ad0f4a9e35e139a"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_20_7",
+        "instance_sha256": "3e728b6241ffbab633effb6c71b57ee0cc9ae55b390f4ef5c2bf5a77b433b441",
+        "station_types": [
+          0,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                12,
+                20,
+                6
+              ],
+              [
+                2,
+                15,
+                8
+              ],
+              [
+                11
+              ]
+            ],
+            [
+              [
+                16,
+                1
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                19,
+                7
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                10,
+                17,
+                18
+              ],
+              [
+                9
+              ]
+            ],
+            [
+              [
+                14,
+                13,
+                3
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "0f7ae0f0d575e09526a7b0b3b146fd00ffc348e0feb71275e89e7da048f25f6f",
+      "stored_greedy_cost": 239.97728392906083,
+      "station_targets": [
+        [],
+        [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          11,
+          12,
+          15,
+          16,
+          19,
+          20
+        ],
+        [
+          3,
+          9,
+          10,
+          13,
+          14,
+          17,
+          18
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          []
+        ],
+        [
+          [
+            2,
+            6,
+            8,
+            11,
+            12,
+            15,
+            20
+          ],
+          [
+            1,
+            4,
+            5,
+            7,
+            16,
+            19
+          ]
+        ],
+        [
+          [
+            9,
+            10,
+            17,
+            18
+          ],
+          [
+            3,
+            13,
+            14
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "3_20_8",
+      "input_sha256": "472b2bad3468c5ed97ab047e327cebf3ff6ca8e1e34a9db51b2da4e5abb18265",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1a552dc9e12fb75ce32f9cd73541f87faf7aa0a98ad9e300d2d6ef0c35aad27f"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "962393d56f1e5257087f83e3d88fee4fc4ba215b99c454de1f0936176c598d6a"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "bdf704272d0e9f81577637102ce72759f90d60d21313dc177f1ca3a863a67641"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "b80eacb51c5128669d28326e4fa76f57d78e104f6df560f2eb39dd3727dc5f2c"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "32b936cdd23f077eb8176f0820829088825073ef124fda6f8d18221eac0db44a"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d73e1806b7401068b07cd05d0d85cfff1ceceaa422c146cfcbdfde26fc9f1761"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "3_20_8",
+        "instance_sha256": "472b2bad3468c5ed97ab047e327cebf3ff6ca8e1e34a9db51b2da4e5abb18265",
+        "station_types": [
+          2,
+          1,
+          2
+        ],
+        "routes": [
+          [
+            [
+              [
+                7,
+                4,
+                17
+              ]
+            ],
+            [
+              [
+                6,
+                5
+              ],
+              [
+                11
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                9,
+                18,
+                12
+              ],
+              [
+                16,
+                1
+              ],
+              [
+                19
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2,
+                10,
+                15
+              ],
+              [
+                8
+              ]
+            ],
+            [
+              [
+                20,
+                13
+              ],
+              [
+                14,
+                3
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "6cda425dc3db77bacbc2b3f9decb54429728e785e03014daeacf6d2f7357307b",
+      "stored_greedy_cost": 265.11270570322176,
+      "station_targets": [
+        [
+          4,
+          5,
+          6,
+          7,
+          11,
+          17
+        ],
+        [
+          1,
+          9,
+          12,
+          16,
+          18,
+          19
+        ],
+        [
+          2,
+          3,
+          8,
+          10,
+          13,
+          14,
+          15,
+          20
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            4,
+            7,
+            17
+          ],
+          [
+            5,
+            6,
+            11
+          ]
+        ],
+        [
+          [],
+          [
+            1,
+            9,
+            12,
+            16,
+            18,
+            19
+          ]
+        ],
+        [
+          [
+            2,
+            8,
+            10,
+            15
+          ],
+          [
+            3,
+            13,
+            14,
+            20
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "4_20_7",
+      "input_sha256": "a74d3f1e763829cf662ccdddb15a5e5b3b8c33817c116904fac4bae4baf60dff",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "b0e899c0cef2f5f2b39d8d9ea0368c495125f9d4f8a12dee227b109f7aa60da9"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "fcb95299ccaf721712384cfaa988b97b8620fce058d297648d148f2379c3dfb3"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ce1263482a6db2aed3bdd6cf271f2d7fdae45f0b3dbad969daf2e5c7c5dab000"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4a7684838ecc16d9e3ac60ef1544dd78220345c10d699e214d2a3271da61469d"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d0d59be87cbe4b7368b00f8c5b5af357c51bd3ff49c08702615342d88e0dbe7d"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1280fc0fd05aeee92cef6ef6d756f291f99b087cde3689532049c21d33bb0d05"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_20_7",
+        "instance_sha256": "a74d3f1e763829cf662ccdddb15a5e5b3b8c33817c116904fac4bae4baf60dff",
+        "station_types": [
+          2,
+          0,
+          2,
+          1
+        ],
+        "routes": [
+          [
+            [
+              [
+                2,
+                8,
+                18
+              ],
+              [
+                1
+              ]
+            ],
+            [
+              [
+                12,
+                5
+              ],
+              [
+                15,
+                17
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                6,
+                3,
+                19
+              ],
+              [
+                7
+              ]
+            ],
+            [
+              [
+                13,
+                16,
+                14
+              ],
+              [
+                20
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                11,
+                9
+              ],
+              [
+                10,
+                4
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "144bc052abfaffb79217ec7e0e505a1ccec45d309d36e06df793fb6a41f976ca",
+      "stored_greedy_cost": 270.10762727673387,
+      "station_targets": [
+        [
+          1,
+          2,
+          5,
+          8,
+          12,
+          15,
+          17,
+          18
+        ],
+        [],
+        [
+          3,
+          6,
+          7,
+          13,
+          14,
+          16,
+          19,
+          20
+        ],
+        [
+          4,
+          9,
+          10,
+          11
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            1,
+            2,
+            8,
+            18
+          ],
+          [
+            5,
+            12,
+            15,
+            17
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            3,
+            6,
+            7,
+            19
+          ],
+          [
+            13,
+            14,
+            16,
+            20
+          ]
+        ],
+        [
+          [],
+          [
+            4,
+            9,
+            10,
+            11
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "4_20_8",
+      "input_sha256": "b0da1ff449f0c6a08e2e63993014ebfcde99e5a2b37696c4966695db710a6159",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7a73dc603c72159302dd0e83eac92d18afa5bbbe6eb73b3a796e4d491c60ba79"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1a6bbe9643715a4ba9859fb2af5a92e92095e0d891858a478c8ce74fbfb5077f"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "fe22da4e131868b8c17a71214e0ba72f7a1ab0d42784d584c4417af5a3bfb325"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "9b5b7314a8ce7259b4aab5d89df91a3c2a2121d314d8848b858ace43d8853f5d"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "209c933f3753318653221c79913dcd7d69cdd5f8bcb095dfe76a234f30559e47"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c5a1e1225d79137c8336866ccfecaa7761eb6e8c7ae724ec3e93ecde766a33f2"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_20_8",
+        "instance_sha256": "b0da1ff449f0c6a08e2e63993014ebfcde99e5a2b37696c4966695db710a6159",
+        "station_types": [
+          2,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                10,
+                17,
+                15
+              ]
+            ],
+            [
+              [
+                8,
+                3
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                20,
+                9,
+                11
+              ]
+            ],
+            [
+              [
+                16,
+                4
+              ],
+              [
+                5
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                14,
+                7,
+                19
+              ],
+              [
+                1,
+                13
+              ]
+            ],
+            [
+              [
+                18,
+                6
+              ],
+              [
+                12,
+                2
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "fac27f5b02879389e7a6bc0180de4e510fee5b14f84750dbec7f2336b23c202b",
+      "stored_greedy_cost": 284.88044332685536,
+      "station_targets": [
+        [
+          3,
+          8,
+          10,
+          15,
+          17
+        ],
+        [
+          4,
+          5,
+          9,
+          11,
+          16,
+          20
+        ],
+        [
+          1,
+          2,
+          6,
+          7,
+          12,
+          13,
+          14,
+          18,
+          19
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            10,
+            15,
+            17
+          ],
+          [
+            3,
+            8
+          ]
+        ],
+        [
+          [
+            9,
+            11,
+            20
+          ],
+          [
+            4,
+            5,
+            16
+          ]
+        ],
+        [
+          [
+            1,
+            7,
+            13,
+            14,
+            19
+          ],
+          [
+            2,
+            6,
+            12,
+            18
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "4_25_7",
+      "input_sha256": "6ef0438cdc35a73c6bfeef6133994db31cc051390f68564749c65eb1f75a662c",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c43bdb6ccab01d64b3b412bc1746f0daa8b0286e6e36d18c704c728154e34358"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5366449ba01c7850c34d7e1e69745e21d4626f5e03721406e4ba48134ee5bc9e"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1aac326bcc23f44c553d5a9af12dd39b3101e8034a4054c176c4d27bf43b813d"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3a1d7277a1633e25cf064f15b39dd9847f9660947da499ace737a86a221914f4"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "b3a08bb69c8e413c41a365c9fe752c377938d977cfc19ba7f1e5ccb9cd8a5805"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a7a38001f6b87d1e9f42c91833614dd1bdf6a773f456bb1b1f8a25f6bcaf0d99"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_25_7",
+        "instance_sha256": "6ef0438cdc35a73c6bfeef6133994db31cc051390f68564749c65eb1f75a662c",
+        "station_types": [
+          2,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                3,
+                17,
+                21
+              ],
+              [
+                14,
+                1,
+                19
+              ],
+              [
+                22
+              ]
+            ],
+            [
+              [
+                20,
+                4,
+                10
+              ],
+              [
+                15,
+                2
+              ],
+              [
+                7
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                13,
+                12,
+                24
+              ]
+            ],
+            [
+              [
+                6,
+                18
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                23,
+                16,
+                8
+              ],
+              [
+                25
+              ]
+            ],
+            [
+              [
+                11,
+                9
+              ],
+              [
+                5
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "34cf18c1e69b3393e1f1bd3a8856815efafe154fc10dd4e7f8172bc29e1acd87",
+      "stored_greedy_cost": 321.2852461709103,
+      "station_targets": [
+        [
+          1,
+          2,
+          3,
+          4,
+          7,
+          10,
+          14,
+          15,
+          17,
+          19,
+          20,
+          21,
+          22
+        ],
+        [
+          6,
+          12,
+          13,
+          18,
+          24
+        ],
+        [
+          5,
+          8,
+          9,
+          11,
+          16,
+          23,
+          25
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            1,
+            3,
+            14,
+            17,
+            19,
+            21,
+            22
+          ],
+          [
+            2,
+            4,
+            7,
+            10,
+            15,
+            20
+          ]
+        ],
+        [
+          [
+            12,
+            13,
+            24
+          ],
+          [
+            6,
+            18
+          ]
+        ],
+        [
+          [
+            8,
+            16,
+            23,
+            25
+          ],
+          [
+            5,
+            9,
+            11
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "4_25_8",
+      "input_sha256": "891eb440cd9cde3ced4ffcaa002d89e894f7c8315af49ed48eb7ca48bd0b4b8f",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4dea6ef6b5395bec824b75cd25e125d72741544ea3c462e0def6c3632bc4ad10"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "817a689be2b0c3bef1e9b66c7779361b783dadcca3bc9eaa2e70771572ec0150"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "df38784ae0b6d3e01eccb1abf9b8e3b742ee2e0f9200fa298246abe1e698d55e"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "20a0c4e7e842ffce8c9bd7350d121edd080ce9f8b8bc6e79608bf866d15792d3"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ed3e85355ad2e170a25520dac6c00ace9af7f98857bc4e8aeaa3b47990270313"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c6d35bc0ecd7d7c7152dbcbe5e3ceaa039e45fc106b85fd6b0f1746a31d7ce98"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_25_8",
+        "instance_sha256": "891eb440cd9cde3ced4ffcaa002d89e894f7c8315af49ed48eb7ca48bd0b4b8f",
+        "station_types": [
+          2,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                6,
+                7,
+                12
+              ]
+            ],
+            [
+              [
+                2,
+                20
+              ],
+              [
+                13
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                18,
+                5,
+                14,
+                11
+              ],
+              [
+                16
+              ]
+            ],
+            [
+              [
+                17,
+                21,
+                10
+              ],
+              [
+                24
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                8,
+                19,
+                15
+              ],
+              [
+                23,
+                3
+              ]
+            ],
+            [
+              [
+                22,
+                1,
+                4
+              ],
+              [
+                9,
+                25
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "699da04bbe85ed177a7fab57d7c49f1b79290f2ed4a701dd042783ee811f41a2",
+      "stored_greedy_cost": 313.1775292760831,
+      "station_targets": [
+        [
+          2,
+          6,
+          7,
+          12,
+          13,
+          20
+        ],
+        [
+          5,
+          10,
+          11,
+          14,
+          16,
+          17,
+          18,
+          21,
+          24
+        ],
+        [
+          1,
+          3,
+          4,
+          8,
+          9,
+          15,
+          19,
+          22,
+          23,
+          25
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            6,
+            7,
+            12
+          ],
+          [
+            2,
+            13,
+            20
+          ]
+        ],
+        [
+          [
+            5,
+            11,
+            14,
+            16,
+            18
+          ],
+          [
+            10,
+            17,
+            21,
+            24
+          ]
+        ],
+        [
+          [
+            3,
+            8,
+            15,
+            19,
+            23
+          ],
+          [
+            1,
+            4,
+            9,
+            22,
+            25
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "4_30_7",
+      "input_sha256": "95a4355441e3673f78a15d20a50402b564f68ade55ce9cc7cea5103396a7187a",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "60dd7d99aebf2c42de3d8f73045178a1a825b698ad6cfc585af5c90117be602b"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "48f0ee3f1cf74a050a6b433f248cf4694e62e5bc71ee6652f86c11a0e99e3417"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5043bea80ab99fed900875f65cdc9b6bd1a8f8bc54ca126a5f8ed6856e47bf4c"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c1bafcaf5f919eb164eee707aa829e6ad672c27aacd65be0b75a6ccb9550edcd"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "09826600618a794318325f4e69641f61a91b5503dd4aa24aaa0f52fa93030ef7"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7b4b02adcf69a7f92c7926c014f82b4aa432da979bd6cee9651fcb899772f713"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_30_7",
+        "instance_sha256": "95a4355441e3673f78a15d20a50402b564f68ade55ce9cc7cea5103396a7187a",
+        "station_types": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "routes": [
+          [
+            [
+              [
+                25,
+                22,
+                13
+              ],
+              [
+                7,
+                24
+              ]
+            ],
+            [
+              [
+                21,
+                3
+              ],
+              [
+                28,
+                27
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                30,
+                11,
+                14,
+                15
+              ],
+              [
+                29,
+                16,
+                4
+              ]
+            ],
+            [
+              [
+                23,
+                9
+              ],
+              [
+                19,
+                10
+              ],
+              [
+                8,
+                26
+              ],
+              [
+                6
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                17,
+                1,
+                12
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              [
+                20,
+                18
+              ],
+              [
+                5
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "8d91968962a625f2c749c54329a9429482fe28ede31ed5c3dcb87c58b4dbdc95",
+      "stored_greedy_cost": 360.07385574667524,
+      "station_targets": [
+        [
+          3,
+          7,
+          13,
+          21,
+          22,
+          24,
+          25,
+          27,
+          28
+        ],
+        [
+          4,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          15,
+          16,
+          19,
+          23,
+          26,
+          29,
+          30
+        ],
+        [],
+        [
+          1,
+          2,
+          5,
+          12,
+          17,
+          18,
+          20
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            7,
+            13,
+            22,
+            24,
+            25
+          ],
+          [
+            3,
+            21,
+            27,
+            28
+          ]
+        ],
+        [
+          [
+            4,
+            11,
+            14,
+            15,
+            16,
+            29,
+            30
+          ],
+          [
+            6,
+            8,
+            9,
+            10,
+            19,
+            23,
+            26
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            1,
+            2,
+            12,
+            17
+          ],
+          [
+            5,
+            18,
+            20
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "4_30_8",
+      "input_sha256": "d0c80a8237e6dd5a14df0525f372a8e04e3c523a91a44b2ef64c7ae5e1052f37",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ee9cc598f201e3286c12eb6382da4a406da6aba7d67569ab792755995af938b2"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a3c3d8f74d2269ad8d4dce7dde129cf192eac6a9ad560e5857121965f247360c"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8dba59911455fffaa95ff06585419d9a37578b569a24b490ecff24d1ea5f2d82"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a766498f2617242f72d6a20cb37f63d874726e26ca69ac63c7f1727f3310d396"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4fca300bf7f7d02f6183e7f16c0d7d8d04375b61e47f90080ca7582c0dd18cd2"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "37420773714118b14fd9b45ee6c8057e61a06fe12953408001c612808081efa3"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "4_30_8",
+        "instance_sha256": "d0c80a8237e6dd5a14df0525f372a8e04e3c523a91a44b2ef64c7ae5e1052f37",
+        "station_types": [
+          2,
+          2,
+          0,
+          1
+        ],
+        "routes": [
+          [
+            [
+              [
+                21,
+                5,
+                19
+              ],
+              [
+                23,
+                4,
+                9
+              ],
+              [
+                8
+              ]
+            ],
+            [
+              [
+                14,
+                13
+              ],
+              [
+                25,
+                12
+              ],
+              [
+                30,
+                10,
+                17
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                20,
+                24,
+                26
+              ],
+              [
+                15,
+                3
+              ]
+            ],
+            [
+              [
+                6,
+                1,
+                7
+              ],
+              [
+                28,
+                22
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            [
+              [
+                2,
+                29,
+                18
+              ],
+              [
+                11,
+                27,
+                16
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "d2211f7d05050107fd4de1f7e49994f53c043e6b9631011c2d3bac579ac6c366",
+      "stored_greedy_cost": 333.0329356682066,
+      "station_targets": [
+        [
+          4,
+          5,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          17,
+          19,
+          21,
+          23,
+          25,
+          30
+        ],
+        [
+          1,
+          3,
+          6,
+          7,
+          15,
+          20,
+          22,
+          24,
+          26,
+          28
+        ],
+        [],
+        [
+          2,
+          11,
+          16,
+          18,
+          27,
+          29
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            4,
+            5,
+            8,
+            9,
+            19,
+            21,
+            23
+          ],
+          [
+            10,
+            12,
+            13,
+            14,
+            17,
+            25,
+            30
+          ]
+        ],
+        [
+          [
+            3,
+            15,
+            20,
+            24,
+            26
+          ],
+          [
+            1,
+            6,
+            7,
+            22,
+            28
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          [
+            2,
+            11,
+            16,
+            18,
+            27,
+            29
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "5_35_7",
+      "input_sha256": "b5742a830e73aac763504e3e0561df2f66fa9b9c9898b787fb9ea8d9285025db",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8c8356b3f87cbbef8ced436e41dfa533db641f4e4a664c3e36d865ce41462591"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "9460d31029fb2e37da72c9ff8c8521e1043667e1b5f05a1738bc97bc997e311e"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ab7c012d18aa251fecd0b39d4ad98a4b795efc922136c516914c1c664d294d28"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ac2df0e3bf82c4836789ac524efb8a119b306144e7afd32b697a82df2b2d8c49"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "da3c1fe452b41330fc80109664dcca0e1351bec49e458a3fe5246e5e9aec49ff"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "6838b9d0aec31d0eb9f67395a91e823508f18cbe82f0405915596ac5da417b72"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "5_35_7",
+        "instance_sha256": "b5742a830e73aac763504e3e0561df2f66fa9b9c9898b787fb9ea8d9285025db",
+        "station_types": [
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                3,
+                7,
+                8
+              ]
+            ],
+            [
+              [
+                21,
+                20
+              ],
+              [
+                18
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                12,
+                34,
+                5
+              ],
+              [
+                22,
+                29
+              ]
+            ],
+            [
+              [
+                25,
+                19,
+                27
+              ],
+              [
+                16
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                33,
+                31,
+                11
+              ],
+              [
+                4,
+                6
+              ]
+            ],
+            [
+              [
+                30,
+                2,
+                13
+              ],
+              [
+                23,
+                9
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                17,
+                15,
+                1,
+                26
+              ],
+              [
+                32
+              ]
+            ],
+            [
+              [
+                10,
+                28,
+                14
+              ],
+              [
+                24,
+                35
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "550ddae3547636f30889eda6023384ed485fe408156e9ea6626afbbfd5f0ff3c",
+      "stored_greedy_cost": 424.1642081515315,
+      "station_targets": [
+        [
+          3,
+          7,
+          8,
+          18,
+          20,
+          21
+        ],
+        [
+          5,
+          12,
+          16,
+          19,
+          22,
+          25,
+          27,
+          29,
+          34
+        ],
+        [
+          2,
+          4,
+          6,
+          9,
+          11,
+          13,
+          23,
+          30,
+          31,
+          33
+        ],
+        [
+          1,
+          10,
+          14,
+          15,
+          17,
+          24,
+          26,
+          28,
+          32,
+          35
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            3,
+            7,
+            8
+          ],
+          [
+            18,
+            20,
+            21
+          ]
+        ],
+        [
+          [
+            5,
+            12,
+            22,
+            29,
+            34
+          ],
+          [
+            16,
+            19,
+            25,
+            27
+          ]
+        ],
+        [
+          [
+            4,
+            6,
+            11,
+            31,
+            33
+          ],
+          [
+            2,
+            9,
+            13,
+            23,
+            30
+          ]
+        ],
+        [
+          [
+            1,
+            15,
+            17,
+            26,
+            32
+          ],
+          [
+            10,
+            14,
+            24,
+            28,
+            35
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "5_35_8",
+      "input_sha256": "005a18bf384a99c44a5a3a0ce27adf227e88fd8e59bf1637095f7c1cfbe04118",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5b76a8d13a339b0d3a98571c0ae17778be006847aa8fae2e914b1123c38634be"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ecd14200e31659d3eb6f32f163437e47476efd56a1f915eef4d04eb8675c63b3"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "b5b387e704acdbde3f12c1bcbad37f4806fb09737c1183fb92e4466ad74f4cda"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7b5f037a92a8e3c9959d2a6b918376c0ed26ccedab07afe8452cbab7319e146c"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "0d8d769be73008e8f64a2e37782276d085f6148a4dd029980c0415a56bcbe9dc"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "e4537a804ae7db2024ca618172ea4d386dfde6b9dc0e62edda2284ca8d314ca8"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "5_35_8",
+        "instance_sha256": "005a18bf384a99c44a5a3a0ce27adf227e88fd8e59bf1637095f7c1cfbe04118",
+        "station_types": [
+          1,
+          2,
+          0,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [],
+            [
+              [
+                4,
+                20,
+                33
+              ],
+              [
+                23,
+                12,
+                14
+              ],
+              [
+                24,
+                31
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3,
+                6,
+                1
+              ],
+              [
+                25,
+                34,
+                11
+              ]
+            ],
+            [
+              [
+                19,
+                2,
+                29
+              ],
+              [
+                26,
+                30
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                21,
+                13,
+                15
+              ],
+              [
+                8
+              ]
+            ],
+            [
+              [
+                28,
+                18
+              ],
+              [
+                5,
+                22
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                10,
+                9,
+                27
+              ],
+              [
+                17
+              ]
+            ],
+            [
+              [
+                7,
+                16
+              ],
+              [
+                32,
+                35
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "f4624fac46c0879fd4a6e476826da3dfe88d331e76c6b0fd610a68cef1385588",
+      "stored_greedy_cost": 405.4365585085027,
+      "station_targets": [
+        [
+          4,
+          12,
+          14,
+          20,
+          23,
+          24,
+          31,
+          33
+        ],
+        [
+          1,
+          2,
+          3,
+          6,
+          11,
+          19,
+          25,
+          26,
+          29,
+          30,
+          34
+        ],
+        [],
+        [
+          5,
+          8,
+          13,
+          15,
+          18,
+          21,
+          22,
+          28
+        ],
+        [
+          7,
+          9,
+          10,
+          16,
+          17,
+          27,
+          32,
+          35
+        ]
+      ],
+      "slot_targets": [
+        [
+          [],
+          [
+            4,
+            12,
+            14,
+            20,
+            23,
+            24,
+            31,
+            33
+          ]
+        ],
+        [
+          [
+            1,
+            3,
+            6,
+            11,
+            25,
+            34
+          ],
+          [
+            2,
+            19,
+            26,
+            29,
+            30
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            8,
+            13,
+            15,
+            21
+          ],
+          [
+            5,
+            18,
+            22,
+            28
+          ]
+        ],
+        [
+          [
+            9,
+            10,
+            17,
+            27
+          ],
+          [
+            7,
+            16,
+            32,
+            35
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "6_50_7",
+      "input_sha256": "f72b0397f8a86d4e7d27b380195a830a74d8cc1a20ee085c02434837b36db9a4",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "9b695571e418626f95ae145927f3d2a44a5399778bf31b13846a9146472980bf"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "389140d43c7a048dd5629a4f11d455ab83b43bd8aba8d25348e9afbedb8b0419"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a15f8991d935b7e27262a14866825527948f49172f072f64d1568eedc0a00bed"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "2ca9e7ded07c9cb73aece2364dc7c29e0ea3ad0c091213043a30a66e9e075982"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "cf1774db7f8f595a5eeafd7ab82bc49767bf24dc2397d5718a33305d7fbbc744"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1ffdd596863ab04a09c93deb59165ca5cef493bed868ee2778b1fdca177497a3"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "6_50_7",
+        "instance_sha256": "f72b0397f8a86d4e7d27b380195a830a74d8cc1a20ee085c02434837b36db9a4",
+        "station_types": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [
+              [
+                15,
+                45,
+                36
+              ],
+              [
+                6,
+                20
+              ]
+            ],
+            [
+              [
+                38,
+                50
+              ],
+              [
+                24,
+                28
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                18,
+                33,
+                25,
+                46
+              ],
+              [
+                27
+              ]
+            ],
+            [
+              [
+                43,
+                19,
+                30
+              ],
+              [
+                3,
+                31
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                8,
+                14,
+                42
+              ],
+              [
+                21,
+                41
+              ]
+            ],
+            [
+              [
+                39,
+                26,
+                13
+              ],
+              [
+                49,
+                5
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                10,
+                1,
+                4
+              ]
+            ],
+            [
+              [
+                29,
+                34
+              ],
+              [
+                16
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                40,
+                7,
+                37,
+                11
+              ],
+              [
+                12,
+                2
+              ]
+            ],
+            [
+              [
+                44,
+                32,
+                35
+              ],
+              [
+                23,
+                9
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                48,
+                17
+              ]
+            ],
+            [
+              [
+                22,
+                47
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "d14611c643e3d2f1b6f1e0627830d194ad6e2eb70f4043ac750aae7d9c124690",
+      "stored_greedy_cost": 628.9594420116479,
+      "station_targets": [
+        [
+          6,
+          15,
+          20,
+          24,
+          28,
+          36,
+          38,
+          45,
+          50
+        ],
+        [
+          3,
+          18,
+          19,
+          25,
+          27,
+          30,
+          31,
+          33,
+          43,
+          46
+        ],
+        [
+          5,
+          8,
+          13,
+          14,
+          21,
+          26,
+          39,
+          41,
+          42,
+          49
+        ],
+        [
+          1,
+          4,
+          10,
+          16,
+          29,
+          34
+        ],
+        [
+          2,
+          7,
+          9,
+          11,
+          12,
+          23,
+          32,
+          35,
+          37,
+          40,
+          44
+        ],
+        [
+          17,
+          22,
+          47,
+          48
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            6,
+            15,
+            20,
+            36,
+            45
+          ],
+          [
+            24,
+            28,
+            38,
+            50
+          ]
+        ],
+        [
+          [
+            18,
+            25,
+            27,
+            33,
+            46
+          ],
+          [
+            3,
+            19,
+            30,
+            31,
+            43
+          ]
+        ],
+        [
+          [
+            8,
+            14,
+            21,
+            41,
+            42
+          ],
+          [
+            5,
+            13,
+            26,
+            39,
+            49
+          ]
+        ],
+        [
+          [
+            1,
+            4,
+            10
+          ],
+          [
+            16,
+            29,
+            34
+          ]
+        ],
+        [
+          [
+            2,
+            7,
+            11,
+            12,
+            37,
+            40
+          ],
+          [
+            9,
+            23,
+            32,
+            35,
+            44
+          ]
+        ],
+        [
+          [
+            17,
+            48
+          ],
+          [
+            22,
+            47
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "6_50_8",
+      "input_sha256": "e9473cd959388394aa84030c44e37d286af2f4bdbdfdd4c676c68b9c2f3439e5",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "39fb1f1bdee1ad3e1e5a90fde68c9d174fe4c3588c1b4f343fd77c1b636d3842"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "4f46ebf19f0526cfea948714c690537cdf1f6d1e72e7fd3ea8ce1c384336f9e9"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "79816f8bdfd37adeef830e4ded3f61dd65902ef12185f389c3f71fbafec120b9"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "cccf5b84e6ae5dcf7900b8ce431e4c8368e61725c97ed581727c813f39c3eb29"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5cb4bc29e9af39cf2a36ec2399f0576250e841dc7ed52b8653570730f00d2f67"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8658d5f52371f5e228f6c7a5f4df16b005c8cd6dbebad688d0c442eddb844d36"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "6_50_8",
+        "instance_sha256": "e9473cd959388394aa84030c44e37d286af2f4bdbdfdd4c676c68b9c2f3439e5",
+        "station_types": [
+          1,
+          2,
+          0,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [],
+            [
+              [
+                3,
+                2,
+                22
+              ],
+              [
+                28,
+                11,
+                15
+              ],
+              [
+                40,
+                14
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                12,
+                16,
+                17
+              ],
+              [
+                9,
+                31,
+                25
+              ]
+            ],
+            [
+              [
+                24,
+                46,
+                10
+              ],
+              [
+                45,
+                42
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                34,
+                30,
+                39,
+                50
+              ],
+              [
+                23,
+                33,
+                29
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                8
+              ]
+            ],
+            [
+              [
+                38,
+                41,
+                44
+              ],
+              [
+                35,
+                20
+              ],
+              [
+                43,
+                26
+              ],
+              [
+                7,
+                36
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                19,
+                47,
+                6,
+                13
+              ],
+              [
+                48,
+                37
+              ]
+            ],
+            [
+              [
+                21,
+                1,
+                32
+              ],
+              [
+                27,
+                49
+              ],
+              [
+                4
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "a3a815b4cc4dd6ac51a98f6d3efa79ee0fe071d3f0030cfb498b91f3c609962c",
+      "stored_greedy_cost": 516.6910371805401,
+      "station_targets": [
+        [
+          2,
+          3,
+          11,
+          14,
+          15,
+          22,
+          28,
+          40
+        ],
+        [
+          9,
+          10,
+          12,
+          16,
+          17,
+          24,
+          25,
+          31,
+          42,
+          45,
+          46
+        ],
+        [],
+        [
+          5,
+          7,
+          8,
+          18,
+          20,
+          23,
+          26,
+          29,
+          30,
+          33,
+          34,
+          35,
+          36,
+          38,
+          39,
+          41,
+          43,
+          44,
+          50
+        ],
+        [
+          1,
+          4,
+          6,
+          13,
+          19,
+          21,
+          27,
+          32,
+          37,
+          47,
+          48,
+          49
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [],
+          [
+            2,
+            3,
+            11,
+            14,
+            15,
+            22,
+            28,
+            40
+          ]
+        ],
+        [
+          [
+            9,
+            12,
+            16,
+            17,
+            25,
+            31
+          ],
+          [
+            10,
+            24,
+            42,
+            45,
+            46
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            5,
+            8,
+            18,
+            23,
+            29,
+            30,
+            33,
+            34,
+            39,
+            50
+          ],
+          [
+            7,
+            20,
+            26,
+            35,
+            36,
+            38,
+            41,
+            43,
+            44
+          ]
+        ],
+        [
+          [
+            6,
+            13,
+            19,
+            37,
+            47,
+            48
+          ],
+          [
+            1,
+            4,
+            21,
+            27,
+            32,
+            49
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "7_65_7",
+      "input_sha256": "21edd674a3f6f87c36d726fa9be95759c9accdc157b6bf52614306a24e77facd",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1da5892a32569321b8b9522ca9d8e6a581b68d11e31c1e5896104cf79e8db2a0"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "68faed5a4f883d19c825849fe1d57569da9c5c9df3351678b74fc8a529b4e337"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7b1cd5057fbe511981299f615f5a5e774cefdf76397ce129ed33f84403175154"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "f07db230bb3a48e3247f7fe6da3bf2aa915a64aa39bb7b56c7462dd126681d69"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3af7742c8a93f2acdf2df06b42a2e45bc8eefbd153ce8db8d5e508f1324291ec"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "16e8adcbddbee023dbf57c5afddde5e7b8a0fb18a0354b918178d9b9c21061bf"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "7_65_7",
+        "instance_sha256": "21edd674a3f6f87c36d726fa9be95759c9accdc157b6bf52614306a24e77facd",
+        "station_types": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                64,
+                57,
+                54,
+                63
+              ],
+              [
+                40,
+                31
+              ]
+            ],
+            [
+              [
+                26,
+                53,
+                17
+              ],
+              [
+                9,
+                61
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                24,
+                8,
+                1
+              ],
+              [
+                29,
+                49,
+                34
+              ]
+            ],
+            [
+              [
+                6,
+                4,
+                27
+              ],
+              [
+                46,
+                2
+              ],
+              [
+                14
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                5,
+                12,
+                21
+              ],
+              [
+                58
+              ]
+            ],
+            [
+              [
+                32,
+                35
+              ],
+              [
+                7,
+                20
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                16,
+                51,
+                30,
+                55
+              ],
+              [
+                60,
+                42,
+                41,
+                33
+              ],
+              [
+                37,
+                38,
+                22
+              ],
+              [
+                15
+              ]
+            ],
+            [
+              [
+                23,
+                11,
+                3
+              ],
+              [
+                52,
+                28,
+                43
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                18,
+                59
+              ],
+              [
+                25,
+                56
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                48,
+                50,
+                36
+              ],
+              [
+                62,
+                39
+              ]
+            ],
+            [
+              [
+                65,
+                44,
+                45
+              ],
+              [
+                19,
+                47
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "006ea41b98f89eaf3fa8a538063fd4c8e6198e8f1fbb64ec8aa54b09555d9017",
+      "stored_greedy_cost": 662.9654243423297,
+      "station_targets": [
+        [
+          9,
+          17,
+          26,
+          31,
+          40,
+          53,
+          54,
+          57,
+          61,
+          63,
+          64
+        ],
+        [
+          1,
+          2,
+          4,
+          6,
+          8,
+          14,
+          24,
+          27,
+          29,
+          34,
+          46,
+          49
+        ],
+        [
+          5,
+          7,
+          12,
+          20,
+          21,
+          32,
+          35,
+          58
+        ],
+        [
+          3,
+          10,
+          11,
+          13,
+          15,
+          16,
+          18,
+          22,
+          23,
+          25,
+          28,
+          30,
+          33,
+          37,
+          38,
+          41,
+          42,
+          43,
+          51,
+          52,
+          55,
+          56,
+          59,
+          60
+        ],
+        [
+          19,
+          36,
+          39,
+          44,
+          45,
+          47,
+          48,
+          50,
+          62,
+          65
+        ],
+        [],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            31,
+            40,
+            54,
+            57,
+            63,
+            64
+          ],
+          [
+            9,
+            17,
+            26,
+            53,
+            61
+          ]
+        ],
+        [
+          [
+            1,
+            8,
+            24,
+            29,
+            34,
+            49
+          ],
+          [
+            2,
+            4,
+            6,
+            14,
+            27,
+            46
+          ]
+        ],
+        [
+          [
+            5,
+            12,
+            21,
+            58
+          ],
+          [
+            7,
+            20,
+            32,
+            35
+          ]
+        ],
+        [
+          [
+            15,
+            16,
+            22,
+            30,
+            33,
+            37,
+            38,
+            41,
+            42,
+            51,
+            55,
+            60
+          ],
+          [
+            3,
+            10,
+            11,
+            13,
+            18,
+            23,
+            25,
+            28,
+            43,
+            52,
+            56,
+            59
+          ]
+        ],
+        [
+          [
+            36,
+            39,
+            48,
+            50,
+            62
+          ],
+          [
+            19,
+            44,
+            45,
+            47,
+            65
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "7_65_8",
+      "input_sha256": "6f971ad400ed378a586e46241128db52a4a76ff434995fddc7da7b0ae576f640",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1a7d096c648cdf853aa4debd2bab0e8cefbf1cb0b1f6f4f3d5d5a23525754150"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8122941e7c36083c250dbbef060e92411ea7e496f0dfd13f5b7dbda3ed73947b"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d6c40850a39e5a68c4a333bff921fc7e9533d3ccbae660d10d9be15b486d9de5"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d6b3b05573ef1fc0b65a2eccd6f4ed9f701633ed6971a0f0c406d41deb655540"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "0023557bcd554432633477c39a0984b37c89605ba2403eb4821f273832877e2d"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7d70996664bd98b048b02e03c915116182727d00c7c8c2ba7539c740c8264a7a"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "7_65_8",
+        "instance_sha256": "6f971ad400ed378a586e46241128db52a4a76ff434995fddc7da7b0ae576f640",
+        "station_types": [
+          2,
+          2,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                44,
+                55,
+                61,
+                3
+              ],
+              [
+                7,
+                34,
+                20
+              ],
+              [
+                13,
+                29,
+                37
+              ]
+            ],
+            [
+              [
+                9,
+                1,
+                23
+              ],
+              [
+                6,
+                43
+              ],
+              [
+                33,
+                51,
+                2
+              ],
+              [
+                45,
+                5
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                64,
+                30,
+                31,
+                14
+              ],
+              [
+                54,
+                59,
+                39
+              ]
+            ],
+            [
+              [
+                56,
+                11,
+                63
+              ],
+              [
+                57,
+                36
+              ],
+              [
+                15,
+                46
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                16,
+                27,
+                24
+              ],
+              [
+                26,
+                65,
+                50
+              ],
+              [
+                60,
+                40,
+                49
+              ],
+              [
+                35,
+                38
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                18,
+                12,
+                19
+              ],
+              [
+                52,
+                10,
+                62
+              ],
+              [
+                58
+              ]
+            ],
+            [
+              [
+                8,
+                48,
+                32
+              ],
+              [
+                47,
+                22
+              ],
+              [
+                41
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                4,
+                53,
+                42
+              ],
+              [
+                17,
+                21,
+                25
+              ],
+              [
+                28
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "aaa8c1e34c11fc70d14e45cf4390f5d853e1ee2b9505103a4d89261a413b486e",
+      "stored_greedy_cost": 634.7306100126507,
+      "station_targets": [
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          9,
+          13,
+          20,
+          23,
+          29,
+          33,
+          34,
+          37,
+          43,
+          44,
+          45,
+          51,
+          55,
+          61
+        ],
+        [
+          11,
+          14,
+          15,
+          30,
+          31,
+          36,
+          39,
+          46,
+          54,
+          56,
+          57,
+          59,
+          63,
+          64
+        ],
+        [
+          16,
+          24,
+          26,
+          27,
+          35,
+          38,
+          40,
+          49,
+          50,
+          60,
+          65
+        ],
+        [
+          8,
+          10,
+          12,
+          18,
+          19,
+          22,
+          32,
+          41,
+          47,
+          48,
+          52,
+          58,
+          62
+        ],
+        [
+          4,
+          17,
+          21,
+          25,
+          28,
+          42,
+          53
+        ],
+        [],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            3,
+            7,
+            13,
+            20,
+            29,
+            34,
+            37,
+            44,
+            55,
+            61
+          ],
+          [
+            1,
+            2,
+            5,
+            6,
+            9,
+            23,
+            33,
+            43,
+            45,
+            51
+          ]
+        ],
+        [
+          [
+            14,
+            30,
+            31,
+            39,
+            54,
+            59,
+            64
+          ],
+          [
+            11,
+            15,
+            36,
+            46,
+            56,
+            57,
+            63
+          ]
+        ],
+        [
+          [],
+          [
+            16,
+            24,
+            26,
+            27,
+            35,
+            38,
+            40,
+            49,
+            50,
+            60,
+            65
+          ]
+        ],
+        [
+          [
+            10,
+            12,
+            18,
+            19,
+            52,
+            58,
+            62
+          ],
+          [
+            8,
+            22,
+            32,
+            41,
+            47,
+            48
+          ]
+        ],
+        [
+          [],
+          [
+            4,
+            17,
+            21,
+            25,
+            28,
+            42,
+            53
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "8_80_7",
+      "input_sha256": "006e0e37ff525ad5e2397223b23ebe81f0c480361b538ee8efe604e400f7740d",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c32879c1088c1d329dd917c8ed8f6971eb052b34eec672d438327a2661330141"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "d19aeeb94ac7e4749e8660baffd259b947eb01f115fb72292eb57f2ff7b0e1d8"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "c2b09ac1746c2ab992d2acd34fbe307d4a1a1db10f49a391cf2fbcca1ab1af80"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "984e2abaed162811cc75afe20bf4a032328bc75d21f4fe78739bd280b7388cd6"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3f1852f81042a096183d30004b145d9914883d85ea6827113c4aebfd1cc2a16c"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "0163efffc0b11fcb5d809d3cfe719b4dc48ee79caabbba59e95f3f21d1858f0a"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "8_80_7",
+        "instance_sha256": "006e0e37ff525ad5e2397223b23ebe81f0c480361b538ee8efe604e400f7740d",
+        "station_types": [
+          2,
+          2,
+          1,
+          1,
+          0,
+          2,
+          1,
+          0
+        ],
+        "routes": [
+          [
+            [
+              [
+                45,
+                27,
+                54,
+                24
+              ],
+              [
+                20,
+                60,
+                12
+              ]
+            ],
+            [
+              [
+                57,
+                61,
+                59
+              ],
+              [
+                80,
+                66
+              ],
+              [
+                38,
+                22
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                46,
+                75,
+                23,
+                49
+              ],
+              [
+                19,
+                41,
+                40,
+                79
+              ],
+              [
+                35,
+                50,
+                9
+              ]
+            ],
+            [
+              [
+                51,
+                34,
+                13
+              ],
+              [
+                5,
+                64,
+                44
+              ],
+              [
+                18,
+                1
+              ],
+              [
+                58,
+                63
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                68,
+                28,
+                48
+              ],
+              [
+                62,
+                11,
+                37
+              ],
+              [
+                73,
+                17,
+                33
+              ],
+              [
+                56,
+                30,
+                47
+              ],
+              [
+                21,
+                78
+              ],
+              [
+                55,
+                77,
+                29
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                70,
+                8,
+                16
+              ],
+              [
+                39,
+                43,
+                2
+              ],
+              [
+                42,
+                76,
+                67
+              ],
+              [
+                52,
+                4
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                15,
+                53,
+                69
+              ],
+              [
+                31,
+                65
+              ]
+            ],
+            [
+              [
+                32,
+                6
+              ],
+              [
+                26,
+                25
+              ],
+              [
+                72
+              ]
+            ]
+          ],
+          [
+            [],
+            [
+              [
+                71,
+                36,
+                10
+              ],
+              [
+                74,
+                3,
+                14
+              ],
+              [
+                7
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "037f2b5c7569e08281ce47d9bd33f3f59bc5d41c26a0e3ae2f11e488c228d774",
+      "stored_greedy_cost": 765.9790349900024,
+      "station_targets": [
+        [
+          12,
+          20,
+          22,
+          24,
+          27,
+          38,
+          45,
+          54,
+          57,
+          59,
+          60,
+          61,
+          66,
+          80
+        ],
+        [
+          1,
+          5,
+          9,
+          13,
+          18,
+          19,
+          23,
+          34,
+          35,
+          40,
+          41,
+          44,
+          46,
+          49,
+          50,
+          51,
+          58,
+          63,
+          64,
+          75,
+          79
+        ],
+        [
+          11,
+          17,
+          21,
+          28,
+          29,
+          30,
+          33,
+          37,
+          47,
+          48,
+          55,
+          56,
+          62,
+          68,
+          73,
+          77,
+          78
+        ],
+        [
+          2,
+          4,
+          8,
+          16,
+          39,
+          42,
+          43,
+          52,
+          67,
+          70,
+          76
+        ],
+        [],
+        [
+          6,
+          15,
+          25,
+          26,
+          31,
+          32,
+          53,
+          65,
+          69,
+          72
+        ],
+        [
+          3,
+          7,
+          10,
+          14,
+          36,
+          71,
+          74
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [
+            12,
+            20,
+            24,
+            27,
+            45,
+            54,
+            60
+          ],
+          [
+            22,
+            38,
+            57,
+            59,
+            61,
+            66,
+            80
+          ]
+        ],
+        [
+          [
+            9,
+            19,
+            23,
+            35,
+            40,
+            41,
+            46,
+            49,
+            50,
+            75,
+            79
+          ],
+          [
+            1,
+            5,
+            13,
+            18,
+            34,
+            44,
+            51,
+            58,
+            63,
+            64
+          ]
+        ],
+        [
+          [],
+          [
+            11,
+            17,
+            21,
+            28,
+            29,
+            30,
+            33,
+            37,
+            47,
+            48,
+            55,
+            56,
+            62,
+            68,
+            73,
+            77,
+            78
+          ]
+        ],
+        [
+          [],
+          [
+            2,
+            4,
+            8,
+            16,
+            39,
+            42,
+            43,
+            52,
+            67,
+            70,
+            76
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            15,
+            31,
+            53,
+            65,
+            69
+          ],
+          [
+            6,
+            25,
+            26,
+            32,
+            72
+          ]
+        ],
+        [
+          [],
+          [
+            3,
+            7,
+            10,
+            14,
+            36,
+            71,
+            74
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    },
+    {
+      "map": "8_80_8",
+      "input_sha256": "fb77bedc140d4893631539beeffa57f7fb57529fb534bb6b139edd554e3a7e56",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "2c90889244c28b205a925686efcf5db21cff80d8c4f33915abaabc0e6a1ed790"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3ab827f9f789c5da1b9b7d6204e75103ab45aa4713e0ade7d02cabfefa12b959"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a8ba59d5830a3c7002892885d070c618c9e9194bd76fd2023b5c4996bf8cbc91"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "54646f00ee089ecb307e8eb722dc2441f1e0f3fac337f045f28fbc61c2b8077a"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "b2c7706f6011495939b563b857cd8ad47d68d3fc3d900c3e1503326309205920"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "09d25c18e9ec9cd2026b603522124320aed292296fadba7f48c582cabaadd13c"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "8_80_8",
+        "instance_sha256": "fb77bedc140d4893631539beeffa57f7fb57529fb534bb6b139edd554e3a7e56",
+        "station_types": [
+          2,
+          2,
+          2,
+          0,
+          2,
+          2,
+          0,
+          2
+        ],
+        "routes": [
+          [
+            [
+              [
+                67,
+                59,
+                63
+              ],
+              [
+                9,
+                52,
+                65
+              ],
+              [
+                53
+              ]
+            ],
+            [
+              [
+                68,
+                32,
+                42
+              ],
+              [
+                28,
+                5,
+                12
+              ],
+              [
+                43
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                7,
+                66,
+                14,
+                3
+              ],
+              [
+                51,
+                4,
+                16
+              ],
+              [
+                36,
+                34,
+                70
+              ],
+              [
+                24
+              ]
+            ],
+            [
+              [
+                54,
+                25,
+                18
+              ],
+              [
+                55,
+                23
+              ],
+              [
+                10,
+                37
+              ],
+              [
+                35,
+                74
+              ],
+              [
+                76
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                29,
+                72,
+                73
+              ],
+              [
+                45,
+                61
+              ]
+            ],
+            [
+              [
+                41,
+                46
+              ],
+              [
+                49,
+                17
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                40,
+                39,
+                33,
+                38
+              ],
+              [
+                22,
+                50,
+                56
+              ],
+              [
+                27
+              ]
+            ],
+            [
+              [
+                64,
+                58,
+                21
+              ],
+              [
+                57,
+                2,
+                44
+              ],
+              [
+                71
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                60,
+                20,
+                79
+              ],
+              [
+                62,
+                80,
+                19
+              ],
+              [
+                8
+              ]
+            ],
+            [
+              [
+                75,
+                11,
+                48
+              ],
+              [
+                13,
+                26
+              ],
+              [
+                77
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                31,
+                69,
+                47
+              ],
+              [
+                78
+              ]
+            ],
+            [
+              [
+                15,
+                6,
+                1
+              ],
+              [
+                30
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "f7aa4df1ee2c601635aa38417c612fe4a18e879d9f1d76444a9d56e25315c782",
+      "stored_greedy_cost": 821.5071301676719,
+      "station_targets": [
+        [
+          5,
+          9,
+          12,
+          28,
+          32,
+          42,
+          43,
+          52,
+          53,
+          59,
+          63,
+          65,
+          67,
+          68
+        ],
+        [
+          3,
+          4,
+          7,
+          10,
+          14,
+          16,
+          18,
+          23,
+          24,
+          25,
+          34,
+          35,
+          36,
+          37,
+          51,
+          54,
+          55,
+          66,
+          70,
+          74,
+          76
+        ],
+        [
+          17,
+          29,
+          41,
+          45,
+          46,
+          49,
+          61,
+          72,
+          73
+        ],
+        [],
+        [
+          2,
+          21,
+          22,
+          27,
+          33,
+          38,
+          39,
+          40,
+          44,
+          50,
+          56,
+          57,
+          58,
+          64,
+          71
+        ],
+        [
+          8,
+          11,
+          13,
+          19,
+          20,
+          26,
+          48,
+          60,
+          62,
+          75,
+          77,
+          79,
+          80
+        ],
+        [],
+        [
+          1,
+          6,
+          15,
+          30,
+          31,
+          47,
+          69,
+          78
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            9,
+            52,
+            53,
+            59,
+            63,
+            65,
+            67
+          ],
+          [
+            5,
+            12,
+            28,
+            32,
+            42,
+            43,
+            68
+          ]
+        ],
+        [
+          [
+            3,
+            4,
+            7,
+            14,
+            16,
+            24,
+            34,
+            36,
+            51,
+            66,
+            70
+          ],
+          [
+            10,
+            18,
+            23,
+            25,
+            35,
+            37,
+            54,
+            55,
+            74,
+            76
+          ]
+        ],
+        [
+          [
+            29,
+            45,
+            61,
+            72,
+            73
+          ],
+          [
+            17,
+            41,
+            46,
+            49
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            22,
+            27,
+            33,
+            38,
+            39,
+            40,
+            50,
+            56
+          ],
+          [
+            2,
+            21,
+            44,
+            57,
+            58,
+            64,
+            71
+          ]
+        ],
+        [
+          [
+            8,
+            19,
+            20,
+            60,
+            62,
+            79,
+            80
+          ],
+          [
+            11,
+            13,
+            26,
+            48,
+            75,
+            77
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            31,
+            47,
+            69,
+            78
+          ],
+          [
+            1,
+            6,
+            15,
+            30
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "9_95_7",
+      "input_sha256": "d4ff82a0de3caa540bd81115ccfc94ae4cfdd9df473fe69a66e17b604bedc0be",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "f08a6ccca3ee270c60fbbb253d96e58c399f9c0645b49ccb6091877fa454330e"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "f3241b0f066c6f07981e55e789fee1b02fdf6c15eb17295deadc1bde8eac9b00"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "efa4f6633e71bc04456b6ae45bdd93d5d719ff7526816a7ec05d95002f4bf066"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "ae676f0bcbd6aa30ce3eac434947cd7ae1164b8bf1c80372b02d32cab4ef1555"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "7978aa756faa4e810082502558424ddc95700db3b455d52182d064b1e929f278"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "5c9a4d17d449cf133de03322987c57a5ce5bbe11e34f170721f49549d45f8b0c"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "9_95_7",
+        "instance_sha256": "d4ff82a0de3caa540bd81115ccfc94ae4cfdd9df473fe69a66e17b604bedc0be",
+        "station_types": [
+          2,
+          0,
+          0,
+          2,
+          2,
+          0,
+          0,
+          2,
+          2
+        ],
+        "routes": [
+          [
+            [
+              [
+                23,
+                19,
+                60,
+                67
+              ],
+              [
+                45,
+                43,
+                94
+              ],
+              [
+                17,
+                49,
+                48
+              ],
+              [
+                22,
+                8
+              ]
+            ],
+            [
+              [
+                76,
+                20,
+                89
+              ],
+              [
+                27,
+                69,
+                11
+              ],
+              [
+                9,
+                39,
+                78
+              ],
+              [
+                35,
+                87
+              ],
+              [
+                10
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                61,
+                54,
+                3
+              ],
+              [
+                38,
+                51,
+                7
+              ]
+            ],
+            [
+              [
+                42,
+                44,
+                82
+              ],
+              [
+                47,
+                26
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                34,
+                18,
+                14,
+                62
+              ],
+              [
+                74,
+                24,
+                83
+              ],
+              [
+                36,
+                85,
+                86
+              ],
+              [
+                70
+              ]
+            ],
+            [
+              [
+                71,
+                6,
+                63
+              ],
+              [
+                1,
+                79
+              ],
+              [
+                59,
+                72
+              ],
+              [
+                90,
+                58
+              ],
+              [
+                93
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                50,
+                32,
+                66,
+                68
+              ],
+              [
+                95,
+                31,
+                37,
+                57
+              ],
+              [
+                41,
+                40,
+                92
+              ],
+              [
+                55,
+                88,
+                84
+              ]
+            ],
+            [
+              [
+                73,
+                4,
+                15
+              ],
+              [
+                52,
+                25,
+                80
+              ],
+              [
+                12,
+                81,
+                53
+              ],
+              [
+                56,
+                33
+              ],
+              [
+                77,
+                2
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                16,
+                29,
+                75,
+                21
+              ],
+              [
+                30,
+                28
+              ]
+            ],
+            [
+              [
+                13,
+                65,
+                64
+              ],
+              [
+                46,
+                91
+              ],
+              [
+                5
+              ]
+            ]
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "f4b5e6c626d9560a1de2cd279c58df46901bc6e629f63ae68b41594af06a980a",
+      "stored_greedy_cost": 883.3625951317717,
+      "station_targets": [
+        [
+          8,
+          9,
+          10,
+          11,
+          17,
+          19,
+          20,
+          22,
+          23,
+          27,
+          35,
+          39,
+          43,
+          45,
+          48,
+          49,
+          60,
+          67,
+          69,
+          76,
+          78,
+          87,
+          89,
+          94
+        ],
+        [],
+        [],
+        [
+          3,
+          7,
+          26,
+          38,
+          42,
+          44,
+          47,
+          51,
+          54,
+          61,
+          82
+        ],
+        [
+          1,
+          6,
+          14,
+          18,
+          24,
+          34,
+          36,
+          58,
+          59,
+          62,
+          63,
+          70,
+          71,
+          72,
+          74,
+          79,
+          83,
+          85,
+          86,
+          90,
+          93
+        ],
+        [],
+        [],
+        [
+          2,
+          4,
+          12,
+          15,
+          25,
+          31,
+          32,
+          33,
+          37,
+          40,
+          41,
+          50,
+          52,
+          53,
+          55,
+          56,
+          57,
+          66,
+          68,
+          73,
+          77,
+          80,
+          81,
+          84,
+          88,
+          92,
+          95
+        ],
+        [
+          5,
+          13,
+          16,
+          21,
+          28,
+          29,
+          30,
+          46,
+          64,
+          65,
+          75,
+          91
+        ]
+      ],
+      "slot_targets": [
+        [
+          [
+            8,
+            17,
+            19,
+            22,
+            23,
+            43,
+            45,
+            48,
+            49,
+            60,
+            67,
+            94
+          ],
+          [
+            9,
+            10,
+            11,
+            20,
+            27,
+            35,
+            39,
+            69,
+            76,
+            78,
+            87,
+            89
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            3,
+            7,
+            38,
+            51,
+            54,
+            61
+          ],
+          [
+            26,
+            42,
+            44,
+            47,
+            82
+          ]
+        ],
+        [
+          [
+            14,
+            18,
+            24,
+            34,
+            36,
+            62,
+            70,
+            74,
+            83,
+            85,
+            86
+          ],
+          [
+            1,
+            6,
+            58,
+            59,
+            63,
+            71,
+            72,
+            79,
+            90,
+            93
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            31,
+            32,
+            37,
+            40,
+            41,
+            50,
+            55,
+            57,
+            66,
+            68,
+            84,
+            88,
+            92,
+            95
+          ],
+          [
+            2,
+            4,
+            12,
+            15,
+            25,
+            33,
+            52,
+            53,
+            56,
+            73,
+            77,
+            80,
+            81
+          ]
+        ],
+        [
+          [
+            16,
+            21,
+            28,
+            29,
+            30,
+            75
+          ],
+          [
+            5,
+            13,
+            46,
+            64,
+            65,
+            91
+          ]
+        ]
+      ]
+    },
+    {
+      "map": "9_95_8",
+      "input_sha256": "27575437c9a13a4400fcc3ae558bac7b0216b252907b486247430a29573dfa67",
+      "greedy_semantic_solution_count_across_six_cells": 1,
+      "greedy_domain_count_across_six_cells": 1,
+      "greedy_cost_count_across_six_cells": 1,
+      "saved_cells": [
+        {
+          "budget": 6,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "48492849d6e8e2c0ec5908cba7178a213dd068418f81db0e725c578bbd6d9244"
+        },
+        {
+          "budget": 6,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "2c6f2b1b262904cda95944f72ef22767189da3c8bf7bc533801e643de6622386"
+        },
+        {
+          "budget": 6,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "3109dc61d5fb6f592b60d8c419274c2d2aaae93840598652ae488de185e2b01b"
+        },
+        {
+          "budget": 12,
+          "seed": 101,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "a1b047efe66911fa57ffa20cd9c0878081f8b5e7fed6fe0912bb17e59731008d"
+        },
+        {
+          "budget": 12,
+          "seed": 102,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "1b77a566328b53b77e4b69d635fbb481a37d9b3c435f25dc32eab9da665a1063"
+        },
+        {
+          "budget": 12,
+          "seed": 103,
+          "meta_path": "<LOCAL_PATH>",
+          "solution_path": "<LOCAL_PATH>",
+          "solution_sha256": "8fd3513fb23aefafadc53194e1a6ccf3f095f079122a3e04e2c2e66f5049b5c7"
+        }
+      ],
+      "issues": [],
+      "canonical_solution": {
+        "schema_version": 1,
+        "instance": "9_95_8",
+        "instance_sha256": "27575437c9a13a4400fcc3ae558bac7b0216b252907b486247430a29573dfa67",
+        "station_types": [
+          0,
+          0,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "routes": [
+          [
+            [],
+            []
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                84,
+                65,
+                10,
+                41
+              ],
+              [
+                48,
+                29,
+                31
+              ],
+              [
+                89
+              ]
+            ],
+            [
+              [
+                54,
+                58,
+                19
+              ],
+              [
+                28,
+                75,
+                93
+              ],
+              [
+                6,
+                57
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ],
+          [
+            [
+              [
+                71,
+                69,
+                51,
+                24
+              ],
+              [
+                43,
+                39,
+                13
+              ],
+              [
+                76
+              ]
+            ],
+            [
+              [
+                66,
+                72,
+                40
+              ],
+              [
+                42,
+                62,
+                25
+              ],
+              [
+                47
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                52,
+                88,
+                5,
+                17
+              ],
+              [
+                11,
+                12,
+                73
+              ],
+              [
+                4,
+                32,
+                33
+              ]
+            ],
+            [
+              [
+                8,
+                68,
+                86
+              ],
+              [
+                50,
+                23,
+                77
+              ],
+              [
+                74,
+                2,
+                81
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                63,
+                38,
+                60,
+                82
+              ],
+              [
+                26,
+                16,
+                3
+              ],
+              [
+                83,
+                55,
+                94
+              ],
+              [
+                92
+              ]
+            ],
+            [
+              [
+                20,
+                61,
+                9
+              ],
+              [
+                45,
+                59,
+                80
+              ],
+              [
+                1,
+                95,
+                18
+              ],
+              [
+                37,
+                87
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                21,
+                79,
+                91,
+                44
+              ],
+              [
+                90,
+                46,
+                64
+              ],
+              [
+                7,
+                34,
+                22
+              ],
+              [
+                14,
+                78
+              ]
+            ],
+            [
+              [
+                56,
+                85,
+                36
+              ],
+              [
+                35,
+                53,
+                30
+              ],
+              [
+                15,
+                70
+              ],
+              [
+                67,
+                49
+              ],
+              [
+                27
+              ]
+            ]
+          ],
+          [
+            [],
+            []
+          ]
+        ]
+      },
+      "canonical_solution_semantic_sha256": "4a1cc8b20ddc7fb0419107a108a3b1feadd3ae602c6b08cdafea5c9f25788d2f",
+      "stored_greedy_cost": 861.2967499784496,
+      "station_targets": [
+        [],
+        [],
+        [
+          6,
+          10,
+          19,
+          28,
+          29,
+          31,
+          41,
+          48,
+          54,
+          57,
+          58,
+          65,
+          75,
+          84,
+          89,
+          93
+        ],
+        [],
+        [
+          13,
+          24,
+          25,
+          39,
+          40,
+          42,
+          43,
+          47,
+          51,
+          62,
+          66,
+          69,
+          71,
+          72,
+          76
+        ],
+        [
+          2,
+          4,
+          5,
+          8,
+          11,
+          12,
+          17,
+          23,
+          32,
+          33,
+          50,
+          52,
+          68,
+          73,
+          74,
+          77,
+          81,
+          86,
+          88
+        ],
+        [
+          1,
+          3,
+          9,
+          16,
+          18,
+          20,
+          26,
+          37,
+          38,
+          45,
+          55,
+          59,
+          60,
+          61,
+          63,
+          80,
+          82,
+          83,
+          87,
+          92,
+          94,
+          95
+        ],
+        [
+          7,
+          14,
+          15,
+          21,
+          22,
+          27,
+          30,
+          34,
+          35,
+          36,
+          44,
+          46,
+          49,
+          53,
+          56,
+          64,
+          67,
+          70,
+          78,
+          79,
+          85,
+          90,
+          91
+        ],
+        []
+      ],
+      "slot_targets": [
+        [
+          [],
+          []
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            10,
+            29,
+            31,
+            41,
+            48,
+            65,
+            84,
+            89
+          ],
+          [
+            6,
+            19,
+            28,
+            54,
+            57,
+            58,
+            75,
+            93
+          ]
+        ],
+        [
+          [],
+          []
+        ],
+        [
+          [
+            13,
+            24,
+            39,
+            43,
+            51,
+            69,
+            71,
+            76
+          ],
+          [
+            25,
+            40,
+            42,
+            47,
+            62,
+            66,
+            72
+          ]
+        ],
+        [
+          [
+            4,
+            5,
+            11,
+            12,
+            17,
+            32,
+            33,
+            52,
+            73,
+            88
+          ],
+          [
+            2,
+            8,
+            23,
+            50,
+            68,
+            74,
+            77,
+            81,
+            86
+          ]
+        ],
+        [
+          [
+            3,
+            16,
+            26,
+            38,
+            55,
+            60,
+            63,
+            82,
+            83,
+            92,
+            94
+          ],
+          [
+            1,
+            9,
+            18,
+            20,
+            37,
+            45,
+            59,
+            61,
+            80,
+            87,
+            95
+          ]
+        ],
+        [
+          [
+            7,
+            14,
+            21,
+            22,
+            34,
+            44,
+            46,
+            64,
+            78,
+            79,
+            90,
+            91
+          ],
+          [
+            15,
+            27,
+            30,
+            35,
+            36,
+            49,
+            53,
+            56,
+            67,
+            70,
+            85
+          ]
+        ],
+        [
+          [],
+          []
+        ]
+      ]
+    }
+  ]
+}

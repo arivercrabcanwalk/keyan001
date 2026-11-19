@@ -1,0 +1,471 @@
+{
+  "schema": "takeover_g3_baseline_registry_v1",
+  "created_utc": "2026-11-12T08:15:58Z",
+  "status": "FROZEN_SPECIFICATION_ONLY",
+  "source_doc": "BASELINE_QUALIFICATION.md",
+  "does_not_change": [
+    "G0_NO_GO",
+    "G3_NOT_PASSED"
+  ],
+  "unit": "map",
+  "layers": {
+    "L0": "same information + maximal legal action domain (S: A2) + whole-map 6s (primary) / 12s (secondary)",
+    "L0-A1": "same information + A1 (cost-neutral intact-trip reassignment) + 6s; floor layer, never the main comparison",
+    "L1": "same action domain but offline / uncapped compute; certificates and references only",
+    "L2": "different information (perfect future) or different action domain (cross-station / divert / WAIT); reference only"
+  },
+  "action_domains": {
+    "A0": "author full TSALNS (deployment + routes)",
+    "A1": "intact-trip reassignment to legal slots within the fixed station (cost-neutral)",
+    "A2": "A1 + trip order / relocate / split / merge of targets within the fixed station",
+    "A3": "A2 + station type or deployment changes (forbidden by S contract)",
+    "A4": "A2 + cross-station target reassignment (forbidden by S contract)"
+  },
+  "s_contract": [
+    {
+      "id": "R_Liu",
+      "name_zh": "忠实作者锚点（J1b/J2b）",
+      "layer": "L1",
+      "action_domain": "A0",
+      "info_set": "full static instance + official Java source + Table A1 parameters",
+      "budget": "1800 s/map cap (intent budget 21600 core-s for 12 maps); measured 1.4-8.7 s/map, 46.3 s total",
+      "postprocessing": "none",
+      "failure_handling": "eligible only if exit 0, not timed out, independently feasible, cost abs err <= 1e-7, latest_time vs M_return abs err <= 1e-7; failures retained, no replacement, no seed swap",
+      "implementation": {
+        "status": "implemented",
+        "paths": [
+          "g23/author_baseline/author_runner.py",
+          "harness/02_run_author.py",
+          "<EXECUTION_PATH>"
+        ],
+        "executed_on_new_population": true
+      },
+      "eligibility": "reference level and cap source only; NOT the strongest non-RL",
+      "notes": "J1b = released Java profile (local_iterations 100, weight_upper 5.0); J2b = paper Table A1 (500, 0.5). ALNS nominal 5000, actual 270 per outer candidate. Never recompute cost from literal eq.(1) arc sum."
+    },
+    {
+      "id": "author_loadbalance",
+      "name_zh": "作者 loadBalance 构造",
+      "layer": "L0",
+      "action_domain": "A2-construct",
+      "info_set": "instance + fixed deployment + per-drone battery/maxAllowedTime/current drone time",
+      "budget": "6s/12s (construction only, not measured)",
+      "postprocessing": "none; if A1 reassignment is attached it must be shared and clocked",
+      "failure_handling": "construction failure recorded per map; never silently substitute the anchor",
+      "implementation": {
+        "status": "not_implemented",
+        "callable_point": "official_source/RoutingOperator.java:1119 loadBalancingInsertion; score at :1640, used at :1179",
+        "paths": [],
+        "executed_on_new_population": false
+      },
+      "eligibility": "eligible comparator (pending implementation); must not be called the author algorithm",
+      "notes": "eq.(23) score rho=0.6. The ALNS repair operator named loadBalancing actually prefers the first empty drone; do not substitute it."
+    },
+    {
+      "id": "cheap_balance",
+      "name_zh": "cheap 平衡构造",
+      "layer": "L0",
+      "action_domain": "A2-construct",
+      "info_set": "instance + fixed deployment + current per-slot load",
+      "budget": "6s/12s",
+      "postprocessing": "none unless shared and clocked",
+      "failure_handling": "no feasible insertion -> recorded failure for that map",
+      "implementation": {
+        "status": "not_implemented",
+        "paths": [],
+        "executed_on_new_population": false
+      },
+      "eligibility": "eligible comparator; cannot be the strongest",
+      "notes": "LPT start inside baseline.py is A1 over the anchor's intact trips, not a per-target constructor."
+    },
+    {
+      "id": "joint_minmax",
+      "name_zh": "同目标站内联合 min-max 下降",
+      "layer": "L0",
+      "action_domain": "A2",
+      "info_set": "instance + common anchor R_Liu",
+      "budget": "6s/12s whole map",
+      "postprocessing": "delivery.finalize_result (fallback to anchor on late/inadmissible/worse raw)",
+      "failure_handling": "6s: 4/11 NO_ONTIME_VALID_OUTPUT (7x65, 8x80, 9x95, 10x110); 12s: 3/11 (8x80, 9x95, 10x110)",
+      "implementation": {
+        "status": "implemented",
+        "paths": [
+          "route_rl_research/20261103/return_makespan/g23/nonrl_baseline/baseline.py",
+          "harness/03_run_nonrl.py"
+        ],
+        "executed_on_new_population": true
+      },
+      "eligibility": "eligible comparator but currently fails the zero-failure gate; cannot be declared the strongest A2 until anytime-ised and re-run",
+      "notes": "dev: 6x50_o1 134.628815 vs floor 140.543544 (-4.2091%); 7x65_o1@12s 228.245347 (-0.5838%)"
+    },
+    {
+      "id": "threshold_feasibility",
+      "name_zh": "threshold 可行性构造",
+      "layer": "L0",
+      "action_domain": "A2-construct",
+      "info_set": "public only: remaining slot duty, trip energy slack, coverage radius, service time",
+      "budget": "6s/12s",
+      "postprocessing": "none unless shared",
+      "failure_handling": "threshold too tight -> recorded failure; threshold grid must be pre-registered on new calibration",
+      "implementation": {
+        "status": "not_implemented",
+        "paths": [],
+        "executed_on_new_population": false
+      },
+      "eligibility": "eligible comparator (pending); distinct from the CLOSED threshold-conditioned policy mechanism",
+      "notes": "Any learned/state-conditioned threshold = resurrection of a closed G0 identity."
+    },
+    {
+      "id": "matheuristic_assign",
+      "name_zh": "适用 matheuristic（指派/DP）",
+      "layer": "L0-or-L1",
+      "action_domain": "A1 -> A2",
+      "info_set": "instance + anchor intact trips",
+      "budget": "6s/12s if A1/A2 within budget; otherwise L1",
+      "postprocessing": "none; take min M_return across available matheuristics",
+      "failure_handling": "solver infeasible/timeout recorded with logs; never report non-optimal as optimal",
+      "implementation": {
+        "status": "partial",
+        "paths": [
+          "harness/04_exact_reassign.py (A1 exact by enumeration)"
+        ],
+        "executed_on_new_population": true
+      },
+      "eligibility": "A1 part is the floor certificate; A2 part pending",
+      "notes": "enumeration bound 2^m per station, m <= 20 required; dev m <= 10"
+    },
+    {
+      "id": "route_only_alns",
+      "name_zh": "强 route-only ALNS",
+      "layer": "L0",
+      "action_domain": "A2",
+      "info_set": "full static instance + fixed deployment",
+      "budget": "6s/12s",
+      "postprocessing": "none unless shared and clocked",
+      "failure_handling": "timeout/infeasible recorded per map",
+      "implementation": {
+        "status": "implemented_elsewhere_only",
+        "paths": [
+          "<EXECUTION_PATH> route_alns_solution"
+        ],
+        "executed_on_new_population": false
+      },
+      "eligibility": "MUST be re-run on the new population before any 'strongest non-RL established' statement",
+      "notes": "Stage A: Route-RL benefit vs route-only ALNS -0.966725% (6s) / -0.955678% (12s), W/T/L 0/21/3, 720 tasks; takeover code copy has no lrphsd/route_rl"
+    },
+    {
+      "id": "lpt_intact_trip",
+      "name_zh": "多趟 repacking（整趟 LPT）",
+      "layer": "L0-A1",
+      "action_domain": "A1",
+      "info_set": "instance + anchor intact trips (orders unchanged)",
+      "budget": "6s (measured 0.001-0.008 s)",
+      "postprocessing": "delivery.finalize_result; raw worse than anchor -> fallback to anchor (7x65_o1 dev)",
+      "failure_handling": "station infeasible -> keep original assignment; full solution still delivered",
+      "implementation": {
+        "status": "implemented",
+        "paths": [
+          "g23/nonrl_baseline/baseline.py:38-70",
+          "harness/03_run_nonrl.py"
+        ],
+        "executed_on_new_population": true
+      },
+      "eligibility": "deployable floor (T1)",
+      "notes": "duty cap for kind==2 slot 1 uses small_duration (stricter than scorer.py:184 and evaluator.py:42); suspected cause of the 6x50_o1 gap (hypothesis H-1)"
+    },
+    {
+      "id": "exact_cost_neutral_reassign",
+      "name_zh": "成本中性整趟重排（精确最优）",
+      "layer": "L1",
+      "action_domain": "A1",
+      "info_set": "instance + anchor complete solution",
+      "budget": "offline; no 6s claim; 2^m per station, m <= 10 in dev",
+      "postprocessing": "none",
+      "failure_handling": "no feasible assignment -> SystemExit retained (11/11 OK in dev; 4x20_o1 skipped for anchor ineligibility)",
+      "implementation": {
+        "status": "implemented",
+        "paths": [
+          "harness/04_exact_reassign.py",
+          "<EXECUTION_PATH>"
+        ],
+        "executed_on_new_population": true
+      },
+      "eligibility": "FLOOR CERTIFICATE (T1); must_beat target; never enters the L0 main table",
+      "notes": "cost invariant mathematically; observed |delta cost| <= 2.27e-13 (float summation order). replay byte-identical (sha256 7737e186...)"
+    }
+  ],
+  "w_contract": [
+    {
+      "id": "A1",
+      "name_zh": "忠实 TSALNS 静态计划 + 标注清楚的在线派单/绕行适配",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "must state which operators are reused verbatim and which are rewritten"
+    },
+    {
+      "id": "A2",
+      "name_zh": "作者相关插入式动态适配",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "must state distance to the original algorithm"
+    },
+    {
+      "id": "A3",
+      "name_zh": "完整车队事件 + 周期重优化（1s/3s 档单列）",
+      "category": "non_learning",
+      "status": "partial",
+      "notes": "causal rolling beam and complete-incumbent rollout exist (emergency_rolling_baseline.py, complete_fleet.py, fleet_history_controls.py) in the old joint-J domain; no 1s/3s periodic re-optimisation"
+    },
+    {
+      "id": "N1",
+      "name_zh": "固定 reserve / static(T) 规则",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "grid pre-registered on new calibration"
+    },
+    {
+      "id": "N2",
+      "name_zh": "走廊可飞阈值",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "threshold fixed, never tuned per test map"
+    },
+    {
+      "id": "N3",
+      "name_zh": "风暴感知资源保留/预置",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "control role only; reserve v5 is HOLD_G0_NO_GO as a mechanism"
+    },
+    {
+      "id": "N2+N3",
+      "name_zh": "组合规则",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "combination pre-registered"
+    },
+    {
+      "id": "N5",
+      "name_zh": "按公开天气类别自适应的规则",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "frozen lookup table only"
+    },
+    {
+      "id": "N4",
+      "name_zh": "真实共同生成模型 + 公共后验 + 候选后 causal rollout",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "8/128 score perturbations do not count; needs public fork/release history/hidden phase"
+    },
+    {
+      "id": "Han_capacity",
+      "name_zh": "Han 共享容量准备度",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "sum_z r[z,b] <= N[b]^next with real ready times; Han-inspired adaptation only"
+    },
+    {
+      "id": "vfa_linear",
+      "name_zh": "线性后决策 VFA",
+      "category": "learned_non_rl",
+      "status": "implemented_old_domain",
+      "notes": "20261106_method_family_B/ORIGINALS/method_lab.py LinearAfterstateVFA; old joint-J population"
+    },
+    {
+      "id": "supervised_value",
+      "name_zh": "监督值拟合",
+      "category": "learned_non_rl",
+      "status": "not_implemented",
+      "notes": "must be listed separately from VFA"
+    },
+    {
+      "id": "bc_initial",
+      "name_zh": "BC 初始策略",
+      "category": "learned_non_rl",
+      "status": "implemented_old_domain",
+      "notes": "carl/bc.py; must be saved before any RL update and evaluated separately"
+    },
+    {
+      "id": "api_only",
+      "name_zh": "API-only（无 RL 更新）",
+      "category": "learned_non_rl",
+      "status": "not_implemented",
+      "notes": "no api_only/action_prior implementation found"
+    },
+    {
+      "id": "nolearn_beam",
+      "name_zh": "无学习 beam / 场景规划",
+      "category": "non_learning",
+      "status": "implemented_old_domain",
+      "notes": "16 episodes (prior/oldbeam/fleet50ms/fleet500ms) on 4 TRAIN maps x 4 days"
+    },
+    {
+      "id": "scenario_capacity",
+      "name_zh": "样本需求场景容量控制",
+      "category": "non_learning",
+      "status": "not_implemented",
+      "notes": "must be called scenario capacity control, not the full Han method"
+    },
+    {
+      "id": "O_oracle",
+      "name_zh": "完美信息/更大预算参考",
+      "category": "non_learning_reference",
+      "status": "not_implemented",
+      "notes": "label as heuristic bound or limit; never a certificate; never in the same-information main comparison"
+    }
+  ],
+  "selection_rule": {
+    "frozen_before_results": true,
+    "single": {
+      "id": "SELECT_FROZEN",
+      "population": "calibration/selection only (never test)",
+      "ranking": [
+        "mean relative improvement ascending",
+        "worst-map relative improvement ascending",
+        "mean wall ascending",
+        "method_id lexicographic"
+      ],
+      "then": "freeze the winner as the unique comparator; run unchanged on test"
+    },
+    "portfolio": {
+      "id": "PORTFOLIO_6S",
+      "members": "pre-registered list with order and per-member time share (default equal split of 6s)",
+      "clock": "one 6s clock per map, all members counted",
+      "deliver": "last validated complete incumbent before the deadline",
+      "bias": "none, because the portfolio is an a-priori defined method that pays its own cost"
+    },
+    "forbidden": [
+      "SELECT_PER_MAP_POST_HOC",
+      "conditional denominators",
+      "swapping comparators",
+      "weakening comparators",
+      "reporting only favourable maps"
+    ]
+  },
+  "must_beat": {
+    "required": [
+      "exact_cost_neutral_reassign",
+      "strongest_eligible_A2_L0_6s"
+    ],
+    "floor_operational": "lpt_intact_trip",
+    "tolerance": {
+      "rel": 1e-09,
+      "abs": 1e-09
+    },
+    "per_map_rule": "candidate_M_return < reference_M_return - max(abs_tol, rel_tol*abs(reference_M_return))",
+    "aggregate_rule": "mean paired pct < 0 AND ci95_upper(mean paired pct) < 0",
+    "failure_policy": {
+      "impute": "anchor_M_return",
+      "label": "fallback_anchor_imputed",
+      "require_zero_failures": true
+    },
+    "denominator": "all anchor-eligible registered maps; no post-hoc exclusion",
+    "unit": "map",
+    "dev_values": {
+      "floor_mean_pct": -12.91890657669358,
+      "floor_median_pct": -17.059187992002936,
+      "floor_wins_ties_losses": [
+        7,
+        4,
+        0
+      ],
+      "floor_ci95_pct": [
+        -18.78821401764189,
+        -6.695504390121138
+      ],
+      "lpt_mean_pct": -12.823188145574658,
+      "lpt_vs_floor_mean_pct": 0.12395380540657902,
+      "lpt_vs_floor_wins_ties_losses": [
+        0,
+        10,
+        1
+      ],
+      "lpt_worst_gap": {
+        "map": "6x50_o1",
+        "lpt": 142.459844,
+        "floor": 140.543544,
+        "pct_of_floor": 1.3634918594723588
+      }
+    }
+  },
+  "scoring": {
+    "admissible_requires": [
+      "original_feasible",
+      "domain_valid",
+      "cost_cap_satisfied"
+    ],
+    "cost_cap": {
+      "epsilon": 0,
+      "absolute_tolerance": 1e-07,
+      "scope": "per map, whole map"
+    },
+    "failure_classes": [
+      "raw_inadmissible",
+      "raw_validation_late",
+      "raw_worse_than_anchor",
+      "NO_ONTIME_VALID_OUTPUT"
+    ],
+    "missing_value_rule": "impute anchor M_return, label fallback_anchor_imputed, report failure count separately",
+    "gates": {
+      "gate_delivery": "failures == 0",
+      "gate_cap": "cap_violations == 0",
+      "gate_floor": "mean paired pct < 0 AND ci95_upper < 0 (all maps)",
+      "gate_strong": "same, against the frozen A2 comparator",
+      "claim_ok": "all four gates"
+    }
+  },
+  "statistics": {
+    "independent_unit": "map",
+    "paired": true,
+    "statistic": "per-map pct = 100*(cand - ref)/ref; report mean and median",
+    "ci": {
+      "method": "percentile bootstrap",
+      "B": 10000,
+      "seed": 20261112,
+      "resample": "maps with replacement"
+    },
+    "tie_tolerance": 1e-09,
+    "secondary": [
+      "paired Wilcoxon",
+      "sign test"
+    ],
+    "multiplicity": "Holm within a pre-declared family",
+    "direction": "M_return negative = better; improvement positive = better"
+  },
+  "prohibited": [
+    "per-map post-hoc selection of the comparator on test",
+    "reporting only favourable comparators",
+    "weakening the comparator (budget, action domain, seeds, known implementation defects)",
+    "averages that hide per-map cap violations",
+    "conditional denominators",
+    "mixing L1/L2 into the main comparison",
+    "passing an A1 floor off as the strongest A2 comparator",
+    "resurrecting closed identities (threshold-conditioned policy, reserve v5, joint-event-screen)",
+    "treating the author anchor as the strongest non-RL",
+    "post-hoc selection on the confirmation population"
+  ],
+  "evidence": {
+    "dev_results": "joint_weather_emergency/20261112_takeover_completion/results/g3_pop/{AUTHOR_RESULTS,NONRL_RESULTS,EXACT_REASSIGN_RESULTS}.json",
+    "prereg_confirm": "<EXECUTION_PATH>",
+    "stats_self": {
+      "path": "<EXECUTION_PATH>",
+      "sha256": "95dac248dc395ac4e80bd3e6396ba471af2b5c00ad533cfc7b6c3dc7dc077411"
+    },
+    "stats_script": {
+      "path": "<EXECUTION_PATH>",
+      "sha256": "eef73b6262fef648e15b74161c4c2a463b11c6b695bf565818f6340b9c927738",
+      "known_defect": "lines 81-82 drop non-ONTIME_VALID rows -> n=7/8 instead of 11"
+    },
+    "exact_replay": {
+      "path": "<EXECUTION_PATH>",
+      "sha256": "7737e1861167274193a566cb92cc382a5ef907a3fd27ae2c7e5f6c66523443f6",
+      "byte_identical_to_g3_pop": true
+    }
+  },
+  "exposure_disclosure": {
+    "what": "read the tail of logs/confirm.log (about 20 rows on 4x25_o2-o4, 4x30_o2-o4, 5x35_o2-o3, 9x95_o2-o3)",
+    "used_in_this_registry": false,
+    "effect": "the confirmation set is no longer strictly unseen; analysis should be run once by a frozen script and the exposure recorded"
+  }
+}

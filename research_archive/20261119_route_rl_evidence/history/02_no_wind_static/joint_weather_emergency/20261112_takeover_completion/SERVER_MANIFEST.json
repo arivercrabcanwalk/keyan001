@@ -1,0 +1,900 @@
+{
+  "schema": "server_manifest/v1",
+  "checked_at_utc": "2026-11-12T07:56:25Z",
+  "checked_at_cst_claim": "2026-11-12T15:56:25+08:00",
+  "checked_window_utc": [
+    "2026-11-12T07:53:38Z",
+    "2026-11-12T07:56:25Z"
+  ],
+  "hostname": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "host_alias": "<COMPUTE_HOST>",
+  "remote_user": "root",
+  "os": {
+    "kernel": "Linux 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug 7 13:43:15 UTC 2026 x86_64",
+    "distro": "Ubuntu 22.04",
+    "uptime": "41 days 1:43",
+    "load_avg_1_5_15": [
+      0.97,
+      1.17,
+      1.12
+    ]
+  },
+  "access": {
+    "method": "<CONNECTION_COMMAND_REMOVED>",
+    "verified": true,
+    "note": "接手指令第 9 节记载上一轮密钥 BatchMode 返回 exit255、需密码认证；本次密钥 wrapper 多次 SSH_EXIT=0，该历史描述已被取代。未读取、未写入任何密码。"
+  },
+  "read_only": {
+    "asserted": true,
+    "scope": "仅 stat/ls/du/find/df/free/ps/who/last/curl/sha256sum/getent/lscpu 与只读 python json.load；未创建、修改、删除远端文件；未启动科研计算；未杀进程。",
+    "remote_temp_files_created": 0
+  },
+  "paths": [
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "100K",
+      "mtime_utc": "2026-11-12T06:10:20Z",
+      "entries": 2,
+      "note": "07:53Z 首次列出时仅 1 个子目录；07:55Z 后因新增 20261112_takeover_completion 变为 2 个，目录 mtime 随之更新到 07:55。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "96K",
+      "files": 11,
+      "mtime_utc": "2026-11-12T06:10:21Z",
+      "note": "含 MODEL_SPEC.md、MODIFIED_FILE、ORIGINALS、ROLLBACK.sh、ROLLBACK_COPY、SOURCE_MANIFEST.json、probe.py、server_evidence、server_transaction.py、test_public_fault_law.py。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "186M（检查结束时，仍在写入）",
+      "mtime_utc": "2026-11-12T07:55:24Z",
+      "note": "非本任务创建。07:55Z 起观测到并发上传，size 62M→117M→186M；含 runtime/corretto17.tar.gz 194714953 B。本任务未触碰。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory（独立 ext4 卷 /dev/mapper/lvmdata-pvc--8ec51cb7--e3ff--43c8--897b--552cf4b28e53）",
+      "size": "7.8G",
+      "mtime_utc": "2026-11-06T15:12:38Z",
+      "entries": 27,
+      "note": "与 / 不同文件系统：容量 49G、已用 7.8G、可用 42G。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "102M",
+      "files": 22439,
+      "mtime_utc": "2026-11-02T04:29:37Z",
+      "sha256_sample": {
+        "file": "published_table1.json",
+        "sha256": "a2ecd144008d466d8d3e94650ae4e4e2f33fdbdd73596372e1e04a07d0b7429f"
+      },
+      "note": "results 97M；full_P1 与 full_P2 各 600 个 .solution.json.gz（合计 1200，与 120 图×5 seed×2 协议一致）；results 下 .solution.json.gz 共 5802 个（含 pilot 与其它矩阵）。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "90M",
+      "files": 20025,
+      "mtime_utc": "2026-11-02T04:29:37Z",
+      "note": "semfix 之前的同名包（无 _semfix 后缀）。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "1.4G",
+      "files": 127373,
+      "mtime_utc": "2026-10-25T06:39:24Z",
+      "sha256_sample": {
+        "file": "MANIFEST.json",
+        "sha256": "ddc3fd3720af4bf0e3ff6453863ad6cc8a7296a069af13c89c079abbe1ee992e"
+      },
+      "note": "含 .gitignore、DIFF_FILE.diff、MANIFEST.json、README.md、ROLLBACK.sh、VERIFICATION.txt 与 configs/docs/evidence/lrphsd/native/results/scripts/tests。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "1.2M",
+      "files": 56,
+      "mtime_utc": "2026-11-06T15:35:31Z",
+      "sha256_sample": {
+        "file": "NEGATIVE_AUDIT.json",
+        "sha256": "734a54c88c3395a27fca28cc4a05aab24d034d9398b9a6e1f86601bf64e53ebf"
+      },
+      "note": "含 ORIGINALS、build_pair.py、det_000/030/050/070 的 original 与 reserve05 成对样本、PAIR_RUN.log、NEGATIVE_AUDIT.json、results。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "101M",
+      "files": 3913,
+      "mtime_utc": "2026-11-01T04:59:40Z",
+      "sha256_sample": {
+        "file": "A6_TRAINING_COMPLETED",
+        "sha256": "866b273abf894259e4b75b4cf3ea61d0258ede17295a602d9945abc128bdbaf3"
+      },
+      "note": "glob training_runs_v5_a6_* 仅此 1 个匹配；含 PPO_seed11/23/37 三流与日志。另有命名不同的 ca_rl_completion_v5_a6_no_runtime_reward_20261101（343M）。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "74M",
+      "mtime_utc": "2026-11-04T13:34:47Z",
+      "note": "含 EXECUTION_MANIFEST/PLAN/REPORT、FINAL_STATE.json、VERIFICATION.txt（2168 B）、reconstructed（17M/1485 files）、published（4.0M/499 files）、rl_project_pack_verified.tar.gz（40M）、delivery_final.tar.gz（3.5M）、diagnostics、logs、tests。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "17M",
+      "files": 1485,
+      "mtime_utc": "2026-11-04T13:02:49Z",
+      "note": "子目录 rl_dyn / rl_ppo / rl_rt / rl_v3 / rl_wind 加 PAPER_FINDINGS.md、README.md；树内最新文件 2026-11-05T05:05Z（__pycache__/problem.cpython-313.pyc）。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "4.0M",
+      "files": 499,
+      "mtime_utc": "2026-11-04T13:02:49Z",
+      "note": "published/rl_research/ 下 rl_dyn 等，对应接手指令第 8 节旧发表代码的远端副本。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "1.6G",
+      "mtime_utc": "2026-11-04T06:40:57Z",
+      "note": "logs 112K / releases 168K / results 856K / runtime 1.6G。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "1.6G",
+      "files": 29710,
+      "mtime_utc": "2026-11-04T06:41:03Z",
+      "note": "conda 风格自建 runtime，lib 占 1.5G。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "symlink → python3.13",
+      "size": "10 B（符号链接自身）",
+      "mtime_utc": "2026-11-04T06:41:00Z",
+      "sha256_sample": {
+        "file": "解析目标 <EXECUTION_PATH> 的内容哈希",
+        "sha256": "59cd621632eb9f7247550c905529a58a15bc75fab91ac057d4bdec4552566ca7"
+      },
+      "note": "可执行；Python 3.13.18。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "15G",
+      "mtime_utc": "2026-11-11T22:20:08Z",
+      "entries": 137,
+      "note": "交接 brief 的远端目录清单未列此项，但它是 / 上最大占用者：20261106_sufficient_training_D 12G、20261106_control_qualification_C 1.2G、20261106_round_E_takeover 717M、20261106_control_qualification_C2_infrastructure 678M、20261106_method_family_B 267M。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "type": "directory",
+      "size": "23M",
+      "mtime_utc": "2026-11-11T21:52:27Z",
+      "note": "目录名日期 20261113 晚于当前 UTC 日期 20261112；内含 macOS AppleDouble 的 ._* 附属文件，说明由 macOS 上传。属观察项，不改动。"
+    }
+  ],
+  "python": {
+    "runtime": {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "executable": true,
+      "symlink_to": "python3.13",
+      "realpath": "<EXECUTION_PATH>",
+      "sha256": "59cd621632eb9f7247550c905529a58a15bc75fab91ac057d4bdec4552566ca7",
+      "version": "Python 3.13.18",
+      "version_exit_code": 0,
+      "pip_version": "pip 26.2.2（python 3.13）",
+      "package_count": 13,
+      "packages": {
+        "torch": "2.12.1+cpu",
+        "numpy": "2.5.2",
+        "networkx": "3.7",
+        "scipy": null,
+        "sympy": "1.14.0",
+        "filelock": "4.2.7",
+        "fsspec": "2026.9.0",
+        "Jinja2": "3.1.6",
+        "mpmath": "1.3.0",
+        "typing_extensions": "4.16.0",
+        "setuptools": "81.0.0"
+      },
+      "import_torch": {
+        "ok": true,
+        "torch_version": "2.12.1+cpu",
+        "cuda_available": false,
+        "torch_threads": 52,
+        "exit_code": 0
+      },
+      "import_scipy": {
+        "ok": false,
+        "error": "ModuleNotFoundError: No module named 'scipy'",
+        "exit_code": 1
+      },
+      "note": "scipy 未安装；任何 import scipy 的历史脚本在该 runtime 下会立即失败。"
+    },
+    "system_python": {
+      "path": "/usr/bin/python3",
+      "realpath": "/usr/bin/python3.10",
+      "version": "3.10.12 (main, Mar 3 2026, 11:56:32) [GCC 11.4.0]",
+      "version_exit_code": 0,
+      "pip_available": false,
+      "pip_error": "/usr/bin/python3: No module named pip",
+      "pip_exit_code": 1,
+      "pip3_present": false,
+      "pip3_exit_code": 127,
+      "dist_packages_sample": [
+        "PyGObject-3.42.1",
+        "dbus-python-1.2.18",
+        "distro-1.7.0",
+        "ssh_import_id-5.11"
+      ],
+      "note": "任务书要求的 python3 -m pip list 实测空输出、RC=0（错误走 stderr 且被 2>/dev/null 吞掉），不能据此断言系统无第三方包。"
+    },
+    "conda": {
+      "conda_binary": "/opt/conda/bin/conda",
+      "on_path": false,
+      "which_conda_exit_code": 1,
+      "version": "conda 25.7.0",
+      "envs": [
+        {
+          "name": "base",
+          "path": "/opt/conda",
+          "python": "3.11.14",
+          "package_count": 171,
+          "pip": "25.1.1",
+          "packages": {
+            "torch": "2.9.0+cu130",
+            "torchvision": "0.24.0+cu130",
+            "numpy": "2.3.3",
+            "scipy": "1.17.1",
+            "networkx": "3.5"
+          },
+          "import_check": {
+            "ok": true,
+            "torch": "2.9.0+cu130",
+            "cuda": false,
+            "scipy": "1.17.1",
+            "numpy": "2.3.3",
+            "networkx": "3.5",
+            "exit_code": 0
+          }
+        },
+        {
+          "name": "(unnamed)",
+          "path": "<EXECUTION_PATH>",
+          "python": "3.13.18",
+          "note": "由 conda env list 注册，详见 python.runtime。"
+        }
+      ],
+      "note": "conda base 的 torch 为 cu130 构建，但机器无 GPU，torch.cuda.is_available()=False。"
+    },
+    "path_resolution": {
+      "python3": "/usr/bin/python3",
+      "python": "not found",
+      "pip3": "not found"
+    }
+  },
+  "gpu": {
+    "present": false,
+    "nvidia_smi": false,
+    "nvidia_smi_error": "command not found",
+    "device_nodes": [],
+    "device_nodes_error": "ls: cannot access '/dev/nvidia*': No such file or directory",
+    "torch_cuda_available_runtime": false,
+    "torch_cuda_available_conda": false,
+    "evidence_exit_code": 0
+  },
+  "disk": {
+    "checked_at_utc": "2026-11-12T07:56:25Z",
+    "mounts": [
+      {
+        "mount": "/",
+        "device": "overlay (k8s pvc-1429b791)",
+        "size": "30G",
+        "used": "20G",
+        "avail": "11G → 9.9G",
+        "use_pct": "66% → 67%",
+        "note": "检查窗口内可用从 11G 降到 9.9G。"
+      },
+      {
+        "mount": "<EXECUTION_PATH>",
+        "device": "/dev/mapper/lvmdata-pvc--8ec51cb7--e3ff--43c8--897b--552cf4b28e53",
+        "size": "49G",
+        "used": "7.8G",
+        "avail": "42G",
+        "use_pct": "16%",
+        "note": "独立可写 ext4 卷，与 / 的预算无关。"
+      },
+      {
+        "mount": "<EXECUTION_PATH>",
+        "device": "/dev/vda3",
+        "size": "984G",
+        "used": "333G",
+        "avail": "611G",
+        "use_pct": "36%",
+        "note": "节点本地盘；可写但不在 PVC 上，持久性与快照不保证，不宜作唯一结果落盘位置。"
+      },
+      {
+        "mount": "/dev/shm",
+        "device": "tmpfs",
+        "size": "24G",
+        "used": "0",
+        "avail": "24G",
+        "use_pct": "0%"
+      }
+    ],
+    "inodes": [
+      {
+        "mount": "/",
+        "total": 1966080,
+        "used": 189074,
+        "free": 1777006,
+        "use_pct": "10%"
+      },
+      {
+        "mount": "<EXECUTION_PATH>",
+        "total": 3276800,
+        "used": 583617,
+        "free": 2693183,
+        "use_pct": "18%"
+      },
+      {
+        "mount": "<EXECUTION_PATH>",
+        "total": 65399824,
+        "used": 1102690,
+        "free": 64297134,
+        "use_pct": "2%"
+      }
+    ],
+    "du_root_entries_top20_sorted": [
+      [
+        "<EXECUTION_PATH>",
+        "15G"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "7.8G"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "1.6G"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "320M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "298M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "154M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "74M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "50M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "31M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "30M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "27M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "20M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "18M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "7.0M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "6.8M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "6.7M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "5.8M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "5.5M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "3.8M"
+      ],
+      [
+        "<EXECUTION_PATH>",
+        "2.9M"
+      ]
+    ],
+    "root_total": {
+      "du_no_x": "26G",
+      "du_x_overlay_only": "18G",
+      "note": "du -sh /root 的 26G 含独立挂载 rivermind-data 7.8G；overlay 上实占约 18G。"
+    },
+    "overlay_top_level_merged_view": {
+      "/root": "18G",
+      "/opt": "8.7G",
+      "/usr": "6.4G",
+      "/tmp": "616M",
+      "/var": "16M",
+      "/etc": "2.3M"
+    },
+    "budget_for_new_experiments": {
+      "writable_available": {
+        "overlay_root": "9.9G",
+        "rivermind_data_volume": "42G",
+        "dev_6_local": "611G"
+      },
+      "recommended_new_output_root": "<EXECUTION_PATH><new_experiment_id>/",
+      "caution": "若沿用历史做法把输出写 /root 或 /tmp（同在 30G overlay 上），当前仅 9.9G 可用；D 包曾因 12.046 GB 超过 12 GB 硬限被终止，余量仅约 0.83 倍。必须分批落盘、压缩分块，或直接写 rivermind-data 卷。",
+      "reclaimable_if_authorized_later": [
+        "<EXECUTION_PATH> 1.5G",
+        "<EXECUTION_PATH> 2.1G",
+        "<EXECUTION_PATH> 982M",
+        "<EXECUTION_PATH> 731M",
+        "<EXECUTION_PATH> 12G"
+      ],
+      "reclaim_note": "仅列候选，未删除任何文件；任何清理需单独授权，且 D 包历史字节受保护。"
+    }
+  },
+  "running_jobs": [],
+  "running_jobs_note": {
+    "python_like_processes": 1,
+    "detail": [
+      {
+        "pid": 22,
+        "ppid": 20,
+        "user": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+        "cmd": "/opt/conda/bin/python3.11 /opt/conda/bin/<COMPUTE_HOST> --ip=<NETWORK_ADDRESS> --<CONNECTION_PORT_REMOVED> --allow-root --no-browser --notebook-dir=/root",
+        "classification": "服务进程，非科研作业",
+        "elapsed": "05:48:16"
+      }
+    ],
+    "research_processes": 0,
+    "training_processes": 0,
+    "driver_processes": 0,
+    "concurrent_writer_observed": {
+      "path": "<EXECUTION_PATH>",
+      "bytes_at_last_check": 194714953,
+      "first_seen_utc": "2026-11-12T07:55:24Z",
+      "note": "非本任务创建；观测到写入增长，说明另有并发会话在写盘。不影响只读结论，但影响磁盘余量。"
+    },
+    "stale_sessions": "who 显示 2 个 root pts 会话未正常登出（pts/0 自 Nov 6 15:10、pts/3 自 Nov 2 06:45，均 gone - no logout）"
+  },
+  "network": {
+    "proxy_env": "none（env | grep -i proxy 返回 RC=1）",
+    "dns": {
+      "github.com": "<NETWORK_ADDRESS>",
+      "pypi.org": [
+        "2a04:4e42:200::223",
+        "2a04:4e42::223",
+        "2a04:4e42:400::223",
+        "2a04:4e42:600::223"
+      ]
+    },
+    "probes": [
+      {
+        "url": "https://github.com/",
+        "http_code": 200,
+        "time_s": 0.880686,
+        "bytes": 525336,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://api.github.com/",
+        "http_code": 200,
+        "time_s": 0.396821,
+        "bytes": 2262,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://pypi.org/pypi/six/json",
+        "http_code": 200,
+        "time_s": 0.479268,
+        "bytes": 40256,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://pypi.org/simple/",
+        "http_code": 200,
+        "time_s": 8.0,
+        "bytes": 28916360,
+        "curl_rc": 28,
+        "note": "48 MB 全量索引 8 s 未下完（已收 28.9 MB），属体积/超时问题，非不可达。"
+      },
+      {
+        "url": "https://pypi.org/simple/scipy/",
+        "http_code": 200,
+        "time_s": 2.878191,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://files.pythonhosted.org/",
+        "http_code": 404,
+        "time_s": 0.456665,
+        "bytes": 10,
+        "curl_rc": 0,
+        "note": "根路径 404 为 Varnish 正常响应；TLS/HTTP 可达，可下 wheel。"
+      },
+      {
+        "url": "https://pypi.tuna.tsinghua.edu.cn/simple/six/",
+        "http_code": 200,
+        "time_s": 1.309117,
+        "bytes": 11565,
+        "curl_rc": 0,
+        "note": "系统 pip 已配置该镜像（/etc/pip.conf）。"
+      },
+      {
+        "url": "https://pypi.tuna.tsinghua.edu.cn/simple/torch/",
+        "http_code": 200,
+        "time_s": 2.390085,
+        "bytes": 298573,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://repo.anaconda.com/pkgs/main/noarch/repodata.json",
+        "http_code": 200,
+        "time_s": 5.153102,
+        "curl_rc": 0
+      },
+      {
+        "url": "https://conda.anaconda.org/conda-forge/noarch/repodata.json",
+        "http_code": 200,
+        "time_s": 12.0,
+        "bytes": 318695,
+        "curl_rc": 28,
+        "note": "195 MB 索引，12 s 仅收 318 KB；可达但慢，大索引不适合短超时。"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/python/cpython/main/README.rst",
+        "http_code": 0,
+        "time_s": 15.0,
+        "bytes": 0,
+        "curl_rc": 28,
+        "note": "8 s 与 15 s 两次尝试均 0 字节超时，不可用。"
+      }
+    ],
+    "git": {
+      "command": "git ls-remote --heads https://github.com/python/cpython",
+      "ok": true,
+      "exit_code": 0,
+      "sample_refs": [
+        "refs/heads/3.11 e34c7bb38687416b137fc45db2f652144847e708",
+        "refs/heads/3.12 3d6d2a63a23ee4d340ed8df6de0bd70ef175c4cf",
+        "refs/heads/3.14 73d2338fbb9a506bfc6cd101eae6a49dc24f7f46",
+        "refs/heads/3.15 6e7dab7510797e94d0e1ece4923b9d3c18a10892",
+        "refs/heads/main 10862056f51eed3a332be3eefd51d4d6e871dade",
+        "refs/heads/3.13 42155a0feaca9ba6991942c323cbe9fb7278be3c"
+      ]
+    },
+    "pip_config": {
+      "source": "/etc/pip.conf",
+      "index_url": "https://pypi.tuna.tsinghua.edu.cn/simple"
+    },
+    "conclusion": "可装包：pypi 官方、清华镜像、files.pythonhosted、repo.anaconda.com 均可达，git ls-remote 成功。不可依赖 raw.githubusercontent.com。conda-forge 大索引需更长超时或显式 channel。"
+  },
+  "receipts_sampled": [
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "size_bytes": 3311,
+      "mtime_utc": "2026-11-12T06:10:21Z",
+      "sha256": "6de4110eba761e130b27b7fc90b549604954aebacb7c8cb1dca679d23f2410c8",
+      "json_parse": {
+        "ok": true,
+        "json_type": "list",
+        "rows": 5,
+        "parsers": [
+          "python3.13",
+          "python3.11"
+        ],
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      "rows": [
+        {
+          "phase": "BASELINE",
+          "exit_status": 0,
+          "wall_s": 0.03952439222484827,
+          "command": "python3 probe.py ORIGINALS/public_fault_law.py"
+        },
+        {
+          "phase": "MODIFIED",
+          "exit_status": 0,
+          "wall_s": 0.03917538095265627,
+          "command": "python3 probe.py MODIFIED_FILE/public_fault_law.py"
+        },
+        {
+          "phase": "ENGINEERING_CASES",
+          "exit_status": 0,
+          "wall_s": 0.05497725307941437,
+          "command": "python3 test_public_fault_law.py"
+        },
+        {
+          "phase": "ROLLBACK",
+          "exit_status": 0,
+          "wall_s": 0.028468463104218245,
+          "command": "./ROLLBACK.sh ROLLBACK_COPY/public_fault_law.py"
+        },
+        {
+          "phase": "ROLLBACK_VERIFY",
+          "exit_status": 0,
+          "wall_s": 0.037928696256130934,
+          "command": "python3 probe.py ROLLBACK_COPY/public_fault_law.py"
+        }
+      ]
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "note": "目录内仅 RESULT.json（702 B）与 TEST_RECEIPTS.json（3311 B），mtime 均 2026-11-12T06:10Z。"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "exists": true,
+      "sha256": "2d2625627dd2b0b9edae4cb4723756cacf5ce609060eb4f7db81a8ea0f64adde"
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "C1",
+      "topic": "磁盘余量口径",
+      "doc_claim": "handoff brief：磁盘仅剩约 11 GB（当作唯一写盘预算）",
+      "measured": "/ overlay 30G/20G/11G（07:54Z）→ 9.9G（07:56Z）；<EXECUTION_PATH> 独立卷可用 42G；<EXECUTION_PATH> 可用 611G",
+      "severity": "high",
+      "impact": "按 brief 会把可用空间低估约 4 倍，可能误判新实验不可行；反之把 <EXECUTION_PATH> 当持久盘有丢失风险。",
+      "adopted": "以 df 逐挂载点为准：/ 9.9–11G，rivermind-data 42G，Dev_6 611G（非持久）。"
+    },
+    {
+      "id": "C2",
+      "topic": "时区",
+      "doc_claim": "brief：时区 UTC（= Asia/Shanghai - 8h）",
+      "measured": "环境变量 TZ=Asia/Shanghai，但 /usr/share/zoneinfo 不存在；date 与 TZ=Asia/Shanghai date 均输出 +0000（即 UTC）",
+      "severity": "medium",
+      "impact": "依赖 TZ=Asia/Shanghai 计算日终窗口/日报的脚本会整体错位 8 小时。",
+      "adopted": "一律用 date -u 记录；远端所有时间戳即 UTC。"
+    },
+    {
+      "id": "C3",
+      "topic": "/root 体积",
+      "doc_claim": "brief：/root 26G",
+      "measured": "du -sh /root = 26G（含嵌套挂载 rivermind-data 7.8G）；du -shx /root = 18G",
+      "severity": "low",
+      "impact": "与 df 的 20G used 对不上，容量测算易出错。",
+      "adopted": "overlay 上按 18G 计；26G 视为含嵌套卷口径。"
+    },
+    {
+      "id": "C4",
+      "topic": "runtime 依赖完整性",
+      "doc_claim": "prompt §9：<EXECUTION_PATH> 为历史科研 runtime，需核实依赖",
+      "measured": "存在且 import torch 成功（2.12.1+cpu），但 scipy 缺失（ModuleNotFoundError，exit 1），仅 13 个包",
+      "severity": "high",
+      "impact": "历史脚本若 import scipy/其它包会立即失败，不能默认该 runtime 可直接复用。",
+      "adopted": "runtime 仅确认 torch/numpy/networkx 可用；需 scipy 时改用 /opt/conda（1.17.1）或另行授权安装。"
+    },
+    {
+      "id": "C5",
+      "topic": "系统 python 无 pip",
+      "doc_claim": "任务书要求用 python3 -m pip list 判断包环境",
+      "measured": "/usr/bin/python3 3.10.12 无 pip（No module named pip，exit 1）；pip3 不存在（127）；python3 -m pip list 空输出且 exit 0（错误被 2>/dev/null 吞掉）",
+      "severity": "medium",
+      "impact": "空输出易被误读为“无包”；系统解释器本身不可装包。",
+      "adopted": "装包用 /opt/conda（pip 25.1.1）或 runtime（pip 26.2.2）。"
+    },
+    {
+      "id": "C6",
+      "topic": "无作业在跑",
+      "doc_claim": "brief：无用户作业在跑",
+      "measured": "无科研/训练/driver 进程（python 类仅 <COMPUTE_HOST> 服务 PID 22）；但 07:55:24Z 起有并发会话向 <EXECUTION_PATH> 上传，186M（corretto17.tar.gz 194714953 B），/ 可用同步从 11G 降到 9.9G",
+      "severity": "medium",
+      "impact": "存在并发写盘/并发会话，磁盘与目录状态在检查窗口内仍在变化。",
+      "adopted": "记录为“无科研计算进程，但有活跃传输”；该目录非本任务产物，未触碰。"
+    },
+    {
+      "id": "C7",
+      "topic": "training_runs_v5_a6_* 通配",
+      "doc_claim": "任务书列出 training_runs_v5_a6_*（暗示可能多个）",
+      "measured": "仅 1 个匹配：training_runs_v5_a6_no_runtime_reward_20261101（101M/3913 files）；另有命名不同的 ca_rl_completion_v5_a6_no_runtime_reward_20261101（343M）",
+      "severity": "low",
+      "impact": "易把两个不同包混为一个。",
+      "adopted": "按完整路径分别登记。"
+    },
+    {
+      "id": "C8",
+      "topic": "远端目录清单遗漏",
+      "doc_claim": "brief 只列 lunwen_engineering / rivermind-data / github_rigor 三棵树",
+      "measured": "<EXECUTION_PATH> 存在且 15G（137 项），是 / 上最大占用者；<EXECUTION_PATH> 1.6G",
+      "severity": "medium",
+      "impact": "只按 brief 盘点会漏掉主要磁盘占用与最新主线远端树。",
+      "adopted": "两棵树均纳入本 manifest。"
+    },
+    {
+      "id": "C9",
+      "topic": "VERIFICATION.txt 大小写",
+      "doc_claim": "（本任务抽样命令误用小写 verification.txt）",
+      "measured": "<EXECUTION_PATH> 存在（2168 B，2026-11-04T13:09Z）；小写不存在",
+      "severity": "info",
+      "impact": "大小写敏感导致一次 MISSING 误报。",
+      "adopted": "以大写文件为准。"
+    },
+    {
+      "id": "C10",
+      "topic": "密钥 vs 密码认证",
+      "doc_claim": "prompt §9：密钥 BatchMode 返回 exit255，需密码认证",
+      "measured": "<EXECUTION_PATH> 密钥 wrapper 本次多次 SSH_EXIT=0",
+      "severity": "info",
+      "impact": "历史认证描述已过时。",
+      "adopted": "以本次密钥成功为准；未读取或写入任何密码。"
+    }
+  ],
+  "gaps": [
+    "未核对容器 cgroup 内存上限；free 显示 371G/可用 362G，但 k8s limit 未测。",
+    "只按任务清单检查 torch/numpy/scipy/networkx；runtime 是否还缺其它包未做完整 pip freeze 对照。",
+    "未测 conda install 的真实下载速度（仅测 repodata 可达）。",
+    "未核对远端源码 SHA 与本地副本 SHA（本任务只做清点，未做逐文件 diff）。",
+    "<EXECUTION_PATH> 的持久性与快照/回收策略未核实，不建议作为唯一结果落盘位置。"
+  ],
+  "evidence_log": [
+    {
+      "step": 1,
+      "command": "<EXECUTION_PATH> 'hostname; date -u; whoami; uname -a'",
+      "ssh_exit": 0,
+      "result": "<COMPUTE_HOST> / 2026-11-12T07:53:38Z / root / Linux 6.8.0-138-generic x86_64"
+    },
+    {
+      "step": 2,
+      "command": "bash -s: 4 个父目录 stat + du -sh + ls -1A",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "4/4 存在：lunwen_engineering 100K / rivermind-data 7.8G / github_rigor 74M / route_rl 1.6G"
+    },
+    {
+      "step": 3,
+      "command": "bash -s: 9 个重点子目录 stat + du + find|wc -l + newest",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "全部存在；文件数 22439 / 20025 / 127373 / 56 / 3913 / 11 / 1485 / 499 / 29710"
+    },
+    {
+      "step": 4,
+      "command": "bash -s: runtime python -V / pip list / import torch / import scipy；/usr/bin/python3 版本与 pip；conda env list",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "exit_codes": {
+        "version": 0,
+        "pip": 0,
+        "import_torch": 0,
+        "imports": 1,
+        "sysver": 0,
+        "pipver": 1,
+        "pip3": 127,
+        "which_conda": 1
+      },
+      "result": "Python 3.13.18 / torch 2.12.1+cpu / scipy 缺失；3.10.12 无 pip；conda 25.7.0 两个 env"
+    },
+    {
+      "step": 5,
+      "command": "bash -s: nproc、lscpu、free -g、df -h、nvidia-smi、ps -ef|grep、uptime、env TZ",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "exit_codes": {
+        "nproc": 0,
+        "free": 0,
+        "df": 0,
+        "ps_grep": 0
+      },
+      "result": "104 vCPU / 371G / overlay 11G / 无 GPU / 仅 <COMPUTE_HOST>"
+    },
+    {
+      "step": 6,
+      "command": "bash -s: TEST_RECEIPTS.json stat+sha256+head+json.load（3.13 与 3.11）+ curl 4 端点",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "exit_codes": {
+        "sha": 0,
+        "parse313": 0,
+        "parse311": 0
+      },
+      "result": "3311 B / 5 行 / 解析成功；github 200、pypi 200、files.pythonhosted 404（可达）、raw.githubusercontent 超时"
+    },
+    {
+      "step": 7,
+      "command": "bash -s: du -sh <EXECUTION_PATH> | sort -h | tail -20；du -shx /root；du -sh /root；df 聚焦",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "joint_weather_emergency 15G 居首；/root 26G（-x 18G）"
+    },
+    {
+      "step": 8,
+      "command": "bash -s: rivermind-data 全部条目 stat；lunwen_engineering 复核；runtime 包数；conda base import；who/last",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "exit_codes": {
+        "conda_import": 0
+      },
+      "result": "发现 takeover_completion 62M→117M 增长；conda base 171 包；2 个未登出 pts"
+    },
+    {
+      "step": 9,
+      "command": "bash -s: full_P1/P2 solution 计数；conda pip；df -i；df -h /",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "P1=600、P2=600；/ 可用 9.9G；inode 10%"
+    },
+    {
+      "step": 10,
+      "command": "bash -s: date -u 终检 + df + takeover 目录 newest",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "2026-11-12T07:56:25Z；corretto17.tar.gz 194714953 B；takeover 目录 186M"
+    },
+    {
+      "step": 11,
+      "command": "bash -s: curl repo.anaconda / conda-forge / pypi-simple；git ls-remote；pip config list",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "exit_codes": {
+        "git": 0,
+        "pipcfg": 0
+      },
+      "result": "repo.anaconda 200；conda-forge 12 s 超时但已收 318KB；git ls-remote 成功；index-url 为清华镜像"
+    },
+    {
+      "step": 12,
+      "command": "bash -s: curl 清华镜像 simple/six、simple/torch + range 测速",
+      "ssh_exit": 0,
+      "script_exit": 0,
+      "result": "200/200；206 部分内容，341430 B/s（HTML 页面而非 wheel，仅供参考）"
+    }
+  ]
+}

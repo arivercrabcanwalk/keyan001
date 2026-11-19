@@ -1,0 +1,291 @@
+{
+  "schema": "deletion_bridge_g0_v1",
+  "updated_utc": "2026-11-13T00:36:01.529944+00:00",
+  "candidate": "ALL_DELETION_TYPED_SPLIT_BRIDGE_V1",
+  "decision": "FINITE_EQUIVALENCE_PASS_CLOSE_FULL_TEMPLATE_ACCELERATION",
+  "G0": "NOT_PASSED_DISTINCT_USEFUL_METHOD_UNESTABLISHED",
+  "G3": "NOT_PASSED",
+  "goal": "active",
+  "root_only": true,
+  "research_host": "<COMPUTE_HOST>",
+  "mathematical_engineering_fixtures": 6,
+  "complete_queries": 184,
+  "validation": {
+    "audit": {
+      "checks": {
+        "empty_tail_returns": 8,
+        "independent_original_scorer_routes": 5522,
+        "internal_constraint_decisions": 5616,
+        "internal_rows": 1404
+      },
+      "claim": "finite exact-constraint equivalence and independent physical replay, not G0/G3, speedup or RL gain",
+      "first_counterexamples": {
+        "coordinate_is_return": {
+          "H": 40,
+          "L": 70,
+          "a": 3,
+          "actual": true,
+          "bridge": 1,
+          "expected": false,
+          "fixture": "two_open_colocated",
+          "modes": [
+            0,
+            0
+          ],
+          "q": 0,
+          "schedule": [
+            [
+              0,
+              [
+                1
+              ]
+            ],
+            [
+              1,
+              [
+                2,
+                3,
+                4,
+                5
+              ]
+            ]
+          ]
+        },
+        "drop_duty_limit": {
+          "H": 700,
+          "L": 1600,
+          "a": 3,
+          "actual": true,
+          "bridge": 1,
+          "expected": false,
+          "fixture": "near_duty",
+          "modes": [
+            0,
+            0
+          ],
+          "q": 0,
+          "schedule": [
+            [
+              0,
+              [
+                1
+              ]
+            ],
+            [
+              0,
+              [
+                2,
+                3,
+                4,
+                5
+              ]
+            ]
+          ]
+        },
+        "drop_empty_return": {
+          "a": 1,
+          "correct_duty": "104/9",
+          "fixture": "singleton",
+          "incorrect_duty": "74/9",
+          "q": 0
+        },
+        "drop_past_energy": {
+          "H": 40,
+          "L": 70,
+          "a": 3,
+          "actual": true,
+          "bridge": 1,
+          "expected": false,
+          "fixture": "depot",
+          "modes": [
+            0,
+            0
+          ],
+          "q": 1,
+          "schedule": [
+            [
+              0,
+              [
+                1
+              ]
+            ],
+            [
+              1,
+              [
+                2,
+                3,
+                4,
+                5
+              ]
+            ]
+          ]
+        },
+        "drop_sum_cap": {
+          "H": 20,
+          "L": 30,
+          "a": 4,
+          "actual": true,
+          "bridge": 2,
+          "expected": false,
+          "fixture": "depot",
+          "modes": [
+            0,
+            0
+          ],
+          "q": 1,
+          "schedule": [
+            [
+              0,
+              [
+                1
+              ]
+            ],
+            [
+              1,
+              [
+                2
+              ]
+            ],
+            [
+              0,
+              [
+                3,
+                4,
+                5
+              ]
+            ]
+          ]
+        },
+        "prefilter_special": {
+          "H": 40,
+          "L": 70,
+          "a": 3,
+          "actual": false,
+          "bridge": 1,
+          "expected": true,
+          "fixture": "depot",
+          "modes": [
+            0,
+            0
+          ],
+          "q": 0,
+          "schedule": [
+            [
+              0,
+              [
+                1
+              ]
+            ],
+            [
+              0,
+              [
+                2,
+                3,
+                4,
+                5
+              ]
+            ]
+          ]
+        }
+      },
+      "float_max_absolute_error": {
+        "cost_absolute": 1.1368683772161603e-13,
+        "duty_absolute": 1.1368683772161603e-13,
+        "energy_absolute": 2.220446049250313e-16
+      },
+      "mutant_detections": {
+        "coordinate_is_return": 96,
+        "drop_duty_limit": 314,
+        "drop_empty_return": 8,
+        "drop_past_energy": 388,
+        "drop_sum_cap": 40,
+        "prefilter_special": 1005
+      }
+    },
+    "child_cpu_s_total": 8.510184999999998,
+    "child_wall_s_total": 8.528001225553453,
+    "counters": {
+      "depot": {
+        "boundary_replays": 3024,
+        "boxes": 540,
+        "patterns": 168,
+        "points": 1290,
+        "recovered": 519,
+        "templates": 162
+      },
+      "near_duty": {
+        "boundary_replays": 6048,
+        "boxes": 644,
+        "patterns": 336,
+        "points": 40,
+        "recovered": 0,
+        "templates": 162
+      },
+      "pair": {
+        "boundary_replays": 72,
+        "boxes": 0,
+        "patterns": 0,
+        "points": 0,
+        "recovered": 0,
+        "templates": 6
+      },
+      "past_returns": {
+        "boundary_replays": 4536,
+        "boxes": 804,
+        "patterns": 252,
+        "points": 1786,
+        "recovered": 666,
+        "templates": 162
+      },
+      "singleton": {
+        "boundary_replays": 16,
+        "boxes": 0,
+        "patterns": 0,
+        "points": 0,
+        "recovered": 0,
+        "templates": 2
+      },
+      "two_open_colocated": {
+        "boundary_replays": 6048,
+        "boxes": 1008,
+        "patterns": 330,
+        "points": 1915,
+        "recovered": 647,
+        "templates": 162
+      }
+    },
+    "maxrss_kib": 29952,
+    "modified_retained": true,
+    "phase_exit_status": {
+      "AUDIT": 2,
+      "AUDIT_REPAIR_1": 0,
+      "BASELINE": 0,
+      "MODIFIED": 0,
+      "ROLLBACK": 0
+    },
+    "query_digest": "64ce9b06c4aaa400ddeb3b21ef12bf314fe8bb363b5844a5fb78b768653c9873",
+    "restored_full_json_byte_identical": true,
+    "restored_stdout_byte_identical": true,
+    "rollback_backup_retained": true,
+    "unchanged_frozen_files_excluding_rollback": "18/18"
+  },
+  "scientific_maps": 0,
+  "training_runs": 0,
+  "checkpoints": 0,
+  "Formal": 0,
+  "subagents": 0,
+  "old_identity_comparisons": [
+    40,
+    126
+  ],
+  "old_calibration": [
+    24,
+    24
+  ],
+  "protected_state_sha256": {
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9",
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e"
+  },
+  "user_decision": "no new decision; existing cap A/B pending",
+  "next": "shared partial-label generation without complete-template enumeration; first specify new operation and full costs"
+}

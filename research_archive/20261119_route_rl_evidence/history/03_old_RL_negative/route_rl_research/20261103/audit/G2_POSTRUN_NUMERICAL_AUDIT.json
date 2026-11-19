@@ -1,0 +1,2735 @@
+{
+  "schema": "g2_postrun_numerical_readonly_audit_v1",
+  "reviewer": "route_mechanism_g4",
+  "scientific_module_imports": 0,
+  "new_dp_evaluator_solver_calls": 0,
+  "issues": [],
+  "map_count": 24,
+  "station_count": 132,
+  "active_count": 98,
+  "strata": {
+    "all": {
+      "maps": 24,
+      "g_to_fixed": {
+        "mean_pct": 0.9331693790115443,
+        "median_pct": 0.7819192399480605,
+        "wtl": [
+          23,
+          1,
+          0
+        ]
+      },
+      "g_to_joint": {
+        "mean_pct": 3.139718785659662,
+        "median_pct": 3.2092026622904,
+        "wtl": [
+          23,
+          1,
+          0
+        ]
+      },
+      "fixed_to_joint": {
+        "mean_pct": 2.2304726806576634,
+        "median_pct": 2.2318612268062754,
+        "wtl": [
+          22,
+          2,
+          0
+        ]
+      },
+      "alns6_gain": {
+        "mean_pct": 1.5347256840816472,
+        "median_pct": 1.805021430955222,
+        "wtl": [
+          16,
+          0,
+          8
+        ]
+      },
+      "alns12_gain": {
+        "mean_pct": 1.531729359341415,
+        "median_pct": 1.805021430955222,
+        "wtl": [
+          16,
+          0,
+          8
+        ]
+      }
+    },
+    "complete": {
+      "maps": 11,
+      "g_to_fixed": {
+        "mean_pct": 1.1184844280080186,
+        "median_pct": 0.977930390417534,
+        "wtl": [
+          11,
+          0,
+          0
+        ]
+      },
+      "g_to_joint": {
+        "mean_pct": 4.664512334106875,
+        "median_pct": 5.1125713571948435,
+        "wtl": [
+          11,
+          0,
+          0
+        ]
+      },
+      "fixed_to_joint": {
+        "mean_pct": 3.586871424976161,
+        "median_pct": 3.4695262877049897,
+        "wtl": [
+          11,
+          0,
+          0
+        ]
+      },
+      "alns6_gain": {
+        "mean_pct": 3.586871424976161,
+        "median_pct": 3.4695262877049897,
+        "wtl": [
+          11,
+          0,
+          0
+        ]
+      },
+      "alns12_gain": {
+        "mean_pct": 3.586871424976161,
+        "median_pct": 3.4695262877049897,
+        "wtl": [
+          11,
+          0,
+          0
+        ]
+      }
+    },
+    "partial": {
+      "maps": 13,
+      "g_to_fixed": {
+        "mean_pct": 0.776364337552989,
+        "median_pct": 0.5882341570717237,
+        "wtl": [
+          12,
+          1,
+          0
+        ]
+      },
+      "g_to_joint": {
+        "mean_pct": 1.849508860050482,
+        "median_pct": 1.9043688832781416,
+        "wtl": [
+          12,
+          1,
+          0
+        ]
+      },
+      "fixed_to_joint": {
+        "mean_pct": 1.0827506662343191,
+        "median_pct": 0.7609620338361244,
+        "wtl": [
+          11,
+          2,
+          0
+        ]
+      },
+      "alns6_gain": {
+        "mean_pct": -0.20170532744447953,
+        "median_pct": -0.5252048147666997,
+        "wtl": [
+          5,
+          0,
+          8
+        ]
+      },
+      "alns12_gain": {
+        "mean_pct": -0.20723700388798516,
+        "median_pct": -0.5336989202277529,
+        "wtl": [
+          5,
+          0,
+          8
+        ]
+      }
+    }
+  },
+  "reference_statuses": {
+    "fixed_owner": {
+      "COMPLETE_FIXED_OWNER_REFERENCE": 97,
+      "UNRESOLVED_SIZE_LIMIT": 33,
+      "UNATTEMPTED_MAP_DEADLINE": 2
+    },
+    "joint": {
+      "COMPLETE_JOINT_REFERENCE": 95,
+      "UNRESOLVED_SIZE_LIMIT": 33,
+      "UNRESOLVED_BOUND": 2,
+      "UNATTEMPTED_MAP_DEADLINE": 2
+    }
+  },
+  "station_types": {
+    "1": {
+      "stations": 16,
+      "active": 16,
+      "paired": 15,
+      "paired_minutes": 0.0
+    },
+    "0": {
+      "stations": 34,
+      "active": 0,
+      "paired": 32,
+      "paired_minutes": 0.0
+    },
+    "2": {
+      "stations": 82,
+      "active": 82,
+      "paired": 48,
+      "paired_minutes": 405.56492911842446
+    }
+  },
+  "joint_dabs_slot_pattern": {
+    "both": 31,
+    "LD_only": 12,
+    "SD_only": 5
+  },
+  "numeric": {
+    "max_abs_full_cost_residual": 2.2737367544323206e-13,
+    "max_abs_dp_minutes_vs_station_evaluator_minutes": 2.842170943040401e-14,
+    "min_saved_full_audit_energy_slack": 0.0005342121948004319,
+    "min_saved_full_audit_duty_slack": 262.8734051061642,
+    "min_accepted_reference_coverage_slack": 36.66917974946409,
+    "min_accepted_reference_dp_duty_slack": 339.48161600816815,
+    "negative_raw_cost_residual_count": 24
+  },
+  "negative_raw_cost_residuals": [
+    {
+      "map": "10_110_7",
+      "station": 0,
+      "arm": "fixed_owner",
+      "residual": -2.2737367544323206e-13
+    },
+    {
+      "map": "10_110_7",
+      "station": 0,
+      "arm": "joint",
+      "residual": -2.2737367544323206e-13
+    },
+    {
+      "map": "3_10_8",
+      "station": 1,
+      "arm": "fixed_owner",
+      "residual": -2.842170943040401e-14
+    },
+    {
+      "map": "3_10_8",
+      "station": 1,
+      "arm": "joint",
+      "residual": -2.842170943040401e-14
+    },
+    {
+      "map": "3_20_7",
+      "station": 2,
+      "arm": "fixed_owner",
+      "residual": -2.842170943040401e-14
+    },
+    {
+      "map": "4_20_7",
+      "station": 0,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_20_7",
+      "station": 2,
+      "arm": "fixed_owner",
+      "residual": -1.1368683772161603e-13
+    },
+    {
+      "map": "4_20_7",
+      "station": 3,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_20_7",
+      "station": 3,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_20_8",
+      "station": 0,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_20_8",
+      "station": 1,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_25_8",
+      "station": 0,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_25_8",
+      "station": 1,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_25_8",
+      "station": 2,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_25_8",
+      "station": 2,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_30_8",
+      "station": 1,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_30_8",
+      "station": 3,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "4_30_8",
+      "station": 3,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "5_35_7",
+      "station": 2,
+      "arm": "fixed_owner",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "5_35_7",
+      "station": 3,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "5_35_8",
+      "station": 4,
+      "arm": "joint",
+      "residual": -5.684341886080802e-14
+    },
+    {
+      "map": "8_80_7",
+      "station": 3,
+      "arm": "fixed_owner",
+      "residual": -1.1368683772161603e-13
+    },
+    {
+      "map": "8_80_7",
+      "station": 3,
+      "arm": "joint",
+      "residual": -1.1368683772161603e-13
+    },
+    {
+      "map": "9_95_7",
+      "station": 3,
+      "arm": "fixed_owner",
+      "residual": -1.1368683772161603e-13
+    }
+  ],
+  "maps": [
+    {
+      "map": "10_110_7",
+      "complete": false,
+      "station_count": 10,
+      "active": 8,
+      "effects": {
+        "g_to_fixed": 0.46972907909779626,
+        "g_to_joint": 1.06146650983043,
+        "fixed_to_joint": 0.5945301115505792
+      },
+      "alns6_gain": -0.5252048147666997,
+      "alns12_gain": -0.5336989202277529,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 12.114573958329856,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.1145739583298564
+      }
+    },
+    {
+      "map": "10_110_8",
+      "complete": false,
+      "station_count": 10,
+      "active": 9,
+      "effects": {
+        "g_to_fixed": 0.5190479708974455,
+        "g_to_joint": 1.209695833706565,
+        "fixed_to_joint": 0.6942513604082465
+      },
+      "alns6_gain": -0.7513523590846778,
+      "alns12_gain": -0.7354474373833808,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 3.4909755419939756,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_10_7",
+      "complete": true,
+      "station_count": 3,
+      "active": 2,
+      "effects": {
+        "g_to_fixed": 0.6493375742171026,
+        "g_to_joint": 3.2956881844722163,
+        "fixed_to_joint": 2.6636466689207987
+      },
+      "alns6_gain": 2.6636466689207987,
+      "alns12_gain": 2.6636466689207987,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.19715454196557403,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_10_8",
+      "complete": true,
+      "station_count": 3,
+      "active": 2,
+      "effects": {
+        "g_to_fixed": 0.6919576726466607,
+        "g_to_joint": 4.137476306999383,
+        "fixed_to_joint": 3.4695262877049897
+      },
+      "alns6_gain": 3.4695262877049897,
+      "alns12_gain": 3.4695262877049897,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.11685374984517694,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_15_7",
+      "complete": true,
+      "station_count": 3,
+      "active": 2,
+      "effects": {
+        "g_to_fixed": 0.7384765344406939,
+        "g_to_joint": 3.484134496276892,
+        "fixed_to_joint": 2.766084849371526
+      },
+      "alns6_gain": 2.766084849371526,
+      "alns12_gain": 2.766084849371526,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 2.9442567504011095,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_15_8",
+      "complete": true,
+      "station_count": 3,
+      "active": 2,
+      "effects": {
+        "g_to_fixed": 1.1053101980584394,
+        "g_to_joint": 5.605371134404361,
+        "fixed_to_joint": 4.550356490685483
+      },
+      "alns6_gain": 4.550356490685483,
+      "alns12_gain": 4.550356490685483,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.43858258286491036,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_20_7",
+      "complete": false,
+      "station_count": 3,
+      "active": 2,
+      "effects": {
+        "g_to_fixed": 1.3790956157021632,
+        "g_to_joint": 1.9616823990569967,
+        "fixed_to_joint": 0.5907335640369482
+      },
+      "alns6_gain": -0.4456472307575322,
+      "alns12_gain": -0.4456472307575322,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.11998158320784569,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "3_20_8",
+      "complete": true,
+      "station_count": 3,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 2.4407990699419453,
+        "g_to_joint": 5.533168273369622,
+        "fixed_to_joint": 3.1697360924928573
+      },
+      "alns6_gain": 3.1697360924928573,
+      "alns12_gain": 3.1697360924928573,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.27619612496346235,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_20_7",
+      "complete": true,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 0.825361945455427,
+        "g_to_joint": 5.399648941186883,
+        "fixed_to_joint": 4.6123556238397025
+      },
+      "alns6_gain": 4.6123556238397025,
+      "alns12_gain": 4.6123556238397025,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.3315900838933885,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_20_8",
+      "complete": true,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 1.1747428660732622,
+        "g_to_joint": 5.397197358974954,
+        "fixed_to_joint": 4.272647110019126
+      },
+      "alns6_gain": 4.272647110019126,
+      "alns12_gain": 4.272647110019126,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.584599457681179,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_25_7",
+      "complete": false,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 1.0307336946653143,
+        "g_to_joint": 2.177141951411535,
+        "fixed_to_joint": 1.1583477371746733
+      },
+      "alns6_gain": 0.349184644350259,
+      "alns12_gain": 0.349184644350259,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.14610949996858835,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_25_8",
+      "complete": true,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 1.19056482703031,
+        "g_to_joint": 5.1125713571948435,
+        "fixed_to_joint": 3.969263181495685
+      },
+      "alns6_gain": 3.969263181495685,
+      "alns12_gain": 3.969263181495685,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 1.5737052499316633,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_30_7",
+      "complete": false,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 1.9542924931468453,
+        "g_to_joint": 3.6064753635119327,
+        "fixed_to_joint": 1.685114945240824
+      },
+      "alns6_gain": 1.5859813156092264,
+      "alns12_gain": 1.5859813156092264,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.7773757497780025,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "4_30_8",
+      "complete": false,
+      "station_count": 4,
+      "active": 3,
+      "effects": {
+        "g_to_fixed": 1.03237886476804,
+        "g_to_joint": 3.1743627476420766,
+        "fixed_to_joint": 2.1643279471648342
+      },
+      "alns6_gain": 1.9519491798742918,
+      "alns12_gain": 1.9519491798742918,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 1.7688298746943474,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "5_35_7",
+      "complete": true,
+      "station_count": 5,
+      "active": 4,
+      "effects": {
+        "g_to_fixed": 0.977930390417534,
+        "g_to_joint": 4.312936290513942,
+        "fixed_to_joint": 3.367942028726974
+      },
+      "alns6_gain": 3.367942028726974,
+      "alns12_gain": 3.367942028726974,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 2.9012398747727275,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "5_35_8",
+      "complete": true,
+      "station_count": 5,
+      "active": 4,
+      "effects": {
+        "g_to_fixed": 0.5810029322101143,
+        "g_to_joint": 3.2440425769387238,
+        "fixed_to_joint": 2.678602403233648
+      },
+      "alns6_gain": 2.678602403233648,
+      "alns12_gain": 2.678602403233648,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 3.708245708141476,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "6_50_7",
+      "complete": true,
+      "station_count": 6,
+      "active": 6,
+      "effects": {
+        "g_to_fixed": 1.9278446975967154,
+        "g_to_joint": 5.787400754843799,
+        "fixed_to_joint": 3.935424938246977
+      },
+      "alns6_gain": 3.9354249382469773,
+      "alns12_gain": 3.9354249382469773,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 5.861030000261962,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "6_50_8",
+      "complete": false,
+      "station_count": 6,
+      "active": 4,
+      "effects": {
+        "g_to_fixed": 0.48347318690121965,
+        "g_to_joint": 2.4166759575886188,
+        "fixed_to_joint": 1.942594695168705
+      },
+      "alns6_gain": 0.6585512123571563,
+      "alns12_gain": 0.6585512123571341,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 10.977969209197909,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "7_65_7",
+      "complete": false,
+      "station_count": 7,
+      "active": 5,
+      "effects": {
+        "g_to_fixed": 0.6808089658145977,
+        "g_to_joint": 2.96454898830297,
+        "fixed_to_joint": 2.2993945064477166
+      },
+      "alns6_gain": 1.658093682036152,
+      "alns12_gain": 1.658093682036152,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 12.090705083217472,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.09070508321747184
+      }
+    },
+    {
+      "map": "7_65_8",
+      "complete": false,
+      "station_count": 7,
+      "active": 5,
+      "effects": {
+        "g_to_fixed": 0.5882341570717237,
+        "g_to_joint": 0.5882341570717237,
+        "fixed_to_joint": 0.0
+      },
+      "alns6_gain": -1.4419686522792075,
+      "alns12_gain": -1.4419686522792075,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 2.479641207959503,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "8_80_7",
+      "complete": false,
+      "station_count": 8,
+      "active": 6,
+      "effects": {
+        "g_to_fixed": 1.0221724946292716,
+        "g_to_joint": 1.7753561838609517,
+        "fixed_to_joint": 0.7609620338361244
+      },
+      "alns6_gain": -0.6727789217041066,
+      "alns12_gain": -0.7875912941633381,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 3.4774681669659913,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "8_80_8",
+      "complete": false,
+      "station_count": 8,
+      "active": 6,
+      "effects": {
+        "g_to_fixed": 0.45098864201051186,
+        "g_to_joint": 1.2036062053943257,
+        "fixed_to_joint": 0.7560271600059553
+      },
+      "alns6_gain": -1.1341515822593846,
+      "alns12_gain": -0.9530534657187758,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.6388204167596996,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "9_95_7",
+      "complete": false,
+      "station_count": 9,
+      "active": 5,
+      "effects": {
+        "g_to_fixed": 0.48178122348392793,
+        "g_to_joint": 1.9043688832781416,
+        "fixed_to_joint": 1.4294746000115413
+      },
+      "alns6_gain": -1.400990562554368,
+      "alns12_gain": -1.5319147537965974,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 11.14201970770955,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    },
+    {
+      "map": "9_95_8",
+      "complete": false,
+      "station_count": 9,
+      "active": 5,
+      "effects": {
+        "g_to_fixed": 0.0,
+        "g_to_joint": 0.0,
+        "fixed_to_joint": 0.0
+      },
+      "alns6_gain": -2.453835167599343,
+      "alns12_gain": -2.468519330444286,
+      "timing": {
+        "end_to_end_through_map_fsync_seconds": 0.20888275001198053,
+        "scheduling_seconds": 12.0,
+        "cap_overrun_seconds": 0.0
+      }
+    }
+  ],
+  "accepted_station_reference_records": [
+    {
+      "map": "10_110_7",
+      "station": 0,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": -2.2737367544323206e-13,
+      "minutes_dp": 105.33463062342727,
+      "minutes_evaluator": 105.33463062342727
+    },
+    {
+      "map": "10_110_7",
+      "station": 0,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": -2.2737367544323206e-13,
+      "minutes_dp": 105.33463062342727,
+      "minutes_evaluator": 105.33463062342727
+    },
+    {
+      "map": "10_110_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_7",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_7",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_7",
+      "station": 4,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 119.89470504703216,
+      "minutes_evaluator": 119.89470504703216
+    },
+    {
+      "map": "10_110_7",
+      "station": 4,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 114.69369526371355,
+      "minutes_evaluator": 114.69369526371356
+    },
+    {
+      "map": "10_110_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 166.2795159286666,
+      "minutes_evaluator": 166.2795159286666
+    },
+    {
+      "map": "10_110_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 154.31830185571516,
+      "minutes_evaluator": 154.31830185571516
+    },
+    {
+      "map": "10_110_7",
+      "station": 9,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 141.13963346951786,
+      "minutes_evaluator": 141.13963346951783
+    },
+    {
+      "map": "10_110_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "10_110_8",
+      "station": 1,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 113.67642905886252,
+      "minutes_evaluator": 113.67642905886254
+    },
+    {
+      "map": "10_110_8",
+      "station": 1,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 113.67642905886252,
+      "minutes_evaluator": 113.67642905886254
+    },
+    {
+      "map": "10_110_8",
+      "station": 2,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 40.571362275866,
+      "minutes_evaluator": 40.571362275866
+    },
+    {
+      "map": "10_110_8",
+      "station": 2,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 40.571362275866,
+      "minutes_evaluator": 40.571362275866
+    },
+    {
+      "map": "10_110_8",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 158.6090301982652,
+      "minutes_evaluator": 158.6090301982652
+    },
+    {
+      "map": "10_110_8",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 143.41299136490454,
+      "minutes_evaluator": 143.41299136490454
+    },
+    {
+      "map": "10_110_8",
+      "station": 8,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 2.2737367544323206e-13,
+      "minutes_dp": 89.56511605270296,
+      "minutes_evaluator": 89.56511605270298
+    },
+    {
+      "map": "10_110_8",
+      "station": 8,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 2.2737367544323206e-13,
+      "minutes_dp": 89.56511605270296,
+      "minutes_evaluator": 89.56511605270298
+    },
+    {
+      "map": "3_10_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 2.842170943040401e-14,
+      "minutes_dp": 116.16632195759063,
+      "minutes_evaluator": 116.16632195759063
+    },
+    {
+      "map": "3_10_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 2.842170943040401e-14,
+      "minutes_dp": 108.57254305173932,
+      "minutes_evaluator": 108.57254305173932
+    },
+    {
+      "map": "3_10_7",
+      "station": 1,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 26.52325071189555,
+      "minutes_evaluator": 26.52325071189555
+    },
+    {
+      "map": "3_10_7",
+      "station": 1,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 26.52325071189555,
+      "minutes_evaluator": 26.52325071189555
+    },
+    {
+      "map": "3_10_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_10_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_10_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_10_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_10_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -2.842170943040401e-14,
+      "minutes_dp": 95.36665657673086,
+      "minutes_evaluator": 95.36665657673086
+    },
+    {
+      "map": "3_10_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -2.842170943040401e-14,
+      "minutes_dp": 90.4875046371424,
+      "minutes_evaluator": 90.4875046371424
+    },
+    {
+      "map": "3_10_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 54.588916526797625,
+      "minutes_evaluator": 54.588916526797625
+    },
+    {
+      "map": "3_10_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 48.242222802224596,
+      "minutes_evaluator": 48.242222802224596
+    },
+    {
+      "map": "3_15_7",
+      "station": 0,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 56.4238014082531,
+      "minutes_evaluator": 56.4238014082531
+    },
+    {
+      "map": "3_15_7",
+      "station": 0,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 56.4238014082531,
+      "minutes_evaluator": 56.4238014082531
+    },
+    {
+      "map": "3_15_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_15_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_15_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 169.03459949035306,
+      "minutes_evaluator": 169.03459949035306
+    },
+    {
+      "map": "3_15_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 2.842170943040401e-14,
+      "minutes_dp": 158.8593239959563,
+      "minutes_evaluator": 158.85932399595632
+    },
+    {
+      "map": "3_15_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_15_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_15_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 124.27835161081765,
+      "minutes_evaluator": 124.27835161081765
+    },
+    {
+      "map": "3_15_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 116.5481824373263,
+      "minutes_evaluator": 116.5481824373263
+    },
+    {
+      "map": "3_15_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 97.95578863275122,
+      "minutes_evaluator": 97.95578863275121
+    },
+    {
+      "map": "3_15_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 87.6740933133203,
+      "minutes_evaluator": 87.6740933133203
+    },
+    {
+      "map": "3_20_7",
+      "station": 0,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_20_7",
+      "station": 0,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "3_20_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -2.842170943040401e-14,
+      "minutes_dp": 96.54163723698957,
+      "minutes_evaluator": 96.54163723698957
+    },
+    {
+      "map": "3_20_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 93.7454853585403,
+      "minutes_evaluator": 93.7454853585403
+    },
+    {
+      "map": "3_20_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 92.42982509351566,
+      "minutes_evaluator": 92.42982509351565
+    },
+    {
+      "map": "3_20_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 85.92341835102016,
+      "minutes_evaluator": 85.92341835102016
+    },
+    {
+      "map": "3_20_8",
+      "station": 1,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 78.0067727118861,
+      "minutes_evaluator": 78.0067727118861
+    },
+    {
+      "map": "3_20_8",
+      "station": 1,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 78.0067727118861,
+      "minutes_evaluator": 78.0067727118861
+    },
+    {
+      "map": "3_20_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 117.64707669083754,
+      "minutes_evaluator": 117.64707669083754
+    },
+    {
+      "map": "3_20_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 107.75695610225243,
+      "minutes_evaluator": 107.75695610225243
+    },
+    {
+      "map": "4_20_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 127.60798718874344,
+      "minutes_evaluator": 127.60798718874344
+    },
+    {
+      "map": "4_20_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 112.40550127893142,
+      "minutes_evaluator": 112.40550127893142
+    },
+    {
+      "map": "4_20_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_20_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_20_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -1.1368683772161603e-13,
+      "minutes_dp": 116.38307053012298,
+      "minutes_evaluator": 116.38307053012298
+    },
+    {
+      "map": "4_20_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 106.87456030193803,
+      "minutes_evaluator": 106.87456030193805
+    },
+    {
+      "map": "4_20_7",
+      "station": 3,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 62.5654656999719,
+      "minutes_evaluator": 62.5654656999719
+    },
+    {
+      "map": "4_20_7",
+      "station": 3,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 62.5654656999719,
+      "minutes_evaluator": 62.5654656999719
+    },
+    {
+      "map": "4_20_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 81.53200546368163,
+      "minutes_evaluator": 81.53200546368163
+    },
+    {
+      "map": "4_20_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 71.27154200823219,
+      "minutes_evaluator": 71.27154200823219
+    },
+    {
+      "map": "4_20_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 87.59565819221538,
+      "minutes_evaluator": 87.59565819221538
+    },
+    {
+      "map": "4_20_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 84.83315823972367,
+      "minutes_evaluator": 84.83315823972367
+    },
+    {
+      "map": "4_20_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 133.53999762817344,
+      "minutes_evaluator": 133.53999762817344
+    },
+    {
+      "map": "4_20_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 122.50506687880853,
+      "minutes_evaluator": 122.50506687880853
+    },
+    {
+      "map": "4_20_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_20_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_25_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 5.684341886080802e-14,
+      "minutes_dp": 73.77358005883056,
+      "minutes_evaluator": 73.77358005883056
+    },
+    {
+      "map": "4_25_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 5.684341886080802e-14,
+      "minutes_dp": 73.77358005883056,
+      "minutes_evaluator": 73.77358005883056
+    },
+    {
+      "map": "4_25_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 103.38534080450913,
+      "minutes_evaluator": 103.38534080450913
+    },
+    {
+      "map": "4_25_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 96.01885962488763,
+      "minutes_evaluator": 96.01885962488763
+    },
+    {
+      "map": "4_25_7",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_25_7",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_25_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 82.68899163793604,
+      "minutes_evaluator": 82.68899163793604
+    },
+    {
+      "map": "4_25_8",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 75.80865042837328,
+      "minutes_evaluator": 75.80865042837328
+    },
+    {
+      "map": "4_25_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 129.93970022497746,
+      "minutes_evaluator": 129.93970022497749
+    },
+    {
+      "map": "4_25_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 121.72182764033602,
+      "minutes_evaluator": 121.72182764033603
+    },
+    {
+      "map": "4_25_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 145.86920366980547,
+      "minutes_evaluator": 145.86920366980547
+    },
+    {
+      "map": "4_25_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 136.40173116557776,
+      "minutes_evaluator": 136.40173116557776
+    },
+    {
+      "map": "4_25_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_25_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_30_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 127.96886696142312,
+      "minutes_evaluator": 127.96886696142312
+    },
+    {
+      "map": "4_30_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 122.03963203807395,
+      "minutes_evaluator": 122.03963203807396
+    },
+    {
+      "map": "4_30_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_30_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_30_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 5.684341886080802e-14,
+      "minutes_dp": 105.11984985964779,
+      "minutes_evaluator": 105.11984985964779
+    },
+    {
+      "map": "4_30_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 99.15092765237769,
+      "minutes_evaluator": 99.15092765237769
+    },
+    {
+      "map": "4_30_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 151.27141751387694,
+      "minutes_evaluator": 151.27141751387694
+    },
+    {
+      "map": "4_30_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 137.00439390052645,
+      "minutes_evaluator": 137.00439390052645
+    },
+    {
+      "map": "4_30_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_30_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "4_30_8",
+      "station": 3,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 78.7330842712999,
+      "minutes_evaluator": 78.7330842712999
+    },
+    {
+      "map": "4_30_8",
+      "station": 3,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 78.7330842712999,
+      "minutes_evaluator": 78.7330842712999
+    },
+    {
+      "map": "5_35_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 87.8149203980258,
+      "minutes_evaluator": 87.8149203980258
+    },
+    {
+      "map": "5_35_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 78.86876371224295,
+      "minutes_evaluator": 78.86876371224295
+    },
+    {
+      "map": "5_35_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 134.6597340828407,
+      "minutes_evaluator": 134.6597340828407
+    },
+    {
+      "map": "5_35_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 126.48974265474533,
+      "minutes_evaluator": 126.48974265474533
+    },
+    {
+      "map": "5_35_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 141.77715391359334,
+      "minutes_evaluator": 141.77715391359337
+    },
+    {
+      "map": "5_35_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 136.56181742292546,
+      "minutes_evaluator": 136.5618174229255
+    },
+    {
+      "map": "5_35_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 128.58054651502772,
+      "minutes_evaluator": 128.58054651502772
+    },
+    {
+      "map": "5_35_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 122.6202283836723,
+      "minutes_evaluator": 122.6202283836723
+    },
+    {
+      "map": "5_35_7",
+      "station": 4,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "5_35_7",
+      "station": 4,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "5_35_8",
+      "station": 0,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 103.70303910372384,
+      "minutes_evaluator": 103.70303910372384
+    },
+    {
+      "map": "5_35_8",
+      "station": 0,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 103.70303910372384,
+      "minutes_evaluator": 103.70303910372384
+    },
+    {
+      "map": "5_35_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 152.9820285117399,
+      "minutes_evaluator": 152.9820285117399
+    },
+    {
+      "map": "5_35_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 5.684341886080802e-14,
+      "minutes_dp": 150.7235011814234,
+      "minutes_evaluator": 150.72350118142342
+    },
+    {
+      "map": "5_35_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "5_35_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "5_35_8",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 119.46665878421949,
+      "minutes_evaluator": 119.46665878421949
+    },
+    {
+      "map": "5_35_8",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 107.20940709737619,
+      "minutes_evaluator": 107.20940709737619
+    },
+    {
+      "map": "5_35_8",
+      "station": 4,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 114.01019403094978,
+      "minutes_evaluator": 114.01019403094978
+    },
+    {
+      "map": "5_35_8",
+      "station": 4,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": -5.684341886080802e-14,
+      "minutes_dp": 106.93210047350011,
+      "minutes_evaluator": 106.93210047350011
+    },
+    {
+      "map": "6_50_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 125.40567364965986,
+      "minutes_evaluator": 125.40567364965987
+    },
+    {
+      "map": "6_50_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 116.55546050403714,
+      "minutes_evaluator": 116.55546050403714
+    },
+    {
+      "map": "6_50_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 141.18621633109302,
+      "minutes_evaluator": 141.18621633109302
+    },
+    {
+      "map": "6_50_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 130.12984206534958,
+      "minutes_evaluator": 130.12984206534958
+    },
+    {
+      "map": "6_50_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 144.82350769996236,
+      "minutes_evaluator": 144.82350769996236
+    },
+    {
+      "map": "6_50_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 132.67957449377357,
+      "minutes_evaluator": 132.67957449377357
+    },
+    {
+      "map": "6_50_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 89.57925330023798,
+      "minutes_evaluator": 89.57925330023798
+    },
+    {
+      "map": "6_50_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 82.83231185008042,
+      "minutes_evaluator": 82.83231185008042
+    },
+    {
+      "map": "6_50_7",
+      "station": 4,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 152.9668508859081,
+      "minutes_evaluator": 152.96685088590812
+    },
+    {
+      "map": "6_50_7",
+      "station": 4,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 143.2142284700443,
+      "minutes_evaluator": 143.2142284700443
+    },
+    {
+      "map": "6_50_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 58.90665965072382,
+      "minutes_evaluator": 58.90665965072382
+    },
+    {
+      "map": "6_50_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 58.90665965072382,
+      "minutes_evaluator": 58.90665965072382
+    },
+    {
+      "map": "6_50_8",
+      "station": 0,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 99.07925941884741,
+      "minutes_evaluator": 99.07925941884741
+    },
+    {
+      "map": "6_50_8",
+      "station": 0,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 99.07925941884741,
+      "minutes_evaluator": 99.07925941884741
+    },
+    {
+      "map": "6_50_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 152.25461347776866,
+      "minutes_evaluator": 152.25461347776866
+    },
+    {
+      "map": "6_50_8",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 140.83251271295205,
+      "minutes_evaluator": 140.83251271295205
+    },
+    {
+      "map": "6_50_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "6_50_8",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "6_50_8",
+      "station": 4,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 171.71603773216594,
+      "minutes_evaluator": 171.71603773216597
+    },
+    {
+      "map": "6_50_8",
+      "station": 4,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 163.16076760364717,
+      "minutes_evaluator": 163.16076760364717
+    },
+    {
+      "map": "6_50_8",
+      "station": 5,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "6_50_8",
+      "station": 5,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "7_65_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 150.59476613608103,
+      "minutes_evaluator": 150.59476613608103
+    },
+    {
+      "map": "7_65_7",
+      "station": 0,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 138.75859715449255,
+      "minutes_evaluator": 138.75859715449255
+    },
+    {
+      "map": "7_65_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 2.2737367544323206e-13,
+      "minutes_dp": 165.97986777598146,
+      "minutes_evaluator": 165.97986777598146
+    },
+    {
+      "map": "7_65_7",
+      "station": 1,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 152.76353826177686,
+      "minutes_evaluator": 152.76353826177686
+    },
+    {
+      "map": "7_65_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 115.45397909706809,
+      "minutes_evaluator": 115.45397909706809
+    },
+    {
+      "map": "7_65_7",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 107.81591087598574,
+      "minutes_evaluator": 107.81591087598574
+    },
+    {
+      "map": "7_65_7",
+      "station": 4,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 136.53291911600905,
+      "minutes_evaluator": 136.53291911600905
+    },
+    {
+      "map": "7_65_8",
+      "station": 2,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 140.51838399183185,
+      "minutes_evaluator": 140.51838399183185
+    },
+    {
+      "map": "7_65_8",
+      "station": 2,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 140.51838399183185,
+      "minutes_evaluator": 140.51838399183185
+    },
+    {
+      "map": "7_65_8",
+      "station": 4,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 90.02175435694818,
+      "minutes_evaluator": 90.02175435694818
+    },
+    {
+      "map": "7_65_8",
+      "station": 4,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 90.02175435694818,
+      "minutes_evaluator": 90.02175435694818
+    },
+    {
+      "map": "7_65_8",
+      "station": 5,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "7_65_8",
+      "station": 5,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "7_65_8",
+      "station": 6,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "7_65_8",
+      "station": 6,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_7",
+      "station": 3,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": -1.1368683772161603e-13,
+      "minutes_dp": 137.5122848712971,
+      "minutes_evaluator": 137.5122848712971
+    },
+    {
+      "map": "8_80_7",
+      "station": 3,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": -1.1368683772161603e-13,
+      "minutes_dp": 137.5122848712971,
+      "minutes_evaluator": 137.5122848712971
+    },
+    {
+      "map": "8_80_7",
+      "station": 4,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_7",
+      "station": 4,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 146.8209625703289,
+      "minutes_evaluator": 146.82096257032893
+    },
+    {
+      "map": "8_80_7",
+      "station": 5,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 135.282504261371,
+      "minutes_evaluator": 135.282504261371
+    },
+    {
+      "map": "8_80_7",
+      "station": 6,
+      "kind": 1,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 88.66817160512383,
+      "minutes_evaluator": 88.66817160512383
+    },
+    {
+      "map": "8_80_7",
+      "station": 6,
+      "kind": 1,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 88.66817160512383,
+      "minutes_evaluator": 88.66817160512383
+    },
+    {
+      "map": "8_80_7",
+      "station": 7,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_7",
+      "station": 7,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 119.67758631718213,
+      "minutes_evaluator": 119.67758631718213
+    },
+    {
+      "map": "8_80_8",
+      "station": 2,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 115.4377029413962,
+      "minutes_evaluator": 115.4377029413962
+    },
+    {
+      "map": "8_80_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_8",
+      "station": 6,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_8",
+      "station": 6,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "8_80_8",
+      "station": 7,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 115.49165954254404,
+      "minutes_evaluator": 115.49165954254404
+    },
+    {
+      "map": "8_80_8",
+      "station": 7,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 1.1368683772161603e-13,
+      "minutes_dp": 107.36592902614562,
+      "minutes_evaluator": 107.36592902614562
+    },
+    {
+      "map": "9_95_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 1,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 2,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": -1.1368683772161603e-13,
+      "minutes_dp": 150.2720201354626,
+      "minutes_evaluator": 150.27202013546258
+    },
+    {
+      "map": "9_95_7",
+      "station": 3,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 139.66469128260053,
+      "minutes_evaluator": 139.66469128260053
+    },
+    {
+      "map": "9_95_7",
+      "station": 5,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 5,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 6,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 6,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_7",
+      "station": 8,
+      "kind": 2,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 167.13670301400606,
+      "minutes_evaluator": 167.1367030140061
+    },
+    {
+      "map": "9_95_7",
+      "station": 8,
+      "kind": 2,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 152.61081732770288,
+      "minutes_evaluator": 152.61081732770288
+    },
+    {
+      "map": "9_95_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 0,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 1,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 1,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 3,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 8,
+      "kind": 0,
+      "arm": "fixed_owner",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    },
+    {
+      "map": "9_95_8",
+      "station": 8,
+      "kind": 0,
+      "arm": "joint",
+      "cost_residual": 0.0,
+      "minutes_dp": 0.0,
+      "minutes_evaluator": 0
+    }
+  ],
+  "source_file_sha256": {
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/REPORT.json": "830c0883bb93f89abc1a6b9aaac92300d11185cdc53223a0a8ad1a2661c66308",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_DRY_RUN_FINAL2.json": "19c2bc761c33a34d6cc0d46a0c0dfa07e215c1f65a9f66cd75ae385cdfeb122c",
+    "WORKSPACE/route_rl_research/20261103/failure/G2_ALNS_GREEDY_PARENTS.json": "5ad8fa1bba2e543d3a95809c6eaecf23f799e9e59df7847ced3f09808431e18a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/stations.json": "a04d59b64d05aa074c2d86a242822295b00289ffbf04ffa007da8a0c0660e4e1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/parent.solution.json": "5281e9d6b8910c02a34ea6e32914b545dd30b74a782ee7e20eed9ba13bd2b5b0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/fixed_owner.solution.json": "631526fc156a673b87ba47105c1a13ca45ef342d60131ecf247b7293b186274a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/joint.solution.json": "5906b65841d7d65fbb99cba50ee331e13caa664c6aa4b096a7284f0365553ae2",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/parent.audit.json": "2bedb277be574bb96e4ab1642d3c4376713dde2d2706393b1737099cfef24830",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/fixed_owner.audit.json": "842cc3bd36e0045628ebcc3db4b1f36b8cc6252465fc147a4e99d0a5a1a887e7",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/joint.audit.json": "dcfa9c193a55b2f3f6d5d13b0ad2847c229ccc32745ce96e0a37d5ef2327e8fd",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/TIMING.json": "25851f5b1cd3059e50871a6135b4f8ef1dbff3d142dd2e3dea128e2b9b5a01e1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_7/archived_comparators.json": "1fcd5b22cd1584ca3c7b1d2f80a5d6a0b55c8d5203341d4505eb93405a76df6d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/stations.json": "0363f57101d3970ada8c36f23310f00290d88e1b5e82e8f1a230bbcdd8da4504",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/parent.solution.json": "27d6e9065d5e5db02187ad75ae9d53c5f818327b079fc1c69c3b8ba07d8ea38d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/fixed_owner.solution.json": "b7667204a7d5d7d118818a66db43ec6c51f7afc744367a272b84f051b44aee5c",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/joint.solution.json": "028ff5b5428d2766a5f9712da2dea19b297a0ac3fd13675464d7879fe414986a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/parent.audit.json": "7440b70ddc37d92647768526814c03856e0ff3fdfaf907bb6438ab27aa0906f3",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/fixed_owner.audit.json": "7edab0e516ab746449b72e46c2837f00e78ffabc1245c1f9904ca8a149f57212",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/joint.audit.json": "bc330c9583c9da6e5d8d6d39b256a37901eaae7c1a6e9f92694ff406f7450191",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/TIMING.json": "ab42715d4105c0871cba703dde9cbacbb3ebb23e3b042c27de1f6c29c4cc5bc0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/10_110_8/archived_comparators.json": "abb910783978f6c01ec03d95eb63badf0725e324991d3320956516b56a7254c8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/stations.json": "95bbda336ee25bf177d06693ea07b3b2351fd6a0a4d2184aaed80765786cf142",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/parent.solution.json": "8fd65c4cddf26cc8c08c6957642772b6617b8bfbc3e4ce63c1678bf73297d3d6",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/fixed_owner.solution.json": "c79eb6b0e10834864ca895f72a1163d845582b0abefb7b994ccb47f75dab2ac4",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/joint.solution.json": "2ecb3cc0f356fd74d68d3c3a0bffc9cb05cd1c6aa0b51dc6ec4adcd6a2031943",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/parent.audit.json": "43951876837a4b0d1eb8aab83e0b7cfd5361a37586270db771cc4f63d3cf90bd",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/fixed_owner.audit.json": "6110f486f75dda3c314accbc714f00860b1695f948fc1bd078fe3f91371badbd",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/joint.audit.json": "d53f89a8bb344c58748253ad984cb2bd2274cf565096d348dde7ce536111f168",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/TIMING.json": "5032656a27fe26aaf738bffe81f6b10896036057521af102ef2293ba33c86c32",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_7/archived_comparators.json": "12a05b31091dc811f85565a33c87ea19433306dae75d017897089ee47840c8ef",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/stations.json": "a9b153f2fef4060bf6abc1b5953e0f1a397e3e23f9e4c345696f4621399d2eb8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/parent.solution.json": "8a45973931a6ab72601c70baa93020b7ab518d445ae00f5409d7b5951b4acb44",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/fixed_owner.solution.json": "f17a81b5110d19c5b6c691193d6a76ca302e397a76efd14166811f71ce0fbe43",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/joint.solution.json": "210c6e0a55832ba45e97ed5a4849862336577a5ec59e40632b0f06d8ec290a4e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/parent.audit.json": "9326f08cf977269dbce15372532566fee99eae501386c4fcf05362b718c10c9d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/fixed_owner.audit.json": "8da3027f74335065dfdad5b9b84b96e36ee59cc27ab19943a5f115aa1de1e5d0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/joint.audit.json": "a2b6248b891aff8953818ae1099a94cc2a8850e650ffc14f21b8425c862bb908",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/TIMING.json": "243367b86cb20a12126bdf4180541e25ccdbac89cb15f67d5d9ce34c95d59af0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_10_8/archived_comparators.json": "e04bdb8170d04a004a9b234a6cb03be4ed5003eb1a59a8632bb94a1c2b0d71a8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/stations.json": "a63b1dde7a500b0081dec321b7b503c9b1a16c9d991446bc0ac55349b7e9eaf8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/parent.solution.json": "5627f6c17c5efeb4f2c6acea14a3088df58c6512f6592d696d2d26dad85018ca",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/fixed_owner.solution.json": "e724e22cdf2b8432819573b78d8389d2c81b3d114ae8ce60c3a3683bea0d011a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/joint.solution.json": "e5200a12c78f3b6d38958a80f5f79e291f3c2211f2fec0a9c02c99c958db696e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/parent.audit.json": "5d88330ae40447b87b164d26b9ff225f95689277590c5fac5ffd4eb7f50a1013",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/fixed_owner.audit.json": "2fe566ca266a909ba75ea279164fd9946d70cf5cbd0503baaf08594193483084",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/joint.audit.json": "10e22512470650af52ad11e9c66fb205256c9a10e30e63176b43bb16e9db9643",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/TIMING.json": "d36bb4d2c4939b885e226d8a90068ba1802f1ea702bf9a665d295a3ee7604d13",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_7/archived_comparators.json": "35d6cdebd03b48a3c0ea608b5a4cf0d17fd5c41c34ddd6dd5d69cfee75010417",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/stations.json": "b3c04ca9acba9648304ac1d4bfe5403cf5f19dc7435682e9802d521ebdfe97f7",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/parent.solution.json": "62858e0bfc72202401f3cc9d48903ecccad12885459d37ead73afcfce937db81",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/fixed_owner.solution.json": "811701da81474ac1d221266e592fc0e661aecd056f9b6ba84c9e15a278744d9b",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/joint.solution.json": "c863973516b5ac672ed6eeb0f2dfbc623e963c4c08724dea460856d6d9b6c81d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/parent.audit.json": "33e511f9035dcac09a9f78a82f4e2e5d9833bad65090366d5bec32f1cc4b83f0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/fixed_owner.audit.json": "dfd802cc911ca226dd272ac5051bb81ceb65f5cc1b7d53d308695d5bf00e2f5e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/joint.audit.json": "cd8f4b38c9a02f3c19b62cc48661763b2e00f12f9d2b7c825c96a72ff413fde1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/TIMING.json": "658050503453daf82ca819313d7cf0fd95c838ee23fa3a6758ae75814b72bf11",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_15_8/archived_comparators.json": "bb8995d52df704ec6fd8cad5c7473864acc82f3613c162c27b737d00652fb371",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/stations.json": "79ef3402b3c295e25854d198a8db7b3b68029a17534ff88b08ebcef72af7345f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/parent.solution.json": "95b87ff800fbc4d3d98a8fb66a85c067c9862774ced73f34a5230a2c730e922f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/fixed_owner.solution.json": "18da1b11bfb387f8efa58e81c2cf279b5d2176fd880c7e44f375cba58faae383",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/joint.solution.json": "c40d3a69f2409e4da0664d679ba705ff7ef6c822962b94fc69ab950ecce3075a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/parent.audit.json": "4d2b5954cfd5528e5b3bdcdb1a225c3b51cdec972445afd5723a5d03bf5f11c1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/fixed_owner.audit.json": "99681985858a52396978763f43ed2f584944db3188514de4f69a665cac512803",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/joint.audit.json": "ef8517d4bfe271c123b5f421e735e005abe545f30eb3952a6b3df1ec31d55d16",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/TIMING.json": "d5de04815e20a03fbbf739a4bf51e01a32bf093552ba373fbc0efcb8520c1b7b",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_7/archived_comparators.json": "a2f31336d7cc1fbddabc37043acd3c5030c465b9778c6adffc42aac99c05614e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/stations.json": "899a58d8dd2c0bdb5bd525340132c39ee88892458fa75d2f8b0dfb40a590e17f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/parent.solution.json": "d7e00e5e7f84a5fbb810dfe5332400544a749607f825a55d07129b6d966ac26d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/fixed_owner.solution.json": "e7db3e024d712aa288553b0f1a079188aa39a129d3fc406d835d35342f298d22",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/joint.solution.json": "084437cc460efd59501c65f54b04b6e6b71bc46e7221d76817ca8ba4a7792729",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/parent.audit.json": "5d2a9036917d7a437daec3ad3543e132faef92f0c685b53240591b849a9e27c7",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/fixed_owner.audit.json": "779339a058b49efbb35b99064ab7ebfee3266ad31a1266d7b8d9e75481dd698e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/joint.audit.json": "d962c196a36d09ff5dab2aa8a14f8c4992dfdffabe62a06e52f9d46cab882047",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/TIMING.json": "e5ce6ac2d27e71a1b83866629b5fdc75bbad899fab816c72e3ca7dcb7aedcbf5",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/3_20_8/archived_comparators.json": "7858421d46fbee7e8eb153b03b1b3de3442c976e036f89dafe2d320d4e5fbc41",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/stations.json": "0127a9fa428a5bec1f98db4a43cfe57cc9c5ce6ec6bb2a3f105a528a6cf943e1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/parent.solution.json": "d36f4fd939de57ef4029d876c8b57d641237dc8095b1ba59b24bf80b109341c2",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/fixed_owner.solution.json": "9526892c86e5a7539efa88667d902014ca9aef3189aec168a9dddb48f4f62afc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/joint.solution.json": "329631e46316008e6cf1b8b7996390d813a724f3aa849c7004088a7abf1a3894",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/parent.audit.json": "2e5dfb25643625e1f777f304d46430566f28eb768385da2ee624bbdefe676e99",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/fixed_owner.audit.json": "34bf885fefd765bb6f169090547a5551b912e55bc790d713f1061ca8215536f0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/joint.audit.json": "869516bc380aba76043b70c9fa3a63e2b8b44182bcca20807d3c755ee397cda7",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/TIMING.json": "9dcff01175f1048057c152b83582f7a9cb17e9ff72713c4eef7d0cef2f7fc3cd",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_7/archived_comparators.json": "b02c653ae13c1abe9e1812ac5df3b4ec5ed745714aafae03155150205e643d0d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/stations.json": "114a2c90f9bdba3e6ce3c45461623842fbde28e1889c4181b731d0e11cc03c33",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/parent.solution.json": "9676ef5f2bf0601587068a49901a84e812a5dd67832b0c743f4948ffac5d8e2a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/fixed_owner.solution.json": "639f01b5e5a16a208200a6def5fd7a24d891107488989801f091b1b0e7388c45",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/joint.solution.json": "3f49d4f33d1ba96d2e69b27ad548bc99111bc1a449abe2b678ea41de89a6a4b9",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/parent.audit.json": "35e4a2d0d0e28192c14b4ea52740920dbcf352de41512c71afa7b6c5f2ba0d08",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/fixed_owner.audit.json": "38d49db4c7bc094d2f2a2b52f05ce0bda6fbe35a10d9008cd86562f20a63923c",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/joint.audit.json": "241c90c0f009fbed1f49c169ef967722ffee21a9b318685ba12390b16e0566b8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/TIMING.json": "3ffe924386a4680ceacc078e2cc0d9fdfa4828b07a4b0624c71e28aa5993ebcc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_20_8/archived_comparators.json": "dadfe30da03e53160d0403d28cc2d3f4fd43e5993ac8600982170ed0656e4efa",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/stations.json": "05cc55e6ea7d3768b879ff0585bcc1ce73ae34e3e816280a547f4d44c173d7b2",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/parent.solution.json": "bf1cb89a30a75043ae551b155d04b8bf1ccd2328ac0f42915ce980adbf9a0f63",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/fixed_owner.solution.json": "509ada056df54cde72c4102d849218695388660a609f25f645b074f2accf16c4",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/joint.solution.json": "a7bf398a16dfeda6d08e9a60f106de6076108411c036a17517c9bffce33b72a8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/parent.audit.json": "ae13b3907388429341c8e1a7341b6339904321eb38043168e64f399439a18ca6",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/fixed_owner.audit.json": "999798109e287541139853d77f95c0a86480e60c9d309f5e9654092c64392f40",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/joint.audit.json": "2cb131e6ce95f5aae25b2d9340ea1a477691be19850c1ffddede952af37bea57",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/TIMING.json": "617ee205181504cead8332860da1574203dafcc010585d03faa2a4b5fdaa49cd",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_7/archived_comparators.json": "f8fa6d1662964afd6d7998f2837c421fbddda9c52d57654a74219c2ef7a46215",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/stations.json": "d1c3b02e00751d86bcc763ddbc6b201b042753537e52c4f9cc85ae7e3be26334",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/parent.solution.json": "3aa439821f3a41add216515dda2bb71cdb26170e2cd89057b512e2a09145bbce",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/fixed_owner.solution.json": "007c8f267dc943ee7020b44bc125eeae2d02da8f6a20388dfd6f9e9e95b17727",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/joint.solution.json": "400a994184adb5985cb28a308bf77b5f4c8d30f38b5cf2536196b0e72242528f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/parent.audit.json": "bfa7dfc0beccec9446fcdef3026e4c5687af92407550472a6d07c86ead76638d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/fixed_owner.audit.json": "32926ec94b712db2ef8264ffda365fd0ef3ae3c83fae76da6304f83709c94f14",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/joint.audit.json": "76af15d314004b06af1ecbe0082798c021ed90137e0bb71a1bf80b3b8dd6705e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/TIMING.json": "4ee64678153555836ac76ccd382251924332c65279d9dc4b6430b8703835862b",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_25_8/archived_comparators.json": "88a87bb267a26d5a31803daea4f5f1f98501bdd0211da343cb342456c3ba9c94",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/stations.json": "e9cd05dce4ddf9f61e6a7ba53407d94f6de0813f3d1ace182e6dff4d0be84b24",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/parent.solution.json": "0c9f9bc8d7f7c68ba444f3ecb9565af47e64ba018b2ad8bca12c9dc7fa5c18b9",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/fixed_owner.solution.json": "077b0c096f6bbffe3160983bb39971bdf63bae81300ef51caa52a0a61e78396a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/joint.solution.json": "18bff0f86b9d45a695236209935b51083b3635d5555ff90910a05b437d712bb6",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/parent.audit.json": "5909af8ef78b8ea6378c261ad6eb76b8264c79067929956434cdb8f8027faafc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/fixed_owner.audit.json": "d8c391c28eecac8b65f9dcdf8249d40db735bdd7ee38aa2ef12a9d892d471f2f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/joint.audit.json": "7ed3e8f31da75d7b576ed13682ac5e1121cd7b6f90ee03a79552463be74e67dc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/TIMING.json": "3252ec535a8636d57d317268a208c886cc63dbb63c46800c0a75d24380f4e133",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_7/archived_comparators.json": "31b7053310d80457b3f9e0cb4675556f7abc1f537611a6d4ebb2b7ddf764601a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/stations.json": "169b9d906ac4842bf95e3aab9d30c43cee33dee54302eb74287b35f547d6ee89",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/parent.solution.json": "5569dbd6bdf38186303645eb682f7a1f3184bae2b1f6ef038958694300e9c7c2",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/fixed_owner.solution.json": "2650cc138e695f72d48a6b24e5fd166be8414d54c5a6af8e91bbbc1c0909a740",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/joint.solution.json": "252ff02cfefc53acc57b9d0154268da63af6a79d3aeb4f180d426b47d71ce224",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/parent.audit.json": "7e22c15f3a637cf5b1b3e34291f7db26f4445b5cec3a5c9ab668ebc59bf62c63",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/fixed_owner.audit.json": "62b0f65138d478278fec1358b99d02c042cc3ae918d790feff6f020f53037768",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/joint.audit.json": "db3ba33a2aa0ceea447dc2f070e3f7de4f6a70dc923d361faf9ac6ba089eefbe",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/TIMING.json": "e61b596a7576c8c5def75db98299f9114c24e6d2e34d043d1347a76dfd4605d5",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/4_30_8/archived_comparators.json": "f56eee41dc111e894ae04935ca905b5a03bf052c49b02c0ee47c49b9dc4bb457",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/stations.json": "96d2b8ac7e7166bcff3a9b4aff04dabe7a9b2cb254ce9b4503171fe041014759",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/parent.solution.json": "08f903b7d8277f60c5ccd6688536d2aee0271dffdcf68be10f6d7f73fdb3283a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/fixed_owner.solution.json": "6aa78c665b21f5394aad95ee81593f344fc452d374fec4d2fe99e5dd95e07939",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/joint.solution.json": "bcad538be93479b01321c188412284a3dbff2abaed5223f3b662480ba7019468",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/parent.audit.json": "e38e21dc13479672b5b3b1eda4b8ae27a1996f65596783b950256c95dd80e9b8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/fixed_owner.audit.json": "1405bb2e630428f0ee055a97425c10796d2a6e57e797c81c15d70149bc591dee",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/joint.audit.json": "b8611905c76e53d4ff3486c1da3190b2bfef3679314c0cb9037db238e2658293",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/TIMING.json": "e3649f4761bd74632ed0f6ad99711093e0f1b445a943048dfb2dff52c99cdce1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_7/archived_comparators.json": "e670a7d8d1288367811c76f471d3010be0cc49aee7ed6caab8a93af2b2eae86e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/stations.json": "a209100109b05f75a0b2bd7299f1f14c8bafc614e92d2543dde8dc0247f48a52",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/parent.solution.json": "faaa6f614ed041dcaf9f4c17a6ba4a7a79dd145735a723b88f8c5ff726d701f3",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/fixed_owner.solution.json": "52f8266b1178ad29e45e05bfc335c953cac42c6a829ad80e4203bb41ac08841f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/joint.solution.json": "6b160db45f7bd7d10b350f080f923665d6de239f0fa117fd2034902db7011bdb",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/parent.audit.json": "05e2265eef0df8d7b1cb0581fdade29d66f5e17b523a0e515310eec5cbea109a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/fixed_owner.audit.json": "29059942530d3c28bf1cffbe5f8ed99b16b9e2ff3de81759c8a88982acc03beb",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/joint.audit.json": "be7914bd136e2755d53ba93a9ce2982b9356ae2f18d7c58c3f73e8e4c324ed33",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/TIMING.json": "5780b43a3c9b8c464daf3bf2d69f8aebcf95bca35eeee44613eb8a1c010d5d73",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/5_35_8/archived_comparators.json": "eb52cd3b10daadfd6a558cf0162065655cb526b36b73fd05e6243136e86c404f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/stations.json": "113964b13e34d1bf0e9b44f5cb1c18026728361ef6f875b23da53db7fd8f4c27",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/parent.solution.json": "b47505c1b4379cb586a652ae20c77d0e269980cac4bc2bb1ac3c28a4325f184f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/fixed_owner.solution.json": "505db2d79688919ff6ab5ea543eac68d21fa10d1f8087fa919e6041c02752a7b",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/joint.solution.json": "aa4cbbf627907131f2a7720dd5be50ba45a84c7a758621629648f1b10ec616fc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/parent.audit.json": "1ee20158e71b13e8586568f4661a9cf0ddb3e90b63f351e858003a5128abfa93",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/fixed_owner.audit.json": "b30c68f103309fa0f74141ad738e8cfc61fff2f42cef6fdb4e82641cecf18e15",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/joint.audit.json": "db6cc44a6610742e65a15d542484a7dd033dbbccd1edfdbb7576cc86c583ace8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/TIMING.json": "d85b96d96e12275bfa0f86df5afff3f373771afba157dc3e999c2bfb9bf1508c",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_7/archived_comparators.json": "8e66c606d1af0d088cd405d85c7209966792aace9820d552b460dd6df8319c4d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/stations.json": "86a02ff3f2fcced0fa46bdf7e0b1b1320de229ffbb0ef487b87d6fccf720d059",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/parent.solution.json": "f955ff7bd3d4b9ddb7074a4b2ab7e398bacdbadb6f1726c354dc9b80da45189e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/fixed_owner.solution.json": "65b8c5ee7bacc624b121827fcd0432649793064b325ba7128d68c1ee1e250cd0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/joint.solution.json": "9fd8c5817f8f9e4f4948816af9fe344ab208b0da4d6089c22a9769d8f0c77cf4",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/parent.audit.json": "a74e3a3a3f2017956a1054c2e20f37851909fa8c24a3b189be18122c358e5ee9",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/fixed_owner.audit.json": "122c27fe89773dc457da63bc41b3f5c60b8aa794d141d01f12d9eec4433b2ba5",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/joint.audit.json": "7b4fcdd08e86ea1803f1ab8c0263849d824fc69d22600657fd00fb48846c9c32",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/TIMING.json": "051ddbf7db393217e11d947a5ccccf5faa6af3d5f6353cbbdd593062966d4bae",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/6_50_8/archived_comparators.json": "930fd65f197fb9ed9a037addbfe98b4fab41eb16779a1370c03a018c4ccf0ff0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/stations.json": "ddac4f20362d95d5f5c311562de8147fd069502dc560b565a570005061929adb",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/parent.solution.json": "b12ca214bf5d13c714c7226b25e9546c7b296977866ea2c6c950b59c654197bc",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/fixed_owner.solution.json": "b3c0e683406d34abcf1029365d8cd6e55fb2a52d79ab3dca461cf57bda6ba9a5",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/joint.solution.json": "37d7b10d8880dea5d3b27883530d360104dec41f8855e7c8e727da3db878e30c",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/parent.audit.json": "84d5fb320571bf4c9eb1bb4cd8a09b2966ea6fbee316b27f5d906e7cb1214b44",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/fixed_owner.audit.json": "747bc7947930b65efeaf95796b07651314fb6cf02fb597e617dc0940c72e5775",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/joint.audit.json": "d77484d9855ca3c8143aa4dc74f34b7d60785ed3c4e663bb8ac7fb4615e0375c",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/TIMING.json": "4c15a114d0c94c3cc4a67b3ea31a2afa32dcbf2658d7d3afa1b5d7b61897107d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_7/archived_comparators.json": "b997ac0d0a193f829d09947a526f7bee76f6e1ebb18e04f1721e513cf8d3ea4a",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/stations.json": "547be77cbe54425c9efcbacce56dc2fba12d18405576c6639e349d68d788bade",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/parent.solution.json": "d660a9b9a2e0a2115883979dffdac7ac28c8bbce0f9c031149391370f95b1ca5",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/fixed_owner.solution.json": "5d4832bd9270df199dfbfecc0bda0e326d9ba4a66b58b548676612cd9d687bb4",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/joint.solution.json": "5d4832bd9270df199dfbfecc0bda0e326d9ba4a66b58b548676612cd9d687bb4",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/parent.audit.json": "cc1bf5835afaf8f611443876c13f001432bc533ffa813fe874053923dbd29308",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/fixed_owner.audit.json": "825a7f9244d02c25f094e724c4c6fe90406e5bb98f56baa17cc8338ec4c0121d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/joint.audit.json": "825a7f9244d02c25f094e724c4c6fe90406e5bb98f56baa17cc8338ec4c0121d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/TIMING.json": "a369176be826377a88afcb64a12b137df887ce14db11af1f427620c0885fa937",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/7_65_8/archived_comparators.json": "689c6553433d157d96598e494a369d30f88a66f292ff6f4f0f6a4b751fb473da",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/stations.json": "41694e4b6723938c7286e0978a29e6c9a336ac7cfe03f7b20378a62d1c8b8839",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/parent.solution.json": "bf916336cfa274bddefde8411240b06a06e846b24a93f5cc8b20166cbe9de17e",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/fixed_owner.solution.json": "7ace7296c849791dcd4856cda67a878d96a0e5e3e17225a9ce85c894380b8f63",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/joint.solution.json": "76e5025e69892932b29ad34e45f54a6920756cef20f2ab44b7c660c7126b0a58",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/parent.audit.json": "fe5c83f72917fc7eae9c39159f795f24017fd9e61ff3a0c4017147d2e95ede92",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/fixed_owner.audit.json": "ec0b928b7c14dc5d7cb16ecba805933b8a75cd40aa7cf9a35fb25e6373394d49",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/joint.audit.json": "046d12969f67e85fa4541cf4a7cdf72b0244094b57de495fc73be040bd64beaa",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/TIMING.json": "e8cd5752d2ec2f5e98ec3a4036b2dd5ab81340cd302c2b2014bb735e5ea6595f",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_7/archived_comparators.json": "766d7597940d2199e42a3b863b00ff2623f878fc1f19dd43bc937161abe70c3b",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/stations.json": "034759269e8fc7c734ac03b3f872bebc21397b43de12982084a412362252f1d0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/parent.solution.json": "cffb0b9ae14dca99a522a2c0180b77e5369358b49ddff33737c0a1255d72ecb1",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/fixed_owner.solution.json": "6327c26ba97bddcec9c098ee05e543b9932fad618feba6815f2bfac520a6b3e2",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/joint.solution.json": "b7180c2107c0801e42d8a7f3eca8e0d17ce3e2592a92320407ef8512a70d880d",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/parent.audit.json": "689a872b1631c2be98258f1eb36c1cfd5820c5ae7b52928b90f26f6c4d5708e7",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/fixed_owner.audit.json": "6ead7e4c6a6733a8b148dfe4847de6eac7f689926dc058d9204408961f72fa73",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/joint.audit.json": "6422cc45c07a4e4cea533598adf12b7f182a1a83c35c188d6e080218fd43ee92",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/TIMING.json": "f37b5e9934b3b6e927837c3ce89a2ea7e5cbf3f55825dbba19681898f568dc06",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/8_80_8/archived_comparators.json": "d979804bba418aefcc66839257d0c3d09612a269c1d69445ca52b95fdeeaa3c8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/stations.json": "f037a4cf88378dcff41a58908614700fdab7fbd592e496aef6e0dce9f206e1da",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/parent.solution.json": "fefb4b8c3ef4f25f2bd09d2c37efe6efed74d56e360d7a2aa86dc810e5dfe278",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/fixed_owner.solution.json": "0f39aad3f15aaf144da62cf780677e6ab1d10e0bf6723e00f3dacf63cbc946a6",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/joint.solution.json": "3475b75c33be4ff558f0ca1f841143f73c3c22ff47b0b122445bd00018d9f844",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/parent.audit.json": "2d54c7b6a2a382e911e39a491f3d411a70d245b1af4514461b550d20c4479412",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/fixed_owner.audit.json": "ddeb490bb5af8b9deb9b170c59fdbc0b16117443fb4368ea3e7a663407dc1999",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/joint.audit.json": "abe71eaf603f40e6c1ca683fba4f3dde3341b8261b8ea2c399348fc7ecfdf8c6",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/TIMING.json": "afab8198c8e96585a493d2e0c473918612cfe8e965bc4cef824aebba4fc3edd0",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_7/archived_comparators.json": "3ab68dda6e21ff8b050455500b2d2954b9d3acc9024c1281df060e362b711a86",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/stations.json": "0083762a6e17310acd553d4247d58bc887805e1c0aa804ed0e615868e1f08592",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/parent.solution.json": "7aa23d381e49e53861839529526139812f98caba47576fb9180d4cd72fd31434",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/fixed_owner.solution.json": "7aa23d381e49e53861839529526139812f98caba47576fb9180d4cd72fd31434",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/joint.solution.json": "7aa23d381e49e53861839529526139812f98caba47576fb9180d4cd72fd31434",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/parent.audit.json": "317826cc733fee2e378261c16dbddc136e5454a73be3e5173af30c495cb67bd8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/fixed_owner.audit.json": "317826cc733fee2e378261c16dbddc136e5454a73be3e5173af30c495cb67bd8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/joint.audit.json": "317826cc733fee2e378261c16dbddc136e5454a73be3e5173af30c495cb67bd8",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/TIMING.json": "9da607bc048f404482ab530b07eb8b72360e9f49304b87937e636a624a188a78",
+    "WORKSPACE/route_rl_research/20261103/joint_route_env/g2_results_v2/9_95_8/archived_comparators.json": "feaf4d8705b38698a7035cd29886b7c19fc20cd33e8801e23e3918072f55da77"
+  },
+  "scientific_interpretation": "bounded exposed-data numerical witnesses only; no opportunity ceiling, novelty, same-resource solver or RL superiority/G4 admission"
+}

@@ -1,0 +1,254 @@
+{
+  "scope": "new local execution-boundary algebra, not AIR2 fixture rerun",
+  "cases": [
+    {
+      "id": "singleton_then_future",
+      "station": [
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "singleton_then_two_futures",
+      "station": [
+        [
+          [
+            [
+              9
+            ]
+          ],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "multi_target_current",
+      "station": [
+        [
+          [],
+          [],
+          [
+            1,
+            2
+          ],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "open_prefix_target",
+      "station": [
+        [
+          [],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "return_then_future",
+      "station": [
+        [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        null
+      ]
+    },
+    {
+      "id": "final_target",
+      "station": [
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "small_slot_target",
+      "station": [
+        [
+          [],
+          [],
+          [],
+          []
+        ],
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ]
+      ],
+      "action": [
+        1,
+        1
+      ]
+    }
+  ],
+  "reject_cases": [
+    {
+      "id": "non_next_target",
+      "station": [
+        [
+          [],
+          [],
+          [
+            1,
+            2
+          ],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "return_before_witness_end",
+      "station": [
+        [
+          [],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "action": [
+        0,
+        null
+      ]
+    }
+  ]
+}

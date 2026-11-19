@@ -1,0 +1,56 @@
+{
+  "claimed_experimental_gain": false,
+  "date_local": "2026-11-13",
+  "executor": "root_only",
+  "gates": "G0/G3 not passed, no training or Formal",
+  "new_algorithm_implementation": false,
+  "next": "NEXT_BOUNDED_WORK.md",
+  "old_allowances": {
+    "actual_comparisons": 126,
+    "calibration_limit": 24,
+    "calibration_used": 24,
+    "new_identities": 40,
+    "refund": 0
+  },
+  "original_scientific_states_unchanged": true,
+  "package": "20261113_suffix_mass_g0_v1",
+  "package_status": "STATIC_G0_SCREENING_CLOSED",
+  "previous_goal_turn": {
+    "classification": "progress",
+    "evidence": "<COMPUTE_HOST> four frozen normalizer stages, exact finite counterexamples and author root kernel match changed the next action; archived prior package remains authoritative",
+    "prior_package": "joint_weather_emergency/20261113_frontier_flow_g0_v1"
+  },
+  "project_status": "INCOMPLETE_GOAL_ACTIVE",
+  "protected_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "remote_final_delivery": "<EXECUTION_PATH>",
+  "resource": {
+    "ALNS_calls": 0,
+    "Formal_calls": 0,
+    "HTTP_200": 10,
+    "HTTP_errors": [],
+    "HTTP_receipts": 10,
+    "author_route_solver_calls": 0,
+    "checkpoints": 0,
+    "<REMOVED_ENDPOINT>_math_or_physics_runs": 0,
+    "local_operations": "reading; HTTP retrieval; PDF text extraction; AST/JSON/hash; writing documents; transfer",
+    "model_imports": 0,
+    "new_agents": 0,
+    "new_primary_fulltexts": 2,
+    "physical_quality_evaluations": 0,
+    "pinned_author_source_files_read": 2,
+    "research_executions": 0,
+    "scientific_maps": 0,
+    "training_calls": 0
+  },
+  "source_hashes": {
+    "literature/ASTAR_PDF.pdf": "859d58c8b4b1d761db255f10e6c764b55e5e4e87c17d000a1430a84bf52fee83",
+    "literature/GELATO.body": "ad9e2d46a34b2c206e0f775c625f9361cb5a4a8dceadeb09d62e40725cc15d48",
+    "literature/GELATO_decode.py": "7a7b42ba95e925047247927d35542844f2dbf149a9e8511e4a114cbe7155a05b",
+    "literature/GELATO_hmm_model.py": "ae89f8b2a2fcd6aed11a61772fd7e86a3d37630756d389d10b71a85f54b35c84"
+  },
+  "this_turn_progress": "two new primary fulltexts and pinned author source show generic compiled suffix guidance/bound refinement already exist; this proposed entry is closed and exact conditioning is not imposed as a project gate",
+  "user_decision": "prior wind cap A/B pending, not repeated or assumed approved"
+}

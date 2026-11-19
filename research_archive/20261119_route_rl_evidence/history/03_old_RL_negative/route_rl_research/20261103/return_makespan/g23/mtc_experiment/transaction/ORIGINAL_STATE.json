@@ -1,0 +1,193 @@
+{
+  "schema": "approved_return_makespan_execution_v1",
+  "date_local": "2026-11-03",
+  "timezone": "Asia/Shanghai",
+  "status": "G1_VERIFIED_G0_MECHANISM_NO_GO_G2_G3_FINITE_GRID_AND_NEW_METRIC_REVIEW_PENDING",
+  "authorization": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "objective": {
+    "primary": "min_full_map_final_return_makespan",
+    "cost_epsilon": 0.0,
+    "absolute_cost_tolerance": 1e-07,
+    "anchor": "shared_complete_feasible_fixed_deployment_solution",
+    "primary_comparison_scope": "D_conditional_route_improvement",
+    "quality_budgets_seconds": [
+      6,
+      12
+    ],
+    "practical_mean_improvement_target_pct": 5.0,
+    "map_level_95pct_ci_lower_bound_requirement_pct": 0.0,
+    "achieved": false
+  },
+  "metric_revision_screen": {
+    "latest_user_request_includes_new_evaluation_indicator": true,
+    "current_M_return_is_new_metric": false,
+    "metric_candidate": "mean_target_completion_time_per_map",
+    "candidate_definition": "per-target elapsed flight plus service time from time zero to completion of that target's inspection; average over all targets in one map; each vehicle executes its trips sequentially; no unmodeled turnaround/waiting time",
+    "candidate_status": "UNDER_INDEPENDENT_PRIOR_ART_AND_IMPLEMENTATION_REVIEW; NOT_FROZEN",
+    "candidate_is_novel_in_routing_literature": false,
+    "candidate_may_be_newly_evaluated_for_LRPHSD": "TO_BE_ASSESSED; do not claim first or metric novelty",
+    "all_methods_must_share_per_map_cost_cap": true,
+    "RL_must_beat_author_and_strongest_same_objective_nonRL": true
+  },
+  "author_comparison_requirement": {
+    "reference_solution": "per-map Liu author-method complete feasible solution on each new development map",
+    "cost_rule": "candidate_cost <= author_cost + 1e-7; epsilon=0; no cross-map averaging",
+    "metric": "M_return, identical to official Check.calculateLatestTime under current physical timing assumptions",
+    "matched_route_improvement_budgets_seconds": [
+      6,
+      12
+    ],
+    "RL_contribution_requires_beating": [
+      "author_reference",
+      "strongest_same_objective_nonRL"
+    ],
+    "conditional_route_claim_only": true,
+    "end_to_end_TSALNS_claim_requires_separate_E_protocol": true,
+    "achieved": false
+  },
+  "action_contract": {
+    "only": [
+      "slot_target",
+      "slot_RETURN"
+    ],
+    "fixed": [
+      "station_deployment",
+      "station_type",
+      "target_station_assignment"
+    ],
+    "station_internal_slot_assignment_allowed": true,
+    "learned_operator_or_subproblem_selection": false,
+    "station_decoding_order": "deterministic_input_station_order"
+  },
+  "resource_envelope": {
+    "new_opportunity_development_maps_max": 48,
+    "separate_nonRL_calibration_validation_maps_max": 24,
+    "new_scientific_nonRL_cpu_core_hours_max": 16,
+    "G4_training_started": false,
+    "formal_started": false
+  },
+  "gates": {
+    "G0": "RESIDUAL_BUDGET_DUAL_PRICE_ROUTE_ACTOR_NO_GO_AS_DISTINCT_ALGORITHMIC_NOVELTY_AFTER_HASHED_CROSS_REVIEW; MAY_ONLY_BE_AN_ORDINARY_RL_CONTROL_AFTER_G0_G3; NO_NEW_MECHANISM_APPROVED",
+    "G1": "37_CORE_PLUS_15_INDEPENDENTLY_AUTHORED_SCORER_PLUS_8_COMPATIBILITY_PASS; ISOLATED_ROLLBACK_PASS; INDEPENDENT_DYNAMIC_9_AND_SCORER_15_PASS",
+    "G2": "V1_WHOLE_MAP_REJECTION_PILOT_FAILED_EXECUTABILITY_FOR_3_20_AND_10_110; V2_SEQUENTIAL_CONDITIONAL_SAMPLER_CONTINUOUS_LAW_CROSS_REVIEW_CONDITIONAL_GO; 53_BIT_GRID_EXHAUSTION_AND_FAILURE_DENOMINATOR_PENDING; NEW_MAPS_NOT_STARTED",
+    "G3": "ISOLATED_J1B_AND_J2B_COMPILE_PASS_20_CLASSES_EACH; J1B_SYNTHETIC_END_TO_END_SMOKE_AND_DUAL_SCORER_MATCH_PASS; LPT_AND_JOINT_VND_SYNTHETIC_TESTS_PASS; BASELINE_FAMILY_AND_QUALITY_RUNS_PENDING",
+    "G4": "NOT_STARTED; REQUIRES_G0_G3_AND_TRAINING_PACKAGE",
+    "G5": "NOT_STARTED",
+    "G6": "NOT_STARTED",
+    "G7": "NOT_STARTED",
+    "G8": "NOT_STARTED"
+  },
+  "agents": [
+    "return_mechanism",
+    "return_audit",
+    "return_precedents"
+  ],
+  "server_execution_owner": "root",
+  "historical_results_preserved": true,
+  "V6_semfix_reproduction_rerun": false,
+  "old_automations_resumed": false,
+  "research_counts": {
+    "new_scientific_solver_calls": 0,
+    "new_development_maps": 0,
+    "new_training_calls": 0,
+    "new_formal_maps": 0,
+    "geometry_only_pilot_proposals": 12000,
+    "geometry_only_pilot_accepted": 67,
+    "geometry_only_pilot_rejected": 11933,
+    "author_synthetic_smoke_runs": 1,
+    "author_profile_compiles": 2,
+    "new_route_quality_calls_on_research_maps": 0,
+    "nonRL_quality_calls_on_research_maps": 0,
+    "synthetic_engineering_tests": {
+      "root_core": 37,
+      "independently_authored_scorer_root_retest": 15,
+      "independent_dynamic_final": 9,
+      "legacy_synthetic_compatibility": 8,
+      "exact_mathematical_sample_banks": 16,
+      "map_performance_samples": 0,
+      "author_runner": 17,
+      "constraint_reconstructed_generator": 13,
+      "nonRL_route_baseline": 7
+    }
+  },
+  "new_mechanism_approved": false,
+  "rl_superiority_proven": false,
+  "innovation_experimentally_proven": false,
+  "paper_writing_enabled": false,
+  "project_complete": false,
+  "next_action": "Finish three-role metric review and independently verify the finite-grid sequential-sampler attempt-cap bound. Freeze the endpoint without claiming it is a novel academic metric, then freeze sampler v2, map split/IDs/exclusions, author J1b anchor, strongest same-objective nonRL controls, failure denominator, paired-map statistics, and the 16 CPU-core-hour ledger before generating any study maps. G0 remains NO-GO for the dual-price actor as algorithmic novelty; G4 has not started and requires G2/G3 opportunity evidence plus a separate multi-agent training package. No positive result is assumed.",
+  "updated_at_local": "2026-11-03T18:41:32+08:00",
+  "current_gate": "G2_V2_FINITE_GRID_AUDIT_AND_METRIC_FREEZE_PENDING",
+  "engineering": {
+    "transaction": "<LOCAL_PATH>",
+    "receipt": "<LOCAL_PATH>",
+    "core_tests_pass": true,
+    "isolated_rollback_pass": true,
+    "original_station_source_sha256": "9c295f0117a4d0935ea32b421513f62edf9c4a455ae11b6ba3a3af834ecd84dd",
+    "original_station_source_unchanged": true,
+    "active_copy_sha256": "b903f7df68cbb1d2faae6fb324ef3ed3ab1f3592c1c56aa2144eddedd54f5428",
+    "active_copy_left_modified": true,
+    "independently_authored_tests_executed_by": "root after fix; not a new independent-agent sign-off",
+    "independent_env_delivery_dynamic_final_acceptance": "PASS_FOR_FROZEN_SYNTHETIC_CONTRACT; 9_DYNAMIC_PLUS_15_SCORER_TESTS",
+    "known_integer_overflow_bug": "FIXED; original failing source and receipts preserved",
+    "failure_source": "<LOCAL_PATH>"
+  },
+  "g0_candidate": {
+    "name": "cost_gated_product_station_trajectory_credit",
+    "mathematical_finite_check": "PASS_16_BANKS_UNDER_EXPLICIT_INDEPENDENCE",
+    "independent_new_algorithm_contribution": "NO_GO_DIRECT_SUBSTITUTION_IN_KUNTZ_CRUCINIO_JOHANSEN_EQ4",
+    "compatible_with_dynamic_global_budget_policy": false,
+    "trained": false,
+    "decision": "<LOCAL_PATH>",
+    "primary_cross_review": "<LOCAL_PATH>"
+  },
+  "additional_g0_screen": {
+    "name": "cost_capped_threshold_conditioned_physical_route_policy",
+    "decision": "NO_GO_AS_ALGORITHMIC_NOVELTY_GENERIC_CONSTRAINED_GOAL_CONDITIONED_RL_APPLICATION",
+    "initial_freeze": "<LOCAL_PATH>",
+    "cross_review": "THREE_ROLE_CROSS_REVIEW_CONFIRMED_NO_GO",
+    "trained": false
+  },
+  "route_budget_price_g0_screen": {
+    "candidate": "residual_budget_priced_direct_physical_route_actor",
+    "initial_sha256": "35aff6ecc10082b6841bbb1d4775a12f1a8ce9cdbea369a90d0cd7ca097c05c1",
+    "cross_response_sha256": "3cd90e6a4ae253c1fd2e5bcdc4a8feab60d513b90dfad1bf5871977802f87c84",
+    "red_team_initial_sha256": "230ad9efc30c86bd02d091c91d5c0efcc24c07a4f9fc0ae09d08a2e893d3ef74",
+    "red_team_independence": "NON_BLIND_EXPOSURE_DISCLOSED",
+    "red_team_cross_response_sha256": "b5afd8b7deb81d2e08de2ac343aeff76cfaf712c947174c92ed2c745fed6c14cd",
+    "decision": "NO_GO_AS_DISTINCT_ALGORITHMIC_NOVELTY; POSSIBLE_ORDINARY_RL_CONTROL_ONLY_AFTER_G0_G3",
+    "training_started": false
+  },
+  "sequential_sampler_v2_screen": {
+    "initial_sha256": "ce00b571a1cd2853c9d5e9cdc3add88dfd2ec44e626132b374272316017c09a5",
+    "cross_response_sha256": "1b8ba454ceaf8e2540cb65ce56b82b62fab5fae088a6d88dc55cadfc3eb8e62f",
+    "continuous_law": "CONDITIONAL_GO_AS_NEW_CONSTRAINT_RECONSTRUCTED_PROTOCOL_ONLY",
+    "author_generator_reproduction_claim": false,
+    "unqualified_IID_uniform_claim": false,
+    "finite_53_bit_attempt_cap_audit": "PENDING",
+    "maps_generated": false
+  },
+  "g23_protocol_audit": {
+    "path": "<LOCAL_PATH>",
+    "independent_audit_complete": true,
+    "root_freeze_complete": false,
+    "new_maps_generated": false,
+    "quality_runs": false
+  },
+  "server_observation": {
+    "time_utc": "2026-11-03T10:14:28+00:00",
+    "related_research_processes": 0,
+    "logical_cpus": 104,
+    "system_python_torch_spec_present": false,
+    "nvidia_smi": null,
+    "gpu_device_nodes": [],
+    "accepted_reproduction_present": true,
+    "old_route_stage_a_present": true,
+    "new_remote_jobs_started": false,
+    "Corretto_JDK17_available": true,
+    "J1b_compile": "PASS_20_CLASSES; MANIFEST_CLASS_HASH_MATCH",
+    "J2b_compile": "PASS_20_CLASSES; MANIFEST_CLASS_HASH_MATCH",
+    "J1b_synthetic_end_to_end_smoke": "PASS_EXIT0_DUAL_SCORER_AND_SOURCE_CLOCK_MATCH; FIXTURE_PERMANENTLY_EXCLUDED",
+    "other_environments_or_hosts_not_audited_for_training": true
+  }
+}

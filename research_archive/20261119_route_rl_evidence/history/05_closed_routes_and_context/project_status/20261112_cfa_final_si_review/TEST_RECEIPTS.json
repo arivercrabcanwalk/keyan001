@@ -1,0 +1,67 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": "./CHECK.py baseline",
+    "argv": [
+      "./CHECK.py",
+      "baseline"
+    ],
+    "input": "ORIGINALS/LATEST_STATUS.md; live baseline; protected scientific states/code/history/user PDFs; source/access records",
+    "at_utc": "2026-11-12T04:52:45.689011+00:00",
+    "stdout": "BASELINE PASS\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "MODIFIED",
+    "command": "./CHECK.py modified",
+    "argv": [
+      "./CHECK.py",
+      "modified"
+    ],
+    "input": "MODIFIED_FILE.md and updated live status; exact suffix/diff; unchanged protected sources; access/gate invariants",
+    "at_utc": "2026-11-12T04:52:45.734039+00:00",
+    "stdout": "MODIFIED PASS\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": "./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md",
+    "argv": [
+      "./ROLLBACK.sh",
+      "ROLLBACK_COPY/LATEST_STATUS.md"
+    ],
+    "input": "ROLLBACK_COPY/LATEST_STATUS.md initially copied from MODIFIED_FILE.md; baseline bytes from ORIGINALS/LATEST_STATUS.md",
+    "at_utc": "2026-11-12T04:52:46.238998+00:00",
+    "stdout": "ROLLBACK PASS\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "ROLLBACK_VERIFY",
+    "command": "./CHECK.py rollback",
+    "argv": [
+      "./CHECK.py",
+      "rollback"
+    ],
+    "input": "restored isolated copy versus ORIGINALS; live and MODIFIED_FILE.md remain changed; scientific states/code/history unchanged",
+    "at_utc": "2026-11-12T04:52:46.292397+00:00",
+    "stdout": "ROLLBACK VERIFY PASS\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "FINAL",
+    "command": "./CHECK.py final",
+    "argv": [
+      "./CHECK.py",
+      "final"
+    ],
+    "input": "four artifacts; executable rollback; all package JSON; source/access, strict contract and gate invariants",
+    "at_utc": "2026-11-12T04:52:46.344858+00:00",
+    "stdout": "FINAL DOCUMENT CHECK PASS\n",
+    "stderr": "",
+    "exit_status": 0
+  }
+]

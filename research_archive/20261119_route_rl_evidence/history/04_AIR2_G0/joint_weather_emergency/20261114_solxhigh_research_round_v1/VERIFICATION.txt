@@ -1,0 +1,243 @@
+ROUND_VERIFICATION
+Changed branches/fields: deadline_control.search_station/generate/worker budget CLI; boundary_advance.advance_next_token; AIR2 compile_pair_rows appended but its modified test phase not executed.
+Scientific G0/G3 not passed. No new scientific maps, author calls, models, training, checkpoints or Formal.
+
+PACKAGE: deadline_control
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+COMMON_H_DEADLINE_VERIFICATION
+Date: 2026-11-14
+Changed branch/field: search_station(deadline), generate(deadline,delivery_reserve_s), worker --budget/--reserve-s; original launch timestamp forwarded.
+Scope: isolated copy, finite fake-clock controls plus one new handwritten real-scorer wiring fixture. No full scientific qualification.
+Remote cwd: <EXECUTION_PATH>
+
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+
+Original SHA256: 6304836adcf1b2e3736b5018c85833da4e6bf812f5facd46983a88dd66ca1fad
+Modified SHA256: 4685e959232a2f8350cd91b028c54913def89b20308d0ae296f9675246b9b3bb
+
+PHASE: BASELINE
+COMMAND: ["/usr/bin/python3", "validate.py", "ORIGINALS/independent_h.py", "BASELINE", "runs/BASELINE.json"]
+INPUT: INPUT.json; original worker and station budget
+STDOUT_LITERAL_BEGIN
+{"checks_passed": 0, "checks_total": 7, "phase": "BASELINE", "status": "KNOWN_DEADLINE_GAP_RECORDED"}
+STDOUT_LITERAL_END
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.050783999999999996
+WALL_S: 0.05142401019111276
+
+PHASE: MODIFIED
+COMMAND: ["/usr/bin/python3", "validate.py", "MODIFIED_FILE.py", "MODIFIED", "runs/MODIFIED.json"]
+INPUT: same INPUT.json; shared full-map deadline
+STDOUT_LITERAL_BEGIN
+{"checks_passed": 7, "checks_total": 7, "phase": "MODIFIED", "status": "PASS"}
+STDOUT_LITERAL_END
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.047999
+WALL_S: 0.048619276843965054
+
+PHASE: ROLLBACK_APPLY
+COMMAND: ["/bin/sh", "ROLLBACK.sh", "<EXECUTION_PATH>"]
+INPUT: independent copy of both modified files; original bytes restored
+STDOUT_LITERAL_BEGIN
+ROLLBACK_BYTES_RESTORED
+STDOUT_LITERAL_END
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.005986000000000009
+WALL_S: 0.006451521068811417
+
+PHASE: ROLLBACK
+COMMAND: ["/usr/bin/python3", "validate.py", "ROLLBACK_COPY/MODIFIED_FILE.py", "ROLLBACK", "runs/ROLLBACK.json"]
+INPUT: same INPUT.json; restored original behavior
+STDOUT_LITERAL_BEGIN
+{"checks_passed": 0, "checks_total": 7, "phase": "ROLLBACK", "status": "KNOWN_DEADLINE_GAP_RECORDED"}
+STDOUT_LITERAL_END
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.050399
+WALL_S: 0.05097711877897382
+
+PHASE: RUNTIME_WIRING
+COMMAND: ["/usr/bin/python3", "runtime_wiring.py"]
+INPUT: RUNTIME_INTENT.json; new fixed handwritten fixture; 6s/12s
+STDOUT_LITERAL_BEGIN
+{"admission_wall_s": 0.16799402236938477, "all_stations_share_one_deadline": true, "budget_s": 6, "process_wall_s": 0.16655046306550503, "status": "ONTIME_VALID"}
+{"admission_wall_s": 0.168241610750556, "all_stations_share_one_deadline": true, "budget_s": 12, "process_wall_s": 0.16580548789352179, "status": "ONTIME_VALID"}
+RUNTIME_WIRING_PASS=2/2 SCIENTIFIC_QUALIFICATION=false
+STDOUT_LITERAL_END
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.380054
+WALL_S: 0.40708770509809256
+
+RESTORED_BEHAVIOR: baseline 0/7 deadline checks, original source hash and all full baseline case/loop/worker JSON fields restored in independent copy; main modified source and worker retained.
+BASELINE/ROLLBACK process exit0 means expected defect was recorded, not that original met deadline contract.
+MODIFIED: 7/7 finite checks pass. Runtime 6s/12s two ONTIME_VALID records; per-map real workload took about0.168s, not a scientific scalability result.
+SOURCE_REPAIRS: 0
+TOTAL_CHILD_CPU_S: 0.535222
+TOTAL_PHASE_WALL_S: 0.5645596319809556
+TRAINING=0 NEW_SCIENTIFIC_MAPS=0 FORMAL=0
+Known remaining: one fixed H only; H-grid scheduling and scientific-scale workload qualification not completed.
+
+
+PACKAGE: air2_kernel
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+AIR2_FAILED_ENGINEERING_VERIFICATION
+Date: 2026-11-14
+CHANGED_BRANCH_FIELD: compile_pair_rows / next_tokens appended to copied Compiler; old production source unchanged; modified enumeration not executed
+REMOTE_CWD: <EXECUTION_PATH>
+
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+ORIGINAL_SHA256: 374870a67f1228bff7cc1166f86140b569e0b72f681dda659e5ea92103d7974e
+MODIFIED_SHA256: aa4c160ead04010e9963a3f786155eef64e409a491a7a27e76e2d46eb52d20e4
+
+PHASE: BASELINE
+COMMAND: ["/usr/bin/python3", "validate.py", "BASELINE"]
+INPUT: INPUT.json; OLD_1RELOC
+STDOUT_LITERAL_BEGIN
+
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+Traceback (most recent call last):
+  File "<EXECUTION_PATH>", line 127, in <module>
+    assert solution_routes(post) == solution_routes(candidate)
+AssertionError
+STDERR_LITERAL_END
+EXIT_STATUS: 1
+CHILD_CPU_S: 0.07446799999999999
+WALL_S: 0.07505021523684263
+
+PHASE: ROLLBACK_RECOVERY
+COMMAND: ["/bin/sh", "ROLLBACK.sh", "<EXECUTION_PATH>"]
+INPUT: independent copy; same INPUT.json; rollback recovery only
+STDOUT_LITERAL_BEGIN
+ROLLBACK_BYTES_RESTORED
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+
+STDERR_LITERAL_END
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.00381
+WALL_S: 0.003959533292800188
+
+PHASE: ROLLBACK_RECOVERY
+COMMAND: ["/usr/bin/python3", "validate.py", "ROLLBACK"]
+INPUT: independent copy; same INPUT.json; rollback recovery only
+STDOUT_LITERAL_BEGIN
+
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+Traceback (most recent call last):
+  File "<EXECUTION_PATH>", line 127, in <module>
+    assert solution_routes(post) == solution_routes(candidate)
+AssertionError
+STDERR_LITERAL_END
+EXIT_STATUS: 1
+CHILD_CPU_S: 0.074694
+WALL_S: 0.07490832637995481
+
+MODIFIED_COMMAND_NOT_EXECUTED: ["/usr/bin/python3", "validate.py", "MODIFIED"]
+MODIFIED_INPUT: same INPUT.json; AIR2
+MODIFIED_LITERAL_RESULT: NOT_RUN_STOPPED_AFTER_BASELINE_ASSERTION
+MODIFIED_EXIT_STATUS: NOT_STARTED
+AUDIT: NOT_STARTED
+FAILED_CONDITION: complete routes must be invariant when converting pre-action witness into post-action boundary representation.
+ROOT_CAUSE: arbitrary force removes and normalizes before consuming a singleton; next future trip can be promoted then merged. This API is not a universal next-token adapter; old method semantics are preserved.
+CLOSED_FAILED: repair0; no original6configuration batch restart, no successful timing rerun.
+RESTORED_BEHAVIOR_STATUS: independent rollback restored original hash and exact baseline AssertionError/exit1; main appended-kernel copy retained.
+Separate next-token correction is isolated in ../boundary_advance; its7/7 does not change this failed batch to PASS.
+
+
+PACKAGE: boundary_advance
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+NEXT_TOKEN_BOUNDARY_ADAPTER_VERIFICATION
+Date: 2026-11-14
+CHANGED_BRANCH_FIELD: advance_next_token; TARGET moves suffix[0] directly into prefix, RETURN closes only when suffix empty; arbitrary-action force remains unchanged
+REMOTE_CWD: <EXECUTION_PATH>
+
+MODIFIED_FILE.py: <LOCAL_PATH>
+DIFF_FILE.patch: <LOCAL_PATH>
+VERIFICATION.txt: <LOCAL_PATH>
+ROLLBACK.sh: <LOCAL_PATH>
+ORIGINAL_SHA256: aa4c160ead04010e9963a3f786155eef64e409a491a7a27e76e2d46eb52d20e4
+MODIFIED_SHA256: 791846864403d2caba01bf372b408cc773a816fc8f29f00b634e91e71bdff628
+
+PHASE: BASELINE
+COMMAND: ["/usr/bin/python3", "validate.py", "ORIGINALS/air2_before.py", "BASELINE", "runs/BASELINE.json"]
+INPUT: INPUT.json; arbitrary-action force used as boundary adapter
+STDOUT_LITERAL_BEGIN
+{"cases_total": 7, "invalid_next_rejected": 0, "phase": "BASELINE", "preserved": 4, "status": "OLD_FORCE_NOT_A_BOUNDARY_ADAPTER"}
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+
+STDERR_LITERAL_END
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.04094
+WALL_S: 0.04154088534414768
+
+PHASE: MODIFIED
+COMMAND: ["/usr/bin/python3", "validate.py", "MODIFIED_FILE.py", "MODIFIED", "runs/MODIFIED.json"]
+INPUT: same INPUT.json; dedicated next-token boundary adapter
+STDOUT_LITERAL_BEGIN
+{"cases_total": 7, "invalid_next_rejected": 2, "phase": "MODIFIED", "preserved": 7, "status": "BOUNDARY_ADAPTER_PASS"}
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+
+STDERR_LITERAL_END
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.04069699999999999
+WALL_S: 0.04129060264676809
+
+PHASE: ROLLBACK_APPLY
+COMMAND: ["/bin/sh", "ROLLBACK.sh", "<EXECUTION_PATH>"]
+INPUT: independent modified copy; original bytes restored
+STDOUT_LITERAL_BEGIN
+ROLLBACK_BYTES_RESTORED
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+
+STDERR_LITERAL_END
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.004819000000000011
+WALL_S: 0.00529941963031888
+
+PHASE: ROLLBACK
+COMMAND: ["/usr/bin/python3", "validate.py", "ROLLBACK_COPY/MODIFIED_FILE.py", "ROLLBACK", "runs/ROLLBACK.json"]
+INPUT: same INPUT.json; restored original behavior
+STDOUT_LITERAL_BEGIN
+{"cases_total": 7, "invalid_next_rejected": 0, "phase": "ROLLBACK", "preserved": 4, "status": "OLD_FORCE_NOT_A_BOUNDARY_ADAPTER"}
+STDOUT_LITERAL_END
+STDERR_LITERAL_BEGIN
+
+STDERR_LITERAL_END
+EXIT_STATUS: 0
+CHILD_CPU_S: 0.040714
+WALL_S: 0.041312091052532196
+
+RESULT: seven complete-route preservation and executed-lock cases4/7 baseline ->7/7 modified ->4/7 rollback;2 invalid next-token requests rejected only by modified.
+RESTORED_BEHAVIOR_STATUS: original SHA and full baseline arrays/rejects restored in separate copy; main modified copy retained.
+LIMIT: finite algebra/API correction only; no AIR2 enumeration, physical/scientific maps, model or training executed in this package.
+SUMMARY: {"status": "FINITE_BOUNDARY_ADAPTER_PASS_NOT_AIR2_OR_G3", "baseline_preserved": 4, "modified_preserved": 7, "cases_total": 7, "rollback_matches_baseline": true, "main_modified_retained": true, "source_repairs": 0, "total_child_cpu_s": 0.12717, "total_phase_wall_s": 0.12944299867376685, "physical_solver_runs": 0, "new_scientific_maps": 0, "training": 0, "Formal": 0}
+
+
+TOTAL_CHILD_CPU_S: 0.815364
+TOTAL_PHASE_WALL_S: 0.8479207055643201
+RESTORED_STATUS: both successful isolated fixes restored complete baseline behavior and original SHA on separate copies; failed AIR2 batch reproduced exact original AssertionError on rollback; all main modified copies retained.
+USER_DECISION: resource ticket asynchronous reply pending at write time.

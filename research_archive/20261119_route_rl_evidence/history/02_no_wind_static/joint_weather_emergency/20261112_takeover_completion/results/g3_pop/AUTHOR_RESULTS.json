@@ -1,0 +1,104 @@
+{
+  "generated_at_utc": "2026-11-12T08:00:33Z",
+  "rows": [
+    {
+      "anchor_eligible": true,
+      "name": "3x10_o1",
+      "returncode": 0,
+      "seed": 1625144013837733252,
+      "status": "ok",
+      "wall_s": 1.401
+    },
+    {
+      "anchor_eligible": true,
+      "name": "3x15_o1",
+      "returncode": 0,
+      "seed": 7700193932397016074,
+      "status": "ok",
+      "wall_s": 1.627
+    },
+    {
+      "anchor_eligible": true,
+      "name": "3x20_o1",
+      "returncode": 0,
+      "seed": 5418963681117818227,
+      "status": "ok",
+      "wall_s": 1.979
+    },
+    {
+      "anchor_eligible": false,
+      "name": "4x20_o1",
+      "returncode": 2,
+      "seed": 8808469753937945259,
+      "status": "failed",
+      "stderr_tail": "",
+      "stdout_tail": "{\"profile\": \"J1b\", \"status\": \"error\", \"seed\": 8808469753937945259, \"input_sha256\": \"4c1dad25ecc2be3c0034f0fdf9739babc012254abbd745ea063f8637ce1f8781\", \"anchor_eligible\": false, \"error\": null}\n",
+      "wall_s": 1.884
+    },
+    {
+      "anchor_eligible": true,
+      "name": "4x25_o1",
+      "returncode": 0,
+      "seed": 7076750193248292570,
+      "status": "ok",
+      "wall_s": 2.95
+    },
+    {
+      "anchor_eligible": true,
+      "name": "4x30_o1",
+      "returncode": 0,
+      "seed": 2401694651202976926,
+      "status": "ok",
+      "wall_s": 3.101
+    },
+    {
+      "anchor_eligible": true,
+      "name": "5x35_o1",
+      "returncode": 0,
+      "seed": 9019519409724296188,
+      "status": "ok",
+      "wall_s": 3.076
+    },
+    {
+      "anchor_eligible": true,
+      "name": "6x50_o1",
+      "returncode": 0,
+      "seed": 7044486061717445621,
+      "status": "ok",
+      "wall_s": 4.074
+    },
+    {
+      "anchor_eligible": true,
+      "name": "7x65_o1",
+      "returncode": 0,
+      "seed": 9157921371502523580,
+      "status": "ok",
+      "wall_s": 4.502
+    },
+    {
+      "anchor_eligible": true,
+      "name": "8x80_o1",
+      "returncode": 0,
+      "seed": 7563921008856048230,
+      "status": "ok",
+      "wall_s": 5.663
+    },
+    {
+      "anchor_eligible": true,
+      "name": "9x95_o1",
+      "returncode": 0,
+      "seed": 6971639430552183697,
+      "status": "ok",
+      "wall_s": 7.321
+    },
+    {
+      "anchor_eligible": true,
+      "name": "10x110_o1",
+      "returncode": 0,
+      "seed": 2058277315271032093,
+      "status": "ok",
+      "wall_s": 8.716
+    }
+  ],
+  "schema": "takeover_g3_author_results_v1"
+}

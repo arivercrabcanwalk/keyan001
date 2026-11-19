@@ -1,0 +1,1956 @@
+{
+  "calibration": {
+    "author_attempt_cap": {
+      "cap": 48,
+      "refundable": false,
+      "remaining": 8,
+      "source": "STATE.json#resource_envelope.author_attempt_cap/used/remaining",
+      "used": 40
+    },
+    "comparison_ledger": {
+      "decomposition": {
+        "BC_only": 6,
+        "RL": 36,
+        "nonRL": 84
+      },
+      "nonRL_split": {
+        "new_g3": 60,
+        "old": 24
+      },
+      "old_total": 66,
+      "residual_unverified": 8,
+      "row_level_verified": {
+        "calibration_four_nonrl_delivered": 16,
+        "g3_launches": 60,
+        "p2_val_calls": 0,
+        "p3_val_calls": 0
+      },
+      "source": "g24_weather_nfz/status_reconciliation_g3_20261105/ROUND_DECISION.md:17-18",
+      "total_documented": 126
+    },
+    "identities": [
+      {
+        "author_seed": 8061040517756394000,
+        "id": "calibration_1",
+        "package": "legacy6",
+        "status": "anchor_failed"
+      },
+      {
+        "author_seed": 6552377845290531000,
+        "id": "validation_1",
+        "package": "legacy6",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 5416193097313747000,
+        "id": "calibration_1",
+        "package": "calibration_four:slot1",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 7050745614158281000,
+        "id": "calibration_2",
+        "package": "calibration_four:slot2",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 3882061849787976700,
+        "id": "calibration_3",
+        "package": "calibration_four:slot3",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 6883377457131737000,
+        "id": "calibration_4",
+        "package": "calibration_four:slot4",
+        "status": "eligible"
+      },
+      {
+        "author_seed": null,
+        "id": "VAL_1",
+        "package": "ordinary_pilot_P2",
+        "status": "anchor_failed"
+      },
+      {
+        "author_seed": null,
+        "id": "VAL_2",
+        "package": "ordinary_pilot_P2",
+        "status": "anchor_failed"
+      },
+      {
+        "author_seed": 6545600431564084000,
+        "id": "VAL_1",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 5339759396693626000,
+        "id": "VAL_2",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 8103504990021122000,
+        "id": "VAL_3",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": null,
+        "id": "VAL_4",
+        "package": "P3_fixed14",
+        "status": "anchor_failed"
+      },
+      {
+        "author_seed": 8921428058653875000,
+        "id": "VAL_5",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 8360826105648212000,
+        "id": "VAL_6",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 1933609355281524500,
+        "id": "VAL_7",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 3836538395111744000,
+        "id": "VAL_8",
+        "package": "P3_fixed14",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 2681003412216674000,
+        "id": "calibration_1",
+        "package": "g3_batch1:slot1",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 4429980145609240600,
+        "id": "calibration_2",
+        "package": "g3_batch1:slot2",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 5014745257682700000,
+        "id": "calibration_3",
+        "package": "g3_batch1:slot3",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 4413690447069893600,
+        "id": "calibration_4",
+        "package": "g3_batch1:slot4",
+        "status": "eligible"
+      },
+      {
+        "author_seed": null,
+        "id": "calibration_5",
+        "package": "g3_batch2:slot1",
+        "status": "anchor_failed"
+      },
+      {
+        "author_seed": 6250957459381662000,
+        "id": "calibration_6",
+        "package": "g3_batch2:slot2",
+        "status": "eligible"
+      },
+      {
+        "author_seed": 1875744519872662300,
+        "id": "calibration_7",
+        "package": "g3_batch2:slot3",
+        "status": "eligible"
+      },
+      {
+        "author_seed": null,
+        "id": "calibration_8",
+        "package": "g3_batch2:slot4",
+        "status": "anchor_failed"
+      }
+    ],
+    "identity_count": 24,
+    "identity_derivation": "40 图中 partition∈{calibration,validation} 全部：legacy 2 + calibration_four 4 + P2 VAL 2 + P3 VAL 8 + G3 8 = 24",
+    "independent_scan_verification": "65 个 generation.json → 40 唯一 canonical_geometry + 40 唯一 raw_sha256；partition 计数 = {calibration:13, validation:11, opportunity:16}",
+    "opportunity_count": 16,
+    "opportunity_derivation": "40 图中 partition=opportunity 全部：legacy 4 + P2 TRAIN 6 + P3 TRAIN 6 = 16",
+    "quota_definition": {
+      "max": 24,
+      "max_field": "STATE.json#resource_envelope.separate_nonRL_calibration_validation_maps_max",
+      "refund_field": "STATE.json#resource_envelope.failed_reservations_refunded=false",
+      "refundable": false,
+      "remaining": 0,
+      "remaining_field": "STATE.json#resource_envelope.calibration_validation_remaining",
+      "used": 24
+    },
+    "quota_full_basis": [
+      "STATE.json#resource_envelope: separate_nonRL_calibration_validation_maps_max=24, separate_calibration_validation_identities_used=24, calibration_validation_remaining=0",
+      "g24_weather_nfz/status_reconciliation_g3_20261105/ROUND_DECISION.md:19『24/24 calibration/validation 额度已用满；不得将剩余 opportunity 额度改名挪用或失败额度退款』",
+      "ROUND_DECISION.md:21『48 作者尝试上限已用 40；仅有 8 次未分配作者额度，并不等于自动获准新校准』",
+      "第二批 2/4 天气锚点失败、第一批 strict 资格被撤回，均不退款（ROUND_DECISION.md:10,13,19）"
+    ]
+  },
+  "conflicts": [
+    {
+      "adopted": "采用 records 数组（40 条）按 records[].source_role 分组：legacy_initial_six 6 / calibration_four 4 / ordinary_p2_eight 8 / p3_fixed14 14 / g3_first_batch 4 / g3_nonrl_validation 4",
+      "conflict": "EXPOSURE_EXCLUSIONS_40.json 的 sources 数组列 5 组共 6+4+8+14+4=36 条，但 record_count=40；缺 g3_nonrl_validation_20261105 一组、且 g3_first_batch 标为 4 条",
+      "evidence": "g24_weather_nfz/status_reconciliation_g3_20261105/EXPOSURE_EXCLUSIONS_40.json",
+      "id": "C1",
+      "reason": "records 与 40 唯一 geometry/raw 哈希自洽，且与 STATE.research_counts.scope 的 6+4+8+14+8 一致",
+      "topic": "40 身份的角色分组"
+    },
+    {
+      "adopted": "本文件一律 (a)；涉及 (b) 时显式写『Stage A 24 图回放』",
+      "conflict": "(a) 24 = 隔离非RL校准/验证身份额度已满；(b) 24 = 旧 Stage A 验证集 24 张图按 frozen input hash 回放（LATEST_STATUS 多处写『24/24张图』）",
+      "evidence": "route_rl_research/20261103/return_makespan/STATE.json#resource_envelope 与 g24_weather_nfz/**/LATEST_STATUS.md",
+      "id": "C2",
+      "reason": "两者分母、对象、用途完全不同，混用会把工程回放当成校准额度",
+      "topic": "『24』的两个不同含义"
+    },
+    {
+      "adopted": "STATE/REPORT 的 0.0 / 0.3333 / 1.0863",
+      "conflict": "交接 prompt 表写『V_cluster=-0.40625，成本比≈1.20743』；包内 STATE.real_gate 与 REPORT.md 写 V_cluster=0.0、V_uniform=0.3333、cost 55.371981 vs 50.972704（比值 1.0863）",
+      "evidence": "joint_weather_emergency/20261112_wx_e/STATE.json#real_gate, REPORT.md:14-15",
+      "id": "C3",
+      "reason": "包内是同期收据，交接表是二手摘要；-0.40625=-13/32 与 64 行结构不符",
+      "topic": "WX-E 首包 V_cluster / 成本比"
+    },
+    {
+      "adopted": "v5 与 v6 的 24 训练 + 32 评价场景为同一批 geometry（仅 id 字符串不同），计入 1 组身份而不是 2 组",
+      "conflict": "REPORT_V3_V8.md 把 v5/v6 列为两个独立包；实际 _scenario() 全文只差 id 前缀，train/eval 区间同为 700-711 / 600-615",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v5/wx_e_v5_driver.py:71-120 vs 20261112_wx_e_v6/wx_e_v6_driver.py:71-120",
+      "id": "C4",
+      "reason": "代码级 diff 证明除包名外逐字相同，RNG 基址 71011+seed*37 相同",
+      "topic": "v5 与 v6 是同一组场景"
+    },
+    {
+      "adopted": "按 generator partition 计入 calibration/validation 合并额度（24 桶），并在身份表保留源包名",
+      "conflict": "包名 g3_nonrl_validation_20261105、map id calibration_5..8，但 generation.json partition=calibration",
+      "evidence": "g24_weather_nfz/g3_nonrl_validation_20261105/server_original/output/calibration_5/generation.json",
+      "id": "C5",
+      "reason": "额度桶是 calibration+validation 合计，命名不影响计数；但单独称『validation』会误导",
+      "topic": "G3 第二批的 partition 命名"
+    },
+    {
+      "adopted": "采用 ROUND_DECISION 的 126=66+60 与 84=24+60；把 8 条旧非RL 行标为 residual_unverified",
+      "conflict": "账本只给分族合计（36 RL/6 BC-only/84 非RL=旧24+新60），未给逐图逐行键；本地可逐行核对的只有 calibration_four 16 行与 G3 60 次启动",
+      "evidence": "g24_weather_nfz/status_reconciliation_g3_20261105/ROUND_DECISION.md:17",
+      "id": "C6",
+      "reason": "16+60+36+6=118，差 8 与『旧24』中的 8 条吻合，但无本地逐行证据",
+      "topic": "126 实际比较的逐行归属"
+    },
+    {
+      "adopted": "按 STATE 采用 64 个科学图名额；但逐图 identity/hash 本地不存在，不能算已核验身份",
+      "conflict": "DESIGN.json 写 scientific_maps=0（执行前模板），sufficient_training_D/STATE.json 写 scientific_maps=64、author_eligible=64",
+      "evidence": "joint_weather_emergency/20261106_sufficient_training_D/DESIGN.json 与 STATE.json",
+      "id": "C7",
+      "reason": "DESIGN 是预执行草稿；STATE 是执行后收据",
+      "topic": "D 包地图数"
+    },
+    {
+      "adopted": "采用『40 图单 family』为事实，并据此禁止把 40 图当规模泛化证据",
+      "conflict": "generator 协议预分配 12 个 family（每 family 4 opportunity + 1 calibration + 1 validation），实际 40 图 100% 是 [3,20]",
+      "evidence": "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH> 与 65 个 generation.json",
+      "id": "C8",
+      "reason": "全库 65 个 generation.json 的 family 去重结果只有 [3,20]",
+      "topic": "40 图 family 覆盖"
+    },
+    {
+      "adopted": "不判为重复身份：两者 RNG 基址与场景体不同（93117+seed*53+coord_rng 分裂 vs 71011+seed*37）",
+      "conflict": "forecast_v1 与 v8 同为 eval 1100-1115 / train 1200-1211",
+      "evidence": "wx_e_forecast_driver.py:92-125 vs wx_e_v8_driver.py:71-104",
+      "id": "C9",
+      "reason": "代码级比较显示 RNG 与 placement 规则不同，几何必然不同",
+      "topic": "同一 seed 数字跨包复用"
+    },
+    {
+      "adopted": "两者都对：44 是登记总人口，12 是 SELECT 子集（12 图 × 4 日 = 48 map-day）",
+      "conflict": "REGISTRATION_PLAN map_slots 24/8/12=44；多目标报告写『12地图、4日』",
+      "evidence": "joint_weather_emergency/20261106_method_family_B/REGISTRATION_PLAN.json 与 20261106_github_multiobjective_check/REPORT.md",
+      "id": "C10",
+      "reason": "不同层级的分母",
+      "topic": "B 包地图数"
+    }
+  ],
+  "evidence_policy": {
+    "conflict_marking": "conflicts[] 列出跨文件不一致与采用值",
+    "unverified_marking": "gaps[] 列出无法本地核验项",
+    "verified_prefix": "evidence_path 指向的文件均已实际打开"
+  },
+  "exclusion_registry": {
+    "composition": {
+      "official_liu": 120,
+      "pilot_geometry_proposals": 12000,
+      "synthetic_smoke": 1,
+      "v2_synthetic": 4,
+      "windows_development_probe": 6
+    },
+    "cross_check": "calibration_1/generation.json metadata.exclusion_record_count = 12131，与 12120+4+6+1 相符",
+    "evidence": [
+      "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+      "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+      "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+      "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>"
+    ],
+    "semantics": "canonical geometry 对平移/行序/节点 ID/空白不变；双重查重（raw bytes + canonical）",
+    "total": 12131
+  },
+  "gaps": [
+    {
+      "gap": "40 图的逐图 quality 比较行不可逐条重建（126 只到分族合计）",
+      "id": "G1",
+      "impact": "无法逐图复核旧比较的胜负分布",
+      "next": "若需审计，从 <COMPUTE_HOST> /root 旧结果目录抽 COMPARISONS 行并做 key 对账；本地无此文件"
+    },
+    {
+      "gap": "D 包 64 图、B 包 44 图的逐图 identity + 哈希不在本地快照",
+      "id": "G2",
+      "impact": "这两个人口只能按人口登记，不能按图核验",
+      "next": "从 <COMPUTE_HOST> 注册/物化文件拉取 64+44 条记录后才可标 VERIFIED"
+    },
+    {
+      "gap": "joint_20261105 的 TRAIN 日基址未在本地注册文件写明（只有 DEV 550100-550103）",
+      "id": "G3",
+      "impact": "TRAIN 事件日无法逐日核验",
+      "next": "查 20261105<EXECUTION_PATH> 的完整版或服务器 day 清单"
+    },
+    {
+      "gap": "620 个发布实例只有 raw sha256，无 canonical geometry 哈希",
+      "id": "G4",
+      "impact": "与 40 图/官方 120 的几何级重叠只能按 raw bytes 判定（已算得交集 0，但格式差异可能掩盖同几何）",
+      "next": "对 620 文件跑 canonical 化后与 12,131 条排除表比对"
+    },
+    {
+      "gap": "WX 各包的 scenario 几何哈希未落盘（只有 scenario_id 字符串）",
+      "id": "G5",
+      "impact": "v5/v6 重复性靠代码 diff 判定，缺独立哈希收据",
+      "next": "重放 _scenario() 只做哈希（不求解），把 32+32 条 geometry 哈希写进登记表"
+    },
+    {
+      "gap": "24 校准身份的『额度已满』只有 STATE 字段与裁决文档，无逐图签收单",
+      "id": "G6",
+      "impact": "若未来争议额度，需回溯",
+      "next": "把本文件 calibration.identities（24 条）作为签收单，与 STATE 字段互证"
+    }
+  ],
+  "generated_at": "2026-11-12T16:01:20+08:00",
+  "generated_by": "DSH 接手线程（splits/exclusions 单任务）",
+  "identity_ledger_40": [
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": "8061040517756394818",
+      "canonical_geometry_sha256": "8a338e764f9526c71fd0424d51cdcb4f4257460d3f8f807856a2306809329ed6",
+      "coordinate_seed_u64": "16848264560810711812",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "天气锚点不合格 battery:2:1:0",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_1",
+      "package_label": "legacy6",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "098896e1cb02d503d29fe6a0b2250547976d13eb9973905d243e062a178460f7",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": "4725616345236868539",
+      "canonical_geometry_sha256": "2eb7aa002e8c758ec1ede9a27789be5d4d16e5c52ece80556d23e1670224db37",
+      "coordinate_seed_u64": "3510608308860296805",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "天气锚点不合格 battery:2:1:0",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "opportunity_1",
+      "package_label": "legacy6",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "8e0a0982d4735440fa192a4b4a89bf15607056ad945e384501b5c219328aec6f",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5589274143055571466",
+      "canonical_geometry_sha256": "3090355d2320f61c5fce2c4219d4b5e7471cd9838178441e80b9e2dda7be7792",
+      "coordinate_seed_u64": "11326821000534890435",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "weather v2/v3 实际训练图（9+9 RL runs 与 BC 示范）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "opportunity_2",
+      "package_label": "legacy6",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": "unknown",
+      "raw_sha256": "25b01c3a589142255855e966ae5035b903c3012328c65a53495f4681336a83e5",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": "7448771392250967152",
+      "canonical_geometry_sha256": "03e112076adff430a824319366be399a29fdbc48089410b0b359f70d22711fce",
+      "coordinate_seed_u64": "7424519560581483456",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "天气锚点不合格 battery:1:0:0",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "opportunity_3",
+      "package_label": "legacy6",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "5f429dd6967f152589876a800fb161223b002de6b6e1df6f7eb1b540045cd2fd",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8176171210666833424",
+      "canonical_geometry_sha256": "c1fed2c363badf70e564af6be69785f9fe23fddaaf45ce0171cddd83c57566ce",
+      "coordinate_seed_u64": "315944167743769220",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "weather v2/v3 第二张实际训练图",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "opportunity_4",
+      "package_label": "legacy6",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": "unknown",
+      "raw_sha256": "cbe72c28e799d0d90aa4517c4c7e1b6025b045d222a015a96e14156cab12d97d",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "6552377845290530962",
+      "canonical_geometry_sha256": "0b83230f16b710f403d2a611272a71cbc9c147d24cf88748d50309e310ff7b50",
+      "coordinate_seed_u64": "7287840944253383520",
+      "exclusion_source_role": "legacy_initial_six",
+      "exposure_note": "weather v2 三个合格锚点之一",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "windows-development-probe-20261104",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "validation_1",
+      "package_label": "legacy6",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": "unknown",
+      "raw_sha256": "049910dea869cfbf30d0e87b9d131d6daae2d90527fec9c93c88136e54a3b794",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104 (ns windows-development-probe-20261104)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5416193097313746951",
+      "canonical_geometry_sha256": "eea4ad8cf13d3ec6778d4c15e0bbaf31e212f57d072e7c9277d22082a3692325",
+      "coordinate_seed_u64": "9696769517328402219",
+      "exclusion_source_role": "calibration_four",
+      "exposure_note": "每图 4 条已交付非RL行（strict/annealed × 6s/12s）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-calibration-only-four-20261104-v1:slot1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_1",
+      "package_label": "cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 4,
+      "raw_sha256": "6c8af0011250e67cfeba35a0d2f174c3451961b747d748f3d6d61e01496cf8df",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/calibration_four_execution_20261104 (ns <COMPUTE_HOST>-calibration-only-four-20261104-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "7050745614158280690",
+      "canonical_geometry_sha256": "c37099bfb6ca9775cd1b237fa6bf5f223b12dec0ef41dc5d8304187f4e4c413d",
+      "coordinate_seed_u64": "3199714144076287646",
+      "exclusion_source_role": "calibration_four",
+      "exposure_note": "每图 4 条已交付非RL行（strict/annealed × 6s/12s）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-calibration-only-four-20261104-v1:slot2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_2",
+      "package_label": "cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 4,
+      "raw_sha256": "0532d6354fa4b05086d39469b78747abd0498ade24bdab9f1bbd12476c60a833",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/calibration_four_execution_20261104 (ns <COMPUTE_HOST>-calibration-only-four-20261104-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "3882061849787976752",
+      "canonical_geometry_sha256": "5bbce7dfab635f39440cfe3d432839dc59aed3dc4d0f08ada638cc43deb9b4ba",
+      "coordinate_seed_u64": "1920062422051144663",
+      "exclusion_source_role": "calibration_four",
+      "exposure_note": "每图 4 条已交付非RL行（strict/annealed × 6s/12s）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-calibration-only-four-20261104-v1:slot3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_3",
+      "package_label": "cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 4,
+      "raw_sha256": "e652e43a0133bb1fa613eaca4a37aea4fba91fb01bfdd9b800ef3ace37e74869",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/calibration_four_execution_20261104 (ns <COMPUTE_HOST>-calibration-only-four-20261104-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "6883377457131737141",
+      "canonical_geometry_sha256": "175ef268528382798bfe809fc932fdb5c2c9a8560a79aa6bc6a8be68b048e6f9",
+      "coordinate_seed_u64": "4623427792268789899",
+      "exclusion_source_role": "calibration_four",
+      "exposure_note": "每图 4 条已交付非RL行（strict/annealed × 6s/12s）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-calibration-only-four-20261104-v1:slot4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_4",
+      "package_label": "cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 4,
+      "raw_sha256": "6ad2fc79f17085468e636857dcddf7ed15ee345c72a409717adbfea3925f6a59",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/calibration_four_execution_20261104 (ns <COMPUTE_HOST>-calibration-only-four-20261104-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "9037025135220550923",
+      "canonical_geometry_sha256": "b46b8c04d465b7b557cd05ffbf16229f32fabc128b28badb7f2688d3426530d8",
+      "coordinate_seed_u64": "10315716839356301853",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_1",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "4c311dec5146df18d05166c40d2a46c93892decc0bce3cc9eeadff79cc9097f2",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "3243719861758967425",
+      "canonical_geometry_sha256": "9b523d535621cf8ead9b0bddb84adc9f03c46eb6ff900b30bf890042e1ca85e4",
+      "coordinate_seed_u64": "11212163679001289909",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_2",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "b88938f2b7f7365d19ebaca679357a4596fb22b21944b5471705f61729a3c6c0",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "9179e8427cc9a5409a1d5677fc80527bf602752d0190bfe1aab8043cd2f40639",
+      "coordinate_seed_u64": "16536284684707784461",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_3",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "9c40c6e1aff4fed80eb2590135b4534f436abd95e5b3fa755cb75553f0831bce",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "3208087635824869580",
+      "canonical_geometry_sha256": "65ede185ee413dbd2efa4502406571a88c88ed91e449fd0568e9276c2fe011f0",
+      "coordinate_seed_u64": "10377320674945614890",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_4",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "ea935829e7c783117b171ad674e351ed08999880971449af1f683229c8e2c57a",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5867136966166737283",
+      "canonical_geometry_sha256": "811a491a6eec19b6ffce05279f44bc6437d58b7c3f556e9dc8194d33f7b42bce",
+      "coordinate_seed_u64": "1772161236358993587",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_5",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_5",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "c0ddc7c71669382f42e966b721ef1a610517d923cc3c77885c4f75a9a7a90b6d",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8709423513222594460",
+      "canonical_geometry_sha256": "9f4bdc44037df5f811b3723c35ed260b8a65f134b33779ffbfa45cb907369a5b",
+      "coordinate_seed_u64": "2007274681249996974",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_6",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_6",
+      "package_label": "p2_8",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "6c67e1796adb7f339c84f533360efa96ba8bc5feb4f8003b97a0a785a3f81e75",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "ef02e2ae2987bb90c8d37d5555fe93ce1bd322dba781f1fb117e0c9d0e6999ff",
+      "coordinate_seed_u64": "4964940896226951351",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:VAL_1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_1",
+      "package_label": "p2_8",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "9fbb70ec8cfee797418f9fee915143f02838ad388ce54f8a541fa8b583956bbc",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "4e001af44bf621ad5baad0d3dae529b5a3847903480641b21caf2eab1cd1b762",
+      "coordinate_seed_u64": "10046345032524705986",
+      "exclusion_source_role": "ordinary_p2_eight",
+      "exposure_note": "0 合格 VAL；PILOT 在 BC 前停（0 VAL 调用，48 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:VAL_2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_2",
+      "package_label": "p2_8",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "4912f078a1b654b323be83e8715c7b0ca8a02f05050b737c9c8163eab70c00e6",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "6533227921728707381",
+      "canonical_geometry_sha256": "49d8896056997215fa0a98340b95e677d914334ed24f2da3cdd98121e8fd3bc8",
+      "coordinate_seed_u64": "14300510430257703506",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_1",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "ad74969b256da62455e0cd2e7e4c3fd1fc788e2e41558b5663e7ef26c78de8f8",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "fac4a012ebe8828e49e2f8012789ff06140815f70ac6845babca4952671c2883",
+      "coordinate_seed_u64": "11803540824159096411",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_2",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "13a2491312f3a11091ded5e7666f1f1d46e230c6295e59f275de8534210fae34",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8214224796288978561",
+      "canonical_geometry_sha256": "9cd8282dcd90a2aa96c3cd76ca777a1c316e5c6690cd4083dc898c166a116f2b",
+      "coordinate_seed_u64": "15095910801075510818",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_3",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "787d456070b164aa20f08aff746543004de726c917e223fcd88276678673cbe4",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8862752592133022981",
+      "canonical_geometry_sha256": "2fea1ab7037f4e03d58a8bdd46cc4c4f78899bff3fd0229403a0f894e7c0edee",
+      "coordinate_seed_u64": "1408316617229734659",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_4",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "3ff0992592e13fe11d135aeeb62dec245c3e814d745dee5f3c164501e1f7f753",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "3160886542338391251",
+      "canonical_geometry_sha256": "bcd9c016924dbc58fb20c776ce2c0beca3f0ec4d39c1cd3eca59a1664bcca8c1",
+      "coordinate_seed_u64": "6480175311113180951",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_5",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_5",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "edca3f890d496acac037518dd13bd0c3d9c295aabc0941f7c4205bbc84194b1a",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5721582391779123333",
+      "canonical_geometry_sha256": "cbd5c9593b494282c21040e20d79cc5e8d6329723721237542aae16b5d5d39c2",
+      "coordinate_seed_u64": "3449552447603342600",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "opportunity/development",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_6",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "TRAIN_6",
+      "package_label": "p3_14",
+      "partition": "opportunity",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "a1dacd75b8f8289ad84bd93521ff42e7e7801898e9908c2ef6999e2514fa41fb",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "TRAIN/opportunity",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "6545600431564083803",
+      "canonical_geometry_sha256": "38ce9e07326de9e5c3e1456604c07ce9de1146e2719c1755e433c0cba2c187ff",
+      "coordinate_seed_u64": "5560278581663723372",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_1",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "5e1a616772c74ff7bd2c878e685eb8a4204f30eb176125d09f145b5cbb32d395",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5339759396693625412",
+      "canonical_geometry_sha256": "dc6929bebc541cc878de76cc9dc592564d777736d6fa222ac2b1f7be7fe4bcae",
+      "coordinate_seed_u64": "10301972090181610039",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_2",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "ac50c693f07e26f3bff39965c6a8bcccbe305e900827dbfc9f419838c1444fdd",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8103504990021122424",
+      "canonical_geometry_sha256": "815d4f3818e62e7b0dbb2b05ee5cb6d14dd62f11cfb1e6eb06d86f1ed996c792",
+      "coordinate_seed_u64": "13196992175538331492",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_3",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "aa488c62e3e56dc643b4356ac8dcf473e28bd959854bcc466e9e4878f61c7a22",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "1270c818775e155c3ad2256c9f5a8ed2a082bc96a5c53c18fdfcba0c6261332d",
+      "coordinate_seed_u64": "5276681482089107995",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_4",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "f348e0e122d40dcd2cdde482707b7f1ca976bbf197a308e36539ac8568d0b2a5",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8921428058653875013",
+      "canonical_geometry_sha256": "e189ee72af9f9d21a53d7b1f26e12e1103a5abdc26cf85b4593cccfa994fbe72",
+      "coordinate_seed_u64": "9216523893445883930",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_5",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_5",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "1193dea8cc4568b6a91ab554a4b90b7f4c7316e935483fd332edb35ad958c679",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "8360826105648211745",
+      "canonical_geometry_sha256": "e54a10c9b88c9c55673c13b2fc3b21c06ff285c98c1a19e96d21cfa233378253",
+      "coordinate_seed_u64": "18229936926937999770",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_6",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_6",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "dd29025bfebc14531f2b1e322d3a148b7d62046a65c4e19caeaea94a3fbb7439",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "1933609355281524465",
+      "canonical_geometry_sha256": "921f84f90c39257cd3747c75dc904a1dc7d2a32cf80a92db020a931a28613e07",
+      "coordinate_seed_u64": "16994972859832178032",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_7",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_7",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "c79081124ca797119ef92797e2f7a936de1c43712b7c2e2470e78b91f31185db",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "3836538395111743981",
+      "canonical_geometry_sha256": "4a1ce4cc15fc82f40ce52bc8ec5bb1f32a7616ed341c65308753501707587bf5",
+      "coordinate_seed_u64": "16124584929509702145",
+      "exclusion_source_role": "p3_fixed14",
+      "exposure_note": "首个 common-BC gate 失败即停（0 VAL 调用，192 行跳过）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:VAL_8",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "VAL_8",
+      "package_label": "p3_14",
+      "partition": "validation",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 0,
+      "raw_sha256": "71dba2bc7c9172fcb07c084666af7ca335ee1352a3a601e931e95bfadb78d39b",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104 (ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1)",
+      "split": "VALIDATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "2681003412216673716",
+      "canonical_geometry_sha256": "dda615cad76ff17577956489c401a8be5aeb82cf38b3f80e8948b3caa233cf98",
+      "coordinate_seed_u64": "10568376817971081221",
+      "exclusion_source_role": "g3_first_batch_20261105",
+      "exposure_note": "第一批 4 图共 40 次比较调用（27 交付/5 超时/8 导入失败）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1:slot1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_1",
+      "package_label": "g3cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 10,
+      "raw_sha256": "01040b09e413b5c5c12e1521c77140c68b9cc0beed065bbfb1a4ab6a831ca32f",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_calibration_20261105 (ns <COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "4429980145609240498",
+      "canonical_geometry_sha256": "249c177ee3fa7f61a21555bfa60d3537ec8ef210ae07f585eb96151652ba44de",
+      "coordinate_seed_u64": "16446809033092008304",
+      "exclusion_source_role": "g3_first_batch_20261105",
+      "exposure_note": "第一批 4 图共 40 次比较调用（27 交付/5 超时/8 导入失败）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1:slot2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_2",
+      "package_label": "g3cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 10,
+      "raw_sha256": "10bfe589571b6f9e0da371ca87274edbee1f1b9bd7bf658a4be980172b0a581f",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_calibration_20261105 (ns <COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "5014745257682700171",
+      "canonical_geometry_sha256": "aefa9affc249adbadb0cd3bbc2129bdc5e772b21c0ed6b17ce9f83fe7fb19854",
+      "coordinate_seed_u64": "11268862518202512688",
+      "exclusion_source_role": "g3_first_batch_20261105",
+      "exposure_note": "第一批 4 图共 40 次比较调用（27 交付/5 超时/8 导入失败）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1:slot3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_3",
+      "package_label": "g3cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 10,
+      "raw_sha256": "aa0d35401bc55055220912db7f7117f5fa93204d85096c04fd02759ee6a4125c",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_calibration_20261105 (ns <COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "4413690447069893544",
+      "canonical_geometry_sha256": "aa8aebe916a1c59790cc0d2713b1f27927708e543cd8bfcf049fca53bc79183c",
+      "coordinate_seed_u64": "13851859804781534736",
+      "exclusion_source_role": "g3_first_batch_20261105",
+      "exposure_note": "第一批 4 图共 40 次比较调用（27 交付/5 超时/8 导入失败）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1:slot4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_4",
+      "package_label": "g3cal4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 10,
+      "raw_sha256": "d71dffdc46ce7473c73a93c12d6dacdacffcc3e60bbf996e4a475a4d12b4deb0",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_calibration_20261105 (ns <COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "c6b5f17ef1c1ec600e41d28fcb8ba929a46706fb64f72ea741dee8b9be326458",
+      "coordinate_seed_u64": "10345901150499424863",
+      "exclusion_source_role": "g3_nonrl_validation_20261105",
+      "exposure_note": "第二批 4 图共 20 次实际比较进程（20 交付）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-validation-20261105-v2:slot1",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_5",
+      "package_label": "g3val4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 5,
+      "raw_sha256": "5c1b9c5b9958a9a5bd2bde7b3e26bb1b593a3b2550387cbc279f7bdeda7d0d47",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_validation_20261105 (ns <COMPUTE_HOST>-g3-nonrl-validation-20261105-v2)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "6250957459381661906",
+      "canonical_geometry_sha256": "348e4c704cc72e086c08c6df9b2c7383ae24aede05f718feb0ea7787de9c63ef",
+      "coordinate_seed_u64": "14808566417892199153",
+      "exclusion_source_role": "g3_nonrl_validation_20261105",
+      "exposure_note": "第二批 4 图共 20 次实际比较进程（20 交付）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-validation-20261105-v2:slot2",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_6",
+      "package_label": "g3val4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 5,
+      "raw_sha256": "f6e83707d64b9feea5587c99649505ac1a841a1e34838db64d88e64628156a9f",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_validation_20261105 (ns <COMPUTE_HOST>-g3-nonrl-validation-20261105-v2)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "eligible",
+      "author_attempts": 1,
+      "author_seed": "1875744519872662205",
+      "canonical_geometry_sha256": "1bbdeab710d5a540ae0fb0b910000d5b214445031eaee8cf0f90317d066a70c9",
+      "coordinate_seed_u64": "18136731138408547509",
+      "exclusion_source_role": "g3_nonrl_validation_20261105",
+      "exposure_note": "第二批 4 图共 20 次实际比较进程（20 交付）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-validation-20261105-v2:slot3",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_7",
+      "package_label": "g3val4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 5,
+      "raw_sha256": "3a6d49d85c58f5efe92b67f970f60764131f9f9385ce92b61311af1d2fcfb8a1",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_validation_20261105 (ns <COMPUTE_HOST>-g3-nonrl-validation-20261105-v2)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    },
+    {
+      "anchor_status": "anchor_failed",
+      "author_attempts": 1,
+      "author_seed": null,
+      "canonical_geometry_sha256": "b21434f29bfb99afc51ca2c494d309e0512291df6ff30bec979a47c4d0930917",
+      "coordinate_seed_u64": "2384259282910847564",
+      "exclusion_source_role": "g3_nonrl_validation_20261105",
+      "exposure_note": "第二批 4 图共 20 次实际比较进程（20 交付）",
+      "exposure_role": "isolated non-RL calibration/validation",
+      "generator_namespace": "<COMPUTE_HOST>-g3-nonrl-validation-20261105-v2:slot4",
+      "generator_version": "2.0.0-engineering",
+      "map_id": "calibration_8",
+      "package_label": "g3val4",
+      "partition": "calibration",
+      "protocol_family": "[3,20]",
+      "quality_comparisons": 5,
+      "raw_sha256": "a2e950f8b10c4c4817b1f2dcd4ee05f70e562b0626d853a52f72f9e91756a1a9",
+      "rng": "SplitMix64 2015-02-16-reference-variant-v1",
+      "seed_scheme": "first8bytes(SHA256(canonical_json{schema,namespace,family,partition,ordinal,stream}))",
+      "source_package": "g24_weather_nfz/g3_nonrl_validation_20261105 (ns <COMPUTE_HOST>-g3-nonrl-validation-20261105-v2)",
+      "split": "CALIBRATION",
+      "square_side_m": 14000,
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "none (fixed-global-square-and-wind-v1; 40 图同一风/同一 NFZ 内容)"
+    }
+  ],
+  "new_population_rules": {
+    "acceptance_checklist": [
+      "身份元组 + canonical/raw 双哈希已登记且不在 12,131 条排除表",
+      "population_id 与旧 40 图人口不同（生成器版本/family 组合/约束/天气条件至少一项实质不同）",
+      "family 覆盖 ≥3 且配额冻结",
+      "day id 为新命名空间，未与任何旧区间重叠",
+      "天气条件哈希已登记，且不与 25916a05…（fixed-global-square-and-wind-v1）重复",
+      "作者锚点逐一求解；失败保留、不补图、不退额度",
+      "资源与输出硬限已登记，含 2880/26880 类评价键的 intent 行",
+      "VAL/DEV/Formal 三级隔离，Formal 在冻结前不生成"
+    ],
+    "definitions": {
+      "event_day": "由冻结 day 生成器与其 seed 命名空间产出的唯一 day id（如 550100-550103、972100-972103）；复用旧 day id 即污染",
+      "map_identity_tuple": "(generator_version, protocol, family=[sites,targets], square_side_m, namespace, partition, ordinal, coordinate_seed_u64, target_id_seed_u64) → canonical_geometry_sha256 + raw_sha256",
+      "map_level_unit": "一张具有唯一 canonical_geometry_sha256 且不在排除登记表内的地图；事件日、求解 seed、训练 seed 一律嵌套在图内，不构成独立图",
+      "weather_condition": "(wind trace, NFZ polygons, forecast publication schedule) 的内容哈希；固定合成风只算 1 个天气条件，不是天气人口"
+    },
+    "explicitly_not_independent": [
+      "同一 canonical_geometry 换求解 seed 或训练 seed",
+      "同一底图换事件日 id（除非 day 生成器与 seed 命名空间全新，且仍按 map 聚合）",
+      "同一 geometry 换 namespace 后缀（:slot1/:slot2）重画",
+      "40 图中不同 map_id 但同 family/同天气：是同人口的独立图，可作为 map 级 n，但不构成新人口",
+      "同一 seed 数字在不同 RNG 基址下重画（如 forecast_v1 1100-1115 与 v8 1100-1115）：是不同图，但属于同一设计人口"
+    ],
+    "problem_statement": "旧账本里『新地图』实际只换了 per-map seed、namespace 后缀与作者 seed；40 图全部同 family [3,20]、同 14000m 方、同一套合成天气。只换 seed 得到的是同一人口的更多抽样，不是新人口；同一底图换事件日/求解 seed 只是 map 内嵌套，不增加地图级 n。",
+    "rules": [
+      {
+        "enforcement": "generator_v2.derive_seed + 生成后即时哈希；登记文件进包",
+        "id": "R1",
+        "reason": "40 图账本证明身份可完全由元组复算",
+        "rule": "任何新图必须先冻结身份元组并计算 canonical_geometry_sha256 + raw_sha256，登记后才允许求解"
+      },
+      {
+        "enforcement": "generator_v2 load_required_exclusions().require_research_ready()",
+        "id": "R2",
+        "reason": "canonical 哈希对平移/行序/ID 不变，重复底图会被识别",
+        "rule": "新图必须通过 12,131 条排除登记表（120 官方 + 12,000 pilot 提案 + 4 合成 + 6 Windows 探针 + 1 合成烟测）的 canonical geometry 与 raw bytes 双重查重"
+      },
+      {
+        "enforcement": "注册文件必须写明 population_id（生成器版本+family 组合+约束+天气条件），seed 不构成 population_id",
+        "id": "R3",
+        "reason": "40 图 = 6 个 namespace 下的 40 次抽样，全部 family [3,20]",
+        "rule": "只改 seed / 只改 namespace 后缀不算新人口，只算同人口新抽样；不得以『换 seed 重画』替代新人口设计"
+      },
+      {
+        "enforcement": "注册文件 family_allocation 字段 + 生成后 family 审计",
+        "id": "R4",
+        "reason": "单 family 无法支持规模泛化，也无法把 map 当独立单位做分层",
+        "rule": "新人口必须覆盖 ≥3 个 family（如 [3,10],[3,20],[5,35],[9,95]），并冻结 family×slot 配额；不得再次出现 40/40 单 family"
+      },
+      {
+        "enforcement": "day id 区间登记 + 生成前查重",
+        "id": "R5",
+        "reason": "旧 day id 已被多包共用，复用等于在同一事件日上调参",
+        "rule": "事件日必须由冻结 day 生成器的新 seed 命名空间产出，day id 不得与 550100-550103、880000+、881000-881001、882000-882003、970000/971100-971101/972100-972103、991000/994100-994103/995100-995103 重叠"
+      },
+      {
+        "enforcement": "scenario.json 去 instance_sha256 后的哈希进登记表",
+        "id": "R6",
+        "reason": "40 图的天气内容哈希完全相同（去 instance_sha256 后为 25916a05…），因此 40 图只有 1 个天气条件",
+        "rule": "天气必须作为独立人口登记：每个天气条件要有 wind trace / NFZ 几何 / 预报发布序列的内容哈希；同一 fixed-global-square-and-wind-v1 只能算 1 个条件"
+      },
+      {
+        "enforcement": "统计脚本按 map 聚合；报告须给出 map n 与 day 嵌套结构",
+        "id": "R7",
+        "reason": "G5 合同要求 map 为主要独立单位",
+        "rule": "同一底图换日/换求解 seed/换训练 seed 明确不计为独立地图；统计分析以图为 n，日与 seed 嵌套"
+      },
+      {
+        "enforcement": "注册文件 fixed no-replacement 字段 + 终局收据",
+        "id": "R8",
+        "reason": "40 图中 10 张锚点失败仍占额度（EXPOSURE_EXCLUSIONS 全 replacement_on_failure=false）",
+        "rule": "锚点失败不退款、不补图：失败的图保留在册并计入暴露，不允许 replacement_on_failure"
+      },
+      {
+        "enforcement": "PREREG.md + RESOURCE_LEDGER.jsonl + 输出硬限",
+        "id": "R9",
+        "reason": "D 包 12.046 GB 超限被 -9，且 2880+26880 评价键无 intent",
+        "rule": "新人口在跑任何质量/训练前必须登记：population_id、family 配额、图数、day 区间、天气条件哈希、作者尝试上限、CPU 核小时上限、输出字节上限"
+      },
+      {
+        "enforcement": "模型选择脚本只允许读新 VAL；旧图仅可作诊断并标注",
+        "id": "R10",
+        "reason": "本文件即排除清单",
+        "rule": "已暴露集合永久退出选模：40 新身份（16 opportunity + 24 calibration/validation）、120 官方图、620 发布实例、Stage A 96 图、joint/deep/B/D/WX 各包一律不得用于新 checkpoint 选择或规则选择"
+      }
+    ]
+  },
+  "next_bounded_work": [
+    "B1: 若要生成新人口，先写 PREREG.md 冻结 population_id（生成器版本+family 配额+约束+天气条件），family ≥3，day 区间避开 550100-995103 全部旧区间",
+    "B2: 从 <COMPUTE_HOST> 拉取 D 64 图与 B 44 图的逐图 identity+hash，补齐 gaps G2",
+    "B3: 对 620 发布实例做 canonical 化并与 12,131 排除表比对，补齐 G4",
+    "B4: 只做哈希重放（不求解）把 WX v5/v6 的 32+32 场景 geometry 哈希落盘，补齐 G5"
+  ],
+  "official_liu_maps": {
+    "allowed_future_use": "仅可作静态外部 benchmark / 回归对照，另注册为 EXPOSED_BENCHMARK，不得计入 Formal 分母",
+    "can_be_new_formal": false,
+    "can_be_new_formal_reason": [
+      "作者公开 benchmark，完整解与对照行均已见过，无 held-out 性",
+      "已做 1200 次配对运行与审计，后续调参必污染",
+      "静态图：无风、无 NFZ、无事件日，不构成 W 合同人口",
+      "只能作天气扩展外部 benchmark，不能登记为从未暴露的 Formal 新图"
+    ],
+    "families": [
+      {
+        "3_10": 10
+      },
+      {
+        "3_15": 10
+      },
+      {
+        "3_20": 10
+      },
+      {
+        "4_20": 10
+      },
+      {
+        "4_25": 10
+      },
+      {
+        "4_30": 10
+      },
+      {
+        "5_35": 10
+      },
+      {
+        "6_50": 10
+      },
+      {
+        "7_65": 10
+      },
+      {
+        "8_80": 10
+      },
+      {
+        "9_95": 10
+      },
+      {
+        "10_110": 10
+      }
+    ],
+    "fully_exposed": true,
+    "fully_exposed_basis": "120/120 图均已跑 P1+P2 × seed 0-4（COMPLETE maps=120 failures=0）并归档完整解；无未跑图",
+    "generator_version": "作者官方（未公开）；本项目生成器 constraint-reconstructed 2.0.0-engineering 不等价",
+    "id_list_count": 120,
+    "id_list_source_file": "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+    "id_list_source_schema": "exposed_instance_exclusion_manifest_v1",
+    "independent_cross_check": {
+      "failures": 0,
+      "method": "120 instance × 5 seed = 600 行；每行 input_sha256 与 manifest raw_sha256 一一相等",
+      "paired_runs": 1200,
+      "path": "reproduction/reviewer_package_semfix/results/semfix_full_P1/",
+      "profiles": [
+        "P1",
+        "P2"
+      ],
+      "rows": 600
+    },
+    "raw_instance_dir": "reproduction/reviewer_package_semfix/external/LRPHSD<EXECUTION_PATH>",
+    "unique_canonical_geometry_sha256": 120,
+    "unique_raw_sha256": 120,
+    "upstream_audit": "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+    "weather_event_day": null
+  },
+  "old_populations": [
+    {
+      "count": 120,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g23<EXECUTION_PATH>",
+        "reproduction/reviewer_package_semfix/SEMFiX_FULL_RESULTS.md",
+        "reproduction/reviewer_package_semfix/results/semfix_full_P1/",
+        "reproduction/reviewer_package_semfix/results/semfix_full_P2/"
+      ],
+      "exposure": "120 maps × 5 seeds(0-4) × 2 profiles(P1,P2) = 1200 配对运行；每 profile 600 行 + 600 完整解 witness",
+      "exposure_detail": {
+        "failures": 0,
+        "full_solutions_archived": true,
+        "maps": 120,
+        "mode": "作者官方 benchmark，全部已跑已看完整解",
+        "profiles": 2,
+        "runs": 1200,
+        "seeds": 5
+      },
+      "generator_version": "作者官方生成器（未公开源码/seed）；本项目 generator_v2=constraint-reconstructed 2.0.0-engineering，显式不等于作者生成器",
+      "id_prefix": "Instances_Alg/<sites>_<targets>_<1..10>.txt（12 families × 10）",
+      "seed_scheme": "求解 seed 0,1,2,3,4（非地图生成 seed）",
+      "source_package": "reproduction/reviewer_package_semfix + g23<EXECUTION_PATH> Liu 120 图）",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": null
+    },
+    {
+      "count": 6,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104/output/MATERIALIZATION.json",
+        "route_rl_research/20261103/return_makespan/STATE.json#weather_v2_development",
+        "route_rl_research/20261103/return_makespan/STATE.json#weather_v3_development"
+      ],
+      "exposure": "6 次作者尝试；opportunity_2/opportunity_4 承担 weather v2+v3 全部 RL 训练（9+9 runs）；opportunity_1/3、calibration_1 天气锚点不合格",
+      "exposure_detail": {
+        "anchor_failures": 3,
+        "author_attempts": 6,
+        "rl_runs_on_opportunity_2_4": 18
+      },
+      "generator_version": "2.0.0-engineering（ns windows-development-probe-20261104）",
+      "id_prefix": "opportunity_1..4 / calibration_1 / validation_1",
+      "seed_scheme": "per-map coordinate_seed_u64 = first8bytes(SHA256(ns|family|partition|ordinal|stream))",
+      "source_package": "g24_weather_nfz/linux_migration_20261104/<REMOVED_ENDPOINT>_bc_v3_execution_20261104",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "fixed-global-square-and-wind-v1（合成风 + 单一 NFZ，40 图同内容）"
+    },
+    {
+      "count": 4,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/calibration_four_execution_20261104/EXPOSURE_EXCLUSIONS.json",
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/calibration_four_execution_20261104/REGISTRATION.json"
+      ],
+      "exposure": "4 次作者尝试 + 16 条已交付非RL比较行（4 图 × strict/annealed × 6s/12s），独立审计 PASS",
+      "exposure_detail": {
+        "author_attempts": 4,
+        "elapsed_s": 116.88070962019265,
+        "improved_rows": 16,
+        "nonrl_rows": 16
+      },
+      "generator_version": "2.0.0-engineering（ns <COMPUTE_HOST>-calibration-only-four-20261104-v1:slot1..slot4）",
+      "id_prefix": "calibration_1..4",
+      "seed_scheme": "同上；用 :slotN 后缀在 ordinal 上限之外铸造 4 张图",
+      "source_package": "g24_weather_nfz/calibration_four_execution_20261104",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "fixed-global-square-and-wind-v1"
+    },
+    {
+      "count": 8,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/ordinary_pilot_execution_20261104/independent_audit/PILOT_EXPOSURE_EXCLUSIONS.json",
+        "route_rl_research/20261103/return_makespan/STATE.json#ordinary_rl_attribution_pilot"
+      ],
+      "exposure": "8 次作者尝试；0 次 VAL 调用（0 合格 VAL 锚点，48 VAL 行跳过）",
+      "exposure_detail": {
+        "anchor_failures": 3,
+        "author_attempts": 8,
+        "val_calls": 0,
+        "val_rows_skipped": 48
+      },
+      "generator_version": "2.0.0-engineering（ns <COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1）",
+      "id_prefix": "TRAIN_1..6 / VAL_1..2",
+      "seed_scheme": "同上",
+      "source_package": "g24_weather_nfz/ordinary_pilot_execution_20261104",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "fixed-global-square-and-wind-v1"
+    },
+    {
+      "count": 14,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/P3_fixed14_execution_20261104/independent_audit/PILOT_EXPOSURE_EXCLUSIONS.json",
+        "route_rl_research/20261103/return_makespan/STATE.json#P3_fixed_population"
+      ],
+      "exposure": "14 次作者尝试；0 次 VAL 调用（首个 common-BC gate 失败即停，192 VAL 行跳过）；checkpoint 仅诊断",
+      "exposure_detail": {
+        "anchor_failures": 2,
+        "author_attempts": 14,
+        "bc_gradient_steps": 1200,
+        "val_calls": 0,
+        "val_rows_skipped": 192
+      },
+      "generator_version": "2.0.0-engineering（ns <COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1）",
+      "id_prefix": "TRAIN_1..6 / VAL_1..8",
+      "seed_scheme": "同上",
+      "source_package": "g24_weather_nfz/P3_fixed14_execution_20261104",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "fixed-global-square-and-wind-v1"
+    },
+    {
+      "count": 8,
+      "evidence_path": [
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/status_reconciliation_g3_20261105/EXPOSURE_EXCLUSIONS_40.json",
+        "route_rl_research/20261103/return_makespan/g24_weather_nfz/status_reconciliation_g3_20261105/ROUND_DECISION.md"
+      ],
+      "exposure": "8 次作者尝试；60 次实际比较启动（第一批 40：27 交付/5 超时/8 导入失败；第二批 20）；47 按时交付；10 条可行改进 incumbent 被内层截止丢弃",
+      "exposure_detail": {
+        "anchor_ineligible_skipped": 20,
+        "author_attempts": 8,
+        "comparison_launches": 60,
+        "delivered": 47,
+        "discarded_incumbents": 10,
+        "import_failures": 8,
+        "timeouts": 5
+      },
+      "generator_version": "2.0.0-engineering（ns <COMPUTE_HOST>-g3-nonrl-calibration-20261105-v1:slot1..4 / <COMPUTE_HOST>-g3-nonrl-validation-20261105-v2:slot1..4）",
+      "id_prefix": "calibration_1..4（第一批）+ calibration_5..8（第二批）",
+      "seed_scheme": "同上",
+      "source_package": "g24_weather_nfz/g3_nonrl_calibration_20261105 + g3_nonrl_validation_20261105",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "fixed-global-square-and-wind-v1"
+    },
+    {
+      "count": 32,
+      "evidence_path": [
+        "joint_weather_emergency/20261105/server_snapshot<EXECUTION_PATH>",
+        "joint_weather_emergency/20261105/server_snapshot<EXECUTION_PATH>",
+        "route_rl_research/20261103/return_makespan/STATE.json#joint_weather_emergency_20261105"
+      ],
+      "exposure": "32 次作者尝试（全静态可行）+ 288 控制行 + 384 模型行 = 672 独立回放；3 RL seed(103/211/307)",
+      "exposure_detail": {
+        "author_attempts": 32,
+        "control_rows": 288,
+        "event_days": [
+          550100,
+          550101,
+          550102,
+          550103
+        ],
+        "model_rows": 384,
+        "replays": 672
+      },
+      "generator_version": "GitHub 重建包 rl_wind/rl_rt 既有实例（非本项目生成器）",
+      "id_prefix": "train0..23 = w5_35_0 … w8_80_23 ; dev0..7 = d5_35_1..4 + d6_50_1..4",
+      "seed_scheme": "作者求解 seed 20261105 + 事件日 id 550100-550103",
+      "source_package": "joint_weather_emergency/20261105",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "每 DEV 图 4 日：550100-550103（TRAIN 日基址未在本地注册文件给出）"
+    },
+    {
+      "count": 44,
+      "evidence_path": [
+        "joint_weather_emergency/20261105_deep_revision<EXECUTION_PATH>",
+        "joint_weather_emergency/20261105_deep_revision/EXPERIMENT_FREEZE.json"
+      ],
+      "exposure": "44 次作者尝试 + 9 训练 run / 768 optimizer steps / 960 训练轨迹 / 1184 评价；3 算法 × 3 seed",
+      "exposure_detail": {
+        "algorithms": [
+          "scst",
+          "loo",
+          "ddqn"
+        ],
+        "author_attempts": 44,
+        "eval_rows": 1184,
+        "optimizer_steps": 768,
+        "training_runs": 9
+      },
+      "generator_version": "GitHub 重建包 rl_wind/rl_rt 既有实例",
+      "id_prefix": "train0..31 = w*(source_ordinal 24-55) ; val0..3 = d7_65_1..4 ; dev0..7 = d8_80_1..4 + d10_110_1..4",
+      "seed_scheme": "seeds 103/211/307；train_day_base 880000、val 881000-881001、dev 882000-882003",
+      "source_package": "joint_weather_emergency/20261105_deep_revision",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "880000+ / 881000-881001 / 882000-882003"
+    },
+    {
+      "count": 44,
+      "evidence_path": [
+        "joint_weather_emergency/20261106_method_family_B/REGISTRATION_PLAN.json",
+        "joint_weather_emergency/20261106_method_family_B/results/EVALUATIONS.jsonl",
+        "joint_weather_emergency/20261106_github_multiobjective_check/REPORT.md"
+      ],
+      "exposure": "8256 意向行（8112 DONE / 144 TIMEOUT）；SELECT 12 图 × 4 日 = 48 map-day；13 方法；3 seed",
+      "exposure_detail": {
+        "done": 8112,
+        "intent_rows": 8256,
+        "methods": 13,
+        "select_days": [
+          972100,
+          972101,
+          972102,
+          972103
+        ],
+        "select_maps": 12,
+        "timeouts": 144
+      },
+      "generator_version": "constraint-reconstructed sequential proposal v2（同 2.0.0-engineering；family 4 组）",
+      "id_prefix": "TRAIN 24 / VAL 8 / SELECT 12（select0..select11）",
+      "seed_scheme": "ns joint_route_method_family_B_20261106_v1；train_day_base 970000、val 971100-971101、select 972100-972103",
+      "source_package": "joint_weather_emergency/20261106_method_family_B",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "970000 / 971100-971101 / 972100-972103"
+    },
+    {
+      "count": 64,
+      "evidence_path": [
+        "joint_weather_emergency/20261106_sufficient_training_D/DESIGN.json",
+        "joint_weather_emergency/20261106_sufficient_training_D/PRE_RECONCILE_20261106_055054/REGISTRATION_PLAN_DRAFT.json",
+        "joint_weather_emergency/20261106_server_recovery/D_TERMINAL_RECONCILIATION/RESULT.json"
+      ],
+      "exposure": "预登记 30 训练流，实际 12 完整审计 + 3 部分 + 9 未观察到目录；2880 VAL + 26880 SELECT 评价键终局无 intent；输出 12.046 GB 超 12 GB 被 -9 终止",
+      "exposure_detail": {
+        "select_intents": 26880,
+        "streams_full_audited": 12,
+        "terminal": "D_RESOURCE_TERMINATED_INCOMPLETE_RECONCILED",
+        "training_streams_planned": 30,
+        "val_intents": 2880
+      },
+      "generator_version": "constraint-reconstructed v2（family 4 组 [3,10],[3,15],[4,20],[4,30]；本地无逐图 generation.json）",
+      "id_prefix": "TRAIN 32 / VAL 8 / SELECT 24（scientific_maps=64）",
+      "seed_scheme": "train_day_base 991000、val 994100-994103、select 995100-995103；seed 103/211/307",
+      "source_package": "joint_weather_emergency/20261106_sufficient_training_D + 20261106_server_recovery",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "991000 / 994100-994103 / 995100-995103"
+    },
+    {
+      "count": 0,
+      "evidence_path": [
+        "joint_weather_emergency/20261112_wx_e/STATE.json",
+        "joint_weather_emergency/20261112_wx_e_v8/REPORT_V3_V8.md",
+        "joint_weather_emergency/20261112_wx_e_risk_v1/STATE.json",
+        "joint_weather_emergency/20261112_wx_c_spatial_diag_v3/STATE.json"
+      ],
+      "exposure": "见 wx_pilot_populations：12 组 seed 区间，合计 3,136 条评价行（64+128+7×256+512+2×320）；全部 CLOSE_*",
+      "exposure_detail": {
+        "all_closed": true,
+        "packages": 12
+      },
+      "generator_version": "各包自带 _scenario()（非 generator_v2；单站、固定 routine 任务，只有 emergency 任务几何随 seed 变）",
+      "id_prefix": "wx-e-<pkg>-<split>-<seed>-<clustered|uniform>；wx-c-v3-<mode>-<seed>",
+      "seed_scheme": "整数 seed 直接进 _scenario 的 RNG 基址（各版本基址不同）",
+      "source_package": "joint_weather_emergency/20261112_wx_e、_real、_forecast_v1、_v3..v8、_risk_v1、20261112_wx_c_spatial_diag_v3",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": "包内合成风轨（burst 后阵风），无独立事件日 id"
+    },
+    {
+      "count": 620,
+      "evidence_path": [
+        "audit/20261104_github_execution/server_evidence/INSTANCE_PROVENANCE.json"
+      ],
+      "exposure": "620 个实例文件逐一记录 sha256 + git sha1；与官方 120 图 raw sha256 交集 = 0",
+      "exposure_detail": {
+        "dev": 20,
+        "overlap_with_official_120": 0,
+        "train": 600
+      },
+      "generator_version": "GitHub 发布树自带实例（作者侧生成，版本未记录）",
+      "id_prefix": "rl_wind/instances/train/w<sites>_<targets>_<n>.txt（600）+ rl_rt/instances/dev/d<sites>_<targets>_<n>.txt（20）",
+      "seed_scheme": "文件名序号 + 源码 seed（逐文件生成 seed 本地未记录）",
+      "source_package": "GitHub 重建包 <EXECUTION_PATH> 快照）",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": null
+    },
+    {
+      "count": 96,
+      "evidence_path": [
+        "stage_a_audit/MODIFIED_FILE.md"
+      ],
+      "exposure": "720 评价任务（24 VAL 图 × 3 solver seed × 2 budget × 5 方法）；24 图独立回放、132 站点",
+      "exposure_detail": {
+        "replay_maps": 24,
+        "tasks": 720,
+        "train_maps": 72,
+        "val_maps": 24
+      },
+      "generator_version": "旧 Stage A 自有图族（非 generator_v2；版本未留 manifest）",
+      "id_prefix": "Stage A: 72 train maps（seeds 1-6）+ 24 validation maps（seeds 7-8）",
+      "seed_scheme": "图 seed 1-8；solver seed 101/102/103",
+      "source_package": "旧 Route-RL Stage A（2026-11-02）",
+      "usable_for_new_model_selection": false,
+      "weather_event_day": null
+    }
+  ],
+  "schema": "splits_and_exclusions_v1",
+  "scope": "从实际旧 manifest/结果文件汇总全部已暴露人口；不修改历史文件、不做科研计算",
+  "summary": {
+    "actual_comparisons": 126,
+    "author_attempt_cap": 48,
+    "author_attempts": 40,
+    "deep_revision_maps": 44,
+    "exclusion_registry_geometries": 12131,
+    "g24_calibration_validation": 24,
+    "g24_new_identities": 40,
+    "g24_opportunity": 16,
+    "joint_20261105_maps": 32,
+    "method_family_B_maps": 44,
+    "official_liu_maps": 120,
+    "published_repo_instances": 620,
+    "stage_a_maps": 96,
+    "sufficient_training_D_maps": 64,
+    "usable_for_new_model_selection": 0,
+    "wx_pilot_packages": 12
+  },
+  "takeover_20261112_g3_population": {
+    "anchor_not_eligible": [
+      {
+        "map": "4x20_o1",
+        "no_replacement": true,
+        "reason": "author recording slot-assignment swap at station index 2; Java latest-time 86.56491551657447 vs scorer 79.47485804779748 at identical cost"
+      }
+    ],
+    "anchors_eligible": 47,
+    "collision_checked": true,
+    "exclusion_record_count": 12131,
+    "may_be_used_for_formal": false,
+    "namespace": "takeover-20261112-g3-v1",
+    "notes": "Not a Formal population. All four opportunity ordinals for all 12 families are consumed by this package; no further maps may be drawn from this namespace.",
+    "partitions": {
+      "opportunity_ordinal_1": {
+        "count": 12,
+        "evidence": "results/g3_pop/population_index.json",
+        "role": "G3 development (analysed first)"
+      },
+      "opportunity_ordinal_2_3_4": {
+        "count": 36,
+        "evidence": "results/g3_confirm/PREREG_CONFIRM.json",
+        "role": "G3 confirmation, prereg written before generation"
+      }
+    },
+    "registered_at_local": "2026-11-12",
+    "registered_by": "20261112_takeover_completion",
+    "run_twice": [
+      {
+        "map": "3x10_o1",
+        "note": "07:58Z smoke run and 07:59Z population run, same seed, identical output"
+      }
+    ],
+    "total_allocated": 48
+  },
+  "workspace": "<LOCAL_PATH>",
+  "wx_pilot_populations": [
+    {
+      "eval_range": "100-103",
+      "evidence": "joint_weather_emergency/20261112_wx_e/STATE.json#toy_pilot_status",
+      "package": "20261112_wx_e（toy，作废）",
+      "rows": null,
+      "status": "INVALIDATED_ENGINEERING_ONLY",
+      "train_range": null
+    },
+    {
+      "eval_range": "0-3",
+      "evidence": "joint_weather_emergency/20261112_wx_e/REPORT.md",
+      "package": "20261112_wx_e（real scientific pilot）",
+      "rows": 64,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": null
+    },
+    {
+      "eval_range": "300-307",
+      "evidence": "joint_weather_emergency/20261112_wx_e_real/wx_e_real_driver.py:342-344",
+      "package": "20261112_wx_e_real（v2）",
+      "rows": 128,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "200-203"
+    },
+    {
+      "eval_range": "1100-1115",
+      "evidence": "joint_weather_emergency/20261112_wx_e_forecast_v1/wx_e_forecast_driver.py:474-475",
+      "package": "20261112_wx_e_forecast_v1",
+      "rows": 256,
+      "status": "PILOT_CLOSED_NEGATIVE",
+      "train_range": "1200-1211"
+    },
+    {
+      "eval_range": "300-315",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v3/wx_e_v3_driver.py:424-425",
+      "package": "20261112_wx_e_v3",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "100-111"
+    },
+    {
+      "eval_range": "400-415",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v4/wx_e_v4_driver.py:426-427",
+      "package": "20261112_wx_e_v4",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "500-511"
+    },
+    {
+      "eval_range": "600-615",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v5/wx_e_v5_driver.py:426-427",
+      "package": "20261112_wx_e_v5",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "700-711"
+    },
+    {
+      "duplicate_of": "20261112_wx_e_v5",
+      "eval_range": "600-615",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v6/wx_e_v6_driver.py:426-427",
+      "package": "20261112_wx_e_v6",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "700-711"
+    },
+    {
+      "eval_range": "900-915",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v7/wx_e_v7_driver.py:443-444",
+      "package": "20261112_wx_e_v7",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "1000-1011"
+    },
+    {
+      "eval_range": "1100-1115",
+      "evidence": "joint_weather_emergency/20261112_wx_e_v8/wx_e_v8_driver.py:444-445",
+      "note": "与 forecast_v1 同 seed 数字但 RNG 基址/场景体不同，不是同一图",
+      "package": "20261112_wx_e_v8",
+      "rows": 256,
+      "status": "CLOSE_NO_FULL_RUN",
+      "train_range": "1200-1211"
+    },
+    {
+      "eval_range": "3100-3131",
+      "evidence": "joint_weather_emergency/20261112_wx_e_risk_v1/wx_e_risk_driver.py:484-489",
+      "package": "20261112_wx_e_risk_v1",
+      "rows": 512,
+      "status": "PILOT_CLOSED_NEGATIVE",
+      "train_range": "2000-2063"
+    },
+    {
+      "eval_range": "clustered 4200-4231 / uniform 5200-5231",
+      "evidence": "joint_weather_emergency/20261112_wx_c_spatial_diag_v3/STATE.json#fresh_identities",
+      "package": "20261112_wx_c_spatial_diag_v3",
+      "rows": 640,
+      "status": "CLOSE_WX_C_CANDIDATE",
+      "train_range": null
+    }
+  ]
+}

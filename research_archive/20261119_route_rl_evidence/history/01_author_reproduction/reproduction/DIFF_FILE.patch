@@ -1,0 +1,34 @@
+--- reproduction/BASELINE.md	2026-11-02 12:51:47
++++ reproduction/MODIFIED_FILE.md	2026-11-02 12:53:20
+@@ -37,3 +37,31 @@
+ ## Known source discrepancies and novelty implication
+ 
+ The released `Main.java` uses 100 location-local iterations and `ALNSSolver.java` caps weights at 5.0, whereas Table A1 gives 500 and 0.5. Raw Java can place SABS work in both route storage slots; its own feasibility check treats both as SD, while the paper permits one SD. J0 therefore requires independent feasibility auditing. J1/J2 inserted a pre-ALNS guard that can discard locally perturbed but repairable candidates; J1b/J2b remove that extra check but retain final feasibility filters. On a three-map seed-0 diagnostic, the J2 pre-ALNS guard rejected 135, 222 and 199 outer candidates, respectively; on `5_35_1`, no candidate reached ALNS and the result stayed at the Greedy cost. J2's large systematic gap versus P2 is therefore not a valid reproduction comparison. Official `RoutingOperator.java` repair methods iterate all opened stations and drones; the CA branch's `global_assignment` receiver mask is not novel solely by widening this scope. The paper-vs-code and Java-vs-port distinctions remain visible in every table.
++
++## Executed full-matrix audit, 2026-11-02
++
++The seven profiles each completed 120 official maps x five seeds (0-4) x 500 outer iterations: 4,200 result rows. The remote root is `<EXECUTION_PATH>`; the local transferred summaries and all seven manifests are in `remote_audit/`. The transferred summary archive SHA256 is `0a9faa3d646d6aff8512dc36e6ecbb6a32c717161f10a998f1230fdc3c65ca6d`. The full raw rows, compressed complete solutions and Java reference outputs remain in the remote `results/full_{profile}/` directories pending offline package transfer. Both audit scripts re-opened every available solution and input, checked source/runner/binary hashes, recomputed objective and feasibility, and returned zero audit errors. A zero audit error is not the same as a zero infeasible run.
++
++| Profile | Runs | Independently feasible | Invalid | Role |
++|---|---:|---:|---:|---|
++| J0 | 600 | 142 | 458 | Instrumented released-code semantics; not a valid feasible-cost reference. |
++| J1 | 600 | 600 | 0 | Historical code-parameter guard diagnostic; extra pre-ALNS guard. |
++| J2 | 600 | 600 | 0 | Historical Table A1 guard diagnostic; extra pre-ALNS guard. |
++| J1b | 600 | 600 | 0 | Correct guard position, Java-code parameter comparator. |
++| J2b | 600 | 600 | 0 | Correct guard position, Table A1 comparator. |
++| P1 | 600 | 600 | 0 | Feasible Python/native port, Java-code parameters. |
++| P2 | 600 | 600 | 0 | Feasible Python/native port, Table A1 parameters. |
++
++J0's 458 invalid complete outputs include 1,373 occurrences of `large_drone_at_small_station` and four `coverage` occurrences; these are issue counts, not distinct-run counts. The valid-only J0 mean is selection-biased and must not be compared as an all-run algorithm result. The 120-map official Java versus Python Greedy differential reports 120/120 exact complete initial routes, with no failures. Ten `3_10` instances also have independent exact-DP objective certificates. The evaluator mutation contract previously rejected five deliberate invalid solution types; the expanded local contract now rejects seven, adding coverage-radius and cumulative-duty violations. Its local command and result are recorded in `VERIFICATION.txt`.
++
++For the correct Java/Python pairing, the signed metric is `100*(Java cost - Python cost)/Java cost`; positive favors Python. J1b versus P1 has 600 paired runs on 120 maps, map-mean difference **-0.028411%**, map-bootstrap 95% interval **[-0.071134%, +0.011721%]**. J2b versus P2 has 600 paired runs on 120 maps, difference **+0.099758%**, interval **[+0.025536%, +0.177271%]**. J1/J2 versus P1/P2 instead give +1.487753% and +4.913955%, primarily because the historical extra pre-ALNS guard changes search; they are not faithful-port gaps. The final routes are not claimed to be identical: exact Greedy agreement and close final-cost distributions do not establish shared stochastic trajectories or identical operator semantics.
++
++Against Liu Table 1's rounded, author-seed-unknown group averages, the mean of 12 equally weighted group percentage gaps is J1b **+0.295977%**, J2b **+0.596687%**, P1 **+0.323337%**, and P2 **+0.490906%** (positive means our run cost is higher). The paper-parameter J2b group gap reaches +1.468650% at `8_80`, +1.459654% at `9_95`, and +1.032313% at `10_110`; P2 also has +1.029177% and +1.085952% at `8_80` and `9_95`. These are modest but size-correlated paper-versus-reproduced-code differences. Unknown author seeds, release-versus-paper parameter differences and residual stochastic-order differences are candidate explanations, not proved attributions. The current evidence supports a close, feasible *parameter-profile and result-distribution reproduction*, not exact paper-number or byte-level trajectory reproduction.
++
++### Remaining closure items before a publication-grade baseline claim
++
++1. Retain the complete offline audit package with all 4,200 raw rows and complete solutions, seven run manifests, 120 inputs, pinned official source and variant patches/build manifests, native source/binary hash, exact certificates, commands, environment and audit scripts. Verify the package hash after transfer and run the audit from the unpacked copy. Summary JSON alone is insufficient for an external reviewer to independently re-evaluate every witness.
++2. Document the first post-Greedy semantic divergence in controlled microinstances for location, routing and each destroy/repair operator. The remaining small Java/Python final-cost gap may be accepted as stochastic, but the cause of the larger-group trend must be bounded by an explicit operator-order/random-stream analysis, rather than silently attributed to RNG.
++3. Separate the published Table 1 values from the reproducible released-code baseline in every manuscript table. Report the per-group gaps, all J0 invalid runs, elapsed-time distribution and hardware/JDK/native toolchain. Do not compare fixed-iteration profiles to later 6/12-second research budgets as if they were equal-time runs.
++
++The engineering gate is **conditional pass for using J1b/J2b and P1/P2 as versioned, independently feasible research baselines**, because the model/constraint audit and full paired matrix passed. The stronger claim that Liu's printed Table 1 has been completely explained remains **open**; the size trend and author-run provenance must stay in the discrepancy ledger. `Global Assignment` novelty and any CA-RL superiority are separate questions and are not established by this reproduction.

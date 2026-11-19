@@ -1,0 +1,142 @@
+--- a/lrphsd/fidelity_ops_v5.py
++++ b/lrphsd/fidelity_ops_v5.py
+@@ -379,7 +379,7 @@
+     return candidate
+ 
+ 
+-def covered_drones(ins, sol, nid, require_routes=False):
++def covered_drones(ins, sol, nid, require_routes=False, allow_empty_station=False):
+     dist = DIST
+     rad = RAD
+     stid = STID
+@@ -390,9 +390,9 @@
+         if not kind or dist[stid[si], nid] > rad[kind]:
+             continue
+         # Init represents an open station with no assigned targets by zero
+-        # drone entries. JSON padding must not create insertion opportunities.
++        # drone entries. Only source operators 2/3 enumerate empty receivers.
+         station = routes[si]
+-        if not any(station):
++        if not any(station) and not allow_empty_station:
+             continue
+         c = cap[kind]
+         limit = lim[kind]
+@@ -447,7 +447,8 @@
+             # Actual code prioritizes first empty storage drone, NOT emptiest
+             # station and NOT load-balance score on existing insertion.
+             newpath = None
+-            for si, di, trips, cap, limit in covered_drones(ins, candidate, nid):
++            for si, di, trips, cap, limit in covered_drones(
++                    ins, candidate, nid, allow_empty_station=True):
+                 if not trips and _path_energy(ins, si, [nid], True) <= cap and _path_time(ins, si, [nid]) <= limit:
+                     newpath = (si, di, 0, 0)
+                     break
+@@ -461,7 +462,9 @@
+             # ascending delta order therefore reproduces the same decision
+             # while evaluating route statistics only for candidates that can
+             # still improve the running minimum.
+-            pairs = list(covered_drones(ins, candidate, nid, require_routes=which in (0, 1)))
++            pairs = list(covered_drones(
++                ins, candidate, nid, require_routes=which in (0, 1),
++                allow_empty_station=which == 3))
+             best = None
+             newpath = None
+             min_delta = math.inf
+@@ -527,7 +530,9 @@
+             else:
+                 mincost = math.inf
+                 newpath = None
+-                for si, di, trips, cap, limit in covered_drones(ins, candidate, nid, require_routes=False):
++                for si, di, trips, cap, limit in covered_drones(
++                        ins, candidate, nid, require_routes=False,
++                        allow_empty_station=which in (2, 3)):
+                     single = _path_time(ins, si, [nid])
+                     cost = single * time_cost
+                     if _path_energy(ins, si, [nid], True) > cap:
+@@ -548,7 +553,9 @@
+         newpath = None
+         bestscore = -math.inf
+         min_delta = math.inf
+-        for si, di, trips, cap, limit in covered_drones(ins, candidate, nid, require_routes=which in (0, 1)):
++        for si, di, trips, cap, limit in covered_drones(
++                ins, candidate, nid, require_routes=which in (0, 1),
++                allow_empty_station=which in (2, 3)):
+             found = False
+             total = 0.0
+             for t in trips:
+@@ -588,7 +595,9 @@
+             continue
+         if which in (1, 3):
+             mincost = math.inf
+-            for si, di, trips, cap, limit in covered_drones(ins, candidate, nid, require_routes=which == 1):
++            for si, di, trips, cap, limit in covered_drones(
++                    ins, candidate, nid, require_routes=which == 1,
++                    allow_empty_station=which == 3):
+                 single = _path_time(ins, si, [nid])
+                 cost = single * time_cost
+                 if _path_energy(ins, si, [nid], True) > cap:
+--- a/native/r6_kernel.c
++++ b/native/r6_kernel.c
+@@ -742,14 +742,15 @@
+     else d_insert(d, ti, pos, nid);
+ }
+ 
+-static int covered_pairs(Sol *o, int nid, int require_routes, int *out_si, int *out_di) {
++static int covered_pairs(Sol *o, int nid, int require_routes, int allow_empty_station,
++                         int *out_si, int *out_di) {
+     int s, di, n = 0, ti = TIDX[nid];
+     for (s = 0; s < NST; s++) {
+         int kind = o->st[s].kind, any = 0;
+         if (!kind) continue;
+         if (!COVER[(size_t)kind * NST * NT + (size_t)s * NT + ti]) continue;
+         for (di = 0; di < MAXDR; di++) if (o->st[s].d[di].ntrips) { any = 1; break; }
+-        if (!any) continue;
++        if (!any && !allow_empty_station) continue;
+         for (di = 0; di < MAXDR; di++) {
+             if (require_routes && !o->st[s].d[di].ntrips) continue;
+             out_si[n] = s; out_di[n] = di; n++;
+@@ -776,7 +777,7 @@
+         int newpath_si = -1, newpath_di = -1, newpath_ti = -1;
+         double bestscore = -INFINITY, min_delta = INFINITY;
+         if (op == 3) {
+-            np = covered_pairs(o, nid, 0, ps, pd);
++            np = covered_pairs(o, nid, 0, 1, ps, pd);
+             for (i = 0; i < np; i++) {
+                 Drone *d = &o->st[ps[i]].d[pd[i]];
+                 int kind = o->st[ps[i]].kind;
+@@ -789,7 +790,7 @@
+             if (newpath_si >= 0) { apply_option(o, nid, newpath_si, newpath_di, 0, 0); continue; }
+         }
+         if (op != 2) {
+-            np = covered_pairs(o, nid, (op == 0 || op == 1), ps, pd);
++            np = covered_pairs(o, nid, (op == 0 || op == 1), op == 3, ps, pd);
+             for (i = 0; i < np; i++) {
+                 int si = ps[i], dj = pd[i], t, m = 0, chosen = 0, total_done = 0;
+                 Drone *d = &o->st[si].d[dj];
+@@ -841,7 +842,7 @@
+             if (op == 1) {
+                 double mincost = INFINITY;
+                 int found_si = -1, found_di = -1;
+-                np = covered_pairs(o, nid, 1, ps, pd);
++                np = covered_pairs(o, nid, 1, 0, ps, pd);
+                 for (i = 0; i < np; i++) {
+                     int si = ps[i], dj = pd[i], kind = o->st[si].kind;
+                     double single = path_time(si, &nid, 1), cost = single * TCOST;
+@@ -852,7 +853,7 @@
+             } else {
+                 double mincost = INFINITY;
+                 int found_si = -1, found_di = -1;
+-                np = covered_pairs(o, nid, 0, ps, pd);
++                np = covered_pairs(o, nid, 0, op == 3, ps, pd);
+                 for (i = 0; i < np; i++) {
+                     int si = ps[i], dj = pd[i], kind = o->st[si].kind, z;
+                     double single = path_time(si, &nid, 1), cost = single * TCOST, total = 0.0;
+@@ -868,7 +869,7 @@
+             continue;
+         }
+         /* op == 2 */
+-        np = covered_pairs(o, nid, 0, ps, pd);
++        np = covered_pairs(o, nid, 0, 1, ps, pd);
+         for (i = 0; i < np; i++) {
+             int si = ps[i], dj = pd[i], t, p;
+             Drone *d = &o->st[si].d[dj];

@@ -1,0 +1,79 @@
+{
+  "schema": "fixed_wind_grid_screen_v1",
+  "date_local": "2026-11-14",
+  "status": "ENGINEERING_GRID_PASS_G0_G3_UNPASSED",
+  "changed_field": "EXPERIMENT_MATRIX_DRAFT.md.fixed_wind_scenario_protocol",
+  "scope": {
+    "wind_model": "uniform steady wind with fixed airspeed and track holding",
+    "energy_model": "flight_time * flight_energy + static target service energy",
+    "emergency_tasks": false,
+    "variable_wind": false,
+    "nfz": false,
+    "scientific_maps": 0,
+    "author_solves": 0,
+    "alns_solves": 0,
+    "training_runs": 0,
+    "formal_runs": 0
+  },
+  "grid": {
+    "speed_levels_mps": [
+      0,
+      2,
+      4,
+      6,
+      8
+    ],
+    "nonzero_flow_to_directions": {
+      "E": [
+        1,
+        0
+      ],
+      "N": [
+        0,
+        1
+      ],
+      "W": [
+        -1,
+        0
+      ],
+      "S": [
+        0,
+        -1
+      ]
+    },
+    "distinct_fields_per_map": 17,
+    "author_airspeed_m_min": 900,
+    "maximum_wind_to_airspeed_ratio": 0.5333333333333333,
+    "aggregation": "equal directions within each nonzero speed, then equal weight over the five speed levels; calm field counted once"
+  },
+  "results": {
+    "existing_constant_wind_tests": "24/24 PASS",
+    "grid_fields": "17/17 PASS",
+    "max_closed_metric_identity_error_min": 8.881784197001252e-16,
+    "max_route_reversal_error_min": 1.7763568394002505e-15,
+    "rollback_copy_matches_baseline": true
+  },
+  "gates": {
+    "G0": "NOT_PASSED",
+    "G3": "NOT_PASSED",
+    "scientific_quality_evidence": false,
+    "rl_advantage_evidence": false,
+    "Formal_admitted": false
+  },
+  "resource_reconciliation": {
+    "author_attempts_used": 40,
+    "author_attempts_cap": 48,
+    "calibration_validation_used": 24,
+    "calibration_validation_cap": 24,
+    "scientific_core_hours_spent": 0,
+    "scientific_maps_created": 0
+  },
+  "next_bounded_work": "Complete a G0-approved physical route mechanism and a separately frozen G3 resource/protocol amendment before any scientific wind-sweep evaluation; then use the fixed 17-field paired design, including every failure and all retained strong baselines.",
+  "user_decision_needed": false,
+  "artifacts": {
+    "modified_file": "MODIFIED_FILE/EXPERIMENT_MATRIX_DRAFT.md",
+    "diff_file": "DIFF_FILE.patch",
+    "verification": "VERIFICATION.txt",
+    "rollback": "ROLLBACK.sh"
+  }
+}

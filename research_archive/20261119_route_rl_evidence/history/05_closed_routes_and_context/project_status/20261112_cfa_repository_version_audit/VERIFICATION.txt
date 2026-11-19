@@ -1,0 +1,61 @@
+DOCUMENT TRANSACTION ONLY: existing-source and document integrity; no research code imported or scientific runs.
+Changed fields: LATEST_STATUS.md source-audit evidence prefix; previous content retained as exact suffix.
+Package STATE.status = SOURCE_QUALIFICATION_COMPLETE_GATES_UNCHANGED; g0_decision unchanged.
+G0 NO-GO; G3/G4 NOT PASSED; project incomplete. Canonical scientific STATE files unchanged.
+CWD: <LOCAL_PATH>
+MODIFIED_FILE: <LOCAL_PATH>
+DIFF_FILE: <LOCAL_PATH>
+VERIFICATION: <LOCAL_PATH>
+ROLLBACK: <LOCAL_PATH>
+BASELINE SHA256: 4cca3afb1f0ca1ae11b33874582b93b0f669a59c170f339961bad5a65d10c076
+MODIFIED SHA256: fadbee51bf0dafa88d9985267b51fad45cf7dc2d0a5b2701c8251cf9e389fc04
+
+BASELINE
+COMMAND: ./CHECK.py baseline
+INPUT: ORIGINALS/LATEST_STATUS.md; live baseline; immutable source/analysis and protected history/PDF/state hashes
+STDIN: <empty>
+STDOUT_LITERAL: "BASELINE PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+WALL_SECONDS: 0.8588589160062838
+
+MODIFIED
+COMMAND: ./CHECK.py modified
+INPUT: MODIFIED_FILE.md and updated live LATEST_STATUS.md; exact suffix/diff; source/record/gate integrity
+STDIN: <empty>
+STDOUT_LITERAL: "MODIFIED PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+WALL_SECONDS: 0.07327987501048483
+
+ROLLBACK
+COMMAND: ./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md
+INPUT: ROLLBACK_COPY/LATEST_STATUS.md initially copied from MODIFIED_FILE.md; ORIGINALS baseline bytes
+STDIN: <empty>
+STDOUT_LITERAL: "ROLLBACK PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+WALL_SECONDS: 0.36277825001161546
+
+ROLLBACK_VERIFY
+COMMAND: ./CHECK.py rollback
+INPUT: restored isolated copy versus ORIGINALS; live/MODIFIED_FILE remain changed; protected sources unchanged
+STDIN: <empty>
+STDOUT_LITERAL: "ROLLBACK VERIFY PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+WALL_SECONDS: 0.07181324998964556
+
+FINAL
+COMMAND: ./CHECK.py final
+INPUT: four artifacts; executable rollback; JSON/source/record invariants; gates and canonical science state hashes
+STDIN: <empty>
+STDOUT_LITERAL: "FINAL DOCUMENT CHECK PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+WALL_SECONDS: 0.07143949999590404
+
+RESTORED STATUS: isolated copy exactly matches ORIGINALS/LATEST_STATUS.md; prior information-penalty closure prefix restored.
+RESTORED SHA256: 4cca3afb1f0ca1ae11b33874582b93b0f669a59c170f339961bad5a65d10c076
+LIVE STATUS: source-audit prefix retained; MODIFIED_FILE.md remains changed.
+RESTORED BEHAVIOR: documentation restored on isolated copy only; scientific behavior was not run or changed.

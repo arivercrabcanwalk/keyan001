@@ -1,0 +1,208 @@
+{
+  "exclusion_record_count": 12131,
+  "exclusion_sources": [
+    {
+      "path": "<EXECUTION_PATH>",
+      "record_count": 12120,
+      "schema": "permanent_exposed_and_pilot_geometry_exclusion_manifest_v1",
+      "sha256": "90ea8233bbe281adc978af0c421ec6a0962346877125dbe21d7382015f8862d6"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "record_count": 1,
+      "schema": "supplemental_synthetic_engineering_exclusion_v1",
+      "sha256": "6e62b16158f9332d782068390889034899a80a4a46363e4f6c862eae8c60ace2"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "record_count": 4,
+      "schema": "sequential_v2_synthetic_engineering_exclusion_v1",
+      "sha256": "623be2a46ee20e93d0997cba4903e8eba7df35ef352af5338646143440beae63"
+    },
+    {
+      "path": "<EXECUTION_PATH>",
+      "record_count": 6,
+      "schema": "sequential_v2_exposed_windows_development_exclusion_v1",
+      "sha256": "8d78dfd793557645f8410aac4d6034c39683f991c67375bd0bbc949acae44161"
+    }
+  ],
+  "generator_protocol": "constraint-reconstructed-sequential-conditional-uniform-proposal",
+  "generator_version": "2.0.0-engineering",
+  "maps": [
+    {
+      "accepted_sites": 3,
+      "accepted_targets": 10,
+      "allocation": null,
+      "canonical_geometry_sha256": "fa0a03295bd339c1697799f7866fdb7063e4c40d27c79259513d9e1811ada6ea",
+      "name": "3x10_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "f32c450b27fe556d1fc52bf297ec9c0503f5c3e68506a91456872ee7a0d47243",
+      "side_m": null,
+      "sites": 3,
+      "status": "generated",
+      "targets": 10
+    },
+    {
+      "accepted_sites": 3,
+      "accepted_targets": 15,
+      "allocation": null,
+      "canonical_geometry_sha256": "5d21665d24ca480b777e129ab243ad4fbce6686bc073ae415c79780b5ba16a9b",
+      "name": "3x15_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "bc3f9d54661809cf1e5f50b7ad562a2a9f566df74b8f24d49fd48d81df958b7b",
+      "side_m": null,
+      "sites": 3,
+      "status": "generated",
+      "targets": 15
+    },
+    {
+      "accepted_sites": 3,
+      "accepted_targets": 20,
+      "allocation": null,
+      "canonical_geometry_sha256": "31df13416caf2f982a3b2146a6a96053b2aa7b12eac2ce76434ad612757cdb74",
+      "name": "3x20_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "38bd5346b59b8be8fb21c8bee2d038ca085b96b7cd1da883232da465423d6651",
+      "side_m": null,
+      "sites": 3,
+      "status": "generated",
+      "targets": 20
+    },
+    {
+      "accepted_sites": 4,
+      "accepted_targets": 20,
+      "allocation": null,
+      "canonical_geometry_sha256": "ab9878335685790df978f7c24bda30e09e0684039af72c87059b4d06c3d9a370",
+      "name": "4x20_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "4c1dad25ecc2be3c0034f0fdf9739babc012254abbd745ea063f8637ce1f8781",
+      "side_m": null,
+      "sites": 4,
+      "status": "generated",
+      "targets": 20
+    },
+    {
+      "accepted_sites": 4,
+      "accepted_targets": 25,
+      "allocation": null,
+      "canonical_geometry_sha256": "a20c5362c7c57bb9b0dbaa3eb226710a19e06408ef3f5dbfef480273af15bd1a",
+      "name": "4x25_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "e173dab64634fd8788e7f7ca8a85c8cb8fd144444dba82f55cfd31eabe8246d1",
+      "side_m": null,
+      "sites": 4,
+      "status": "generated",
+      "targets": 25
+    },
+    {
+      "accepted_sites": 4,
+      "accepted_targets": 30,
+      "allocation": null,
+      "canonical_geometry_sha256": "9b05c3bae01f0b85e849b3e0d11cfd10cb50bfa4fba08df0148139898ddcfd5b",
+      "name": "4x30_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "1a3b3534815b284173ece990b02afbdaeac4947f3665221e5928ade1561ae0ad",
+      "side_m": null,
+      "sites": 4,
+      "status": "generated",
+      "targets": 30
+    },
+    {
+      "accepted_sites": 5,
+      "accepted_targets": 35,
+      "allocation": null,
+      "canonical_geometry_sha256": "e1d31d561facd87678dd59d7c29c7872ca68bb3ee8d658d6017ddc2c89c8dbdf",
+      "name": "5x35_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "938f793dfd908b3b793f0ee7c7986bab3e0d9f25a2dbfe56eff4e8054211eb2c",
+      "side_m": null,
+      "sites": 5,
+      "status": "generated",
+      "targets": 35
+    },
+    {
+      "accepted_sites": 6,
+      "accepted_targets": 50,
+      "allocation": null,
+      "canonical_geometry_sha256": "e43e8502d11b46f4a21f9e866b1b988a2a2d9f7e04678945a1ecc77c77a220a4",
+      "name": "6x50_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "67a83103d5158dfc3a3fafce23e441d3e532c9c678ae8d4268272fbbb46189b0",
+      "side_m": null,
+      "sites": 6,
+      "status": "generated",
+      "targets": 50
+    },
+    {
+      "accepted_sites": 7,
+      "accepted_targets": 65,
+      "allocation": null,
+      "canonical_geometry_sha256": "900b546b363a72c4ea03b4deeb31fa9245588319fcaddcbdb558426ba703167d",
+      "name": "7x65_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "01f30896c4d8ec0734cf1d42434cfbcaafd1f1a7fa83a0f3a035a3884dc137ad",
+      "side_m": null,
+      "sites": 7,
+      "status": "generated",
+      "targets": 65
+    },
+    {
+      "accepted_sites": 8,
+      "accepted_targets": 80,
+      "allocation": null,
+      "canonical_geometry_sha256": "03b23e6f7722adedbc41ada06205189cdb717b59515875f21bfaea3d4f6b103a",
+      "name": "8x80_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "daf0afc82dd1b96565c9bc4c74e8bd5077b550c9245d6fe65096dc9e6d83c16c",
+      "side_m": null,
+      "sites": 8,
+      "status": "generated",
+      "targets": 80
+    },
+    {
+      "accepted_sites": 9,
+      "accepted_targets": 95,
+      "allocation": null,
+      "canonical_geometry_sha256": "f7bb9c19deb6fafb8b53b31e5defb586697a1bdac937db1589a9d6d8ac36ea23",
+      "name": "9x95_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "e0ae8575009433bbdaf42256c7809948c54d54f17259cf22fd859c5335cc3679",
+      "side_m": null,
+      "sites": 9,
+      "status": "generated",
+      "targets": 95
+    },
+    {
+      "accepted_sites": 10,
+      "accepted_targets": 110,
+      "allocation": null,
+      "canonical_geometry_sha256": "4501db540ab34244bc0d67508008aa19a79f929fff920e25d214faea3aecc319",
+      "name": "10x110_o1",
+      "ordinal": 1,
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "920bee0182957d36b99ef9944f75b8ec4b69666f6981d9eb8e21b975304eda34",
+      "side_m": null,
+      "sites": 10,
+      "status": "generated",
+      "targets": 110
+    }
+  ],
+  "namespace": "takeover-20261112-g3-v1",
+  "partition": "opportunity",
+  "rng": {
+    "name": "SplitMix64",
+    "version": "2015-02-16-reference-variant-v1"
+  },
+  "schema": "takeover_g3_population_v1"
+}

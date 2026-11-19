@@ -1,0 +1,33 @@
+{
+  "schema": "partial-label-profiles-close-v1",
+  "written_utc": "2026-11-13T02:19:56.072728+00:00",
+  "executor": "root only",
+  "research_host": "<COMPUTE_HOST>",
+  "candidate": "PARTIAL_LABEL_PROFILES_V1",
+  "engineering_correctness": "PASS_BOUNDED",
+  "acceleration": "FAIL_CURRENT_IMPLEMENTATION_CLOSED",
+  "gate_G0": "NOT_PASSED",
+  "gate_G3": "NOT_PASSED",
+  "overall_research_complete": false,
+  "G8_complete": false,
+  "scientific_training_runs": 0,
+  "scientific_maps": 0,
+  "Formal_runs": 0,
+  "subagents": 0,
+  "engineering_main_fixtures": 4,
+  "queries": 168,
+  "oracle_queries": 60,
+  "unique_witnesses_replayed": 91,
+  "complete_phase_wall_ratio": 1.8337595907344209,
+  "source_error_repair_rounds_used": 1,
+  "input_sha256": "61a4c59a4425db2c2f2ba78d2ac7d40f318ddea0ad8a58053a261bdee8b1e8d3",
+  "protected_states_sha256": {
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9",
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e"
+  },
+  "A_user_approved": true,
+  "user_decision_needed": false,
+  "next_bounded_work": "derive and compare true-prefix-conditioned query resource compression; no speed tuning on exposed four fixtures; see NEXT_MECHANISM_DERIVATION.md",
+  "goal_tool_observed_status": "blocked",
+  "goal_tool_status_changed_by_this_package": false
+}

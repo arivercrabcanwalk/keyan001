@@ -1,0 +1,67 @@
+{
+  "changed_branch_or_field": "baselines/minmax_alns.py::attempt, elif mk > cur_mk + 1e-12 with unchanged global M: ok=False -> ok=total < cur_tot - 1e-12",
+  "counts": {
+    "author_solves": 0,
+    "bounded_module_calls": 5,
+    "checkpoints": 0,
+    "child_cpu_s": 0.9014939999999999,
+    "formal_maps": 0,
+    "modified_files": 43,
+    "nonzero_exit_module_calls": 0,
+    "original_files": 43,
+    "scientific_maps": 0,
+    "training_calls": 0
+  },
+  "current_sequence": "CONSTANT_WIND_FIRST_EMERGENCY_LATER",
+  "execution_host": "<COMPUTE_HOST>",
+  "gates": {
+    "G0": {
+      "candidate": "CAP_CONDITIONED_ROUTE_CREDIT_V1",
+      "candidate_decision": "CLOSE_STANDARD_CONDITIONAL_SCORE_COVARIANCE_LOO",
+      "nonRL_fix_is_distinct_RL_innovation": false,
+      "status": "NOT_PASSED"
+    },
+    "G1": {
+      "full_dynamic_WX_qualified": false,
+      "status": "LIMITED_SYNTHETIC_ENGINEERING_ONLY"
+    },
+    "G2": {
+      "status": "HANDWRITTEN_COST_COUPLING_WITNESS_ONLY_NO_SCIENTIFIC_POPULATION"
+    },
+    "G3": {
+      "status": "NOT_PASSED",
+      "strong_nonRL_bug_fixed_in_separate_package": true,
+      "whole_map_6s12s_and_population_comparison": "NOT_EXECUTED",
+      "wind_feasible_shared_author_anchor_scientific_contract": "NOT_YET_QUALIFIED"
+    },
+    "G4": {
+      "status": "NO_NEW_TRAINING"
+    },
+    "G5": {
+      "status": "NO_NEW_FORMAL"
+    },
+    "G6": {
+      "status": "NO_SCIENTIFIC_ABLATION"
+    },
+    "G7": {
+      "status": "NO_POSITIVE_MANUSCRIPT"
+    },
+    "G8": {
+      "status": "RESEARCH_INCOMPLETE"
+    }
+  },
+  "goal_status": "ACTIVE_RESEARCH_INCOMPLETE",
+  "new_or_resumed_agents": 0,
+  "next": "<LOCAL_PATH>",
+  "old_exposed_DEV_tuning": false,
+  "old_quota_refunds": 0,
+  "package": "20261113_nonbottleneck_credit_fix_v1",
+  "remote_execution_root": "<EXECUTION_PATH>",
+  "rollback_passed": true,
+  "root_only": true,
+  "scientific_STATE_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "source_reopen_verified": true
+}

@@ -1,0 +1,32 @@
+Static archival verification only; no research execution.
+{
+  "result": "PASS",
+  "source_records": 4542,
+  "archive_files_before_QA": 995,
+  "JSON_and_JSONL_records_parsed": 3959,
+  "sensitive_pattern_hits": 0,
+  "final_scrub_occurrences": {
+    "credential_Chinese_assignment": 0,
+    "ssh_identity_path": 0,
+    "private_key": 0,
+    "credential_token": 0,
+    "absolute_local": 0,
+    "absolute_remote": 0,
+    "endpoint": 0,
+    "network_address": 0,
+    "email": 0
+  },
+  "local_unreadable_sources": 5857,
+  "prior_GitHub_status_counts": {
+    "not_found_in_inspected_existing_GitHub_transfer": 4476,
+    "existing_GitHub_transfer_source_path_content_differs_or_was_sanitized": 11,
+    "existing_GitHub_transfer_same_sha256": 55
+  },
+  "archive_bytes_before_QA": 40132717,
+  "source_mutations": 0,
+  "network_or_research_execution": 0
+}
+Command: python3 finalize_lunwen_curated_1119.py
+Exit status: 0
+Every archive file was reopened; JSON/JSONL parsed; copied-file hashes checked and refreshed after final sanitization.
+No original source was modified.

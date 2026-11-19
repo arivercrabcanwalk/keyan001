@@ -1,0 +1,50 @@
+{
+  "schema": "bounded_sortie_reference_v1",
+  "date": "2026-11-14",
+  "executor": "root_only",
+  "status": "STRUCTURAL_REDUCTION_AND_LIMITED_<REMOVED_ENDPOINT>_KERNEL_PASS",
+  "changed_function": "partition_dp; main UNKNOWN lower-bound terms",
+  "changed_branch": "all-submask energy scan -> least-bit feasible catalogue or original scan",
+  "additional_fix": "exact-station UNKNOWN frontier max -> min; cross-station max retained",
+  "bound_fix_status": "7/7 finite frontier checks pass; 3 original invalid lower bounds corrected",
+  "historical_unknown_records_read": 5,
+  "historical_reported_bounds_changed": 0,
+  "conditional_proof": {
+    "small_drone_trip_target_upper_bound": 3,
+    "large_drone_trip_target_upper_bound": 4
+  },
+  "physical_validation": "NOT_RUN_IN_THIS_PACKAGE",
+  "kernel_behavioral_validation": "35/35 identical best/choice/transitions on frozen generic inputs",
+  "local_validation_scope": "static AST/text/hash/patch/independent-copy rollback only",
+  "last_ssh_exit": 0,
+  "last_ssh_result": "hostname <COMPUTE_HOST>; authenticated existing endpoint; bounded engineering completed",
+  "G0": "UNCHANGED_NOT_PASSED",
+  "G3": "UNCHANGED_NOT_PASSED",
+  "new_scientific_maps": 0,
+  "new_author_or_alns_solves": 0,
+  "new_training_or_formal": 0,
+  "next": "new concrete G0 physical-route mechanism and independent G3 qualification; no old-test rerun or automatic scientific matrix admission",
+  "scientific_resource_expansion": "NOT_AUTHORIZED_BY_THIS_PACKAGE",
+  "execution_blocker": null,
+  "goal_completion_proven": false,
+  "static_revision_checks": "BASELINE/MODIFIED/independent ROLLBACK exit0; no numerical runtime",
+  "historical_consecutive_turns_same_connection_blocker": 4,
+  "connection_restored_at_utc": "2026-11-14T03:22:26Z",
+  "restored_behavior": "independent rollback original SHA, full baseline kernel arrays and bound defects match",
+  "remote_evidence": "<EXECUTION_PATH>",
+  "local_evidence": "server_evidence/RESUME1/runs",
+  "runtime_summary": {
+    "phase_exit_statuses": {
+      "BASELINE": 0,
+      "MODIFIED": 0,
+      "RESTORE_COPY": 0,
+      "ROLLBACK": 0
+    },
+    "total_child_cpu_sec": 0.49979399999999996,
+    "total_phase_wall_sec": 0.5007028062827885,
+    "original_sha256": "e38fd6fd9715a5c4b4c33246b1f280a2213e60b0e86dc6f4f5c0e918c5141779",
+    "modified_sha256": "81cef85d1ffae845dda3f67472aeff9aadb7d59bd7f29e97203faf8d2bd82142",
+    "rollback_sha256": "e38fd6fd9715a5c4b4c33246b1f280a2213e60b0e86dc6f4f5c0e918c5141779",
+    "main_modified_copy_retained": true
+  }
+}

@@ -1,0 +1,41 @@
+交接文档完整性验收（2026-11-19，北京时间；仅本地文件；非科研重跑）
+旧版保留: <LOCAL_PATH>
+新主文档 (MODIFIED_FILE): <LOCAL_PATH>
+DIFF_FILE: <LOCAL_PATH>
+VERIFICATION: <LOCAL_PATH>
+ROLLBACK: <LOCAL_PATH>
+变动：在单独新文档更新 §0 最新结论、A/W 合同、F3 与 G0/AIR2、历史闭合和下一会话入口；原科学文件无写入。
+
+BASELINE
+COMMAND: /usr/bin/shasum -a 256 <LOCAL_PATH>
+INPUT: original 2026-11-12 handoff; bytes only
+STDOUT (repr): '3c21ad6e8869b92f3ee441925651167e43d8daaac8f4c9e615044a6faeb6c19f  <LOCAL_PATH>'
+STDERR (repr): ''
+EXIT: 0
+
+MODIFIED
+COMMAND: /usr/bin/patch -s NEW_WINDOW_TAKEOVER_PROMPT.md <LOCAL_PATH>
+INPUT: cwd=/var/folders/rh/cw09nmb54yg7jpm72r6k7bf80000gn/T/lrphsd_handoff_proof_ujaiuuuo; original copied to proof dir. Its patched bytes compare identical to the actual new document.
+STDOUT (repr): ''
+STDERR (repr): ''
+EXIT: 0
+
+ROLLBACK
+COMMAND: <LOCAL_PATH> /var/folders/rh/cw09nmb54yg7jpm72r6k7bf80000gn/T/lrphsd_handoff_proof_ujaiuuuo
+INPUT: patched handoff in independent disposable directory; original bytes restored; main new handoff retained.
+STDOUT (repr): 'ORIGINAL_20261112_HANDOFF_RESTORED_ON_PROOF_COPY\n'
+STDERR (repr): ''
+EXIT: 0
+
+资料读回与字段核对：PASS
+引用：53 个不同本地目标全部可解析（文件/目录存在；未重新读取全部原始轨迹）。§0–§7 及 §7 提示中的绝对入口通过。
+核对范围：state / gate / summary / independent audit / deployment / completion receipts / allocation ticket / ledger / AIR2 record。结果来自既有 <COMPUTE_HOST> 收据，本地未导入、重算或运行科研代码。
+原保护 STATE：
+a7eae55ee6af425a3f35644176ecd35d447b097c8aac3ad02670b5b732e0376b  route_rl_research/20261103/STATE.json
+b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9  route_rl_research/20261103/return_makespan/STATE.json
+b531bb400eead532bae296e9664da74fbf1bdea03c385c913668146946b1c4c1  joint_weather_emergency/20261112_takeover_completion/STATE.json
+读回 SHA256：
+61aa76bb8ea4c9f8630dc4450d9a4a45f9a69785964d59880a0981464bcd4339  NEW_WINDOW_TAKEOVER_PROMPT.md
+b392161a69df655f72b52b93a3a8fed52a712564bebb80b5dcf7f03b8151d33e  DIFF_FILE.patch
+9af42fcf7e890ab3eb2329aecb1050aa8f4fdd23325c68de79fb4ddfbbff2306  ROLLBACK.sh
+最终状态：原交接和科学记录保留；独立临时验证目录已移除，新交接保持新版本。未连接服务器，未新建聊天/科学实验/训练/Formal。

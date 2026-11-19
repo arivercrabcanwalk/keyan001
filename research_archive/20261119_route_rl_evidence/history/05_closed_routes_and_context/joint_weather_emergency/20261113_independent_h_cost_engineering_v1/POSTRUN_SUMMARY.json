@@ -1,0 +1,79 @@
+{
+  "phases": [
+    {
+      "phase": "BASELINE",
+      "utc": "2026-11-13T11:23:59.325740+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "BASELINE"
+      ],
+      "child_pid": 1040,
+      "exit_status": 1,
+      "child_cpu_s": 0.122352,
+      "wall_s": 0.16556421527639031,
+      "scope": "G3_CONTROL_ENGINEERING_ONLY_NO_TRAINING"
+    },
+    {
+      "phase": "BASELINE_REPAIR1",
+      "utc": "2026-11-13T11:25:20.642813+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "BASELINE_REPAIR1"
+      ],
+      "child_pid": 1077,
+      "exit_status": 1,
+      "child_cpu_s": 0.092219,
+      "wall_s": 0.11628204490989447,
+      "scope": "G3_CONTROL_ENGINEERING_ONLY_NO_TRAINING"
+    },
+    {
+      "phase": "MODIFIED",
+      "utc": "2026-11-13T11:26:21.409921+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "MODIFIED"
+      ],
+      "child_pid": 1090,
+      "exit_status": 1,
+      "child_cpu_s": 0.095265,
+      "wall_s": 0.11564908130094409,
+      "scope": "G3_CONTROL_ENGINEERING_ONLY_NO_TRAINING"
+    },
+    {
+      "phase": "POSTFAILURE_ROLLBACK",
+      "command": [
+        "/usr/bin/python3",
+        "validation/postfailure_rollback.py"
+      ],
+      "utc": "2026-11-13T11:27:39.927411+00:00",
+      "exit_status": 0,
+      "child_cpu_s": 0.119419,
+      "wall_s": 0.1659841686487198,
+      "scope": "RESTORE_KNOWN_FAILURE_ONLY_NOT_A_REPAIR_OR_QUALITY_RERUN"
+    }
+  ],
+  "phase_count": 4,
+  "child_cpu_seconds": 0.429255,
+  "wall_seconds": 0.5634795101359487,
+  "frozen_source_files_verified": 41,
+  "training": 0,
+  "checkpoint": 0,
+  "author_solves": 0,
+  "complete_ALNS_solves": 0,
+  "new_scientific_maps": 0,
+  "Formal": 0,
+  "subagents": 0,
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "status": "CLOSED_FAILED_SOURCE_HELPER_ERROR",
+  "complete_configuration_results": 0,
+  "repair_used": 1,
+  "repair_remaining": 0,
+  "original_AUDIT": "NOT_RUN_NO_COMPLETE_BASELINE_OR_MODIFIED_RESULTS",
+  "original_ROLLBACK": "REPLACED_ONLY_BY_POSTFAILURE_FAILURE_RESTORATION_CHECK",
+  "full_quality_batch_resumed": false,
+  "scorer_calls": "NOT_INSTRUMENTED_NO_COMPLETE_BATCH_OUTPUT"
+}

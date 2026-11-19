@@ -1,0 +1,46 @@
+{
+  "status": "CLOSED_FAILED_BASELINE_ADAPTER_ASSUMPTION",
+  "modified_enumeration_executed": false,
+  "audit_executed": false,
+  "repair_remaining": 0,
+  "rollback": {
+    "status": "CLOSED_FAILED_BASELINE_ADAPTER_ASSUMPTION_NOT_REOPENED",
+    "modified_phase_executed": false,
+    "audit_phase_executed": false,
+    "repairs": 0,
+    "rollback_reproduces_original_failure": true,
+    "main_modified_copy_retained": true,
+    "records": [
+      {
+        "command": [
+          "/bin/sh",
+          "ROLLBACK.sh",
+          "<EXECUTION_PATH>"
+        ],
+        "input": "independent copy; same INPUT.json; rollback recovery only",
+        "stdout_literal": "ROLLBACK_BYTES_RESTORED\n",
+        "stderr_literal": "",
+        "exit_status": 0,
+        "wall_s": 0.003959533292800188,
+        "child_cpu_s": 0.00381
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "validate.py",
+          "ROLLBACK"
+        ],
+        "input": "independent copy; same INPUT.json; rollback recovery only",
+        "stdout_literal": "",
+        "stderr_literal": "Traceback (most recent call last):\n  File \"<EXECUTION_PATH>\", line 127, in <module>\n    assert solution_routes(post) == solution_routes(candidate)\nAssertionError\n",
+        "exit_status": 1,
+        "wall_s": 0.07490832637995481,
+        "child_cpu_s": 0.074694
+      }
+    ]
+  },
+  "training": 0,
+  "new_scientific_maps": 0,
+  "G0": "NOT_PASSED",
+  "G3": "NOT_PASSED"
+}

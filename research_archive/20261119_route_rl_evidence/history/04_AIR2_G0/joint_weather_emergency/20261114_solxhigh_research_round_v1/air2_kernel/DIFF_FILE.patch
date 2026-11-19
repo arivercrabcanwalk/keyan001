@@ -1,0 +1,118 @@
+--- ORIGINALS/compiler.py
++++ MODIFIED_FILE.py
+@@ -240,3 +240,115 @@
+                         assert len(out) <= max_queries, 'frozen query limit'
+         return {'name': self.f['name'], 'root': self.root, 'cap': self.cap, 'answers': out,
+                 'counters': dict(self.counters), 'remote_prefix_identities': [digest(k) for k in self.cache]}
++
++
++def next_tokens(station, enabled_slots):
++    """Physical actions compatible with one complete pre-action witness."""
++    tokens = []
++    for k in enabled_slots:
++        done, prefix, suffix, future = station[k]
++        if suffix:
++            tokens.append((k, suffix[0]))
++        elif prefix:
++            tokens.append((k, None))
++    return tuple(tokens)
++
++
++def compile_pair_rows(station, enabled_slots, score_candidate, *,
++                      rank_by_slot=(4, 3), row_limit=20000, check=lambda: None):
++    """Enumerate registered <=2-source-trip / <=2-output-trip topology only.
++
++    The caller binds the rank domain and supplies the original physical scorer.
++    No local cost-cap filter is applied. Completed trips and open prefixes stay
++    fixed; untouched pending trips retain their relative order. This is a fixed
++    exact local-search component, not an RL policy or full-domain action oracle.
++    """
++    import itertools
++    station = tuple(norm(sl) for sl in station)
++    enabled_slots = tuple(enabled_slots)
++    if len(station) != 2 or any(k not in (0, 1) for k in enabled_slots):
++        raise ValueError('TWO_SLOTS_AND_VALID_ENABLED_SLOTS_REQUIRED')
++    if any(station[k][1] or station[k][2] or station[k][3]
++           for k in (0, 1) if k not in enabled_slots):
++        raise ValueError('DISABLED_SLOT_HAS_PENDING_ROUTE')
++    remaining = [((sl[1] + sl[2],) if sl[1] or sl[2] else ()) + sl[3]
++                 for sl in station]
++    source_trips = [(k, j, trip) for k in enabled_slots
++                    for j, trip in enumerate(remaining[k])]
++    seen, rows, buckets = set(), [], {}
++    attempted = 0
++    original_targets = sorted(a for sl in station for tr in routes(sl) for a in tr)
++
++    def register(candidate, pair_ids):
++        nonlocal attempted
++        check()
++        attempted += 1
++        if candidate in seen:
++            return
++        seen.add(candidate)
++        if any(candidate[k][:2] != station[k][:2] for k in (0, 1)):
++            raise ValueError('EXECUTED_PREFIX_CHANGED')
++        if sorted(a for sl in candidate for tr in routes(sl) for a in tr) != original_targets:
++            raise ValueError('TARGET_COVERAGE_CHANGED')
++        receipt = score_candidate(candidate)
++        if receipt is None:
++            return
++        if len(rows) >= row_limit:
++            raise RuntimeError('FROZEN_AIR2_ROW_LIMIT')
++        tokens = next_tokens(candidate, enabled_slots)
++        row = {'station': candidate, 'pair_source_ids': pair_ids,
++               'route_hash': digest(candidate), 'actions': tokens, 'score': receipt}
++        index = len(rows)
++        rows.append(row)
++        for action in tokens:
++            buckets.setdefault(canonical(action), []).append(index)
++
++    register(station, ())
++    pairs = [(row,) for row in source_trips]
++    pairs += list(itertools.combinations(source_trips, 2))
++    for pair in pairs:
++        check()
++        if any(len(trip) > rank_by_slot[k] for k, j, trip in pair):
++            raise ValueError('SOURCE_TRIP_OUTSIDE_BOUND_RANK_DOMAIN')
++        selected = {(k, j) for k, j, trip in pair}
++        targets = tuple(sorted(a for k, j, trip in pair for a in trip))
++        if len(targets) != len(set(targets)) or len(targets) > 8:
++            raise ValueError('PAIR_UNION_NOT_UNIQUE_OR_EXCEEDS_EIGHT')
++        base = [tuple(trip for j, trip in enumerate(remaining[k]) if (k, j) not in selected)
++                for k in (0, 1)]
++        pinned_selected = {k for k in enabled_slots if station[k][1] and (k, 0) in selected}
++        for ordering in itertools.permutations(targets):
++            check()
++            partitions = [(ordering,)]
++            partitions.extend((ordering[:cut], ordering[cut:]) for cut in range(1, len(ordering)))
++            for trips in partitions:
++                for owners in itertools.product(enabled_slots, repeat=len(trips)):
++                    check()
++                    if any(len(trip) > rank_by_slot[k] for trip, k in zip(trips, owners)):
++                        continue
++                    new = [[trip for trip, owner in zip(trips, owners) if owner == k] for k in (0, 1)]
++                    candidate = []
++                    compatible = True
++                    for k in (0, 1):
++                        done, prefix, _, _ = station[k]
++                        if k in pinned_selected:
++                            anchored = [tr for tr in new[k] if tr[:len(prefix)] == prefix]
++                            if len(anchored) != 1:
++                                compatible = False
++                                break
++                            current = anchored[0]
++                            rest = tuple(tr for tr in new[k] if tr != current) + base[k]
++                            tail = current[len(prefix):]
++                        elif prefix:
++                            current = base[k][0]
++                            tail = current[len(prefix):]
++                            rest = tuple(new[k]) + base[k][1:]
++                        else:
++                            full = tuple(new[k]) + base[k]
++                            tail, rest = (full[0], full[1:]) if full else ((), ())
++                        candidate.append(norm((done, prefix, tail, rest)))
++                    if compatible:
++                        register(tuple(candidate), tuple((k, j) for k, j, tr in pair))
++    return {'status': 'COMPLETE_REGISTERED_PAIR_DOMAIN_ONLY', 'rows': rows,
++            'buckets': buckets, 'attempted_including_duplicates': attempted,
++            'distinct_structural_candidates_scored': len(seen)}

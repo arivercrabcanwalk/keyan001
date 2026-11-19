@@ -1,0 +1,70 @@
+{
+  "status": "TWO_COMPONENT_FIXES_VERIFIED_AIR2_FIRST_BATCH_CLOSED_FAILED_RESEARCH_UNFINISHED",
+  "date": "2026-11-14",
+  "agents": {
+    "count": 3,
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "design_and_cross_review_complete": true,
+    "remote_science_owner": "root"
+  },
+  "deadline_unit_checks": {
+    "baseline": 0,
+    "modified": 7,
+    "rollback": 0,
+    "total": 7
+  },
+  "new_deadline_real_wiring": {
+    "handwritten_geometry": 1,
+    "budgets_s": [
+      6,
+      12
+    ],
+    "ONTIME_VALID": 2,
+    "scientific_qualification": false
+  },
+  "AIR2": {
+    "code_written": true,
+    "modified_enumeration_executed": false,
+    "first_batch": "CLOSED_FAILED_BASELINE_ADAPTER_ASSUMPTION",
+    "repair_remaining": 0,
+    "full_configuration_results": 0,
+    "rollback_reproduces_failure": true
+  },
+  "next_token_adapter": {
+    "baseline_preserved": 4,
+    "modified_preserved": 7,
+    "rollback_preserved": 4,
+    "total": 7,
+    "invalid_next_rejected_modified": 2,
+    "AIR2_enumeration": 0
+  },
+  "G0": "NOT_PASSED_CONCRETE_SPEC_ENGINEERING_PENDING",
+  "G3": "NOT_PASSED_SCIENTIFIC_POPULATION_AND_FULL_QUALIFICATION_PENDING",
+  "new_scientific_maps": 0,
+  "new_author_calls": 0,
+  "new_models": 0,
+  "training_updates": 0,
+  "checkpoints": 0,
+  "Formal": 0,
+  "resource_choice": "APPROVED_48_CPU_CORE_HOURS_10_SOLVER_RUN_SEEDS",
+  "proposed_G3": {
+    "fresh_base_maps": 24,
+    "winds_mps": [
+      "0",
+      "4 E flow-to",
+      "8 N flow-to"
+    ],
+    "new_map_wind_author_attempts": 72,
+    "recommended_cpu_core_hours_cap": 48,
+    "recommended_solver_run_seeds": 10,
+    "smaller_option_cpu_core_hours_cap": 42,
+    "smaller_option_solver_run_seeds": 3,
+    "old_balances_reallocated": false
+  },
+  "child_cpu_seconds_all_recorded_phases": 0.815364,
+  "phase_wall_seconds_all_recorded_phases": 0.8479207055643201,
+  "recorded_command_count": 12,
+  "limits": "phase times exclude SSH/transfer/parent overhead, not scientific speed measurements",
+  "authorization_record": "<LOCAL_PATH>"
+}

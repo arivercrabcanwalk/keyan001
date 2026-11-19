@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-11-12T21:14:21.952463+00:00",
+  "executor": "root_only",
+  "candidate": "JOINT_SPLIT_SCHEDULE_SUFFIX_V1",
+  "decision": "CLOSE_GENERIC_JOINT_SPLIT_NO_DISTINCT_OPERATION",
+  "overall_goal": "active_incomplete",
+  "G0": "no_qualified_new_mechanism",
+  "G3": "not_passed",
+  "G4": "no_new_training",
+  "Formal": "not_admitted",
+  "G8": "incomplete",
+  "research_execution": {
+    "numeric_mathematical_runs": 0,
+    "physical_runs": 0,
+    "new_maps": 0,
+    "author_solver_runs": 0,
+    "ALNS_runs": 0,
+    "quality_evaluations": 0,
+    "model_imports": 0,
+    "training_runs": 0,
+    "checkpoints": 0,
+    "Formal_runs": 0,
+    "subagents": 0
+  },
+  "network": {
+    "requests": 22,
+    "HTTP200": 21,
+    "HTTP404": 1,
+    "failure_body_saved": true
+  },
+  "prior_budgets": {
+    "identities": 40,
+    "actual_comparisons": 126,
+    "calibration_used": 24,
+    "calibration_limit": 24,
+    "changed": false
+  },
+  "cap_AB": "previous_async_question_pending_not_repeated_not_assumed",
+  "new_user_decisions": [],
+  "next": "NEXT_BOUNDED_WORK.md"
+}

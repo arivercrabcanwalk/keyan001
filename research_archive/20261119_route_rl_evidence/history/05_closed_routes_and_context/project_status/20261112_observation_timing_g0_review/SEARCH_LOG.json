@@ -1,0 +1,23 @@
+{
+  "date_local": "2026-11-12",
+  "purpose": "Exact prior-art screen for route-dependent observation timing",
+  "available_capabilities": "Built-in web and official public HTTPS; academic/AgentKey MCP discovery tools absent; no configuration changes",
+  "queries": [
+    "\"partially observable semi-Markov\" route planning observation timing",
+    "\"informative path planning\" \"wind\" uncertainty aerial",
+    "\"planning and acting in partially observable stochastic domains\" 1998 pdf",
+    "\"Autonomous navigation of stratospheric balloons\" observation action wind",
+    "\"partially observable semi-Markov\" \"sojourn\" observations Chronos",
+    "\"Solving partially observable semi-Markov decision processes\" pdf",
+    "\"Monte-Carlo Planning in Large POMDPs\" Silver Veness 2010 pdf",
+    "ChronosPerseus POSMDP Kohar sojourn 2022 arxiv",
+    "\"Solving Partially Observable Semi-Markov Decision Processes\""
+  ],
+  "web_fetch_failure": {
+    "url": "https://www.cassandra.org/arc/papers/aij98.pdf",
+    "result": "400 Content length is too large: 26777504",
+    "used_in_formula_verification": false
+  },
+  "source_selection": "Primary arXiv author versions and NeurIPS proceedings; no secondary-summary claims used",
+  "separate_publication_claims": "Chronos and wind-IPP are v1 preprints; no unverified journal metadata supplied"
+}

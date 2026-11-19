@@ -1,0 +1,179 @@
+[
+  {
+    "key": "brown",
+    "path": "<LOCAL_PATH>",
+    "sha256": "2a8b61eb74c0202d3ae7053c3ecae28544cff3c18828c4851387874ba5b9f88f",
+    "bytes": 224777,
+    "pages": 17,
+    "manifest": "<LOCAL_PATH>",
+    "embedded_files": 0,
+    "extra_si_status": "explicit_online_appendices_acquired",
+    "version": "published_2010",
+    "source_url": "https://people.duke.edu/~psun/bio/785.pdf",
+    "retrieved_at_utc": "2026-11-12T04:37:02.664Z",
+    "role": "primary_formula_source",
+    "read_pdf_pages": [
+      3,
+      5,
+      6
+    ],
+    "visually_reviewed_pdf_pages": [
+      3,
+      5,
+      6
+    ]
+  },
+  {
+    "key": "brown_si",
+    "path": "<LOCAL_PATH>",
+    "sha256": "4f1e6cd767d38cde8f8d3fe7d88c0e32f1b5374483154654acf9c6e27d6ff740",
+    "bytes": 540403,
+    "pages": 15,
+    "manifest": "<LOCAL_PATH>",
+    "embedded_files": 0,
+    "extra_si_status": "not_exhaustively_searched",
+    "version": "published_2010",
+    "source_url": "https://people.duke.edu/~psun/bio/Information_Relaxations_and_Duality_in_Stochastic_Dynamic_Programs_ECompanion.pdf",
+    "retrieved_at_utc": "2026-11-12T04:37:03.222Z",
+    "role": "primary_formula_source",
+    "read_pdf_pages": [
+      2,
+      3
+    ],
+    "visually_reviewed_pdf_pages": [
+      2,
+      3
+    ]
+  },
+  {
+    "key": "pd_mcts",
+    "path": "<LOCAL_PATH>",
+    "sha256": "208675e29829f086417f9466be369a8f301d4e267b214b5efc93fdc84ad48b6b",
+    "bytes": 1442345,
+    "pages": 33,
+    "manifest": "<LOCAL_PATH>",
+    "embedded_files": 0,
+    "extra_si_status": "not_exhaustively_searched",
+    "version": "arxiv_1704.05963v1_2017_not_final_2020",
+    "source_url": "https://arxiv.org/pdf/1704.05963v1",
+    "retrieved_at_utc": "2026-11-12T04:37:12.164Z",
+    "role": "primary_formula_source",
+    "read_pdf_pages": [
+      9,
+      10,
+      11
+    ],
+    "visually_reviewed_pdf_pages": [
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "label": "cfa_crossref",
+    "requested_url": "https://api.crossref.org/works/10.1016/j.trb.2025.103335",
+    "at_utc": "2026-11-12T04:31:42.126477+00:00",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works/10.1016/j.trb.2025.103335",
+    "mime": "application/json",
+    "path": "<LOCAL_PATH>",
+    "bytes": 15082,
+    "sha256": "941eb1dcb024d72507f88f191053dcd48ab6e7dfaddadf207297647870d2cd34",
+    "role": "access_or_metadata_evidence_not_fulltext"
+  },
+  {
+    "label": "cfa_publisher_xml",
+    "requested_url": "https://api.elsevier.com/content/article/pii/S0191261525001845?httpAccept=text%2Fxml",
+    "at_utc": "2026-11-12T04:31:43.162346+00:00",
+    "status": 200,
+    "final_url": "https://api.elsevier.com/content/article/pii/S0191261525001845?httpAccept=text%2Fxml",
+    "mime": "text/xml;charset=UTF-8",
+    "path": "<LOCAL_PATH>",
+    "bytes": 2016,
+    "sha256": "866113a6e59f4a073b059ceabcf191f436b1d0b662f88de5d894beeaca655992",
+    "role": "access_or_metadata_evidence_not_fulltext"
+  },
+  {
+    "label": "cfa_author_profile",
+    "requested_url": "https://www.ulaval.ca/la-recherche/repertoire-corps-professoral/leandro-callegari-coelho",
+    "at_utc": "2026-11-12T04:31:44.476258+00:00",
+    "status": 200,
+    "final_url": "https://www.ulaval.ca/la-recherche/repertoire-corps-professoral/leandro-callegari-coelho",
+    "mime": "text/html; charset=utf-8",
+    "path": "<LOCAL_PATH>",
+    "bytes": 199052,
+    "sha256": "864f19fc633f7fe97b2d6c5e91eaafe3822b2a093e9f6ba1aa6eea8f17e722a8",
+    "role": "access_or_metadata_evidence_not_fulltext"
+  },
+  {
+    "requested_url": "https://api.elsevier.com/content/article/pii/S0191261525001845?view=FULL&httpAccept=text%2Fxml",
+    "at_utc": "2026-11-12T04:34:00.824014+00:00",
+    "status": 401,
+    "final_url": "https://api.elsevier.com/content/article/pii/S0191261525001845?view=FULL&httpAccept=text%2Fxml",
+    "error": "HTTPError 401",
+    "path": "<LOCAL_PATH>",
+    "bytes": 133,
+    "sha256": "a199c5505f5d84ca6206475b3a116d509aa4528f154f0d3cdbc57669ec400bb5",
+    "role": "access_or_metadata_evidence_not_fulltext"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "fce67b16dcd20b48a6f999bcfb35db1e75b9c8a3e63a2c505f3d02500f1eedaa",
+    "bytes": 14617,
+    "role": "baseline_or_discovery_record"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "78281890b39d33aa7e3271b615803cc18db58185a281081dbaa5056dc5457325",
+    "bytes": 21166,
+    "role": "baseline_or_discovery_record"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "fdb6fcbb7d267224fe4e92ea0721a106bf47179967dc06f80d69877aaaefd751",
+    "bytes": 34935,
+    "role": "baseline_or_discovery_record"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "4c377333d76b05fbc43da68b762c5a6c15a362019c96da2d55e051ce88002d5d",
+    "bytes": 60719,
+    "role": "baseline_or_discovery_record"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "28d7319b6c427e6302f5781bc190aa69a8a8551eadf6cf7a8b3f3b3508197efc",
+    "bytes": 5574180,
+    "role": "user_fulltext_zhao",
+    "doi": "10.1016/j.tre.2026.105074",
+    "version": "user_supplied_published_pdf",
+    "reading_record": "<LOCAL_PATH>"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "28d7319b6c427e6302f5781bc190aa69a8a8551eadf6cf7a8b3f3b3508197efc",
+    "bytes": 5574180,
+    "role": "user_fulltext_zhao",
+    "doi": "10.1016/j.tre.2026.105074",
+    "version": "user_supplied_published_pdf",
+    "reading_record": "<LOCAL_PATH>"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "b90cce45c6f538eb6b04250adefd98cbd1ed3c56e7207754e159c324eeb30c2e",
+    "bytes": 5239889,
+    "role": "user_fulltext_han",
+    "doi": "10.1016/j.tre.2026.105100",
+    "version": "user_supplied_published_pdf",
+    "reading_record": "<LOCAL_PATH>"
+  },
+  {
+    "path": "<LOCAL_PATH>",
+    "sha256": "b90cce45c6f538eb6b04250adefd98cbd1ed3c56e7207754e159c324eeb30c2e",
+    "bytes": 5239889,
+    "role": "user_fulltext_han",
+    "doi": "10.1016/j.tre.2026.105100",
+    "version": "user_supplied_published_pdf",
+    "reading_record": "<LOCAL_PATH>"
+  }
+]

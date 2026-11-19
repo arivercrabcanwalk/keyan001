@@ -1,0 +1,98 @@
+{
+  "schema": "takeover_completion_gate_decisions_v1",
+  "generated_at_local": "2026-11-12",
+  "authority": "LATEST_STATUS.md + return_makespan/STATE.json + this package's receipts",
+  "gates": {
+    "G0": {
+      "status": "NO_GO",
+      "decision": "NO_NEW_DISTINCT_MECHANISM_NO_TRAINING",
+      "scope": "static/conditional S contract only",
+      "evidence": [
+        "G0_DECISION.md",
+        "MECHANISM_SPEC.md",
+        "CLOSED_DIRECTIONS.md",
+        "PRIOR_ART_EQUATION_AUDIT.md",
+        "G3_REPORT.md"
+      ],
+      "reasons": [
+        "S contract is a deterministic fully observed MDP: rollout samples collapse to one deterministic continuation and VFA collapses to regression on a deterministic function, so estimation/credit steps have zero information gain",
+        "cost = fixed + 0.5*sum(duty) and M_return = max(duty); intact-trip relabelling is cost-identical by construction, so the 11.4% M_return gain is a max-reordering artefact with a computable upper bound, not an algorithm",
+        "epsilon=0 plus frozen domain makes admissibility equivalent to 'total duty not increased', which forecloses the only remaining route-side move (re-partition) unless offset elsewhere",
+        "all 10 fresh candidates either duplicate an existing closed direction, reduce to standard CO/RL, or are negative differences for the current contract"
+      ],
+      "not_closed": [
+        "route-level headroom magnitude (measurement contaminated by implementation overhead)",
+        "W contract science",
+        "RL in general"
+      ],
+      "training_blocked": true
+    },
+    "G1": {
+      "status": "LIMITED_ENGINEERING_PASS",
+      "evidence": [
+        "historical joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json"
+      ],
+      "note": "unchanged this round; no new G1 work claimed"
+    },
+    "G2": {
+      "status": "EXTENDED",
+      "evidence": [
+        "G3_REPORT.md",
+        "STRONG_NONRL_REPORT.md",
+        "stats/STATS.json"
+      ],
+      "note": "headroom decomposed: relabelling floor vs route re-partitioning"
+    },
+    "G3": {
+      "status": "NOT_PASSED",
+      "partial_progress": "two reference layers now exist: (a) exact cost-neutral reassignment, 47 maps, admissible, Delta cost <= 2.3e-13; (b) a non-learning min-max ALNS that beats (a) on 22/46 maps with 0 losses and 46/46 on-time admissible outputs",
+      "evidence": [
+        "G3_REPORT.md",
+        "STRONG_NONRL_REPORT.md",
+        "results/g3_pop/STRONG_NONRL_RESULTS.json",
+        "results/g3_confirm/STRONG_NONRL_RESULTS.json"
+      ],
+      "blockers": [
+        "end-to-end same-wall-clock comparison against the author pipeline not run",
+        "no Formal population",
+        "no RL run at all"
+      ]
+    },
+    "G4": {
+      "status": "NOT_STARTED",
+      "blocked_by": [
+        "G0",
+        "G3"
+      ],
+      "note": "zero training runs this package"
+    },
+    "G5": {
+      "status": "NOT_STARTED",
+      "blocked_by": [
+        "G4"
+      ]
+    },
+    "G6": {
+      "status": "NOT_STARTED",
+      "blocked_by": [
+        "G0",
+        "G4"
+      ]
+    },
+    "G7": {
+      "status": "NOT_STARTED",
+      "note": "no positive result to write; negative-result package is delivered instead"
+    },
+    "G8": {
+      "status": "PARTIAL_RESEARCH_PACKAGE",
+      "note": "history matrix, equation comparison, mechanism spec, gates, splits, prereg, budget, receipts and replication delivered; Formal and positive paper remain absent by design"
+    }
+  },
+  "claims_not_made": [
+    "no RL beats any baseline",
+    "no new mechanism",
+    "no Formal result",
+    "no W-contract result",
+    "no claim that M_return improvement of 5% is a contribution"
+  ]
+}

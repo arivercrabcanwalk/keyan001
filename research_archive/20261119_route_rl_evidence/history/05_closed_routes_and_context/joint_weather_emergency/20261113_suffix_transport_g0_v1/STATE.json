@@ -1,0 +1,72 @@
+{
+  "author_versions": {
+    "BQ_actual": "b7f927faf1d87dca699361312471c10ecc8dd346",
+    "BQ_is_paper_experimental_commit": "not established; later than v3",
+    "BQ_old_pointer": "05fb8586bcad95b71b5b2b1625374cc2d0ed2743",
+    "HGS_current_HEAD": "1a927955cd2861a29d978f0d359d6e647db9319c",
+    "HGS_paper_mapping": "explicit author README attribution; experiments not re-run",
+    "HGS_paper_tag": "v1.0.0",
+    "HGS_paper_tag_commit": "35b32d8e9552074f52444d51ea1fe8aec9055467"
+  },
+  "candidate": "RESOURCE_COMPATIBLE_SUFFIX_TRANSPORT_V1",
+  "claimed_experimental_gain": false,
+  "date_local": "2026-11-13",
+  "decision": "CLOSE_GENERIC_SUFFIX_TRANSPORT_NO_DISTINCT_OPERATION",
+  "executor": "root_only",
+  "gates": "G0/G3 not passed; no training or Formal",
+  "new_algorithm_implementation": false,
+  "next": "NEXT_BOUNDED_WORK.md; need a distinct operation generating a better physical suffix, not yet defined",
+  "old_allowances": {
+    "actual_comparisons": 126,
+    "calibration_limit": 24,
+    "calibration_used": 24,
+    "new_identities": 40,
+    "refund": 0
+  },
+  "original_scientific_states_unchanged": true,
+  "package": "20261113_suffix_transport_g0_v1",
+  "package_status": "STATIC_G0_SCREENING_CLOSED",
+  "previous_goal_turn": {
+    "classification": "progress",
+    "evidence": "joint_budget_value primary/code review closed a concrete generic update; final manifest 49/49 archived on <COMPUTE_HOST> with unchanged scientific states",
+    "manifest_sha256": "7de1f89cb1a3ba202cf9df6087559307b57fea7177a7924ca88943aca07d1698"
+  },
+  "progress": "explicit suffix compatibility contract and two new primary sources with fixed author code distinguish physical tail transport from quotient/policy equality; current generic entry closed without toy execution",
+  "project_status": "INCOMPLETE_GOAL_ACTIVE",
+  "protected_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "remote_final_delivery": "<EXECUTION_PATH>",
+  "resource": {
+    "ALNS_calls": 0,
+    "BQ_author_python_files_fully_read": 2,
+    "Formal_calls": 0,
+    "HGS_cpp_files_partial_read": 2,
+    "HTTP_200": 20,
+    "HTTP_404_observed_error_string": 1,
+    "TLS_handshake_timeouts": 1,
+    "author_route_solver_calls": 0,
+    "checkpoints": 0,
+    "<REMOVED_ENDPOINT>_math_or_physics_runs": 0,
+    "local_operations": "source retrieval/reading; text extraction; AST/JSON/hash; symbolic documents and record integrity transaction; transfer",
+    "model_imports": 0,
+    "network_requests": 22,
+    "new_agents": 0,
+    "new_primary_fulltexts": 2,
+    "physical_quality_evaluations": 0,
+    "research_executions": 0,
+    "scientific_maps": 0,
+    "training_calls": 0
+  },
+  "source_hashes": {
+    "literature/BQ_HTML.html": "e5dfdc0fd80d1d82917924a665318111c5d32e90155bbb43a5c3af37448ef04a",
+    "literature/BQ_dataset.py": "5d6d99b76966c7bd24cf9fb43ae9a5cda605c1e6c7b141d4ee8e6e5016b76cb8",
+    "literature/BQ_decoding.py": "77e9b2d0e5e5f990cd7a47784d1c685d9848f9443c46fb9b65c7b6c3d4dd2bd6",
+    "literature/HGS_HTML.html": "4ef9dd7e5381d5ae749ac6f499c0d39d4e58d4a45a87cd2e24084d1e79f5df2b",
+    "literature/HGS_LocalSearch.cpp": "83e601088b48c68c8f9881569324b3be62ad3f746b1f04b8560f8e849c38196a",
+    "literature/HGS_PAPER_LocalSearch.cpp": "05a88b07fe8556a1918245baa7d43c97d49ced40c0c15d0e0b21fc1e7e757564",
+    "literature/HGS_README.md": "691038e55b1328658efc8def95c115c4d62f7ee1b36fb819148d5bb643cb7ff5"
+  },
+  "user_decision": "prior cap A/B pending; no new question or assumed approval"
+}

@@ -1,0 +1,147 @@
+{
+  "Formal": 0,
+  "G0": "UNPASSED_NO_ADMITTED_NEW_STEP",
+  "G3": "UNPASSED_SCIENTIFIC_QUALIFICATION_PENDING",
+  "actual_method_calls_latest": 2,
+  "actual_method_calls_total": 4,
+  "all_stage_count": 8,
+  "all_stage_exit0": 8,
+  "author_solves": 0,
+  "cap_decision": "existing A/B unanswered; no repeated question or primary change",
+  "changed_field": "route_delivery.DELIVERY_CONTRACT=actual_exit_and_independent_validation_v1",
+  "checkpoints": 0,
+  "execution_host": "<COMPUTE_HOST>",
+  "final_delivery_cases": [
+    {
+      "accepted": true,
+      "case": "GOOD",
+      "exit_status": 0,
+      "failure_reason": null,
+      "itt_anchor_used": false,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "EARLY_SAVED_LATE",
+      "exit_status": -9,
+      "failure_reason": "PROCESS_LATE_OR_TIMEOUT",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "NONZERO",
+      "exit_status": 7,
+      "failure_reason": "NONZERO_EXIT",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "MISSING",
+      "exit_status": 0,
+      "failure_reason": "MISSING_OUTPUT",
+      "itt_anchor_used": true,
+      "raw_output_retained": false
+    },
+    {
+      "accepted": false,
+      "case": "BAD_JSON",
+      "exit_status": 0,
+      "failure_reason": "MALFORMED_OUTPUT:JSONDecodeError",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "BAD_HASH",
+      "exit_status": 0,
+      "failure_reason": "PROTOCOL_OR_IDENTITY_MISMATCH",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "FORGED_SCORE",
+      "exit_status": 0,
+      "failure_reason": "CLAIM_MISMATCH",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "INCOMPLETE",
+      "exit_status": 0,
+      "failure_reason": "INADMISSIBLE_OUTPUT",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "OVER_CAP",
+      "exit_status": 0,
+      "failure_reason": "INADMISSIBLE_OUTPUT",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "DOMAIN_CHANGED",
+      "exit_status": 0,
+      "failure_reason": "INADMISSIBLE_OUTPUT",
+      "itt_anchor_used": true,
+      "raw_output_retained": true
+    },
+    {
+      "accepted": false,
+      "case": "LAUNCH_ERROR",
+      "exit_status": null,
+      "failure_reason": "LAUNCH_ERROR",
+      "itt_anchor_used": true,
+      "raw_output_retained": false
+    }
+  ],
+  "final_methods": [
+    {
+      "accepted": true,
+      "admission_wall_s": 0.2172342031262815,
+      "anchor_M_return": 22.491325002669335,
+      "anchor_cost": 117.13698750400401,
+      "exit_status": 0,
+      "itt_M_return": 22.491325002669335,
+      "itt_cost": 117.13698750400401,
+      "method": "strong",
+      "process_wall_s": 0.21627224702388048
+    },
+    {
+      "accepted": true,
+      "admission_wall_s": 0.2166506927460432,
+      "anchor_M_return": 22.491325002669335,
+      "anchor_cost": 117.13698750400401,
+      "exit_status": 0,
+      "itt_M_return": 22.491325002669335,
+      "itt_cost": 117.13698750400401,
+      "method": "strong_bank",
+      "process_wall_s": 0.21572695579379797
+    }
+  ],
+  "goal": "active",
+  "modified_files": 46,
+  "next": "NEXT_BOUNDED_WORK.md",
+  "original_files": 43,
+  "original_shared_bytes_unchanged": true,
+  "resources": {
+    "child_cpu_s": 2.7204379999999997,
+    "counting": "supervised child trees, excluding controller/SSH/archive overhead",
+    "exit0": 8,
+    "maxrss_kib": 21632,
+    "modules": 8,
+    "wall_s": 3.7971257721073925
+  },
+  "rollback": "separate copy restored43/43 and original strong import pass/delivery entrypoint absent; main46 retained",
+  "root_only": true,
+  "schema": "fixed_wind_process_delivery_engineering_v1",
+  "scientific_maps": 0,
+  "status": "ENGINEERING_INTERFACE_COMPLETE_RESEARCH_INCOMPLETE",
+  "training": 0
+}

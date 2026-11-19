@@ -1,0 +1,93 @@
+{
+  "schema": "public_prefix_interface_status_v1",
+  "updated_utc": "2026-11-13T04:56:47.216497+00:00",
+  "package_status": "COMPLETE_BOUNDED_ENGINEERING_AND_LEARNING_SCREEN",
+  "goal_status": "active",
+  "project_complete": false,
+  "root_only": true,
+  "execution_host": "<COMPUTE_HOST>",
+  "original_file_count": 26,
+  "modified_file_count": 27,
+  "changed_contract": "global_env.CONSTRUCTION_CONTRACT=fixed_wind_public_prefix_v1",
+  "changed_interfaces": [
+    "wind CostAnchor",
+    "directed fixed-wind legs",
+    "small/closed/parameter-preserving prefix projection",
+    "force RETURN None",
+    "whole-map deadline and checked commit"
+  ],
+  "fixtures": 2,
+  "assertions": 77,
+  "committed_completion_actions": 12,
+  "max_independent_heading_resource_error": 1.7763568394002505e-15,
+  "actual_worker_calls": 2,
+  "good_accepted": true,
+  "early_saved_late_rejected": true,
+  "raw_late_output_retained": true,
+  "phase_exit_status": {
+    "BASELINE": 0,
+    "MODIFIED": 0,
+    "AUDIT": 0,
+    "ROLLBACK": 0,
+    "RESULT": 0
+  },
+  "resources": {
+    "complete": true,
+    "phases": [
+      "BASELINE",
+      "MODIFIED",
+      "AUDIT",
+      "ROLLBACK",
+      "RESULT"
+    ],
+    "actual_child_cpu_s": 0.6451800000000001,
+    "phase_wall_s": 0.7554056667722762,
+    "registered_base_cpu_s": 225,
+    "source_repair_used": 0,
+    "serial": true
+  },
+  "rollback": {
+    "complete": true,
+    "status": "PASS_SEPARATE_COPY_RESTORED_LEGACY_BEHAVIOR",
+    "original_files_restored": 26,
+    "original_hashes_restored": true,
+    "baseline_answers_identical": true,
+    "literal_stdout_identical": true,
+    "rollback_command": [
+      "<EXECUTION_PATH>",
+      "<EXECUTION_PATH>"
+    ],
+    "rollback_stdout": "ROLLBACK_FILES_RESTORED=26 MAIN_MODIFIED_RETAINED=true\n",
+    "rollback_exit_status": 0,
+    "restored_probe_command": [
+      "/usr/bin/python3",
+      "validation/probe_legacy.py",
+      "--tree",
+      "<EXECUTION_PATH>",
+      "--output",
+      "results/ROLLBACK_BASELINE.json"
+    ],
+    "restored_probe_stdout": "BASELINE=LEGACY_ZERO_WIND_NO_PREFIX_COMPLETION INPUTS=2 FIXED_WIND_MAPS_ACCEPTED=0\n",
+    "restored_probe_exit_status": 0,
+    "main_modified_tree_retained": true,
+    "modified_file_count": 27
+  },
+  "G0": "NO_NEW_DISTINCT_MECHANISM",
+  "G3": "NOT_PASSED_ENGINEERING_SCOPE_ONLY",
+  "learning_draft": "CLOSE_FIXED_DONOR_CROSS_PAIRING_AS_DISTINCT_LEARNING_STEP",
+  "model_imports": 0,
+  "training_runs": 0,
+  "checkpoints": 0,
+  "scientific_maps": 0,
+  "author_solves": 0,
+  "ALNS_calls": 0,
+  "Formal": false,
+  "old_106_or_104_matrices_rerun": false,
+  "protected_states_sha256": {
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9",
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e"
+  },
+  "old_ledger": "40 identities / 126 comparisons / calibration24/24 preserved",
+  "next_action": "Read UCPO final and LOLS; define one different policy-dependent physical continuation/credit operation before any further engineering or training",
+  "user_decision_required": false
+}

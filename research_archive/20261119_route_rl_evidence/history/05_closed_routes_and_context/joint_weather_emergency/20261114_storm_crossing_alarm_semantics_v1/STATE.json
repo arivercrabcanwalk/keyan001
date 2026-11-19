@@ -1,0 +1,71 @@
+{
+  "package": "20261114_storm_crossing_alarm_semantics_v1",
+  "updated_local_date": "2026-11-14",
+  "changed_field": "ExogenousFuture.storm_crossings; translating-ellipse trailing_edge_exit_time",
+  "changed_branch": "CausalEngine initialization precomputes storm_exit_time + sampled_delay; every TARGET dispatch reserves its target; SERVICE_END no longer schedules the alarm",
+  "baseline_release_times_min": [
+    25.0,
+    35.0
+  ],
+  "baseline_service_times_min": [
+    20.0,
+    30.0
+  ],
+  "modified_release_times_min": [
+    40.0,
+    40.0
+  ],
+  "modified_service_times_min": [
+    20.0,
+    30.0
+  ],
+  "checks": {
+    "baseline_T11": "PASS_5_OF_5",
+    "modified_T11": "PASS_6_OF_6",
+    "modified_T9": "PASS_5_OF_5",
+    "paired_order_invariance": "PASS",
+    "analytic_moving_ellipse_exit": "PASS_TANGENCY_MISS_AND_ACTIVE_WINDOW_TRUNCATION_NEGATIVES",
+    "in_flight_alarm_duplicate_dispatch_control": "BASELINE_2_VS_MODIFIED_1_PASS",
+    "post_service_reinspection_duplicate_dispatch_control": "BASELINE_3_VS_MODIFIED_2_PASS",
+    "reserved_target_remains_in_flight_until_completion": "PASS",
+    "initial_due_alarm_visible_and_service_accounted": "PASS",
+    "duplicate_crossing_rejected": "PASS",
+    "modified_T1_T12": "PASS_78_OF_78",
+    "rotated_ellipse_float_tolerance": "PASS_ABS_ERROR_LE_1E-12",
+    "modified_py_compile": "PASS_4_FILES",
+    "rollback_copy_source_hashes": "PASS",
+    "rollback_copy_behavior_restored": "PASS"
+  },
+  "gates": {
+    "G0": "NOT_PASSED",
+    "G3": "NOT_PASSED",
+    "training_admitted": false,
+    "scientific_population_created": false,
+    "formal_run": false
+  },
+  "limits": [
+    "storm_exit_time still must come from an upstream storm-track scenario generator",
+    "exposure-conditioned fault probability still requires applicable fault data and independent calibration",
+    "one storm crossing per target per episode only",
+    "alarm-job-specific deadline and metric denominator remain unimplemented",
+    "alarm probability/delay remain uncalibrated engineering inputs"
+  ],
+  "final_validation": {
+    "host": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "python": "3.10.12",
+    "standalone_T11_started_utc": "2026-11-13T18:38:11Z",
+    "full_suite_started_utc": "2026-11-13T18:38:23Z",
+    "full_suite_receipt": "runs_remote_terminal/modified_full_rotated_ellipse_tolerance_v2/SUMMARY.json",
+    "full_suite_assertions": 78,
+    "full_suite_status": "PASS",
+    "remote_run_all_sha256": "a91e0113770950b8b04a751316f3113036a66a9a28f11ecd832c6ff72985c5af",
+    "modified_source_sha256": {
+      "env/core.py": "291fc0512b48dd91abdd4f8b25527cbbed674869f0f4f1d034b26294262c1bf6",
+      "env/causal_engine.py": "fc04b301611a89c4d22bbcf20c19fd263642cf78401df4e480ef1c236741c253",
+      "env/exogenous_stream.py": "ac2317ed4a5b99a65de17b23296ee422ec4793cc02af07853332ba54010388ce",
+      "tests/run_all.py": "a91e0113770950b8b04a751316f3113036a66a9a28f11ecd832c6ff72985c5af"
+    },
+    "preserved_prior_failure": "runs_remote_terminal/modified_full_rotated_ellipse_final/T11.json records strict float equality failure at 39.99999999999999; it was not overwritten"
+  },
+  "user_decision_required": false
+}

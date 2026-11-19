@@ -1,0 +1,1502 @@
+                 Symmetric Replay Training: Enhancing Sample Efficiency
+             in Deep Reinforcement Learning for Combinatorial Optimization
+
+
+                              Hyeonah Kim 1 Minsu Kim 1 Sungsoo Ahn 2 Jinkyoo Park 1 3
+
+
+                          Abstract                                  Even though solving CO problems with expensive objec-
+                                                                    tive functions is frequently found in various fields like drug
+       Deep reinforcement learning (DRL) has signifi-               discovery or hardware design, it has numerous challenges.
+       cantly advanced the field of combinatorial opti-
+       mization (CO). However, its practicality is hin-             Recent advances in deep reinforcement learning (DRL) have
+       dered by the necessity for a large number of                 drawn significant attention as an alternative way to solving
+       reward evaluations, especially in scenarios in-              CO problems. Various studies have demonstrated remark-
+       volving computationally intensive function assess-           able achievements across broad domains, including routing
+       ments. To enhance the sample efficiency, we pro-             (Kool et al., 2018; Kwon et al., 2020; Son et al., 2023),
+       pose a simple but effective method, called sym-              scheduling (Park et al., 2023; Kwon et al., 2021), and ma-
+       metric replay training (SRT), which can be eas-              terial design (Olivecrona et al., 2017; Ahn et al., 2020a;
+       ily integrated into various DRL methods. Our                 Bengio et al., 2023). Especially in constructive methods,
+       method leverages high-reward samples to encour-              where a solution is sequentially built from an empty set, it is
+       age exploration of the under-explored symmetric              beneficial to guarantee feasibility to practical constraints us-
+       regions without additional online interactions –             ing a masking strategy. Note that in the constructive method,
+       free. Through replay training, the policy is trained         a policy generates a trajectory, and the reward is evaluated
+       to maximize the likelihood of the symmetric tra-             in a terminal state, i.e., episodic rewards.
+       jectories of discovered high-rewarded samples.               DRL methods generally leverage extensive samples to en-
+       Experimental results demonstrate the consistent              hance training stability, assuming reward evaluation is af-
+       improvement of our method in sample efficiency               fordable. However, in practice, reward computation can be
+       across diverse DRL methods applied to real-world             costly due to several factors: (1) objective functions often
+       tasks, such as molecular optimization and hard-              cannot be defined analytically, requiring computationally
+       ware design.                                                 intensive simulations for evaluation, such as in black-box
+                                                                    optimization; or (2) objective functions may be analytically
+                                                                    defined but still demand additional computation, such as
+1. Introduction                                                     solving another optimization problem (e.g., bi-level opti-
+                                                                    mization). For instance, in molecular optimization, evalu-
+Combinatorial optimization (CO) problems arise across di-           ating designed molecules in real-world scenarios involves
+verse industrial domains, but they are notoriously challeng-        costly assessments, such as wet lab experiments (Gao et al.,
+ing to solve. In CO (e.g., traveling salesman problems;             2022). In this regard, reducing the number of reward evalu-
+TSP), the massive discrete solution space often leads to            ations is significantly beneficial. This discrepancy raises a
+NP-hardness. Furthermore, CO problems in practical sce-             straightforward research question: How can we enhance the
+narios often involve computationally expensive objective            sample efficiency of DRL methods for a broad spectrum of
+functions to evaluate (e.g., a black-box function), introduc-       CO problems and methods?
+ing significant restrictions on the problem-solving process.
+                                                                    This paper proposes a simple yet effective add-on method,
+   1
+    Department of Industrial & Systems Engineering, Ko-             symmetric replay training (SRT), which is a generic method
+rea Advanced Institute of Science and Technology (KAIST),           that leverages the solution-symmetric nature of combinato-
+Daejeon, South Korea 2 Pohang University of Science and
+Technology (POSTECH), Pohang, South Korea 3 OMELET,                 rial space. In DRL for CO, multiple action sequences (i.e.,
+Daejeon, South Korea. Correspondence to: Hyeonah Kim                action trajectories) can be mapped to a single combinatorial
+<hyeonah <EMAIL_REMOVED>>.                                          solution, and the reward is defined on the terminal state (i.e.,
+                                                                    solution). Previous studies have tried to consider the symme-
+Proceedings of the 41 st International Conference on Machine        tries in CO, but they utilize numerous samples (Kwon et al.,
+Learning, Vienna, Austria. PMLR 235, 2024. Copyright 2024 by
+the author(s).                                                      2020; Kim et al., 2022b) or assume the specific method (Yao
+
+                                                                1
+                                                                  Symmetric Replay Training
+
+                                      Symmetric Replay Training
+
+
+
+
+         Reward-maximizing Training
+                                      𝑅′′                           𝑅′′
+                                      𝑅′
+
+
+
+
+                                                                                                   : Ground-truth
+                                                                                                   : Expected reward landscape of 𝜋𝜃
+                                      𝑅′                                                       /   : Sampled/symmetric trajectories
+
+
+                       Figure 1. Illustration for two-step training strategies: reward-maximizing training and symmetric replay training.
+
+et al., 2022) or problem (Duan et al., 2022). To effectively                       transformations. They provide theoretical and empirical
+utilize symmetries in CO, we suggest a decomposed train-                           insights for SRT. Note that the maximum entropy transfor-
+ing process in two steps: reward-maximizing training and                           mation is primarily adopted since it is a generic approach
+symmetric replay training. The two-step training also allows                       with low computational complexity  Industrial & Systems Engineering
+                                                                                                                         while effectively im-           7
+efficient exploration in the vast action trajectory space.                         proving sample efficiency in various tasks.
+Reward-maximizing training is conducted with a conven-                             We empirically demonstrate that symmetric replay training
+tional DRL algorithm, which involves the exploration of                            consistently improves the sample efficiency by plugging it
+the high-rewarded action trajectories over the entire action                       into various DRL methods with simple implementation. The
+space. Subsequently, symmetric replay training bootstraps                          experimental results show that plugging our method into the
+the policy to explore symmetric regions without additional                         state-of-the-art DRL method can achieve superior perfor-
+reward evaluation, leading to improved sample efficiency.                          mance in hardware design optimization and sample-efficient
+In detail, the high-rewarded action trajectories obtained in                       molecular optimization by adding it to the competitive DRL
+the previous step are symmetrically transformed, and then                          method. Here is a highlight of our contribution:
+the policy is trained to imitate these symmetric action tra-
+jectories. As illustrated in Figure 1, the symmetric replay                          1. We propose a generic method, symmetric replay train-
+training promotes the exploration of under-explored regions                             ing (SRT), which enhances the sample efficiency of
+containing trajectories equivariant to the high-rewarded tra-                           various DRL methods for CO. The proposed method
+jectories collected from reward-maximizing training.                                    is empirically demonstrated as simple yet effective, by
+                                                                                        consistently improving various DRL methods, both
+The two decomposed training steps, reward-maximizing and                                on-policy and off-policy, in various tasks.
+symmetric replay training, are effectively inter-operated:
+one seeks the high-reward samples, while the other recycles                          2. We investigate various symmetric transformation strate-
+the explored samples to explore symmetric regions for free.                             gies for replay training, offering both theoretical and
+Symmetric replay training strategically leverages previously                            empirical perspectives that could benefit future efforts
+high-rewarded trajectories without necessitating additional                             in SRT-like replay training approaches.
+reward evaluation. Our policy is trained to maximize the
+                                                                                     3. We conduct comprehensive experiments with a broad
+likelihood of high-rewarded trajectories in the symmetric
+                                                                                        range of DRL methods and various CO tasks. We
+region, encouraging exploration of under-explored areas.
+                                                                                        benchmark the DRL methods from on-policy to off-
+Additionally, replaying symmetric trajectories incorporates
+                                                                                        policy methods across various tasks from classical TSP
+symmetric priors, relieving the overfitting of replay training.
+                                                                                        to practical hardware design optimization, which can
+Since the policy perceives these symmetric trajectories as
+                                                                                        contribute to DRL for CO communities.
+heterogeneous, SRT is advantageous in scaling up the replay
+loop to further utilize collected samples before re-interacting
+with the environment.                                                              2. Related Works
+For a better comprehension of symmetric replay training,                           2.1. Symmetries in DRL for CO
+this paper explores three straightforward strategies: (1) max-                     Several works have been studied to utilize the symmetric
+imum entropy, (2) adversarial, and (3) importance sampling                         nature of combinatorial optimization. Representatively, the
+
+                                                                               2
+                                                     Symmetric Replay Training
+
+Policy Optimization for Multiple Optima (POMO; Kwon                       MLE training of SRT is also beneficial compared to data
+et al., 2020) and Symmetric Neural Combinatorial Optimiza-                augmentation training; see Appendix D.3. Note that SRT
+tion (Sym-NCO; Kim et al., 2022b) are proposed. These                     uses imitation loss, which allows training with augmented
+methods sample multiple trajectories from a single prob-                  trajectories without introducing importance weights, even
+lem by forcing N heterogeneous starting point based on                    in on-policy DRL.
+the TSP’s cyclic symmetries (Kwon et al., 2020) or giving
+symmetric input noise to make wide exploration (Kim et al.,               2.3. Replay Ratio Scaling
+2022b). Importantly, they use symmetries to effectively eval-
+uate the REINFORCE baseline, which stabilizes training by                 Increasing the number of replay loops is highly related to
+effectively reducing the variance. However, they associate                scaling up the replay ratio, which means the number of pa-
+extensive reward evaluation, while ours does not require                  rameter updates per environment interaction (Wang et al.,
+additional sample evaluations to utilize symmetries. Fur-                 2017; Fedus et al., 2020; D’Oro et al., 2022). Replay ratio
+thermore, the results in Appendix D.7 demonstrate that SRT                is also known as update-to-data (UTD) ratio (Chen & Tian,
+can further improve the sample efficiency of these methods.               2019; Smith et al., 2022). Although the benefits of replay
+The improvements come from the difference that they take                  ratio scaling are limited, it has demonstrated improved per-
+account of symmetries in input space, while ours utilize                  formance, particularly on well-tuned algorithms (Kielak,
+symmetries in output (action trajectories) space.                         2019; Chen & Tian, 2019; Smith et al., 2022). Recently,
+                                                                          D’Oro et al. (2022) achieved better replay ratio scaling with
+Separately, Generative Flow Networks (GFlowNets; Bengio                   parameter reset strategy by mitigating the loss of ability
+et al., 2023), which represents the combinatorial space in                to generalize on model-free RL. Most replay ratio scaling
+CO problems with a directed acyclic graph, were proposed.                 approaches assume the utilization of replay training, thus off-
+We discuss the relationship with GFlowNet in Section 4.4.                 policy training, and propose how to further increase replay
+                                                                          ratio by preventing overfitting or primacy biases (D’Oro
+2.2. Data Augmentation                                                    et al., 2022; Nikishin et al., 2022). On the other hand, we
+                                                                          propose a new replay method both for off-policy and on-
+The symmetric transformation shares a similar concept with
+                                                                          policy training in CO. Though SRT demonstrates that it can
+data augmentation techniques, such as cropping (Laskin
+                                                                          increase replay ratio less suffering from overfitting, other
+et al., 2020; Yarats et al., 2021), noise injection (Laskin et al.,
+                                                                          replay ratio scaling approaches like periodic resetting policy
+2020; Fan et al., 2021), and Mixup (Fan et al., 2021; Zhang
+                                                                          parameters or sophisticated design for experience buffer can
+et al., 2018), all of which can contribute to improved sample
+                                                                          be incorporated to enhance sample efficiency further.
+efficiency. However, most data augmentation methods focus
+on continuous space. Notably, recent efforts have been made               We provide further related works in Appendix E.
+to adapt data augmentation NLP tasks (Shen et al., 2020;
+Ren et al., 2021; Feng et al., 2021; Kim et al., 2021b). One              3. Background
+of the key ideas is to obtain informative samples while keep-
+ing the semantics of original sentences, (Wang et al., 2018;              Our method aims to improve the sample efficiency of deep
+Garg & Ramakrishnan, 2020). Notably, Kim et al. (2021b)                   reinforcement learning for solving combinatorial optimiza-
+introduces a learnable augmentation policy that constructs                tion with expensive reward function. Specifically, we con-
+difficult but not too different samples (DND). As our sym-                sider combinatorial optimization as maximization of the
+metric transformation preserves the solutions by utilizing                black-box function f (x) over a discrete set X , i.e.,
+the nature of CO tasks, augmenting trajectories does not
+lose semantics. Note that the adversarial transformation is                                         max f (x).
+                                                                                                    x∈X
+designed to find difficult samples akin to DND.
+In CO, Duan et al. (2022) presented a label-preserving aug-               To solve this problem, we formulate the construction and
+mentation in contrastive learning for the Boolean satisfi-                evaluation of the solution as a Markov decision process
+ability problem. Additionally, Yao et al. (2022) utilized                 (MDP). In the MDP, we let each state s describe a subse-
+augmentation, including flipping, in supervised learning for              quence of the action trajectory with problem context c, i.e.,
+the TSP. Lastly, Kim et al. (2023) suggested an additional                st = {(a1 , . . . , at−1 ), c}. The initial state corresponds to
+loss term using symmetrically augmented data in hardware                  an empty, i.e., s1 = {∅, c}, and the final state corresponds
+design. These works suggested data augmentation based                     to a complete sequence of actions, i.e., sT = {⃗a, c}, giving
+on symmetries, which is integrated into a specific learn-                 a solution x. Then, a policy π(s′ |s) decides a transition
+ing framework. On the other hand, our paper introduces                    between states, s → s′ , by selecting an action a to be up-
+a generic method to enhance diverse DRL methods across                    dated to the incomplete solution described by the state s.
+various domains. We empirically show that the separated                   We assume that the transition is deterministic, meaning that
+                                                                          the next state is determined by a specific transition function.
+
+                                                                      3
+                                                 Symmetric Replay Training
+
+We further impose two conditions on the MDP that exploit
+the prior knowledge about combinatorial optimization prob-
+lems considered in this work. First, we assume the reward
+is episodic, i.e., given a terminated action-state trajectory
+associated with a solution x, the reward R(sT ) = f (x) and
+R(st ) = 0 for t < T . Note that the sT contains the action
+sequence ⃗a, giving a solution x. The next condition is that
+the action space At at each state st only consists of actions
+that generate a valid solution.
+
+4. Methodology
+                                                                                 Figure 2. Overview of iterative training
+Our method, symmetric replay training (SRT), is an add-
+on method that improves the sample efficiency of DRL for             given trajectory τ = (s1 , . . . , sT ) using the loss function
+CO by replaying the symmetrically transformed solution.              defined as follows:
+The key idea is to utilize the symmetric natures of CO to
+generate different trajectories, which induce the same solu-                          LRM = (R(x) − b) log πθ (τ ),
+tions, i.e., solution-preserving transformation; no additional                                       −1
+                                                                                                    TY
+reward evaluations are required as the solution remains un-                       where πθ (τ ) =         πθ (st+1 |st ).
+changed. SRT enhances sample efficiency in two ways: (1)                                            t=1
+by recycling once-evaluated samples via replay training and
+                                                                     Here, b is a baseline that does not depend on x. It is worth
+(2) by stimulating the exploration of under-explored regions
+                                                                     emphasizing that the model and training method in reward-
+via symmetric trajectories.
+                                                                     maximizing training are not restricted. Thus, our method
+Our method repeats the following two policy update loops:            allows the application of various DRL methods as a base.
+
+Step A: Reward-maximizing training. Train the (factor-               4.2. Symmetric Replay Training
+    ized) policy using a conventional episodic reinforce-
+                                                                     4.2.1. S YMMETRIC TRANSFORMATION POLICY
+    ment learning algorithm.
+                                                                     The symmetric trajectory policy p(τ→x |x) is a probabilistic
+Step B: Symmetric replay training                                    distribution that samples symmetric trajectories τ→x , which
+       1. Collect high-rewarded trajectories from Step A.            have an identical terminal state (i.e., an identical solution
+                                                                     x). For example, in the traveling salesman problem (TSP), a
+       2. Randomly sample trajectories using symmetric
+                                                                     representative CO problem, shifting the starting points gives
+          transformation policy.
+                                                                     the same solution. In the case of TSP with four cities, the
+       3. Train the policy by imitating the symmetric tra-           sequences 1-2-3-4-1 and 3-4-1-2-3 represent the identical
+          jectories.                                                 Hamiltonian cycle x.
+                                                                     For a better comprehensive understanding of the symmetric
+Intuitively, our Step A is designed to encourage the policy
+                                                                     transformation policy, we investigate possible choices of
+to exploit high-reward samples via reinforcement learning.
+                                                                     p(τ→x |x): maximum entropy, adversarial, and importance
+Then, Step B aims to promote exploration of the symmet-
+                                                                     sampling transformations.
+ric space by imitating the collected high-reward samples
+with symmetric transformation. Note that the strategies for
+collecting high-reward samples are flexibly employed ac-             Maximum entropy transformation policy. By setting
+cording to tasks or DRL methods, such as greedy rollout,             p(τ→x |x) as a uniform distribution, we can achieve the max-
+reward-prioritized sampling, or top-K selection.                     imum entropy for the training policy πθ (·); see Theorem 4.1
+                                                                     in Section 4.3 for theoretical analysis. Notably, the uniform
+                                                                     distribution stands out for its simplicity and O(1) sampling
+4.1. Reward-maximizing Training
+                                                                     cost (e.g., in TSP, a symmetric trajectory is determined by
+Reward-maximizing training corresponds to the original               simply choosing the starting point and direction), easily ap-
+training of deep reinforcement learning (DRL) methods.               plicable to various tasks. Therefore, we adopt the maximum
+For simplicity, this step is illustrated using the example of        entropy policy as a default for our experiments.
+REINFORCE, a widely used DRL algorithm for CO (e.g.,
+Bello et al., 2017; Kool et al., 2018; Kim et al., 2022b). In        Adversarial transformation policy. An alternative op-
+reward-maximizing training, the policy πθ is trained for a           tion is to sample a trajectory that has the minimum log-
+
+                                                                 4
+                                                    Symmetric Replay Training
+
+likelihood under πθ (τ ). Formally, symmetric trajectories              symmetric replay training. First, we begin with introducing
+are selected as follows:                                                a theorem about the maximization of policy entropy.
+                                                                        Theorem 4.1. Consider a distribution πθ (τ ) over the tra-
+                        min log π(τ ),
+                       τ ∈T→x                                           jectory, and πθ (x) over its corresponding solutions. Let
+                                                                        U (τ→x |x) denote an uniform distribution. Then the entropy
+where T→x denotes a set of all trajectories that give a solu-
+                                                                        of πθ (τ ) can be decomposed and upper bounded as follows:
+tion x. In the case of TSP, where the number of symmetric
+trajectories is 2N , where N is the problem size, the sam-                    H(πθ (τ ))
+pling cost is O(N ).                                                                  = H(πθ (x)) + Ex∼πθ (x) H(p(τ→x |x))
+                                                                                        | {z } |              {z         }        (2)
+                                                                                            Step A              Step B
+Importance sampling transformation policy. The last
+option is to sample trajectories based on importance weights,                         ≤H(πθ (x) + Ex∼πθ (x) H(U (τ→x |x)).
+which are set inversely proportional to the log-likelihood.
+Formally, symmetric trajectories are sampled from                       Proof. See Appendix A.1 for the entire proof.
+
+                p(τ→x |x) ∝ e−β log πθ (τ→x ) .                         In Theorem 4.1, the policy entropy H(πθ (τ )) is decom-
+                                                                        posed into two distinct components: the entropy associated
+Here, β is an inverse temperature, a tunable hyperparameter.            with the solution exploration policy, denoted as H(p(x)),
+Intuitively, it becomes the maximum entropy transformation              and the entropy for the symmetric transformation policy,
+as β → 0, and the adversarial transformation as β → ∞;                  expressed as Ex∼p(x) H(p(τ→x |x)). This decomposition
+refer to Appendix A.2 for formal proof. Therefore, having               offers an intuitive illustration of our two-step learning pro-
+0 < β < ∞ can be considered a compromised approach                      cess. In particular, maximizing the second entropy term
+between the maximum entropy and adversarial transforma-                 encourages the search of various symmetric spaces while
+tions. Note that evaluating the importance weight requires              preserving high-reward solutions. We achieve this by em-
+O(N ) computations in TSP.                                              ploying uniform symmetric transformation, represented as
+                                                                        p(τ→x |x) = U (τ→x |x). This approach enables us to maxi-
+4.2.2. S YMMETRIC REPLAY TRAINING                                       mize entropy exploration within the symmetric space, facili-
+The symmetric replay training involves maximum likelihood               tating a more comprehensive search of potential solutions.
+estimation of τ→x sampled from p(τ→x |x). The symmetric
+replay training loss function is derived as follows:                    4.4. Relationship with GFlowNets
+                                                                        Our symmetric transformation policy p(τ→x |x) is similar
+           LSRT (x) = −Ep(τ→x |x) [log πθ (τ→x )]            (1)
+                                                                        to GFlowNet’s backward policy PB (st |st+1 ) where both
+The SRT loss function is formulated to maximize the log-                assume the multiple possible (partial) trajectories that leads
+likelihood of the symmetric trajectories. To adjust the scale           to identical states: i.e., directed acyclic graph (DAG)-like
+of the loss function, we introduce a scaling coefficient.               MDP. While GFlowNets trains policy using a balanced ob-
+Roughly, α is set to make LSRT 10 or 100 times smaller                  jective with PB , such as trajectory balance (Malkin et al.,
+than LRM . Note that the high-reward samples are obtained               2022), which is known to give slow learning signals when
+by greedy rollout or selecting Top-K samples in the mini-               trajectory length is large (Falet et al., 2024), our method
+batch, and so on.                                                       makes direct credit assignment into a trajectory drawn from
+                                                                        p(τ→x |x), which gives faster learning signals. Accordingly,
+Our symmetric replay training significantly benefits from               our method significantly improves GFlowNets training effi-
+additionally exploring the high-rewarded regions on the                 ciency by using our periodic replay training of maximum
+symmetric space for free. Moreover, we can explore regions              likelihood estimation in experiments on three tasks.
+that are likely to have higher rewards but are far from the
+current regions, since the symmetric action trajectory may
+have a significant edit distance from the original trajectory.1         5. Experiments
+                                                                        This section presents experiments with three distinct set-
+4.3. Interplay of Reward-maximizing and Symmetric                       tings: a synthetics scenario and two real-world scenarios of
+     Replay Training                                                    hardware design and sample-efficient molecular optimiza-
+This subsection presents an analysis of the interplay be-               tion. For the synthetic setting, we employ traveling salesman
+tween two iterative steps: reward-maximizing training and               problems (TSP), the widely studied CO problems, for pre-
+                                                                        cise analyses of the proposed method. We also provide the
+   1
+     Edit distance is a measure of similarity between two se-           experiments on other CO problems in Appendix D.7.
+quences, defined as the minimum number of operations required
+to transform one sequence into the other, e.g., Hamming distance.       In the subsequent sections, we validate the effectiveness of
+
+                                                                    5
+                                                                         Symmetric Replay Training
+
+
+Table 1. Sample efficiency on the synthetic TSP (N = 50) with                                                         6.5       Non-symmetric
+                                                                                                                                Symmetric
+four independent seeds. The average costs (↓) and the standard                                                        6.4
+
+
+                                                                                                        Cost (K=2M)
+deviations are reported.                                                                                              6.3
+ Method                                            K = 100K              K = 2M                                       6.2
+ A2C (Bello et al., 2017)                         6.780 ± 0.208      6.129 ± 0.021                                    6.1
+ A2C + SRT (ours)                                 6.586 ± 0.043      6.038 ± 0.005                                    6.0
+                                                                                                                            0     1      2       4       8    16
+ PG-Rollout (Kool et al., 2018)                   7.138 ± 0.196      6.226 ± 0.026                                               The number of replay loops
+ PG-Rollout + SRT (ours)                          6.879 ± 0.110      6.131 ± 0.019
+ PPO (Schulman et al., 2017)                      6.771 ± 0.120      6.319 ± 0.110                                      Figure 4. Increasing replay loop
+ PPO + SRT (ours)                                 6.712 ± 0.024      6.249 ± 0.045
+ GFlowNet (Bengio et al., 2023)                   6.797 ± 0.078      6.195 ± 0.010
+ GFlowNet + SRT (ours)                            6.596 ± 0.030      6.167 ± 0.013           consequent customers is defined as an Euclidean distance.
+                                                                                             The auto-regressive policy starts from an empty tour and
+                                                                                             constructs the (partial) tour by iteratively selecting the next
+       7.25                    A2C                                    PG
+                               A2C + SRT (ours)                       PG + SRT (ours)        visit. In TSP, a solution denotes a cycle (i.e., a route) with-
+       7.00                                                                                  out a designated starting point. Thus, symmetric trajectories
+       6.75
+Cost                                                                                         are obtained by cyclically shifting k positions to the left
+       6.50                                                                                  or right. Furthermore, in TSP with Euclidean distance, the
+       6.25                                                                                  reversed order of visiting sequence also gives a symmetric
+       6.00                                                                                  action trajectory. We set the maximum reward calls as 2M.
+              0.0M   0.5M   1.0M    1.5M    2.0M 0.0M    0.5M     1.0M    1.5M    2.0M
+       7.25                    PPO                              GFlowNet
+                               PPO + SRT (ours)                 GFlowNet + SRT (ours)
+       7.00
+                                                                                             Experimental setting. Our experiments are conducted
+       6.75
+Cost                                                                                         with AM architecture from Kool et al. (2018). We employ
+       6.50
+                                                                                             various RL methods, including policy gradient with actor-
+       6.25                                                                                  critic (Bello et al., 2017), policy gradient with greedy rollout
+       6.00                                                                                  (Kool et al., 2018), Proximal Policy Optimization (Schul-
+              0.0M   0.5M   1.0M    1.5M    2.0M 0.0M    0.5M     1.0M    1.5M    2.0M
+                     Num. of reward calls               Num. of reward calls                 man et al., 2017), and a Generative Flow Network (Bengio
+                Figure 3. Optimization curves on TSP (N = 50)                                et al., 2023), and additionally implement SRT on top of
+                                                                                             the DRL methods to enhance sample efficiency. Note that
+                                                                                             GFlowNet is an off-policy method. We basically follow
+our method in real-world applications. Firstly, we conduct                                   the hyperparameter configuration used in AM. For addi-
+experiments focused on hardware design optimization, par-                                    tional parameters of PPO and GFlowNet, we systematically
+ticularly addressing the Decap Placement Problem (DPP),                                      evaluate several combinations to identify the most optimal
+a widely recognized problem within the hardware design                                       configuration. The details about implementations are pro-
+domain (Koo et al., 2017; Kim et al., 2021a; Berto et al.,                                   vided in Appendix B. We measure the average costs on the
+2023). Furthermore, we extend our experiments to the Prac-                                   validation dataset over the number of reward calls (K) in
+tical Molecular Optimization (PMO) benchmark (Gao et al.,                                    training with four independent random seeds. In symmet-
+2022), a well-established benchmark for sample-efficient                                     ric replay training, we gather confidence trajectories from
+molecular optimization. All data and codes are available at                                  the up-to-date policy via greedy rollout, assuming that the
+https://github.com/kaist-silab/symmetric replay.                                             greedy solution gives a relatively high reward trajectory.
+
+5.1. Synthetic Setting: Traveling Salesman Problems
+                                                                                             Does SRT improve sample efficiency? As illustrated in
+In general, CO problems have closed forms of objective                                       Figure 3 and detailed in Table 1, our approach consistently
+functions, which means the reward evaluations are not ex-                                    demonstrates enhanced sample efficiency across various
+pensive. However, we conduct experiments on the TSP                                          DRL methods. Notably, A2C outperforms the other meth-
+synthetic dataset assuming that the number of computing                                      ods under conditions where the number of available training
+objective function values is limited; this allows more con-                                  samples is limited, thereby resulting in the best performance
+trolled experiments and more precise analysis.                                               when combined with SRT. The most substantial improve-
+                                                                                             ment facilitated by SRT is observed in the case of GFlowNet,
+Tasks. Traveling salesman problems (TSP) aim to min-                                         where a cost reduction of 3.76% is achieved when the sam-
+imize the distance of a tour that visits all customers and                                   ple size K = 100K. In PG-Rollout, a 1.53% cost reduction
+returns to the starting point. In TSP, the distance between                                  is realized with SRT when K = 2M.
+
+                                                                                         6
+                                                                                                    Symmetric Replay Training
+
+        6.1                                                      18
+
+
+
+
+                                           Difference of Log-likelihood
+                             MaxEnt                                                                 MaxEnt             Table 2. Experimental results of DPP on two different PDN envi-
+                             Sampling                            17                                 Sampling
+                             Adversaial                          16                                 Adversaial         ronments. The average rewards (↑) and standard deviations are
+       6.05
+                                                                                                                       reported with four independent runs.
+Cost                                                             15
+                                                                                                                                                                          Chip-package
+                                                                 14                                                     Method                                                                 HBM PDN
+                                                                                                                                                                              PDN
+                                                                          9
+                                                                                                                        A2C (Kool et al., 2018)                        9.772 ± 0.823        25.945 ± 0.177
+       6.01                                                               8                                             A2C + SRT (ours)                              12.757 ± 0.267        26.449 ± 0.094
+           1.0M 1.2M 1.4M 1.6M 1.8M 2.0M                                      1.0M           1.5M           2.0M
+               Num. of reward calls                                                  Num. of reward calls               PG-Rollout (Kool et al., 2018)                10.240 ± 0.955        25.714 ± 0.122
+                                                                                                                        PG-Rollout + SRT (ours)                       12.601 ± 0.467        26.355 ± 0.013
+Figure 5. The optimization curve (left) and difference between
+symmetric trajectories (right) with different transformation polices.                                                   PPO (Schulman et al., 2017)                    9.821 ± 0.411        25.907 ± 0.068
+                                                                                                                        PPO + SRT (ours)                              11.279 ± 0.511        26.322 ± 0.141
+                                                                                                                        GFlowNet (Bengio et al., 2023)                 9.740 ± 0.245        25.845 ± 0.103
+Overfitting in replay training. In this section, we inves-                                                              GFlowNet + SRT (ours)                         12.784 ± 0.186        26.469 ± 0.057
+tigate the extent to which symmetric replay training can
+increase the number of replay loops without encountering
+                                                                                                                              26.50
+issues of overfitting. To assess the effectiveness of sym-                                                                    26.25
+metric transformation in replay training, we perform the                                                                      26.00
+same experiments without symmetric transformation (the                                                                 Cost   25.75
+results are denoted as ‘Non-symmetric’ in Figure 4). As                                                                       25.50
+                                                                                                                                                       A2C                                     PG
+illustrated in Figure 4, our symmetric replay training suc-                                                                   25.25                    A2C + SRT (ours)                        PG + SRT (ours)
+cessfully enhances sample efficiency up to replay loops                                                                               0K        5K        10K        15K           5K          10K        15K
+16. In contrast, non-symmetric replay training experiences                                                                    26.50
+diminished performance when reaching when the loop ex-                                                                        26.25
+ceeds 8. This suggests that the symmetric transformation                                                                      26.00
+provides trajectories that induce the same solution but are                                                            Cost   25.75
+distinctive from the policy’s perspective, contributing to                                                                    25.50
+                                                                                                                                                       PPO                               GFlowNet
+                                                                                                                              25.25                    PPO + SRT (ours)                  GFlowNet + SRT (ours)
+mitigating overfitting from replaying the restricted set of
+repetitive trajectories.                                                                                                              0K        5K        10K        15K 0K         5K          10K         15K
+                                                                                                                                             Num. of reward calls                Num. of reward calls
+
+                                                                                                                                           Figure 6. Optimization curves on HBM PDN
+Comparing different strategies of p(τ→x |x). We con-
+duct experiments to compare different symmetric transfor-
+mation policies. The difference of loglikelihood between                                                               5.2. Hardware Design Optimization
+symmetric trajectories is measured as follows:
+                                                                                                                       Tasks. We employ decoupling capacitor placement prob-
+                1       X                                                                                              lems (DPP), which constitute a fundamental optimization
+                                log πθ (τ ) − min log πθ (τ )                                                          challenge in hardware design. In the context of hardware de-
+              |T→x |                                                           τ ∈T→x
+                       τ ∈T→x                                                                                          vices like CPUs and GPUs, a decoupling capacitor (decap) is
+                                                                                                                       a critical component responsible for reducing power noises
+As illustrated in Figure 5, the adversarial transformation ef-                                                         along the power distribution network (PDN). The primary
+fectively minimizes log-likelihood differences among sym-                                                              objective of DPP is to identify the optimal arrangement for
+metric trajectories, thereby enhancing sample efficiency. De-                                                          placing these decaps to maximize the power integrity (PI)
+spite its effectiveness, the adversarial transformation might                                                          objective, which involves computationally expensive evalu-
+not be unavailable when the analytical knowledge of sym-                                                               ations. We tackle two distinct DPP tasks: the chip-package
+metric trajectories is not accessible. On the other hand,                                                              PDN (Koo et al., 2017) and the High Bandwidth Memory
+the maximum entropy transformation is a more generic ap-                                                               (HBM) PDN (Jun et al., 2017) with 15K limited reward
+proach, so it is advantageous for practical scenarios.                                                                 calls. These two tasks exhibit variations in their PI land-
+                                                                                                                       scapes, presenting unique challenges. In DPP, permuting
+Additional experiments. We provide the experimental                                                                    the decision orders of decap yields symmetric trajectories.
+results to verify the effectiveness of each choice by ablating
+the components. Moreover, we compare SRT with expe-                                                                    Experimental setting. We employ a Device Transformer
+rience replay. Ours shows superior performance by not                                                                  (DevFormer; Kim et al., 2023) as our base neural architec-
+introducing importance weight, leading to low variance and                                                             ture, originally designed for offline DPP tasks. In an online
+allowing replay training of on-policy methods like A2C. All                                                            optimization context involving interactions with the DPP
+results are provided in Appendix D.                                                                                    environment, we integrate well-established DRL methods
+
+                                                                                                                   7
+                                                 Symmetric Replay Training
+
+(A2C, PG, PPO, and GFlowNet) on DevFormer to maxi-
+                                                                     Table 3. Experimental results on sample efficient molecular opti-
+mize effectiveness. Similar to the experiment on TSP, we
+                                                                     mization. AUC top-10 (↑) is reported with five independent runs.
+adjust hyperparameters by examining several combinations             We use oracle ID instead of a name for better readability.
+since DPP tasks have different reward scales. The details are                                                         GFlowNet                              REINVENT
+provided in Appendix B. Lastly, we use higher-than-average                   Oracle                 GFlowNet                                 REINVENT
+                                                                                                                     + SRT (ours)                           + SRT (ours)
+samples in the online batch as high-rewarded samples. To                     #1                    0.459 ± 0.028    0.526 ± 0.022        0.847 ± 0.021      0.889 ± 0.008
+verify the effectiveness of our methods, SRT is built on these               #2                    0.437 ± 0.007    0.448 ± 0.010        0.605 ± 0.017      0.616 ± 0.018
+                                                                             #3                    0.326 ± 0.008    0.345 ± 0.011        0.603 ± 0.084      0.590 ± 0.040
+DRL methods to enhance sample efficiency and compare                         #4                    0.587 ± 0.002    0.582 ± 0.004        0.630 ± 0.013      0.650 ± 0.045
+the resulting rewards.                                                       #5                    0.601 ± 0.055    0.796 ± 0.054        0.953 ± 0.006      0.960 ± 0.005
+                                                                             #6                    0.700 ± 0.005    0.688 ± 0.006        0.735 ± 0.004      0.751 ± 0.009
+                                                                             #7                    0.666 ± 0.006    0.657 ± 0.010        0.800 ± 0.016      0.828 ± 0.034
+Results. Addressing DPP tasks proved challenging due                         #8                    0.468 ± 0.211    0.928 ± 0.006        0.940 ± 0.014      0.924 ± 0.036
+to the limited online reward calls available. For instance,                  #9                    0.199 ± 0.199    0.628 ± 0.024        0.842 ± 0.018      0.858 ± 0.016
+                                                                             #10                   0.442 ± 0.017    0.505 ± 0.040        0.574 ± 0.101      0.665 ± 0.113
+the PG-Rollout method exhibited high variances, making                       #11                   0.207 ± 0.003    0.211 ± 0.002        0.350 ± 0.012      0.351 ± 0.015
+it less effective at exploring the DPP solution space. This                  #12                   0.181 ± 0.002    0.181 ± 0.002        0.255 ± 0.014      0.260 ± 0.010
+challenge stems from the inherent symmetry of DPP, where                     #13                   0.332 ± 0.012    0.339 ± 0.004        0.618 ± 0.020      0.637 ± 0.065
+                                                                             #14                   0.785 ± 0.003    0.784 ± 0.003        0.821 ± 0.007      0.820 ± 0.005
+multiple trajectories could lead to identical solutions. Con-                #15                   0.434 ± 0.006    0.429 ± 0.010        0.538 ± 0.030      0.536 ± 0.015
+versely, GFlowNet models, incorporating structured bias                      #16                   0.917 ± 0.002    0.922 ± 0.002        0.940 ± 0.001      0.941 ± 0.000
+to handle solution symmetries, showed improved perfor-                       #17                   0.660 ± 0.004    0.652 ± 0.008        0.749 ± 0.015      0.779 ± 0.019
+                                                                             #18                   0.464 ± 0.003    0.466 ± 0.003        0.529 ± 0.020      0.538 ± 0.010
+mance compared to non-symmetric DRL methods like PPO.                        #19                   0.217 ± 0.022    0.282 ± 0.013        0.511 ± 0.029      0.535 ± 0.046
+As demonstrated in Table 2 and Figure 6, significant im-                     #20                   0.292 ± 0.009    0.291 ± 0.007        0.459 ± 0.011      0.536 ± 0.035
+provements are observed by applying SRT on top of these                      #21                   0.190 ± 0.002    0.189 ± 0.004        0.342 ± 0.016      0.372 ± 0.032
+                                                                             #22                   0.000 ± 0.000    0.000 ± 0.000        0.000 ± 0.000      0.000 ± 0.000
+methods. The most considerable reward improvement is                         #23                   0.353 ± 0.024    0.398 ± 0.010        0.512 ± 0.017      0.514 ± 0.015
+observed in A2C for chip-package PDN, at 30.54%. In the                      Avg.                     0.431                0.489               0.615            0.632
+case of GFlowNet with SRT, exploring focused on the sym-
+metric variants within the high-reward region enhances the                                                  jnk3                                 isomers_c7h8n2o2
+                                                                                         0.6                                       1.0
+sample efficiency by mitigating its underfitting. Notably,
+
+
+                                                                     Avg. Top-10 score
+                                                                                                                                   0.8
+the wall-clock comparison results in Appendix D.4 show                                   0.5
+                                                                                                                                   0.6
+that SRT effectively enhances performance by achieving sig-                              0.4
+                                                                                                                                   0.4
+nificantly lower costs while maintaining similar or slightly                             0.3
+                                                                                                         GFlowNet                  0.2              GFlowNet
+increased runtime.                                                                       0.2             GFlowNet + SRT (ours)     0.0              GFlowNet + SRT (ours)
+                                                                                               0   2000 4000 6000 8000 10000             0    2000 4000 6000 8000 10000
+                                                                                                           jnk3                                  isomers_c7h8n2o2
+5.3. Practical Molecular Optimization Benchmark                                                                                    1.0
+
+
+
+
+                                                                     Avg. Top-10 score
+                                                                                         0.8                                       0.8
+Tasks. We employ practical molecular optimization
+                                                                                         0.6                                       0.6
+(PMO; Gao et al., 2022), whose reward evaluations are lim-
+                                                                                         0.4                                       0.4
+ited up to 10K, and the goal is achieving the highest score
+                                                                                         0.2            REINVENT                   0.2             REINVENT
+within the limited reward calls. PMO contains 23 tasks                                                  REINVENT + SRT (ours)                      REINVENT + SRT (ours)
+                                                                                                                                   0.0
+based on different score functions called Oracles; a task                                      0   2000 4000 6000 8000 10000             0    2000 4000 6000 8000 10000
+                                                                                                    Num. of reward calls                       Num. of reward calls
+is a CO problem that maximizes the given score function,
+such as QED (Bickerton et al., 2012), DRD2 (Olivecrona               Figure 7. Average score of Top-10 in jnk3 (Oracle #10) and
+et al., 2017) and JNK3 (Li et al., 2018). For example, QED           isomers c7h8n2o2 (Oracle #8).
+measures drug safety, while the others measure bioactivi-
+ties against their corresponding disease targets. In de novo         the online experience buffer, so we also collect the replay
+molecular optimization, molecules are represented as graphs          samples from the experience buffer with the same replay
+or strings,2 which have multiple ways for a single molecule.         size. For GFlowNet, we set the replay size as the same as
+                                                                     the sample batch size. The performance of the methods
+Experimental setting. We build SRT on the GFlowNet                   is evaluated based on the area under the curve (AUC) to
+(Bengio et al., 2023) and REINVENT (Olivecrona et al.,               consider a combination of optimization ability and sample
+2017). REINVENT is the most competitive DRL method,                  efficiency. The AUC of the top 10 average performance is
+and GFlowNet is beneficial to generate diverse candidates            mainly reported since it is essential to find distinct molecular
+in the PMO benchmark. Note that REINVENT contains                    candidates to progress to later stages of development in drug
+   2
+    In this study, we mainly employ SELFreferencIng Embed-           discovery. Lastly, as a high-rewarded sample to replay, we
+ded Strings (SELFIES; Krenn et al., 2020) for the string-based       gather Top-K samples from the entire pool of generated
+representation to ensure compliance with chemical constraints.       samples up to that point in training.
+
+                                                                 8
+                                                 Symmetric Replay Training
+
+Results. As shown in Table 3, SRT significantly improves             the Korea government(MSIT) (2022-0-01032, Development
+GFlowNet and REINVENT by achieving the enhanced                      of Collective Collaboration Intelligence Framework for In-
+AUC in 12 and 18 oracles out of 23, respectively, not                ternet of Autonomous Things).
+only on average; the statistical analyses are provided in
+Appendix D.5. Note that REINVENT is regarded as a                    References
+state-of-the-art method in PMO, and SRT also improves
+16 oracles out of 23 in the experiment of REINVENT with              Ahn, S., Kim, J., Lee, H., and Shin, J. Guiding deep molec-
+SMILES strings; see Appendix D.6. In addition, Figure 7                ular optimization with genetic exploration. Advances in
+further demonstrates our method’s effectiveness by illustrat-          neural information processing systems, 33:12008–12021,
+ing the average scores of the top 10 molecules in the JNK3             2020a.
+and isomer c7h8n2o2 tasks, revealing a substantial en-
+                                                                     Ahn, S., Seo, Y., and Shin, J. Learning what to defer for
+hancement in sample efficiency.
+                                                                       maximum independent sets. In Proceedings of the 37th
+                                                                      International Conference on Machine Learning, PMLR,
+6. Conclusion                                                          pp. 134–144, 2020b.
+This study proposes a new approach, called symmetric re-             Baptista, R. and Poloczek, M. Bayesian optimization of
+play training (SRT), to enhance the sample efficiency of               combinatorial structures. In International Conference on
+DRL methods for practical combinatorial optimization prob-             Machine Learning, pp. 462–471. PMLR, 2018.
+lems. Our approach improves the sample efficiency by
+reusing the high-rewarded samples from the policy in the             Bello, I., Pham, H., Le, Q. V., Norouzi, M., and Bengio,
+symmetric space, which helps explore new regions without               S. Neural combinatorial optimization with reinforcement
+additional reward computation. Replay training through                 learning. In 5th International Conference on Learning
+symmetric transformations enhances the sample efficiency               Representations, Workshop Track Proceedings, 2017.
+by effectively increasing the replay ratio while mitigating
+                                                                     Bengio, E., Jain, M., Korablyov, M., Precup, D., and Ben-
+the adverse effects of overfitting. The proposed method is
+                                                                       gio, Y. Flow network based generative models for non-
+a generic add-on approach that can synergize with previ-
+                                                                       iterative diverse candidate generation. Advances in Neu-
+ously proposed constructive DRL methods across various
+                                                                       ral Information Processing Systems, 34:27381–27394,
+CO problems. Since our method is conducted separately (in
+                                                                       2021.
+Step B), we do not introduce additional restrictions on train-
+ing or alter the architecture of base DRL methods (in Step           Bengio, Y., Lahlou, S., Deleu, T., Hu, E. J., Tiwari, M., and
+A). Another contribution of our method is the utilization              Bengio, E. Gflownet foundations. Journal of Machine
+of maximizing log-likelihood loss functions and separated              Learning Research, 24(210):1–55, 2023.
+training steps. Therefore, SRT does not introduce impor-
+tance weight, which often leads to large variances, even             Berto, F., Hua, C., Park, J., Kim, M., Kim, H., Son, J.,
+when applied with on-policy methods. The extensive exper-              Kim, H., Kim, J., and Park, J. RL4CO: an extensive rein-
+iments verify that our method consistently enhances sample             forcement learning for combinatorial optimization bench-
+efficiency in various DRL methods in real-world bench-                 mark. arXiv preprint arXiv:2306.17100, 2023. URL
+marks, like hardware design and molecular optimization.                https://github.com/kaist-silab/rl4co.
+                                                                     Bickerton, G. R., Paolini, G. V., Besnard, J., Muresan, S.,
+Impact Statement                                                       and Hopkins, A. L. Quantifying the chemical beauty of
+                                                                       drugs. Nature chemistry, 4(2):90–98, 2012.
+This research intersects reinforcement learning and combi-
+natorial optimization, areas that inherently involve various         Bliek, L., Guijt, A., Karlsson, R., Verwer, S., and de Weerdt,
+industrial and social impacts. However, we believe that this           M. Benchmarking surrogate-based optimisation algo-
+work does not present any unique societal consequences                 rithms on expensive black-box functions. Applied Soft
+that necessitate specific emphasis beyond those typically              Computing, 147:110744, 2023.
+associated with these fields.
+                                                                     Chen, X. and Tian, Y. Learning to perform local rewrit-
+                                                                       ing for combinatorial optimization. Advances in Neural
+Acknowledgments                                                        Information Processing Systems, 32, 2019.
+The authors are grateful to Haeyeon Kim for the help in im-          Choo, J., Kwon, Y.-D., Kim, J., Jae, J., Hottung, A., Tierney,
+plementing the hardware design simulator. This work was                K., and Gwon, Y. Simulation-guided beam search for
+supported by the Institute of Information & communications             neural combinatorial optimization. Advances in Neural
+Technology Planning & Evaluation (IITP) grant funded by                Information Processing Systems, 35:8760–8772, 2022.
+
+                                                                 9
+                                                 Symmetric Replay Training
+
+Cohen, T. and Welling, M. Group equivariant convolutional             Gómez-Bombarelli, R., Wei, J. N., Duvenaud, D.,
+  networks. In International conference on machine learn-               Hernández-Lobato, J. M., Sánchez-Lengeling, B., She-
+  ing, pp. 2990–2999. PMLR, 2016.                                       berla, D., Aguilera-Iparraguirre, J., Hirzel, T. D., Adams,
+                                                                        R. P., and Aspuru-Guzik, A. Automatic chemical de-
+Deac, A., Weber, T., and Papamakarios, G. Equivariant                   sign using a data-driven continuous representation of
+  MuZero. arXiv preprint arXiv:2302.04798, 2023.                        molecules. ACS central science, 4(2):268–276, 2018.
+
+Deshwal, A., Belakaria, S., Doppa, J. R., and Kim, D. H.              Hottung, A. and Tierney, K. Neural large neighborhood
+  Bayesian optimization over permutation spaces. In Pro-                search for the capacitated vehicle routing problem. In
+  ceedings of the AAAI Conference on Artificial Intelli-               24th European Conference on Artificial Intelligence
+  gence, volume 36, pp. 6515–6523, 2022.                               (ECAI 2020), 2020.
+                                                                      Hottung, A., Kwon, Y.-D., and Tierney, K. Efficient ac-
+D’Oro, P., Schwarzer, M., Nikishin, E., Bacon, P.-L., Belle-            tive search for combinatorial optimization problems. In
+  mare, M. G., and Courville, A. Sample-efficient rein-                International Conference on Learning Representations,
+  forcement learning by breaking the replay ratio barrier. In           2022.
+  Deep Reinforcement Learning Workshop NeurIPS 2022,
+  2022.                                                               Irurozki, E. and López-Ibáñez, M. Unbalanced mallows
+                                                                         models for optimizing expensive black-box permutation
+Duan, H., Vaezipoor, P., Paulus, M. B., Ruan, Y., and Mad-               problems. In Proceedings of the Genetic and Evolution-
+  dison, C. Augment with care: Contrastive learning for                  ary Computation Conference, pp. 225–233, 2021.
+  combinatorial problems. In International Conference on              Jain, M., Bengio, E., Hernandez-Garcia, A., Rector-Brooks,
+ Machine Learning, pp. 5627–5642. PMLR, 2022.                            J., Dossou, B. F., Ekbote, C. A., Fu, J., Zhang, T., Kil-
+                                                                         gour, M., Zhang, D., et al. Biological sequence design
+Falet, J.-P. R., Lee, H. B., Malkin, N., Sun, C., Secrieru,
+                                                                         with gflownets. In International Conference on Machine
+  D., Zhang, D., Lajoie, G., and Bengio, Y. Delta-AI:
+                                                                         Learning, pp. 9786–9801. PMLR, 2022.
+  Local objectives for amortized inference in sparse graphi-
+  cal models. In The Twelfth International Conference on              Jang, H., Kim, M., and Ahn, S. Learning energy decompo-
+  Learning Representations, 2024.                                       sitions for partial inference in GFlownets. In The Twelfth
+                                                                        International Conference on Learning Representations,
+Fan, L., Wang, G., Huang, D.-A., Yu, Z., Fei-Fei, L., Zhu,              2024.
+  Y., and Anandkumar, A. SECANT: Self-expert cloning
+  for zero-shot generalization of visual policies. In Interna-        Jensen, J. H. A graph-based genetic algorithm and gener-
+  tional Conference on Machine Learning, pp. 3088–3099.                 ative model/monte carlo tree search for the exploration
+  PMLR, 2021.                                                           of chemical space. Chemical science, 10(12):3567–3572,
+                                                                        2019.
+Fedus, W., Ramachandran, P., Agarwal, R., Bengio, Y.,                 Jiang, Y., Cao, Z., and Zhang, J. Solving 3d bin pack-
+  Larochelle, H., Rowland, M., and Dabney, W. Revisiting                 ing problem via multimodal deep reinforcement learning.
+  fundamentals of experience replay. In International Con-               In Proceedings of the 20th International Conference on
+  ference on Machine Learning, pp. 3061–3071. PMLR,                      Autonomous Agents and MultiAgent Systems, pp. 1548–
+  2020.                                                                  1550, 2021.
+
+Feng, S. Y., Gangal, V., Wei, J., Chandar, S., Vosoughi, S.,          Jiang, Y., Cao, Z., Wu, Y., Song, W., and Zhang, J.
+  Mitamura, T., and Hovy, E. A survey of data augmenta-                  Ensemble-based deep reinforcement learning for vehi-
+  tion approaches for nlp. arXiv preprint arXiv:2105.03075,              cle routing problems under distribution shift. In Thirty-
+  2021.                                                                  seventh Conference on Neural Information Processing
+                                                                         Systems, 2023.
+Gao, W., Fu, T., Sun, J., and Coley, C. Sample efficiency             Jun, H., Cho, J., Lee, K., Son, H.-Y., Kim, K., Jin, H., and
+  matters: a benchmark for practical molecular optimiza-                Kim, K. Hbm (high bandwidth memory) dram technology
+  tion. Advances in Neural Information Processing Systems,              and architecture. In 2017 IEEE International Memory
+  35:21342–21357, 2022.                                                 Workshop (IMW), pp. 1–4. IEEE, 2017.
+Garg, S. and Ramakrishnan, G. BAE: BERT-based adver-                  Khalil, E., Dai, H., Zhang, Y., Dilkina, B., and Song,
+  sarial examples for text classification. In Proceedings of            L. Learning combinatorial optimization algorithms over
+  the 2020 Conference on Empirical Methods in Natural                   graphs. Advances in Neural Information Processing Sys-
+  Language Processing (EMNLP), pp. 6174–6181, 2020.                     tems, 30, 2017.
+
+                                                                 10
+                                                 Symmetric Replay Training
+
+Kielak, K. P. Do recent advancements in model-based deep             Korovina, K., Xu, S., Kandasamy, K., Neiswanger, W., Poc-
+  reinforcement learning really improve data efficiency?               zos, B., Schneider, J., and Xing, E. ChemBO: Bayesian
+  2019.                                                                optimization of small organic molecules with synthe-
+                                                                       sizable recommendations. In International Conference
+Kim, H., Park, H., Kim, M., Choi, S., Kim, J., Park, J., Kim,          on Artificial Intelligence and Statistics, pp. 3393–3403.
+  S., Kim, S., and Kim, J. Deep reinforcement learning                 PMLR, 2020.
+  framework for optimal decoupling capacitor placement
+  on general pdn with an arbitrary probing port. In 2021             Krenn, M., Häse, F., Nigam, A., Friederich, P., and Aspuru-
+  IEEE 30th Conference on Electrical Performance of Elec-              Guzik, A. Self-referencing embedded strings (SELFIES):
+  tronic Packaging and Systems (EPEPS), pp. 1–3, 2021a.                A 100% robust molecular string representation. Machine
+  doi: 10.1109/EPEPS51341.2021.9609194.                                Learning: Science and Technology, 1(4):045024, 2020.
+
+Kim, H., Kim, M., Berto, F., Kim, J., and Park, J. De-               Kwon, Y.-D., Choo, J., Kim, B., Yoon, I., Gwon, Y., and
+  vFormer: A symmetric transformer for context-aware                  Min, S. POMO: Policy optimization with multiple op-
+  device placement. In Proceedings of the 40th Inter-                 tima for reinforcement learning. Advances in Neural
+  national Conference on Machine Learning, pp. 16541–                 Information Processing Systems, 33:21188–21198, 2020.
+  16566. PMLR, 23–29 Jul 2023.                                       Kwon, Y.-D., Choo, J., Yoon, I., Park, M., Park, D., and
+                                                                      Gwon, Y. Matrix encoding networks for neural combi-
+Kim, J., Kang, D., Ahn, S., and Shin, J. What makes
+                                                                      natorial optimization. Advances in Neural Information
+  better augmentation strategies? augment difficult but not
+                                                                      Processing Systems, 34:5138–5149, 2021.
+  too different. In International Conference on Learning
+  Representations, 2021b.                                            Laskin, M., Lee, K., Stooke, A., Pinto, L., Abbeel, P., and
+                                                                       Srinivas, A. Reinforcement learning with augmented data.
+Kim, M., Park, J., and Park, J. Learning to CROSS ex-                  Advances in neural information processing systems, 33:
+  change to solve min-max vehicle routing problems. In                 19884–19895, 2020.
+  The Eleventh International Conference on Learning Rep-
+  resentations, 2022a.                                               Li, J.-Y., Zhan, Z.-H., and Zhang, J. Evolutionary compu-
+                                                                       tation for expensive optimization: A survey. Machine
+Kim, M., Park, J., and Park, J. Sym-NCO: Leveraging sym-               Intelligence Research, 19(1):3–23, 2022.
+  metricity for neural combinatorial optimization. In Ad-
+  vances in Neural Information Processing Systems, 2022b.            Li, S., Yan, Z., and Wu, C. Learning to delegate for large-
+                                                                       scale vehicle routing. Advances in Neural Information
+Kim, M., Choi, S., Son, J., Kim, H., Park, J., and Bengio, Y.          Processing Systems, 34:26198–26211, 2021.
+  Ant colony sampling with GFlowNets for combinatorial
+  optimization. arXiv preprint arXiv:2403.07041, 2024a.              Li, Y., Zhang, L., and Liu, Z. Multi-objective de novo drug
+                                                                       design with conditional graph generative model. Journal
+Kim, M., Ko, J., Yun, T., Zhang, D., Pan, L., Kim, W., Park,           of cheminformatics, 10:1–24, 2018.
+  J., Bengio, E., and Bengio, Y. Learning to scale logits
+                                                                     Lindauer, M., Eggensperger, K., Feurer, M., Biedenkapp,
+  for temperature-conditional GFlowNets. In International
+                                                                       A., Deng, D., Benjamins, C., Ruhkopf, T., Sass, R., and
+  Conference on Machine Learning, 2024b.
+                                                                       Hutter, F. Smac3: A versatile bayesian optimization
+Kingma, D. P. and Welling, M. Auto-encoding variational                package for hyperparameter optimization. The Journal
+  bayes. In 2nd International Conference on Learning                   of Machine Learning Research, 23(1):2475–2483, 2022.
+  Representations, ICLR 2014, Banff, AB, Canada, April               Ma, G., Bengio, E., Bengio, Y., and Zhang, D. Baking sym-
+  14-16, 2014, Conference Track Proceedings, 2014. URL                metry into GFlowNets. In NeurIPS 2023 AI for Science
+  http://arxiv.org/abs/1312.6114.                                     Workshop, 2023a.
+Koo, K., Luevano, G. R., Wang, T., Özbayat, S., Michalka,           Ma, Y., Hao, X., Hao, J., Lu, J., Liu, X., Xialiang, T.,
+  T., and Drewniak, J. L. Fast algorithm for minimizing the           Yuan, M., Li, Z., Tang, J., and Meng, Z. A hierarchical
+  number of decap in power distribution networks. IEEE                reinforcement learning based optimization framework
+  Transactions on Electromagnetic Compatibility, 60(3):               for large-scale dynamic pickup and delivery problems.
+  725–732, 2017.                                                      Advances in Neural Information Processing Systems, 34:
+                                                                      23609–23620, 2021.
+Kool, W., van Hoof, H., and Welling, M. Attention, learn to
+  solve routing problems! In International Conference on             Ma, Y., Cao, Z., and Chee, Y. M. Learning to search feasible
+  Learning Representations, 2018.                                     and infeasible regions of routing problems with flexible
+
+                                                                11
+                                                 Symmetric Replay Training
+
+  neural k-opt. In Advances in Neural Information Process-           Qiu, R., Sun, Z., and Yang, Y. DIMES: A differentiable
+  ing Systems, volume 36, pp. 49555–49578, 2023b.                      meta solver for combinatorial optimization problems. In
+                                                                       Advances in Neural Information Processing Systems, vol-
+Madan, K., Rector-Brooks, J., Korablyov, M., Bengio, E.,
+                                                                       ume 35, pp. 25531–25546, 2022.
+ Jain, M., Nica, A. C., Bosc, T., Bengio, Y., and Malkin, N.
+ Learning GFlowNets from partial episodes for improved               Rector-Brooks, J., Madan, K., Jain, M., Korablyov, M., Liu,
+ convergence and stability. In International Conference                C.-H., Chandar, S., Malkin, N., and Bengio, Y. Thompson
+ on Machine Learning, pp. 23467–23483. PMLR, 2023.                     sampling for improved exploration in GFlowNets. arXiv
+Malkin, N., Jain, M., Bengio, E., Sun, C., and Bengio,                 preprint arXiv:2306.17693, 2023.
+ Y. Trajectory balance: Improved credit assignment in
+ gflownets. Advances in Neural Information Processing                Ren, S., Zhang, J., Li, L., Sun, X., and Zhou, J. Text au-
+ Systems, 35:5955–5967, 2022.                                          toaugment: Learning compositional augmentation policy
+                                                                       for text classification. arXiv preprint arXiv:2109.00523,
+Mondal, A. K., Nair, P., and Siddiqi, K. Group equiv-                  2021.
+ ariant deep reinforcement learning. arXiv preprint
+ arXiv:2007.03437, 2020.                                             Satorras, V. G., Hoogeboom, E., and Welling, M. E(n)
+                                                                       equivariant graph neural networks. In International Con-
+Mondal, A. K., Jain, V., Siddiqi, K., and Ravanbakhsh,
+                                                                       ference on Machine Learning, pp. 9323–9332. PMLR,
+ S. EqR: Equivariant representations for data-efficient
+                                                                       2021.
+ reinforcement learning. In International Conference on
+ Machine Learning, pp. 15908–15926. PMLR, 2022.
+                                                                     Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and
+Moss, H., Leslie, D., Beck, D., Gonzalez, J., and Rayson, P.           Klimov, O. Proximal policy optimization algorithms.
+ BOSS: Bayesian optimization over string spaces. Ad-                   arXiv preprint arXiv:1707.06347, 2017.
+ vances in neural information processing systems, 33:
+ 15476–15486, 2020.                                                  Shen, D., Zheng, M., Shen, Y., Qu, Y., and Chen, W. A
+                                                                       simple but tough-to-beat data augmentation approach for
+Nikishin, E., Schwarzer, M., D’Oro, P., Bacon, P.-L., and              natural language understanding and generation. arXiv
+  Courville, A. The primacy bias in deep reinforcement                 preprint arXiv:2009.13818, 2020.
+  learning. In Proceedings of the 39th International Con-
+  ference on Machine Learning, pp. 16828–16847. PMLR,                Shen, M. W., Bengio, E., Hajiramezanali, E., Loukas, A.,
+  2022.                                                                Cho, K., and Biancalani, T. Towards understanding and
+                                                                       improving GFlowNet training. In Proceedings of the 40th
+Oh, C., Tomczak, J., Gavves, E., and Welling, M. Combi-
+                                                                       International Conference on Machine Learning, 2023.
+  natorial bayesian optimization using the graph cartesian
+  product. Advances in Neural Information Processing
+                                                                     Smith, L., Kostrikov, I., and Levine, S. A walk in the
+ Systems, 32, 2019.
+                                                                       park: Learning to walk in 20 minutes with model-free
+Olivecrona, M., Blaschke, T., Engkvist, O., and Chen, H.               reinforcement learning. arXiv preprint arXiv:2208.07860,
+  Molecular de-novo design through deep reinforcement                  2022.
+  learning. Journal of cheminformatics, 9(1):1–14, 2017.
+                                                                     Son, J., Kim, M., Kim, H., and Park, J. Meta-SAGE: Scale
+Pan, L., Zhang, D., Courville, A., Huang, L., and Bengio,              meta-learning scheduled adaptation with guided explo-
+  Y. Generative augmented flow networks. In The Eleventh               ration for mitigating scale shift on combinatorial opti-
+  International Conference on Learning Representations,                mization. In Proceedings of the 40th International Con-
+  2022.                                                                ference on Machine Learning, volume 202, pp. 32194–
+Pan, L., Malkin, N., Zhang, D., and Bengio, Y. Better                  32210. PMLR, 2023.
+  training of GFlowNets with local credit and incomplete
+  trajectories. In Proceedings of the 40th International Con-        Son, J., Kim, M., Choi, S., Kim, H., and Park, J. Equity-
+  ference on Machine Learning, volume 202, pp. 26878–                  Transformer: Solving NP-hard min-max routing prob-
+  26890. PMLR, 2023.                                                   lems as sequential generation with equity context. In
+                                                                       Proceedings of the AAAI Conference on Artificial Intelli-
+Park, J., Kwon, C., and Park, J. Learn to solve the min-max            gence, volume 38, pp. 20265–20273, 2024.
+  multiple traveling salesmen problem with reinforcement
+  learning. In Proceedings of the 2023 International Con-            Tripp, A., Simm, G. N., and Hernández-Lobato, J. M. A
+  ference on Autonomous Agents and Multiagent Systems,                 fresh look at de novo molecular design benchmarks. In
+  pp. 878–886, 2023.                                                   NeurIPS 2021 AI for Science Workshop, 2021.
+
+                                                                12
+                                                 Symmetric Replay Training
+
+Van der Pol, E., Worrall, D., van Hoof, H., Oliehoek, F., and        Zhang, C., Song, W., Cao, Z., Zhang, J., Tan, P. S., and Chi,
+  Welling, M. MDP homomorphic networks: Group sym-                     X. Learning to dispatch for job shop scheduling via deep
+  metries in reinforcement learning. Advances in Neural                reinforcement learning. Advances in Neural Information
+  Information Processing Systems, 33:4199–4210, 2020.                  Processing Systems, 33:1621–1632, 2020.
+
+Vinyals, O., Fortunato, M., and Jaitly, N. Pointer networks.         Zhang, D., Dai, H., Malkin, N., Courville, A., Bengio, Y.,
+  In Advances in Neural Information Processing Systems,                and Pan, L. Let the flows tell: Solving graph combinato-
+  volume 28, 2015.                                                     rial problems with gflownets. In Thirty-seventh Confer-
+                                                                       ence on Neural Information Processing Systems, 2023.
+Wang, D. and Walters, R. SO(2)-equivariant reinforce-
+ ment learning. In International Conference on Learning              Zhang, H., Cisse, M., Dauphin, Y. N., and Lopez-Paz, D.
+ Representations, 2022.                                                mixup: Beyond empirical risk minimization. In Interna-
+                                                                       tional Conference on Learning Representations, 2018.
+Wang, X., Pham, H., Dai, Z., and Neubig, G. SwitchOut: an
+ efficient data augmentation algorithm for neural machine
+ translation. In Proceedings of the 2018 Conference on
+ Empirical Methods in Natural Language Processing, pp.
+ 856–861, 2018.
+
+Wang, Z., Bapst, V., Heess, N., Mnih, V., Munos, R.,
+ Kavukcuoglu, K., and de Freitas, N. Sample efficient
+ actor-critic with experience replay. In International Con-
+ ference on Learning Representations, 2017.
+
+Weiler, M. and Cesa, G. General E(2)-Equivariant steer-
+ able CNNs. Advances in Neural Information Processing
+ Systems, 32, 2019.
+
+Weininger, D. SMILES, a chemical language and informa-
+ tion system. 1. introduction to methodology and encoding
+ rules. Journal of chemical information and computer sci-
+ ences, 28(1):31–36, 1988.
+
+Xin, L., Song, W., Cao, Z., and Zhang, J. Multi-decoder
+  attention model with embedding glimpse for solving ve-
+  hicle routing problems. In Proceedings of the AAAI Con-
+  ference on Artificial Intelligence, volume 35, pp. 12042–
+  12049, 2021a.
+
+Xin, L., Song, W., Cao, Z., and Zhang, J. NeuroLKH: Com-
+  bining deep learning model with lin-kernighan-helsgaun
+  heuristic for solving the traveling salesman problem. Ad-
+  vances in Neural Information Processing Systems, 34:
+  7472–7483, 2021b.
+
+Yao, S., Lin, X., Wang, Z., and Zhang, Q. Data-efficient
+  supervised learning is powerful for neural combinatorial
+  optimization. 2022.
+
+Yarats, D., Fergus, R., and Kostrikov, I. Image augmentation
+  is all you need: Regularizing deep reinforcement learning
+  from pixels. In 9th International Conference on Learning
+  Representations, 2021.
+
+Ye, H., Wang, J., Cao, Z., Liang, H., and Li, Y. Deep-
+  ACO: Neural-enhanced ant systems for combinatorial
+  optimization. In Advances in Neural Information Pro-
+  cessing Systems, volume 36, pp. 43706–43728, 2023.
+
+                                                                13
+                                                     Symmetric Replay Training
+
+A. Proof for Theoretical Analysis in Section 3.2
+A.1. Proof for Theorem 4.1
+Consider πθ (τ ) as the distribution over the trajectory. Let Tx denote the space of trajectories associated with the solution x.
+                                            X
+                           H(πθ (τ )) = −          πθ (τ ) log πθ (τ )
+                                            τ ∈T
+                                            X        X
+                                      =−                    πθ (τ ) log πθ (τ )
+                                            x∈X τ→x ∈Tx
+                                            X        X
+                                      =−                    p(τ→x |x)p(x) (log p(τ→x |x) + log p(x))
+                                            x∈X τ→x ∈Tx
+
+                                      = H(p(x)) + Ex∼p(x) H(p(τ→x |x))
+                                      ≤ H(p(x)) + Ex∼p(x) H(U (τ→x |x)),
+
+where U (τ |x) is a uniform distribution over action-trajectories associated with the solution x. The third equality stems
+from the fact that πθ (τ ) = πθ (τ, x) since x is fixed given τ . One can show that the final upper-bound is the entropy of
+distribution obtained from replacing p(τ |x) by U (τ |x).
+
+A.2. Extreme Case of Inverse Temperature in Boltzmann Distribution
+Proposition A.1. Consider p(τ ) to be the Boltzmann distribution of energy E(τ ) with inverse temperature β given by:
+
+                                                           p(τ ) ∝ e−βE(τ ) .
+
+The following two statements are satisfied:
+
+Statement 1     If β → ∞, then p(τ ) = δτ,argmin E(τ ) , where δi,j is the Kronecker delta function.
+
+Statement 2     If β = 0, then p(τ ) is a uniform distribution.
+
+Proof of Statement 1. Consider the limit as β → ∞. The Boltzmann distribution becomes:
+
+                                                     lim p(τ ) ∝ lim e−βE(τ ) .
+                                                    β→∞             β→∞
+
+
+
+For any τ such that E(τ ) > minτ ′ E(τ ′ ), the exponential term e−βE(τ ) approaches zero as β becomes very large. To see
+this, let ϵ = E(τ ) − minτ ′ E(τ ′ ) > 0. Then, we have:
+                                                                                  ′
+                                        lim e−βE(τ ) = lim e−β(minτ ′ E(τ )+ϵ) = 0.
+                                        β→∞                  β→∞
+
+
+
+Now, for the case where τ = argmin E(τ ), the exponential term e−βE(τ ) becomes 1, as β does not affect the term when τ
+minimizes the energy.
+Thus, in the limit β → ∞, we have:                      (
+                                                         1, if τ = argmin E(τ ),
+                                            lim p(τ ) ∝
+                                           β→∞           0, otherwise.
+
+Now, using the definition of the Kronecker delta function δi,j :
+
+                                                      lim p(τ ) ∝ δτ,argmin E(τ ) .
+                                                     β→∞
+
+Thus, Statement 1 holds.
+
+                                                                   14
+                                                 Symmetric Replay Training
+
+Proof of Statement 2. For β = 0, the Boltzmann distribution becomes:
+
+                                                    p(τ ) ∝ e−0·E(τ ) = 1.
+
+Therefore, p(τ ) is a constant, and the distribution is uniform, satisfying Statement 2.
+
+Let the energy E(τ ) be a log-likelihood of training policy: E(τ ) = log πθ (τ ). Then, statement 1 shows that our important
+sampling transformation becomes the adversarial transformation. Also, statement 2 shows that our important sampling
+transformation becomes the maximum entropy (i.e., uniform) transformation.
+
+
+
+
+                                                              15
+                                                Symmetric Replay Training
+
+B. Implementation details
+B.1. Pseudo-code for REINFORCE with SRT
+In this section, we provide a pseudo-code in case of employing REINFORCE as a base DRL method in Step A.
+
+Algorithm 1 REINFORCE with SRT
+ 1: Input: objective function f , batch size B, SRT sample width L, a scale coefficient α
+ 2: Initialize the number of reward calls k ← 0,
+ 3: while k ≤ K do
+ 4:    si1 ← GetInitialState(), ∀i ∈ {1, . . . , B}
+                        QT
+ 5:    τ ∼ πθ (·|s1 ) = t=1 πθ (st+1 |st )
+ 6:    ▷ R EWARD E VALUATION
+ 7:    R(xi ) ← f (xi ), ∀i ∈ {1, . . . , B}
+ 8:    k ←k+B
+ 9:    ▷ S TEP   PA.  R EWARD - MAXIMIZING T RAINING
+                   B
+10:    LRM ← i=1 (R(xi ) − b) log πθ (·)
+11:    θ ← Adam(θ, ∇LRM )
+12:    ▷ S TEP B. S YMMETRIC R EPLAY T RAINING
+13:    τ i ← GreedyRollout(), ∀i ∈ {1, . . . , B}
+14:    Symmetric transform τ , i.e., τ i,1 , . . . τ i,L ∼ p(τ→x |xi ), ∀i ∈ {1, . . . , B}
+                   PB      PL
+15:    LSRT ← α i=1 L1 l=1 log πθ (τ i,l |si1 )
+16:    θ ← Adam(θ, ∇LSRT )
+17: end while
+
+
+There are various ways to collect high-reward samples in Step B. For example, GreedyRollout can be replaced with
+other strategies, such as reward-prioritized sampling or collecting Top-k samples.
+
+B.2. Proximal policy optimization (PPO)
+We use AM architecture (Kool et al.,
+                                QN2018) on TSP and Devformer architecture (Kim et al., 2023) on DPP for parameterizing
+compositional policy π(x|s1 ) = t=1 π(at |st ). Then, we implement based on the following equation as follows:
+
+
+                                                                                                      
+                                               π(x|s1 )                       π(x|s1 )
+                    L(x; s1 ) = min A(x; s1 )              , A(x; s1 )clip                , 1 − ϵ, 1 + ϵ ,
+                                              πold (x|s1 )                   πold (x|s1 )
+                    A(x; s1 ) = R(x; s1 ) − V (s1 ),
+
+where R stands for reward function and V stands for value function. Since we implement PPO on compositional MDP
+setting, we train value function in the context of s1 by following actor-critic implementation of Kool et al. (2018).
+
+Hyperparameters. We systematically investigate a range of hyperparameter combinations involving different baselines
+([rollout, critic]), various values for clipping epsilon ([0.1, 0.2, 0.3]), and numbers of inner loops ([5, 10, 20]). Our
+observations reveal that the critic baseline consistently enhances training stability across all tasks, leading to reduced
+variation when modifying the training seeds. The best configurations for each task are provided in Table 4.
+
+
+                                       Table 4. Hyperparameter configurations for PPO.
+                                                       TSP       Chip-package PDN        HBM PDN
+                          Baseline                     critic          critic             critic
+                          Eps. clip                     0.2             0.1                0.2
+                          Number of inner loops k        5              20                 10
+
+
+                                                                16
+                                                Symmetric Replay Training
+
+B.3. Generative flow network (GFlowNet)
+Similar to the PPO implementation, we employ the Attention Model (AM) architecture (Kool et al., 2018) on the Traveling
+Salesman Problem (TSP), and  QN the DevFormer architecture (Kim et al., 2023) on DPP, for parameterizing the compositional
+forward policy PF (τ |s1 ) = t=1 PF (at |st ). Subsequently, we configure the backward policy PB as a uniform distribution
+for all possible parent nodes, following the methodology outlined in (Malkin et al., 2022). Lastly, we parameterize Z(s1 )
+using a two-layer perceptron with ReLU activation functions, where the number of hidden units matches the embedding
+dimension of the AM or DevFormer. This two-layer perceptron takes input from the mean of the encoded embedding vector
+obtained from the encoder of the AM or DevFormer and produces a scalar value to estimate the partition function.
+To train the GFlowNet model, we use trajectory balance loss introduced in Malkin et al. (2022) as follows:
+
+                                                                                           2
+                                                                     Z(s1 )PF (τ |s1 )
+                                      L(τ ; s1 ) =       log                                                          (3)
+                                                                   e−βE(x;s1 ) PB (τ |s1 )
+
+The trajectory τ includes a terminal state represented as x. Subsequently, we employ an on-policy optimization method
+to minimize Equation (3), with trajectories τ sampled from the training policy PF . In this context, E(x; s1 ) represents
+the energy, which is essentially the negative counterpart of the reward R(x; s1 ). The hyperparameter β plays the role of
+temperature adjustment in this process.
+
+Hyperparameters. We explore a spectrum of hyperparameter combinations, varying β ([5, 10, 20]) and numbers of inner
+loops ([2, 5, 10]). The best configurations for each task are provided in Table 5.
+
+
+                                    Table 5. Hyperparameter configurations for GFlowNet.
+                                                          TSP         Chip-package PDN             HBM PDN
+                          β                                20                   10                   10
+                          Number of inner loops k          10                    2                    2
+
+
+
+
+                                                                     17
+                                                 Symmetric Replay Training
+
+C. Experimental details
+C.1. Traveling salesman problems (TSP)
+Since we employ the AM architecture, we use the same hyperparameters for the model architecture and training parameters
+except for the batch and epoch data sizes.3 Initially, the Attention Model (AM) employed a batch size of 512 and an epoch
+data size of 1,280,000. Notably, the evaluation of the greedy rollout baseline was conducted every epoch. When the number
+of available training samples is constrained, utilizing a smaller batch size and epoch data size becomes advantageous.
+Consequently, we adjusted these parameters to be 100 for batch size and 10,000 for epoch data size. In symmetric replay
+training (Step B), the scale coefficients are meticulously set to scale the SRT loss. As a rough guideline, we establish a
+coefficient that renders the SRT loss approximately 10 to 100 times smaller than the RL loss. Additionally, for the number
+of symmetric transformations (L in Equation (1)) is set as the number of inner loops. See Table 6 in details.
+
+
+                         Table 6. Scale coefficient and the number of symmetric transformations in TSP.
+                                                  A2C      PG-Rollout        PPO       GFlowNet
+                             Scale coefficient   0.001        0.001        0.00001         0.1
+                             L                     1            1          5 (= k)      10 (= k)
+
+
+C.2. Decap placement problems (DPP)
+Similar to the experiments on TSP, we follow the setting of DevFormer.4 We set the batch size as 100 and epoch data size as
+600. Note that the maximum number of reward calls is set 15K,, a considerably smaller limit compared to TSP. Regarding
+the scale coefficient and the number of symmetric transformations, we maintain consistency with the principles applied in
+the TSP experiments as follows:
+
+
+                      Table 7. Scale coefficient and the number of symmetric transformations in DPP tasks.
+                                                  A2C     PG-Rollout        PPO        GFlowNet
+                             Scale coefficient    0.01        0.01          0.01          0.1
+                             L                      1          1          20 (= k)      2 (= k)
+
+
+C.3. Practical molecular optimization (PMO)
+We basically follow the experimental setting (e.g., batch size) in the practical molecular optimization (PMO) benchmark.5 In
+symmetric replay training, we utilize reward-prioritized sampling for the online buffer, which contains molecules generated
+during online learning. For the REINVENT, where the replay buffer is already incorporated, we set the number of replaying
+samples equal to the replay buffer size, i.e., 24, and the scale coefficient to 0.001. Regarding the GFlowNet method, we
+configure the number of replaying samples to match the batch size of 64. Furthermore, we set the scale coefficient to 1.0,
+given that the RL loss in GFlowNet is much higher compared to REINVENT.
+
+
+
+
+   3
+     AM: https://github.com/wouterkool/attention-learn-to-route
+   4
+     DevFormer: https://github.com/kaist-silab/devformer
+   5
+     Practical molecular optimization: https://github.com/wenhao-gao/mol_opt
+
+                                                              18
+                                                              Symmetric Replay Training
+
+D. Additional Experiments
+D.1. Ablation study for the number of symmetric trajectories in SRT
+We conducted the ablation study for varying sample width in replay training. ‘Non-symmetric’ denotes the replay training
+without symmetric transformation; thus, increased the number of trajectories gives duplicated samples. Figure 8 shows that
+the symmetric replay training consistently gives better performance and robust to the choice of L.
+
+
+                                                   6.14                                  Non-symmetric
+                                                                                         Symmetric
+                                                   6.12
+
+
+                                     Cost (K=2M)
+                                                   6.10
+                                                   6.08
+                                                   6.06
+                                                   6.04
+
+                                                          0          1        2      4        8      16
+                                                              The number of symmetric samples (L)
+
+                                        Figure 8. Ablation study for the sample width in SRT
+
+
+
+D.2. Comparison with Experience Replay on TSP50
+We conduct comparative experiments with experience replay and ours using A2C on TSP50. This requires importance
+sampling weight as follows:
+
+                                                                                               "T                    #
+                                                                   π(τ |s1 )                      Y π(st+1 |st )
+                   Eτ ∼π(·|s1 ) R(x) = Eτ ∼q(·|s1 )                          R(x) = Eτ ∼q(·|s1 )                   R(x) ,
+                                                                   q(τ |s1 )                      t=1
+                                                                                                      q(st+1 |st )
+
+
+where π(·|s1 ) and q(·|s1 ) are the training policy and behavior policy, respectively, and x is a solution (i.e., the terminal
+state).
+
+
+                                         7.4                                              A2C
+                                         7.2                                              A2C + ER
+                                                                                          A2C + SRT (ours)
+                                         7.0
+                                         6.8
+                                  Cost
+                                         6.6
+                                         6.4
+                                         6.2
+                                         6.0
+                                                    0.0M 0.2M 0.5M 0.8M 1.0M 1.2M 1.5M 1.8M 2.0M
+                                                                         Num. of reward calls
+
+Figure 9. Comparative experiments with experience replay and SRT. The average validation costs over the computation budget are
+measured.
+
+
+The results show that the existing experience replay method can suffer from high variance because of importance sampling,
+leading to the degradation of performance. Note that the importance weights are required even without symmetric
+transformation when using on-policy training, like A2C. On the other hand, ours does not require the importance sampling
+weight since SRT uses imitation learning loss.
+
+                                                                              19
+                                                   Symmetric Replay Training
+
+D.3. Comparison with Data Augmentation on TSP50
+Without SRT, symmetric trajectories can be utilized like data augmentation. In this experiment, we train the policy both
+using sampled trajectories and symmetric (i.e., augmented) trajectories. When on-policy methods like A2C, the importance
+weights are required for symmetric trajectories similar to the previous section. The policy is updated only using the
+reward-maximizing loss LRM (τ ) + LRM (τ ′ ), where τ ′ ∼ p(τ̂→x |x). Here, τ̂ is obtained greedy-rollout; see Algorithm 1.
+The experiments are conducted with the A2C method on TSP with N = 50.
+
+                                35                                                                500
+
+
+
+
+                                                                                                      Difference of Log-likelihood
+                                30                                                                400
+                                25
+                                                                                                  300
+                         Cost   20
+                                                                                                  200
+                                15
+                                10                                                                100
+                                5                                                                 0
+                                     0.0M 0.2M 0.5M 0.8M 1.0M 1.2M 1.5M 1.8M 2.0M
+                                                     Num. of reward calls
+Figure 10. Optimization curve (red) and difference of log-likelihood between symmetric trajectories (blue) over training steps with
+reward-maximizing training of symmetric trajectories.
+
+
+
+Table 8. The average cost and difference of log-likelihood on TSP50 with reward-maximizing training of symmetric trajectories
+                                                                      100K                  2M
+                           Avg. Cost (↓)                       16.851 ± 11.162       6.179 ± 0.0029
+                           Log-likelihood Difference (↓)       23.647 ± 22.331      445.044 ± 19.053
+
+As depicted in Figure 10 and Table 8, reward-maximizing training tends to seek one of minimizing cost or reducing
+differences of symmetric trajectories, not both. In the early stage of training, the cost tends to go higher because the sampled
+and augmented trajectories provide dis-aligned information, as the clearly increased average costs compared to the original
+A2C method (16.851 >> 6.780). From a certain point, the cost is decreased with a significant increase in the difference of
+log-likelihood. This implies that the symmetric nature of CO needs to be utilized carefully so as not to harm the performance
+of DRL methods, especially when on-policy learning is used.
+
+
+
+
+                                                                 20
+                                                 Symmetric Replay Training
+
+D.4. Additional results on hardware design optimization
+To verify the benefit of SRT, we also report the overall runtime (for 15K evaluations) of the hardware design optimization
+tasks as follows.
+
+                        Table 9. Wall-clock time of whole training in hardware design optimization tasks
+                                                    Chip-package PDN                 HBM PDN
+                              A2C                  4,204.50 (±342.90)       33,289.75 (±682.85)
+                              A2C + SRT            4,265.25 (±425.38)     33,294.75 (±1,722.59)
+                              PG-Rollout           3,747.00 (±516.97)       34,251.25 (±573.18)
+                              PG-Rollout + SRT     3,795.25 (±803.31)     30,351.25 (±1,150.44)
+                              PPO                   3,884.25 (±81.15)       32,148.75 (±623.47)
+                              PPO + SRT             4,700.00 (±58.26)       32,479.25 (±168.71)
+                              GFlowNet              3,528.75 (±26.66)     35,968.00 (±3,942.48)
+                              GFlowNet + SRT        3,528.25 (±17.80)     35,867.75 (±5,307.87)
+
+
+It is worth emphasizing that SRT is beneficial when the reward evaluation costs are more expensive than the additional costs
+from SRT. Furthermore, SRT allows GPU batch processing, resulting much smaller wall-clock runtime compared to reward
+evaluation with simulation. The results show that SRT effectively enhances performance by achieving significantly lower
+costs while maintaining similar or slightly increased runtime, which is negligible compared to the simulation time. We will
+include this result in the manuscript.
+
+
+
+
+                                                              21
+                                               Symmetric Replay Training
+
+D.5. Statistical analysis on molecular optimization
+We perform a t-test to compare the average AUC10 scores, setting the null hypothesis as µBase = µSRT . The resulting
+p-values are 0.0045 and 0.0015 for REINVENT and GFlowNets, respectively. Thus, the statistical analysis indicates that
+SRT enhances sample efficiency significantly for both REINVENT and GFlowNets.
+
+
+                                           Table 10. The results of t-statistical test
+                                          REINVENT REINVENT + SRT GFlowNet               GFlowNet + SRT
+                Mean                           0.615                0.633       0.431             0.489
+                Variance                    1.32E-05             7.36E-05    8.98E-06       7.83063E-05
+                Observations                       5                    5           5                 5
+                Hypothesized Mean Diff.            0                                0
+                t Stat                       -4.1332                          -6.4356
+                P(T ≤ t) one-tail             0.0045                           0.0015
+                t Critical one-tail           2.0150                           2.1318
+
+
+
+
+                                                           22
+                                                Symmetric Replay Training
+
+D.6. Additional results on molecular optimization
+In this subsection, we provide the additional results of the black-box optimization method in the PMO benchmark. Gaussian
+process Bayesian optimization (GPBO; Tripp et al., 2021) and Graph Genetic Algorithm (Graph GA; Jensen, 2019)
+are included. Note that GPBO employs Graph GA when optimizing the GP acquisition function. Though Graph GA
+demonstrates powerful performance, designing operators, such as crossover and mutation, greatly affects performance (Li
+et al., 2022) Thus, careful algorithm design, which requires specific domain knowledge, is necessitated whenever there is a
+change in tasks. The results show that SRT outperforms other black-box optimization methods by improving the on-policy
+RL method, REINVENT.
+Additionally, we apply our method on REINVENT with SMILES, the simplified molecular-input line-entry system
+(Weininger, 1988), which is another string-based representation. It is worth mentioning that REINVENT-SMILES gives
+the best performance in practical molecular optimization benchmark (Gao et al., 2022). Noticeably, the results in Table 11
+demonstrate that our achieves improved performances on 16 out of 23 oracles compared to REINVENT-SMILES.
+
+
+Table 11. Experimental results on sample efficient molecular optimization, including REINVENT-SMILES and REINVENT-SMILES
+with ours. Area under the curve of top-10 average property value (↑). Note that the improved cost via SRT is denoted in bold.
+                                                                         REINVENT        REINVENT-SMILES
+              Oracle                        GPBO          Graph GA
+                                                                          SMILES            + SRT (ours)
+              albuterol similarity       0.896 ± 0.009   0.838 ± 0.027   0.881 ± 0.016       0.890 ± 0.020
+              amlodipine mpo             0.577 ± 0.042   0.649 ± 0.014   0.645 ± 0.018       0.654 ± 0.034
+              celecoxib rediscovery      0.733 ± 0.026   0.682 ± 0.127   0.719 ± 0.016       0.734 ± 0.059
+              deco hop                   0.620 ± 0.008   0.601 ± 0.004   0.665 ± 0.042       0.643 ± 0.009
+              drd2                       0.933 ± 0.014   0.968 ± 0.006   0.957 ± 0.007       0.966 ± 0.007
+              fexofenadine mpo           0.723 ± 0.002   0.773 ± 0.014   0.780 ± 0.012       0.787 ± 0.011
+              gsk3b                      0.878 ± 0.018   0.792 ± 0.092   0.881 ± 0.036       0.877 ± 0.030
+              isomers c7h8n2o2           0.912 ± 0.023   0.944 ± 0.030   0.941 ± 0.012       0.961 ± 0.008
+              isomers c9h10n2o2pf2cl     0.542 ± 0.383   0.831 ± 0.018   0.840 ± 0.026       0.874 ± 0.021
+              jnk3                       0.588 ± 0.095   0.677 ± 0.120   0.777 ± 0.030       0.813 ± 0.070
+              median1                    0.288 ± 0.003   0.265 ± 0.016   0.372 ± 0.014       0.364 ± 0.002
+              median2                    0.298 ± 0.005   0.268 ± 0.013   0.282 ± 0.002       0.289 ± 0.012
+              mestranol similarity       0.659 ± 0.108   0.550 ± 0.032   0.632 ± 0.041       0.658 ± 0.030
+              osimertinib mpo            0.788 ± 0.003   0.818 ± 0.007   0.833 ± 0.010       0.840 ± 0.007
+              perindopril mpo            0.495 ± 0.005   0.498 ± 0.009   0.536 ± 0.015       0.538 ± 0.009
+              qed                        0.936 ± 0.001   0.939 ± 0.001   0.941 ± 0.000       0.941 ± 0.000
+              ranolazine mpo             0.737 ± 0.007   0.716 ± 0.011   0.770 ± 0.005       0.796 ± 0.008
+              scaffold hop               0.536 ± 0.007   0.506 ± 0.016   0.552 ± 0.023       0.562 ± 0.014
+              sitagliptin mpo            0.422 ± 0.008   0.486 ± 0.007   0.466 ± 0.039       0.483 ± 0.019
+              thiothixene rediscovery    0.565 ± 0.032   0.494 ± 0.010   0.544 ± 0.029       0.539 ± 0.027
+              troglitazone rediscovery   0.417 ± 0.025   0.421 ± 0.041   0.456 ± 0.021       0.428 ± 0.026
+              valsartan smarts           0.000 ± 0.000   0.000 ± 0.000   0.182 ± 0.363       0.000 ± 0.000
+              zaleplon mpo               0.456 ± 0.019   0.449 ± 0.012   0.533 ± 0.009       0.555 ± 0.015
+              Average                       0.609           0.616            0.660               0.661
+
+
+
+
+                                                             23
+                                                                       Symmetric Replay Training
+
+
+                                           Table 12. Experimental results on sample efficient Euclidean CO problems.
+                                                                        N = 50                                                         N = 100
+                           Method                         K = 200K                     K = 2M                        K = 200K                       K = 2M
+                           AM Critic                     6.541 ± 0.075              6.129 ± 0.021               9.600 ± 0.090                   8.917 ± 0.115
+                           AM Rollout                    6.708 ± 0.077              6.199 ± 0.014              11.891 ± 1.008                   9.193 ± 0.053
+                   TSP     POMO                          7.910 ± 0.055              7.074 ± 0.010              12.766 ± 0.358                  10.964 ± 0.171
+                           Sym-NCO                       7.035 ± 0.209              6.334 ± 0.045              10.776 ± 0.362                   9.159 ± 0.056
+                           SRT (ours)                    6.450 ± 0.053              6.038 ± 0.005               9.521 ± 0.098                  8.573 ± 0.019
+                           AM Rollout                13.366 ± 0.199                 11.921 ± 0.026             23.414 ± 0.238                  19.088 ± 0.232
+
+                   CVRP
+                           POMO                      13.799 ± 0.310                 12.661 ± 0.065             22.939 ± 0.245                  20.785 ± 0.403
+                           Sym-NCO                   13.406 ± 0.204                 12.215 ± 0.124             21.860 ± 0.422                  18.630 ± 0.106
+                           SRT (ours)                12.922 ± 0.071                 11.721 ± 0.093             21.582 ± 0.149                  18.304 ± 0.109
+
+
+                          N = 50                                   N = 100                                            N = 50                                 N = 100
+                                                                                                         15                                    24
+                                   AM Critic        14                     AM Critic                                           AM Rollout                           AM Rollout
+          8.0                      AM Rollout                              AM Rollout                                          POMO            23                   POMO
+                                   POMO             13                     POMO                                                Sym-NCO                              Sym-NCO
+                                                                                                         14                                    22
+          7.5                      Sym-NCO          12                     Sym-NCO                                             SymRD (ours)                         SymRD (ours)
+                                   SymRD (ours)                            SymRD (ours)
+   Cost   7.0                                       11                                            Cost   13
+                                                                                                                                               21
+                                                                                                                                               20
+          6.5                                       10
+                                                    9                                                    12                                    19
+          6.0                                                                                                                                  18
+                0.5M      1.0M      1.5M     2.0M           0.5M    1.0M     1.5M     2.0M                    0.5M    1.0M      1.5M    2.0M          0.5M   1.0M      1.5M   2.0M
+                Num. of reward calls                         Num. of reward calls                             Num. of reward calls                    Num. of reward calls
+
+
+                                      Figure 11. Validation cost over computation budget on euclidean CO problems.
+
+
+
+D.7. Experiments on various synthetic CO problems
+The experiments in this section cover various sample-efficient tasks in Euclidean and non-Euclidean combinatorial optimiza-
+tion. Note that we assume the expensive black-box reward function in sample-efficient tasks. In Euclidean CO tasks, the
+features of variables, such as their two-dimensional coordinates, satisfy Euclidean conditions (e.g., cost coefficients are
+defined as Euclidean distances). On the other hand, non-Euclidean CO problems lack these constraints, necessitating the
+encoding of higher-dimensional data, such as a distance matrix.
+
+D.7.1. E UCLIDEAN CO PROBLEMS
+Experimental settings. We selected two representative routing tasks - the traveling salesman problem (TSP) and the
+capacitated vehicle routing problem (CVRP) with 50 and 100 customers. The CVRP assumes multiple salesmen (i.e.,
+vehicles) with limited carrying capacity; thus, if the capacity is exceeded, the vehicle must return to the depot. For base DRL
+methods, we employ the best-performing DRL methods, AM for TSP and Sym-NCO for CVRP. We follow the reported
+hyperparameters for the model in their original paper.6
+
+Results. The results in Table 12 and Figure 11 indicate that SRT consistently outperforms baseline methods in terms
+of achieving the lowest cost over the training budget. Note that ours employs the AM with critic baseline for TSP and
+Sym-NCO with the reduced number of augmentations for CVRP. As depicted in Table 12, the most significant improvement
+over the base DRL models is observed in TSP100, with a percentage decrease of 3.86%, and CVRP50, with a percentage
+decrease of 4.04%. While POMO and Sym-NCO consider the symmetric nature of CO, the required number of samples
+cancels out the benefits. In contrast, our method utilizes the symmetric pseudo-labels generated via the training policy for
+free, enabling the policy to explore the symmetric space without increasing the number of required samples. As a result,
+SRT successfully improves sample efficiency.
+   6
+       Sym-NCO: https://github.com/alstn12088/Sym-NCO
+
+                                                                                             24
+                                                                   Symmetric Replay Training
+
+
+                                    Table 13. Experimental results on sample efficient non-Euclidean CO problems.
+                                                                         N = 50                                                  N = 100
+                         Method                         K = 200K                     K = 2M                       K = 200K                       K = 2M
+                         MatNet-Fixed                 3.139 ± 0.024             2.000 ± 0.002                   4.400 ± 0.040                  3.227 ± 0.016
+                  ATSP   MatNet-Sampled               3.235 ± 0.021             2.019 ± 0.005                   4.324 ± 0.036                  2.915 ± 0.040
+                         SRT (ours)                   2.845 ± 0.039             1.945 ± 0.003                   3.771 ± 0.012                  2.513 ± 0.022
+                         MatNet-Fixed                 56.350 ± 0.170            55.341 ± 0.118                  96.461 ± 0.206             95.107 ± 0.072
+                  FSSP   MatNet-Sampled               56.347 ± 0.234            55.172 ± 0.032                  96.256 ± 0.140             94.978 ± 0.055
+                         SRT (ours)                   56.104 ± 0.125            55.110 ± 0.061                  96.030 ± 0.132             94.934 ± 0.051
+
+                         N = 50                                N = 100                                           N = 50                                   N = 100
+         3.6             MatNet-Fixed                          MatNet-Fixed                                     MatNet-Fixed                              MatNet-Fixed
+         3.4             MatNet-Sampled         4.5            MatNet-Sampled                                   MatNet-Sampled          97.5              MatNet-Sampled
+                         MatNet + SRT (ours)                   MatNet + SRT (ours)            57.0              MatNet + SRT (ours)                       MatNet + SRT (ours)
+         3.2                                                                                                                            97.0
+                                                4.0
+         3.0                                                                                  56.5
+         2.8                                                                                                                            96.5
+  Cost                                          3.5                                    Cost   56.0
+         2.6                                                                                                                            96.0
+         2.4                                    3.0                                           55.5                                      95.5
+         2.2
+         2.0                                                                                                                            95.0
+                                                2.5                                           55.0
+           0.0M   0.5M    1.0M    1.5M   2.0M           0.5M   1.0M      1.5M   2.0M              0.0M   0.5M    1.0M     1.5M   2.0M      0.0M    0.5M    1.0M     1.5M   2.0M
+                  Num. of reward calls                  Num. of reward calls                             Num. of reward calls                     Num. of reward calls
+
+                                  Figure 12. Validation cost over computation budget on non-Euclidean CO problems.
+
+
+D.7.2. N ON -E UCLIDEAN CO PROBLEMS
+Experimental settings. Based on the work of Kwon et al. (2021), we have selected two benchmark tasks, namely the
+asymmetric TSP (ATSP) and flexible flow-shop scheduling problems (FSSP). The ATSP is non-Euclidean TSP where the
+distance matrix could be non-symmetric, i.e., dist(i, j) ̸= dist(j, i), where i and j indicate cities. The FSSP is an important
+scheduling problem that assigns jobs to multiple machines to minimize total completion time. As a baseline, we employ
+Matrix Encoding Network (MatNet) proposed to solve non-Euclidean CO.7 We compare ours with two versions of MatNet:
+MatNet-Fixed and MatNet-Sampled. MatNet-Fixed, the original version, explores N heterogeneous starting points of
+trajectories, while MatNet-Sampled explores less than N number of multiple trajectories with sampling strategy.
+Results. The superior performance of SRT over MatNet-Fixed and MatNet-Sampled is demonstrated in both Table 13 and
+Figure 12. We employ MatNet-Sampled as a base DRL method for both tasks and use the same number of multi-starting in
+ours and MatNet-Sampled. Notably, SRT outperforms MatNet-Sampled by a significant margin in the case of ATSP, with a
+performance gap of about 12% at N = 100, K = 200K, where SRT achieves 3.771 and MatNet-Sampled achieves 4.324.
+
+
+
+
+   7
+       MatNet: https://github.com/yd-kwon/MatNet
+
+                                                                                       25
+                                                   Symmetric Replay Training
+
+E. Further related works
+E.1. Deep reinforcement learning for combinatorial optimization
+Deep reinforcement learning (DRL) has emerged as a promising methodology for solving combinatorial optimization.
+Especially by selecting actions sequentially, i.e., in a constructive way, DRL policies generate a combinatorial solution. This
+approach is beneficial to producing feasible solutions that satisfy the complex constraints of CO by restricting action space
+using a masking scheme (Kool et al., 2018). The foundational work of Bello et al. (2017) introduced the actor-critic method
+for training PointerNet (Vinyals et al., 2015) to solve TSP and the knapsack problem. Subsequently, several works were
+proposed to extend PointerNet into a Transformer-based model (Kool et al., 2018; Xin et al., 2021a) especially for routing
+problems. Building upon the success of the attention model (AM; Kool et al., 2018), Kwon et al. (2020), and Kim et al.
+(2022b) suggested enhanced reinforcement learning techniques by employing a precise baseline for REINFORCE based on
+symmetries in CO problems. On the other hand, various works have been suggested to solve broader ranges of CO problems
+(Khalil et al., 2017; Ahn et al., 2020b; Zhang et al., 2020; Jiang et al., 2021; Kwon et al., 2021; Kim et al., 2021a; Park et al.,
+2023; Zhang et al., 2023; Son et al., 2024)
+Several studies have proposed to address challenges such as distributional shift and scalability (Hottung et al., 2022; Li
+et al., 2021; Ma et al., 2021; Choo et al., 2022; Qiu et al., 2022; Son et al., 2023; Ma et al., 2023b; Jiang et al., 2023). It
+is noteworthy that besides the constructive approach, there is another stream, the improvement heuristic style (Hottung &
+Tierney, 2020; Xin et al., 2021b; Kim et al., 2022a; Ye et al., 2023; Kim et al., 2024a), though such studies fall outside our
+research scope. Our research goal is to enhance the sample efficiency of constructive DRL methods for CO; the sample
+efficiency has been comparatively less explored in contrast to issues such as distributional shift and scalability in DRL for
+CO literature. This study offers an orthogonal but generally applicable approach to existing works in the field.
+
+E.2. Equivariant Deep Learning
+Equivariant DRL has also been extensively studied in recent years (Mondal et al., 2022; Van der Pol et al., 2020; Mondal
+et al., 2020; Wang & Walters, 2022; Deac et al., 2023). This approach reduces search space by cutting out symmetric space
+using equivariant representation learning, such as employing equivariant neural networks (Cohen & Welling, 2016; Weiler &
+Cesa, 2019; Satorras et al., 2021). Consequently, it leads to better generalization and sample efficiency. Being different from
+these approaches, we focus on handling symmetries in decision space by exploring the symmetric space without restrictions
+on network structure. Therefore, employing equivariant DRL methods with our method is available when guaranteeing
+equivariance is crucial.
+
+E.3. Generative Flow Networks in Combinatorial Optimization
+Genetic Flow Networks or GFlowNets (Bengio et al., 2023) are suggested to sample discrete object x from the target energy
+distribution, where P (x) ∝ e−βE(x) . GFlowNets consider symmetric trajectories by modeling a sequential construction of
+combinatorial solutions as a flow on a directed acyclic graph, where each node corresponds to a state (a partial solution).
+GFlowNets have been employed to solve various CO problems, whether when the reward evaluations are expensive or
+not. Bengio et al. (2021) firstly proposed GFlowNets with flow matching loss, a temporal difference-like loss. The work
+of Bengio et al. (2021) is used to generate molecular graphs in de nove molecular optimization. Then, Jain et al. (2022)
+introduced a model-based GFlowNet, called GFlowNet-AL, to generate biological sequences. In addition, Zhang et al.
+(2023) used GFlowNet to solve CO defined on graphs, like maximum independent set (MIS) problems.
+On the other hand, several works have been proposed for better GFlowNet training, by introducing new loss functions
+(Bengio et al., 2023; Malkin et al., 2022; Madan et al., 2023), improved exploration strategies (Pan et al., 2023; Jang
+et al., 2024), experience replaying (Ma et al., 2023a), and credit assignment methods (Shen et al., 2023; Pan et al., 2022;
+Rector-Brooks et al., 2023; Kim et al., 2024b).
+
+E.4. Black-box Combinatorial Optimization
+Building on the great success of Bayesian optimization (BO) in black-box optimization (Bliek et al., 2023; Irurozki & López-
+Ibáñez, 2021; Lindauer et al., 2022), several works were suggested to apply BO to combinatorial decision. Combinatorial
+Bayesian optimization solves a bi-level optimization where the upper problem is surrogate regression, and the lower problem
+is acquisition optimization. In the context of combinatorial space, the acquisition optimization is modeled as quadratic
+integer programming problems, which is NP-hard (Baptista & Poloczek, 2018; Deshwal et al., 2022).
+
+                                                               26
+                                                Symmetric Replay Training
+
+To address the NP-hardness of acquisition optimization, various techniques have been proposed, including continuous
+relaxation Oh et al. (2019), sampling with simulated annealing (Deshwal et al., 2022), genetic algorithms (Moss et al., 2020;
+Tripp et al., 2021), and random walk explorer (Korovina et al., 2020). While these methods have demonstrated competitive
+performance in lower-dimensional tasks like neural architecture search (NAS), they often demand substantial computation
+time, particularly in molecular optimization tasks (Gao et al., 2022).
+As mentioned in (Deshwal et al., 2022) and (Gao et al., 2022), one of the alternative approaches is to utilize a variational
+auto-encoder (VAE; Kingma & Welling, 2014) to map the high-dimensional combinatorial space into “compact” continuous
+latent space to apply BO, like (Gómez-Bombarelli et al., 2018). Though this approach has shown successful performance in
+molecular optimization, it also introduces variational error since VAE maximizes a lower bound of the likelihood, known as
+evidence lower bound (ELBO), not directly maximizes the likelihood.
+
+
+
+
+                                                             27
+

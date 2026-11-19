@@ -1,0 +1,52 @@
+DOCUMENT TRANSACTION — no scientific experiment or simulator execution
+
+Changed branch/field:
+  LATEST_STATUS.md latest prefix / observation_timing candidate status
+  G0_NO_GO_OBSERVATION_TIMING_STANDARD_POSMDP; candidate_closed=true
+  G0/G3/G4 NOT_PASSED; G1 LIMITED_ENGINEERING_ONLY; G5–G8 incomplete
+  project_complete=false; root_only=true
+
+Four transaction artifacts:
+  MODIFIED_FILE=<LOCAL_PATH>
+  DIFF_FILE=<LOCAL_PATH>
+  VERIFICATION.txt=<LOCAL_PATH>
+  ROLLBACK.sh=<LOCAL_PATH>
+
+Working directory for all commands below:
+  <LOCAL_PATH>
+
+BASELINE exact command: ./CHECK.py baseline
+Input: ORIGINALS/LATEST_STATUS.md and live <LOCAL_PATH> before update;
+       protected input hashes in SOURCE_INDEX.json.
+Literal stdout: BASELINE PASS
+Exit status: 0
+Original SHA256: 0819c064a21810217b054edbaf15812c82923d8928000b97a8dd9ed29837a52f
+
+MODIFIED exact command: ./CHECK.py modified
+Input: MODIFIED_FILE, updated live LATEST_STATUS.md, STATE.json, source/network receipts,
+       original suffix and exact unified diff.
+Literal stdout: MODIFIED PASS
+Exit status: 0
+Modified SHA256: c8b5e9fd293535c2aae22a5c95a92dce9e0d389bdcac0affa0073cf5b3944cfa
+
+ROLLBACK exact command: ./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md
+Input: isolated copy of MODIFIED_FILE at ROLLBACK_COPY/LATEST_STATUS.md and original status snapshot.
+Literal stdout: ROLLBACK PASS
+Exit status: 0
+Restored copy SHA256: 0819c064a21810217b054edbaf15812c82923d8928000b97a8dd9ed29837a52f
+
+ROLLBACK verification exact command: ./CHECK.py rollback
+Input: restored isolated copy, retained changed live status, protected input hashes.
+Literal stdout: ROLLBACK VERIFY PASS
+Exit status: 0
+
+Restored behavior/status:
+  Isolated rollback copy exactly restores the preceding original-prompts/CFA/PbP status prefix.
+  Its G0/G3/G4 status remains NOT_PASSED, with overall research incomplete.
+  Live LATEST_STATUS.md and MODIFIED_FILE retain the new observation-timing closure prefix.
+  Scientific source files, two canonical STATE.json files, and original user PDFs remain unchanged.
+  No scientific behavior was executed before or after the document change.
+  No experimental, training, author solving, quality evaluation, new-map, server or subagent calls.
+
+Final reopening check is recorded in FINAL_RECEIPT.json after inventory construction.
+This evidence validates the document transaction only; it does not pass scientific G0/G3/G4.

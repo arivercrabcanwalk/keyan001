@@ -1,0 +1,262 @@
+SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning (https://arxiv.org/abs/2503.04085)
+citeturn14academia12 [wordlim: 200] Published: 1.7 years ago; Title: SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning ... This paper introduces a DRL-based method called the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM), tailored for the MTTDVRP with maximum working hours constraints.
+Title: SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning
+Authors: Arash Mozhdehi, Yunli Wang, Sun Sun, Xin Wang
+Date: Thu Mar  6 04:47:49 2025
+
+Deep reinforcement learning (DRL)-based frameworks, featuring Transformer-style policy networks, have demonstrated their efficacy across various vehicle routing problem (VRP) variants. However, the application of these methods to the multi-trip time-dependent vehicle routing problem (MTTDVRP) with maximum working hours constraints -- a pivotal element of urban logistics -- remains largely unexplored. This paper introduces a DRL-based method called the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM), tailored for the MTTDVRP with maximum working hours constraints. The proposed method introduces a temporal locality inductive bias to the encoding module of the policy networks, enabling it to effectively account for the time-dependency in travel distance or time. The decoding module of SED2AM includes a vehicle selection decoder that selects a vehicle from the fleet, effectively associating trips with vehicles for functional multi-trip routing. Additionally, this decoding module is equipped with a trip construction decoder leveraged for constructing trips for the vehicles. This policy model is equipped with two classes of state representations, fleet state and routing state, providing the information needed for effective route construction in the presence of maximum working hours constraints. Experimental results using real-world datasets from two major Canadian cities not only show that SED2AM outperforms the current state-of-the-art DRL-based and metaheuristic-based baselines but also demonstrate its generalizability to solve larger-scale problems.--------------------------------------------------------------------------------
+[PDF] SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning | CiteDrive (https://www.citedrive.com/en/discovery/sed2am-solving-multi-trip-time-dependent-vehicle-routing-problem-using-deep-reinforcement-learning/)
+citeturn14search0 [wordlim: 200] Crawled: 1.7 years ago; # SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning ... This paper introduces a DRL-based method called the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM), tailored for the MTTDVRP with maximum working hours constraints.
+
+DOI: 10.1145/3721983 ISSN: 1556-4681
+
+# SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning
+
+Arash Mozhdehi, Yunli Wang, Sun Sun, Xin Wang
+
+Show PDF Cite
+
+Deep reinforcement learning (DRL)-based frameworks, featuring Transformer-style policy networks, have demonstrated their efficacy across various vehicle routing problem (VRP) variants. However, the application of these methods to the multi-trip time-dependent vehicle routing problem (MTTDVRP) with maximum working hours constraints—a pivotal element of urban logistics—remains largely unexplored. This paper introduces a DRL-based method called the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM), tailored for the MTTDVRP with maximum working hours constraints. The proposed method introduces a temporal locality inductive bias to the encoding module of the policy networks, enabling it to effectively account for the time-dependency in travel distance/time. The decoding module of SED2AM includes a vehicle selection decoder that selects a vehicle from the fleet, effectively associating trips with vehicles for functional multi-trip routing. Additionally, this decoding module is equipped with a trip construction decoder leveraged for constructing trips for the vehicles. This policy model is equipped with two classes of state representations, fleet state and routing state, providing the information needed for effective route construction in the presence of maximum working hours constraints. Experimental results using real-world datasets from two major Canadian cities not only show that SED2AM outperforms the current state-of-the-art DRL-based and metaheuristic-based baselines but also demonstrate its generalizability to solve larger-scale problems.
+
+Release Year:
+
+ISSN:1556-4681
+
+DOI:10.1145/3721983--------------------------------------------------------------------------------
+LMask: Learn to Solve Constrained Routing Problems with Lazy Masking (https://proceedings.iclr.cc/paper_files/paper/2026/hash/ade039c1db0391106a3375bd2feb310a-Abstract-Conference.html)
+citeturn14search1 [wordlim: 200] Crawled: 5 days ago; In this paper, we propose LMask, a novel learning framework that utilizes dynamic masking to generate high-quality feasible solutions for constrained routing problems. LMask introduces the LazyMask decoding method, which lazily refines feasibility masks with the backtracking mechanism. ... Extensive experiments on the traveling salesman problem with time windows (TSPTW) and TSP with draft limits (TSPDL) demonstrate that LMask achieves state-of-the-art feasibility rates and solution quality, outperforming existing neural methods.
+# LMask: Learn to Solve Constrained Routing Problems with Lazy Masking
+
+Tianyou Li, Haijun Zou, JIAYUAN WU, Zaiwen Wen
+
+International Conference on Learning Representations 2026 (ICLR 2026) Conference
+
+Bibtex Paper
+
+## Abstract
+
+Routing problems are canonical combinatorial optimization tasks with wide-ranging applications in logistics, transportation, and supply chain management. However, solving these problems becomes significantly more challenging when complex constraints are involved. In this paper, we propose LMask, a novel learning framework that utilizes dynamic masking to generate high-quality feasible solutions for constrained routing problems. LMask introduces the LazyMask decoding method, which lazily refines feasibility masks with the backtracking mechanism. In addition, it employs the refinement intensity embedding to encode the search trace into the model, mitigating representation ambiguities induced by backtracking. To further reduce sampling cost, LMask sets a backtracking budget during decoding, while constraint violations are penalized in the loss function during training to counteract infeasibility caused by this budget. We provide theoretical guarantees for the validity and probabilistic optimality of our approach. Extensive experiments on the traveling salesman problem with time windows (TSPTW) and TSP with draft limits (TSPDL) demonstrate that LMask achieves state-of-the-art feasibility rates and solution quality, outperforming existing neural methods.--------------------------------------------------------------------------------
+A scalable learning approach for the capacitated vehicle routing problem - ScienceDirect (https://doi.org/10.1016%2Fj.cor.2024.106787)
+citeturn14search2 [wordlim: 200] Published: 2.0 years ago; Crawled: last month; Many variants of the vehicle routing problem can be considered with simple modifications of the existing masking scheme. ... In the case of route duration constraints, the total time taken to traverse all edges, service each customer and refuel or recharge the vehicle cannot exceed the total allotted routing time 𝑇. ... The architectural differences are minor for each problem variant to the end-to-end neural network sub-solver are minor and are limited to the handling of the initial features through an embedding, the decoder context and the creation of masks to ensure the feasibility of each node selection. ... This mask can be removed at testing time if required, or retained to guarantee the feasibility of a solution.
+The total fuel level, or battery energy level, 𝑏𝑖, upon arrival at any node 𝑖 may never be less than zero. To prevent the vehicle from becoming stranded, it must either return to the depot before running out of fuel or battery energy, or it must visit a charging station node. Depending on the charging strategy, a family of constraints may exist to restrict the charging profile once the vehicle arrives.
+
+The heuristic used to identify the initial solution is the end-to-end model, and improvements are permitted by accepting improving solutions with fewer routes at each stage of the decomposition. The architectural differences are minor for each problem variant to the end-to-end neural network sub-solver are minor and are limited to the handling of the initial features through an embedding, the decoder context and the creation of masks to ensure the feasibility of each node selection.
+
+### 6.2. Constraint masks
+
+Masks are generated in the same manner as described in the original works of Kool et al. (2018) and Kwon et al. (2020) and others. This set of mask becomes a tree of decisions, much like the one depicted in Fig. 5.
+
+A node may only be visited if the conjunction of all the logical conditions for visiting that node are satisfied.
+
+Image
+
+  1. Download: Download high-res image (106KB)
+  2. Download: Download full-size image
+
+Fig. 4. Masking scheme. Considering the vehicle starts at node 𝑖, which could be any node, it must consider if it can now visit customer 𝑗. This is possible if it has both enough energy and time to do so and to return to the depot. Otherwise, a check can be performed to evaluate if subsequently visiting a charging station could make such a visit feasible.
+
+Image
+
+  1. Download: Download high-res image (253KB)
+  2. Download: Download full-size image
+
+Fig. 5. A depiction of a decision tree used to generate the mask that determines whether or not a customer may be visited, considering the vehicle is an electric vehicle. If a node is feasible, the probability 𝑝𝑡𝑗 that node 𝑗 is selected at time step 𝑡 is nonzero. It is zero-valued otherwise.
+
+During training, it is necessary to ensure the convergence of a solution by mandating that at least one customer is selected in any route. This prevents behaviour observed at the beginning stages of training where multiple routes are constructed in which only refuelling or recharging stations are visited. Constructing many routes of this kind does not render the solutions for some of the models of these problems infeasible, but it does significantly slow training or possibly make training impossible. This is because the training updates occur only once all solutions for a batch of problem instances have been completed. If any one solution does not converge, then no updates to the weights of the neural network will be made. This mask can be removed at testing time if required, or retained to guarantee the feasibility of a solution. This may come at a cost in restricting the solution space that the end-to-end model can access.
+
+--------------------------------------------------------------------------------
+Learning to Handle Complex Constraints for Vehicle Routing Problems (https://proceedings.nips.cc/paper_files/paper/2024/hash/a9d2a5fd12d34250c21b5e4fa8d906b0-Abstract-Conference.html)
+citeturn14search3 [wordlim: 200] Crawled: last week; # Learning to Handle Complex Constraints for Vehicle Routing Problems ... While recent neural methods excel in constructing solutions based on feasibility masking, they struggle with handling complex constraints, especially when obtaining the masking itself is NP-hard.
+# Learning to Handle Complex Constraints for Vehicle Routing Problems
+
+Jieyi Bi, Yining Ma, Jianan Zhou, Wen Song, Zhiguang Cao, Yaoxin Wu, Jie Zhang
+
+Advances in Neural Information Processing Systems 37 (NeurIPS 2024) Main Conference Track
+
+Bibtex Paper
+
+## Abstract
+
+Vehicle Routing Problems (VRPs) can model many real-world scenarios and often involve complex constraints. While recent neural methods excel in constructing solutions based on feasibility masking, they struggle with handling complex constraints, especially when obtaining the masking itself is NP-hard. In this paper, we propose a novel Proactive Infeasibility Prevention (PIP) framework to advance the capabilities of neural methods towards more complex VRPs. Our PIP integrates the Lagrangian multiplier as a basis to enhance constraint awareness and introduces preventative infeasibility masking to proactively steer the solution construction process. Moreover, we present PIP-D, which employs an auxiliary decoder and two adaptive strategies to learn and predict these tailored masks, potentially enhancing performance while significantly reducing computational costs during training. To verify our PIP designs, we conduct extensive experiments on the highly challenging Traveling Salesman Problem with Time Window (TSPTW), and TSP with Draft Limit (TSPDL) variants under different constraint hardness levels. Notably, our PIP is generic to boost many neural methods, and exhibits both a significant reduction in infeasible rate and a substantial improvement in solution quality.
+
+## DOI
+
+10.52202/079017-2964
+
+#### Name Change Policy
+
+Requests for name changes in the electronic proceedings will be accepted with no questions asked. However name changes may cause bibliographic tracking issues. Authors are asked to consider this carefully and discuss it with their co-authors prior to requesting a name change in the electronic proceedings.--------------------------------------------------------------------------------
+Adaptive primal–dual Q-learning for electric vehicle route optimization on real-world charging networks | Scientific Reports (https://www.nature.com/articles/s41598-026-49124-8)
+citeturn14search4 [wordlim: 200] Published: 3 months ago; Crawled: last month;   * Integration of a large-scale real-world charging station network, including node clustering, connector-type constraints, and SoC-constrained transitions to better reflect realistic EV driving conditions. ... This primal–dual structure allows the agent to dynamically learn trade-offs between route efficiency and constraint satisfaction (e.g., SoC safety margin, energy cost, or charging availability), producing interpretable and constraint-aware routing policies. ... The proposed primal–dual reinforcement learning framework demonstrates that data-driven routing strategies can meaningfully enhance trip reliability by identifying feasible and energy-aware paths across vast, geographically diverse networks. ... Approaches such as GRU-based forecasting or hybrid predictive-routing models^{18} provide useful demand estimation but do not perform policy learning.
+While a two-stage deep RL training strategy improves solution quality in practical scenarios^{19}. Recent reports such as the Global EV Outlook^{20} highlight the rapid growth of EV adoption worldwide. Machine learning methods are also used for charging demand prediction, including physics-informed graph learning models^{21}. Public datasets such as UrbanEV^{22} further support data-driven EV research.
+
+While recent contributions have improved EV routing via predictive models and multi-objective optimization, they still lack lightweight, interpretable learning mechanisms that directly adapt to SoC constraints and charger availability through real-time interaction. Our work introduces a primal–dual reinforcement learning framework that outperforms both classical and improvised graph-search baselines. Using Q-Learning, Double Q-Learning, and a novel Dual Q–Adaptive Weighting formulation, the agent dynamically balances travel efficiency and energy constraints without predefined heuristics or metaheuristic tuning. Unlike GRU-based or deep RL architectures that require substantial computational infrastructure, the proposed tabular, primal–dual strategy remains computationally lightweight and fully interpretable, yet delivers superior route optimization performance.
+
+The major contributions of this work are as follows:
+
+  * A Dual Q-Adaptive Weighting reinforcement learning framework embedded in an end-to-end EV routing pipeline. The model learns optimal routes through interaction with the environment while considering SoC, energy cost, and charging station availability, outperforming standard algorithms and RL baselines.
+
+  * Comprehensive benchmarking across seven models, including two classical baselines (Dijkstra and A*), two energy-aware variants, the proposed Dual Q-Adaptive Weighting RL model, and two standard RL methods (Q-Learning and Double Q-Learning).
+
+  * Integration of a large-scale real-world charging station network, including node clustering, connector-type constraints, and SoC-constrained transitions to better reflect realistic EV driving conditions.
+
+  * Demonstration that the proposed primal–dual RL approach improves route efficiency, constraint satisfaction, and adaptability in sparse-charging environments compared to classical and standard RL methods.
+
+  * Discussion of potential applications in EV navigation systems, smart transportation networks, and energy-aware routing tools, particularly for regions with limited charging infrastructure.
+
+Unlike deep RL approaches that rely on neural approximators and are often less suited and computationally more expensive when applied to large discrete routing graph structures, our method uses a tabular primal–dual formulation that is naturally aligned with the discrete EV-routing state space. This avoids function-approximation errors, improves training stability, and enables full interpretability of the learned policy. The Lagrangian-driven adaptive weight provides explicit control over the trade-off between route efficiency and charging constraints.
+
+The agent selects actions using a Lagrangian-combined score that balances efficiency against constraint violations. The balance is controlled by a dual variable \(\mu\), which is updated through gradient-based dual ascent. For all reinforcement learning experiments, a learning rate of \(\alpha = 0.1\), a discount factor of \(\gamma = 0.9\), and an \(\epsilon\)-greedy exploration strategy with \(\epsilon\) value being 0.2 is used.
+
+During each transition from state \(s\) to \(s'\) via action \(a\), the reward and cost components are updated using separate temporal-difference (TD) targets. The combined Lagrangian score used for action selection is given in Equation (7). The primal updates for reward and cost values follow Equations (8) and (9), while the dual update rule for \(\mu\), enforcing the cost constraint, is given in Equation (10).
+
+$$\begin{aligned} & \mathcal {L}(s,a) = Q_r(s,a) - \mu \, Q_c(s,a) \end{aligned}$$
+
+(7)
+
+$$\begin{aligned} & Q_r(s,a) \leftarrow Q_r(s,a) + \alpha \Big [ r + \gamma \max _{a'} Q_r(s',a') - Q_r(s,a) \Big ] \end{aligned}$$
+Similarly, studies focusing on charging strategies^{6,14}, off-grid delivery^{7}, dynamic pricing^{8}, or crowd-sensed navigation^{9} often treat routing and energy management as separate tasks. This separation limits adaptability when encountering sparse infrastructure or varying charger characteristics. Approaches such as GRU-based forecasting or hybrid predictive-routing models^{18} provide useful demand estimation but do not perform policy learning. Deep reinforcement learning models for EVRPTW^{17} achieve strong performance but require significantly more computational overhead and are not optimized for large, discrete road-charging graphs.
+
+In contrast, our framework integrates routing and energy-awareness into a unified reinforcement learning formulation. Standard Q-Learning and Double Q-Learning enable the agent to learn long-term consequences of charger spacing, SoC constraints, and detour penalties directly from interaction, without relying on hand-crafted heuristics or metaheuristic tuning. However, fixed reward weights limit their adaptability when constraint severity fluctuates across regions. The proposed Primal-Dual Q Learning model addresses this limitation by introducing a Lagrangian-driven adaptive weighting mechanism. Unlike prior energy-aware or predictive systems, the primal-dual formulation updates a dual variable during training to automatically adjust the importance of energy constraint violations. This enables more stable convergence when navigating sparse-charging segments and improves charging-aware decision making compared to standard RL agents. As demonstrated in the experimental results, the Primal-Dual Q model consistently outperforms classical algorithms, improvised variants, and baseline RL methods, offering higher route accuracy, fewer stops, and improved feasibility across diverse real-world routes.
+
+--------------------------------------------------------------------------------
+Energy-aware reinforcement learning for robotic manipulation of articulated components in infrastructure operation and maintenance - ScienceDirect (https://doi.org/10.1016/j.cacaie.2026.100015)
+citeturn14search5 [wordlim: 200] Published: 5 months ago; Crawled: last month; The constrained SAC framework in Section 3.3 is optimised via a primal-dual procedure that alternates between policy improvement, value estimation, and adaptive constraint regulation. ... To enforce the long-term energy constraint 𝐽𝑐⁡(𝜋) ≤𝜃, the Lagrange multiplier 𝜆 is updated through a dual ascent step:(26)𝜆←max⁡(0,𝜆+𝜂𝜆⁢(𝐽𝑐⁡(𝜋)−𝜃))where 𝜂𝜆 >0 is the dual learning rate. ... Both the reward critic 𝑄𝑟 and the cost critic 𝑄𝑐 employ target networks with Polyak averaging to stabilise temporal-difference estimation:(27)𝜙target←𝜏⁢𝜙+(1−𝜏)⁢𝜙target0<𝜏≪1 where 𝜙 denotes critic parameters.
+### 3.4. Optimisation strategy and theoretical properties
+
+The constrained SAC framework in Section 3.3 is optimised via a primal-dual procedure that alternates between policy improvement, value estimation, and adaptive constraint regulation. This section outlines the optimisation strategy and highlights theoretical properties that support stable and reliable behaviour in long-horizon infrastructure O&M scenarios.
+
+To enforce the long-term energy constraint 𝐽𝑐⁡(𝜋) ≤𝜃, the Lagrange multiplier 𝜆 is updated through a dual ascent step:(26)𝜆←max⁡(0,𝜆+𝜂𝜆⁢(𝐽𝑐⁡(𝜋)−𝜃))where 𝜂𝜆 >0 is the dual learning rate. When the expected energy consumption exceeds the budget 𝜃, 𝜆 increases, amplifying the penalty on high-energy actions in the actor objective (25); conversely, when 𝐽𝑐⁡(𝜋) <𝜃, 𝜆 decreases, allowing the policy to place more emphasis on task performance. This adaptive mechanism steers the optimisation towards a feasible solution of the constrained problem (16) and implements a standard dual ascent scheme for CMDPs.
+--------------------------------------------------------------------------------
+Adaptive constrained reinforcement learning for energy-aware scheduling under changing load | Scientific Reports (https://www.nature.com/articles/s41598-026-72061-5)
+citeturn14search6 [wordlim: 200] Published: last month; Crawled: 4 weeks ago; Adaptive constrained reinforcement learning for energy-aware scheduling under changing load ... In a dense sweep of reward weights, no fixed weight maintained the target across all tested loads, and neither does any fixed dual price. ... Because the policy is conditioned on the constraint price rather than on a fixed trade-off, one trained policy behaves as a family of controllers: the operator can select any violation target at deployment with no retraining (mean error 0.42 percentage points across targets from two to twenty percent), and the same policy generalizes to loads and bursty arrival patterns never seen in training, holds several heterogeneous service targets at once, and carries over from tabular learning to function approximation.
+Because the policy is conditioned on the constraint price rather than on a fixed trade-off, one trained policy behaves as a family of controllers: the operator can select any violation target at deployment with no retraining (mean error 0.42 percentage points across targets from two to twenty percent), and the same policy generalizes to loads and bursty arrival patterns never seen in training, holds several heterogeneous service targets at once, and carries over from tabular learning to function approximation. Constraint-driven adaptation thus turns the operating point into a controllable, reusable quantity rather than one baked into a training weight.
+
+## Funding
+
+This research was supported by Universiti Tenaga Nasional (UNITEN), Malaysia.
+
+## Author information
+
+### Authors and Affiliations
+
+  1. Department of Computer and Information Science, University of Pennsylvania, Philadelphia, 19104, PA, USA
+
+Saher Elsayed
+
+  2. College of Computing and Informatics, Universiti Tenaga Nasional (UNITEN), Putrajaya Campus, Jalan IKRAM-UNITEN, 43000, Kajang, Selangor, Malaysia
+
+Khairi Azhar Aziz
+
+### Corresponding author
+
+Correspondence to Khairi Azhar Aziz (<EMAIL_REMOVED>).
+
+## Ethics declarations
+
+### Competing interests
+
+The authors declare no competing interests.
+
+## About this article
+
+### Cite this article
+
+Elsayed, S., Aziz, K.A. Adaptive constrained reinforcement learning for energy-aware scheduling under changing load. Sci Rep (2026). https://doi.org/10.1038/s41598-026-72061-5
+
+  * Received: 21 June 2026
+
+  * Accepted: 15 September 2026
+
+  * Published: 21 September 2026
+
+  * DOI (Digital Object Identifier): https://doi.org/10.1038/s41598-026-72061-5
+
+### Keywords
+
+  * Reinforcement learning
+  * Energy-aware scheduling
+  * Constrained Markov decision process
+  * Service-level objectives
+  * Lagrangian methods
+  * Adaptive control--------------------------------------------------------------------------------
+A dual-phase spatio-temporal deep reinforcement learning approach for the time-dependent green multi-depot vehicle routing problem with time windows (https://ideas.repec.org/a/eee/transe/v216y2026ics1366554526005260.html)
+citeturn14search7 [wordlim: 200] Published: 9 months ago; Crawled: last week; "A dual-phase spatio-temporal deep reinforcement learning approach for the time-dependent green multi-depot vehicle routing problem with time windows," Transportation Research Part E: Logistics and Transportation Review, Elsevier, vol.
+
+# A dual-phase spatio-temporal deep reinforcement learning approach for the time-dependent green multi-depot vehicle routing problem with time windows
+
+## Author
+
+Listed:
+
+  * Zou, Yang
+  * Huang, Xiaokun
+  * Yin, Yunqiang
+  * Cheng, T.C.E.
+
+## Abstract
+
+In time-varying traffic conditions, departure timing affects travel duration, arrival schedules, and environmental performance, making temporal decisions an important component of green multi-depot vehicle routing. This study investigates the Time-Dependent Green Multi-Depot Vehicle Routing Problem with Time Windows. It incorporates proactive node-level waiting into spatial route planning, whereas conventional immediate-departure approaches treat temporal scheduling as an implicit consequence of the selected route. We propose a Dual-Phase Spatio-Temporal Policy (DPSTP) framework based on deep reinforcement learning. The framework adopts a route-first, schedule-second decision paradigm, where spatial route construction and route-conditioned departure scheduling are sequentially determined and jointly optimized to minimize a total cost comprising operational duration, emission-proxy costs, and lateness penalties. --------------------------------------------------------------------------------
+Scalable knowledge-guided framework for large multi-depot vehicle routing - ScienceDirect (https://www.sciencedirect.com/science/article/pii/S0360835226004833)
+citeturn14search8 [wordlim: 200] Crawled: 6 days ago; Solving the vehicle routing problem (VRP) in large-scale, multi-depot logistics is complex due to the intricate trade-offs between computational scalability and constraint satisfaction While deep reinforcement learning (DRL)-based approaches seem to be promising, they often struggle with the logical feasibility and interpretability required for real-world operations. ... The evolution of intelligent transportation systems and autonomous logistics has introduced new paradigms to vehicle routing problems (VRPs). ... Knowledge-Guided Multi-Agent Routing: Embeds logical constraints into route construction via node masking, ensuring feasibility and interpretability. ... Examples include DRL with Monte Carlo Tree Search (Alcaraz et al., 2022), actor-critic RL with Large Neighborhood Search (Zhao et al., 2020), bi-level hybrid search for arc routing (Zhou et al., 2024), and multi-objective RL for time-dependent pickup and delivery (Santiyuda et al., 2024). ... In most cases, neural policies generate initial solutions while heuristics operate as black-box post-processors, without access to learned representations or domain knowledge encoded during training.
+
+# Scalable knowledge-guided framework for large multi-depot vehicle routing☆
+
+Author links open overlay panel Narges Movahedkor ^{a} ^{1}, Reza Shahbazian ^{b} ^{2}, Francesca Guerriero ^{a} ^{3}
+
+10.1016/j.cie.2026.112282
+
+## Highlights
+
+  * •
+
+KGCAF integrates logical feasibility rules into neural networks via node masking.
+
+  * •
+
+Depot profile decomposition enables scalable parallel routing for multi-depot VRPs.
+
+  * •
+
+Achieves SOTA on VRPTW: cuts travel distance by 86% and minimizes time violations.
+
+## Abstract
+
+Solving the vehicle routing problem (VRP) in large-scale, multi-depot logistics is complex due to the intricate trade-offs between computational scalability and constraint satisfaction While deep reinforcement learning (DRL)-based approaches seem to be promising, they often struggle with the logical feasibility and interpretability required for real-world operations. We propose the Knowledge-Guided Collaborative Attention Framework (KGCAF), which combines depot-level profile-based decomposition with feasibility-aware graph attention and hybrid heuristic refinement. --------------------------------------------------------------------------------
+Double Duality: Variational Primal-Dual Policy Optimization for Constrained Reinforcement Learning (https://www.jmlr.org/beta/papers/v24/22-1190.html)
+citeturn14search9 [wordlim: 200] Published: 3.8 years ago; Crawled: last month; # Double Duality: Variational Primal-Dual Policy Optimization for Constrained Reinforcement Learning ... In this work, we present a model-based algorithm, Variational Primal-Dual Policy Optimization (VPDPO), in which Lagrangian and Fenchel duality are implemented to reformulate the original constrained problem into an unconstrained primal-dual optimization.
+--------------------------------------------------------------------------------
+Adaptive primal–dual Q-learning for electric vehicle route optimization on real-world charging networks - Manipal Academy of Higher Education, Manipal, India (https://researcher.manipal.edu/en/publications/adaptive-primaldual-q-learning-for-electric-vehicle-route-optimiz/)
+citeturn14search10 [wordlim: 200] Crawled: 3 weeks ago; This study presents a comprehensive EV route optimization framework that integrates reinforcement learning (RL) with graph-based methods. ... A novel Dual Q–Adaptive Weighting model that balances reward and cost through a primal–dual learning mechanism is proposed. The framework learns energy-aware routing strategies from historical navigation experience.
+--------------------------------------------------------------------------------
+Primal-Dual Differentiable (https://docs.nlr.gov/docs/fy23osti/84635.pdf)
+citeturn14search13 [wordlim: 200] Published: 6 months ago; training leading to a constraint-satisfying policy. ... programming, primal-dual method, reinforcement learning ... To address the first issue, a reward-constrained policy ... This report is available at no cost from the National Renewable Energy Laboratory at www.nrel.gov/publications.
+--------------------------------------------------------------------------------
+Published as a conference paper at ICLR 2026 (https://openreview.net/pdf?id=zsNUc2iMzp)
+citeturn14search14 [wordlim: 200] Published: 6 months ago; Most neural methods for routing problems handle constraints by employing the masking mechanism, which excludes actions directly leading to infeasible solutions during construction (Kool et al., 2018; Huang et al., 2025; Kwon et al., 2020; Joshi et al., 2019; Luo et al., 2023). ... Kool et al. (2022) propose DDP, which combines learned neural heuristics with dynamic programming algorithms to handle hard constraints. ... Chen et al. (2024) develop a multi-step look-ahead method tailored for TSPTW, incorporating problem-specific features and a large supervised learning dataset. ... We propose the LazyMask decoding algorithm, which lazily updates feasibility masks through the backtracking mechanism, enabling efficient generation of feasible solutions with theoretical guarantees.
+--------------------------------------------------------------------------------
+A Reinforcement Learning Framework for Scalable Partitioning and Optimization of Large-Scale Capacitated Vehicle Routing Problems (https://www.mdpi.com/2079-9292/14/19/3879)
+citeturn14search11 [wordlim: 200] Published: 1.1 years ago; Crawled: 3 weeks ago; The Capacitated Vehicle Routing Problem (CVRP) can be naturally cast as a sequential decision-making process: At each step, an agent selects a customer to be assigned to the current route, such that feasibility is preserved and the global objective of minimizing travel cost is optimized. ... Hou et al. ensure feasibility primarily through masking: customer nodes that would exceed vehicle capacity are blocked, and a global mask mechanism controls fleet size to guarantee that the solution does not use more than the available vehicles.
+--------------------------------------------------------------------------------
+Learning to Handle Constraints in Routing Problems (https://openreview.net/pdf?id=Rs6OoGgUIM)
+citeturn14search15 [wordlim: 200] Published: last year; With the learned heatmap, these solvers can greatly ... Classic neural methods handle VRP constraints using feasibility masking to exclude invalid actions [9, ... methods have explored Lagrangian-based problem reformulation [58], lookahead strategies [13], and ... hard-constrained vehicle routing problems (VRPs), where feasibility is critical.
+--------------------------------------------------------------------------------
+The Multi-Trip Time-Dependent Mix Vehicle Routing Problem for Hybrid Autonomous Shared Delivery Location and Traditional Door-to-Door Delivery Modes (https://arxiv.org/abs/2503.05842)
+citeturn14academia16 [wordlim: 200] Published: 1.7 years ago; Shared Distribution Locations (SDLs) offer an alternative to door-to-door (D2D) delivery by providing a wider delivery window and serving multiple community customers, thereby improving last-mile logistics through reduced delivery time, lower costs, and higher customer satisfaction.This paper introduces the Multi-Trip Time-Dependent Hybrid Vehicle Routing Problem (MTTD-MVRP), a challenging variant of the Vehicle Routing Problem (VRP) that combines Autonomous Electric Vehicles (AEVs) with conventional vehicles.
+--------------------------------------------------------------------------------
+PRIMAL-DUAL POLICY OPTIMIZATION FOR CONSTRAINED REINFORCEMENT LEARNING (https://www.jmlr.org/papers/volume24/22-1190/22-1190.pdf)
+citeturn14search17 [wordlim: 200] Published: 2.9 years ago; PRIMAL-DUAL POLICY OPTIMIZATION FOR CONSTRAINED REINFORCEMENT LEARNING ... If we use linear function approximation for the cost function, i.e. ... When \(\mathcal{W}\) reduces to a singleton \(\{\Psi=\left(\mathbb{E}_P[\psi(s_h,a_h)]\right)_{h\in[H]}\}\), i.e. the kernel embedding of a given probability distribution \(\{P_h\}_{h\in[H]}\), the optimization reduced to apprenticeship learning.
+--------------------------------------------------------------------------------
+A
+Application to the Capacitated Vehicle Routing P (https://proceedings.neurips.cc/paper_files/paper/2023/file/f445ba15f0f05c26e1d24f908ea78d60-Supplemental-Conference.pdf)
+citeturn14search18 [wordlim: 200] Published: 3.0 years ago; layers with 8 heads, an embedding size of 192, and a feed-forward layer dimension of 512. ... approximation: fixing lower encoder levels and recomputing just the top level with a mask of already ... We fixed the bottom layers of our model and recomputed just the top layer, by masking already visited ... by training the model on expert solutions that sort subtours by the remaining vehicle capacity at
+--------------------------------------------------------------------------------
+Finding Solutions to the Vehicle Routing Problem using a Graph Neural Network (https://sal.aalto.fi/publications/pdf-files/theses/bac/thag22_public.pdf)
+citeturn14search19 [wordlim: 200] Published: 4.8 years ago; This adjacency matrix describes a probabilistic heat-map over the graph, on which beam search is performed to construct a valid route. ... Neural Networks (NN) have seen application to combinatorial optimization problems since the 1980s, when Hopfield and Tank (1985) developed the Hopfield network to solve the travelling salesperson problem (TSP). ... They mask out previously visited nodes at each decoding step to ensure valid solutions. ... They apply the network to the capacitated VRP and VRP with split deliveries, outperforming classical heuristics like the Clarke-Wright savings (Clarke and Wright, 1964) and Sweep (Wren and
+--------------------------------------------------------------------------------
+Constrained Reinforcement Learning for Predictive Control in Real-Time Stochastic Dynamic Optimal Power Flow (https://arxiv.org/abs/2302.10382)
+citeturn14academia20 [wordlim: 200] Published: 3.7 years ago; Title: Constrained Reinforcement Learning for Predictive Control in Real-Time Stochastic Dynamic Optimal Power Flow ... Conventional DRL encourages the agent to explore various policies encoded in a neural network (NN) with the goal of maximizing the reward function. ... This paper presents a novel primal-dual approach for learning optimal constrained DRL policies for dynamic optimal power flow problems, with the aim of controlling power generations and battery outputs.
+--------------------------------------------------------------------------------
+Learning to Handle Complex Constraints for Vehicle Routing Problems (https://arxiv.org/abs/2410.21066)
+citeturn14academia21 [wordlim: 200] Published: 2.0 years ago; Title: Learning to Handle Complex Constraints for Vehicle Routing Problems ... While recent neural methods excel in constructing solutions based on feasibility masking, they struggle with handling complex constraints, especially when obtaining the masking itself is NP-hard.
+

@@ -1,0 +1,102 @@
+{
+  "commands": {
+    "emergency_release": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "verify_emergency_release.py"
+      ],
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "exit_status": 0,
+      "log": "<LOCAL_PATH>",
+      "log_sha256": "41eb09530400fe8c67d3cce8ca1a6aa1147da9ba6f6f308a57eacf3805493727"
+    },
+    "formal_contracts": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "formal_contracts_20261105/verify_contracts.py"
+      ],
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "exit_status": 0,
+      "log": "<LOCAL_PATH>",
+      "log_sha256": "b4b6e8877b542f0825ee84f8b5bf75343447d8f3a4c79705cf1a0b0cdf0a3db3"
+    },
+    "unit_regression": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-v"
+      ],
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "exit_status": 0,
+      "log": "<LOCAL_PATH>",
+      "log_sha256": "bb24e4f1cf9f0d54795aaf5307de66c8019ab2bdc850b7aa7fb1c4aaa2bc102a",
+      "tests": 70
+    },
+    "weather_hardening": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "weather_hardening_20261105/test_hardening.py"
+      ],
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "exit_status": 0,
+      "log": "<LOCAL_PATH>",
+      "log_sha256": "8227efb837eb6e12956f6ddaa3a59126dfdd956855cafb8d44ee6e1eef98e409"
+    },
+    "weather_rollback": {
+      "command": [
+        "<LOCAL_PATH>"
+      ],
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "exit_status": 0,
+      "log": "<LOCAL_PATH>",
+      "log_sha256": "8d6b7bf3eff1f96516239301adcc47aea6bd2f663c18cf5ec05d7174bcac0db8"
+    }
+  },
+  "cross_oracle_boundaries": {
+    "distance_m": 5e-10,
+    "exact_zero": "matched",
+    "positive_sub_eps": "matched"
+  },
+  "current_source_sha256": {
+    "emergency_scenario.py": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+    "weather_full_map.py": "c7db62049f8d6011153e0cf9139a9098a92d07fc62977f5359c18ffb23069b25",
+    "weather_oracle.py": "c529cae8823a9685f91ca5e5549bdd69aab2f3d13cfd5198874c38a85f8a3034",
+    "weather_replay.py": "6863dd602baa7d83177b96651bbabe06235c6f47139baac5a77aef63f667a1fd"
+  },
+  "emergency_cross_contract": {
+    "active_module_sha256": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+    "phase_accounting_transaction": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+    "receipt": "<LOCAL_PATH>",
+    "windows_bundle": {
+      "active_module_sha256": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+      "files": 60,
+      "path": "<LOCAL_PATH>",
+      "sha256": "c56c5fd002c0b3cd7bfd283e096f1d758e3499095a133aa03f696bfc73fca4ec"
+    }
+  },
+  "formal_contracts": {
+    "check_count": 2238,
+    "phase_accounting_scenarios": 4,
+    "receipt": "<LOCAL_PATH>"
+  },
+  "interpretation": "current-source implementation integrity only; no registered-map, route-quality, RL-superiority, confirmation-set, or real-flight-safety claim",
+  "schema": "weather_current_release_audit_v1",
+  "status": "PASS",
+  "weather_hardening": {
+    "historical_replay_modified_sha256": "fcacd224db747d0817ced53813e1585fe6f8ad9775952e5913622156748e32e3",
+    "rollback": "<LOCAL_PATH>",
+    "verification": "<LOCAL_PATH>"
+  },
+  "weather_replay_boundary_hardening": {
+    "rollback": "<LOCAL_PATH>",
+    "verification": "<LOCAL_PATH>"
+  },
+  "windows_bundle": {
+    "archive_sha256": "2442db5982104a3d4a6dbe892b35f0923e571e7ac380d541e0c496c764b2fb9f",
+    "manifest_sha256": "629c11380d38b66900d8672a01fe8e829bb3ffbe9307727e2903e94706eb9ae3",
+    "path": "<LOCAL_PATH>",
+    "payload_files": 64
+  }
+}

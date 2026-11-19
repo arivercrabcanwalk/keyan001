@@ -1,0 +1,82 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": "./CHECK.py baseline",
+    "argv": [
+      "./CHECK.py",
+      "baseline"
+    ],
+    "input": "ORIGINALS/LATEST_STATUS.md; live baseline; immutable source/analysis and protected history/PDF/state hashes",
+    "stdin": "",
+    "at_utc": "2026-11-12T05:18:09.131727+00:00",
+    "stdout": "BASELINE PASS\n",
+    "stderr": "",
+    "exit_status": 0,
+    "wall_seconds": 0.8588589160062838,
+    "scientific_execution": false
+  },
+  {
+    "phase": "MODIFIED",
+    "command": "./CHECK.py modified",
+    "argv": [
+      "./CHECK.py",
+      "modified"
+    ],
+    "input": "MODIFIED_FILE.md and updated live LATEST_STATUS.md; exact suffix/diff; source/record/gate integrity",
+    "stdin": "",
+    "at_utc": "2026-11-12T05:18:09.206791+00:00",
+    "stdout": "MODIFIED PASS\n",
+    "stderr": "",
+    "exit_status": 0,
+    "wall_seconds": 0.07327987501048483,
+    "scientific_execution": false
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": "./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md",
+    "argv": [
+      "./ROLLBACK.sh",
+      "ROLLBACK_COPY/LATEST_STATUS.md"
+    ],
+    "input": "ROLLBACK_COPY/LATEST_STATUS.md initially copied from MODIFIED_FILE.md; ORIGINALS baseline bytes",
+    "stdin": "",
+    "at_utc": "2026-11-12T05:18:09.570022+00:00",
+    "stdout": "ROLLBACK PASS\n",
+    "stderr": "",
+    "exit_status": 0,
+    "wall_seconds": 0.36277825001161546,
+    "scientific_execution": false
+  },
+  {
+    "phase": "ROLLBACK_VERIFY",
+    "command": "./CHECK.py rollback",
+    "argv": [
+      "./CHECK.py",
+      "rollback"
+    ],
+    "input": "restored isolated copy versus ORIGINALS; live/MODIFIED_FILE remain changed; protected sources unchanged",
+    "stdin": "",
+    "at_utc": "2026-11-12T05:18:09.642169+00:00",
+    "stdout": "ROLLBACK VERIFY PASS\n",
+    "stderr": "",
+    "exit_status": 0,
+    "wall_seconds": 0.07181324998964556,
+    "scientific_execution": false
+  },
+  {
+    "phase": "FINAL",
+    "command": "./CHECK.py final",
+    "argv": [
+      "./CHECK.py",
+      "final"
+    ],
+    "input": "four artifacts; executable rollback; JSON/source/record invariants; gates and canonical science state hashes",
+    "stdin": "",
+    "at_utc": "2026-11-12T05:18:09.713946+00:00",
+    "stdout": "FINAL DOCUMENT CHECK PASS\n",
+    "stderr": "",
+    "exit_status": 0,
+    "wall_seconds": 0.07143949999590404,
+    "scientific_execution": false
+  }
+]

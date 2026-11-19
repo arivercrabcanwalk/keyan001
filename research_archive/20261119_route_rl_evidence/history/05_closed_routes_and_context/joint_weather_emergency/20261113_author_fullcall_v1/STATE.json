@@ -1,0 +1,234 @@
+{
+  "G0": "NO_QUALIFIED_DISTINCT_MECHANISM",
+  "G3": "UNPASSED",
+  "chain_failure_then_final_source": "../20261113_author_strong_chain_v1",
+  "goal_status": "ACTIVE",
+  "historical_C_Liu_replaced": false,
+  "<REMOVED_ENDPOINT>_only_execution": true,
+  "next": "NEXT_BOUNDED_WORK.md",
+  "preserved_quotas": {
+    "actual_comparisons": 126,
+    "calibration": 24,
+    "calibration_limit": 24,
+    "new_identities": 40
+  },
+  "root_only": true,
+  "schema": "fixed_wind_full_author_engineering_v1",
+  "status": "FULL_AUTHOR_DELIVERY_ENGINEERING_PASSED_CHAIN_REPAIRED_SEPARATELY_RESEARCH_INCOMPLETE",
+  "summary": {
+    "Formal": 0,
+    "Java_entered_Main": 5,
+    "Java_launch_attempts": 6,
+    "all_child_cpu_s": 25.542525,
+    "baseline_actual": {
+      "delivered": true,
+      "latest_matches": true,
+      "original_feasible": true,
+      "reported_cost_matches": true,
+      "score": {
+        "M_return": 21.027017981913968,
+        "M_service": 20.37818997868216,
+        "cost": 114.94052697287096,
+        "fixed_cost": 83.4,
+        "ignored_empty_trip_count": 0,
+        "instance_sha256": "3470e60847bb74b0b3f3d47c5c2c344c7b2973681e4999b7b27a0f0d9adf865f",
+        "issues": [],
+        "mean_target_completion": 12.187762219533646,
+        "nonempty_trip_count": 3,
+        "operating_cost": 31.54052697287095,
+        "operating_minutes": 63.0810539457419,
+        "original_feasible": true,
+        "p90_target_completion_nearest_rank": 20.37818997868216,
+        "parameter_sha256": "8ebcb8aae89e079f2e2990d5e82560dfb2578bc61f80edb65e351eef52094d7b",
+        "physics_sha256": "dd88504e1117d10cce4c896fec3a79557da61cfabd508b6290b0d93286704400",
+        "schema": "constant_wind_return_makespan_score_v1",
+        "slot_duty": [
+          {
+            "duty_min": 0.0,
+            "slot": 0,
+            "station": 0
+          },
+          {
+            "duty_min": 21.027017981913968,
+            "slot": 1,
+            "station": 0
+          },
+          {
+            "duty_min": 0.0,
+            "slot": 0,
+            "station": 1
+          },
+          {
+            "duty_min": 21.027017981913968,
+            "slot": 1,
+            "station": 1
+          },
+          {
+            "duty_min": 0.0,
+            "slot": 0,
+            "station": 2
+          },
+          {
+            "duty_min": 21.027017981913968,
+            "slot": 1,
+            "station": 2
+          }
+        ],
+        "solution_sha256": "5e64599d1ee5b5d0d8a55844c02039fcddd53c8f1f2cca93e7d6f2d2f4131b96",
+        "station_makespan": [
+          21.027017981913968,
+          21.027017981913968,
+          21.027017981913968
+        ],
+        "target_completion": {
+          "1": 4.64,
+          "2": 11.545096679918782,
+          "3": 20.37818997868216,
+          "4": 4.64,
+          "5": 11.545096679918782,
+          "6": 20.37818997868216,
+          "7": 4.64,
+          "8": 11.545096679918782,
+          "9": 20.37818997868216
+        },
+        "target_station": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 2,
+          "8": 2,
+          "9": 2
+        },
+        "total_distance_m": 8172.948551167712,
+        "total_energy": 1.2434589710233541,
+        "trips": [
+          {
+            "duration_min": 21.027017981913968,
+            "energy": 0.4144863236744514,
+            "energy_slack": 0.3955136763255487,
+            "length_m": 2724.3161837225707,
+            "slot": 1,
+            "station": 0,
+            "targets": [
+              1,
+              2,
+              3
+            ],
+            "trip": 0
+          },
+          {
+            "duration_min": 21.027017981913968,
+            "energy": 0.4144863236744514,
+            "energy_slack": 0.3955136763255487,
+            "length_m": 2724.3161837225707,
+            "slot": 1,
+            "station": 1,
+            "targets": [
+              4,
+              5,
+              6
+            ],
+            "trip": 0
+          },
+          {
+            "duration_min": 21.027017981913968,
+            "energy": 0.4144863236744514,
+            "energy_slack": 0.3955136763255487,
+            "length_m": 2724.3161837225707,
+            "slot": 1,
+            "station": 2,
+            "targets": [
+              7,
+              8,
+              9
+            ],
+            "trip": 0
+          }
+        ],
+        "visited_count": 9
+      },
+      "source_latest_time": 21.027017981913968,
+      "status": "QUALIFIED_ZERO_WIND_ENGINEERING"
+    },
+    "checkpoints": 0,
+    "closure_fix_child_cpu_s": 0.85743,
+    "closure_fix_modules": 3,
+    "complete_qualified_author_outputs": 3,
+    "full_wind_calls": [
+      {
+        "M_return": 22.491325002669335,
+        "actual_start_through_exit_s": 2.067810477,
+        "budget_s": 6,
+        "cost": 117.136987504004,
+        "external_on_time_valid": true,
+        "stage": "MODIFIED6"
+      },
+      {
+        "M_return": 26.67181731250836,
+        "actual_start_through_exit_s": 3.34044428,
+        "budget_s": 12,
+        "cost": 193.70772596876256,
+        "external_on_time_valid": true,
+        "stage": "FULL12"
+      }
+    ],
+    "intentional_Main_failures_or_mutations": 2,
+    "main_child_cpu_s": 24.447822000000002,
+    "main_modules": 8,
+    "modified_files": 22,
+    "module_exit1": 2,
+    "newline_fix_child_cpu_s": 0.237273,
+    "newline_fix_modules": 3,
+    "original_files": 21,
+    "qualified_wind_author_outputs": 2,
+    "real_strong_nonRL_calls": 2,
+    "retained_pre_Main_JVM_failure": 1,
+    "scientific_maps": 0,
+    "strong_chain": [
+      {
+        "M": 22.491325002669335,
+        "admissible": true,
+        "anchor_M": 22.491325002669335,
+        "anchor_cost": 117.13698750400401,
+        "case": "MODIFIED6",
+        "cost": 117.13698750400401,
+        "elapsed_s": 0.07036940893158317,
+        "fallback": false,
+        "over_budget": false,
+        "seed": 20261112,
+        "station_types_preserved": true,
+        "status": "ONTIME_VALID",
+        "target_station_preserved": true,
+        "wind": [
+          540.0,
+          0.0
+        ]
+      },
+      {
+        "M": 26.67181731250836,
+        "admissible": true,
+        "anchor_M": 26.67181731250836,
+        "anchor_cost": 193.70772596876253,
+        "case": "FULL12",
+        "cost": 193.70772596876253,
+        "elapsed_s": 0.3008173988200724,
+        "fallback": false,
+        "over_budget": false,
+        "seed": 20261112,
+        "station_types_preserved": true,
+        "status": "ONTIME_VALID",
+        "target_station_preserved": true,
+        "wind": [
+          0.0,
+          540.0
+        ]
+      }
+    ],
+    "timed_modules": 14,
+    "training": 0
+  },
+  "two_original_scientific_STATE_bytes_unchanged": true
+}

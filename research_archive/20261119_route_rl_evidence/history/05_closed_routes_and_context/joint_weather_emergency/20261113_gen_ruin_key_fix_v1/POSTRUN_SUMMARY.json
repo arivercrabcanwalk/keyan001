@@ -1,0 +1,81 @@
+{
+  "phases": [
+    {
+      "phase": "BASELINE",
+      "utc": "2026-11-13T11:29:51.528668+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "BASELINE"
+      ],
+      "child_pid": 1180,
+      "exit_status": 0,
+      "child_cpu_s": 0.131954,
+      "wall_s": 0.1666048257611692,
+      "scope": "ISOLATED_HELPER_REGRESSION_ONLY"
+    },
+    {
+      "phase": "MODIFIED",
+      "utc": "2026-11-13T11:30:01.459647+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "MODIFIED"
+      ],
+      "child_pid": 1193,
+      "exit_status": 0,
+      "child_cpu_s": 0.115602,
+      "wall_s": 0.16566149005666375,
+      "scope": "ISOLATED_HELPER_REGRESSION_ONLY"
+    },
+    {
+      "phase": "AUDIT",
+      "utc": "2026-11-13T11:30:14.023737+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "AUDIT"
+      ],
+      "child_pid": 1206,
+      "exit_status": 0,
+      "child_cpu_s": 0.104373,
+      "wall_s": 0.11577973887324333,
+      "scope": "ISOLATED_HELPER_REGRESSION_ONLY"
+    },
+    {
+      "phase": "ROLLBACK",
+      "utc": "2026-11-13T11:30:15.188897+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "validation/run.py",
+        "ROLLBACK"
+      ],
+      "child_pid": 1219,
+      "exit_status": 0,
+      "child_cpu_s": 0.13226,
+      "wall_s": 0.16596767073497176,
+      "scope": "ISOLATED_HELPER_REGRESSION_ONLY"
+    }
+  ],
+  "phase_count": 4,
+  "child_cpu_seconds": 0.484189,
+  "wall_seconds": 0.614013725426048,
+  "frozen_source_files_verified": 35,
+  "training": 0,
+  "checkpoint": 0,
+  "author_solves": 0,
+  "complete_ALNS_solves": 0,
+  "new_scientific_maps": 0,
+  "Formal": 0,
+  "subagents": 0,
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "calls": 36,
+  "baseline_index_errors": 28,
+  "modified_index_errors": 0,
+  "independent_physical_rechecks_with_repetition": 32,
+  "empty_slots_unchanged": 8,
+  "full_ALNS_solves": 0,
+  "previous_H_cost_batch": "CLOSED_FAILED_NOT_RESUMED",
+  "status": "HELPER_FIX_ENGINEERING_PASSED_LIMITED_SCOPE"
+}

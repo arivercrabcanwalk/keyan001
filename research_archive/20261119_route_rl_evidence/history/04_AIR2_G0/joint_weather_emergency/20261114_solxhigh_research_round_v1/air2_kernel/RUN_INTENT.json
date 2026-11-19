@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "created_utc": "2026-11-14T03:59:20.357823+00:00",
+  "host": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "root_only_remote": true,
+  "phases": [
+    "BASELINE",
+    "MODIFIED",
+    "AUDIT",
+    "ROLLBACK_APPLY",
+    "ROLLBACK"
+  ],
+  "cpu_seconds_total": 180,
+  "wall_seconds_total": 240,
+  "max_memory_bytes": 1073741824,
+  "source_repairs": 0,
+  "audit_repairs": 0,
+  "successful_timing_reruns": 0,
+  "new_handwritten_fixtures": 3,
+  "prefix_states_per_fixture": 2,
+  "scientific_maps": 0,
+  "author_calls": 0,
+  "full_ALNS_quality_runs": 0,
+  "training": 0,
+  "Formal": 0,
+  "scope": "registered <=2-trip component, no neural policy or full finite-domain qualification",
+  "finance_H": "frozen E2 empty state at anchor.makespan; no H or geometry adjustment if no compensation",
+  "P3": "E3 empty only, shared once vs same finite table per action, all work charged",
+  "row_limit_note": "new component explicit 20000 physical rows, historical compiler 4000 guard not changed; no full-domain guarantee"
+}

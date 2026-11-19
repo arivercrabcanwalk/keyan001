@@ -1,0 +1,208 @@
+[
+  {
+    "sheet": "Summary - bar{l}=60min",
+    "nonempty_rows": 24,
+    "last_nonempty_row": 29
+  },
+  {
+    "sheet": "CFA M=1 Psi = 30 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "max_M",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "CFA M=2 Psi = 60 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "max_M",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "myopic Psi = 30 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "max_M",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "myopic Psi = 60 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "max_M",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "PFA Psi = 30 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "PFA Psi = 60 - all",
+    "nonempty_rows": 3001,
+    "last_nonempty_row": 3001,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "#_epochs",
+      "speed_dev",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_#_failed_executed",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 3000,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "10": 300
+    }
+  },
+  {
+    "sheet": "Oracle - all",
+    "nonempty_rows": 301,
+    "last_nonempty_row": 301,
+    "headers": [
+      "instance",
+      "#_customers",
+      "#_batteries",
+      "#_drones",
+      "time_step_(min)",
+      "min_M",
+      "solution_cost($)",
+      "#_served_customers",
+      "ratio_served_customers_without_penalty",
+      "total_penalty_(min)",
+      "total_penalty_(min)/#_served_customers",
+      "total_distance_traveled_(meters)",
+      "total_exec_t_(s)"
+    ],
+    "data_rows": 300,
+    "instance_ids": 300,
+    "records_per_instance": {
+      "1": 300
+    }
+  },
+  {
+    "sheet": "CFA M=1 Psi=30 plot data",
+    "nonempty_rows": 302,
+    "last_nonempty_row": 302
+  },
+  {
+    "sheet": "CFA M=2 Psi=60 plot data",
+    "nonempty_rows": 302,
+    "last_nonempty_row": 302
+  }
+]

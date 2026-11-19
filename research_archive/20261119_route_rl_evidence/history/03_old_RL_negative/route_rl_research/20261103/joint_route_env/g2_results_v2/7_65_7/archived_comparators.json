@@ -1,0 +1,1460 @@
+[
+  {
+    "budget": 6,
+    "seed": 101,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "893421177ebc256fdcd441b6f08adbe35960051f5d4563b870178af9976404ce",
+    "solution_sha256": "7b21b3cd6ee7fe8fa42f1dd70746133ddea24ac5d3316cb3b794b791d159970c",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.1740959799346,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3481919598692,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9878.879958904177,
+          "time_min": 40.97653328767131,
+          "energy": 0.7975775991780836,
+          "energy_slack": 0.01242240082191648
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 8408.668151880094,
+          "time_min": 39.3429646132001,
+          "energy": 0.768173363037602,
+          "energy_slack": 0.04182663696239808
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9045.916431048394,
+          "time_min": 40.05101825672044,
+          "energy": 0.780918328620968,
+          "energy_slack": 0.02908167137903206
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 6707.689474273517,
+          "time_min": 37.45298830474835,
+          "energy": 0.7341537894854704,
+          "energy_slack": 0.07584621051452967
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.1740959799346,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 6.003319528885186,
+    "historical_search_seconds": 6.000517393928021,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.6605069635892602
+  },
+  {
+    "budget": 6,
+    "seed": 102,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "4db68f7f45859a5126f5f52b2a3d1d5d8d303f8ba02f547ecb7e6d203452c7c1",
+    "solution_sha256": "7061cd647b42cae8b2fecbec919ae7cbd4d9abe3ef6f0131274a4795b68d17d7",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.1580427393837,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3160854787674,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8140.651781498587,
+          "time_min": 39.045168646109545,
+          "energy": 0.7628130356299718,
+          "energy_slack": 0.04718696437002823
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6707.689474273517,
+          "time_min": 37.45298830474835,
+          "energy": 0.7341537894854704,
+          "energy_slack": 0.07584621051452967
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9462.863311028696,
+          "time_min": 40.51429256780966,
+          "energy": 0.789257266220574,
+          "energy_slack": 0.020742733779426037
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 9701.053616313795,
+          "time_min": 40.77894846257088,
+          "energy": 0.794021072326276,
+          "energy_slack": 0.015978927673724108
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.1580427393837,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 6.003293012268841,
+    "historical_search_seconds": 6.000554210972041,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.658093682036152
+  },
+  {
+    "budget": 6,
+    "seed": 103,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "ee6980ccdab2de593f28c0bce2449b61d0575af57e84673eea55b649af8239a2",
+    "solution_sha256": "e74d278035bf88f37138b496fd561585835e60a3465275b52df91042412e53ac",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.1580427393837,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3160854787674,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6707.689474273517,
+          "time_min": 37.45298830474835,
+          "energy": 0.7341537894854704,
+          "energy_slack": 0.07584621051452967
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9701.053616313795,
+          "time_min": 40.77894846257088,
+          "energy": 0.794021072326276,
+          "energy_slack": 0.015978927673724108
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9462.863311028696,
+          "time_min": 40.51429256780966,
+          "energy": 0.789257266220574,
+          "energy_slack": 0.020742733779426037
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 8140.651781498587,
+          "time_min": 39.045168646109545,
+          "energy": 0.7628130356299718,
+          "energy_slack": 0.04718696437002823
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.1580427393837,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 6.003289890941232,
+    "historical_search_seconds": 6.000500665046275,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.658093682036152
+  },
+  {
+    "budget": 12,
+    "seed": 101,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "f378a92d1afac3022c9e6a7adf1e60d6664e94817f9b6e3b5a9c7e0f357ce598",
+    "solution_sha256": "b44c28c7fdad837fa760ef67afcff11d6c2ffb0ad3cd89912534b8b83bd69980",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.1580427393837,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3160854787674,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6707.689474273517,
+          "time_min": 37.45298830474835,
+          "energy": 0.7341537894854704,
+          "energy_slack": 0.07584621051452967
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9701.053616313795,
+          "time_min": 40.77894846257088,
+          "energy": 0.794021072326276,
+          "energy_slack": 0.015978927673724108
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9462.863311028696,
+          "time_min": 40.51429256780966,
+          "energy": 0.789257266220574,
+          "energy_slack": 0.020742733779426037
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 8140.651781498587,
+          "time_min": 39.045168646109545,
+          "energy": 0.7628130356299718,
+          "energy_slack": 0.04718696437002823
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.1580427393837,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 12.003228495828807,
+    "historical_search_seconds": 12.000492610037327,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.658093682036152
+  },
+  {
+    "budget": 12,
+    "seed": 102,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "7c9ef2d3e2556875648b26cdff1713cdedc59c465c1e244bc654a60664dfd363",
+    "solution_sha256": "3e2f6e9bc0e35dfc08de3c7401a4ae2f578c336e6333dcf9799cd3e384fca393",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.170150644567,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3403012891341,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6713.910554440665,
+          "time_min": 37.45990061604518,
+          "energy": 0.7342782110888134,
+          "energy_slack": 0.07572178891118664
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9865.557275075485,
+          "time_min": 40.96173030563943,
+          "energy": 0.7973111455015098,
+          "energy_slack": 0.01268885449849022
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9045.916431048394,
+          "time_min": 40.05101825672044,
+          "energy": 0.780918328620968,
+          "energy_slack": 0.02908167137903206
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 8408.668151880094,
+          "time_min": 39.3429646132001,
+          "energy": 0.768173363037602,
+          "energy_slack": 0.04182663696239808
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.170150644567,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 12.003260564059019,
+    "historical_search_seconds": 12.000488074030727,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.659913872816892
+  },
+  {
+    "budget": 12,
+    "seed": 103,
+    "meta_path": "<LOCAL_PATH>",
+    "solution_path": "<LOCAL_PATH>",
+    "meta_sha256": "4bf1b7cd2f934f8653fffaebdf3c9b3f11d3d534cfb156e0874eec260693f8cb",
+    "solution_sha256": "c45a172ad57a0488724b8e4a35d57ca16aa6fb88cb2254c27e963a4e7e13fd26",
+    "independent_audit": {
+      "feasible": true,
+      "cost": 654.1580427393837,
+      "fixed_cost": 217.0,
+      "operating_minutes": 874.3160854787674,
+      "issues": [],
+      "details": [
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 11097.155268931003,
+          "time_min": 32.33017252103445,
+          "energy": 0.6219431053786201,
+          "energy_slack": 0.3780568946213799
+        },
+        {
+          "station": 0,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9030.11311397606,
+          "time_min": 50.033459015528955,
+          "energy": 0.9806022622795212,
+          "energy_slack": 0.019397737720478814
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6628.123580132113,
+          "time_min": 37.364581755702346,
+          "energy": 0.7325624716026423,
+          "energy_slack": 0.07743752839735774
+        },
+        {
+          "station": 0,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9779.89755943376,
+          "time_min": 30.866552843815292,
+          "energy": 0.5955979511886752,
+          "energy_slack": 0.21440204881132485
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 8489.87903853528,
+          "time_min": 39.43319893170587,
+          "energy": 0.7697975807707057,
+          "energy_slack": 0.2302024192292943
+        },
+        {
+          "station": 1,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9812.116374230827,
+          "time_min": 40.90235152692314,
+          "energy": 0.7962423274846167,
+          "energy_slack": 0.20375767251538335
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 8970.380969779211,
+          "time_min": 39.96708996642135,
+          "energy": 0.7794076193955843,
+          "energy_slack": 0.030592380604415714
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 11834.256928401617,
+          "time_min": 33.14917436489068,
+          "energy": 0.6366851385680323,
+          "energy_slack": 0.17331486143196773
+        },
+        {
+          "station": 1,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 2275.247687436387,
+          "time_min": 12.52805298604043,
+          "energy": 0.24550495374872774,
+          "energy_slack": 0.5644950462512723
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4622.296449021232,
+          "time_min": 15.135884943356924,
+          "energy": 0.29244592898042465,
+          "energy_slack": 0.7075540710195753
+        },
+        {
+          "station": 2,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 10118.769461846396,
+          "time_min": 41.24307717982933,
+          "energy": 0.802375389236928,
+          "energy_slack": 0.19762461076307203
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6481.751076615627,
+          "time_min": 27.20194564068403,
+          "energy": 0.5296350215323126,
+          "energy_slack": 0.2803649784676875
+        },
+        {
+          "station": 2,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 10685.764199878022,
+          "time_min": 31.8730713331978,
+          "energy": 0.6137152839975604,
+          "energy_slack": 0.19628471600243969
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 6521.010561895074,
+          "time_min": 47.24556729099453,
+          "energy": 0.9304202112379015,
+          "energy_slack": 0.06957978876209847
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 9088.444759666298,
+          "time_min": 50.09827195518477,
+          "energy": 0.981768895193326,
+          "energy_slack": 0.018231104806674003
+        },
+        {
+          "station": 3,
+          "drone": 0,
+          "trip": 2,
+          "length_m": 9557.384513589046,
+          "time_min": 50.61931612621005,
+          "energy": 0.991147690271781,
+          "energy_slack": 0.008852309728219043
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 6707.689474273517,
+          "time_min": 37.45298830474835,
+          "energy": 0.7341537894854704,
+          "energy_slack": 0.07584621051452967
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 9701.053616313795,
+          "time_min": 40.77894846257088,
+          "energy": 0.794021072326276,
+          "energy_slack": 0.015978927673724108
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 2,
+          "length_m": 9462.863311028696,
+          "time_min": 40.51429256780966,
+          "energy": 0.789257266220574,
+          "energy_slack": 0.020742733779426037
+        },
+        {
+          "station": 3,
+          "drone": 1,
+          "trip": 3,
+          "length_m": 8140.651781498587,
+          "time_min": 39.045168646109545,
+          "energy": 0.7628130356299718,
+          "energy_slack": 0.04718696437002823
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 0,
+          "length_m": 4383.098574314787,
+          "time_min": 24.87010952701643,
+          "energy": 0.48766197148629575,
+          "energy_slack": 0.5123380285137042
+        },
+        {
+          "station": 4,
+          "drone": 0,
+          "trip": 1,
+          "length_m": 11788.417179336195,
+          "time_min": 43.09824131037355,
+          "energy": 0.8357683435867239,
+          "energy_slack": 0.16423165641327608
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 0,
+          "length_m": 9133.674721487398,
+          "time_min": 40.14852746831933,
+          "energy": 0.782673494429748,
+          "energy_slack": 0.02732650557025207
+        },
+        {
+          "station": 4,
+          "drone": 1,
+          "trip": 1,
+          "length_m": 7574.436729269781,
+          "time_min": 28.416040810299755,
+          "energy": 0.5514887345853956,
+          "energy_slack": 0.25851126541460445
+        }
+      ],
+      "visited": 65,
+      "missing": 0
+    },
+    "status": "VALID_ARCHIVED_FIXED_OWNER_ANCHOR",
+    "issues": [],
+    "saved_cost": 654.1580427393837,
+    "cost_residual": 0.0,
+    "historical_end_to_end_seconds": 12.003232021350414,
+    "historical_search_seconds": 12.000484655145556,
+    "historical_model_load_seconds": 0.012308008968830109,
+    "joint_candidate_gain_pct": 1.658093682036152
+  }
+]

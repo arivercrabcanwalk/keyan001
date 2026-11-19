@@ -1,0 +1,100 @@
+{
+  "date_local": "2026-11-12",
+  "scope": "main_and_SI_already_authorized",
+  "brown_2010": {
+    "main": "ACQUIRED_PUBLIC_AUTHOR_PDF_17_PAGES",
+    "companion": "ACQUIRED_PUBLIC_AUTHOR_PDF_15_PAGES_INCLUDING_COVER",
+    "aggregate_si_status": "explicit_online_appendices_acquired",
+    "bare_pdf_manifest_si_not_found": "route_does_not_identify_landing_page_not_evidence_of_absence"
+  },
+  "pd_mcts": {
+    "fulltext": "ACQUIRED_ARXIV_V1_2017_33_PAGES",
+    "final_journal_fulltext": "NOT_ACQUIRED",
+    "additional_si": "not_exhaustively_searched"
+  },
+  "cfa_final_2025": {
+    "doi": "10.1016/j.trb.2025.103335",
+    "fulltext": "NOT_ACQUIRED",
+    "pfa_oracle_definition": "UNREAD_FINAL_VERSION",
+    "licenses_from_crossref": [
+      {
+        "start": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              1
+            ]
+          ],
+          "date-time": "2025-12-01T00:00:00Z",
+          "timestamp": 1764547200000
+        },
+        "content-version": "tdm",
+        "delay-in-days": 0,
+        "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+      },
+      {
+        "start": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              1
+            ]
+          ],
+          "date-time": "2025-12-01T00:00:00Z",
+          "timestamp": 1764547200000
+        },
+        "content-version": "tdm",
+        "delay-in-days": 0,
+        "URL": "https://www.elsevier.com/legal/tdmrep-license"
+      },
+      {
+        "start": {
+          "date-parts": [
+            [
+              2025,
+              9,
+              30
+            ]
+          ],
+          "date-time": "2025-09-30T00:00:00Z",
+          "timestamp": 1759190400000
+        },
+        "content-version": "vor",
+        "delay-in-days": 0,
+        "URL": "http://creativecommons.org/licenses/by/4.0/"
+      }
+    ],
+    "default_api": {
+      "http_status": 200,
+      "bytes": 2016,
+      "originalText_present": false
+    },
+    "full_view_api": {
+      "http_status": 401,
+      "bytes": 133
+    },
+    "downloader_status": "oa_not_found",
+    "interpretation": "file_not_located_by_this_route; formal VOR CC_BY_4_0 license is present",
+    "browser_observation": "publisher_verification_challenge; no checkbox interaction; observed in tool session, no local screenshot claimed",
+    "draft_2024": "version_separate; not substituted for final"
+  },
+  "zhao_2026": {
+    "doi": "10.1016/j.tre.2026.105074",
+    "main": "USER_FULLTEXT_AUDITED_IN_PRIOR_PACKAGE",
+    "independent_si": "DECLARED_IN_MAIN_NOT_ACQUIRED",
+    "pdf_external_link_annotations": 107,
+    "direct_si_asset_found_in_pdf_links": false
+  },
+  "han_2026": {
+    "doi": "10.1016/j.tre.2026.105100",
+    "main": "USER_FULLTEXT_AUDITED_IN_PRIOR_PACKAGE",
+    "online_si": "EXISTENCE_AND_CONTENT_UNVERIFIED",
+    "pdf_external_link_annotations": 89,
+    "direct_si_asset_found_in_pdf_links": false
+  },
+  "absence_of_si_not_inferred": true,
+  "no_guessed_supplement_asset_urls": true,
+  "new_user_decision_required": false
+}

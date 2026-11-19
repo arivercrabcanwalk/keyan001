@@ -1,0 +1,428 @@
+POLITECNICO DI TORINO (https://iris.polito.it/retrieve/handle/11583/2976496/0c9294dd-a788-499c-ad7b-18bc96c86fd9/2023-ieeeaccess-Energy_Efficient_UAV-Based_Last-Mile_Delivery.pdf)
+citeturn16search12 [wordlim: 200] Published: 2.2 years ago; Bruni et al.: Energy Efficient UAV-Based Last-Mile Delivery: A Tactical-Operational Model ... The drone routing decisions
+define the FC that launches the drone, the order of customers ... drone payload, it is important to track, at each customer’s site, ... choice of FCs is selective and one FC (FC 4) is not used.
+at the beginning of the service. The drone routing decisions
+define the FC that launches the drone, the order of customers
+to be visited, and the FC that retrieves the drone, which
+can be different from the starting FC. Once the route plans
+are defined, the drone is appropriately loaded and visits the
+subset of customers assigned. Clearly, the designed routes
+should be energy feasible, i.e. the total energy consumption
+should not exceed the battery capacity. Since the drone energy
+consumption depends on travel time and (non-linearly) on the
+drone payload, it is important to track, at each customer’s site,
+the drone payload after dropping the parcel at the customer’s
+doorstep. Finally, after delivering the last customer’s package,
+the drone is retrieved at one of the FCs.
+It is important to note that in the DRP-SD, the main
+focus is on tactical plans such as the selection of FCs
+and the fleet size decision, while the operational routing
+plans are incorporated to account for the connection and
+mutual interactions between such long-term and short-term
+plans. At the time the tactical decisions are made, the exact
+information on the parcels features such as weight is not
+available and we should plan based on peak- or average-
+demand scenario, depending on the risk aversion of the
+decision maker.
+Figure 1 represents a DRP-SD instance with four potential
+FCs and three drones. In the colored squares above each
+customer, the accumulated drone payload after departure
+from the customer is reported. All parcels have a weight of
+0.5 kg. Each drone is launched from a selected FC, serves
+multiple customers and is finally retrieved at one of the active
+FCs already used as drone launch points. As we can see, the
+choice of FCs is selective and one FC (FC 4) is not used.
+B. DRP-SD: MATHEMATICAL FORMULATION
+Following Dorling et al. [22]’s approach, the energy con-
+sumption (in Watt-hours, Wh) in a drone flying from point
+i to point j with travel time tij while carrying a payload of
+weight pij can be expressed as:
+Eij =
+q
+g3
+2 ρξh (ω + µ + pij)3/2 tij
+(1)
+p ⌋customers. --------------------------------------------------------------------------------
+The drone latency location routing problem under uncertainty (https://iris.polito.it/retrieve/handle/11583/2982205/03275ea4-be10-467c-99cc-e1df7a1b8bed/1-s2.0-S0968090X2300311X-main.pdf)
+citeturn16search13 [wordlim: 200] Published: 3.1 years ago; This globally valid cut ensures that, for each violated route, at least one customer/FC is removed. ... In the first solution (Fig. 5(a)) the red route is not feasible with respect to the battery capacity (called energy infeasible) and the cut y²\_{FC₂ C₁} + y¹\_{C₁ C₄} + y⁰\_{C₄ FC₂} ≤ 2 is added. ... The A1 and A2 instances, were originally proposed for the single-depot deterministic drone routing problem (for A2 instances, the customers’ coordinates were divided by 2 to make the problem feasible).
+
+The valid cut 𝒩𝒢(π) corresponding to route π is defined as follows
+
+𝒩𝒢(π) = ∑\_{(i,j)∈π} ∑\_{y\_{ij}∈L} (1 − y\_{ij}^r) ≥ 1.  (43)
+
+This globally valid cut ensures that, for each violated route, at least one customer/FC is removed. Since the feasible region of the original problem is bounded and there is a finite number of feasible solutions, the number of such “no-good” cuts is also limited guaranteeing the algorithm convergence. If all the nodes are explored and none of them passes the feasibility check in terms of energy consumption, we can conclude that the problem is infeasible.
+
+In the following, we present a small example to clarify how the B&Ck algorithm works.
+
+4.1. Illustrative example
+
+Consider a small example with four customers, two drones, and two potential FCs, each with a capacity of two. Table 3 shows the coordinates of the customers C1, C2, C3, C4 and the potential FCs in the two-dimensional space, and the customers’ demands (in terms of parcel weight). Let us consider an ellipsoidal uncertainty set with correlated flight times (Appendix reports the covariance matrix). --------------------------------------------------------------------------------
+A Dynamic Drone Routing Problem with Uncertain Demand and Energy Consumption (https://www.cirrelt.ca/documentstravail/cirrelt-2024-34.pdf)
+citeturn16search14 [wordlim: 200] Published: 2.2 years ago; Crawled: 2.1 years ago; A Dynamic Drone Routing Problem with Uncertain Demand and Energy Consumption ... As previously indicated, it is composed of four steps: a trip generation procedure, an algorithm to select trips maximizing the number of customers served, a procedure to assign trips to drones in order to
+
+CIRRELT-2024-34 17
+The time associated with the new state is defined as t_{k+1} = t_k + Ψ, with Ψ denoting a given time step eventually calibrated based on the process describing the arrival of new requests during the day. Our choice differs from other contributions that associate the new decision point with the arrival of a new request. The motivation comes from the difference in the considered problems. During some hours of the day, the frequency of arrival of requests can be very high, making the continuous update of the routing plans useless.
+
+The transition to the next decision state S_{k+1} starting from S_k^x entails updating the sets of requests, which is done in lines 6–11 of Algorithm 1. The set of new requests appearing between t_k and t_{k+1}, denoted by set U_{k+1}, is updated in line 6 with the newly-arriving random requests. Line 7 updates the set of outstanding requests D_{k+1} with the requests from epoch k, i.e., D_{k+1} ← D_k^x. Finally, the set of drones Δ_{k+1} is updated to include the new states of drones for the next period encompassing their flying operations and/or recharge operations at the depot, and B_{k+1} is also updated to consider the new state of the batteries.
+
+5.3. Algorithm components
+
+This section provides a comprehensive, step-by-step description of the procedures invoked in Algorithm 2 to perform the action derived from the adopted CFA policy. As previously indicated, it is composed of four steps: a trip generation procedure, an algorithm to select trips maximizing the number of customers served, a procedure to assign trips to drones in order to
+
+CIRRELT-2024-34 17--------------------------------------------------------------------------------
+A deep reinforcement learning and fractional packing framework for routing and scheduling in healthcare waste supply chains (https://openalex.org/W4414299110)
+citeturn16search0 [wordlim: 200] Published: 1.1 years ago; Crawled: 2 months ago; # A deep reinforcement learning and fractional packing framework for routing and scheduling in healthcare waste supply chains ... These algorithms aim to optimize route planning and scheduling for medical waste collection vehicles operating under real-world constraints such as limited vehicle capacity and fixed service windows. ... A multi-trip routing strategy is integrated into the promising algorithms to assess its impact on performance metrics, including capacity utilization, travel distance, total operational time, and number of trips.
+# A deep reinforcement learning and fractional packing framework for routing and scheduling in healthcare waste supply chains
+
+OpenAlex ID: W4414299110
+
+DOI: 10.1016/j.sca.2025.100164
+
+Type: article
+
+Year: 2025
+
+Publication date: 2025-09-17
+
+Language: en
+
+## Source
+
+Name: Supply Chain Analytics
+
+ISSN-L: 2949-8635
+
+ISSN: 2949-8635
+
+Publisher: Elsevier BV
+
+## Citation
+
+## Article links
+
+  * Article website
+  * Location website
+
+## Authors
+
+  * Norhan Khallaf (ORCID) — Menoufia University (ROR)
+  * Osama Abdel‐Raouf (ORCID) — Menoufia University (ROR)
+  * Mohiy Hadhoud — Menoufia University (ROR)
+  * Mohamed Dawam — Cairo University (ROR)
+  * Ahmed Kafafy — Menoufia University (ROR)
+
+## Abstract
+
+Artificial intelligence (AI) is increasingly utilized in healthcare logistics, including automated systems for collecting hazardous medical waste from hospitals under strict time and capacity constraints. This study compares three routing algorithms: (1) Google Maps Destination using an application programming interface (API), (2) hybrid clustering with Deep Q-Network (DQN), and (3) a hybrid method combining clustering, the fractional knapsack strategy, and DQN. These algorithms aim to optimize route planning and scheduling for medical waste collection vehicles operating under real-world constraints such as limited vehicle capacity and fixed service windows. The routing problem is modeled as both a capacitated vehicle routing problem (CVRP) and a CVRP with time windows (CVRPTW), capturing complexities. A multi-trip routing strategy is integrated into the promising algorithms to assess its impact on performance metrics, including capacity utilization, travel distance, total operational time, and number of trips. 
+Field: Medicine
+
+Domain: Health Sciences
+
+## Keywords
+
+  * Vehicle routing problem
+  * Cluster analysis
+  * Scheduling (production processes)
+  * Packing problems
+  * Job shop scheduling
+  * Routing (electronic design automation)
+  * Knapsack problem
+  * Capacity planning
+
+## Open access
+
+Is open access: yes
+
+Open access status: diamond
+
+Open-access URL: https://doi.org/10.1016/j.sca.2025.100164
+
+License: cc-by
+
+## Citations
+
+FWCI: 1.3017
+
+Cites: 35
+
+### Referenced works
+
+  * W3103906052
+  * W4306316942
+  * W4316037940
+  * W4376614283
+  * W4388081873
+  * W4391221820
+  * W4391534059
+  * W4391889802
+  * W4392121271
+  * W4396759670
+  * W4399768132
+  * W4400173131
+  * W4400572334
+  * W4400616730
+  * W4401537074
+  * W4401974860
+  * W4404118740
+  * W4404460534
+  * W4405569245
+  * W4405907456
+  * W4406019804
+  * W4406703214
+  * W4406959045
+  * W4407366612
+  * W4407386611
+  * W4407780763
+  * W4408829872
+  * W4409249736
+  * W4409403975
+  * W4409991407
+  * W4410401589
+  * W4410952652
+  * W4411237205
+  * W4411264296
+  * W4412946166
+
+Cited by: 1
+
+Normalized percentile: 0.83243734--------------------------------------------------------------------------------
+(PDF) Towards Scalable Three-Dimensional Loading Capacitated Vehicle Routing (https://doi.org/10.13140/RG.2.2.24344.71687)
+citeturn16search1 [wordlim: 200] Published: 1.7 years ago; Crawled: last month; Keywords: Supply Chain, Vehicle Routing, Optimisation, Reinforcement Learning, Logistics ... Collaborative packing and routing
+
+e-mail: <EMAIL_REMOVED>, <EMAIL_REMOVED>
+
+Abstract: Current vehicle routing methods suﬀer from non-linear scaling with increasing
+
+problem size and are therefore bound to limited geographic areas to compute results in time
+
+for day-to-day operations. This only allows for local optima in routing and leaves global
+
+optimization potential untouched. We develop a reinforcement learning model to approximately
+
+solve the three-dimensional loading capacitated vehicle routing problem in linear time. We
+
+demonstrate the linear time scaling of our reinforcement learning model and benchmark our
+
+routing performance against state-of-the-art methods. Our results show a promising ﬁrst step
+
+towards large-scale logistics optimization with reinforcement learning. Copyright ©2025 IFAC
+
+Keywords: Supply Chain, Vehicle Routing, Optimisation, Reinforcement Learning, Logistics
+
+1. INTRODUCTION
+
+Heavy goods vehicles (HGVs) are a vital part of the
+
+supply chains that power our economy. At the same time,
+
+HGVs are also a major contributor to climate change,
+
+accounting for 4.75% of the total greenhouse gas emissions
+
+in the United Kingdom alone (Transport Statistics Great
+
+Britain, 2020). Despite this signiﬁcant impact on our
+
+environment, logistics operations in the UK are lacking
+
+eﬃciency with an average loading factor of only around
+
+60% for HGVs (Freight Transport Association, 2019).
+
+One promising approach to increase the eﬃciency of HGV
+
+usage is collaborative vehicle routing with co-loading of
+
+delivery items, as shown in Figure 1. In this approach,
+
+carriers give away packages that are undesirable for their
+
+routes and accept packages from other carriers that ﬁt
+
+--------------------------------------------------------------------------------
+An Optimal Routing Algorithm for Unmanned Aerial Vehicles (https://www.mdpi.com/1424-8220/21/4/1219/pdf?version=1613149306)
+citeturn16search15 [wordlim: 200] Published: 5.7 years ago; Crawled: 5.7 years ago; Therefore, we create a routing algorithm to find optimal round-trip routes for UAVs, which deliver goods from depots to customers. ... In this process, we allow multiple UAVs to deliver goods to one customer at the same time. ... Amazon, the world’s largest e-commerce company, launched Prime Air [1], a future delivery system using UAVs designed to rapidly deliver goods to customers. ... With the growth of UAV delivery business, delivery management systems will likewise increase [4]. ... In Reference [5], Wang et al. determined optimal routes for two trucks and one drone that uses the trucks as depots.
+Sensors
+
+Communication
+
+# An Optimal Routing Algorithm for Unmanned Aerial Vehicles
+
+Sooyeon Kim 1, Jae Hyun Kwak 2, Byoungryul Oh 1, Da-Han Lee 1 and Duehee Lee 1,*  
+
+1 Department of Electric and Electrical Engineering, Konkuk University, Seoul 05029, Korea; <EMAIL_REMOVED> (S.K.); <EMAIL_REMOVED> (B.O.); <EMAIL_REMOVED> (D.-H.L.)  
+2 Department of Electrical and Computer Engineering, University of Rochester, Rochester, NY 60521, USA; <EMAIL_REMOVED>  
+* Correspondence: <EMAIL_REMOVED>; Tel.: +82-2-450-3933
+
+**Abstract:** A delivery service using unmanned aerial vehicles (UAVs) has potential as a future business opportunity, due to its speed, safety and low-environmental impact. To operate a UAV delivery network, a management system is required to optimize UAV delivery routes. Therefore, we create a routing algorithm to find optimal round-trip routes for UAVs, which deliver goods from depots to customers. Optimal routes per UAV are determined by minimizing delivery distances considering the maximum range and loading capacity of the UAV. In order to accomplish this, we propose an algorithm with four steps. First, we build a virtual network to describe the realistic environment that UAVs would encounter during operation. Second, we determine the optimal number of in-service UAVs per depot. Third, we eliminate subtours, which are infeasible routes, using flow variables part of the constraints. Fourth, we allocate UAVs to customers minimizing delivery distances from depots to customers. In this process, we allow multiple UAVs to deliver goods to one customer at the same time. Finally, we verify that our algorithm can determine the number of UAVs in service per depot, round-trip routes for UAVs, and allocate UAVs to customers to deliver at the minimum cost.
+
+**Keywords:** unmanned aerial vehicle; multiple depots vehicle routing problem; subtour elimination; network optimization; mixed integer linear programming
+
+## 1. Introduction
+
+Unmanned aerial vehicles (UAVs), also known as drones, are very common in today’s society. They are used for pleasure, photography, filmography, and surveillance, but they can also have industrial applications. --------------------------------------------------------------------------------
+Microsoft Word - 43823404-20190517_Drone Delivery Evaluation - Executive Summary_v6.docx (https://ctl.mit.edu/sites/ctl.mit.edu/files/theses/43823404-20190517_Drone_Delivery_Evaluation_-_Executive_Summary_v6.pdf)
+citeturn16search16 [wordlim: 200] Crawled: 9 months ago; An efficient drone delivery system has to address the classic vehicle routing problem (VRP): "What is the optimal set of routes for a fleet of drones to serve a given set of customers?". ... Hence, a Memetic Algorithm introduces a stage of individual learning (rather than population), so a new better solution that has higher fitness can be selected, independent from the rest of the population. ... It shows four labeled model panels: Model 1 Pure Drone Delivery, Model 2 Drone-inner/Truck-outer, Model 3 Truck-inner/Drone-outer, and Model 4 Shared Truck-Drone, each depicting customer pins, depot, truck/drone routes, and a dashed drone reach circle.
+This thesis evaluates the optimal design and operational performance of different drone delivery models to help the industry understand potential use cases of drones in last-mile delivery systems
+
+**Methodology**
+
+There are various operating models for a drone-based last-mile delivery system from pure drone delivery model to unsynchronized/synchronized truck-drone delivery system. This thesis focuses on and quantitatively models four main drone delivery system as shown in Figure 1:
+1. Pure drone delivery: customers are served by drones (no trucks)
+2. Drone-inner/Truck-outer: drones to serve customers closer from the depot and trucks to serve customers farther from the depot
+3. Truck-inner/Drone-outer: trucks to serve customers closer from the depot and drones to serve customers farther from the depot
+4. Shared Truck-Drone: trucks or drones can serve any customers, depending on the optimality of objective function (e.g. minimizing tour time)
+
+An efficient drone delivery system has to address the classic vehicle routing problem (VRP): "What is the optimal set of routes for a fleet of drones to serve a given set of customers?". --------------------------------------------------------------------------------
+Very large-scale neighborhood search for drone routing with energy replenishment | OR Spectrum | Springer Nature Link (https://link.springer.com/article/10.1007/s00291-026-00849-y)
+citeturn16search2 [wordlim: 200] Published: 8 months ago; Crawled: today; We formulate a basic optimization problem – the Drone Routing Problem with Energy replenishment (DRP-E) (cf. ... The route contains three operations with makespans $\mathcal{M}({o}_{1})=\mathcal{M}({w}_{0},{v}_{1},{w}_{0})=4$ $\mathcal {M}(o_1)=\mathcal {M}(w_0, v_1, w_0)=4$, $\mathcal{M}({o}_{2})=\mathcal{M}({w}_{0},{v}_{2},{v}_{3},{w}_{1})=7$ $\mathcal {M}(o_2)=\mathcal {M}(w_0, v_2,v_3, w_1)=7$, and $\mathcal{M}({o}_{3})=\mathcal{M}({w}_{3},{v}_{4},{v}_{5},{w}_{t})=7$ $\mathcal {M}(o_3)=\mathcal {M}(w_3, v_4, v_5, w_t)=7$ as well as one nonempty traveling leg with makespan $\mathcal{M}({r}_{2})=\mathcal{M}({w}_{1},{w}_{3})=4$ $\mathcal {M}(r_2)=\mathcal {M}(w_1,w_3)=4$. ... Such normalization makes our results more informative in view of the ever-changing characteristics of young drone technology and different application scenarios.
+## 1 Introduction
+
+Aerial drones are a highly promising modern technology. In the U.S. alone, around 850,000 drones are registered for commercial and recreational purposes FAA (2022). One of the main challenges with commercially attractive small multi-rotor drones is their short battery life, requiring periodic landings for energy replenishment. This challenge can be addressed either through fast-charging which allows near-full battery replenishment in about six minutes, (U.S. Army SBIR 2025), or, through hot swapping, which is widely adopted in civil solutions as it enables battery replacement in just seconds, keeping the drone fully powered throughout (Mohsan et al 2022; Schneider et al 2022).
+
+In this article, we study the scheduling of a single drone, which has to replenish its energy regularly, and possibly refill other capacitated resources, like payload. We formulate a basic optimization problem – the Drone Routing Problem with Energy replenishment (DRP-E) (cf. Fig. 1), which is relevant for a large number of applications. The drone alone has to visit a set of points of interest (destinations). It can replenish its energy and other resources at one of the Replenishment Locations (RLs) by meeting a Mobile Replenishment Station (MRS). Specially equipped trucks, replenishment robots, or autonomous platforms are examples of such MRSs. At RLs, the vehicles can wait for each other and perform the replenishment operations safely. The objective is to sequence the drone’s destination visits, schedule replenishment stops, and select replenishment locations to minimize the makespan subject to the following basic constraints (additional constraints are possible):
+
+  * The energy consumption of the drone between two subsequently visited RLs should not exceed the maximal energy capacity of the drone’s battery;
+
+  * The replenishment starts when both the drone and the MRS have reached the selected RL, in other words, waiting times eventually emerge.
+
+Fig. 1
+
+Image: Fig. 1
+--------------------------------------------------------------------------------
+Energy-predictive planning for optimizing drone service delivery - ScienceDirect (https://doi.org/10.1016/j.eswa.2025.129251)
+citeturn16search3 [wordlim: 200] Published: 9 months ago; Crawled: last month; When a customer invokes a drone delivery service, a corresponding service request is created. The smart control center collects and analyzes flight data from all drones, predicts energy consumption for each segment based on wind, payload, and other relevant factors, allocates the availability of recharging stations, and assigns paths and priorities to each drone service.
+## 3. Energy-predictive system for drone services
+
+We propose an energy-predictive system for drone services. Our system scenario involves multiple drones providing delivery services to their respective destinations within a skyway network of landing and recharging stations (see Fig. 1). When a drone is fully recharged, its battery is enough to cover each segment flight in the skyway network. When a customer invokes a drone delivery service, a corresponding service request is created. The smart control center collects and analyzes flight data from all drones, predicts energy consumption for each segment based on wind, payload, and other relevant factors, allocates the availability of recharging stations, and assigns paths and priorities to each drone service. We define that each drone needs to be fully recharged at the recharging stations. Based on predicted energy consumption and flight times, the smart control center computes the right takeoff times for each drone service in advance.
+
+We formally define the key concepts of our framework, including energy-predictive drone service, service request, composite service, and recharging station congestion.
+--------------------------------------------------------------------------------
+FlexPool: A Distributed Model-Free Deep Reinforcement Learning Algorithm for Joint Passengers and Goods Transportation — Lacuna (https://lacuna.tiptreesystems.com/work/flexpool-a-distributed-model-free-deep-reinforcement-learning-algorithm-for/wrk_12c902a23ae9d94f7e27e3dbe53879f7)
+citeturn16search4 [wordlim: 200] Published: 4.8 years ago; Crawled: 3 weeks ago; # FlexPool: A Distributed Model-Free Deep Reinforcement Learning Algorithm for Joint Passengers and Goods Transportation ... By allowing packages to transfer between vehicles at designated "hop-zones" while pooling passengers normally, the system drastically improves vehicle packing. ... The authors tackle the challenge of creating a dynamic, learning-based dispatch system that can simultaneously route a single autonomous fleet for both people and packages, maximizing total vehicle capacity without degrading the passenger experience. ... Seat Optimization unlocks latent capacity: By treating a vehicle as two distinct resource pools, fleets can double-dip on revenue and utility for a single trip, drastically reducing the number of vehicles needed on the road.
+
+# FlexPool: A Distributed Model-Free Deep Reinforcement Learning Algorithm for Joint Passengers and Goods Transportation
+
+Kaushik Manchella, Abhishek K. Umrawal, Vaneet Aggarwal
+
+IEEE Transactions on Intelligent Transportation Systems 2022 · OpenReview
+
+## TL;DR
+
+FlexPool introduces a distributed, model-free deep reinforcement learning framework that jointly manages passenger ride-sharing and multi-hop goods delivery for a single fleet of autonomous vehicles. By allowing packages to transfer between vehicles at designated "hop-zones" while pooling passengers normally, the system drastically improves vehicle packing. This combined approach yields a 30% increase in fuel efficiency and a 35% boost in fleet utilization compared to segregated or single-hop delivery models.
+
+## What Problem Does This Paper Address?
+
+The explosive growth of both e-commerce last-mile deliveries and passenger ride-sharing has led to severe urban traffic congestion and increased carbon emissions. --------------------------------------------------------------------------------
+Learning for routing: A guided review of recent developments and future directions - ScienceDirect (https://doi.org/10.1016/j.tre.2025.104278)
+citeturn16search5 [wordlim: 200] Crawled: last week; Reinforcement learning ... For instance, Liu et al. (2023b) innovatively proposed a hybrid approach that represents delivery routes as sentences and zones as words, enabling a Word2Vec-based model to learn drivers’ behavioral patterns. ... In the context of routing, this might mean that an LLM can be asked to create a meaningful tour between 5 cities that shall be visited during a road trip. ... (2022)  | VRPTW with two-dimensional packing  | Boost CG mechanism  | SL  | Branch-and-price  | SL  | MLP
+
+## Transportation Research Part E: Logistics and Transportation Review
+
+Date: October 2025
+
+Article: 104278
+
+Volume: Volume 202
+
+View accessibility information
+
+## Published by: Elsevier
+
+### Published by
+
+Show more
+
+Research article
+
+Open access
+
+Under a Creative Commons license
+
+Get rights and content
+
+# Learning for routing: A guided review of recent developments and future directions
+
+Author links open overlay panel Fangting Zhou ^{a}, Attila Lischka ^{b}, Balázs Kulcsár ^{b}, Jiaming Wu ^{a}, Morteza Haghir Chehreghani ^{c}, Gilbert Laporte ^{d} ^{e}
+
+10.1016/j.tre.2025.104278
+
+## Highlights
+
+  * •
+
+Provide a comprehensive summary of the latest ML techniques for routing problems.
+
+  * •
+
+Develop a structured taxonomy for ML-based routing approaches.
+
+  * •
+
+Offer a future roadmap, identifying key gaps and opportunities in ML-based routing.
+
+## Abstract
+
+This paper reviews the current progress in applying machine learning (ML) tools to solve NP-hard combinatorial optimization problems, with a focus on routing problems such as the traveling salesman problem (TSP) and the vehicle routing problem (VRP). --------------------------------------------------------------------------------
+Solver-Independent MAPPO for Disruption-Aware Last-Mile Routing via Candidate Parcel-Locker Consolidation Points (https://www.mdpi.com/2079-3197/14/9/223)
+citeturn16search6 [wordlim: 200] Published: last month; Crawled: 2 weeks ago; multi-agent reinforcement learning; MAPPO; dynamic vehicle routing; parcel lockers; last-mile logistics; disruption resilience; feasibility masking; solver-independent execution ... Ant colony optimization (ACO), adaptive large neighborhood search (ALNS), and complete reoptimization devote online search to the revealed instance and can deliver strong route quality [8,9,10].
+
+Submission received: 24 July 2026 / Revised: 7 September 2026 / Accepted: 13 September 2026 / Published: 21 September 2026
+
+(This article belongs to the Section Computational Intelligence)
+
+Download keyboard_arrow_down
+
+Download PDF
+Download PDF with Cover
+Download XML
+Download Epub
+
+Browse Figures
+
+Versions Notes
+
+## Abstract
+
+Urban last-mile routes must adapt when demand and network conditions change after dispatch. This study proposes a solver-independent multi-agent proximal policy optimization (MAPPO) framework that combines a shared fleet policy, dynamically ranked candidate parcel-locker consolidation points, disruption-aware observations, fleet-level value learning, and structural feasibility masking. Evaluation on a Los Angeles road-network simulation used chronological data splits, ten random seeds, matched routing baselines, and compound-disruption stress tests. MAPPO served 98.4% of demand versus 96.6% for static OR-Tools and reduced failed packages by 52.2%; under severe compound disruption, service increased from 89.4% to 93.0%. --------------------------------------------------------------------------------
+Branch-and-price algorithm augmented by deep learning for the truck-drone routing problem with 3D loading constraints - ScienceDirect (https://www.sciencedirect.com/science/article/abs/pii/S0957417426015095)
+citeturn16search7 [wordlim: 200] Published: last month; Crawled: 3 months ago; To address the compounded NP-hardness of routing and 3D bin packing, we develop a learning-augmented branch-and-price (LABP) algorithm. ... Specifically, the problem is partitioned into a Restricted Master Problem (RMP), which optimizes route selection, and a pricing subproblem (SP) responsible for generating feasible routes.
+While truck-drone collaborative models typically assume an idealized mobile depot, neglecting the geometric arrangement of cargo renders theoretically optimal routing plans physically unimplementable. We formulate the 3L-CVRPD as a mixed-integer linear program to minimize total operational costs. To address the compounded NP-hardness of routing and 3D bin packing, we develop a learning-augmented branch-and-price (LABP) algorithm. Since the complexity of 3D loading constraints precludes efficient dominance rules in exact labeling, we introduce a non-autoregressive pricing guidance graph neural network (PG-GNN) to accelerate column generation. Utilizing dual-aware embeddings, the PG-GNN efficiently samples high-quality columns by predicting paths with negative reduced costs. A subsequent exact pricing solver establishes valid lower bounds for safe pruning. Computational experiments on instances with up to 100 customers and 199 items demonstrate that LABP, functioning as a matheuristic, significantly outperforming adapted heuristic baselines in solution quality. --------------------------------------------------------------------------------
+GitHub - The-SGH/stowroute: Integrated logistics optimization framework combining multi-trip vehicle routing, volume-constrained routing, and 3D bin packing. · GitHub (https://github.com/The-SGH/stowroute)
+citeturn16search8 [wordlim: 200] Crawled: last month; StowRoute is an end-to-end logistics optimization framework that combines vehicle routing, multi-trip fleet scheduling, capacity planning, and 3D bin packing into a single workflow.
+stowroute.ipynb  | stowroute.ipynb  |    |  
+truck_data.xlsx  | truck_data.xlsx  |    |  
+
+# StowRoute: Integrated Logistics Optimization using Vehicle Routing and Bin Packing
+
+## Overview
+
+StowRoute is an end-to-end logistics optimization framework that combines vehicle routing, multi-trip fleet scheduling, capacity planning, and 3D bin packing into a single workflow.
+
+The project was developed to simulate real-world distribution operations where transportation planning and truck loading decisions must be optimized simultaneously. Traditional Capacitated Vehicle Routing Problems (CVRP) focus primarily on routing constraints; StowRoute extends this by incorporating physical loading feasibility through volume-aware routing and 3D bin packing validation.
+
+The framework integrates:
+
+  * Multi-trip Capacitated Vehicle Routing Problem (CVRP)
+  * Fleet scheduling with depot reloads
+  * Weight and volume constrained routing
+  * 3D bin packing validation
+  * LIFO-compliant truck loading
+  * Delivery manifest generation
+  * Interactive logistics analytics dashboards
+
+--------------------------------------------------------------------------------
+(PDF) PassGoodPool: Joint Passengers and Goods Fleet Management with Reinforcement Learning aided Pricing, Matching, and Route Planning (https://www.researchgate.net/publication/346014308_PassGoodPool_Joint_Passengers_and_Goods_Fleet_Management_with_Reinforcement_Learning_aided_Pricing_Matching_and_Route_Planning)
+citeturn16search9 [wordlim: 200] Published: 6.0 years ago; Crawled: 5 months ago; The Route Planning and Matching policy which ... 8: Calculate trip time T j,i ∈t cand,i from loc(V j)∈V cand to o i using
+--------------------------------------------------------------------------------
+An Optimal Routing Algorithm for Unmanned Aerial Vehicles (https://www.mdpi.com/1424-8220/21/4/1219)
+citeturn16search10 [wordlim: 200] Published: 5.7 years ago; Crawled: last month; Third, we present delivered quantity {\pi }_{dk} to the d th customer by the k th UAV to check that allocated UAVs satisfy all customers. ... To verify that the result of the routing algorithm based on {q}_{ijk} is optimal, we apply the algorithm to another simple network, labeled with the costs per edge as in Figure 7. ... Furthermore, we represent the total cost for UAVs in Table 4 and Table 5, when the fixed cost per UAV is 100, and the variable cost is equal to the moving distances of UAVs.
+--------------------------------------------------------------------------------
+Reinforcement learning in the context of container terminals | Flexible Services and Manufacturing Journal | Springer Nature Link (https://link.springer.com/article/10.1007/s10696-025-09643-4)
+citeturn16search11 [wordlim: 200] Published: 11 months ago; Crawled: 2 months ago; The proposed DRL method indicates a remarkable performance in terms of total cost and empty truck trip cost (ETTC) compared with TS and SA algorithms.
+
+Adi et al. (2021) extended their previous study using a Cooperative Multiagent Deep Reinforcement Learning method to produce transport order (TO) truck routes and solve the multi-objective problem of minimizing ETTC and truck waiting cost (TWC). ... This cooperative framework involves considering the first agent’s decision, ensuring that both agents collaborate to determine an effective truck route.
+--------------------------------------------------------------------------------
+Delivery drone (https://en.wikipedia.org/wiki/Delivery_drone)
+citeturn16search17 [wordlim: 200] Crawled: 2 weeks ago; From 2013 and 2015, UAVs were observed delivering items into prisons on at least four occasions in the United States while four separate but similar incidents occurred in Ireland, Britain, Australia and Canada as well. ... In December 2013, the DHL parcel service subsidiary of Deutsche Post AG tested a "microdrones md4-1000" for delivery of medicine. image ... In December 2013, in a research project of Deutsche Post AG subsidiary DHL, a sub-kilogram quantity of medicine was delivered via a prototype Microdrones "Parcelcopter", raising speculation that disaster relief may be the first industry the company will use the technology. ... In February 2015, Hangzhou-based e-commerce provider Ali Baba started delivery drone service in a partnership with Shanghai YTO Express in which it delivered tea to 450 customers around select cities in China ... In January 2018, Boeing unveiled a prototype of a cargo drone for up to 500 lb (227 kg) payloads, an electric flying testbed that completed flight tests at the Boeing Research & Technology research center in Missouri. ... "Energy use and life cycle greenhouse gas emissions of drones for commercial package delivery".
+

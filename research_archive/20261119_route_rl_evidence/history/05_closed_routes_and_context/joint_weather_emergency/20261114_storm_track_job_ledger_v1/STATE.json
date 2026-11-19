@@ -1,0 +1,91 @@
+{
+  "package": "20261114_storm_track_job_ledger_v1",
+  "updated_local_date": "2026-11-14",
+  "status": "ENGINEERING_ACCEPTED_WITHIN_SYNTHETIC_FIXTURE",
+  "changed_behavior": "CausalEngine._advance_to publishes storm alarms due at t_next before processing service completion, implementing service_start < release_time <= completion_time.",
+  "new_interfaces": [
+    "timestamped planar storm-cell footprint observations with source/version/coordinate-system/coverage provenance",
+    "interval-censored target exit records with explicit gap censoring and re-entry crossing IDs",
+    "explicit exit interval resolution draw with stored draw/model IDs",
+    "independent base-task and alarm-job ledger replay from receipt dispatch/completion rows"
+  ],
+  "source": {
+    "baseline_path": "BASELINE/public_rollout",
+    "modified_path": "MODIFIED_FILE/public_rollout",
+    "original_causal_engine_sha256": "fc04b301611a89c4d22bbcf20c19fd263642cf78401df4e480ef1c236741c253",
+    "modified_causal_engine_sha256": "526234531a11023be706df9df76af896acfec417aaa870e190ba35e1c255fccd",
+    "storm_track_sha256": "8464c85576334730e492754e61c9db0e25d669e192a31cdc8c6a29761c600fe2",
+    "job_ledger_sha256": "e0ff63adcc85c79f8e48dba031029401fb71c66e9b0041aec071089e35f9819b",
+    "diff_sha256": "5bb20c7461c6fa63f07d72f382e43d23af4993e23ef68058eca2836454e70190",
+    "rollback_script_sha256": "7662d8c7fe11e362be552a12cee8c49c03e7d6f31c9215e7a3d6c10a28b7cf03"
+  },
+  "<REMOVED_ENDPOINT>": {
+    "hostname": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "python": "3.10.12",
+    "cpu_quota": "1200000 100000",
+    "memory_max_bytes": 45097156608,
+    "persistent_volume_available_at_start": "41G",
+    "scientific_process_seen_at_start": false
+  },
+  "tests": {
+    "baseline_acceptance": {
+      "pass": 2,
+      "total": 2,
+      "exit_status": 0,
+      "tie_target_dispatches": 2
+    },
+    "modified_acceptance": {
+      "pass": 14,
+      "total": 14,
+      "exit_status": 0,
+      "tie_target_dispatches": 1
+    },
+    "baseline_T9_T11": {
+      "pass": 11,
+      "total": 11,
+      "exit_status": 0
+    },
+    "modified_T9_T11": {
+      "pass": 11,
+      "total": 11,
+      "exit_status": 0
+    },
+    "rollback_copy_modified_acceptance": {
+      "pass": 14,
+      "total": 14,
+      "exit_status": 0
+    },
+    "rollback_restore_diff_qr": {
+      "identical_to_baseline": true,
+      "exit_status": 0
+    },
+    "rollback_copy_restored_behavior": {
+      "pass": 2,
+      "total": 2,
+      "exit_status": 0,
+      "tie_target_dispatches": 2
+    }
+  },
+  "parameters": {
+    "empirical_data_downloaded": false,
+    "storm_law_fit": false,
+    "response_window_source": "absent; fixture-only label used in tests",
+    "scientific_population_created": false
+  },
+  "gates": {
+    "G0": "NOT_PASSED",
+    "G3": "NOT_PASSED",
+    "W_science_admitted": false,
+    "training": false,
+    "formal": false
+  },
+  "open_dependencies": [
+    "real radar-to-cell segmentation and target-coordinate transform are not implemented",
+    "cross-version cell identity and ambiguous/multiple crossing semantics remain unresolved",
+    "multiple target crossings are preserved by the adapter but refused by the current engine v1 interface",
+    "target-level fault observations and business response-window source are absent",
+    "the engine currently derives storm release from an explicitly resolved exit time; a gap-censored interval cannot be promoted to a v1 engine event"
+  ],
+  "next_bounded_work": "Bind an applicable region/asset class and traceable target-level fault plus response-window sources; then audit coverage and storm-heldout split feasibility before any E2 fit or policy batch.",
+  "user_decision_required_now": false
+}

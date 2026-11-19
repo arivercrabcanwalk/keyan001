@@ -1,0 +1,76 @@
+{
+  "G0": {
+    "candidate": "ROUTE_INTERLEAVING_MARGINAL_SCORE_V1",
+    "decision": "CLOSE_NO_ESTABLISHED_DISTINCT_ROUTE_LEARNING_STEP",
+    "does_not_imply_RL_impossibility": true,
+    "mathematical_fixture_checks_passed": true,
+    "passed": false
+  },
+  "G3": {
+    "no_old_primary_replacement": true,
+    "passed": false,
+    "shared_wind_contract_decision": "PENDING_USER_A_OR_B"
+  },
+  "contract_receipt": {
+    "reused_author_C0": 114.94052697287096,
+    "reused_author_rescored_Cw": 117.13698750400401,
+    "single_target_C0": 29.3,
+    "single_target_Cw": 29.8625
+  },
+  "counts": {
+    "Formal_rows": 0,
+    "bounded_modules": 6,
+    "checkpoints": 0,
+    "handwritten_route_parameter_points": 9,
+    "independent_scientific_maps": 0,
+    "interleavings_per_point": 20,
+    "module_exit_0": 6,
+    "new_ALNS_calls": 0,
+    "new_author_solves": 0,
+    "training_calls": 0
+  },
+  "date_local": "2026-11-13",
+  "executor": "root_only",
+  "goal_remains_active": true,
+  "implementation": {
+    "changed_field": "METHOD: enumeration -> prefix_dp; new prefix_dp forward accumulation and applicability guards",
+    "modified_hashes": {
+      "interleaving.py": "2f34d8df0d0223dd865c8c24df607ce63afc5c22c0d72340c0f6d4b7080df258"
+    },
+    "original_hashes": {
+      "interleaving.py": "15af2cf9c806a2cfbbfdf4ef1901aee388daede69a85715cc1ed2ee802c999bd"
+    },
+    "primary_modified_retained": true,
+    "separate_copy_rollback_verified": true
+  },
+  "legacy_quota": {
+    "actual_comparisons": 126,
+    "calibration_limit": 24,
+    "calibration_used": 24,
+    "changed": false,
+    "identities": 40
+  },
+  "next": "Source-grounded inspection of ECHO actual vehicle selection/return representation; no new data/training until prerequisites",
+  "package_status": "BOUNDED_MATHEMATICAL_AND_PROTOCOL_WORK_COMPLETE",
+  "project_complete": false,
+  "protected_scientific_states": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "resources": {
+    "cpu_hard_total_s": 80,
+    "measured_child_cpu_s": 0.583094,
+    "measured_module_wall_s": 0.6565459435805678,
+    "measurement_boundary": "module child processes including rollback nested children; excludes supervisor/SSH/HTTP/doc overhead",
+    "module_hard_max": 8,
+    "wall_hard_total_s": 120
+  },
+  "schema": "fixed_wind_interleaving_g0_v1",
+  "scientific_execution_host": "<COMPUTE_HOST> / <COMPUTE_HOST>",
+  "user_decision": {
+    "answer_received": false,
+    "document": "WIND_COMPARISON_PROTOCOL.md",
+    "recommendation": "A",
+    "required_for_new_wind_primary": true
+  }
+}

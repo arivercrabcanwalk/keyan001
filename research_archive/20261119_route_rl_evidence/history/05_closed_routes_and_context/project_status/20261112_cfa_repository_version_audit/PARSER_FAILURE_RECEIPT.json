@@ -1,0 +1,14 @@
+{
+  "command": "<LOCAL_PATH> READ_EXISTING_ODS.py",
+  "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "input": "sources/results_pinned.ods",
+  "exit_status": 1,
+  "literal_result": "KeyError: 'J18'",
+  "preserved_source_sha256": "647360fbeae7c019933002e48002fcfba7aaa8b84fd80547dc7286d1d01b6eb6",
+  "cause": "assertion addresses were derived from XML row-element positions instead of logical row positions; parser itself already expanded repeat rows",
+  "correction": "actual PFA wrong-group cell J19; alleged self-reference and Oracle cross-size references withdrawn after logical-address check",
+  "scientific_execution": false,
+  "stdin": "",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<LOCAL_PATH>\", line 180, in <module>\n    main()\n  File \"<LOCAL_PATH>\", line 160, in main\n    assert \"PFA Psi = 30 - all\" in special_cells[\"J18\"][\"formula\"]\n                                   ~~~~~~~~~~~~~^^^^^^^\nKeyError: 'J18'\n"
+}

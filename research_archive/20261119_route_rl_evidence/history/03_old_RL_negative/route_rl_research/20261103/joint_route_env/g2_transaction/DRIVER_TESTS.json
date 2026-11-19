@@ -1,0 +1,69 @@
+{
+  "scope": "synthetic dummy-object driver tests; no real map/DP/evaluator/solver/server",
+  "attempts": [
+    {
+      "command": "python3 -m unittest discover -s route_rl_research/20261103/joint_route_env -p test_g2_driver.py -v",
+      "input": "fake station, fake evaluator/build/DP, temp archive only",
+      "stdout": "",
+      "stderr": "test_archived_comparator_preserves_missing_cell_and_disables_best3 (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_preserves_missing_cell_and_disables_best3) ... ok\ntest_fixed_owner_slot_change_is_rejected (test_g2_driver.G2DriverSyntheticTests.test_fixed_owner_slot_change_is_rejected) ... ok\ntest_reconstructed_parent_must_match_saved_canonical_solution (test_g2_driver.G2DriverSyntheticTests.test_reconstructed_parent_must_match_saved_canonical_solution) ... ok\ntest_rejected_reference_with_missing_cost_is_retained (test_g2_driver.G2DriverSyntheticTests.test_rejected_reference_with_missing_cost_is_retained) ... ok\ntest_run_map_keeps_parent_routes_for_unresolved_station (test_g2_driver.G2DriverSyntheticTests.test_run_map_keeps_parent_routes_for_unresolved_station) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.068s\n\nOK\n",
+      "exit_status": 0,
+      "elapsed_seconds": 0.7506794575601816,
+      "source_sha256": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_g2_driver.py": "4e9e4e430fad904d0ef0972757b8c9248ee18ca3879d49815b4b48a456343ecd",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e"
+      }
+    },
+    {
+      "created_utc": "2026-11-03T05:24:35.543287+00:00",
+      "command": "python3 -m unittest discover -s route_rl_research/20261103/joint_route_env -p test_g2_driver.py -v",
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "input": "Synthetic in-memory instance and fake evaluator/build/solve_station; temporary archive files only; no real-map load or project evaluator/DP/solver imported",
+      "stdout": "",
+      "stderr": "test_archived_comparator_preserves_missing_cell_and_disables_best3 (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_preserves_missing_cell_and_disables_best3) ... ok\ntest_archived_comparator_preserves_solution_identity_mismatch (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_preserves_solution_identity_mismatch) ... ok\ntest_archived_comparator_retains_infeasible_audit_with_null_cost (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_retains_infeasible_audit_with_null_cost) ... ok\ntest_fixed_owner_slot_change_is_rejected (test_g2_driver.G2DriverSyntheticTests.test_fixed_owner_slot_change_is_rejected) ... ok\ntest_reconstructed_parent_must_match_saved_canonical_solution (test_g2_driver.G2DriverSyntheticTests.test_reconstructed_parent_must_match_saved_canonical_solution) ... ok\ntest_reference_cost_residual_is_separate_from_feasibility (test_g2_driver.G2DriverSyntheticTests.test_reference_cost_residual_is_separate_from_feasibility) ... ok\ntest_rejected_reference_with_missing_cost_is_retained (test_g2_driver.G2DriverSyntheticTests.test_rejected_reference_with_missing_cost_is_retained) ... ok\ntest_run_map_expired_batch_records_unattempted_without_solve (test_g2_driver.G2DriverSyntheticTests.test_run_map_expired_batch_records_unattempted_without_solve) ... ok\ntest_run_map_keeps_parent_routes_for_unresolved_station (test_g2_driver.G2DriverSyntheticTests.test_run_map_keeps_parent_routes_for_unresolved_station) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.100s\n\nOK\n",
+      "exit_status": 0,
+      "elapsed_wall_seconds": 0.4786024997010827,
+      "source_sha256_before": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_g2_driver.py": "054b8658d26f044f3589d457cb68dd1e620c3a738543989113c4205dffd70e50",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e"
+      },
+      "source_sha256_after": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_g2_driver.py": "054b8658d26f044f3589d457cb68dd1e620c3a738543989113c4205dffd70e50",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e"
+      },
+      "source_stable_during_test": true,
+      "real_map_dp_calls": 0,
+      "real_evaluator_calls": 0,
+      "real_training_calls": 0
+    },
+    {
+      "created_utc": "2026-11-03T05:49:52.807704+00:00",
+      "command": "python3 -m unittest discover -s route_rl_research/20261103/joint_route_env -p test_g2_driver.py -v",
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "input": "Same 9 fake-only tests; fixed-owner test now asserts physical feasibility and unchanged station union to isolate slot ownership rejection; no real maps or project evaluator/DP import",
+      "stdout": "",
+      "stderr": "test_archived_comparator_preserves_missing_cell_and_disables_best3 (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_preserves_missing_cell_and_disables_best3) ... ok\ntest_archived_comparator_preserves_solution_identity_mismatch (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_preserves_solution_identity_mismatch) ... ok\ntest_archived_comparator_retains_infeasible_audit_with_null_cost (test_g2_driver.G2DriverSyntheticTests.test_archived_comparator_retains_infeasible_audit_with_null_cost) ... ok\ntest_fixed_owner_slot_change_is_rejected (test_g2_driver.G2DriverSyntheticTests.test_fixed_owner_slot_change_is_rejected) ... ok\ntest_reconstructed_parent_must_match_saved_canonical_solution (test_g2_driver.G2DriverSyntheticTests.test_reconstructed_parent_must_match_saved_canonical_solution) ... ok\ntest_reference_cost_residual_is_separate_from_feasibility (test_g2_driver.G2DriverSyntheticTests.test_reference_cost_residual_is_separate_from_feasibility) ... ok\ntest_rejected_reference_with_missing_cost_is_retained (test_g2_driver.G2DriverSyntheticTests.test_rejected_reference_with_missing_cost_is_retained) ... ok\ntest_run_map_expired_batch_records_unattempted_without_solve (test_g2_driver.G2DriverSyntheticTests.test_run_map_expired_batch_records_unattempted_without_solve) ... ok\ntest_run_map_keeps_parent_routes_for_unresolved_station (test_g2_driver.G2DriverSyntheticTests.test_run_map_keeps_parent_routes_for_unresolved_station) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.073s\n\nOK\n",
+      "exit_status": 0,
+      "elapsed_wall_seconds": 0.42102695908397436,
+      "source_sha256_before": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_g2_driver.py": "5ad1d85ad3c9549b47da511ff96eb26d68e02e521da996e7c060db6625e72a4e",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e"
+      },
+      "source_sha256_after": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_g2_driver.py": "5ad1d85ad3c9549b47da511ff96eb26d68e02e521da996e7c060db6625e72a4e",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e"
+      },
+      "source_stable_during_test": true,
+      "real_map_dp_calls": 0,
+      "real_evaluator_calls": 0,
+      "real_training_calls": 0
+    }
+  ],
+  "latest_exit_status": 0,
+  "latest_driver_sha256": "869b10ae554343bf4a4b1de622aff9eeb3a9affe665c0c29209c51678f0661ea",
+  "latest_test_sha256": "5ad1d85ad3c9549b47da511ff96eb26d68e02e521da996e7c060db6625e72a4e"
+}

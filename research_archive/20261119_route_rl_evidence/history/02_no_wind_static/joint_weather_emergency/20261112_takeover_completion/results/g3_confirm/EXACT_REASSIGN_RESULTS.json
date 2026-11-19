@@ -1,0 +1,6763 @@
+{
+  "rows": [
+    {
+      "admissible": true,
+      "anchor_M_return": 83.34200569857558,
+      "anchor_cost": 176.3643075878744,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 83.34200569857558,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "3x10_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                4
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 18.318437818780687,
+          "slots": 1,
+          "station": 0,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                3
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                5
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 33.42912992353205,
+          "slots": 2,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                10,
+                7
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 83.34200569857558,
+          "slots": 1,
+          "station": 2,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 83.34200569857558,
+      "validated_cost": 176.3643075878744
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 41.29984488235887,
+      "anchor_cost": 183.71790713885065,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 41.29984488235887,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "3x10_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                9,
+                7
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.10318800954089,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                2
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 28.42560691555203,
+          "slots": 1,
+          "station": 1,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                1,
+                8,
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.29984488235887,
+          "slots": 2,
+          "station": 2,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 41.29984488235887,
+      "validated_cost": 183.71790713885065
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 58.276138969577545,
+      "anchor_cost": 170.98845012285176,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 58.276138969577545,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "3x10_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                6,
+                4
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 35.41804687331392,
+          "slots": 1,
+          "station": 0,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                5
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 58.276138969577545,
+          "slots": 1,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                2,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 31.380101680876635,
+          "slots": 2,
+          "station": 2,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 58.276138969577545,
+      "validated_cost": 170.98845012285176
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 81.56500960544125,
+      "anchor_cost": 190.7627647998608,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 80.29703768120137,
+      "improvement_pct": -1.5545537607038866,
+      "issues": [],
+      "map": "3x15_o2",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                9,
+                5,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                7,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14,
+                12,
+                3
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 80.29703768120137,
+          "slots": 2,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                4,
+                10,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                8,
+                11
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 47.66418710650193,
+          "slots": 2,
+          "station": 2,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 80.29703768120137,
+      "validated_cost": 190.7627647998608
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 70.3863396383239,
+      "anchor_cost": 214.24488997206078,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 53.792733678217786,
+      "improvement_pct": -23.57503749359804,
+      "issues": [],
+      "map": "3x15_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                3,
+                12
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 39.496234961985024,
+          "slots": 1,
+          "station": 0,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                15,
+                13,
+                6
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 50.432439919743885,
+          "slots": 2,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                2,
+                14,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                11
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 53.792733678217786,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 53.792733678217786,
+      "validated_cost": 214.24488997206078
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 50.10980559745785,
+      "anchor_cost": 234.60837458312886,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 50.10980559745785,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "3x15_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 20.448539045149488,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                12,
+                3,
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                14,
+                6
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 40.81162342699222,
+          "slots": 2,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                11,
+                8,
+                9,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                1,
+                13
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 50.10980559745785,
+          "slots": 2,
+          "station": 2,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 50.10980559745785,
+      "validated_cost": 234.60837458312886
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 132.81965208334745,
+      "anchor_cost": 269.809611808575,
+      "cost_delta_vs_anchor": -5.684341886080802e-14,
+      "exact_reassign_M_return": 96.97569998207209,
+      "improvement_pct": -26.98693419162282,
+      "issues": [],
+      "map": "3x20_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                13,
+                18
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 29.424670171991444,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                14,
+                12,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                8
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 47.21112394472209,
+          "slots": 2,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                1,
+                9
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                3,
+                17,
+                7,
+                15
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                11,
+                6,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 96.97569998207209,
+          "slots": 2,
+          "station": 2,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 96.97569998207209,
+      "validated_cost": 269.80961180857497
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 116.87858819916318,
+      "anchor_cost": 269.4447501175689,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 81.25361296883649,
+      "improvement_pct": -30.480326447493614,
+      "issues": [],
+      "map": "3x20_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                10,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                6,
+                5
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 40.52802815571971,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                12
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 20.937656180026835,
+          "slots": 2,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                13,
+                9,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                15,
+                20
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                7,
+                3,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                17,
+                19
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 81.25361296883649,
+          "slots": 2,
+          "station": 2,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 81.25361296883649,
+      "validated_cost": 269.4447501175689
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 93.48833927735384,
+      "anchor_cost": 247.07336851179159,
+      "cost_delta_vs_anchor": 2.842170943040401e-14,
+      "exact_reassign_M_return": 93.48833927735384,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "3x20_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                7,
+                11,
+                18
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                16,
+                1,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 93.48833927735384,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                13,
+                15
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                9,
+                12,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 51.73813101756902,
+          "slots": 2,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                19,
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                14,
+                4
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 63.10436444578316,
+          "slots": 1,
+          "station": 2,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 93.48833927735384,
+      "validated_cost": 247.0733685117916
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 80.71426745256306,
+      "anchor_cost": 247.09259149740117,
+      "cost_delta_vs_anchor": -2.842170943040401e-14,
+      "exact_reassign_M_return": 70.97567570464267,
+      "improvement_pct": -12.065514629918317,
+      "issues": [],
+      "map": "4x20_o2",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                18,
+                8,
+                9
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                20
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 60.415872231004805,
+          "slots": 1,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                13,
+                14,
+                11
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                15,
+                17,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 50.10236452245053,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                2,
+                1,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                12,
+                7
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                19,
+                4
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 70.97567570464267,
+          "slots": 2,
+          "station": 3,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 70.97567570464267,
+      "validated_cost": 247.09259149740114
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 166.57921870262453,
+      "anchor_cost": 214.68416159955834,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 166.57921870262453,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "4x20_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                18
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                5
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 54.75823339095434,
+          "slots": 1,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                15,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                1,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                4,
+                17
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                2,
+                19
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 166.57921870262453,
+          "slots": 1,
+          "station": 2,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                16,
+                12
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 41.2308711055378,
+          "slots": 1,
+          "station": 3,
+          "trips": 1
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 166.57921870262453,
+      "validated_cost": 214.68416159955834
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 57.10222672602422,
+      "anchor_cost": 295.051288569227,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 52.053168291536295,
+      "improvement_pct": -8.842139306954255,
+      "issues": [],
+      "map": "4x20_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                20
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                13,
+                2,
+                15
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 45.48267852199012,
+          "slots": 1,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                3,
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                12,
+                9,
+                17
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 39.1221068681557,
+          "slots": 2,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                11
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                14,
+                19,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                1,
+                18
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 52.053168291536295,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                7
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                8
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 30.9883552994881,
+          "slots": 2,
+          "station": 3,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 52.053168291536295,
+      "validated_cost": 295.051288569227
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 97.13820259926001,
+      "anchor_cost": 308.5713612638449,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 97.13820259926001,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "4x25_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                9,
+                19,
+                23,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                13,
+                22,
+                16
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 49.93271803265795,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                1,
+                2,
+                4
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                15,
+                14,
+                6,
+                21
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                3
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 97.13820259926001,
+          "slots": 2,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                18,
+                12
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 37.873616878860545,
+          "slots": 1,
+          "station": 2,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                17,
+                24
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                8,
+                7
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 82.07969319553037,
+          "slots": 1,
+          "station": 3,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 97.13820259926001,
+      "validated_cost": 308.5713612638449
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 134.5780714417128,
+      "anchor_cost": 284.5236276509827,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 96.0715696191389,
+      "improvement_pct": -28.61276091272528,
+      "issues": [],
+      "map": "4x25_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                12,
+                7,
+                10
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                17,
+                9,
+                13,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                18
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 96.0715696191389,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                21,
+                23,
+                22
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                15,
+                5,
+                24,
+                6
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                3,
+                4,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                25
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 93.1047972595274,
+          "slots": 2,
+          "station": 1,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                14,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                11
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 54.13599832541324,
+          "slots": 1,
+          "station": 2,
+          "trips": 2
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 96.0715696191389,
+      "validated_cost": 284.5236276509827
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 80.11469583301543,
+      "anchor_cost": 327.39438281474844,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 70.71504054211081,
+      "improvement_pct": -11.732747897460031,
+      "issues": [],
+      "map": "4x25_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                14,
+                6,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                10,
+                24
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 54.29052696087423,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                19
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 11.657931619435324,
+          "slots": 1,
+          "station": 1,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                22,
+                23
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                20,
+                17,
+                11
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                21,
+                3
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 67.50195410484478,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                4,
+                13,
+                8,
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                25
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                12,
+                18
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 70.71504054211081,
+          "slots": 2,
+          "station": 3,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 70.71504054211081,
+      "validated_cost": 327.39438281474844
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 211.6194591205542,
+      "anchor_cost": 313.03757925891915,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 153.53327409536382,
+      "improvement_pct": -27.44841389661627,
+      "issues": [],
+      "map": "4x30_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                22,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                21
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                9,
+                29,
+                11
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                7,
+                28,
+                12
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                24,
+                14,
+                27
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                15,
+                17
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                8,
+                26
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 153.53327409536382,
+          "slots": 2,
+          "station": 0,
+          "trips": 7
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                4,
+                13
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 32.91813194499901,
+          "slots": 1,
+          "station": 2,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                16,
+                3,
+                23
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                19
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.74186220540313,
+          "slots": 2,
+          "station": 3,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 153.53327409536382,
+      "validated_cost": 313.03757925891915
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 133.2560361879424,
+      "anchor_cost": 320.5622801729295,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 98.5112031934342,
+      "improvement_pct": -26.07374043867296,
+      "issues": [],
+      "map": "4x30_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                5,
+                24,
+                21,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                6,
+                28
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                8,
+                10,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                23,
+                13,
+                14
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 98.5112031934342,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                3,
+                9
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                30
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 97.5251628518478,
+          "slots": 1,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                27,
+                12
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 40.18859196628938,
+          "slots": 1,
+          "station": 2,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                29,
+                26,
+                25
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                1,
+                2
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 75.30893113639473,
+          "slots": 1,
+          "station": 3,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 98.5112031934342,
+      "validated_cost": 320.5622801729295
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 115.90788931156655,
+      "anchor_cost": 331.46826381677016,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 77.16899843451841,
+      "improvement_pct": -33.422134685686444,
+      "issues": [],
+      "map": "4x30_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                10,
+                13,
+                29,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                23,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                18,
+                9
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 66.75299189061639,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                17,
+                2
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 41.34657930257779,
+          "slots": 1,
+          "station": 1,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                30,
+                27,
+                12
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                22,
+                24,
+                3
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 71.17393071113685,
+          "slots": 1,
+          "station": 2,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                26,
+                4
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                21,
+                28,
+                14
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                25,
+                1
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                19,
+                20
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 77.16899843451841,
+          "slots": 2,
+          "station": 3,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 77.16899843451841,
+      "validated_cost": 331.46826381677016
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 98.91576808436479,
+      "anchor_cost": 376.59882896836876,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 98.91576808436479,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "5x35_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                18,
+                34
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                13,
+                28
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 75.47684056685216,
+          "slots": 1,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                6,
+                33
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 54.831851342953556,
+          "slots": 1,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                1,
+                24
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                27,
+                15,
+                29
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 77.29110118599047,
+          "slots": 1,
+          "station": 2,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                35,
+                31
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                14,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                26,
+                12,
+                23
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 98.21740521917638,
+          "slots": 1,
+          "station": 3,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                20,
+                16,
+                22,
+                21
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                11,
+                32,
+                25,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                17,
+                19
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 98.91576808436479,
+          "slots": 2,
+          "station": 4,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 98.91576808436479,
+      "validated_cost": 376.59882896836876
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 96.75643420690793,
+      "anchor_cost": 418.6738825924332,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 96.75643420690793,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "5x35_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                10,
+                19
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                11,
+                15,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                13
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 96.75643420690793,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                28
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 52.13380655495174,
+          "slots": 1,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                26,
+                27,
+                23
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 53.55656320509748,
+          "slots": 1,
+          "station": 2,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                34,
+                12,
+                17
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                32,
+                18,
+                5,
+                31
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                20,
+                29
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 92.98249310750589,
+          "slots": 2,
+          "station": 3,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                30,
+                3,
+                25,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                1,
+                21
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                4
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 72.86805233317587,
+          "slots": 2,
+          "station": 4,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 96.75643420690793,
+      "validated_cost": 418.6738825924332
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 159.64202751799223,
+      "anchor_cost": 414.8068139901336,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 159.64202751799223,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "5x35_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                26,
+                33,
+                34
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14,
+                20,
+                25
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.41681263130677,
+          "slots": 2,
+          "station": 0,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                23,
+                3,
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                11,
+                35
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                21,
+                19,
+                12
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                27,
+                24,
+                9
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 159.64202751799223,
+          "slots": 1,
+          "station": 1,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                1,
+                10,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                15
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 57.026068007811304,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                31,
+                30,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                32,
+                16,
+                8
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 73.02274379175287,
+          "slots": 1,
+          "station": 3,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                29,
+                6,
+                18
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.03463508356787,
+          "slots": 2,
+          "station": 4,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 159.64202751799223,
+      "validated_cost": 414.8068139901336
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 168.14446757734504,
+      "anchor_cost": 469.9066572015116,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 149.81306811674136,
+      "improvement_pct": -10.90217223600972,
+      "issues": [],
+      "map": "6x50_o2",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                44,
+                36,
+                35,
+                19
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                29,
+                11,
+                48
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                13,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                41,
+                23
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 94.96089019275686,
+          "slots": 2,
+          "station": 1,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                12,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                40,
+                43
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                33,
+                50
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                18,
+                39,
+                34
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 144.1538126828411,
+          "slots": 1,
+          "station": 2,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                27,
+                45,
+                15
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 53.29052500399686,
+          "slots": 1,
+          "station": 3,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                49,
+                37,
+                32,
+                46
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                42,
+                7,
+                28
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                26,
+                8,
+                24
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                21,
+                25,
+                3
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                38,
+                31,
+                6
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                47
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                22,
+                14
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 149.81306811674136,
+          "slots": 2,
+          "station": 4,
+          "trips": 7
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 5
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 149.81306811674136,
+      "validated_cost": 469.9066572015116
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 181.19302217627927,
+      "anchor_cost": 518.6720955547319,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 181.19302217627927,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "6x50_o3",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                28,
+                46,
+                18
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                23,
+                34,
+                25
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                32,
+                6,
+                29
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                37,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                27,
+                45,
+                47
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 181.19302217627927,
+          "slots": 1,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                7,
+                16,
+                33
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                11,
+                39
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                12,
+                9
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 82.50909732682143,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                15,
+                26
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                42,
+                13,
+                35,
+                36
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                22,
+                50,
+                48
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                38
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 93.95511179154396,
+          "slots": 2,
+          "station": 3,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                41,
+                49
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14,
+                4,
+                21
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 75.33120312397534,
+          "slots": 1,
+          "station": 4,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                40,
+                44
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                17,
+                43,
+                24
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                30,
+                31
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                19
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 76.49446393729046,
+          "slots": 2,
+          "station": 5,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 181.19302217627927,
+      "validated_cost": 518.6720955547319
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 170.45177243153836,
+      "anchor_cost": 487.92806096535816,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 170.45177243153836,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "6x50_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                41,
+                24,
+                1
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                38,
+                7
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                32,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                9,
+                21
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 84.14080657442338,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                14,
+                43,
+                20,
+                26
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                45
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                15,
+                29,
+                4,
+                3
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                39,
+                28,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                34,
+                36,
+                13
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 101.78977821178037,
+          "slots": 2,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                12,
+                40,
+                18
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                37,
+                23,
+                31
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                50
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                48,
+                44,
+                11
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 87.65927311351851,
+          "slots": 2,
+          "station": 3,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                49,
+                46,
+                25
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                5,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                47,
+                42
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                10,
+                27
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                19
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 170.45177243153836,
+          "slots": 1,
+          "station": 5,
+          "trips": 5
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 170.45177243153836,
+      "validated_cost": 487.92806096535816
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 175.29356479629496,
+      "anchor_cost": 627.2326206293649,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 148.9900478445528,
+      "improvement_pct": -15.005409344210056,
+      "issues": [],
+      "map": "7x65_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                19,
+                40,
+                49,
+                3
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                2,
+                59,
+                58,
+                37
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                4,
+                47,
+                6,
+                48
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                35,
+                52
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 148.96616097141919,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                43,
+                10,
+                54,
+                7
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                26,
+                13,
+                16
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                24,
+                53,
+                22,
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                56,
+                11,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                51,
+                31,
+                12
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 148.9900478445528,
+          "slots": 2,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                21,
+                18
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                34,
+                23,
+                30,
+                9
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                50,
+                42,
+                46,
+                57
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                62,
+                36,
+                55
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                20,
+                14,
+                27
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 140.97570437511388,
+          "slots": 2,
+          "station": 2,
+          "trips": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                1,
+                28,
+                61
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                29,
+                60
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 41.378047944352886,
+          "slots": 2,
+          "station": 4,
+          "trips": 2
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                32,
+                65,
+                33,
+                64
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                41,
+                38,
+                63
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                45,
+                39,
+                44
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 77.9556904848406,
+          "slots": 2,
+          "station": 6,
+          "trips": 3
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 148.9900478445528,
+      "validated_cost": 627.2326206293649
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 188.3222788382041,
+      "anchor_cost": 628.0170495484173,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 188.3222788382041,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "7x65_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                43,
+                34,
+                24
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 39.971807376106646,
+          "slots": 1,
+          "station": 0,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                61,
+                38,
+                7
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                59,
+                14,
+                10,
+                3
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                62,
+                26,
+                42
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                32,
+                47,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                56,
+                22,
+                31
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 136.1073604215429,
+          "slots": 2,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                28,
+                53,
+                51
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                11,
+                54,
+                39,
+                29
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                27,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                45,
+                23
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 91.34344057160314,
+          "slots": 2,
+          "station": 3,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                12
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                63,
+                41
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 69.2449626652594,
+          "slots": 1,
+          "station": 4,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                48,
+                50,
+                16
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                17,
+                15,
+                6
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                57,
+                37,
+                65
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                35,
+                58
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 76.33030116607993,
+          "slots": 2,
+          "station": 5,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                36,
+                20,
+                60
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                55,
+                44,
+                21
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                52,
+                25
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                49,
+                8,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                46,
+                64,
+                40
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 188.3222788382041,
+          "slots": 1,
+          "station": 6,
+          "trips": 5
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 188.3222788382041,
+      "validated_cost": 628.0170495484173
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 212.48162901072968,
+      "anchor_cost": 586.0715440045612,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 149.98633551244626,
+      "improvement_pct": -29.412092607369644,
+      "issues": [],
+      "map": "7x65_o4",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                35,
+                4,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                50,
+                16
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                48,
+                24,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                36,
+                58,
+                33
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 148.32450628234895,
+          "slots": 1,
+          "station": 1,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                53,
+                54,
+                64
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                39,
+                46,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                34
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 91.12031497308831,
+          "slots": 1,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                45,
+                44,
+                61,
+                55
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                14,
+                51,
+                29
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                30,
+                15,
+                49
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                28,
+                38,
+                42
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                56,
+                26,
+                62
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                5
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 119.79738422803996,
+          "slots": 2,
+          "station": 3,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                65,
+                21,
+                10,
+                47
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                7,
+                59,
+                52
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                11,
+                40,
+                57,
+                32
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                63,
+                18,
+                37
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                41,
+                27
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 149.58164234921185,
+          "slots": 2,
+          "station": 4,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                31,
+                60,
+                43
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                9,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                2,
+                20
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                12,
+                23
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 149.98633551244626,
+          "slots": 1,
+          "station": 5,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 6
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 149.98633551244626,
+      "validated_cost": 586.0715440045612
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 207.19835217662327,
+      "anchor_cost": 754.8325237116183,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 207.19835217662327,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "8x80_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                29,
+                63,
+                55
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                80,
+                21,
+                65,
+                48
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                59,
+                31,
+                5
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                10,
+                77
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 84.69436180702476,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                50,
+                49
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                46,
+                20
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                14,
+                9
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                36,
+                75,
+                34
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                47,
+                62,
+                51
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                15,
+                52,
+                45
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 207.19835217662327,
+          "slots": 1,
+          "station": 1,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                54,
+                25,
+                11
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                43,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                66,
+                73
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 70.60966038243356,
+          "slots": 2,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                69,
+                41,
+                12,
+                37
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                53,
+                17,
+                60,
+                68
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                44,
+                18,
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                38,
+                76
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                7,
+                40
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                70,
+                39
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 126.3358795397113,
+          "slots": 2,
+          "station": 4,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                33,
+                13,
+                79,
+                64
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                67,
+                57,
+                78,
+                56
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                16,
+                23,
+                32,
+                71
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                74
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                22,
+                19,
+                27
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 151.25649457649527,
+          "slots": 2,
+          "station": 5,
+          "trips": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                26,
+                61,
+                58
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                42,
+                30,
+                72
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 42.782976927701284,
+          "slots": 2,
+          "station": 7,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 207.19835217662327,
+      "validated_cost": 754.8325237116183
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 189.8387231406556,
+      "anchor_cost": 697.0857382089725,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 189.8387231406556,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "8x80_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                59
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                74,
+                45,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                38,
+                62,
+                41
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                60,
+                1,
+                68
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 124.65030081821365,
+          "slots": 1,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                70,
+                65
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                39,
+                57,
+                23
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                66,
+                17,
+                30,
+                48
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                8,
+                47,
+                12
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                79
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                67,
+                56,
+                43
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 123.16026703610126,
+          "slots": 2,
+          "station": 1,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                7
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                21,
+                31,
+                27
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                11,
+                78
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 97.98256858636721,
+          "slots": 1,
+          "station": 2,
+          "trips": 3
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                32,
+                26,
+                20
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                63,
+                36,
+                25,
+                13
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                42,
+                61,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                71,
+                64,
+                51
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 149.84303062511765,
+          "slots": 2,
+          "station": 4,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                2,
+                76,
+                22
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                80,
+                50,
+                54
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                29,
+                16,
+                69
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                4,
+                49,
+                46
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                75,
+                37,
+                14
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 189.8387231406556,
+          "slots": 1,
+          "station": 6,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                58,
+                53
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                55,
+                34,
+                77
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                52,
+                44,
+                72
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                40,
+                3
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                73,
+                19,
+                15
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 167.87021272975522,
+          "slots": 1,
+          "station": 7,
+          "trips": 5
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 189.8387231406556,
+      "validated_cost": 697.0857382089725
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 240.12519927174247,
+      "anchor_cost": 700.4764000760701,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 200.16664769338638,
+      "improvement_pct": -16.640715634820232,
+      "issues": [],
+      "map": "8x80_o4",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                77,
+                47,
+                23
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                12,
+                28,
+                15,
+                69
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                70,
+                19,
+                39,
+                20
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                7,
+                31
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                30,
+                2,
+                44,
+                37
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                18,
+                71,
+                38
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 147.2756409918744,
+          "slots": 2,
+          "station": 1,
+          "trips": 6
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                46,
+                63,
+                49,
+                4
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                73,
+                10,
+                26,
+                29
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                22,
+                62
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                41,
+                3,
+                50,
+                74
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                78,
+                57,
+                9
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                80
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                43,
+                21,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                13,
+                66
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 200.16664769338638,
+          "slots": 2,
+          "station": 3,
+          "trips": 8
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                40,
+                72,
+                6,
+                58
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                65,
+                75,
+                52,
+                67
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                32,
+                36,
+                42,
+                61
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                53,
+                54
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                76,
+                24
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                56
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                79,
+                51
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 149.37002848217622,
+          "slots": 2,
+          "station": 4,
+          "trips": 7
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                68,
+                55
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                34,
+                45,
+                64
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                60,
+                48
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 104.15263212973682,
+          "slots": 1,
+          "station": 5,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                14,
+                59,
+                27
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 38.73396571015914,
+          "slots": 1,
+          "station": 6,
+          "trips": 1
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 7
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 200.16664769338638,
+      "validated_cost": 700.4764000760701
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 221.33437052438873,
+      "anchor_cost": 843.2378483429941,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 221.33437052438873,
+      "improvement_pct": 0.0,
+      "issues": [],
+      "map": "9x95_o2",
+      "per_station": [
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 0
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                75,
+                66,
+                3
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                54,
+                8,
+                94
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                87,
+                10,
+                56
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                50,
+                57,
+                19
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                70,
+                48,
+                40
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 189.61763967035222,
+          "slots": 1,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                63,
+                55,
+                21,
+                81
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                42,
+                72,
+                91
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                62,
+                29,
+                4,
+                16
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                78
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                61,
+                58
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                39,
+                74,
+                68
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 116.66807625182497,
+          "slots": 2,
+          "station": 2,
+          "trips": 6
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                12,
+                46,
+                76
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                52,
+                36,
+                92
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 88.33467898172177,
+          "slots": 1,
+          "station": 4,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                25,
+                17,
+                49,
+                38
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                93,
+                47,
+                35
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                80,
+                44
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                73,
+                65,
+                69
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                26,
+                33
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 93.97042473596349,
+          "slots": 2,
+          "station": 5,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                82,
+                30,
+                90
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                60,
+                41,
+                34
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                88,
+                27,
+                89
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                45,
+                85,
+                71
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                23,
+                64,
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                53,
+                15,
+                67
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 221.33437052438873,
+          "slots": 1,
+          "station": 6,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                28,
+                77,
+                86
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                37,
+                22,
+                32
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                95,
+                79
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 112.7591199883476,
+          "slots": 1,
+          "station": 7,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                6,
+                31,
+                51,
+                20
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                83,
+                7,
+                9,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                11,
+                43,
+                84
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                59,
+                18
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 101.06848331877345,
+          "slots": 2,
+          "station": 8,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 221.33437052438873,
+      "validated_cost": 843.2378483429941
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 227.36495698643483,
+      "anchor_cost": 828.3768160530474,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 183.40374782724655,
+      "improvement_pct": -19.33508564462338,
+      "issues": [],
+      "map": "9x95_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                55,
+                60,
+                95,
+                41
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                32,
+                43,
+                44,
+                74
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                40,
+                62,
+                25
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                46,
+                21,
+                8,
+                69
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                52,
+                10,
+                94
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                39
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                30,
+                26
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                86,
+                9
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                36,
+                81
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 183.40374782724655,
+          "slots": 2,
+          "station": 0,
+          "trips": 9
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                47,
+                79,
+                45
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                49,
+                90,
+                34,
+                82
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                13,
+                78,
+                27
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                85
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 89.42443910690933,
+          "slots": 2,
+          "station": 1,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                65,
+                12,
+                38
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                56,
+                61,
+                72
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                84,
+                54,
+                53
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                11,
+                29
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 148.14704856662846,
+          "slots": 1,
+          "station": 2,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                63,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                31,
+                71,
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                80,
+                75,
+                73
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                64,
+                7,
+                67
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 149.36425246170296,
+          "slots": 1,
+          "station": 4,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                88,
+                22,
+                93,
+                50
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                91,
+                87
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                89,
+                77,
+                83
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                59,
+                48,
+                76,
+                37
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                58,
+                51,
+                57
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 101.81113783566178,
+          "slots": 2,
+          "station": 7,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                42,
+                92
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                4,
+                24,
+                23,
+                20
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                35,
+                68,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                6,
+                66,
+                2
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                16,
+                19,
+                70
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 112.79670074043918,
+          "slots": 2,
+          "station": 8,
+          "trips": 5
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 183.40374782724655,
+      "validated_cost": 828.3768160530474
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 261.3239929619226,
+      "anchor_cost": 849.4550641050041,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 188.52083125923335,
+      "improvement_pct": -27.859348419376623,
+      "issues": [],
+      "map": "9x95_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                73,
+                83,
+                17
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                86,
+                65,
+                85
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                39,
+                70,
+                66
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                48,
+                4,
+                30
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                87,
+                76,
+                95
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 188.52083125923335,
+          "slots": 1,
+          "station": 0,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                24,
+                63,
+                3,
+                67
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                82,
+                68,
+                10
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                55,
+                12,
+                11,
+                36
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                42,
+                88,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                89,
+                81,
+                58
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 118.59244201261842,
+          "slots": 2,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                13,
+                16,
+                1,
+                6
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                41,
+                22,
+                60,
+                54
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                94
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                34,
+                84,
+                37
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 99.16050993632157,
+          "slots": 2,
+          "station": 2,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                49,
+                14,
+                71,
+                2
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                75,
+                59
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                56,
+                31,
+                50,
+                74
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                79,
+                23,
+                38
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                62,
+                46,
+                51
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                57,
+                72,
+                18
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                28,
+                53,
+                77
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                43,
+                61,
+                35
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 178.4858797319601,
+          "slots": 2,
+          "station": 3,
+          "trips": 8
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                26,
+                93,
+                33
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                64,
+                7,
+                45
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                20,
+                25,
+                69,
+                78
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                29,
+                9,
+                40
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 92.42195915012312,
+          "slots": 2,
+          "station": 5,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                21,
+                52,
+                5,
+                92
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                91
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                32,
+                80,
+                27,
+                47
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                19,
+                44,
+                90
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 98.74086013374519,
+          "slots": 2,
+          "station": 6,
+          "trips": 4
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 7
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 8
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 188.52083125923335,
+      "validated_cost": 849.4550641050041
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 220.72159782824835,
+      "anchor_cost": 1023.6530993631409,
+      "cost_delta_vs_anchor": -1.1368683772161603e-13,
+      "exact_reassign_M_return": 184.9253332202462,
+      "improvement_pct": -16.217835028476262,
+      "issues": [],
+      "map": "10x110_o2",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                25,
+                36,
+                55
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                94,
+                70,
+                88,
+                5
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                2,
+                96,
+                81
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                104,
+                38
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 132.42232203805492,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                106,
+                74
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                3,
+                39
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 50.70425367373062,
+          "slots": 1,
+          "station": 1,
+          "trips": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                66,
+                14,
+                107,
+                11
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                54,
+                67,
+                76,
+                21
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                47,
+                77,
+                110,
+                85
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                46,
+                34,
+                90
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                9,
+                72,
+                24
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 146.93398088662087,
+          "slots": 2,
+          "station": 2,
+          "trips": 5
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 3
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                93,
+                78,
+                95,
+                29
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                33,
+                1,
+                82,
+                35
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                41,
+                101,
+                60
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                97
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 97.44046545612876,
+          "slots": 2,
+          "station": 5,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                92,
+                23,
+                98,
+                65
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                18,
+                16,
+                40
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                108,
+                49,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                42,
+                52
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 89.76444116523628,
+          "slots": 2,
+          "station": 6,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                86,
+                37,
+                8
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                12,
+                32,
+                100
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                31,
+                6
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 103.14500594835059,
+          "slots": 1,
+          "station": 7,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                30,
+                45,
+                7,
+                87
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                105,
+                62,
+                102
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                48,
+                58,
+                44,
+                83
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                69,
+                91,
+                68,
+                103
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                10,
+                59,
+                63
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                15,
+                64,
+                53
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 149.2662014588225,
+          "slots": 2,
+          "station": 8,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                109,
+                99,
+                71
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                57,
+                19,
+                79
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                61,
+                89,
+                50,
+                56
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                26,
+                4,
+                51,
+                22
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                75,
+                13,
+                84
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                80,
+                20,
+                43
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                73,
+                27
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 184.9253332202462,
+          "slots": 2,
+          "station": 9,
+          "trips": 7
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 184.9253332202462,
+      "validated_cost": 1023.6530993631408
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 223.55650568675782,
+      "anchor_cost": 997.3295340564925,
+      "cost_delta_vs_anchor": 0.0,
+      "exact_reassign_M_return": 200.23443554485567,
+      "improvement_pct": -10.432293200440558,
+      "issues": [],
+      "map": "10x110_o3",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                9,
+                88,
+                105,
+                52
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                55,
+                41,
+                11
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                5,
+                51,
+                46
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                8,
+                101
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 81.32572795711059,
+          "slots": 2,
+          "station": 0,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                91,
+                25,
+                13
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                21,
+                104
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                76,
+                31,
+                89
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 97.71785366767901,
+          "slots": 1,
+          "station": 1,
+          "trips": 3
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 2
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                65,
+                58,
+                77,
+                99
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                74,
+                53,
+                64,
+                108
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                20,
+                17,
+                6,
+                43
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                40,
+                85,
+                18,
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                34,
+                49,
+                80
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                79,
+                16,
+                36
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                78,
+                3,
+                28
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                35,
+                95,
+                56
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 200.23443554485567,
+          "slots": 2,
+          "station": 3,
+          "trips": 8
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                30,
+                96,
+                63
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                27,
+                97,
+                45
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                83,
+                69,
+                47
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                39,
+                98,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                7,
+                71,
+                109
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                72,
+                67,
+                103
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                38,
+                26,
+                4
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 156.66533792904244,
+          "slots": 2,
+          "station": 5,
+          "trips": 7
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                110,
+                29,
+                87
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                23,
+                82,
+                92,
+                90
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                33,
+                62
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                68,
+                15,
+                59,
+                42
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                93,
+                66,
+                44,
+                100
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                102,
+                57,
+                106
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 147.7770883535701,
+          "slots": 2,
+          "station": 7,
+          "trips": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                60,
+                61,
+                75,
+                84
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                19,
+                22,
+                81
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                54,
+                2,
+                50
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                37,
+                107
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 91.64809303590741,
+          "slots": 2,
+          "station": 8,
+          "trips": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                12,
+                86,
+                48,
+                73
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                70,
+                32,
+                94
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 49.7333237223758,
+          "slots": 2,
+          "station": 9,
+          "trips": 2
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 200.23443554485567,
+      "validated_cost": 997.3295340564925
+    },
+    {
+      "admissible": true,
+      "anchor_M_return": 235.80310813660236,
+      "anchor_cost": 1017.2218931511597,
+      "cost_delta_vs_anchor": 2.2737367544323206e-13,
+      "exact_reassign_M_return": 194.22078747850117,
+      "improvement_pct": -17.634339507523485,
+      "issues": [],
+      "map": "10x110_o4",
+      "per_station": [
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                31,
+                75,
+                22,
+                4
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                87,
+                95
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                1,
+                44,
+                92
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 65.88845783456027,
+          "slots": 2,
+          "station": 0,
+          "trips": 3
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                18,
+                29,
+                32
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                60,
+                83,
+                21
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                107
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                52,
+                99,
+                20
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                33,
+                81,
+                79
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 166.570971118664,
+          "slots": 1,
+          "station": 1,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                85,
+                50,
+                94,
+                59
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                76,
+                16,
+                9,
+                35
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                74,
+                5,
+                46
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                17,
+                70,
+                15
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                91,
+                100
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 140.89485191082963,
+          "slots": 2,
+          "station": 2,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                80,
+                23,
+                71
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                25,
+                19,
+                3
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                10,
+                6,
+                41,
+                13
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                36,
+                77,
+                8,
+                69
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                57,
+                89,
+                105,
+                86
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                102,
+                40,
+                90
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                55,
+                58,
+                54
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 194.22078747850117,
+          "slots": 2,
+          "station": 3,
+          "trips": 7
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 4
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                106,
+                34,
+                104,
+                63
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                101
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                61,
+                28,
+                82,
+                84
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                24,
+                98,
+                7
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                64,
+                73,
+                14
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                26,
+                30,
+                96
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 120.62997124527263,
+          "slots": 2,
+          "station": 5,
+          "trips": 6
+        },
+        {
+          "assignment": [],
+          "kind": 0,
+          "min_makespan": 0.0,
+          "slots": 0,
+          "station": 6
+        },
+        {
+          "assignment": [
+            {
+              "slot": 0,
+              "targets": [
+                43,
+                78,
+                2
+              ]
+            },
+            {
+              "slot": 0,
+              "targets": [
+                48,
+                42,
+                97,
+                68
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                62,
+                12,
+                39
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                37,
+                53
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                88,
+                38,
+                108
+              ]
+            }
+          ],
+          "kind": 2,
+          "min_makespan": 105.58911941371679,
+          "slots": 2,
+          "station": 7,
+          "trips": 5
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                93,
+                65,
+                47
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 36.15541583162412,
+          "slots": 1,
+          "station": 8,
+          "trips": 1
+        },
+        {
+          "assignment": [
+            {
+              "slot": 1,
+              "targets": [
+                72,
+                45,
+                110
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                109,
+                11,
+                66
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                56,
+                51,
+                27
+              ]
+            },
+            {
+              "slot": 1,
+              "targets": [
+                67,
+                49,
+                103
+              ]
+            }
+          ],
+          "kind": 1,
+          "min_makespan": 157.57932971315748,
+          "slots": 1,
+          "station": 9,
+          "trips": 4
+        }
+      ],
+      "status": "OK",
+      "validated_M_return": 194.22078747850117,
+      "validated_cost": 1017.22189315116
+    }
+  ],
+  "schema": "takeover_g3_exact_cost_neutral_reassign_v1"
+}

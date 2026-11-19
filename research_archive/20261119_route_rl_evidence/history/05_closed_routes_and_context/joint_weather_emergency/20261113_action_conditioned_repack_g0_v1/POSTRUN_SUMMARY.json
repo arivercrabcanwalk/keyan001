@@ -1,0 +1,231 @@
+{
+  "utc": "2026-11-13T13:47:27.979173+00:00",
+  "scope": "READ_ONLY_EXISTING_ROWS_NO_NEW_SAMPLING_SCORING_SOLVING",
+  "records": 192,
+  "modes": {
+    "fixed": {
+      "records": 48,
+      "complete": 36,
+      "retained_deadends": 12,
+      "pipeline_wall_s": 0.11098122596740723,
+      "counters": {},
+      "per_fixture": {
+        "flex_gap": {
+          "records": 8,
+          "complete": 4
+        },
+        "mixed_trips": {
+          "records": 8,
+          "complete": 8
+        },
+        "open_pin": {
+          "records": 8,
+          "complete": 8
+        },
+        "sabs": {
+          "records": 8,
+          "complete": 8
+        },
+        "typed_reject": {
+          "records": 8,
+          "complete": 0
+        },
+        "zero_ties": {
+          "records": 8,
+          "complete": 8
+        }
+      }
+    },
+    "eager_frontier": {
+      "records": 48,
+      "complete": 35,
+      "retained_deadends": 13,
+      "pipeline_wall_s": 0.13972573494538665,
+      "counters": {
+        "queries": 1492,
+        "load_evals": 5240,
+        "assignment_builds": 0,
+        "assignment_expansions": 0,
+        "label_expansions": 836,
+        "peak_frontier": 435,
+        "materializations": 235,
+        "moved_trips": 106
+      },
+      "per_fixture": {
+        "flex_gap": {
+          "records": 8,
+          "complete": 3
+        },
+        "mixed_trips": {
+          "records": 8,
+          "complete": 8
+        },
+        "open_pin": {
+          "records": 8,
+          "complete": 8
+        },
+        "sabs": {
+          "records": 8,
+          "complete": 8
+        },
+        "typed_reject": {
+          "records": 8,
+          "complete": 0
+        },
+        "zero_ties": {
+          "records": 8,
+          "complete": 8
+        }
+      }
+    },
+    "conditional_fullscan": {
+      "records": 48,
+      "complete": 40,
+      "retained_deadends": 8,
+      "pipeline_wall_s": 0.15108824893832207,
+      "counters": {
+        "queries": 1254,
+        "load_evals": 4798,
+        "assignment_builds": 914,
+        "assignment_expansions": 2419,
+        "label_expansions": 0,
+        "peak_frontier": 0,
+        "materializations": 245,
+        "moved_trips": 76
+      },
+      "per_fixture": {
+        "flex_gap": {
+          "records": 8,
+          "complete": 8
+        },
+        "mixed_trips": {
+          "records": 8,
+          "complete": 8
+        },
+        "open_pin": {
+          "records": 8,
+          "complete": 8
+        },
+        "sabs": {
+          "records": 8,
+          "complete": 8
+        },
+        "typed_reject": {
+          "records": 8,
+          "complete": 0
+        },
+        "zero_ties": {
+          "records": 8,
+          "complete": 8
+        }
+      }
+    },
+    "conditional_frontier": {
+      "records": 48,
+      "complete": 40,
+      "retained_deadends": 8,
+      "pipeline_wall_s": 0.15079878969118,
+      "counters": {
+        "queries": 1254,
+        "load_evals": 10868,
+        "assignment_builds": 0,
+        "assignment_expansions": 0,
+        "label_expansions": 876,
+        "peak_frontier": 455,
+        "materializations": 245,
+        "moved_trips": 76
+      },
+      "per_fixture": {
+        "flex_gap": {
+          "records": 8,
+          "complete": 8
+        },
+        "mixed_trips": {
+          "records": 8,
+          "complete": 8
+        },
+        "open_pin": {
+          "records": 8,
+          "complete": 8
+        },
+        "sabs": {
+          "records": 8,
+          "complete": 8
+        },
+        "typed_reject": {
+          "records": 8,
+          "complete": 0
+        },
+        "zero_ties": {
+          "records": 8,
+          "complete": 8
+        }
+      }
+    }
+  },
+  "audit_counts": {
+    "records": 192,
+    "query_checks": 4998,
+    "mask_mismatch": 0,
+    "witness_mismatch": 0,
+    "complete_original_rescores": 302,
+    "complete_original_replays": 302,
+    "fullscan_frontier_pairs": 48
+  },
+  "audit_mismatch_types": {
+    "SCORE": 302
+  },
+  "registered_flex": {
+    "fixed": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "eager_frontier": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "conditional_fullscan": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "conditional_frontier": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "negative_first_masks": {
+    "open_pin": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "typed_reject": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "sabs_equal": true,
+  "phase_attempts": 5,
+  "phase_successes": 3,
+  "phase_failures": 2,
+  "main_child_cpu_s": 13.232328,
+  "phase_full_exit_wall_total_s": 13.373091246467084,
+  "repair_remaining": 0,
+  "successful_timing_reruns": 0,
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "training": 0,
+  "Formal": 0,
+  "postread_cpu_s": 0.04149139899999999
+}

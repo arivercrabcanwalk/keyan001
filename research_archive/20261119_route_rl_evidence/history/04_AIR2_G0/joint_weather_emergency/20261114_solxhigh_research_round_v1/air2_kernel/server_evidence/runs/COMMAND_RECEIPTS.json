@@ -1,0 +1,16 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "validate.py",
+      "BASELINE"
+    ],
+    "input": "INPUT.json; OLD_1RELOC",
+    "stdout_literal": "",
+    "stderr_literal": "Traceback (most recent call last):\n  File \"<EXECUTION_PATH>\", line 127, in <module>\n    assert solution_routes(post) == solution_routes(candidate)\nAssertionError\n",
+    "exit_status": 1,
+    "wall_s": 0.07505021523684263,
+    "child_cpu_s": 0.07446799999999999
+  }
+]

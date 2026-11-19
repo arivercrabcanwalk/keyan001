@@ -1,0 +1,34 @@
+{
+  "scope": "Observed document transaction commands only; no research modules imported",
+  "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "records": [
+    {
+      "phase": "BASELINE",
+      "command": "./CHECK.py baseline",
+      "input": "ORIGINALS/LATEST_STATUS.md + live pre-update LATEST_STATUS.md + SOURCE_INDEX.json",
+      "stdout": "BASELINE PASS\n",
+      "exit_status": 0
+    },
+    {
+      "phase": "MODIFIED",
+      "command": "./CHECK.py modified",
+      "input": "MODIFIED_FILE + live updated LATEST_STATUS.md + protected source and network identities",
+      "stdout": "MODIFIED PASS\n",
+      "exit_status": 0
+    },
+    {
+      "phase": "ROLLBACK",
+      "command": "./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md",
+      "input": "isolated changed status copy + ORIGINALS/LATEST_STATUS.md",
+      "stdout": "ROLLBACK PASS\n",
+      "exit_status": 0
+    },
+    {
+      "phase": "ROLLBACK_VERIFY",
+      "command": "./CHECK.py rollback",
+      "input": "restored isolated copy + changed live status + protected sources",
+      "stdout": "ROLLBACK VERIFY PASS\n",
+      "exit_status": 0
+    }
+  ]
+}

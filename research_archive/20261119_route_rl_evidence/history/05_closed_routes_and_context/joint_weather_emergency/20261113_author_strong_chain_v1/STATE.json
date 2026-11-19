@@ -1,0 +1,59 @@
+{
+  "Formal": 0,
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "Java_calls": 0,
+  "child_cpu_s": 0.85743,
+  "<REMOVED_ENDPOINT>_only_execution": true,
+  "modified_files": 43,
+  "modules": 3,
+  "next": "../20261113_author_fullcall_v1/NEXT_BOUNDED_WORK.md",
+  "original_files": 10,
+  "real_strong_nonRL_calls": 2,
+  "results": [
+    {
+      "M": 22.491325002669335,
+      "admissible": true,
+      "anchor_M": 22.491325002669335,
+      "anchor_cost": 117.13698750400401,
+      "case": "MODIFIED6",
+      "cost": 117.13698750400401,
+      "elapsed_s": 0.07036940893158317,
+      "fallback": false,
+      "over_budget": false,
+      "seed": 20261112,
+      "station_types_preserved": true,
+      "status": "ONTIME_VALID",
+      "target_station_preserved": true,
+      "wind": [
+        540.0,
+        0.0
+      ]
+    },
+    {
+      "M": 26.67181731250836,
+      "admissible": true,
+      "anchor_M": 26.67181731250836,
+      "anchor_cost": 193.70772596876253,
+      "case": "FULL12",
+      "cost": 193.70772596876253,
+      "elapsed_s": 0.3008173988200724,
+      "fallback": false,
+      "over_budget": false,
+      "seed": 20261112,
+      "station_types_preserved": true,
+      "status": "ONTIME_VALID",
+      "target_station_preserved": true,
+      "wind": [
+        0.0,
+        540.0
+      ]
+    }
+  ],
+  "rollback": "10/10 original hash + env.causal_engine missing import behavior restored; primary43 retained",
+  "root_only": true,
+  "schema": "fixed_wind_author_to_strong_chain_v1",
+  "scientific_maps": 0,
+  "status": "BOUNDED_ENGINEERING_CHAIN_COMPLETE_RESEARCH_INCOMPLETE",
+  "training": 0
+}

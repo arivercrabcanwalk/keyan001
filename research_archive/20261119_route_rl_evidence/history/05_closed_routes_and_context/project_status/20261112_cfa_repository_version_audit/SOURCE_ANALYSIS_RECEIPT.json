@@ -1,0 +1,15 @@
+{
+  "command": "<LOCAL_PATH> READ_EXISTING_ODS.py",
+  "argv": [
+    "<LOCAL_PATH>",
+    "READ_EXISTING_ODS.py"
+  ],
+  "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "input": "sources/results_pinned.ods; existing author records only",
+  "stdin": "",
+  "stdout": "AUTHOR ODS READ PASS\nSHEETS 10 EXISTING_RECORDS 18300 FORMULA_FINDINGS 19\nCFA M=1 Psi = 30 - all served 295.5726666666666666666666667 cost 1286.405202333333333333333333 underfilled 1884\nCFA M=2 Psi = 60 - all served 281.1076666666666666666666667 cost 1238.985856666666666666666667 underfilled 2986\nmyopic Psi = 30 - all served 284.4646666666666666666666667 cost 1277.258288666666666666666667 underfilled 2965\nmyopic Psi = 60 - all served 270.1423333333333333333333333 cost 1375.205350333333333333333333 underfilled 2999\nPFA Psi = 30 - all served 247.5343333333333333333333333 cost 3460.384212666666666666666667 underfilled 3000\nPFA Psi = 60 - all served 174.736 cost 12616.44361333333333333333333 underfilled 3000\nOracle - all served 298.1733333333333333333333333 cost 4802.43325 underfilled 208\n",
+  "stderr": "",
+  "exit_status": 0,
+  "at_utc": "2026-11-12T05:06:05.817520+00:00",
+  "scientific_execution": false
+}

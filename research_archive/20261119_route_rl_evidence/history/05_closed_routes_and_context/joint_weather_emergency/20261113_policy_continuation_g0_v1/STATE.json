@@ -1,0 +1,117 @@
+{
+  "ALNS_calls": 0,
+  "author_solves": 0,
+  "branch": {
+    "baseline": "pivotal_binary",
+    "field": "schedule_credit.MODE",
+    "modified": "guarded_sweep",
+    "modified_retained": true
+  },
+  "checkpoints": 0,
+  "cost_evidence": {
+    "broad_speedup_claim": false,
+    "complete_baseline_wall_s": 0.45660365698859096,
+    "complete_modified_wall_s": 0.4169685859233141,
+    "kernel_trade_16x32_ratio": 1.726352233114572,
+    "kernel_trade_4x8_ratio": 4.2880390120068235,
+    "kernel_trade_64x64_ratio": 0.7875372000050173,
+    "single_process_ratio": 0.9131958965754249,
+    "two_full_physical_pools_nonzero_credit": 0
+  },
+  "current_turn_assessment": "progress_new_shared_sensitivity_code_exact_values_gradients_and_conditional_baseline_diagnosis",
+  "engineering": {
+    "all_oracle_means_exact": true,
+    "cartesian_combinations": 13807,
+    "cases": 12,
+    "complete_batches": 512,
+    "deletion_values_equal": 4753,
+    "exact_gradient_error": "0",
+    "finite_gradient_settings": 2,
+    "maximum_literal_physical_error": 0.0,
+    "oracle_estimator_types": 4,
+    "physical_fixtures": 2,
+    "physical_main_and_deletion_witnesses": 97
+  },
+  "executor": "root",
+  "failures_retained": [
+    "dispatch_argparse_exit2_before_numeric_phase",
+    "BASELINE_exit1_negative_generated_duty"
+  ],
+  "final_recorded_utc": "2026-11-13T05:43:18.535302+00:00",
+  "finite_variance_evidence": {
+    "deletion_over_conditional_rao_blackwell": [
+      15.454554397569417,
+      43.786008566359044
+    ],
+    "deletion_over_conditional_score_weighted": [
+      2.1056023786472706,
+      1.9571490850682194
+    ],
+    "deletion_over_optimal_constant": [
+      0.7230290699936746,
+      0.6863819878075127
+    ],
+    "oracle_cost_is_free": false,
+    "training_benefit_proven": false
+  },
+  "formal_calls": 0,
+  "goal_status": "active",
+  "model_imports": 0,
+  "new_scientific_maps": 0,
+  "next": "source_and_proof_check_of_all_forced_insertion_values_then_independent_bounded_engineering_only_if_distinct",
+  "next_detail": "NEXT_MECHANISM_DERIVATION.md",
+  "old_identity_ledger": {
+    "actual_comparisons": 126,
+    "changed": false,
+    "new_identities": 40,
+    "old_calibration_limit": 24,
+    "old_calibration_used": 24
+  },
+  "optimizer_steps": 0,
+  "package": "20261113_policy_continuation_g0_v1",
+  "phase_status": {
+    "AUDIT": "EXIT0",
+    "BASELINE": "FAILED_RETAINED",
+    "BASELINE_REPAIR1": "EXIT0",
+    "CREDIT_ANALYSIS": "EXIT0",
+    "GRADIENT": "EXIT0",
+    "MODIFIED": "EXIT0",
+    "ROLLBACK": "EXIT0",
+    "SUMMARY": "EXIT0"
+  },
+  "previous_turn_assessment": "progress_public_prefix_interface_verified",
+  "protected_states_expected": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "repairs": {
+    "fixed_sample_count_changed": false,
+    "input_json_changed": false,
+    "invalid_raw_samples_kept_as_failure_sentinels": true,
+    "remaining_source_repair_allowance": 0,
+    "source_repairs_used": 1,
+    "successful_timing_repeated": false
+  },
+  "research_host": "<COMPUTE_HOST>",
+  "resource_ledger": "RESOURCE_LEDGER.json",
+  "rollback": {
+    "baseline_complete_json_restored": true,
+    "baseline_literal_stdout_restored": true,
+    "modified_sha256": "0642db80faa95c06e01a563426e3d14e55a89eac6acbc0624e6fb39231d4bdae",
+    "original_sha256": "b5f85ac24531c377a2fb3fbd723d74126a38ff4425d59e7a6078ef33411ffa70",
+    "separate_copy_tested": true
+  },
+  "scientific_gates": {
+    "G0": "NO_SCIENTIFIC_PASS",
+    "G3": "NOT_PASSED",
+    "G8": "INCOMPLETE",
+    "formal": "NOT_STARTED",
+    "training": "NOT_STARTED_IN_THIS_PACKAGE"
+  },
+  "scope": "S_const fixed wind A simple energy direct physical TARGET/RETURN",
+  "status": "FINITE_DELETION_COMPUTATION_VERIFIED_LEARNING_VALUE_UNPROVEN",
+  "subagents": 0,
+  "supervised_child_cpu_seconds": 5.704281,
+  "training_calls": 0,
+  "user_decision_required": false
+}

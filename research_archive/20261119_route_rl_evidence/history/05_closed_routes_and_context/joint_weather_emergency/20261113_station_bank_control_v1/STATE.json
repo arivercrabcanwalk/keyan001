@@ -1,0 +1,104 @@
+{
+  "breakthrough_claim": false,
+  "candidate_screen": {
+    "decision": "NOT_ADMITTED_STANDARD_BEST_OF_BANK_SCORE_AND_RECOMBINATION",
+    "difference_from_old_product": "minimum feasible bank objective instead of expected product average; no non-direct new learning step identified",
+    "id": "FEASIBLE_STATION_BANK_PAIRING"
+  },
+  "control": {
+    "cost_accumulation": "literal station/slot order monotone prefix minimization",
+    "entry": "MODIFIED_FILE/station_bank.py::solve",
+    "global_route_optimality_claim": false,
+    "mode": "threshold_monotone",
+    "scientific_end_to_end_deadline_driver": false,
+    "scope": "finite complete station-schedule bank, fixed deployment/type/target-station/constant wind, full original cap"
+  },
+  "date_local": "2026-11-13",
+  "existing_user_decision": {
+    "dependent_scientific_batches": 0,
+    "new_cap_assumed_approved": false,
+    "new_questions": 0,
+    "protocol": "20261113_interleaving_g0_v1/WIND_COMPARISON_PROTOCOL.md",
+    "status": "AWAITING_EXISTING_REPLY"
+  },
+  "gates": {
+    "G0": "NO_ADMITTED_NEW_DISTINCT_MECHANISM_NO_TRAINING",
+    "G1": "FINITE_BANK_CONTROL_ENGINEERING_PASS_ONLY",
+    "G3": "NOT_PASSED",
+    "G4": "NOT_ADMITTED",
+    "G5_FORMAL": "NOT_STARTED",
+    "G8": "NOT_COMPLETE"
+  },
+  "goal_status": "active",
+  "host": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "legacy_quota": {
+    "actual_comparisons": 126,
+    "calibration_validation_max": 24,
+    "calibration_validation_used": 24,
+    "refunded": false,
+    "unique_identities": 40
+  },
+  "new_counts": {
+    "alns_calls": 0,
+    "author_solves": 0,
+    "bounded_modules": 5,
+    "checkpoints": 0,
+    "domain_physics_anchor_rejections": 9,
+    "engineering_inputs": 9,
+    "engineering_physical_fixture_identities": 1,
+    "engineering_winds": 3,
+    "exact_reference_combinations_per_input": 27,
+    "formal_maps": 0,
+    "hand_anchors_per_wind": 3,
+    "independent_action_replay_inputs": 9,
+    "module_exit0": 5,
+    "module_exit_nonzero": 0,
+    "mutants_caught": 2,
+    "new_literature_http_calls": 0,
+    "original_hashes_restored": 1,
+    "primary_sources_reused": 2,
+    "scientific_maps": 0,
+    "scientific_quality_calls": 0,
+    "subagents": 0,
+    "training_calls": 0
+  },
+  "next_candidate": "NOT_SELECTED",
+  "next_work": "NEXT_BOUNDED_WORK.md",
+  "owner": "root",
+  "project_complete": false,
+  "protected_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "receipts_sha256": "a6b17cee3bf5f4115fff5066556861f99609645acfeac40c8334423412bfaece",
+  "remote_root": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "resource": {
+    "actual_child_cpu_s": 0.6882469999999999,
+    "actual_wall_s_sum": 0.7222886583767831,
+    "maxrss_kib": 18304,
+    "registered_cpu_s_max": 42,
+    "registered_modules_max": 7,
+    "registered_output_bytes_max": 14680064,
+    "registered_wall_s_max": 70,
+    "scope": "five supervised children including rollback descendants; excludes text/transport/package"
+  },
+  "results": {
+    "M_and_full_cost_equal_inputs": 9,
+    "east_wind_handwritten_anchor_M": 12.0,
+    "east_wind_parent1_M": 8.0,
+    "east_wind_same_bank_full_cost": 145.2,
+    "east_wind_same_bank_nonRL_M": 7.0,
+    "literal_order_boundary_is_physical_map": false,
+    "multi_trip_cumulative_duty": 14.0,
+    "overcap_parent_entries_retained": true,
+    "rollback": {
+      "backup_preserved": true,
+      "original_hashes_restored": true,
+      "original_json_restored": true,
+      "original_stdout_restored": true,
+      "pass": true,
+      "primary_modified_retained": true
+    }
+  },
+  "status": "FINITE_STATION_BANK_STRONG_CONTROL_ENGINEERING_COMPLETE_NO_NEW_G0_CANDIDATE"
+}

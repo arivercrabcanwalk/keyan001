@@ -1,0 +1,59 @@
+{
+  "author_commit": "84df15ea977271e6a4d015f10f9f355f7e866890",
+  "author_commit_is_paper_experimental_commit": "not established",
+  "candidate": "JOINT_BUDGET_RETURN_VALUE_UPDATE_V1",
+  "claimed_experimental_gain": false,
+  "date_local": "2026-11-13",
+  "decision": "CLOSE_GENERIC_JOINT_VALUE_UPDATE_NO_DISTINCT_OPERATION",
+  "executor": "root_only",
+  "gates": "G0/G3 not passed; no training or Formal",
+  "new_algorithm_implementation": false,
+  "next": "NEXT_BOUNDED_WORK.md; next mechanism not yet selected",
+  "old_allowances": {
+    "actual_comparisons": 126,
+    "calibration_limit": 24,
+    "calibration_used": 24,
+    "new_identities": 40,
+    "refund": 0
+  },
+  "original_scientific_states_unchanged": true,
+  "package": "20261113_joint_budget_value_g0_v1",
+  "package_status": "STATIC_G0_SCREENING_CLOSED",
+  "previous_turn_classification": "progress: generic compiled suffix guide entry closed through two fulltexts and fixed author code; not repeated",
+  "project_status": "INCOMPLETE_GOAL_ACTIVE",
+  "protected_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "remote_final_delivery": "<EXECUTION_PATH>",
+  "resource": {
+    "ALNS_calls": 0,
+    "Formal_calls": 0,
+    "HTTP_200": 10,
+    "HTTP_errors": [
+      422
+    ],
+    "HTTP_receipts": 11,
+    "author_route_solver_calls": 0,
+    "checkpoints": 0,
+    "<REMOVED_ENDPOINT>_math_or_physics_runs": 0,
+    "local_operations": "source retrieval and reading; AST/JSON/hash; document editing and integrity transaction; transfer",
+    "model_imports": 0,
+    "new_agents": 0,
+    "new_primary_fulltexts": 2,
+    "physical_quality_evaluations": 0,
+    "pinned_author_source_files_read": 3,
+    "research_executions": 0,
+    "scientific_maps": 0,
+    "training_calls": 0
+  },
+  "source_hashes": {
+    "literature/BMDP_arxiv.html": "9a16be38f72a13bf025f0c9cada8f97ae4fcbe114bc3085999c4ae5fc4b555e2",
+    "literature/BMDP_bftq.py": "e0df1479b30c3674f57bbb4ea7e062ee85ef568d143c81a0089072d008ae92b0",
+    "literature/BMDP_greedy_policy.py": "995de1b7cbd960bdbc47be2538a42d492f58bacbcf1da015b44a68adbab01cd1",
+    "literature/BMDP_models.py": "4e02991899fc5594e697ad055cab946b258908b94be59cd3b3d0c25e427682b6",
+    "literature/MVDRL_arxiv.html": "865e0abcfa6d4c29c379ff985de46df5219069b3c167a3649b0c66054f96d80b"
+  },
+  "this_turn_progress": "two new primary sources and three pinned author files cover generic budgeted/joint value update; expected-cost and evaluation-to-control bridges made explicit; entry closed without new execution",
+  "user_decision": "prior cap A/B pending; no new question, no assumed approval"
+}

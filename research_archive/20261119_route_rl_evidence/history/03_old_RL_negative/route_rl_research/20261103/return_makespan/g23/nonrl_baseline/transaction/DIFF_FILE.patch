@@ -1,0 +1,288 @@
+--- ORIGINAL_FILE.py
++++ MODIFIED_FILE.py
+@@ -1,21 +1,275 @@
+-"""New-module preimplementation scaffold: common-anchor no-op only.
++"""Same-objective non-RL controls for fixed-owner, station-joint route search.
+ 
+-This is a newly created scaffold, not a prior research solver or author file.
+-The real implementation is developed on a copy; rollback restores this no-op.
++This is an experimental engineering baseline, not an accepted scientific result.
++Every complete proposal is checked by the independent full-map scorer. The LPT
++control repacks intact anchor trips; joint_minmax adds deterministic route-level
++neighborhood descent under the original global cost cap.
+ """
++from __future__ import annotations
++
++from copy import deepcopy
++from itertools import combinations
++import math
+ from time import perf_counter
+-from scorer import CostAnchor
++
+ from delivery import finalize_result
++from scorer import COST_TOLERANCE, CostAnchor, validate_candidate
+ 
+ 
++def _duration(instance, station_idx, trip):
++    station = instance.stations[station_idx]
++    nodes = [instance.nodes[nid] for nid in trip]
++    sequence = [station] + nodes + [station]
++    distance = sum(math.hypot(a.x - b.x, a.y - b.y)
++                   for a, b in zip(sequence, sequence[1:]))
++    return distance / instance.params.speed + sum(n.service for n in nodes)
++
++
++def _energy(instance, station_idx, trip):
++    station = instance.stations[station_idx]
++    nodes = [instance.nodes[nid] for nid in trip]
++    sequence = [station] + nodes + [station]
++    distance = sum(math.hypot(a.x - b.x, a.y - b.y)
++                   for a, b in zip(sequence, sequence[1:]))
++    return (distance / instance.params.speed * instance.params.flight_energy
++            + sum(n.energy for n in nodes))
++
++
++def _lpt_repack(instance, anchor):
++    """Assign intact trips to eligible station slots in longest-first order."""
++    candidate = anchor.solution()
++    for si, kind in enumerate(anchor.station_types):
++        original_routes = deepcopy(candidate["routes"][si])
++        trips = [list(trip) for slot in candidate["routes"][si] for trip in slot if trip]
++        slots = (1,) if kind == 1 else (0, 1)
++        loads = {slot: 0.0 for slot in slots}
++        rebuilt = [[], []]
++        for trip in sorted(trips, key=lambda t: (-_duration(instance, si, t), tuple(t))):
++            duration = _duration(instance, si, trip)
++            energy = _energy(instance, si, trip)
++            feasible_slots = []
++            for slot in slots:
++                capacity = (instance.params.large_battery if slot == 0
++                            else instance.params.small_battery)
++                duty_limit = (instance.params.large_duration
++                              if kind == 2 and slot == 0
++                              else instance.params.small_duration)
++                if (energy <= capacity + 1e-7
++                        and loads[slot] + duration <= duty_limit + 1e-7):
++                    feasible_slots.append(slot)
++            # LPT considers the lightest slot among those that can physically
++            # carry the intact trip; the full-map scorer remains authoritative.
++            for slot in sorted(feasible_slots, key=lambda d: (loads[d], d)):
++                rebuilt[slot].append(list(trip))
++                loads[slot] += duration
++                break
++            else:
++                rebuilt = original_routes
++                break
++        candidate["routes"][si] = rebuilt
++    return candidate
++
++
++def _clean(routes):
++    return [[[[int(n) for n in trip] for trip in slot if trip]
++             for slot in station] for station in routes]
++
++
++def _route_locations(solution):
++    for si, station in enumerate(solution["routes"]):
++        for slot, trips in enumerate(station):
++            for ti, trip in enumerate(trips):
++                for pi, nid in enumerate(trip):
++                    yield si, slot, ti, pi, nid
++
++
++def _neighbours(solution):
++    """Yield deterministic same-station physical route edits."""
++    base = solution["routes"]
++
++    # Reverse every segment of each trip (all 2-opt order reversals).
++    for si, station in enumerate(base):
++        for slot, trips in enumerate(station):
++            for ti, trip in enumerate(trips):
++                for left in range(len(trip)):
++                    for right in range(left + 1, len(trip)):
++                        out = deepcopy(base)
++                        out[si][slot][ti][left:right + 1] = reversed(
++                            out[si][slot][ti][left:right + 1])
++                        yield "two_opt", out, si
++
++    # Relocate one target among trips and slots within its fixed station.
++    locations = list(_route_locations(solution))
++    for src_si, src_slot, src_ti, src_pi, nid in locations:
++        station_slots = (1,) if solution["station_types"][src_si] == 1 else (0, 1)
++        for dst_slot in station_slots:
++            for dst_ti in range(len(base[src_si][dst_slot])):
++                if (src_slot == dst_slot and src_ti == dst_ti
++                        and len(base[src_si][src_slot][src_ti]) == 1):
++                    continue
++                out = deepcopy(base)
++                moved = out[src_si][src_slot][src_ti].pop(src_pi)
++                if not out[src_si][src_slot][src_ti]:
++                    out[src_si][src_slot].pop(src_ti)
++                    if src_slot == dst_slot and src_ti < dst_ti:
++                        dst_ti -= 1
++                out[src_si][dst_slot][dst_ti].append(moved)
++                yield "relocate", out, src_si
++            # A singleton trip split is a first-class route decision.
++            out = deepcopy(base)
++            out[src_si][src_slot][src_ti].pop(src_pi)
++            if not out[src_si][src_slot][src_ti]:
++                out[src_si][src_slot].pop(src_ti)
++            out[src_si][dst_slot].append([nid])
++            yield "split_relocate", out, src_si
++
++    # Swap targets across trips/slots while preserving exact target coverage.
++    for a, b in combinations(locations, 2):
++        asi, ad, ati, api, an = a
++        bsi, bd, bti, bpi, bn = b
++        if asi != bsi or (ad, ati, api) == (bd, bti, bpi):
++            continue
++        out = deepcopy(base)
++        out[asi][ad][ati][api], out[bsi][bd][bti][bpi] = bn, an
++        yield "swap", out, asi
++
++    # Merge two trips in either order; may move a complete trip between slots.
++    for si, station in enumerate(base):
++        for src_slot in (0, 1):
++            for src_ti in range(len(station[src_slot])):
++                for dst_slot in (0, 1):
++                    for dst_ti in range(len(station[dst_slot])):
++                        if (src_slot, src_ti) == (dst_slot, dst_ti):
++                            continue
++                        for reverse in (False, True):
++                            out = deepcopy(base)
++                            source = list(out[si][src_slot][src_ti])
++                            target = out[si][dst_slot][dst_ti]
++                            merged = list(target) + source if reverse else source + list(target)
++                            # Delete high indexes first when both trips share a slot.
++                            refs = sorted(((src_slot, src_ti), (dst_slot, dst_ti)),
++                                          key=lambda x: (x[0], x[1]), reverse=True)
++                            for d, ti in refs:
++                                out[si][d].pop(ti)
++                            # Destination index after source deletion.
++                            insert_at = dst_ti
++                            if src_slot == dst_slot and src_ti < dst_ti:
++                                insert_at -= 1
++                            out[si][dst_slot].insert(insert_at, merged)
++                            yield "merge", out, si
++
++
++def _score(instance, anchor, routes):
++    proposal = anchor.solution()
++    proposal["routes"] = _clean(routes)
++    return proposal, validate_candidate(instance, proposal, anchor, epsilon=0.0,
++                                        cost_tolerance=COST_TOLERANCE)
++
++
++def _certificate(score, move, station):
++    reasons = list(score.get("issues", [])) + list(score.get("domain_issues", []))
++    if not score.get("cost_cap_satisfied", False):
++        reasons.append("full_map_cost_cap_exceeded")
++    return {
++        "move": move,
++        "station": station,
++        "solution_sha256": score.get("solution_sha256"),
++        "original_feasible": score.get("original_feasible"),
++        "domain_valid": score.get("domain_valid"),
++        "cost_cap_satisfied": score.get("cost_cap_satisfied"),
++        "admissible": score.get("admissible"),
++        "cost": score.get("cost"),
++        "anchor_cost": score.get("cost_budget"),
++        "raw_cost_minus_cap": score.get("raw_cost_minus_cap"),
++        "M_return": score.get("M_return"),
++        "issues": reasons,
++    }
++
++
+ def solve(instance, anchor_or_solution, *, method="joint_minmax", budget_s=6.0,
+-          started_at=None, clock=perf_counter, **unused):
++          started_at=None, clock=perf_counter, max_evaluations=12000):
++    """Run LPT or deterministic joint min-max descent from a common anchor.
++
++    Wall-clock starts before anchor construction unless the caller supplies its
++    pre-load start. The finite evaluation cap also makes testing deterministic.
++    """
++    if method not in ("lpt", "joint_minmax"):
++        raise ValueError("method must be 'lpt' or 'joint_minmax'")
++    if type(budget_s) not in (int, float) or not math.isfinite(budget_s) or budget_s <= 0:
++        raise ValueError("budget_s must be finite and positive")
++    if type(max_evaluations) is not int or max_evaluations <= 0:
++        raise ValueError("max_evaluations must be a positive integer")
+     started_at = clock() if started_at is None else started_at
+     anchor = (anchor_or_solution if isinstance(anchor_or_solution, CostAnchor)
+               else CostAnchor.from_solution(instance, anchor_or_solution))
+     anchor.verify(instance)
+-    record = finalize_result(instance, anchor.solution(), anchor,
+-                             started_at=started_at, budget_s=budget_s, clock=clock)
+-    record.update(method=method, implementation="new_module_noop_scaffold",
+-                  candidate_validation_calls=0, accepted_moves=[])
+-    return record
++
++    proposed = _lpt_repack(instance, anchor)
++    proposal_score = validate_candidate(instance, proposed, anchor, epsilon=0.0,
++                                         cost_tolerance=COST_TOLERANCE)
++    validations = 1
++    rejected_inadmissible = 0
++    candidate_ledger = [_certificate(proposal_score, "lpt_repack", None)]
++    accepted_moves = []
++    current = proposed if proposal_score["admissible"] else anchor.solution()
++    current_score = proposal_score if proposal_score["admissible"] else validate_candidate(
++        instance, current, anchor, epsilon=0.0, cost_tolerance=COST_TOLERANCE)
++    if not proposal_score["admissible"]:
++        validations += 1
++        rejected_inadmissible += 1
++        candidate_ledger.append(_certificate(current_score, "anchor_fallback", None))
++
++    timed_out = False
++    if method == "joint_minmax":
++        while validations < max_evaluations:
++            try:
++                if clock() - started_at >= budget_s:
++                    timed_out = True
++                    break
++            except Exception:
++                timed_out = True
++                break
++            best = None
++            for kind, routes, touched_station in _neighbours(current):
++                if validations >= max_evaluations:
++                    break
++                if clock() - started_at >= budget_s:
++                    timed_out = True
++                    break
++                candidate, score = _score(instance, anchor, routes)
++                validations += 1
++                candidate_ledger.append(_certificate(score, kind, touched_station))
++                if not score["admissible"]:
++                    rejected_inadmissible += 1
++                    continue
++                old_key = (current_score["M_return"], current_score["cost"],
++                           current_score["total_distance_m"])
++                new_key = (score["M_return"], score["cost"], score["total_distance_m"])
++                if new_key < old_key and (best is None or new_key < best[0]):
++                    best = (new_key, candidate, score, kind, touched_station)
++            if best is not None:
++                _, current, current_score, kind, touched = best
++                accepted_moves.append({"move": kind, "station": touched,
++                                       "M_return": current_score["M_return"],
++                                       "cost": current_score["cost"]})
++                continue
++            if timed_out:
++                break
++            break
++
++    finalized = finalize_result(instance, current, anchor, started_at=started_at,
++                                budget_s=budget_s, clock=clock, epsilon=0.0,
++                                cost_tolerance=COST_TOLERANCE)
++    finalized.update({
++        "method": method,
++        "implementation": "deterministic_station_joint_route_vnd_v1",
++        "candidate_validation_calls": validations,
++        "rejected_inadmissible_candidates": rejected_inadmissible,
++        "candidate_certificates": candidate_ledger,
++        "accepted_moves": accepted_moves,
++        "search_timed_out": timed_out,
++        "search_exhausted_or_local_minimum": not timed_out and validations < max_evaluations,
++        "max_evaluations": max_evaluations,
++        "search_cpu_or_wall_budget_seconds": budget_s,
++    })
++    return finalized

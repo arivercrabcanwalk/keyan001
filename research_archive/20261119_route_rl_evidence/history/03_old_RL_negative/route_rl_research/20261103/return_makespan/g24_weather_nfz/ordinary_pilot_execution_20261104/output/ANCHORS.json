@@ -1,0 +1,296 @@
+{
+  "records": [
+    {
+      "artifact_hashes": {
+        "author/RUN.json": "c5f3dfae0f0806010f353c0943971191fe35364526fe53bdd3373d569e9b7621",
+        "author/solution.json": "809ca7a5932ed68282ee1a9049228b1184dc60fea3cf8125e177e38a69c229d5",
+        "instance.txt": "4c311dec5146df18d05166c40d2a46c93892decc0bce3cc9eeadff79cc9097f2",
+        "scenario.json": "9599d6e75bda32eedf0e06b884105e4cd0440993bbf420559648c3d5815e63de",
+        "weather_anchor.json": "2082f76732548d90b87d7ed351ced50f580da8f8a934692e6599d87afc5f56a7"
+      },
+      "author_process": {
+        "deadline_abs": 2877456.373902803,
+        "ended_abs": 2877276.436921132,
+        "error": null,
+        "exit_code": 0,
+        "hard_killed": false,
+        "raw": {
+          "artifact_hashes": {
+            "author/RUN.json": "c5f3dfae0f0806010f353c0943971191fe35364526fe53bdd3373d569e9b7621",
+            "author/solution.json": "809ca7a5932ed68282ee1a9049228b1184dc60fea3cf8125e177e38a69c229d5",
+            "instance.txt": "4c311dec5146df18d05166c40d2a46c93892decc0bce3cc9eeadff79cc9097f2",
+            "scenario.json": "9599d6e75bda32eedf0e06b884105e4cd0440993bbf420559648c3d5815e63de",
+            "weather_anchor.json": "2082f76732548d90b87d7ed351ced50f580da8f8a934692e6599d87afc5f56a7"
+          },
+          "author_seed": 9037025135220550923,
+          "directory": "<EXECUTION_PATH>",
+          "status": "eligible"
+        },
+        "stage_wall_s": 5.063015982974321,
+        "started_abs": 2877271.373905149,
+        "status": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"eligible\", \"directory\": \"<EXECUTION_PATH>\", \"artifact_hashes\": {\"instance.txt\": \"4c311dec5146df18d05166c40d2a46c93892decc0bce3cc9eeadff79cc9097f2\", \"scenario.json\": \"9599d6e75bda32eedf0e06b884105e4cd0440993bbf420559648c3d5815e63de\", \"weather_anchor.json\": \"2082f76732548d90b87d7ed351ced50f580da8f8a934692e6599d87afc5f56a7\", \"author/solution.json\": \"809ca7a5932ed68282ee1a9049228b1184dc60fea3cf8125e177e38a69c229d5\", \"author/RUN.json\": \"c5f3dfae0f0806010f353c0943971191fe35364526fe53bdd3373d569e9b7621\"}, \"author_seed\": 9037025135220550923}\n"
+      },
+      "author_seed": 9037025135220550923,
+      "directory": "<EXECUTION_PATH>",
+      "geometry_sha256": "b46b8c04d465b7b557cd05ffbf16229f32fabc128b28badb7f2688d3426530d8",
+      "id": "TRAIN_1",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_1",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "4c311dec5146df18d05166c40d2a46c93892decc0bce3cc9eeadff79cc9097f2",
+      "reason": null,
+      "split": "TRAIN",
+      "status": "eligible"
+    },
+    {
+      "artifact_hashes": {
+        "author/RUN.json": "9b61eea6fa65ac1b9a6859785c8f3a668e15e2f8b0dc15b97465c17df8dbfb29",
+        "author/solution.json": "83fdf6d6f2875dc8834076c235bd424bcb19b9f4747b24cea6071acdb053feed",
+        "instance.txt": "b88938f2b7f7365d19ebaca679357a4596fb22b21944b5471705f61729a3c6c0",
+        "scenario.json": "9f4e4cdd54698245c8eab1d8a26e9ceceb34d66efb0b4799c5d2c226948f4c7d",
+        "weather_anchor.json": "44ced3f8ee5314bcca7cd58b420fa85b2b6c742f425ef74199bac9fb408a40e7"
+      },
+      "author_process": {
+        "deadline_abs": 2877461.437618349,
+        "ended_abs": 2877282.276243798,
+        "error": null,
+        "exit_code": 0,
+        "hard_killed": false,
+        "raw": {
+          "artifact_hashes": {
+            "author/RUN.json": "9b61eea6fa65ac1b9a6859785c8f3a668e15e2f8b0dc15b97465c17df8dbfb29",
+            "author/solution.json": "83fdf6d6f2875dc8834076c235bd424bcb19b9f4747b24cea6071acdb053feed",
+            "instance.txt": "b88938f2b7f7365d19ebaca679357a4596fb22b21944b5471705f61729a3c6c0",
+            "scenario.json": "9f4e4cdd54698245c8eab1d8a26e9ceceb34d66efb0b4799c5d2c226948f4c7d",
+            "weather_anchor.json": "44ced3f8ee5314bcca7cd58b420fa85b2b6c742f425ef74199bac9fb408a40e7"
+          },
+          "author_seed": 3243719861758967425,
+          "directory": "<EXECUTION_PATH>",
+          "status": "eligible"
+        },
+        "stage_wall_s": 5.838622591923922,
+        "started_abs": 2877276.437621206,
+        "status": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"eligible\", \"directory\": \"<EXECUTION_PATH>\", \"artifact_hashes\": {\"instance.txt\": \"b88938f2b7f7365d19ebaca679357a4596fb22b21944b5471705f61729a3c6c0\", \"scenario.json\": \"9f4e4cdd54698245c8eab1d8a26e9ceceb34d66efb0b4799c5d2c226948f4c7d\", \"weather_anchor.json\": \"44ced3f8ee5314bcca7cd58b420fa85b2b6c742f425ef74199bac9fb408a40e7\", \"author/solution.json\": \"83fdf6d6f2875dc8834076c235bd424bcb19b9f4747b24cea6071acdb053feed\", \"author/RUN.json\": \"9b61eea6fa65ac1b9a6859785c8f3a668e15e2f8b0dc15b97465c17df8dbfb29\"}, \"author_seed\": 3243719861758967425}\n"
+      },
+      "author_seed": 3243719861758967425,
+      "directory": "<EXECUTION_PATH>",
+      "geometry_sha256": "9b523d535621cf8ead9b0bddb84adc9f03c46eb6ff900b30bf890042e1ca85e4",
+      "id": "TRAIN_2",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_2",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "b88938f2b7f7365d19ebaca679357a4596fb22b21944b5471705f61729a3c6c0",
+      "reason": null,
+      "split": "TRAIN",
+      "status": "eligible"
+    },
+    {
+      "author_process": {
+        "deadline_abs": 2877467.276917286,
+        "ended_abs": 2877289.388526731,
+        "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "exit_code": 1,
+        "hard_killed": false,
+        "raw": null,
+        "stage_wall_s": 7.111607215367258,
+        "started_abs": 2877282.276919516,
+        "status": "failed",
+        "stderr": "Traceback (most recent call last):\n  File \"<EXECUTION_PATH>\", line 464, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"<EXECUTION_PATH>\", line 460, in main\n    elif args.command=='author':author_worker(args)\n                                ^^^^^^^^^^^^^^^^^^^\n  File \"<EXECUTION_PATH>\", line 335, in author_worker\n    receipt=runner.prepare_author_weather_anchor(directory/'instance.txt',directory/'author',directory/'scenario.json')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<EXECUTION_PATH>\", line 208, in prepare_author_weather_anchor\n    raise ValueError(f\"author solution is weather-infeasible: {uncapped['issues']}\")\nValueError: author solution is weather-infeasible: ['battery:0:0:0']\n",
+        "stdout": ""
+      },
+      "geometry_sha256": "9179e8427cc9a5409a1d5677fc80527bf602752d0190bfe1aab8043cd2f40639",
+      "id": "TRAIN_3",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_3",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "9c40c6e1aff4fed80eb2590135b4534f436abd95e5b3fa755cb75553f0831bce",
+      "reason": "author_worker_failed_or_late",
+      "split": "TRAIN",
+      "status": "anchor_failed"
+    },
+    {
+      "artifact_hashes": {
+        "author/RUN.json": "128e1e696f31582ad58803a3de49b552b60579c22daaf2f301818343376023c7",
+        "author/solution.json": "f8c0d34d96a33bf6e5b2c13f1cefee10632b429ba809ad0055d3135c7cc791ac",
+        "instance.txt": "ea935829e7c783117b171ad674e351ed08999880971449af1f683229c8e2c57a",
+        "scenario.json": "2c77e8c563b1ce63bec323b79dbc964f2da2b03d65ca0b7d7b412a1b99744aef",
+        "weather_anchor.json": "aa6fe6fab1750de9f3a5ddce0f68acb336da43a607ca1ca20bcaad8de10afe51"
+      },
+      "author_process": {
+        "deadline_abs": 2877474.389303887,
+        "ended_abs": 2877294.915765103,
+        "error": null,
+        "exit_code": 0,
+        "hard_killed": false,
+        "raw": {
+          "artifact_hashes": {
+            "author/RUN.json": "128e1e696f31582ad58803a3de49b552b60579c22daaf2f301818343376023c7",
+            "author/solution.json": "f8c0d34d96a33bf6e5b2c13f1cefee10632b429ba809ad0055d3135c7cc791ac",
+            "instance.txt": "ea935829e7c783117b171ad674e351ed08999880971449af1f683229c8e2c57a",
+            "scenario.json": "2c77e8c563b1ce63bec323b79dbc964f2da2b03d65ca0b7d7b412a1b99744aef",
+            "weather_anchor.json": "aa6fe6fab1750de9f3a5ddce0f68acb336da43a607ca1ca20bcaad8de10afe51"
+          },
+          "author_seed": 3208087635824869580,
+          "directory": "<EXECUTION_PATH>",
+          "status": "eligible"
+        },
+        "stage_wall_s": 5.526458926033229,
+        "started_abs": 2877289.389306177,
+        "status": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"eligible\", \"directory\": \"<EXECUTION_PATH>\", \"artifact_hashes\": {\"instance.txt\": \"ea935829e7c783117b171ad674e351ed08999880971449af1f683229c8e2c57a\", \"scenario.json\": \"2c77e8c563b1ce63bec323b79dbc964f2da2b03d65ca0b7d7b412a1b99744aef\", \"weather_anchor.json\": \"aa6fe6fab1750de9f3a5ddce0f68acb336da43a607ca1ca20bcaad8de10afe51\", \"author/solution.json\": \"f8c0d34d96a33bf6e5b2c13f1cefee10632b429ba809ad0055d3135c7cc791ac\", \"author/RUN.json\": \"128e1e696f31582ad58803a3de49b552b60579c22daaf2f301818343376023c7\"}, \"author_seed\": 3208087635824869580}\n"
+      },
+      "author_seed": 3208087635824869580,
+      "directory": "<EXECUTION_PATH>",
+      "geometry_sha256": "65ede185ee413dbd2efa4502406571a88c88ed91e449fd0568e9276c2fe011f0",
+      "id": "TRAIN_4",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_4",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "ea935829e7c783117b171ad674e351ed08999880971449af1f683229c8e2c57a",
+      "reason": null,
+      "split": "TRAIN",
+      "status": "eligible"
+    },
+    {
+      "artifact_hashes": {
+        "author/RUN.json": "c78db33e6c07cf24f093224f3f3dfa6f4be94e3a8541e24c618068536ecf58bd",
+        "author/solution.json": "40f1a5625d09273c6a4d484d9a4314ff1c4279ecb789730febcd30c69aa03e1d",
+        "instance.txt": "c0ddc7c71669382f42e966b721ef1a610517d923cc3c77885c4f75a9a7a90b6d",
+        "scenario.json": "59b2258007ce022e4783b3e8dbe0f9b4a0c2a41c4a2a5a91c928314a3c8e470f",
+        "weather_anchor.json": "b281af54e958b42a436d71fca494ae3dfa2b6ac3ed513d4635ea92ed4ab255b2"
+      },
+      "author_process": {
+        "deadline_abs": 2877479.916576094,
+        "ended_abs": 2877300.280116863,
+        "error": null,
+        "exit_code": 0,
+        "hard_killed": false,
+        "raw": {
+          "artifact_hashes": {
+            "author/RUN.json": "c78db33e6c07cf24f093224f3f3dfa6f4be94e3a8541e24c618068536ecf58bd",
+            "author/solution.json": "40f1a5625d09273c6a4d484d9a4314ff1c4279ecb789730febcd30c69aa03e1d",
+            "instance.txt": "c0ddc7c71669382f42e966b721ef1a610517d923cc3c77885c4f75a9a7a90b6d",
+            "scenario.json": "59b2258007ce022e4783b3e8dbe0f9b4a0c2a41c4a2a5a91c928314a3c8e470f",
+            "weather_anchor.json": "b281af54e958b42a436d71fca494ae3dfa2b6ac3ed513d4635ea92ed4ab255b2"
+          },
+          "author_seed": 5867136966166737283,
+          "directory": "<EXECUTION_PATH>",
+          "status": "eligible"
+        },
+        "stage_wall_s": 5.3635385991074145,
+        "started_abs": 2877294.916578264,
+        "status": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"eligible\", \"directory\": \"<EXECUTION_PATH>\", \"artifact_hashes\": {\"instance.txt\": \"c0ddc7c71669382f42e966b721ef1a610517d923cc3c77885c4f75a9a7a90b6d\", \"scenario.json\": \"59b2258007ce022e4783b3e8dbe0f9b4a0c2a41c4a2a5a91c928314a3c8e470f\", \"weather_anchor.json\": \"b281af54e958b42a436d71fca494ae3dfa2b6ac3ed513d4635ea92ed4ab255b2\", \"author/solution.json\": \"40f1a5625d09273c6a4d484d9a4314ff1c4279ecb789730febcd30c69aa03e1d\", \"author/RUN.json\": \"c78db33e6c07cf24f093224f3f3dfa6f4be94e3a8541e24c618068536ecf58bd\"}, \"author_seed\": 5867136966166737283}\n"
+      },
+      "author_seed": 5867136966166737283,
+      "directory": "<EXECUTION_PATH>",
+      "geometry_sha256": "811a491a6eec19b6ffce05279f44bc6437d58b7c3f556e9dc8194d33f7b42bce",
+      "id": "TRAIN_5",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_5",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "c0ddc7c71669382f42e966b721ef1a610517d923cc3c77885c4f75a9a7a90b6d",
+      "reason": null,
+      "split": "TRAIN",
+      "status": "eligible"
+    },
+    {
+      "artifact_hashes": {
+        "author/RUN.json": "f527aa7fd9c25d84735e6f1e820ce358c77c02d259f4e26fd0eea1ae1b03a12a",
+        "author/solution.json": "c3415779ee7b9cc1f60f5009295450d78912d2f5ef2efa1e38c7b105906bfb5c",
+        "instance.txt": "6c67e1796adb7f339c84f533360efa96ba8bc5feb4f8003b97a0a785a3f81e75",
+        "scenario.json": "c9e7e6b7adaddee0761675cd3c38d4b75a0d939f46eef5ee5cc0046480d8c8d0",
+        "weather_anchor.json": "cb711caf73fffa9172166f5060d6eea03790d3d40b6b84e2ad3e982fb739d567"
+      },
+      "author_process": {
+        "deadline_abs": 2877485.281062471,
+        "ended_abs": 2877305.296402985,
+        "error": null,
+        "exit_code": 0,
+        "hard_killed": false,
+        "raw": {
+          "artifact_hashes": {
+            "author/RUN.json": "f527aa7fd9c25d84735e6f1e820ce358c77c02d259f4e26fd0eea1ae1b03a12a",
+            "author/solution.json": "c3415779ee7b9cc1f60f5009295450d78912d2f5ef2efa1e38c7b105906bfb5c",
+            "instance.txt": "6c67e1796adb7f339c84f533360efa96ba8bc5feb4f8003b97a0a785a3f81e75",
+            "scenario.json": "c9e7e6b7adaddee0761675cd3c38d4b75a0d939f46eef5ee5cc0046480d8c8d0",
+            "weather_anchor.json": "cb711caf73fffa9172166f5060d6eea03790d3d40b6b84e2ad3e982fb739d567"
+          },
+          "author_seed": 8709423513222594460,
+          "directory": "<EXECUTION_PATH>",
+          "status": "eligible"
+        },
+        "stage_wall_s": 5.015337943099439,
+        "started_abs": 2877300.281065042,
+        "status": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"eligible\", \"directory\": \"<EXECUTION_PATH>\", \"artifact_hashes\": {\"instance.txt\": \"6c67e1796adb7f339c84f533360efa96ba8bc5feb4f8003b97a0a785a3f81e75\", \"scenario.json\": \"c9e7e6b7adaddee0761675cd3c38d4b75a0d939f46eef5ee5cc0046480d8c8d0\", \"weather_anchor.json\": \"cb711caf73fffa9172166f5060d6eea03790d3d40b6b84e2ad3e982fb739d567\", \"author/solution.json\": \"c3415779ee7b9cc1f60f5009295450d78912d2f5ef2efa1e38c7b105906bfb5c\", \"author/RUN.json\": \"f527aa7fd9c25d84735e6f1e820ce358c77c02d259f4e26fd0eea1ae1b03a12a\"}, \"author_seed\": 8709423513222594460}\n"
+      },
+      "author_seed": 8709423513222594460,
+      "directory": "<EXECUTION_PATH>",
+      "geometry_sha256": "9f4bdc44037df5f811b3723c35ed260b8a65f134b33779ffbfa45cb907369a5b",
+      "id": "TRAIN_6",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:TRAIN_6",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "raw_sha256": "6c67e1796adb7f339c84f533360efa96ba8bc5feb4f8003b97a0a785a3f81e75",
+      "reason": null,
+      "split": "TRAIN",
+      "status": "eligible"
+    },
+    {
+      "author_process": {
+        "deadline_abs": 2877490.297424425,
+        "ended_abs": 2877311.150117261,
+        "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "exit_code": 1,
+        "hard_killed": false,
+        "raw": null,
+        "stage_wall_s": 5.852688308805227,
+        "started_abs": 2877305.297428952,
+        "status": "failed",
+        "stderr": "Traceback (most recent call last):\n  File \"<EXECUTION_PATH>\", line 464, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"<EXECUTION_PATH>\", line 460, in main\n    elif args.command=='author':author_worker(args)\n                                ^^^^^^^^^^^^^^^^^^^\n  File \"<EXECUTION_PATH>\", line 335, in author_worker\n    receipt=runner.prepare_author_weather_anchor(directory/'instance.txt',directory/'author',directory/'scenario.json')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<EXECUTION_PATH>\", line 208, in prepare_author_weather_anchor\n    raise ValueError(f\"author solution is weather-infeasible: {uncapped['issues']}\")\nValueError: author solution is weather-infeasible: ['battery:0:1:0']\n",
+        "stdout": ""
+      },
+      "geometry_sha256": "ef02e2ae2987bb90c8d37d5555fe93ce1bd322dba781f1fb117e0c9d0e6999ff",
+      "id": "VAL_1",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:VAL_1",
+      "ordinal": 1,
+      "partition": "validation",
+      "raw_sha256": "9fbb70ec8cfee797418f9fee915143f02838ad388ce54f8a541fa8b583956bbc",
+      "reason": "author_worker_failed_or_late",
+      "split": "VAL",
+      "status": "anchor_failed"
+    },
+    {
+      "author_process": {
+        "deadline_abs": 2877496.151045761,
+        "ended_abs": 2877314.643117875,
+        "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "exit_code": 1,
+        "hard_killed": false,
+        "raw": null,
+        "stage_wall_s": 3.492069703992456,
+        "started_abs": 2877311.151048171,
+        "status": "failed",
+        "stderr": "Traceback (most recent call last):\n  File \"<EXECUTION_PATH>\", line 464, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"<EXECUTION_PATH>\", line 460, in main\n    elif args.command=='author':author_worker(args)\n                                ^^^^^^^^^^^^^^^^^^^\n  File \"<EXECUTION_PATH>\", line 334, in author_worker\n    if not result['anchor_eligible']:raise ValueError('author anchor ineligible')\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: author anchor ineligible\n",
+        "stdout": ""
+      },
+      "geometry_sha256": "4e001af44bf621ad5baad0d3dae529b5a3847903480641b21caf2eab1cd1b762",
+      "id": "VAL_2",
+      "namespace": "<COMPUTE_HOST>-ordinary-route-ppo-attribution-20261104-v1:VAL_2",
+      "ordinal": 1,
+      "partition": "validation",
+      "raw_sha256": "4912f078a1b654b323be83e8715c7b0ca8a02f05050b737c9c8163eab70c00e6",
+      "reason": "author_worker_failed_or_late",
+      "split": "VAL",
+      "status": "anchor_failed"
+    }
+  ]
+}

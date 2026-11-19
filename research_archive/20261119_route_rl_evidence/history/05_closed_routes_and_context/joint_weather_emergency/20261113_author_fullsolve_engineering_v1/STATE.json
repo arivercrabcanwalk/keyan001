@@ -1,0 +1,37 @@
+{
+  "Formal": 0,
+  "G0": "NO_QUALIFIED_DISTINCT_MECHANISM",
+  "G3": "UNPASSED",
+  "G4": "NO_NEW_TRAINING",
+  "G5_G8": "INCOMPLETE",
+  "checkpoints": 0,
+  "engineering_qualified_including_repeats": 4,
+  "execution_host": "<COMPUTE_HOST>",
+  "full_main_actual_returns": 5,
+  "full_main_invocations": 11,
+  "l2o_candidate": "CLOSED_AS_STANDARD_COMBINATION",
+  "next": "../20261113_author_single_station_fix_v1/INTENT.md",
+  "per_profile_qualified": {
+    "original_j1b": 1,
+    "wind_adapted_j1b": 1
+  },
+  "preserved_quotas": {
+    "actual_comparisons": 126,
+    "calibration": 24,
+    "calibration_limit": 24,
+    "new_identities": 40
+  },
+  "registered_full_main_cases_per_profile": 3,
+  "root_only": true,
+  "scientific_maps": 0,
+  "status": "FULL_MAIN_ENGINEERING_COMPLETE_WITH_RETAINED_FAILURES",
+  "summary": {
+    "child_cpu_s": 63.357717,
+    "failed_phases": 1,
+    "phase_count": 7,
+    "remaining_phases": 0,
+    "remaining_repair": 0,
+    "wall_s_sum": 55.93208731338382
+  },
+  "training": 0
+}

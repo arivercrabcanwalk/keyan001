@@ -1,0 +1,52 @@
+[
+  {
+    "stage": "BASELINE",
+    "command": "python3 CHECK.py BASELINE ORIGINALS",
+    "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "input": "ORIGINALS+frozen source hashes+metadata",
+    "stdin": "none",
+    "stdout": "PASS_DOCUMENT_INTEGRITY status=RESERVE_V5_STATIC_HOLD verified_metadata=2\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "stage": "MODIFIED",
+    "command": "python3 CHECK.py MODIFIED MODIFIED_FILE",
+    "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "input": "modified or rollback document bundle + same fixed evidence",
+    "stdin": "none",
+    "stdout": "PASS_DOCUMENT_INTEGRITY status=JOINT_EVENT_G0_NO_GO verified_metadata=2\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "stage": "ROLLBACK",
+    "command": "./ROLLBACK.sh ROLLBACK_COPY",
+    "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "input": "modified or rollback document bundle + same fixed evidence",
+    "stdin": "none",
+    "stdout": "restored=ROLLBACK_COPY status=RESERVE_V5_STATIC_HOLD bytes=MATCH\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "stage": "RESTORED",
+    "command": "python3 CHECK.py BASELINE ROLLBACK_COPY",
+    "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "input": "modified or rollback document bundle + same fixed evidence",
+    "stdin": "none",
+    "stdout": "PASS_DOCUMENT_INTEGRITY status=RESERVE_V5_STATIC_HOLD verified_metadata=2\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  {
+    "stage": "MAIN_MODIFIED_RETAINED",
+    "command": "python3 CHECK.py MODIFIED MODIFIED_FILE",
+    "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "input": "modified or rollback document bundle + same fixed evidence",
+    "stdin": "none",
+    "stdout": "PASS_DOCUMENT_INTEGRITY status=JOINT_EVENT_G0_NO_GO verified_metadata=2\n",
+    "stderr": "",
+    "exit_status": 0
+  }
+]

@@ -1,0 +1,1214 @@
+Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems
+Report GitHub Issue
+×
+Title:
+Content selection saved. Describe the issue below:
+Description:
+Submit without GitHub
+Submit in GitHub
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+Why HTML?
+Report Issue
+Back to Abstract
+Download PDF
+Abstract
+1 Introduction
+Integration of Hypergraph Learning into Routing Problems
+Dual-Pointer Attention-Based Decoder with Route Recording
+Extensive Experimental Validation
+2 Related Works
+2.1 Non-graph Neural Heuristic
+2.2 Graph-Based Neural Heuristic
+2.3 Hypergraph Learning
+3 Preliminaries
+3.1 Problem Formulation
+Pairwise Graph Definition
+Hypergraph Definition
+3.2 Reinforcement Learning
+State
+Action
+Reward
+4 Methodology
+4.1 Graph Feature Augmentation
+4.2 Encoder with Hypergraph Learning
+4.2.1 Selection of Hyperedge Nodes
+Learning to Reconstruct Hyperedge Nodes
+4.2.2 MHA Node Representation Learning
+Hyperedge Embedding Generation
+MHA Node Embedding Update
+4.3 Dual-Pointer Decoder
+4.3.1 Context Embedding
+4.3.2 Dual Probability Calculation
+4.4 REINFORCE Self-Critic Training
+4.4.1 REINFORCE with Greedy Baseline Rollout
+4.4.2 Self-Critic Training
+4.5 Complexity Analysis
+5 Experiment
+5.1 Experiment Setup
+Datasets and Parameters
+Baseline Models
+5.2 Experiment Results and Analysis
+5.2.1 Model Performance
+5.2.2 Ablation Study
+5.2.3 Sensitivity Analysis
+6 Conclusion
+References
+License: CC BY 4.0
+arXiv:2503.10421v2 [cs.LG] 03 Sep 2026
+Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems
+Journal: Neural Networks
+Zhenwei Wang
+Email: <EMAIL_REMOVED>
+Affiliation: University of Nottingham Ningbo China, 199 East Taikang Road, Ningbo, 315100, Zhejiang, China
+Tiehua Zhang
+Email: <EMAIL_REMOVED>
+Affiliation: Tongji University, 1239,Siping Road, Shanghai, 200092, Shanghai, China
+Affiliation: State Key Laboratory for Novel Software Technology, Nanjing University, 163,Xianlin Road, Nanjing, 210023, Jiangsu, China
+Jing Liu
+Email: <EMAIL_REMOVED>
+Affiliation: University of Nottingham Ningbo China, 199 East Taikang Road, Ningbo, 315100, Zhejiang, China
+Heng Yu
+Email: <EMAIL_REMOVED>
+Affiliation: University of Nottingham Ningbo China, 199 East Taikang Road, Ningbo, 315100, Zhejiang, China
+Kaizhu Huang
+Email: <EMAIL_REMOVED>
+Affiliation: Duke Kunshan University, 8,Duke Road, Suzhou, 215316, Jiangsu, China
+Ruibin Bai
+Email: <EMAIL_REMOVED>
+Affiliation: University of Nottingham Ningbo China, 199 East Taikang Road, Ningbo, 315100, Zhejiang, China
+Corresponding author: corresponding author
+Abstract
+The application of learning-based methods, particularly neural network based methods, to Vehicle Routing Problems (VRP) has emerged as a pivotal area of research within combinatorial optimization. VRPs are characterized by expansive solution spaces and complex constraints, often compounded by uncertainties, which render traditional approaches, such as exact mathematical models or heuristic methods, prone to substantial computational overhead. Although some recent learning-based methods have demonstrated good performance for VRPs with straightforward constraint scenarios, they often struggle to effectively handle the complex, hard constraints commonly encountered in practice. As the first work to incorporate hypergraph learning into routing
+problems, this study introduces an end-to-end framework that integrates constraint-oriented hypergraph neural networks with reinforcement learning to address these challenges in vehicle routing problems. The central motivation is that routing constraints, such as capacity limits and time-window penalties, are naturally imposed on groups of nodes and partial routes rather than on isolated pairwise edges. Therefore, a representation mechanism capable of preserving such high-order constraint semantics is needed. A key innovation of this work lies in the development of a constraint-oriented dynamic hyperedge reconstruction strategy within the designated encoder, which substantially enhances hypergraph representation learning. Additionally, the decoder leverages a double-pointer attention mechanism to iteratively generate solutions. The proposed model is trained using asynchronous parameter updates guided by hypergraph constraints and optimized through a dual loss function that includes both constraint loss and policy gradient loss. Experimental results on benchmark datasets demonstrate that this approach not only eliminates the need for complex heuristic operators but also achieves state-of-the-art (SOTA) solution quality.
+Keywords:
+Vehicle Routing Problems , Hypergraph Learning , Reinforcement Learning , Combinatorial Optimization
+††highlights: To the best of our knowledge, this is the first application of hypergraph learning to vehicle routing problems for capturing higher-order node representations.
+We develop an end-to-end hypergraph network with adaptive hyperedge construction that dynamically incorporates route constraints into the hyperedge set, enabling constraint-aware hypergraph representation learning within the encoder.
+We propose a dual-pointer decoder that integrates global and local attention to balance exploration and exploitation during stepwise decision-making.
+1 Introduction
+The Vehicle Routing Problem (VRP) is a fundamental combinatorial optimization problem characterized by its inherent graph structure. It has garnered extensive research attention across logistics, operations research, and transportation. Due to its formulation as a discrete combinatorial decision problem, VRP is prone to combinatorial explosion when addressing large-scale instances, firmly establishing its status as a well-known NP-hard problem.
+There are two primary approaches to solving such problems: exact and approximate methods [1]. Exact methods, such as linear programming and integer programming, leverage mathematical modeling to identify optimal solutions [47]. However, due to the vastness of the solution space, these methods often become computationally intractable, especially for large-scale problems, as obtaining an optimal solution within a practical timeframe may be infeasible. To overcome this limitation, approximate methods are widely employed; common heuristics include local and neighborhood search [10], genetic algorithms [51], and genetic programming [11]. These approaches start from a feasible solution and iteratively improve it via carefully designed operators to obtain near-optimal results. A major drawback, however, is their reliance on perfectly estimated problem parameters, often inducing over-optimization and poor robustness under uncertainties.
+Recent advancements in artificial intelligence have renewed interest in machine learning-based approaches, offering robust and efficient approximation capabilities for combinatorial optimization. One line of work treats the VRP as a sequence-to-sequence decision problem, i.e., a constructive heuristic [32]. Inspired by natural language processing, these methods [36, 28, 29, 46, 55, 48] adopt pointer networks [44] and attention mechanisms [42] to generate solutions in an auto-regressive manner. Given the challenges associated with obtaining high-quality labeled solutions, unsupervised learning techniques, particularly Reinforcement Learning (RL), are frequently employed to train models on a large number of problem instances. By learning the underlying data distribution and node relationships, these approaches iteratively produce solutions that adhere to the required constraints. This end-to-end framework alleviates the need for extensive labeled datasets required in supervised learning, allowing the model to efficiently infer near-optimal solutions without relying on domain experts to design complex heuristic operators. Moreover, robustness, stability, delay effects, and synchronization have been extensively studied in competitive and memristive neural networks [9, 39]. These studies address control and synchronization issues and highlight the continuing importance of robust neural computation under dynamic constraints.
+In contrast, alternative learning-based approaches, known as improvement heuristics, focus on optimizing feasible solutions rather than constructing them directly. They utilize machine learning to refine initial solutions, often augmented with perturbations such as 2-opt, 3-opt, or guided local search, to learn and improve the solution optimization process [12]. Such an iterative improvement framework enables these methods to effectively balance exploration and exploitation, further enhancing solution quality.
+Regardless of whether a constructive or improvement approach is used, Graph Neural Networks (GNNs) have become increasingly popular due to the inherently graphical nature of the VRPs. However, most prior studies  [26, 35, 24, 38, 30, 45] have primarily relied on pairwise-based GNNs, such as Random Walk Message Passing  [40], Graph Convolutional Networks (GCN)  [18], and Graph Attention Networks (GAT)  [43], for node representation learning. A significant challenge in addressing the VRP lies in its limited feature space, which restricts the expressiveness and effectiveness of node representations. Additionally, routing-specific constraints are often underutilized during graph learning, creating performance bottlenecks. Moreover, these methods struggle to effectively capture high-order and sequential information. In step-by-step constructive approaches, where nodes are incrementally selected to form partial solutions, depending solely on low-order neighbor information can adversely affect the selection of subsequent nodes. This short-sightedness increases the risk of the overall solution becoming trapped in a local optimum, thereby limiting the quality of the final result. More importantly, capacity, time-window, route-duration, and precedence constraints are not determined by a single edge or by an isolated pair of customers. They are induced by a set of customers and by the partial route state accumulated before the current decision. Pairwise dense attention can connect all node pairs, but such connections do not preserve the identity of the constraint group; stacking more pairwise layers may also blur node representations and aggravate over-smoothing in deep message passing [8]. These limitations motivate a representation mechanism that treats constraint-induced customer groups as first-class structural objects rather than decomposing them into independent pairwise messages. Addressing these issues calls for the development of advanced methods capable of effectively utilizing problem-specific constraints and incorporating richer structural and sequential information into the learning process.
+This paper proposes a novel end-to-end hypergraph learning framework for addressing the constraints in VRPs and their variants. The method enriches node representations by learning not only from low-order neighborhoods but also by dynamically integrating problem-specific constraint information into the hypergraph. Concretely, we construct constraint-oriented hyperedges to capture high-order neighbor relationships, which are then used to augment pairwise node representations. During solution generation, a multi-head attention mechanism iteratively produces approximate optimal solutions. The framework is trained with RL, enabling effective handling of multiple VRP constraints while achieving competitive performance. The novelty is therefore twofold. First, the encoder represents constraint-induced group relations through adaptive hyperedges instead of relying only on pairwise graph edges. Second, RL supplies route-level feedback to train the decoder without requiring optimal labels, while the hypergraph reconstruction loss guides the encoder toward constraint-aware representations. In this sense, reinforcement learning is the decision optimization mechanism, whereas hypergraph learning is the representation mechanism; their combination makes the framework both decision-aware and constraint-aware.
+Key innovations of this work are summarized as follows:
+Integration of Hypergraph Learning into Routing Problems
+To the best of our knowledge, this is the first work to incorporate hypergraph learning into routing problems. A novel constraint-oriented dynamic hyperedge construction encoder is introduced, enabling the model to effectively capture high-order node relationships while satisfying problem-specific constraints.
+Dual-Pointer Attention-Based Decoder with Route Recording
+We propose a dual-pointer decoder, leveraging an attention mechanism that combines partial solution features and local node features. This design supports the auto-regressive generation of solutions while dynamically updating the hypergraph encoder using a reinforcement learning policy gradient, which ensures continuous improvement of the solution quality.
+Extensive Experimental Validation
+We have conducted extensive experiments to validate the effectiveness of our proposed model. The experimental results demonstrate that the hypergraph learning framework introduced in this paper achieves a leading level of performance improvement in VRP and its variants up to 7.38%.
+2 Related Works
+This section provides an overview of learning-based methods for solving routing problems, categorized into graph-based and non-graph-based neural heuristics. Furthermore, as this work marks the first introduction of hypergraphs into routing optimization, advanced hypergraph-based methods will also be discussed.
+2.1 Non-graph Neural Heuristic
+The autoregressive solution generation approach was first introduced by [44], which proposed the Pointer Network (PtrNet). PtrNet utilized a long short-term memory network (LSTM) to encode node information and decode an output sequence, effectively addressing the challenge of mapping sequences with unequal lengths. However, its initial implementation relied on supervised learning, requiring large datasets with labeled optimal solutions. To address this limitation, Bello et al. [2] extended PtrNet by adopting reinforcement learning, using node distances as rewards and training the model with policy gradient techniques, achieving impressive results. Nazari et al. [36] further enhanced PtrNet by integrating LSTM with dot-product attention and applying reinforcement learning to tackle combinatorial optimization problems. Their approach outperformed Google’s open-source solver, OR-Tools [15], on the VRP. Inspired by the transformer architecture, Kool et al. [28] introduced the attention-based encoder-decoder model AM, which recalculates node representations via attention in the encoding phase and outputs probability distributions over decision nodes in the decoding phase. Sampling from these distributions constructs the final solution. AM has since become a milestone in solving routing problems for non-graph structures.
+Subsequent works have refined AM to improve performance, scalability, and generalization. For example, POMO [29] introduced feature transformations and multiple initial nodes to achieve near-optimal solutions for the Traveling Salesman Problem (TSP) and VRP. Bi et al. [6] pre-trained AM using knowledge distillation to handle routing problems across data distributions and applied Lagrange relaxation to solve VRPs with temporal constraints, such as the Traveling Salesman Problem with Time Windows (TSPTW) [7]. PointerFormer [23] and Tspformer [48] extend the Transformer by, respectively, employing multiple attention-based decoders and sampled scaled dot-product attention to tackle large-scale TSP instances. Gao et al. [13] enhanced AM’s generalization by integrating local and global strategies, while Lin et al. [31] improved its performance through pre-training and fine-tuning fully connected network parameters.
+Additionally, hybrid approaches have combined learning-based methods with local search techniques. For instance, strategies like 2-opt are used to perturb feasible solutions, while heuristic operators are learned to further optimize them. These advancements have significantly improved the efficiency, scalability, and generalization of learning-based methods for routing problems.
+More recently, the field has moved beyond single-task synthetic benchmarks toward broader generalization. Omni-VRP studies fast adaptation across problem sizes and distributions through a meta-learning framework [53]. RouteFinder formulates multiple VRP variants as attribute combinations in a unified environment and investigates foundation-model-style pretraining for routing [4]. RL4CO provides a modular benchmark and implementation framework for reproducible RL-based combinatorial optimization research [3]. Heavy-decoder methods such as LEHD shift computational effort from a static encoder to a dynamic decoder and show strong cross-size generalization on TSP and CVRP [34]. The light-decoder method further analyzes how decoder context and multi-expert routing policies affect VRP generalization under different constraint regimes [20]. For complex constraints, Bi et al. [7] propose proactive infeasibility prevention, showing that local feasibility masks may be insufficient when future infeasibility is induced by the current action. The more recent CaR framework explicitly studies construct-and-refine constraint handling, indicating that representation sharing and feasibility refinement are becoming central issues for neural routing solvers [5]. Scale-Net further studies cross-scale and multi-task routing through a hierarchical U-Net structure [33], while EvoReal addresses the gap between synthetic and real routing distributions through LLM-guided instance generation and progressive adaptation [54]. These studies clarify the current state of the art: neural routing is progressing toward unified, scalable, constraint-aware, and distribution-robust solvers. In contrast, the present paper focuses on a complementary direction: introducing hypergraph learning to explicitly encode high-order constraint relations within the routing representation itself.
+2.2 Graph-Based Neural Heuristic
+While prior works have explored sequence-to-sequence methods for solving routing problems, they largely overlook the underlying topological structure of these problems. To address this limitation, GNN-based approaches have gained prominence. Khalil et al. [26] employed struct2vec to represent routing problems as graphs and trained the model using a deep Q-network. Joshi et al. [24] proposed a non-autoregressive framework for the Traveling Salesman Problem (TSP), leveraging stacked GCN layers to generate an edge adjacency probability matrix. This matrix was visualized as a heat map, and solutions were extracted via beam search. Ma et al. [35] introduced a hierarchical graph pointer network with a graph embedding layer to capture node relationships. Their reinforcement learning-based approach employed layer-specific reward functions to stabilize training and improve generalization for the TSP. Similarly, Senuma et al. [38] used GCN to extract node and edge features, which were integrated with a pointer network to construct a policy model. By minimizing total edge costs through reinforcement learning, they proposed a re-planning strategy to optimize paths. Lei et al. [30] further advanced GNN-based methods by utilizing GAT for graph representation learning, incorporating edge features into the encoder outputs. Their end-to-end framework, trained via reinforcement learning with policy gradients, achieved high-quality solutions for both TSP and VRP. Wang et al. [45] improved graph representation by designing a graph attention encoder that filtered globally low-correlation nodes via sampling, thereby enhancing node-level representations.
+Despite these advancements, most GNN-based approaches focus on pairwise relationships between nodes and edges, neglecting higher-order interactions within graph-structured data. This limitation is particularly pronounced in vehicle routing problems, where constraints such as vehicle capacity often involve group interactions among nodes rather than simple pairwise relationships. For example, fulfilling capacity constraints may require coordination among multiple nodes, including those without direct connections. Thus, methods relying solely on pairwise relationships may struggle to address the complexity of routing problems with diverse constraints. This observation is consistent with the broader graph-learning literature: pairwise GNNs are effective for local relational propagation, but deeper propagation can make node embeddings less distinguishable, especially when all customers repeatedly exchange similar messages in dense routing graphs [8]. A hyperedge offers a different inductive bias because the aggregation unit is a constraint-related node set rather than a single pairwise edge.
+2.3 Hypergraph Learning
+Hypergraph learning extends traditional graph learning by modeling high-order correlations among data through hyperedges that connect multiple nodes, enabling the representation of complex structures in high-dimensional and nonlinear spaces [50]. Several notable studies have advanced this field. Guo et al. [16] employed hypergraphs to model group similarity in recommendation systems, framing group preference learning as an inductive hyperedge embedding task. Their approach connects all groups as a hypergraph to achieve accurate group representations. Gao et al. [14] proposed HGNN+, a general framework for hypergraph neural networks that captures high-order relationships by linking multimodal and multi-type data through hyperedges and hyperedge groups, effectively modeling intricate data dependencies. Jiang et al. [22] introduced the dynamic hypergraph neural network (DHGNN) framework, which consists of two key components: dynamic hypergraph construction (DHG) and hypergraph convolution (HGC). The DHG module uses k-NN to generate initial hyperedges and extends them with k-means clustering, capturing both local and global relationships. The HGC component encodes high-order data correlations within the hypergraph structure, enhancing the model’s capacity to represent complex dependencies. The above studies emphasize that compressing high-order events into pairwise edges can discard the semantics of the group itself. For routing, this point is particularly relevant because the feasibility of a partial route is defined by the joint demand, arrival time, and service state of multiple customers.
+Building on these advancements, this paper extends hypergraph-based techniques to address the VRP. In this approach, hyperedges are dynamically constructed according to problem-specific constraints and high-dimensional projections of the nodes. The model is trained using feedback from deep reinforcement learning, enabling it to effectively capture and optimize the high-order relationships inherent in VRP.
+3 Preliminaries
+This section begins by introducing the graph-based modeling approach for the routing problem, including the definition of hyperedges within the hypergraph structure. Subsequently, the problem is abstracted into a Markov Decision Process (MDP) [25] and addressed using the designated reinforcement learning approaches.
+3.1 Problem Formulation
+The VRP can be formulated on a graph \mathcal{G}=(\mathcal{V},\mathcal{A})𝒢=(𝒱,𝒜)\mathcal{G}=(\mathcal{V},\mathcal{A}), where \mathcal{V}𝒱\mathcal{V} is the node set including a depot node (node 0) and a set of customer nodes to be serviced. \mathcal{A}𝒜\mathcal{A} is the set of arcs between nodes. Vehicles depart from the depot, service the demand of each customer node exactly once, and then return to the depot. Each vehicle is subject to a capacity constraint, ensuring that the total demand of the customer nodes it serves does not exceed its maximum capacity. Formally, it is called the Capacitated Vehicle Routing Problem (CVRP). The objective is to determine the shortest route while satisfying all given constraints. The mathematical model of CVRP in set partitioning form can be expressed as follows:
+\min\sum_{r\in\Omega}c_{r}z_{r}min∑r∈Ωcrzr\min\sum_{r\in\Omega}c_{r}z_{r}
+(1)
+subject to
+\sum_{r\in\Omega}z_{r}=|\mathcal{K}|∑r∈Ωzr=|𝒦|\sum_{r\in\Omega}z_{r}=|\mathcal{K}|
+(2)
+\sum_{r\in\Omega}a_{i,r}z_{r}=1,\quad\forall i\in\mathcal{V}\backslash\{0\}∑r∈Ωai,r​zr=1,∀i∈𝒱\{0}\sum_{r\in\Omega}a_{i,r}z_{r}=1,\quad\forall i\in\mathcal{V}\backslash\{0\}
+(3)
+z_{r},a_{i,r}\in\{0,1\},\quad\forall r\in\Omega,\forall i\in\mathcal{V}\backslash\{0\}zr,ai,r∈{0,1},∀r∈Ω,∀i∈𝒱\{0}z_{r},a_{i,r}\in\{0,1\},\quad\forall r\in\Omega,\forall i\in\mathcal{V}\backslash\{0\}
+(4)
+Expression (1) defines the objective function of the CVRP in its set partitioning form. Here, \OmegaΩ\Omega denotes the set of all feasible routes satisfying vehicle capacity constraints, c_{r}crc_{r} represents the cost of route r\in\Omegar∈Ωr\in\Omega, and z_{r}zrz_{r} is a binary decision variable indicating whether route rrr is included in the final solution (z_{r}=1zr=1z_{r}=1) or not (z_{r}=0zr=0z_{r}=0). The objective is to minimize the total cost by selecting a set of feasible routes that collectively form a feasible solution. Constraint (2) restricts the number of selected routes to the number of available vehicles \mathcal{K}𝒦\mathcal{K}. a_{i,r}ai,ra_{i,r} is an indicator that takes a value of 1 if route rrr covers node iii, and 0 otherwise. Constraint (3) ensures that each node iii is visited exactly once across all vehicles, while Constraint (4) enforces the binary nature of the decision variables.
+Pairwise Graph Definition
+Consider a pairwise graph \mathcal{G}=(\mathcal{V},\mathcal{E})𝒢=(𝒱,ℰ)\mathcal{G}=(\mathcal{V},\mathcal{E}), with node set \mathcal{V}=\{v_{0},v_{1},\ldots,v_{n}\}𝒱={v0,v1,…,vn}\mathcal{V}=\{v_{0},v_{1},\ldots,v_{n}\}, where v_{0}v0v_{0} represents the warehouse, while v_{1}v1v_{1} to v_{n}vnv_{n} denote the customer nodes. The edge set \mathcal{E}=\{(v_{i},v_{j})\mid v_{i},v_{j}\in\mathcal{V},i\neq j\}ℰ={(vi,vj)∣vi,vj∈𝒱,i≠j}\mathcal{E}=\{(v_{i},v_{j})\mid v_{i},v_{j}\in\mathcal{V},i\neq j\} represents the connections between nodes, indicating the potential paths that vehicles may travel.
+Hypergraph Definition
+Given a hypergraph \mathcal{\hat{G}}=(\mathcal{V},\mathcal{\hat{E}})𝒢^=(𝒱,ℰ^)\mathcal{\hat{G}}=(\mathcal{V},\mathcal{\hat{E}}), where \mathcal{V}=\{v_{0},v_{1},\dots,v_{n}\}𝒱={v0,v1,…,vn}\mathcal{V}=\{v_{0},v_{1},\dots,v_{n}\} is the node set and \mathcal{\hat{E}}=\{e_{1},\dots,e_{m}\}ℰ^={e1,…,em}\mathcal{\hat{E}}=\{e_{1},\dots,e_{m}\} is the hyperedge set, each hyperedge e_{k}\in\mathcal{\hat{E}}ek∈ℰ^e_{k}\in\mathcal{\hat{E}} is defined as a subset of nodes, e_{k}=\{v|v\in\mathcal{V}\},|e_{k}|=\Deltaek={v|v∈𝒱},|ek|=Δe_{k}=\{v|v\in\mathcal{V}\},|e_{k}|=\Delta. The degree of a hyperedge, \DeltaΔ\Delta, represents the number of nodes it contains. Hyperedge formation exhibits strong aggregation properties, grouping highly correlated nodes under heterogeneous constraints. If each hyperedge e_{k}eke_{k} satisfies Constraint (3) and forms subsets of \OmegaΩ\Omega, i.e., e_{k}\subseteq r\in\Omegaek⊆r∈Ωe_{k}\subseteq r\in\Omega, this structure effectively supports the sequential decision-making process. A useful way to understand this advantage is to compare a hyperedge with clique expansion. A hyperedge of degree \DeltaΔ\Delta can be converted into pairwise edges by connecting all node pairs, but this introduces O(\Delta^{2})O⁡(Δ2)O(\Delta^{2}) pairwise relations and no longer explicitly preserves the fact that these nodes belong to the same constraint-induced group. Direct hyperedge aggregation keeps the group identity and allows the encoder to associate the node set with a route-level constraint. This is important for CVRP and CVRPTW, where feasibility depends on the cumulative demand or temporal status of a set of visited and candidate nodes rather than a single pairwise distance.
+3.2 Reinforcement Learning
+This paper formulates the CVRP as a sequential decision-making optimization problem in discrete space. Starting from the initial city layout of a specific problem instance, it incrementally constructs a city arrangement to guide decision-making. This process is modeled as a Markov Decision Process (MDP), where the states, actions, and rewards are defined and processed within the reinforcement learning framework.
+State
+The state of the CVRP consists of two key components: the dynamic state, which includes the current locations of nodes to be visited and the remaining vehicle capacity, and the static state, representing the fixed locations of all nodes. State transitions are determined by the selected node based on the action taken. As each node is selected, the vehicle’s capacity is updated. When the vehicle returns to the depot, its capacity is fully reset.
+Action
+The action corresponds to the decision-making process of selecting the next node. During the decoding stage, the system evaluates the current state and samples a node from the set of accessible nodes, based on a probability distribution generated by the attention mechanism of the decoder network. The conditional probability of selecting a node at step ttt through policy \piπ\pi is denoted as p=(\pi_{t}\mid\pi_{0},\ldots,\pi_{t-1},s_{t})p=(πt∣π0,…,πt−1,st)p=(\pi_{t}\mid\pi_{0},\ldots,\pi_{t-1},s_{t}), where s_{t}sts_{t} is the state of the current step. With the influence of neural network parameters \thetaθ\theta, the solution probability of an instance \mathcal{G}𝒢\mathcal{G} can be represented as:
+p_{\pi_{\theta}}(\tau|\mathcal{G})=\prod_{t=1}^{|\tau|}p_{\pi_{\theta}}(\tau_{t}\mid\mathcal{G},\tau_{t^{\prime}},\forall t^{\prime}<t)pπθ(τ|𝒢)=∏t=1|τ|pπθ(τt∣𝒢,τt′,∀t′<t)p_{\pi_{\theta}}(\tau|\mathcal{G})=\prod_{t=1}^{|\tau|}p_{\pi_{\theta}}(\tau_{t}\mid\mathcal{G},\tau_{t^{\prime}},\forall t^{\prime}<t)
+(5)
+In this context, \tauτ\tau denotes a trajectory derived from policy \piπ\pi, influenced by the neural network parameters \thetaθ\theta.
+Reward
+The objective of CVRP is to determine the shortest path. Meanwhile, in reinforcement learning, the goal is typically to identify a policy that maximizes rewards. To align this with the CVRP, we use the negative value of the route distance obtained for each instance as the reward for the solution generated by the policy. Therefore, the reward for the solution \tauτ\tau can be expressed as follows:
+r(\tau)=-L(\tau)=-\sum_{i=0}^{|\tau|}\left\|\tau_{i}-\tau_{i+1}\right\|_{2}r(τ)=−L(τ)=−∑i=0|τ|‖τi−τi+1‖2r(\tau)=-L(\tau)=-\sum_{i=0}^{|\tau|}\left\|\tau_{i}-\tau_{i+1}\right\|_{2}
+(6)
+Overall, reinforcement learning employs Monte Carlo sampling [52] to estimate rewards for various solutions under a specific policy. It modifies neural network parameters through gradient ascent to maximize rewards, that is, minimize the total route distance.
+4 Methodology
+Figure 1: Encoding Process Based on Adaptive Hypergraph Learning. In module (a), the original node coordinates are enhanced to generate features for the encoder. Module (b) maps nodes through a linear layer to identify hyperedge candidates based on a threshold. In module (c), candidates are validated against constraints, and a loss is computed to optimize node correlation within the hyperedge. Finally, module (d) uses multi-head attention to fuse hyperedge and node representations, averaging the output as the graph representation for the decoder.
+The proposed constraint-oriented hypergraph learning framework provides a comprehensive end-to-end learning solution in an Encoder-Decoder manner. First, the encoder dynamically constructs hyperedges for each node while ensuring compliance with various constraints. A multi-head attention mechanism is then applied to integrate hyperedge representations with original node features, enabling effective graph representation learning. The resulting node representations are subsequently passed as input to the decoder. The decoder operates autoregressively, leveraging a dual attention pointer mechanism that incorporates both the current node and historical nodes as context embeddings to compute local and partial solution attention scores. Finally, nodes are sequentially generated based on the learned probability distributions. The following subsections provide a detailed explanation of the key components of this architecture.
+4.1 Graph Feature Augmentation
+In light of previous works, the features of nodes in routing problems are relatively sparse (usually the coordinates or distances of nodes in Euclidean space), providing limited useful information. To address this issue, we perform data augmentation at the node level. Drawing inspiration from POMO [29], we apply transformations such as rotation, symmetry, and folding to represent diverse spatial states of the same instance. Unlike POMO, however, we do not increase the number of instances. Instead, the augmented results are incorporated as extended features for each node, facilitating the averaging process in the subsequent attention mechanism.
+Table 1: Data Augmentation
+Original Instance
+(x,y)OPENx,y)x,y)
+Augmented Instance
+f(y,x)f⁡(y,x)f(y,x)
+f(1-x,1-y)f⁡(1−x,1−y)f(1-x,1-y)
+f(\rho,\alpha)f⁡(ρ,α)f(\rho,\alpha)
+Operations such as rotation and folding on coordinates are essentially permutations and combinations of the original coordinates (x,y)(x,y)(x,y) and flipped coordinates (1-x,1-y)(1−x,1−y)(1-x,1-y). Instead of generating different forms of the same instance, we integrate these as new features, reducing POMO’s eight coordinate mappings to two owing to the permutation-invariant nature of graph structures. Following the setup in [13], we further incorporate polar coordinates representing the distance and direction of nodes relative to the depot, where \rhoρ\rho is the radial distance and \alphaα\alpha is the angular direction. This introduces directional information between nodes and the depot into the features. Through this data augmentation, we aim to provide the neural network with richer information about symmetry and directionality, enabling it to consider more than just the 2D planar coordinates of nodes during decision-making.
+Additionally, we introduce polar coordinates as enhanced features, encoding both the distance and angle between nodes. These three types of coordinate mapping relationships are shown in Table 1. After applying these mappings to the coordinate values, they are used as new feature dimensions for concatenation. Finally, all augmented features are structured into a graph format, where a graph attention network layer is employed to fuse pairwise node representations effectively. The augmented node embeddings can be calculated as follows:
+\boldsymbol{x}_{i}=\boldsymbol{f}_{aug}(\boldsymbol{v}_{i})||\boldsymbol{f}_{pola}(\boldsymbol{v}_{i})\quad i=0,\ldots,n𝒙i=𝒇a​u​g(𝒗i)||𝒇p​o​l​a(𝒗i)i=0,…,n\boldsymbol{x}_{i}=\boldsymbol{f}_{aug}(\boldsymbol{v}_{i})||\boldsymbol{f}_{pola}(\boldsymbol{v}_{i})\quad i=0,\ldots,n
+(7)
+\boldsymbol{H}_{0}^{enc}=\left\{\begin{array}[]{ll}GAT(BN(FF(\boldsymbol{x}_{i})))&i=0\\
+GAT(BN(FF(\boldsymbol{x}_{i}||\boldsymbol{q}_{i})))&i=1,\ldots,n\\
+\end{array}\right.𝑯0e​n​c={G​A​T​(B​N​(F​F​(𝒙i)))i=0GAT(BN(FF(𝒙i||𝒒i)))i=1,…,n\boldsymbol{H}_{0}^{enc}=\left\{\begin{array}[]{ll}GAT(BN(FF(\boldsymbol{x}_{i})))&i=0\\
+GAT(BN(FF(\boldsymbol{x}_{i}||\boldsymbol{q}_{i})))&i=1,\ldots,n\\
+\end{array}\right.
+(8)
+The two mapping functions in Equation (7) enhance the original node coordinates v_{i}viv_{i} in two ways: \boldsymbol{f}_{aug}(\cdot)𝒇a​u​g​(⋅)\boldsymbol{f}_{aug}(\cdot) applies transformations such as flipping, rotating, and folding to the Euclidean coordinates in two-dimensional space, while \boldsymbol{f}_{pola}(\cdot)𝒇p​o​l​a​(⋅)\boldsymbol{f}_{pola}(\cdot) converts the coordinates into polar form and \cdot||\cdot⋅||⋅\cdot||\cdot denotes concatenation. Equation (8) further captures the pairwise representations of nodes based on the enhanced attributes \boldsymbol{x}_{i}𝒙i\boldsymbol{x}_{i}. It is important to note that depot and service nodes are treated separately: the demand feature of a service node is represented by q_{i}qiq_{i}, whereas the depot v_{0}v0v_{0} has no service demand. Here, FF(\cdot)F​F​(⋅)FF(\cdot) refers to a feedforward neural network layer, BN(\cdot)B​N​(⋅)BN(\cdot) denotes batch normalization [21], and GAT(\cdot)G​A​T​(⋅)GAT(\cdot) represents a graph attention network layer. The use of GATG​A​TGAT encoding allows the model to learn pairwise features prior to hypergraph learning, ensuring that low-order pairwise information is preserved when dynamically constructing hyperedges. The input for hypergraph representation learning in the encoder is denoted as H_{0}^{enc}H0e​n​cH_{0}^{enc}.
+4.2 Encoder with Hypergraph Learning
+The proposed hypergraph learning-based encoder is composed of two key modules: Constraint-oriented Adaptive Hyperedge Reconstruction and Attention-based Node Representation Learning. In the first module, hyperedges are dynamically constructed to adaptively learn the weight coefficients of nodes during training. A filtering process then determines which nodes will compose each hyperedge. In this way, the composition of hyperedges for each node includes highly correlated nodes that are limited by specific constraints. Once the hyperedges are constructed, their features are updated at the node level using a multi-head attention mechanism in the second module. This process integrates the information from hyperedges with the original node representations, ultimately generating the output graph representation and completing the encoding process. The entire encoding procedure is illustrated in Fig. 1. Detailed explanations of these two core modules are provided in the following subsections.
+4.2.1 Selection of Hyperedge Nodes
+As illustrated in Fig. 1(b), a master node \hat{v}_{i}v^i\hat{v}_{i} forms its associated hyperedge node set \hat{e}(\hat{v}_{i})e^​(v^i)\hat{e}(\hat{v}_{i}) by selecting nodes around itself. All nodes, including the master node, are first projected into a high-dimensional space through a linear transformation layer \ThetaΘ\Theta. Feature similarity is then measured via a dot product, and nodes exceeding the threshold \deltaδ\delta are selected as candidates, ensuring strong feature-space correlation within the hyperedge. Additionally, the candidate set \mathcal{S}(\hat{v}_{i})𝒮⁡(v^i)\mathcal{S}(\hat{v}_{i}) must satisfy problem-specific constraints. To handle the complexity of routing problems, heterogeneous hyperedges are constructed for each master node \hat{v}_{i}v^i\hat{v}_{i}, with each hyperedge tailored to a specific constraint Con_{j}C​o​njCon_{j}. This approach ensures that all nodes within a hyperedge adhere to the corresponding constraint. To capture the full problem context, each node takes turns as a master node, enabling the construction of diverse constraint-based hyperedges.
+The selection of the hyperedge node set \hat{e}(\hat{v}_{i}^{Con_{j}})e^​(v^iC​o​nj)\hat{e}(\hat{v}_{i}^{Con_{j}}) based on the master node \hat{v}_{i}v^i\hat{v}_{i} is illustrated in Equations (9) and (10).
+\mathcal{S}(\hat{v}_{i})=\{v|v\in\mathcal{V}\backslash\{\hat{v}_{i}\},\Theta_{\hat{v}_{i}}(v)>\delta\}𝒮(v^i)={v|v∈𝒱\{v^i},Θv^i(v)>δ}\mathcal{S}(\hat{v}_{i})=\{v|v\in\mathcal{V}\backslash\{\hat{v}_{i}\},\Theta_{\hat{v}_{i}}(v)>\delta\}
+(9)
+\hat{e}^{Con_{j}}(\hat{v}_{i})=\{v|v\in\mathcal{\hat{S}}(\hat{v}_{i}),\mathcal{\hat{S}}(\hat{v}_{i})=Con_{j}(\mathcal{S}(\hat{v}_{i}))\}e^C​o​nj(v^i)={v|v∈𝒮^(v^i),𝒮^(v^i)=Conj(𝒮(v^i))}\hat{e}^{Con_{j}}(\hat{v}_{i})=\{v|v\in\mathcal{\hat{S}}(\hat{v}_{i}),\mathcal{\hat{S}}(\hat{v}_{i})=Con_{j}(\mathcal{S}(\hat{v}_{i}))\}
+(10)
+In Equation (9), \ThetaΘ\Theta denotes the weights of the linear layer associated with each instance node, with \hat{v}_{i}v^i\hat{v}_{i} as the master node. The threshold hyperparameter \deltaδ\delta, whose sensitivity is analyzed in the next section, acts as a filtering mechanism. It maps the weights to the master node \hat{v}_{i}v^i\hat{v}_{i} and all other nodes v\in\mathcal{V}\backslash\{\hat{v}_{i}\}v∈𝒱\{v^i}v\in\mathcal{V}\backslash\{\hat{v}_{i}\}, represented as \Theta_{\hat{v}_{i}}(v)Θv^i​(v)\Theta_{\hat{v}_{i}}(v).
+In Equation (10), Con_{j}C​o​njCon_{j} captures the influence of the jjjth constraint on the candidate node set \mathcal{S}(\hat{v}_{i})𝒮⁡(v^i)\mathcal{S}(\hat{v}_{i}). A penalty-based mechanism is applied, allowing nodes that violate constraints to incur penalties rather than being strictly excluded. This soft constraint approach provides flexibility, especially in routing problems where constraints like time or cost penalties are critical. For example, visiting a node that violates a constraint results in a penalty instead of outright exclusion, enabling adaptable solutions for problem variants. Here, we denote \mathcal{\hat{S}}(\hat{v}_{i})𝒮^​(v^i)\mathcal{\hat{S}}(\hat{v}_{i}) as the candidate node set for hyperedges after the application of constraint penalty feedback. This penalty feedback is essentially a mean squared error (MSE) applied to various constraint values, such as capacity limitations. We will provide further clarification on the calculation of the hyperedge constraint loss in subsequent sections.
+For strict constraint conditions, masks are applied in the decoder to enforce compliance. This dual approach enables the effective handling of both soft and hard constraints.
+Ultimately, the various constraint-based hyperedges associated with the master node \hat{v}_{i}v^i\hat{v}_{i} (\forall\hat{v}_{i}\in\mathcal{V}∀v^i∈𝒱\forall\hat{v}_{i}\in\mathcal{V}) can be expressed as:
+\mathcal{\hat{E}}(\hat{v}_{i})=\hat{e}^{Con_{j}}(\hat{v}_{i}),\quad i=\{1,\ldots,n\},\,j=\{1,\ldots,m\}ℰ^​(v^i)=e^C​o​nj​(v^i),i={1,…,n},j={1,…,m}\mathcal{\hat{E}}(\hat{v}_{i})=\hat{e}^{Con_{j}}(\hat{v}_{i}),\quad i=\{1,\ldots,n\},\,j=\{1,\ldots,m\}. This formulation ensures that heterogeneous hyperedges are constructed to address diverse constraint types, enabling the model to adapt to the specific requirements of different routing problem variants.
+The above formulation also provides a theoretical justification for using hypergraphs in routing. In a pairwise GNN, the message passing unit is an edge and therefore describes a relation between two nodes. However, capacity feasibility is determined by the accumulated demand of a subset of customers, and time-window feasibility depends on the temporal state induced by a partial route. These constraints are set functions over multiple nodes. By associating each master node with constraint-specific hyperedges, the encoder approximates these set functions through high-order aggregation instead of decomposing them into independent pairwise messages. This does not constitute an optimality guarantee, but it provides a structurally more faithful inductive bias for VRPs with group-level constraints.
+Learning to Reconstruct Hyperedge Nodes
+As shown in Fig.1(c), hyperedge nodes are dynamically reconstructed during training based on the neural network’s weight mapping \ThetaΘ\Theta. To enable adaptive parameter tuning, we propose a composite loss function with two components: node correlation loss and hyperedge constraint loss.
+The node correlation loss measures the feature similarity between the master node and its hyperedge nodes. Minimizing this loss ensures semantic consistency and improves the representational quality of the hyperedge, resulting in a more cohesive and meaningful hypergraph structure. The hyperedge constraint loss enforces problem-specific constraints by penalizing violations within the hyperedge. Instead of excluding non-compliant nodes, penalties are applied based on the degree of violation, allowing flexible handling of soft constraints. This design ensures adaptability to diverse scenarios while maintaining feasibility under hard constraints, enhancing the model’s robustness and applicability to complex tasks.
+The computation of node correlation loss is as follows:
+\displaystyle\mathcal{L}_{node}=\sum_{i=1}^{n}\sum_{j=1}^{m}\left\|H_{0}^{enc}(\hat{v}_{i})\cdot\theta_{proj}-\Theta_{\hat{v}_{i}}^{Con_{j}}(v)\cdot H_{0}^{enc}(\hat{e}^{Con_{j}}(\hat{v}_{i}))\right\|_{2}ℒn​o​d​e=∑i=1n∑j=1m‖H0e​n​c​(v^i)⋅θp​r​o​j−Θv^iC​o​nj​(v)⋅H0e​n​c​(e^C​o​nj​(v^i))‖2\displaystyle\mathcal{L}_{node}=\sum_{i=1}^{n}\sum_{j=1}^{m}\left\|H_{0}^{enc}(\hat{v}_{i})\cdot\theta_{proj}-\Theta_{\hat{v}_{i}}^{Con_{j}}(v)\cdot H_{0}^{enc}(\hat{e}^{Con_{j}}(\hat{v}_{i}))\right\|_{2}
+(11)
+H_{0}^{enc}(\cdot)H0e​n​c​(⋅)H_{0}^{enc}(\cdot) represents the augmented node representation, while \theta_{{proj}}θp​r​o​j\theta_{{proj}} denotes the weights of a linear layer that projects the master node into a high-dimensional space. Equation (11) computes the MSE between the master node and its associated slave nodes within hyperedges, considering various mmm constraints in the high-dimensional space. A lower MSE reflects a stronger feature correlation among hyperedge nodes.
+The reconstruction of hyperedge nodes is guided by the learnable reconstruction projection coefficient vector \Theta_{\hat{v}_{i}}^{Con_{j}}(v)Θv^iC​o​nj​(v)\Theta_{\hat{v}_{i}}^{Con_{j}}(v) for constraints, where \hat{v}_{i}v^i\hat{v}_{i} represents the master node and v\in\mathcal{V}\backslash\{\hat{v}_{i}\}v∈𝒱\{v^i}v\in\mathcal{V}\backslash\{\hat{v}_{i}\},j={1,...,m}j=1,…,mj={1,...,m}. We use two regularization terms in this coefficient vector to balance sparsity and smoothness when dynamically reconstructing hyperedges, as described in Equation (12), where the subscripts of \hat{v}v^\hat{v} and ConC​o​nCon are omitted to represent them in matrix form.
+\mathcal{L}_{rec\_node}=\mathcal{L}_{node}+\sum\|\Theta_{\hat{v}}^{Con}(v)\|_{1}+\sum\lambda\|\Theta_{\hat{v}}^{Con}(v)\|_{2}ℒr​e​c​_​n​o​d​e=ℒn​o​d​e+∑‖Θv^C​o​n​(v)‖1+∑λ​‖Θv^C​o​n​(v)‖2\mathcal{L}_{rec\_node}=\mathcal{L}_{node}+\sum\|\Theta_{\hat{v}}^{Con}(v)\|_{1}+\sum\lambda\|\Theta_{\hat{v}}^{Con}(v)\|_{2}
+(12)
+Firstly, L1L​1L1 normalization is applied to encourage sparsity by reducing weight factors toward zero, promoting hyperedges with a minimal set of highly correlated nodes. However, L1L​1L1 regularization can be sensitive to noise and outliers. To address this, L2L​2L2 normalization is also introduced, providing a smoothing effect and reducing noise sensitivity. A hyperparameter \lambdaλ\lambda is used to balance the trade-off between sparsity (L1L​1L1) and smoothness (L2L​2L2). This dual-regularization approach ensures robust and meaningful reconstruction of hyperedge nodes.
+Meanwhile, the constraint loss is defined as:
+\mathcal{L}_{con}=\sum_{i=1}^{n}\sum_{j=1}^{m}\|f_{Con_{j}}(\mathcal{S}(\hat{v}_{i}))\|_{2}ℒc​o​n=∑i=1n∑j=1m‖fC​o​nj​(𝒮⁡(v^i))‖2\mathcal{L}_{con}=\sum_{i=1}^{n}\sum_{j=1}^{m}\|f_{Con_{j}}(\mathcal{S}(\hat{v}_{i}))\|_{2}
+(13)
+where f_{Con_{j}}(\mathcal{S}(\hat{v}_{i}))fC​o​nj​(𝒮⁡(v^i))f_{Con_{j}}(\mathcal{S}(\hat{v}_{i})) evaluates constraint jjj on the candidate node set \mathcal{S}(\hat{v}_{i})𝒮⁡(v^i)\mathcal{S}(\hat{v}_{i}) and is incorporated as a penalty term in the hyperedge node construction loss. It utilizes the upper and lower bounds of the constraints as labels and calculates the L2L​2L2 distance as a penalty based on the constraint status of the nodes within the hyperedge. For instance, if the sum of the demands of the nodes within a hyperedge exceeds the vehicle capacity, resulting in a negative slack, it violates the capacity constraint, and the L2L​2L2 distance between the demand sum and the capacity will be computed as a penalty. This penalty enforces compliance with constraints while allowing flexibility for soft violations.
+The final encoder hypergraph loss, defined as \mathcal{L}_{hg}=\mathcal{L}_{rec\_node}+\gamma\mathcal{L}_{con}ℒh​g=ℒr​e​c​_​n​o​d​e+γ​ℒc​o​n\mathcal{L}_{hg}=\mathcal{L}_{rec\_node}+\gamma\mathcal{L}_{con}, integrates both loss components, with \gamma=0.01γ=0.01\gamma=0.01 as scaling factors to balance them, ensuring neither component dominates the optimization, and enabling the model to capture structural relationships and satisfy constraints effectively within the hypergraph.
+4.2.2 MHA Node Representation Learning
+This subsection details the node representation learning module in the encoder. The process consists of two key steps: hyperedge embedding generation and node embedding updating. Each step is described in detail below.
+Hyperedge Embedding Generation
+After selecting hyperedge nodes, the chosen nodes \hat{e}^{Con}(\hat{v}_{i})e^C​o​n​(v^i)\hat{e}^{Con}(\hat{v}_{i}) are used to generate hyperedge representations under different constraints. These representations are fused with the master node features via a multi-head attention mechanism, facilitating information integration across constraints.
+The hyperedge representation is determined by the projection weight coefficient \ThetaΘ\Theta. To enhance this process, a gating mechanism with a predefined threshold is applied, zeroing out the weights of non-hyperedge nodes. This ensures that only relevant nodes contribute to the hyperedge features. Consequently, the embedding of the hyperedge associated with the master node \hat{v}_{i}v^i\hat{v}_{i} is expressed as:
+e_{\hat{v}_{i}}^{Con}=\frac{H_{0}^{enc}(\hat{e}^{Con}(\hat{v}_{i}))\cdot\bar{\Theta}_{\hat{v}_{i}}^{Con}(v)}{\Delta(\hat{e}^{Con}(\hat{v}_{i}))}ev^iC​o​n=H0e​n​c​(e^C​o​n​(v^i))⋅Θ¯v^iC​o​n​(v)Δ⁡(e^C​o​n​(v^i))e_{\hat{v}_{i}}^{Con}=\frac{H_{0}^{enc}(\hat{e}^{Con}(\hat{v}_{i}))\cdot\bar{\Theta}_{\hat{v}_{i}}^{Con}(v)}{\Delta(\hat{e}^{Con}(\hat{v}_{i}))}
+(14)
+where
+\bar{\Theta}_{\hat{v}_{i}}^{Con}(v)=\left\{\begin{array}[]{ll}\Theta_{\hat{v}_{i}}^{Con}(v)&v\in\hat{e}^{Con}(\hat{v}_{i})\\
+1&v=\hat{v}_{i}\\
+0&otherwise\\
+\end{array}\right.Θ¯v^iC​o​n​(v)={Θv^iC​o​n​(v)v∈e^C​o​n​(v^i)1v=v^i0o​t​h​e​r​w​i​s​e\bar{\Theta}_{\hat{v}_{i}}^{Con}(v)=\left\{\begin{array}[]{ll}\Theta_{\hat{v}_{i}}^{Con}(v)&v\in\hat{e}^{Con}(\hat{v}_{i})\\
+1&v=\hat{v}_{i}\\
+0&otherwise\\
+\end{array}\right.
+(15)
+Equation (15) implements threshold control on the weights to eliminate the influence of irrelevant nodes. The denominator of Equation (14) utilizes the degree of the hyperedge noted as \DeltaΔ\Delta to apply regularization.
+Figure 2: Proposed dual-pointer attention-based decoder.
+MHA Node Embedding Update
+As previously described, each node acts as a master node to construct hyperedges under various constraint types. Once the hyperedge representations are obtained, a multi-head attention mechanism updates the master node’s embedding. This process integrates information from diverse constraint-aware hyperedges into the master node’s representation, completing the graph representation learning.
+To systematically explain this (see Fig.1(d)), we first use linear projection matrices Q_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d}Qh​gh​e​a​d∈ℛdk×dQ_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d}, K_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d}Kh​gh​e​a​d∈ℛdk×dK_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d}, and V_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d},head\in\{1,\dots,k\}Vh​gh​e​a​d∈ℛdk×d,h​e​a​d∈{1,…,k}V_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d},head\in\{1,\dots,k\} to map the master node representation H_{0}^{enc}(\hat{v}_{i})\in\mathcal{R}^{d\times 1}H0e​n​c​(v^i)∈ℛd×1H_{0}^{enc}(\hat{v}_{i})\in\mathcal{R}^{d\times 1} and its jjj-th hyperedge representation e_{\hat{v}_{i}}^{Con_{j}}\in\mathcal{R}^{d\times 1}ev^iC​o​nj∈ℛd×1e_{\hat{v}_{i}}^{Con_{j}}\in\mathcal{R}^{d\times 1} into a high-dimensional space. Here, kkk is the number of attention heads, and headh​e​a​dhead specifies the index of each head. We then compute attention scores uuu by applying the dot product between the two vectors across different heads. Using these attention scores, the master node performs a weighted fusion of the hyperedge representations, as detailed in Equations (16) to (17).
+u_{\hat{v}_{i}}^{Con_{j}}=\|_{head=1}^{k}\frac{(Q_{hg}^{head}H_{0}^{enc}(\hat{v}_{i}))^{T}\cdot(K_{hg}^{head}e_{\hat{v}_{i}}^{Con_{j}})}{\sqrt{d/k}}uv^iC​o​nj=∥h​e​a​d=1k(Qh​gh​e​a​d​H0e​n​c​(v^i))T⋅(Kh​gh​e​a​d​ev^iC​o​nj)d/ku_{\hat{v}_{i}}^{Con_{j}}=\|_{head=1}^{k}\frac{(Q_{hg}^{head}H_{0}^{enc}(\hat{v}_{i}))^{T}\cdot(K_{hg}^{head}e_{\hat{v}_{i}}^{Con_{j}})}{\sqrt{d/k}}
+(16)
+The equation (16) computes the attention score between the master node \hat{v_{i}}vi^\hat{v_{i}} and one of its hyperedges \hat{e}^{Con_{j}}(\hat{v}_{i})e^C​o​nj​(v^i)\hat{e}^{Con_{j}}(\hat{v}_{i}). The symbol |||⁣||| denotes the concatenation operation, which merges the attention scores from various heads. The attentive score u_{\hat{v}_{i}}^{Con_{j}}\in\mathcal{R}^{k}uv^iC​o​nj∈ℛku_{\hat{v}_{i}}^{Con_{j}}\in\mathcal{R}^{k} is a weight vector that illustrates the importance of a specific constrained hyperedge, referred to as superscript {}^{Con_{j}}C​o​nj{}^{Con_{j}}, in updating the embedding of the master node.
+h_{\hat{v}_{i}}=\|_{head=1}^{k}\sum_{j=1}^{m}Softmax\left(u_{\hat{v}_{i}}^{Con_{j}}\right)\cdot V_{hg}^{head}e_{\hat{v}_{i}}^{Con_{j}}hv^i=|∑j=1mh​e​a​d=1k⁡S​o​f​t​m​a​x​(uv^iC​o​nj)⋅Vh​gh​e​a​d​ev^iC​o​njh_{\hat{v}_{i}}=\|_{head=1}^{k}\sum_{j=1}^{m}Softmax\left(u_{\hat{v}_{i}}^{Con_{j}}\right)\cdot V_{hg}^{head}e_{\hat{v}_{i}}^{Con_{j}}
+(17)
+Equation (17) uses the Softmax function to normalize hyperedge attention scores u\in\mathcal{R}^{k}u∈ℛku\in\mathcal{R}^{k} across different constraints. The normalized weights are used for weighted fusion of hyperedges, mapped via the projection matrix V_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d}Vh​gh​e​a​d∈ℛdk×dV_{hg}^{head}\in\mathcal{R}^{\frac{d}{k}\times d} over constrained hyperedges 1 to mmm. Outputs from all attention heads are then aggregated to form the fused master node representation h_{\hat{v}_{i}}\in\mathcal{R}^{d\times 1}hv^i∈ℛd×1h_{\hat{v}_{i}}\in\mathcal{R}^{d\times 1} (Fig.1(d)). Finally, average pooling is applied to all fused master nodes to obtain the hypergraph’s overall representation for the decoder, given by H_{g}=\frac{\sum_{i=1}^{n}h_{\hat{v}_{i}}}{n}Hg=∑i=1nhv^inH_{g}=\frac{\sum_{i=1}^{n}h_{\hat{v}_{i}}}{n}.
+4.3 Dual-Pointer Decoder
+Decoders in previous studies [2, 36, 28, 29, 30] relied solely on current state features, using node representations from the encoder for stochastic sampling. Violated or visited nodes were masked, and the depot was selected if no valid nodes remained. While solutions were generated iteratively, this approach suffered from error propagation, as suboptimal decisions at one step impacted subsequent steps, complicating learning. To overcome this, we propose a dual-pointer decoder that combines current and historical state features. A route recorder tracks partial solutions, enabling attention over global nodes with fused probability distributions from both pointers. This design improves fault tolerance, reducing error propagation and enhancing robustness and performance.
+4.3.1 Context Embedding
+To maintain the continuity of historical states, we propose a route recorder module that records the representation data of previously visited nodes and incorporates it through a residual connection to form the embedding of the partial solution. This mechanism effectively emphasizes the representation of completed nodes during the attention calculation process. Compared to approaches that rely solely on the previous node, this design is more conducive to guiding decisions toward peripherally related nodes. The primary advantage lies in its ability to introduce perturbations into the decision-making process, thereby reducing the likelihood of converging to local optima. Consequently, this approach enables a more comprehensive consideration of context nodes. Accordingly, the embedding of context nodes is divided into two components, as defined in Equation (18) and Equation (19).
+h_{c}^{current}=\left\{\begin{array}[]{ll}FF\left(H_{g}\|h_{v_{0}}\|\mathcal{O}_{t}\right)&t=0\\
+FF\left(H_{g}\|h_{\tau_{t-1}}\|\mathcal{O}_{t}\right)&t>0\\
+\end{array}\right.hcc​u​r​r​e​n​t={F​F​(Hg​‖hv0‖​𝒪t)t=0F​F​(Hg​‖hτt−1‖​𝒪t)t>0h_{c}^{current}=\left\{\begin{array}[]{ll}FF\left(H_{g}\|h_{v_{0}}\|\mathcal{O}_{t}\right)&t=0\\
+FF\left(H_{g}\|h_{\tau_{t-1}}\|\mathcal{O}_{t}\right)&t>0\\
+\end{array}\right.
+(18)
+h_{c}^{historical}=\left\{\begin{array}[]{ll}FF\left(H_{g}\|h_{v_{0}}\|\mathcal{O}_{t}\right)&t=0\\
+FF\left(H_{g}\|h_{\tau_{t-1}}+...+h_{\tau_{t1}}\|\mathcal{O}_{t}\right)&t>0\\
+\end{array}\right.hch​i​s​t​o​r​i​c​a​l={F​F​(Hg​‖hv0‖​𝒪t)t=0F​F​(Hg​‖hτt−1+…+hτt​1‖​𝒪t)t>0h_{c}^{historical}=\left\{\begin{array}[]{ll}FF\left(H_{g}\|h_{v_{0}}\|\mathcal{O}_{t}\right)&t=0\\
+FF\left(H_{g}\|h_{\tau_{t-1}}+...+h_{\tau_{t1}}\|\mathcal{O}_{t}\right)&t>0\\
+\end{array}\right.
+(19)
+FFF​FFF denotes the feed forward layer, while \mathcal{O}_{t}𝒪t\mathcal{O}_{t} represents the state of the vehicle at timestep ttt, specifically its remaining capacity. At the initial timestep (t=0t=0t=0), the two context vectors are identical. However, as the solution is iteratively constructed, h_{c}^{historical}hch​i​s​t​o​r​i​c​a​lh_{c}^{historical} progressively incorporates the representations of visited nodes into the context embedding, enabling it to capture historical information dynamically.
+4.3.2 Dual Probability Calculation
+Following the approach in Equation (16), we utilize a multi-head attention mechanism to calculate attention scores between the two context embeddings and all node embeddings. These scores are then used for stochastic sampling based on a probability distribution. Rather than sampling independently from the two pointers, we compute a weighted average of their probability distributions. This method smooths the sampling process and increases the chances of selecting nodes that a single pointer might overlook. As a result, it reduces the risk of the decoder converging to a local optimum, as shown in Fig. 2. The detailed computation is presented in Equations (20) and (21).
+u_{i,t}^{c_{i}}=\begin{array}[]{ll}\frac{\left(\boldsymbol{Q}_{c_{i}}h_{c}^{c_{i}}\right)^{T}\left(\boldsymbol{K}_{c_{i}}h_{\hat{v}_{i}}^{t}\right)}{\sqrt{d_{h}}}&\hat{v}_{i}\neq\tau_{t^{\prime}},\forall t^{\prime}<t\\
+\\
+\end{array}ui,tci=(𝑸ci​hcci)T​(𝑲ci​hv^it)dhv^i≠τt′,∀t′<tu_{i,t}^{c_{i}}=\begin{array}[]{ll}\frac{\left(\boldsymbol{Q}_{c_{i}}h_{c}^{c_{i}}\right)^{T}\left(\boldsymbol{K}_{c_{i}}h_{\hat{v}_{i}}^{t}\right)}{\sqrt{d_{h}}}&\hat{v}_{i}\neq\tau_{t^{\prime}},\forall t^{\prime}<t\\
+\\
+\end{array}
+(20)
+Here c_{i}=\{current,historical\}ci={c​u​r​r​e​n​t,h​i​s​t​o​r​i​c​a​l}c_{i}=\{current,historical\} indicates the index of pointers and context embeddings. For each policy, we use separate weight matrices for query and key projections in attention calculation. h_{\hat{v}_{i}}^{t}hv^ith_{\hat{v}_{i}}^{t} represents the candidate action node that can be selected (after masking unavailable nodes) at timestep ttt, while d_{h}dhd_{h} is the feature dimension on each attention head for controlling variance and preventing gradient vanishing.
+Equation (20) derives the attention compatibility uuu for current and historical states individually, considering the available nodes at step ttt. Equation (21) calculates the probability distribution for sampling. To enhance the distinction between nodes, activation and scaling are applied to the two attention vectors separately, constraining their values within [-Clip,Clip][−C​l​i​p,C​l​i​p][-Clip,Clip] (with Clip=10C​l​i​p=10Clip=10), following prior works [28, 30, 45]. The final probability p_{\pi_{\theta}}pπθp_{\pi_{\theta}} combines the attention results from both pointers, guiding the decoder to randomly select a node as the action node at step ttt.
+p_{\pi_{\theta}}(\tau_{t}|s,\tau_{t^{\prime}},\forall t^{\prime}<t)=Softmax(\sum_{c_{i}}Clip\cdot tanh(u_{i,t}^{c_{i}}))pπθ(τt|s,τt′,∀t′<t)=Softmax(∑ciClip⋅tanh(ui,tci))p_{\pi_{\theta}}(\tau_{t}|s,\tau_{t^{\prime}},\forall t^{\prime}<t)=Softmax(\sum_{c_{i}}Clip\cdot tanh(u_{i,t}^{c_{i}}))
+(21)
+The decoding operation must be executed in a loop for a certain number of steps, referred to as ttt until all nodes have been visited. Notably, the value of ttt is usually much larger than the number of nodes, nnn. The reason is that in routing problems, vehicles often select the depot as intermediate nodes to complete sub-paths owing to the constraints, which increases the number of steps required. Moreover, the attention score for infeasible nodes is set as -\inf−⁣inf-\inf, ensuring the probability of being selected is 000 during the masking operation.
+4.4 REINFORCE Self-Critic Training
+We adopt reinforcement learning to train the proposed end-to-end model. The primary objective is to expose the model to a large number of problem instances drawn from the same distribution, allowing it to learn generalizable patterns and enhance its decision-making performance. Through training, the model learns to increase the likelihood of making optimal decisions. When encountering similar problems characterized by specific features, the model can select a favorable combination of decision actions, as these actions have been optimized during the training process to achieve superior solutions.
+To accurately estimate the expected reward for sampling a batch of data, we employ Monte Carlo estimation. The estimated reward is then used as the loss function for reinforcement learning, formulated as \mathcal{L}_{rl}({\pi_{\theta}}|\mathcal{G})=\mathbb{E}_{\tau\sim p_{\pi_{\theta}}(\tau|\mathcal{G})}r(\tau)ℒr​l​(πθ|𝒢)=𝔼τ∼pπθ​(τ|𝒢)​r​(τ)\mathcal{L}_{rl}({\pi_{\theta}}|\mathcal{G})=\mathbb{E}_{\tau\sim p_{\pi_{\theta}}(\tau|\mathcal{G})}r(\tau). During training, we utilize the REINFORCE algorithm [49] and evaluate the model against a self-critical baseline to further stabilize and improve the learning process.
+4.4.1 REINFORCE with Greedy Baseline Rollout
+During the training process, strategies that outperform the baseline are identified as effective strategies. To leverage this, we adopt a variant of the actor-critic approach called the self-critic mode. In this approach, the same model is used for both the actor and the critic, but with different decoding strategies to evaluate the quality of the actor model. Specifically, we use the parameters of the best-performing actor model to date as the parameters for the critic (baseline) model. For the baseline evaluation, a greedy decoding strategy is employed, which consistently selects the action with the highest probability. This simplifies the evaluation process and provides a stable and reliable reference point.
+To further streamline computation, all probabilities are converted into logarithmic probabilities, effectively reducing computational complexity. With these considerations, the policy gradient [41] can be formulated as:
+\nabla\mathcal{L}_{rl}\left(\pi_{\theta}|\mathcal{G}\right)=\mathbb{E}_{\tau\sim p_{\pi_{\theta}}(\tau|\mathcal{G})}[(r(\tau)-b_{\pi_{\theta^{\prime}}}(\mathcal{G}))\nabla_{\theta}\log p_{\pi_{\theta}}(\tau|\mathcal{G})]∇ℒr​l​(πθ|𝒢)=𝔼τ∼pπθ​(τ|𝒢)​[(r⁡(τ)−bπθ′​(𝒢))​∇θ​log⁡pπθ​(τ|𝒢)]\nabla\mathcal{L}_{rl}\left(\pi_{\theta}|\mathcal{G}\right)=\mathbb{E}_{\tau\sim p_{\pi_{\theta}}(\tau|\mathcal{G})}[(r(\tau)-b_{\pi_{\theta^{\prime}}}(\mathcal{G}))\nabla_{\theta}\log p_{\pi_{\theta}}(\tau|\mathcal{G})]
+(22)
+In this context, \pi_{\theta^{\prime}}πθ′\pi_{\theta^{\prime}} refers to the parameters of the previous optimal model. As training progresses, if the reward from the actor network surpasses that of the critic network, the actor’s policy is reinforced. When the actor’s performance on the validation set significantly exceeds that of the critic network, the parameters of the critic network are updated to match those of the current actor network. This continuous updating process allows the critic network to help the actor consistently perform better than greedy rollout, facilitating gradual convergence during training.
+4.4.2 Self-Critic Training
+The hypergraph encoder incorporates two types of loss: the hyperedge node reconstruction loss and the hyperedge constraint loss, as described in Section 4.2. When applying self-critic methods in reinforcement learning to update the policy gradient of network parameters during training, the encoder’s parameters are updated separately using a combined loss function. It is worth noting that, when employing the Adam optimizer for network parameter updates, the decoder’s parameters are updated once per batch of sampled data.
+However, during our experiments, we observed that frequent updates to the hypergraph encoder’s parameters could lead to non-convergence due to the large volume of data involved in reinforcement learning training. To address this issue, we opted to update the hypergraph network’s parameters only once after completing the training for an entire epoch. This ensures that all instance features are fully learned before the parameters are adjusted. The detailed training procedure is outlined in Algorithm 1.
+Algorithm 1  Asynchronous REINFORCE Algorithm
+0:
+Actor policy network \pi_{\theta}πθ\pi_{\theta}; Baseline policy network \pi_{\theta}^{b}πθb\pi_{\theta}^{b}; Training epochs EEE; Batch size BBB; Steps per epoch TTT; Significance level \epsilonϵ\epsilon.
+1:
+Initialization: \theta,\theta^{b}\leftarrowθ,θb←\theta,\theta^{b}\leftarrow Xavier init \thetaθ\theta;
+2:
+for  eee in 1,\ldots,E1,…,E1,\ldots,E do
+3:
+for  ttt in 1,\ldots,T1,…,T1,\ldots,T do
+4:
+\mathcal{G}_{i}\leftarrow RandomInstance(),\forall i\in\{1,\ldots,B\}𝒢i←R​a​n​d​o​m​I​n​s​t​a​n​c​e​(),∀i∈{1,…,B}\mathcal{G}_{i}\leftarrow RandomInstance(),\forall i\in\{1,\ldots,B\}
+5:
+Compute \mathcal{L}_{hg}ℒh​g\mathcal{L}_{hg}
+6:
+\tau_{i}\leftarrow SampleSolution(\mathcal{G}_{i},p_{\theta}),\forall i\in\{1,\ldots,B\}τi←S​a​m​p​l​e​S​o​l​u​t​i​o​n​(𝒢i,pθ),∀i∈{1,…,B}\tau_{i}\leftarrow SampleSolution(\mathcal{G}_{i},p_{\theta}),\forall i\in\{1,\ldots,B\}
+7:
+\tau_{i}^{b}\leftarrow GreedyRollout(\mathcal{G}_{i},p_{\theta}^{b}),\forall i\in\{1,\ldots,B\}τib←G​r​e​e​d​y​R​o​l​l​o​u​t​(𝒢i,pθb),∀i∈{1,…,B}\tau_{i}^{b}\leftarrow GreedyRollout(\mathcal{G}_{i},p_{\theta}^{b}),\forall i\in\{1,\ldots,B\}
+8:
+Compute r(\tau_{i}|\mathcal{G}_{i}),r(\tau_{i}^{b}|\mathcal{G}_{i})r⁡(τi|𝒢i),r⁡(τib|𝒢i)r(\tau_{i}|\mathcal{G}_{i}),r(\tau_{i}^{b}|\mathcal{G}_{i}) through Eq. (6)
+9:
+\nabla\mathcal{L}_{rl}\leftarrow\sum_{i=1}^{B}(r(\tau_{i})-r(\tau_{i}^{b}))\nabla_{\theta}\log p_{\pi_{\theta}}(\tau_{i}|\mathcal{G}_{i})∇ℒr​l←∑i=1B(r⁡(τi)−r⁡(τib))​∇θ​log⁡pπθ​(τi|𝒢i)\nabla\mathcal{L}_{rl}\leftarrow\sum_{i=1}^{B}(r(\tau_{i})-r(\tau_{i}^{b}))\nabla_{\theta}\log p_{\pi_{\theta}}(\tau_{i}|\mathcal{G}_{i})
+10:
+if \theta_{rl}\in\thetaθr​l∈θ\theta_{rl}\in\theta then
+11:
+\theta_{rl}\leftarrow Adam(\theta_{rl},\nabla_{\theta}\mathcal{L}_{rl})θr​l←A​d​a​m​(θr​l,∇θℒr​l)\theta_{rl}\leftarrow Adam(\theta_{rl},\nabla_{\theta}\mathcal{L}_{rl})
+12:
+end if
+13:
+end for
+14:
+if \theta_{hg}\in\thetaθh​g∈θ\theta_{hg}\in\theta then
+15:
+\theta_{hg}\leftarrow Adam(\theta_{hg},\nabla_{\theta}\mathcal{L}_{hg})θh​g←A​d​a​m​(θh​g,∇θℒh​g)\theta_{hg}\leftarrow Adam(\theta_{hg},\nabla_{\theta}\mathcal{L}_{hg})
+16:
+end if
+17:
+if OneSidedPairedTTest(p_{\theta},p_{\theta}^{b}pθ,pθbp_{\theta},p_{\theta}^{b}) <\epsilon<ϵ<\epsilon then
+18:
+\theta^{b}\leftarrow\thetaθb←θ\theta^{b}\leftarrow\theta
+19:
+end if
+20:
+end for
+20:
+Parameter set \thetaθ\theta of the actor network
+This asynchronous parameter update mechanism significantly improves overall model performance. First, the stable, high-quality graph feature representations learned by the encoding module at the epoch level provide more reliable inputs to the decoding module. Due to the complexity of the graph structure information processed by the hypergraph network, frequent parameter updates can lead to abrupt changes before the model fully captures the graph structure features and constraint relationships. Such instability may result in over-smoothing of graph node representations, reducing the discriminability of attention mechanisms during decoding and hindering the convergence of reinforcement learning. From the perspective of reinforcement learning, this design separates two sources of feedback with different statistical properties. The decoder receives batch-level route rewards and updates the policy so that trajectories outperforming the greedy self-critical baseline increase their log-probability, while inferior trajectories are penalized. The hypergraph encoder, in contrast, is guided by reconstruction and constraint losses accumulated over an epoch. This separation reduces the interference between sparse route-level reward signals and representation-level hyperedge reconstruction signals.
+Meanwhile, the decoder processes samples in batches, providing immediate feedback that enables timely parameter adjustments. This increases the likelihood of adopting more effective reward strategies, accelerating the model’s search for local optimal solutions. In the early stages of training, this approach helps the decoding module quickly learn basic output strategies while simultaneously offering positive feedback to guide parameter updates in the encoding module. As training progresses, the hyperedges derived from the learned representations of the encoding module become better aligned with the problem requirements, effectively narrowing the search space during decoding and facilitating faster convergence of the overall training process.
+4.5 Complexity Analysis
+We analyze the main computational cost of the proposed encoder-decoder framework. Let N=n+1N=n+1N=n+1 be the number of nodes including the depot, ddd the hidden dimension, L_{g}LgL_{g} the number of pairwise graph-attention layers before hypergraph construction, mmm the number of constraint types, \bar{\Delta}Δ¯\bar{\Delta} the average number of retained nodes in a hyperedge after thresholding, and TTT the number of decoding steps.
+The low-order graph encoding stage first projects node features and then applies pairwise graph attention. Its dominant cost is
+C_{\mathrm{pair}}=O\!\left(L_{g}(N^{2}d+Nd^{2})\right)Cpair=O⁡(Lg​(N2​d+N​d2))C_{\mathrm{pair}}=O\!\left(L_{g}(N^{2}d+Nd^{2})\right),
+where O(N^{2}d)O⁡(N2​d)O(N^{2}d) comes from pairwise attention score computation and value aggregation, and O(Nd^{2})O⁡(N​d2)O(Nd^{2}) comes from feature projections.
+The hypergraph reconstruction stage constructs constraint-oriented hyperedges for each master node. For mmm constraint types, scoring all master-candidate node pairs requires
+C_{\mathrm{score}}=O(mN^{2}d)Cscore=O⁡(m​N2​d)C_{\mathrm{score}}=O(mN^{2}d).
+After thresholding, each hyperedge contains \bar{\Delta}Δ¯\bar{\Delta} nodes on average, so hyperedge aggregation and constraint-aware representation fusion require
+C_{\mathrm{hg}}=O(mN\bar{\Delta}d)Chg=O⁡(m​N​Δ¯​d)C_{\mathrm{hg}}=O(mN\bar{\Delta}d).
+This term also shows the advantage over clique expansion: converting a degree-\DeltaΔ\Delta hyperedge into pairwise edges would introduce O(\Delta^{2})O⁡(Δ2)O(\Delta^{2}) pairwise relations and remove the explicit identity of the constraint-induced group, whereas direct hyperedge aggregation preserves the group relation with cost linear in \bar{\Delta}Δ¯\bar{\Delta}.
+The dual-pointer decoder evaluates candidate-node scores at each construction step by using the current node state and the route-history context. Under greedy decoding, its dominant cost is
+C_{\mathrm{dec}}=O(TNd)Cdec=O⁡(T​N​d)C_{\mathrm{dec}}=O(TNd),
+or O(TNd+T^{2}d)O⁡(T​N​d+T2​d)O(TNd+T^{2}d) if the route-history context is fully recomputed rather than incrementally updated. Sampling, beam search, or local search would multiply or add to this decoding cost.
+Therefore, the dominant per-instance cost of the proposed model is:
+C_{\mathrm{total}}=O\!\left(L_{g}(N^{2}d+Nd^{2})+mN^{2}d+mN\bar{\Delta}d+TNd\right)Ctotal=O⁡(Lg​(N2​d+N​d2)+m​N2​d+m​N​Δ¯​d+T​N​d)C_{\mathrm{total}}=O\!\left(L_{g}(N^{2}d+Nd^{2})+mN^{2}d+mN\bar{\Delta}d+TNd\right)
+(23)
+For mini-batch training with batch size BBB and AAA augmented rollouts, the forward cost scales as O(BA\,C_{\mathrm{total}})O⁡(B​A​Ctotal)O(BA\,C_{\mathrm{total}}). The main memory cost comes from dense pairwise attention and hyperedge reconstruction coefficients, i.e., O(N^{2}+mN^{2})O⁡(N2+m​N2)O(N^{2}+mN^{2}), plus the retained sparse hyperedge incidence O(mN\bar{\Delta})O⁡(m​N​Δ¯)O(mN\bar{\Delta}).
+5 Experiment
+We conducted a series of experiments to evaluate the effectiveness of our proposed constraint-oriented hypergraph model. Using three datasets, we analyzed the model from three key perspectives to address the following research questions:
+RQ1. Solution Quality: Does our model outperform state-of-the-art methods in solving the VRP and its variants? Specifically, we evaluated improvements in solution quality, computational efficiency, and the model’s capability to handle online problem-solving scenarios.
+RQ2. Ablation Study: How do individual components of the model contribute to its overall performance? We investigated the effects of the data augmentation module, hypergraph module, and double-pointer decoding module.
+RQ3. Hyperparameter Sensitivity: How do hypergraph reconstruction parameters and hyperedge mapping regularization coefficients influence the model’s performance? We conducted sensitivity analyses to explore the impact of these hyperparameters.
+These research questions guided a comprehensive evaluation of our model’s performance and characteristics. In the following sections, we detail the experimental setup and provide an in-depth analysis of the results.
+5.1 Experiment Setup
+Datasets and Parameters
+Building on prior research, we utilized both randomly generated datasets and the CVRPLIB benchmark to evaluate the effectiveness of our model in solving the CVRP and its variants. For the randomly generated datasets, we trained three models corresponding to problem sizes of 20, 50, and 100 nodes. Node demands were randomly sampled within the range of 1 to 9, while vehicle capacity constraints were set to 30, 40, and 50, respectively, based on the problem size.
+For the CVRPLIB dataset, we employed pre-trained models to address problems of varying scales. Specifically, the model trained on 50-node problems was used to solve instances with fewer than 60 nodes, while the model trained on 100-node problems was applied to larger instances. This approach ensured the scalability and adaptability of the model across different problem sizes.
+Furthermore, we implemented and evaluated diverse graph-based end-to-end models on the CVRPTW under soft time window constraints. Each node’s service time constraint was defined with a uniformly distributed random start time T_{start}Ts​t​a​r​tT_{start} combined with a randomly generated service time T_{service}Ts​e​r​v​i​c​eT_{service} and accepted service duration T_{window}Tw​i​n​d​o​wT_{window}. Consequently, the time window of customers is represented as [T_{start},T_{start}+T_{window}][Ts​t​a​r​t,Ts​t​a​r​t+Tw​i​n​d​o​w][T_{start},T_{start}+T_{window}] while vehicles stayed at each node during service time T_{service}Ts​e​r​v​i​c​eT_{service}. Vehicle speed was maintained constant at 111 unit, and deviations from the designated time windows incurred penalties proportional to temporal discrepancies: a penalty coefficient of <NETWORK_ADDRESS> was applied for early arrivals (relative to the start time) and <NETWORK_ADDRESS> for late arrivals. The optimization objective aimed to minimize the total sum of vehicle travel time and incurred penalties across all routes. This formulation ensures a balanced trade-off between operational efficiency and temporal constraint adherence while preserving computational tractability.
+For parameter selection during training, we used 640,000640,000640,000 instances to train the models with 202020 and 505050 nodes, while the model with 100100100 nodes was trained on 128,000128,000128,000 instances due to time and memory constraints. Both the validation and test sets consisted of 1,0001,0001,000 instances each, and the results were averaged over these 1,0001,0001,000 instances. The learning rate was set to 10^{-4}10−410^{-4}, with a decay factor of <NETWORK_ADDRESS> for Adam Optimizer [27]. The batch size was 128128128 for the 20-20−20- and 50-50−50-node models and 646464 for the 100-100−100-node model. The hidden feature dimension of the neural network was set to 256256256, with 888 attention heads, a dropout rate of <NETWORK_ADDRESS>, and 200200200 training epochs to ensure stability and convergence.
+All experiments were conducted on an Nvidia RTX A6000 GPU with 48GB of memory, paired with an Intel Xeon Silver 4126 CPU running at 2.10GHz.
+Baseline Models
+We categorized the baseline models into three groups for comparison with our proposed model. The three categories are: general solvers, sequential end-to-end models, and graph-based end-to-end models. The general solvers include Gurobi [17], LKH3 [19], and Google OR-Tools [15]. For end-to-end models, we selected classic SOTA models, graph-based models, and recent neural routing solvers with heavy-decoder, ensemble local-policy, and light-decoder designs.
+Below, we provide an introduction to the learning-based baselines:
+1.
+Pointer Networks (PtrNets) [36]: A classic seq2seq model, which integrates LSTM and dot-product attention, is capable of efficiently deriving solutions for the VRP within a short time.
+2.
+Attention Model (AM) [28]: The transformer-based classic SOTA model, utilizing a seq2seq framework, has been extensively applied to solve the VRP and its variants. It has established itself as a foundational milestone, significantly influencing subsequent research in this domain.
+3.
+POMO [29]: The enhanced algorithm of Attention Model (AM) integrates data augmentation techniques and a multi-start parallel strategy. It has been widely applied to solving problems such as the Traveling Salesman Problem and CVRP.
+4.
+LEHD [34]: A heavy-decoder neural solver that reduces reliance on a static encoder and shifts relation modeling into the dynamic decoding stage, thereby improving cross-scale generalization for routing problems.
+5.
+ELG [13]: An ensemble framework with a transferable local policy that combines local and global information to improve the generalization of neural VRP solvers.
+6.
+ReLD [20]: A recent light-decoder-based solver that reconsiders decoder context design and augmentation for efficient neural routing.
+7.
+E-GAT [30]: The model based on Graph Attention Networks, incorporating edge features, represents the SOTA among graph-based approaches for solving VRP. Its encoder employs GAT with residual connections, while the decoder follows a design similar to that of the AM.
+8.
+GASE [45]: This work builds upon AM and GAT by integrating additional sampling policy into the graph node embeddings to better regulate the attention mechanism, thereby improving solution quality.
+5.2 Experiment Results and Analysis
+Table 2: Comparison with baseline methods on random CVRP instances. The symbol “-” in the Gurobi row indicates that no result was available within the time limit; Gurobi and LKH3 outcomes are reproduced from previous studies [28, 29, 30]. The symbol “*” in the Time column denotes the total runtime of a single-threaded sequential OR-Tools run with a 1-second search limit per instance over 1,000 test cases. Boldface denotes SOTA performance among learning-based methods.
+Model
+CVRP20
+CVRP50
+CVRP100
+Objective
+Gap(%)
+Time
+Objective
+Gap(%)
+Time
+Objective
+Gap(%)
+Time
+Gurobi[17]
+6.10
+0.00
+-
+-
+-
+-
+-
+-
+-
+LKH3[19]
+6.14
+0.58
+2h
+10.38
+0.00
+7h
+15.65
+0.00
+13h
+OR-Tools[15]
+6.18
+1.31
+*1000s
+10.98
+5.81
+*1016s
+17.09
+9.20
+*1054s
+PtrNet[36]
+6.59
+8.03
+0.11s
+11.39
+9.78
+0.16s
+17.23
+10.12
+0.32s
+AM model[28]
+6.40
+4.97
+1s
+10.98
+5.86
+3s
+16.80
+7.34
+8s
+AM SamplingS​a​m​p​l​i​n​gSampling [28]
+6.24
+2.30
+3m
+10.59
+2.02
+7m
+16.16
+3.26
+30m
+POMO [29]
+6.35
+4.09
+1s
+10.74
+3.52
+1s
+16.15
+3.19
+3s
+POMO\times 8Aug×8​A​u​g\times 8Aug[29]
+6.14
+0.65
+5s
+10.42
+0.45
+26s
+15.73
+0.32
+2m
+LEHD Greedy [34]
+6.36
+4.26
+2s
+10.92
+5.41
+2s
+16.22
+4.59
+30s
+ELG\times 8×8\times 8Aug ensemble 0.4 Local Size [13]
+6.35
+4.16
+4s
+10.47
+1.06
+10s
+15.84
+2.13
+3.18m
+ReLD\times 8×8\times 8Aug [20]
+6.15
+0.89
+3s
+10.43
+0.66
+9s
+15.80
+1.87
+1.34m
+E-GAT[30]
+6.26
+2.60
+2s
+10.80
+4.05
+7s
+16.69
+6.68
+17s
+GASE[45]
+6.21
+1.80
+1.7s
+10.74
+3.46
+3s
+16.37
+4.60
+6.6s
+Our approach
+6.14
+0.65
+3s
+10.65
+2.60
+8s
+16.35
+4.47
+18s
+Our approach \times 8Aug×8​A​u​g\times 8Aug
+6.13
+0.49
+6s
+10.40
+0.19
+28s
+15.77
+0.76
+2m
+This subsection analyzes the experimental results by addressing the research questions posed earlier through three parts of the experiment: the performance of the model on benchmark datasets, the effectiveness of individual model components, and the impact of hyperparameter variations on model performance.
+5.2.1 Model Performance
+We first evaluated the trained model on datasets where node coordinates were uniformly and randomly generated within the range [0, 1], and compared its performance with other SOTA methods on CVRP. As shown in Table 2, the “Objective” column records the average route length over 1,000 test cases. The results for Gurobi, LKH3, and other learning-based baselines are taken from referenced work [30]. The hypergraph-based model demonstrates outstanding performance on small- and medium-scale datasets, establishing new SOTA results for small- and medium-scale problems among all end-to-end models. We attribute this to the fact that, on small- and medium-scale datasets, hyperedges constrain the decision space to a subset of nodes satisfying hyperedge constraints. Compared to other SOTA methods, which search across the entire instance’s node space, the hypergraph model operates in a significantly smaller sampling space, making it more likely to achieve better results within a limited number of stochastic samples. The proposed model achieves performance improvements ranging from 0.82% to 7.38% compared to existing end-to-end models. Furthermore, its exceptionally short inference time enables effective online decision-making for problems with similar distributions, without compromising efficiency.
+To address recent SOTA comparisons more explicitly, Table 2 additionally includes LEHD Greedy, ELG with 8-fold augmentation and ensemble local policy, and ReLD with 8-fold augmentation. These methods represent complementary recent directions: heavy-decoder relation reconstruction, local-global ensemble policies, and light-decoder redesign. Under this expanded comparison, our approach with 8-fold augmentation achieves gaps of 0.49% and 0.19% on CVRP20 and CVRP50, respectively, and remains competitive with recent neural solvers while using a constraint-oriented hypergraph encoder. On CVRP100, however, POMO with 8-fold augmentation remains stronger in gap, whereas our model remains competitive but incurs a larger inference cost. This pattern indicates that the proposed hypergraph encoder is most effective when constraint-compatible customer groups can be reliably reconstructed from the training scale, while larger instances require stronger decoding or cross-scale training to fully exploit the representation.
+Figure 3: Visualization on randomly generated CVRP datasets. The first row demonstrates that the hyperedge constraint learning effectively captures optimized vehicle capacity patterns, with the sub-routes exhibiting no discernible suboptimal path segments internally. In contrast, while the second row shows successful learning of vehicle capacity patterns through hyperedge constraints, the red-circled portions within the sub-routes reveal apparent non-optimal routing configurations that require further optimization.
+We also visualized the generated solutions to identify the performance bottlenecks of the proposed hypergraph model. As illustrated in Fig. 3, the hyperedge constraints within the hypergraph framework effectively cluster nodes into subpaths for a single vehicle, forming a cyclical pattern. The decoder then resolves these subpaths, effectively decomposing the VRP into multiple TSPs that satisfy capacity constraints, thereby reducing the complexity of the solution process. During decoding, the first row of Fig. 3 demonstrates ideal scenarios where the capacity constraints are evenly distributed, and no significant suboptimal decision subsequences are present. In contrast, the second row exhibits clear suboptimal decision sequences, as indicated by the crossing of subpaths within the red circles, caused by the greedy strategy employed during inference. Common approaches to address this performance bottleneck include expanding the search space for each decision step (e.g., beam search), utilizing stochastic sampling to perform multiple inferences and select the optimal result (Sampling), or applying heuristic methods such as local search to enhance the obtained solutions.
+Although these approaches enhance the quality of the solutions, they inevitably increase inference time. For online problems, this often translates to longer solving times, requiring a trade-off between inference time and solution quality based on the specific application scenarios.
+Table 3: Comparison results on random CVRPTW
+Model
+CVRPTW20
+CVRPTW50
+CVRPTW100
+Objective
+Time
+Objective
+Time
+Objective
+Time
+E-GAT
+14.39
+2s
+36.8
+7.8s
+76.87
+18.1s
+GASE
+13.62
+1.8s
+33.79
+3.2s
+69.63
+8.3s
+Our approach
+9.27
+3.2s
+16.27
+9.7s
+44.93
+23s
+Furthermore, we applied the proposed hypergraph model and other comparative graph-based models to the randomly generated VRPTW. Notably, the hypergraph model outperformed alternative graph architectures, demonstrating its superior capability in capturing high-order node interactions for sequential decision-making under time window penalties. Given the stochastic generation of time windows, where single-step decision errors may propagate into substantial delays, our hyperedge construction explicitly incorporates next-node arrival status as a loss term to mitigate temporal constraint violations. As evidenced by the experimental results in Table 3, this targeted hyperedge design for time window nodes effectively reduces penalty accumulation while maintaining computational efficiency. The improvement on CVRPTW is substantially larger than that on standard CVRP: for CVRPTW100, the objective is reduced from 76.87 with E-GAT and 69.63 with GASE to 44.93 with the proposed model. This supports the motivation that time-window feasibility is not a purely pairwise spatial relation. A customer that appears locally attractive by distance can still become unfavorable after considering the accumulated service time and the temporal status of other customers in the same partial route. The constraint-oriented hyperedge therefore supplies a useful group-level signal to the decoder.
+Table 4: Model performance on CVRPLIB datasets across different problem scales. The boldface entries denote the best results achieved by comparative models. The symbol "-" indicates entries that are not applicable or not reported. The Gap column quantifies the performance discrepancy between the current model and the optimal solution.
+Data instance
+Number of nodes
+Optimal Solution
+Our Approach
+E-GAT
+POMO\times 8Aug×8​A​u​g\times 8Aug
+Objective
+Objective
+Gap(%)
+Objective
+Gap(%)
+Objective
+Gap(%)
+A-n44-k6
+43
+937
+985
+5.12
+984
+5.01
+997
+6.40
+A-n45-k6
+44
+944
+952
+0.85
+984
+4.23
+993
+5.52
+A-n63-k10
+62
+1314
+1375
+4.64
+1519
+15.60
+1329
+1.16
+A-n64-k9
+63
+1401
+1549
+10.56
+1659
+18.40
+1430
+2.10
+A-n69-k9
+68
+1159
+1203
+3.80
+1264
+9.05
+1199
+3.47
+B-n34-k5
+33
+788
+793
+0.63
+812
+3.04
+903
+14.66
+B-n35-k5
+34
+955
+983
+2.93
+986
+3.24
+1005
+5.28
+B-n45-k6
+43
+678
+707
+4.28
+729
+7.52
+737
+8.73
+B-n51-k7
+50
+1032
+1121
+8.62
+1045
+1.25
+1088
+5.48
+P-n50-k8
+49
+631
+665
+5.39
+655
+3.80
+661
+4.83
+P-n51-k10
+50
+741
+761
+2.70
+811
+9.44
+759
+2.43
+P-n70-k10
+69
+827
+862
+4.23
+865
+4.59
+867
+4.79
+E-n101-k14
+100
+1067
+1126
+5.53
+1163
+8.96
+1116
+4.22
+M-n101-k10
+100
+820
+827
+0.85
+873
+6.46
+842
+2.98
+M-n121-k7
+120
+1034
+1141
+10.35
+1144
+10.63
+1110
+7.35
+M-n151-k12
+150
+1015
+1120
+10.34
+1106
+8.96
+1070
+5.44
+Average Gap
+-
+-
+-
+5.01
+-
+7.51
+-
+5.30
+Table 5: Analysis on XML100 customer-distribution subsets. All methods use 100-node pretrained models and are evaluated on XML100 instances with the same node scale but different geometric distributions. “Mixed” denotes the random-clustered customer distribution in XML100.
+Customer distribution
+Instances
+POMO
+Our approach
+Gap(%)
+Gap Std
+Gap(%)
+Gap Std
+Clustered
+3322
+10.59
+9.11
+10.11
+8.32
+Mixed
+3318
+8.75
+7.83
+8.41
+6.77
+Clustered, 8Aug
+3322
+6.62
+5.05
+6.48
+4.83
+Mixed, 8Aug
+3318
+5.77
+4.06
+5.55
+3.73
+Finally, we designed a series of experiments to validate the model’s generalization and robustness. The generalization experiments primarily assessed the model’s performance across varying node scales by comparing its results on the benchmark dataset CVRPLIB with known optimal solutions. In contrast, the robustness experiments involved perturbing the trained model by generating two additional distributions of node demands, while maintaining fixed node coordinate distributions and the ratio of node demands to vehicle capacities. This approach allowed us to evaluate the model’s resilience to variations in demand distributions.
+As shown in Table 4, on the one hand, the hypergraph model achieved a smaller average gap to the optimal solution compared to other learning-based state-of-the-art methods on various scales of the CVRPLIB dataset, indicating its strong generalization capability. The average gap of the proposed model is 5.01%, compared with 7.51% for E-GAT and 5.30% for POMO with 8-fold augmentation. This result is important because the comparison includes instances whose scale and distribution differ from the random training distribution, suggesting that constraint-oriented hyperedges provide a useful inductive bias beyond the synthetic test set. On the uniformly generated CVRP100 benchmark in Table 2, our augmented model is also competitive: the objective is 15.77, only 0.04 higher than POMO with 8-fold augmentation. The remaining difference can be partly attributed to the uniform spatial distribution, where customer neighborhoods are less clearly separated, and the advantage of constraint-oriented hyperedge construction is weakened. The absence of hyperedge embedding formation hinders the master node’s representation learning, preventing it from adequately capturing the information with associated nodes. Consequently, the greedy inference strategy employed during decoding may overlook these nodes, leading to the emergence of suboptimal subpaths. To further examine generality and scalability under non-uniform geometry, we added an XML100 subset analysis [37], as reported in Table 5. XML100 keeps the node scale fixed at 100 but changes the geometric and demand distributions, allowing us to separate scale transfer from distributional geometry. On clustered customer layouts, the gap is reduced from 10.59% with POMO to 10.11% with the proposed model, and from 6.62% to 6.48% under 8-fold augmentation. On mixed random-clustered layouts, the gap is reduced from 8.75% to 8.41%, and from 5.77% to 5.55% under 8-fold augmentation. The corresponding standard deviations are also lower. These results indicate that the hypergraph encoder is more effective when the customer distribution contains geometric clusters or mixed local structures. In such cases, pairwise dense attention tends to assign similar representations to nearby customers, which can lead to diffuse attention logits and over-smoothed node embeddings. Constraint-oriented hyperedges mitigate this effect by preserving group-level compatibility information and restricting representation aggregation to route-relevant customer sets.
+These results also clarify the difference between heavy-encoder and heavy-decoder scalability. Heavy-decoder methods such as LEHD are designed to improve large-scale generalization by dynamically rebuilding relations during decoding, and they are particularly valuable when the test size is far larger than the training size. In contrast, the proposed framework is a heavy-encoder representation-learning approach: its advantage lies in learning constraint-aware node and hyperedge representations before decoding. When a fixed-scale encoder trained on 100-node synthetic instances is transferred to much larger or denser instances, the learned neighborhood and hyperedge distributions inevitably experience a distribution shift, which explains the performance decline on the largest CVRPLIB instance. Therefore, large-scale deployment should combine the proposed hypergraph representation with cross-scale training, hierarchical hypergraph construction, stronger decoding/search, or progressive adaptation strategies [34, 53, 33, 54].
+Figure 4: Cross-demand Perturbation Analysis
+On the other hand, Fig. 4 presents the model’s robustness under various customer demand distributions. Notably, the Gaussian distribution of demands is characterized by a mean of 5.5 and a standard deviation of 1.33, while the cluster distribution centers are set at (3,5,7). Each cluster center serves as the mean for a normal distribution with a standard deviation of 0.1, ensuring that all demand values are clipped within the range of [1, 9]. This methodology aims to maintain cross-distribution noise interference in the ratio of node demands to vehicle capacities, thereby aligning more closely with real-world scenarios. If the demand range is designed to be too narrow, the CVRP would degenerate into a Traveling Salesman Problem (TSP). Conversely, an excessively broad demand range may result in vehicles returning to the depot after visiting only a few nodes, thereby compromising the validity of the capacity constraints.
+Experiments indicate that our method outperforms E-GAT even in the presence of demand-distribution perturbations. The hypergraph model exhibits a certain degree of robustness against interference, with performance degradation ranging from 3.42\%3.42%3.42\% to 6.38\%6.38%6.38\% on the noisy datasets. In comparison, the performance drop of E-GAT varied between 2.27\%2.27%2.27\% and 8.24\%8.24%8.24\%, indicating less stable behavior under the same perturbation protocol. For reference, OR-Tools uses heuristic construction and Guided Local Search, making it less sensitive to such noise because the solution can be iteratively repaired. On small- and medium-scale datasets, the solution gap between our approach and OR-Tools ranges from 0.12\%0.12%0.12\% to 3.55\%3.55%3.55\%, while E-GAT exhibits a gap of 0.47\%0.47%0.47\% to 6.56\%6.56%6.56\%. These results suggest that constraint-oriented hyperedges provide a useful robustness bias by grouping customers according to capacity-related compatibility rather than relying only on pairwise spatial attention. However, autoregressive neural solvers still lack the iterative repair capability of improvement heuristics.
+5.2.2 Ablation Study
+Table 6: Ablation Study
+Model
+CVRP 20 Gap(%)
+CVRP 50 Gap(%)
+Ours
+0.65
+2.60
+w/o dynamic hypergraph
+2.95
+7.42
+w/o data augmentation
+1.80
+2.79
+w/o dual-pointer recorder
+2.79
+6.64
+We conducted ablation studies on three key submodules of the hypergraph model by creating three variants and evaluating their effectiveness on randomly generated datasets in the greedy rollout policy. The results are summarized in Table 6 and variants presented as follows:
+Figure 5: Training Curves of Various Size Datasets for Ablation
+1.
+The first variant, denoted as w/o dynamic hypergraph, replaces the hypergraph module with a standard GAT, thereby removing the dynamic hypergraph structure.
+2.
+The second variant, denoted as w/o data augmentation, eliminates data augmentation and uses only the raw node coordinates and demands as input features for the encoder.
+3.
+The third variant, denoted as w/o dual-pointer recorder, removes the route recorder in the decoder’s dual-pointer mechanism. In this variant, decoding relies solely on a single pointer to compute attention based on the current node representation, without incorporating information from the partial solution.
+Fig. 5 illustrates the training curves of the hypergraph model and its variants under the ablation study. The results indicate that the three innovative modules we proposed contribute positively to the overall architecture. The most direct evidence for the representation contribution is the removal of the dynamic hypergraph module: the gap increases from 0.65% to 2.95% on CVRP20 and from 2.60% to 7.42% on CVRP50. This degradation is larger than that caused by removing data augmentation on CVRP50, indicating that the improvement is not merely a consequence of extra input features or parameter count. Rather, preserving constraint-oriented hyperedge identities changes the information delivered to the decoder. Removing the dual-pointer recorder also causes a large degradation, from 2.60% to 6.64% on CVRP50, which confirms that route-history context is necessary for using high-order representations in sequential construction. However, the benefits of the data augmentation module are not pronounced in small-scale datasets, and it results in a slower convergence rate. We attribute this phenomenon to the limited action space in small-scale problems, where each decision step has a restricted number of actions, making action selection highly sensitive. The additional features introduced by the data augmentation module affect the attention scores, thereby increasing the number of action nodes in the decision space. This leads to instability during random sampling decisions. As the problem scale increases, the impact of this instability diminishes.
+5.2.3 Sensitivity Analysis
+In this section, we analyze the impact of hyperparameter tuning on the performance of the proposed model. Two key hyperparameters are introduced during model construction: \deltaδ\delta and \lambdaλ\lambda.
+Figure 6: Hyperparameter Sensitivity Analysis
+1.
+\deltaδ\delta: This parameter adjusts the weight threshold for reconstructing hyperedge nodes. Only nodes with weights exceeding the threshold \deltaδ\delta are included in the hyperedge. A higher \deltaδ\delta value results in fewer nodes being incorporated into the hyperedge, thereby tightening the constraints.
+2.
+\lambdaλ\lambda: This coefficient balances the contributions of the L1L​1L1 and L2L​2L2 norms of the weight vector during hyperedge reconstruction, as defined in Equation (5). The value of \lambdaλ\lambda determines the relative influence of sparsity (L1L​1L1 norm) and smoothness (L2L​2L2 norm) on the hyperedge reconstruction loss.
+The effects of these hyperparameters on model performance are demonstrated in Fig. 6. A grid search for \deltaδ\delta in the range [-0.1,0.1][−0.1,0.1][-0.1,0.1], combined with three \lambdaλ\lambda configurations, revealed optimal performance at \delta=0δ=0\delta=0 and \lambda=0.2λ=0.2\lambda=0.2. It is important to note that \deltaδ\delta represents the weight threshold for the adaptive hyperedge reconstruction, while the mapping for hyperedge reconstruction is composed of learnable weight parameters \Theta_{\mathrm{master}}Θmaster\Theta_{\mathrm{master}}. We initialized these parameters using the Xavier uniform distribution, and during the weight learning process, we monitored the weight variation range, which remained between -0.1 and 0.1. Consequently, we conducted a hyperparameter sensitivity experiment on \deltaδ\delta using a magnitude-based grid search. The sensitivity settings for \lambdaλ\lambda were informed by prior research [50]. Additionally, our model incorporates a weight hyperparameter \gamma=0.01γ=0.01\gamma=0.01, which scales the constraint penalties \mathcal{L}_{con}ℒc​o​n\mathcal{L}_{con} and hyperedge reconstruction error \mathcal{L}_{rec\_node}ℒr​e​c​_​n​o​d​e\mathcal{L}_{rec\_node} to the same order of magnitude, thereby preventing one type of loss from dominating the optimization of the hypergraph gradients.
+The results indicate that an overly large threshold or excessive L_{1}L1L_{1} regularization reduces the number of nodes per hyperedge, weakening encoder representation and restricting decoder decisions, thus degrading performance. Conversely, overly small thresholds and minimal L_{1}L1L_{1} regularization introduce too many nodes into hyperedge reconstruction, causing over-smoothness in hypergraph representations. This sensitivity pattern is consistent with the motivation of the paper: useful hyperedges should be neither too sparse to miss feasible customer groups nor too dense to collapse into ordinary pairwise fully connected attention. The hyperedge threshold therefore controls a representation trade-off between constraint selectivity and information preservation.
+6 Conclusion
+This paper presents an end-to-end framework based on an encoder-decoder architecture to solve routing problems. In the encoder, a constraint-oriented hyperedge is constructed for each node to perform data augmentation and enhance node representation learning, which is further optimized through a hypergraph reconstruction loss. In the decoder, a dual-pointer mechanism is introduced to decode multi-head attention scores by simultaneously incorporating the partial solution state stored in the route recorder and the current node state. These scores are subsequently masked and fused through weighted aggregation, enabling the progressive construction of routing solutions. The main significance of the work is to introduce a constraint-aware high-order representation perspective into neural routing. Hypergraph learning structures the input representation by preserving constraint-induced customer groups, whereas reinforcement learning optimizes the sequential route-construction policy through label-free route-level feedback. The results show clear benefits on small- and medium-scale CVRP instances, strong improvements on CVRPTW, and an average CVRPLIB gap competitive with strong neural baselines. They also reveal limitations: large-scale transfer remains challenging when a fixed-scale hypergraph encoder is combined with greedy decoding. Future work will therefore focus on hierarchical hypergraph construction and stronger decoding/search strategies.
+References
+[1]
+R. Bai, X. Chen, Z. Chen, T. Cui, S. Gong, W. He, X. Jiang, H. Jin, J. Jin, G. Kendall, et al. (2023)
+Analytics and machine learning in vehicle routing research.
+International Journal of Production Research 61 (1), pp. 4–30.
+Cited by: §1.
+[2]
+I. Bello, H. Pham, Q. V. Le, M. Norouzi, and S. Bengio (2016)
+Neural combinatorial optimization with reinforcement learning.
+arXiv preprint arXiv:1611.09940.
+Cited by: §2.1,
+§4.3.
+[3]
+F. Berto, C. Hua, J. Park, L. Luttmann, Y. Ma, F. Bu, J. Wang, H. Ye, M. Kim, S. Choi, et al. (2025)
+RL4CO: an extensive reinforcement learning for combinatorial optimization benchmark.
+arXiv preprint arXiv:2306.17100.
+Cited by: §2.1.
+[4]
+F. Berto, C. Hua, N. G. Zepeda, A. Hottung, N. Wouda, L. Lan, K. Tierney, and J. Park (2024)
+RouteFinder: towards foundation models for vehicle routing problems.
+arXiv preprint arXiv:2406.15007.
+Cited by: §2.1.
+[5]
+J. Bi, Z. Cao, J. Zhou, W. Song, Y. Wu, J. Zhang, Y. Ma, and C. Wu (2026)
+Towards efficient constraint handling in neural solvers for routing problems.
+arXiv preprint arXiv:2602.16012.
+Cited by: §2.1.
+[6]
+J. Bi, Y. Ma, J. Wang, Z. Cao, J. Chen, Y. Sun, and Y. M. Chee (2022)
+Learning generalizable models for vehicle routing problems via knowledge distillation.
+In Advances in Neural Information Processing Systems,
+Vol. 35, pp. 31226–31238.
+Cited by: §2.1.
+[7]
+J. Bi, Y. Ma, J. Zhou, W. Song, Z. Cao, Y. Wu, and J. Zhang (2024)
+Learning to handle complex constraints for vehicle routing problems.
+arXiv preprint arXiv:2410.21066.
+Cited by: §2.1,
+§2.1.
+[8]
+B. P. Chamberlain, J. Rowbottom, D. Eynard, F. Di Giovanni, X. Dong, and M. M. Bronstein (2021)
+Grand: graph neural diffusion.
+In Proceedings of the 38th International Conference on Machine Learning,
+pp. 1407–1418.
+Cited by: §1,
+§2.2.
+[9]
+A. Chandrasekar, T. Radhika, A. R. Subhashri, H. Ahmad, and T. Radwan (2025)
+Resilient memory sampled-data controller for synchronization of semi-markovian jump competitive neural networks with mixed delays.
+International Journal of Electrical Power & Energy Systems 171, pp. 110982.
+Cited by: §1.
+[10]
+B. Chen, R. Qu, R. Bai, and W. Laesanklang (2020)
+A variable neighborhood search algorithm with reinforcement learning for a real-life periodic vehicle routing problem with time windows and open routes.
+RAIRO - Operations Research 54 (5), pp. 1467–1494.
+External Links: ISSN 0399-0559
+Cited by: §1.
+[11]
+X. Chen, R. Bai, R. Qu, and H. Dong (2022)
+Cooperative double-layer genetic programming hyper-heuristic for online container terminal truck dispatching.
+IEEE Transactions on Evolutionary Computation.
+Cited by: §1.
+[12]
+P. R. d. O. da Costa, J. Rhuggenaath, Y. Zhang, and A. Akcay (2020)
+Learning 2-opt heuristics for the traveling salesman problem via deep reinforcement learning.
+arXiv.
+External Links: 2004.01608
+Cited by: §1.
+[13]
+C. Gao, H. Shang, K. Xue, D. Li, and C. Qian (2023)
+Towards generalizable neural solvers for vehicle routing problems via ensemble with transferrable local policy.
+arXiv preprint arXiv:2308.14104.
+Cited by: §2.1,
+§4.1,
+item 5,
+Table 2.
+[14]
+Y. Gao, Y. Feng, S. Ji, and R. Ji (2022)
+HGNN+: general hypergraph neural networks.
+IEEE Transactions on Pattern Analysis and Machine Intelligence 45 (3), pp. 3181–3199.
+Cited by: §2.3.
+[15]
+Google Optimization Tools (2024)
+Google optimization tools.
+Note: OnlineAccessed: 2024-03-26
+External Links: Link
+Cited by: §2.1,
+§5.1,
+Table 2.
+[16]
+L. Guo, H. Yin, T. Chen, X. Zhang, and K. Zheng (2021)
+Hierarchical hyperedge embedding-based representation learning for group recommendation.
+ACM Transactions on Information Systems (TOIS) 40 (1), pp. 1–27.
+Cited by: §2.3.
+[17]
+Gurobi Optimization, LLC (2024)
+Gurobi optimizer.
+Note: Accessed: 2024-03-26
+External Links: Link
+Cited by: §5.1,
+Table 2.
+[18]
+W. Hamilton, Z. Ying, and J. Leskovec (2017)
+Inductive representation learning on large graphs.
+In Advances in Neural Information Processing Systems,
+Vol. 30, pp. 1025–1035.
+Cited by: §1.
+[19]
+K. Helsgaun (2017)
+An extension of the lin-kernighan-helsgaun tsp solver for constrained traveling salesman and vehicle routing problems.
+Roskilde: Roskilde University 12, pp. 966–980.
+Cited by: §5.1,
+Table 2.
+[20]
+Z. Huang, J. Zhou, Z. Cao, and Y. Xu (2025)
+Rethinking light decoder-based solvers for vehicle routing problems.
+arXiv preprint arXiv:2503.00753.
+Cited by: §2.1,
+item 6,
+Table 2.
+[21]
+S. Ioffe and C. Szegedy (2015)
+Batch normalization: accelerating deep network training by reducing internal covariate shift.
+In International conference on machine learning,
+pp. 448–456.
+Cited by: §4.1.
+[22]
+J. Jiang, Y. Wei, Y. Feng, J. Cao, and Y. Gao (2019)
+Dynamic hypergraph neural networks..
+In IJCAI,
+pp. 2635–2641.
+Cited by: §2.3.
+[23]
+Y. Jin, Y. Ding, X. Pan, K. He, L. Zhao, T. Qin, L. Song, and J. Bian (2023)
+Pointerformer: deep reinforced multi-pointer transformer for the traveling salesman problem.
+Proceedings of the AAAI Conference on Artificial Intelligence 37 (7), pp. 8132–8140.
+Cited by: §2.1.
+[24]
+C. K. Joshi, T. Laurent, and X. Bresson (2019)
+An efficient graph convolutional network technique for the travelling salesman problem.
+arXiv preprint arXiv:1906.01227.
+Cited by: §1,
+§2.2.
+[25]
+S. Karimi, A. Karimi, and A. Vahidi (2023)
+Level-$k$ reasoning, deep reinforcement learning, and monte carlo decision process for fast and safe automated lane change and speed management.
+IEEE Transactions on Intelligent Vehicles 8 (6), pp. 3556–3571.
+External Links: ISSN 2379-8904, 2379-8858,
+LCCN 4
+Cited by: §3.
+[26]
+E. Khalil, H. Dai, Y. Zhang, B. Dilkina, and L. Song (2017)
+Learning combinatorial optimization algorithms over graphs.
+In Advances in Neural Information Processing Systems,
+Vol. 30, pp. 6351–6361.
+Cited by: §1,
+§2.2.
+[27]
+D. P. Kingma and J. Ba (2014)
+Adam: a method for stochastic optimization.
+arXiv preprint arXiv:1412.6980.
+Cited by: §5.1.
+[28]
+W. Kool, H. Van Hoof, and M. Welling (2019)
+Attention, learn to solve routing problems!.
+arXiv preprint arXiv:1803.08475.
+Cited by: §1,
+§2.1,
+§4.3.2,
+§4.3,
+item 2,
+Table 2,
+Table 2,
+Table 2.
+[29]
+Y. Kwon, J. Choo, B. Kim, I. Yoon, Y. Gwon, and S. Min (2020)
+POMO: policy optimization with multiple optima for reinforcement learning.
+In Advances in Neural Information Processing Systems,
+Vol. 33, pp. 1188–1198.
+Cited by: §1,
+§2.1,
+§4.1,
+§4.3,
+item 3,
+Table 2,
+Table 2,
+Table 2.
+[30]
+K. Lei, P. Guo, Y. Wang, X. Wu, and W. Zhao (2022)
+Solve routing problems with a residual edge-graph attention neural network.
+Neurocomputing 508, pp. 79–98.
+External Links: ISSN 09252312
+Cited by: §1,
+§2.2,
+§4.3.2,
+§4.3,
+item 7,
+§5.2.1,
+Table 2,
+Table 2.
+[31]
+Z. Lin, Y. Wu, B. Zhou, Z. Cao, W. Song, Y. Zhang, and S. Jayavelu (2024)
+Cross-problem learning for solving vehicle routing problems.
+arXiv preprint arXiv:2404.11677.
+Cited by: §2.1.
+[32]
+S. Liu, Y. Zhang, K. Tang, and X. Yao (2023)
+How good is neural combinatorial optimization? a systematic evaluation on the traveling salesman problem.
+IEEE Computational Intelligence Magazine 18 (3), pp. 14–28.
+External Links: ISSN 1556-603X, 1556-6048,
+LCCN 1
+Cited by: §1.
+[33]
+S. Liu, Z. Cao, N. Yin, and Y. Ong (2026)
+Scale-net: a hierarchical u-net framework for cross-scale generalization in multi-task vehicle routing.
+Proceedings of the AAAI Conference on Artificial Intelligence 40 (17), pp. 19743–19751.
+Cited by: §2.1,
+§5.2.1.
+[34]
+F. Luo, X. Lin, F. Liu, Q. Zhang, and Z. Wang (2023)
+Neural combinatorial optimization with heavy decoder: toward large scale generalization.
+In Advances in Neural Information Processing Systems,
+Vol. 36, pp. 8845–8864.
+Cited by: §2.1,
+item 4,
+§5.2.1,
+Table 2.
+[35]
+Q. Ma, S. Ge, D. He, D. Thaker, and I. Drori (2019)
+Combinatorial optimization by graph pointer networks and hierarchical reinforcement learning.
+arXiv preprint arXiv:1911.04936.
+Cited by: §1,
+§2.2.
+[36]
+M. Nazari, A. Oroojlooy, L. Snyder, and M. Takác (2018)
+Reinforcement learning for solving the vehicle routing problem.
+In Advances in Neural Information Processing Systems,
+Vol. 31, pp. 9861–9871.
+Cited by: §1,
+§2.1,
+§4.3,
+item 1,
+Table 2.
+[37]
+E. Queiroga, R. Sadykov, E. Uchoa, and T. Vidal (2022)
+10,000 optimal CVRP solutions for testing machine learning based heuristics.
+Note: AAAI-22 Workshop on Machine Learning for Operations Research (ML4OR)
+External Links: Link
+Cited by: §5.2.1.
+[38]
+Y. Senuma, Z. Wang, Y. Nakano, and J. Ohya (2022)
+GEAR: a graph edge attention routing algorithm solving combinatorial optimization problem with graph edge cost.
+In Proceedings of the 10th ACM SIGSPATIAL International Workshop on Analytics for Big Geospatial Data,
+pp. 8–16.
+Cited by: §1,
+§2.2.
+[39]
+A. R. Subhashri, T. Radhika, and A. Chandrasekar (2026)
+Robust dissipative sliding mode control synchronization of memristive inertial competitive neural networks with time-varying delay.
+The European Physical Journal Special Topics 234, pp. 8403–8425.
+Cited by: §1.
+[40]
+M. Sugiyama and K. Borgwardt (2015)
+Halting in random walk kernels.
+In Advances in Neural Information Processing Systems,
+Vol. 28, pp. 1639–1647.
+Cited by: §1.
+[41]
+R. S. Sutton, D. McAllester, S. Singh, and Y. Mansour (1999)
+Policy gradient methods for reinforcement learning with function approximation.
+In Advances in Neural Information Processing Systems,
+Vol. 12, pp. 1057–1063.
+Cited by: §4.4.1.
+[42]
+A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin (2017)
+Attention is all you need.
+In Advances in Neural Information Processing Systems,
+Vol. 30, pp. 6000–6010.
+Cited by: §1.
+[43]
+P. Veličković, G. Cucurull, A. Casanova, A. Romero, P. Lio, and Y. Bengio (2017)
+Graph attention networks.
+arXiv preprint arXiv:1710.10903.
+Cited by: §1.
+[44]
+O. Vinyals, M. Fortunato, and N. Jaitly (2015)
+Pointer networks.
+In Advances in Neural Information Processing Systems,
+Vol. 28, pp. 2692–2700.
+Cited by: §1,
+§2.1.
+[45]
+Z. Wang, R. Bai, F. Khan, E. Özcan, and T. Zhang (2024)
+Gase: graph attention sampling with edges fusion for solving vehicle routing problems.
+Memetic Computing 16 (3), pp. 337–353.
+Cited by: §1,
+§2.2,
+§4.3.2,
+item 8,
+Table 2.
+[46]
+Y. Xiao, D. Wang, X. Wu, Y. Wu, B. Li, W. Du, L. Wang, and Y. Zhou (2025)
+Improving generalization of neural vehicle routing problem solvers through the lens of model architecture.
+Neural Networks 187, pp. 107380.
+Cited by: §1.
+[47]
+N. Xue, R. Bai, R. Qu, and U. Aickelin (2021)
+A hybrid pricing and cutting approach for the multi-shift full truckload vehicle routing problem.
+European Journal of Operational Research 292 (2), pp. 500–514 (English).
+Cited by: §1.
+[48]
+H. Yang, M. Zhao, L. Yuan, Y. Yu, Z. Li, and M. Gu (2023)
+Memory-efficient transformer-based network model for traveling salesman problem.
+Neural Networks 161, pp. 589–597.
+Cited by: §1,
+§2.1.
+[49]
+J. Zhang, J. Kim, B. O’Donoghue, and S. Boyd (2021)
+Sample efficient reinforcement learning with reinforce.
+In Proceedings of the AAAI conference on artificial intelligence,
+Vol. 35, pp. 10887–10895.
+Cited by: §4.4.
+[50]
+T. Zhang, Y. Liu, Z. Shen, X. Ma, P. Qi, Z. Ding, and J. Jin (2025)
+Learning from heterogeneity: a dynamic learning framework for hypergraphs.
+IEEE Transactions on Artificial Intelligence.
+Cited by: §2.3,
+§5.2.3.
+[51]
+J. Zhao, M. Poon, V. Y. Tan, and Z. Zhang (2024)
+A hybrid genetic search and dynamic programming-based split algorithm for the multi-trip time-dependent vehicle routing problem.
+European Journal of Operational Research.
+Cited by: §1.
+[52]
+J. Zheng, K. He, J. Zhou, Y. Jin, and C. Li (2021)
+Combining reinforcement learning with lin-kernighan-helsgaun algorithm for the traveling salesman problem.
+In Proceedings of the AAAI conference on artificial intelligence,
+Vol. 35, pp. 12445–12452.
+Cited by: §3.2.
+[53]
+J. Zhou, Y. Wu, W. Song, Z. Cao, and J. Zhang (2023)
+Towards omni-generalizable neural methods for vehicle routing problems.
+In Proceedings of the 40th International Conference on Machine Learning,
+pp. 42769–42789.
+Cited by: §2.1,
+§5.2.1.
+[54]
+J. Zhu, Y. Wu, Z. Lin, Z. Zhang, H. Yin, Z. Cao, S. Jayavelu, and X. Li (2026)
+Bridging synthetic and real routing problems via llm-guided instance generation and progressive adaptation.
+Proceedings of the AAAI Conference on Artificial Intelligence 40 (43), pp. 44764–44772.
+Cited by: §2.1,
+§5.2.1.
+[55]
+T. Zhu, X. Shi, X. Xu, and J. Cao (2023)
+An accelerated end-to-end method for solving routing problems.
+Neural Networks 164, pp. 535–545.
+Cited by: §1.
+Experimental support, please
+view the build logs
+for errors. Generated by
+L
+A
+T
+E
+xml
+.
+Instructions for reporting errors
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+methods listed below:
+Click the "Report Issue" (
+) button, located in the page header.
+Tip: You can select the relevant text first, to include it in your report.
+Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we
+may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+all.
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+We gratefully acknowledge support from
+our major funders,
+member institutions, ,
+and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status (opens in new tab)
+Major funding support from

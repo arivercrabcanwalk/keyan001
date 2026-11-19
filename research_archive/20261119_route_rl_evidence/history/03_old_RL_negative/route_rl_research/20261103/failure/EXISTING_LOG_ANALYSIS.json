@@ -1,0 +1,312 @@
+{
+  "kind": "existing_json_only_no_optimizer",
+  "training": {
+    "11": {
+      "train_drone_tasks": 541,
+      "episodes": 480,
+      "transitions": 3854,
+      "training_seconds": 58.51256287982687,
+      "unavoidable_unsampled_lower_bound": 61,
+      "python_rng_replay_distinct_task_indices": 317,
+      "python_rng_replay_unsampled": 224,
+      "replay_caveat": "Replays CPython random choice/shuffle from code and logged transition counts; not independently logged task identities",
+      "validation_curve": [
+        {
+          "update": 5,
+          "delta": 0.9855703276253974
+        },
+        {
+          "update": 10,
+          "delta": 3.1899303155896686
+        },
+        {
+          "update": 15,
+          "delta": 2.176549788212417
+        },
+        {
+          "update": 20,
+          "delta": 2.5300676753817295
+        },
+        {
+          "update": 25,
+          "delta": 1.3007476569317176
+        },
+        {
+          "update": 30,
+          "delta": -0.028278934815645113
+        },
+        {
+          "update": 35,
+          "delta": 0.09854657387984811
+        },
+        {
+          "update": 40,
+          "delta": 0.7107898124528029
+        },
+        {
+          "update": 45,
+          "delta": 0.4357379146533968
+        },
+        {
+          "update": 50,
+          "delta": 1.0537277671403686
+        },
+        {
+          "update": 55,
+          "delta": 0.9026196333526652
+        },
+        {
+          "update": 60,
+          "delta": 0.7048426513054057
+        }
+      ]
+    },
+    "23": {
+      "train_drone_tasks": 541,
+      "episodes": 480,
+      "transitions": 3964,
+      "training_seconds": 61.11752054700628,
+      "unavoidable_unsampled_lower_bound": 61,
+      "python_rng_replay_distinct_task_indices": 318,
+      "python_rng_replay_unsampled": 223,
+      "replay_caveat": "Replays CPython random choice/shuffle from code and logged transition counts; not independently logged task identities",
+      "validation_curve": [
+        {
+          "update": 5,
+          "delta": 8.386868426107377
+        },
+        {
+          "update": 10,
+          "delta": 8.386868426107377
+        },
+        {
+          "update": 15,
+          "delta": 1.9015976937240306
+        },
+        {
+          "update": 20,
+          "delta": 1.6007443803272825
+        },
+        {
+          "update": 25,
+          "delta": 1.5803225397619844
+        },
+        {
+          "update": 30,
+          "delta": 1.8601849246821616
+        },
+        {
+          "update": 35,
+          "delta": 1.1116405495758757
+        },
+        {
+          "update": 40,
+          "delta": 0.7019851895838185
+        },
+        {
+          "update": 45,
+          "delta": 0.25049644345451927
+        },
+        {
+          "update": 50,
+          "delta": 0.14729510928170475
+        },
+        {
+          "update": 55,
+          "delta": -0.263371644337447
+        },
+        {
+          "update": 60,
+          "delta": -0.3307136951258334
+        }
+      ]
+    },
+    "37": {
+      "train_drone_tasks": 541,
+      "episodes": 480,
+      "transitions": 4020,
+      "training_seconds": 63.1135013489984,
+      "unavoidable_unsampled_lower_bound": 61,
+      "python_rng_replay_distinct_task_indices": 332,
+      "python_rng_replay_unsampled": 209,
+      "replay_caveat": "Replays CPython random choice/shuffle from code and logged transition counts; not independently logged task identities",
+      "validation_curve": [
+        {
+          "update": 5,
+          "delta": 8.38260969364231
+        },
+        {
+          "update": 10,
+          "delta": 5.54343941385959
+        },
+        {
+          "update": 15,
+          "delta": 1.0298533517216228
+        },
+        {
+          "update": 20,
+          "delta": 1.30686758593302
+        },
+        {
+          "update": 25,
+          "delta": 0.9037656424599163
+        },
+        {
+          "update": 30,
+          "delta": 1.2549312242542507
+        },
+        {
+          "update": 35,
+          "delta": 1.0773718769738976
+        },
+        {
+          "update": 40,
+          "delta": 1.0397456893555683
+        },
+        {
+          "update": 45,
+          "delta": 7.397980445244933
+        },
+        {
+          "update": 50,
+          "delta": 8.386868426107375
+        },
+        {
+          "update": 55,
+          "delta": 7.454644968379452
+        },
+        {
+          "update": 60,
+          "delta": 7.662723796526142
+        }
+      ]
+    }
+  },
+  "evaluation": {
+    "route_rl_6s": {
+      "rows": 72,
+      "mean_search_seconds": 5.966342911699838,
+      "mean_e2e_seconds": 5.968527659385775,
+      "max_search_overrun_seconds": -0.008526232093572617,
+      "rollouts": {
+        "min": 46,
+        "mean": 245.04166666666666,
+        "max": 785
+      },
+      "route_decisions": {
+        "min": 6552,
+        "mean": 8377.236111111111,
+        "max": 9120
+      },
+      "solver_seconds": {
+        "min": 5.907072111964226,
+        "mean": 5.966108760473111,
+        "max": 5.99130248837173
+      },
+      "best_cost": {
+        "min": 142.5447863347431,
+        "mean": 492.13375379630264,
+        "max": 1092.1091718733858
+      },
+      "best_operating_minutes": {
+        "min": 142.68957266948618,
+        "mean": 650.6341742592721,
+        "max": 1521.0183437467717
+      }
+    },
+    "route_alns_6s": {
+      "rows": 72,
+      "mean_search_seconds": 6.000384653155278,
+      "mean_e2e_seconds": 6.002472858326251,
+      "max_search_overrun_seconds": 0.0006929319351911545,
+      "iterations": {
+        "min": 347984,
+        "mean": 513327.44444444444,
+        "max": 993576
+      },
+      "feasible_candidates": {
+        "min": 190257,
+        "mean": 298133.94444444444,
+        "max": 435612
+      },
+      "accepted": {
+        "min": 152667,
+        "mean": 217634.75,
+        "max": 295660
+      },
+      "best_route_operating_minutes": {
+        "min": 142.68957266948615,
+        "mean": 638.456262388457,
+        "max": 1494.049459433691
+      },
+      "solver_seconds": {
+        "min": 6.0000444683246315,
+        "mean": 6.0000808675928665,
+        "max": 6.000138753093779
+      }
+    },
+    "route_rl_12s": {
+      "rows": 72,
+      "mean_search_seconds": 11.966268339498331,
+      "mean_e2e_seconds": 11.968480217141202,
+      "max_search_overrun_seconds": -0.010400675237178802,
+      "rollouts": {
+        "min": 91,
+        "mean": 503.1666666666667,
+        "max": 1577
+      },
+      "route_decisions": {
+        "min": 13126,
+        "mean": 16932,
+        "max": 18296
+      },
+      "solver_seconds": {
+        "min": 11.864042147994041,
+        "mean": 11.96603147882787,
+        "max": 11.989433442708105
+      },
+      "best_cost": {
+        "min": 142.5447863347431,
+        "mean": 492.07243587973363,
+        "max": 1092.1091718733858
+      },
+      "best_operating_minutes": {
+        "min": 142.68957266948618,
+        "mean": 650.5115384261339,
+        "max": 1521.0183437467717
+      }
+    },
+    "route_alns_12s": {
+      "rows": 72,
+      "mean_search_seconds": 12.000386787481451,
+      "mean_e2e_seconds": 12.002485540546736,
+      "max_search_overrun_seconds": 0.0006796391680836678,
+      "iterations": {
+        "min": 697744,
+        "mean": 1024449.7777777778,
+        "max": 1957279
+      },
+      "feasible_candidates": {
+        "min": 378238,
+        "mean": 594016.0138888889,
+        "max": 857669
+      },
+      "accepted": {
+        "min": 306038,
+        "mean": 433567.7638888889,
+        "max": 606130
+      },
+      "best_route_operating_minutes": {
+        "min": 142.68957266948615,
+        "mean": 638.323314519734,
+        "max": 1493.4206584830358
+      },
+      "solver_seconds": {
+        "min": 12.00004277098924,
+        "mean": 12.0000843799078,
+        "max": 12.000315786805004
+      }
+    }
+  },
+  "model_load_seconds": 0.012308008968830109
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "validate.py",
+      "ORIGINALS/air2_before.py",
+      "BASELINE",
+      "runs/BASELINE.json"
+    ],
+    "input": "INPUT.json; arbitrary-action force used as boundary adapter",
+    "stdout_literal": "{\"cases_total\": 7, \"invalid_next_rejected\": 0, \"phase\": \"BASELINE\", \"preserved\": 4, \"status\": \"OLD_FORCE_NOT_A_BOUNDARY_ADAPTER\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "wall_s": 0.04154088534414768,
+    "child_cpu_s": 0.04094,
+    "utc": "2026-11-14T04:02:23.081432+00:00"
+  },
+  {
+    "phase": "MODIFIED",
+    "command": [
+      "/usr/bin/python3",
+      "validate.py",
+      "MODIFIED_FILE.py",
+      "MODIFIED",
+      "runs/MODIFIED.json"
+    ],
+    "input": "same INPUT.json; dedicated next-token boundary adapter",
+    "stdout_literal": "{\"cases_total\": 7, \"invalid_next_rejected\": 2, \"phase\": \"MODIFIED\", \"preserved\": 7, \"status\": \"BOUNDARY_ADAPTER_PASS\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "wall_s": 0.04129060264676809,
+    "child_cpu_s": 0.04069699999999999,
+    "utc": "2026-11-14T04:02:23.123187+00:00"
+  },
+  {
+    "phase": "ROLLBACK_APPLY",
+    "command": [
+      "/bin/sh",
+      "ROLLBACK.sh",
+      "<EXECUTION_PATH>"
+    ],
+    "input": "independent modified copy; original bytes restored",
+    "stdout_literal": "ROLLBACK_BYTES_RESTORED\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "wall_s": 0.00529941963031888,
+    "child_cpu_s": 0.004819000000000011,
+    "utc": "2026-11-14T04:02:23.129192+00:00"
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": [
+      "/usr/bin/python3",
+      "validate.py",
+      "ROLLBACK_COPY/MODIFIED_FILE.py",
+      "ROLLBACK",
+      "runs/ROLLBACK.json"
+    ],
+    "input": "same INPUT.json; restored original behavior",
+    "stdout_literal": "{\"cases_total\": 7, \"invalid_next_rejected\": 0, \"phase\": \"ROLLBACK\", \"preserved\": 4, \"status\": \"OLD_FORCE_NOT_A_BOUNDARY_ADAPTER\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "wall_s": 0.041312091052532196,
+    "child_cpu_s": 0.040714,
+    "utc": "2026-11-14T04:02:23.170878+00:00"
+  }
+]

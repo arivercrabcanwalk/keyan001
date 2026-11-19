@@ -1,0 +1,63 @@
+TOOL_TRANSACTION_VERIFICATION
+changed_branch=G0 joint-event documentation (Git branch unchanged)
+changed_field=LATEST_STATUS.latest_entry: RESERVE_V5_STATIC_HOLD -> JOINT_EVENT_G0_NO_GO; historical scientific gates unchanged
+MODIFIED_FILE=<LOCAL_PATH>
+DIFF_FILE=<LOCAL_PATH>
+VERIFICATION=<LOCAL_PATH>
+ROLLBACK=<LOCAL_PATH>
+WORKING_DIRECTORY=<LOCAL_PATH>
+ORIGINAL_STATUS_SHA256=60fb898a54c157b1235cb968239dc1f81b6a77294622f38497abc082c03bc7ef
+MODIFIED_STATUS_SHA256=4e8cb94803d0c87aa807f7a35439829f2194697a2687a0c7eb89d85a6563df6f
+CHECK_SCOPE=document/source-hash/metadata integrity; no research-code import, simulation or solver
+SOURCE_METADATA=2 CrossRef HTTP200 records; fulltext=0; publisher preview does not equal fulltext
+SCIENTIFIC_RUNS=0; TRAINING=0; SOLVER=0; QUALITY_EVALUATIONS=0; NEW_OR_RESTORED_SUBAGENTS=0
+
+BASELINE_COMMAND: python3 CHECK.py BASELINE ORIGINALS
+BASELINE_INPUT: ORIGINALS+frozen source hashes+metadata
+BASELINE_STDIN: none
+BASELINE_LITERAL_STDOUT:
+PASS_DOCUMENT_INTEGRITY status=RESERVE_V5_STATIC_HOLD verified_metadata=2
+BASELINE_LITERAL_STDERR: ''
+BASELINE_EXIT_STATUS: 0
+
+MODIFIED_COMMAND: python3 CHECK.py MODIFIED MODIFIED_FILE
+MODIFIED_INPUT: modified or rollback document bundle + same fixed evidence
+MODIFIED_STDIN: none
+MODIFIED_LITERAL_STDOUT:
+PASS_DOCUMENT_INTEGRITY status=JOINT_EVENT_G0_NO_GO verified_metadata=2
+MODIFIED_LITERAL_STDERR: ''
+MODIFIED_EXIT_STATUS: 0
+
+ROLLBACK_COMMAND: ./ROLLBACK.sh ROLLBACK_COPY
+ROLLBACK_INPUT: modified or rollback document bundle + same fixed evidence
+ROLLBACK_STDIN: none
+ROLLBACK_LITERAL_STDOUT:
+restored=ROLLBACK_COPY status=RESERVE_V5_STATIC_HOLD bytes=MATCH
+ROLLBACK_LITERAL_STDERR: ''
+ROLLBACK_EXIT_STATUS: 0
+
+RESTORED_COMMAND: python3 CHECK.py BASELINE ROLLBACK_COPY
+RESTORED_INPUT: modified or rollback document bundle + same fixed evidence
+RESTORED_STDIN: none
+RESTORED_LITERAL_STDOUT:
+PASS_DOCUMENT_INTEGRITY status=RESERVE_V5_STATIC_HOLD verified_metadata=2
+RESTORED_LITERAL_STDERR: ''
+RESTORED_EXIT_STATUS: 0
+
+MAIN_MODIFIED_RETAINED_COMMAND: python3 CHECK.py MODIFIED MODIFIED_FILE
+MAIN_MODIFIED_RETAINED_INPUT: modified or rollback document bundle + same fixed evidence
+MAIN_MODIFIED_RETAINED_STDIN: none
+MAIN_MODIFIED_RETAINED_LITERAL_STDOUT:
+PASS_DOCUMENT_INTEGRITY status=JOINT_EVENT_G0_NO_GO verified_metadata=2
+MAIN_MODIFIED_RETAINED_LITERAL_STDERR: ''
+MAIN_MODIFIED_RETAINED_EXIT_STATUS: 0
+
+RESTORED_STATUS=RESERVE_V5_STATIC_HOLD; original status bytes/SHA restored on separate ROLLBACK_COPY
+RESTORED_BEHAVIOR=original document integrity output reproduced, exit0; analysis/evidence files retained; main MODIFIED_FILE remains JOINT_EVENT_G0_NO_GO
+LIVE_STATUS=identical to MODIFIED_FILE/LATEST_STATUS.md; previous content preserved as exact suffix
+ESTABLISHED=two primary DOI identity records and an analytic equal-marginal counterexample; no performance result
+UNPROVED=novel algorithm, learned advantage, Liu superiority, strongest-nonRL superiority, strict-cap M_return opportunity
+CLOSED=current joint-event VFA candidate NO_GO_AS_DISTINCT_ALGORITHM; prior experiment identities not reopened
+NEXT=fulltext comparison after SI scope reply; no new scientific run until G0/G3 pass
+USER_DECISION=SI scope question pending; no experimental admission requested
+GOAL=active; previous turn progress; full objective not completed

@@ -1,0 +1,26 @@
+{
+  "already_seen": "ordinal 1 only (12 maps, analysed in G3_DEV_REPORT.md)",
+  "budget": {
+    "author_wall_s_per_map_max": 1800,
+    "output_bytes_cap": 2000000000,
+    "route_budget_s": [
+      6,
+      12
+    ]
+  },
+  "decision_rule": "replication counts only if the point estimate keeps the same sign and the 95% CI excludes zero; otherwise the dev effect is reported as not replicated",
+  "expected_maps": 36,
+  "families": 12,
+  "namespace": "takeover-20261112-g3-v1",
+  "no_selection": "all 36 maps enter; no ordinal, family, or map may be dropped after results are seen; anchor failures are retained and reported",
+  "ordinals": [
+    2,
+    3,
+    4
+  ],
+  "partition": "opportunity",
+  "primary_estimand": "mean paired change in M_return of exact cost-neutral reassignment vs author anchor, map-level bootstrap 95% CI",
+  "registered_at_utc": "2026-11-12T08:06:55Z",
+  "schema": "takeover_g3_confirmation_prereg_v1",
+  "secondary_estimand": "LPT 6s vs exact cost-neutral; joint_minmax 12s vs exact cost-neutral"
+}

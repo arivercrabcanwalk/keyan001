@@ -1,0 +1,115 @@
+{
+  "active_core_source_sha256": {
+    "emergency_scenario.py": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+    "weather_full_map.py": "c7db62049f8d6011153e0cf9139a9098a92d07fc62977f5359c18ffb23069b25",
+    "weather_oracle.py": "c529cae8823a9685f91ca5e5549bdd69aab2f3d13cfd5198874c38a85f8a3034",
+    "weather_replay.py": "6863dd602baa7d83177b96651bbabe06235c6f47139baac5a77aef63f667a1fd"
+  },
+  "allowed_claims": [
+    "A deterministic synthetic weather/NFZ engineering environment with bounded contract evidence.",
+    "Exactness and causal-frontier claims within the explicitly declared finite-domain model.",
+    "A reproducible emergency event simulator with 120 smoke rows, 13 boundary cases, finite-horizon phase-accounting, and fixed-station action-domain witnesses."
+  ],
+  "bounded_theorem_contracts": [
+    {
+      "claim": "Piecewise-constant wind straight-leg integration is exact under the declared fixed-airspeed model.",
+      "id": "T1",
+      "scope": "finite knots, no waiting, one straight segment at a time",
+      "witness": "weather_oracle.py:_integrate_leg; weather_replay.py:_integrate"
+    },
+    {
+      "claim": "The visibility search is finite and deterministic under the no-wait/no-cycle simple-path contract.",
+      "id": "T2",
+      "scope": "endpoint plus convex-NFZ-vertex graph; stable (arrival, distance, path) tie-break",
+      "witness": "weather_oracle.py:plan_route; weather_replay.py:replay_route"
+    },
+    {
+      "claim": "Strict-interior NFZ overlap is rejected only when the integrated time interval overlaps the half-open active interval.",
+      "id": "T3",
+      "scope": "convex polygon, boundary/tangent legs legal, active interval [on, off)",
+      "witness": "weather_oracle.py:_inside_distance_interval; weather_replay.py:_strict_interior_distances"
+    },
+    {
+      "claim": "Weather observations expose only the declared causal frontier and the independent replay checks terminal route admissibility.",
+      "id": "T4",
+      "scope": "fixed outer station/ownership contract; no claim of generalization",
+      "witness": "weather_full_map.py:observation/step/replay_weather_solution; formal_contracts_20261105/evidence/formal_contracts.json"
+    },
+    {
+      "claim": "Emergency events have deterministic ordering and account only the executed finite-horizon position, energy, duty, and cost prefix.",
+      "id": "T5",
+      "scope": "finite drones/tasks, bounded waits, declared piecewise-constant trace, terminal failure stops a drone",
+      "witness": "emergency_scenario.py:EmergencySimulator._accrue_event/_handle_event; PHASE_ACCOUNTING_PROOF.md; phase-accounting transaction"
+    },
+    {
+      "claim": "Emergency rates use an explicit fixed denominator, including a null zero-emergency denominator.",
+      "id": "T6",
+      "scope": "multiple emergency tasks, exact deadline, late delivery, zero-emergency case",
+      "witness": "emergency_scenario.py:result; emergency_boundary_suite_release_20261105.json"
+    },
+    {
+      "claim": "Fixed station ownership is preserved by the ranking baselines, and action masks exclude busy, terminal, horizon, and invalid-index actions.",
+      "id": "T7",
+      "scope": "2-4 fixed stations, normal/reversed task order, three baselines; bounded event model",
+      "witness": "STATION_ACTION_DOMAIN_PROOF.md; verify_station_action_domain.py; station-action-domain transaction"
+    }
+  ],
+  "engineering_readiness": {
+    "current_release_receipt": "<LOCAL_PATH>",
+    "emergency_boundary_cases": 13,
+    "emergency_paired_scenarios": 40,
+    "emergency_smoke_rows": 120,
+    "emergency_station_action_domain_transaction": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+    "emergency_windows_bundle": {
+      "active_module_sha256": "43794ae3ec936c8160c66178be706b37949d0233af2aded46e171dc2c872bdc6",
+      "files": 60,
+      "path": "<LOCAL_PATH>",
+      "sha256": "c56c5fd002c0b3cd7bfd283e096f1d758e3499095a133aa03f696bfc73fca4ec"
+    },
+    "formal_checks": 2238,
+    "status": "PASS",
+    "v15_bundle": {
+      "archive_sha256": "2442db5982104a3d4a6dbe892b35f0923e571e7ac380d541e0c496c764b2fb9f",
+      "manifest_sha256": "629c11380d38b66900d8672a01fe8e829bb3ffbe9307727e2903e94706eb9ae3",
+      "path": "<LOCAL_PATH>",
+      "payload_files": 64
+    }
+  },
+  "interpretation": "Engineering PASS is evidence of implementation integrity only. The current state does not support a positive RL, novelty, generalization, or flight-safety conclusion.",
+  "prohibited_claims": [
+    "RL superiority over the author solution or strongest same-objective non-RL control.",
+    "Distinct algorithmic novelty or a new metric novelty claim.",
+    "Real-weather calibration, confirmation-set statistical power, or real-flight safety.",
+    "A completed manuscript or G7/G8 publication readiness."
+  ],
+  "required_next_scientific_gate": "Register a distinct non-rescue protocol with fixed train/validation populations, at least three independent seeds, author and strongest same-objective non-RL controls, complete-candidate accounting, and predeclared statistical analysis before any new run.",
+  "schema": "paper_readiness_audit_v1",
+  "scientific_readiness": {
+    "blockers": [
+      {
+        "evidence": "STATE.json:gates.G4; STATE.json:weather_v3_development",
+        "gate": "G4",
+        "reason": "No complete candidate and no demonstrated improvement over author and strongest same-objective non-RL control."
+      },
+      {
+        "evidence": "STATE.json:g0_candidate; STATE.json:gates.G6",
+        "gate": "G0/G6",
+        "reason": "No mechanism was approved as distinct algorithmic novelty; ablation gate has not started."
+      },
+      {
+        "evidence": "STATE.json:paper_writing_enabled; STATE.json:gates.G7; STATE.json:gates.G8",
+        "gate": "G7/G8",
+        "reason": "Paper-writing and clean-package gates remain closed."
+      },
+      {
+        "evidence": "STATE.json:P3_fixed_population; STATE.json:current_gate",
+        "gate": "P3",
+        "reason": "Fixed-population common-BC feasibility gate failed before PPO/VAL; diagnostic replay did not reopen it."
+      }
+    ],
+    "current_gate": "P3_NO_PPO_OR_VAL_DUE_TRAIN_FEASIBILITY_FAILURE",
+    "state_status": "P3_TEACHER_STATE_FIT_DIAGNOSTIC_COMPLETE_P3_REMAINS_CLOSED",
+    "status": "NO_GO"
+  },
+  "status": "NOT_READY_FOR_CLAIMED_RL_PAPER"
+}

@@ -1,0 +1,56 @@
+DOCUMENT TRANSACTION ONLY: no research code imported; no scientific test/training/solver.
+Changed field: LATEST_STATUS.md static G0 evidence prefix; all previous bytes retained as exact suffix.
+Documentary package STATE.g0_decision = G0_NO_GO_CENTERED_DUAL_SCORE_STANDARD_AND_STATIC_ZERO.
+Canonical scientific STATE files unchanged. G0 NO-GO; G3/G4 NOT PASSED; project incomplete.
+CWD: <LOCAL_PATH>
+MODIFIED_FILE: <LOCAL_PATH>
+DIFF_FILE: <LOCAL_PATH>
+VERIFICATION: <LOCAL_PATH>
+ROLLBACK: <LOCAL_PATH>
+BASELINE SHA256: fce67b16dcd20b48a6f999bcfb35db1e75b9c8a3e63a2c505f3d02500f1eedaa
+MODIFIED SHA256: 4cca3afb1f0ca1ae11b33874582b93b0f669a59c170f339961bad5a65d10c076
+
+BASELINE
+COMMAND: ./CHECK.py baseline
+INPUT: ORIGINALS/LATEST_STATUS.md; live baseline; protected scientific states/code/history/user PDFs; source/access records
+STDIN: <empty>
+STDOUT_LITERAL: "BASELINE PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+
+MODIFIED
+COMMAND: ./CHECK.py modified
+INPUT: MODIFIED_FILE.md and updated live status; exact suffix/diff; unchanged protected sources; access/gate invariants
+STDIN: <empty>
+STDOUT_LITERAL: "MODIFIED PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+
+ROLLBACK
+COMMAND: ./ROLLBACK.sh ROLLBACK_COPY/LATEST_STATUS.md
+INPUT: ROLLBACK_COPY/LATEST_STATUS.md initially copied from MODIFIED_FILE.md; baseline bytes from ORIGINALS/LATEST_STATUS.md
+STDIN: <empty>
+STDOUT_LITERAL: "ROLLBACK PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+
+ROLLBACK_VERIFY
+COMMAND: ./CHECK.py rollback
+INPUT: restored isolated copy versus ORIGINALS; live and MODIFIED_FILE.md remain changed; scientific states/code/history unchanged
+STDIN: <empty>
+STDOUT_LITERAL: "ROLLBACK VERIFY PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+
+FINAL
+COMMAND: ./CHECK.py final
+INPUT: four artifacts; executable rollback; all package JSON; source/access, strict contract and gate invariants
+STDIN: <empty>
+STDOUT_LITERAL: "FINAL DOCUMENT CHECK PASS\n"
+STDERR_LITERAL: ""
+EXIT_STATUS: 0
+
+RESTORED STATUS: isolated copy exactly matches ORIGINALS/LATEST_STATUS.md; previous bibliography prefix restored.
+RESTORED SHA256: fce67b16dcd20b48a6f999bcfb35db1e75b9c8a3e63a2c505f3d02500f1eedaa
+LIVE STATUS: static G0 prefix retained; MODIFIED_FILE.md remains changed.
+RESTORED BEHAVIOR: documentation restored in isolated copy only; scientific behavior was not run or changed.

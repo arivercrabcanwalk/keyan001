@@ -1,0 +1,215 @@
+SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning (https://arxiv.org/html/2503.04085v1)
+citeturn15view0 [wordlim: 200] Crawled: yesterday; Content type: text/html; Source: open({"ref_id":"https://arxiv.org/html/2503.04085v1","lineno":null}); Total lines: 592
+L0: ##### Report GitHub Issue
+L1: 
+L2: [Button: ×]
+L3: 
+L4: Title: [Input: Enter title]
+L5: 
+L6: Content selection saved. Describe the issue below:
+L7: 
+L8: Description:
+L9: 
+L10: [Button: Submit without GitHub] [Button: Submit in GitHub]
+L11: 
+L12: 【0†Why HTML?†info.arxiv.org】 Report Issue 【1†Back to Abstract】 【2†Download PDF】 Contents Reading mode Colour theme
+L13:   1. 【3†Abstract.】
+L14:   2. 【4†1 Introduction】
+L15:   3. 【5†2 Related Works】
+L16:   4. 【6†3 Preliminaries】
+L17:   5. 【7†4 Methodology】
+L18:     1. 【8†4.1 Framework Overview】
+L19:     2. 【9†4.2 Policy Model Architecture】
+L20:       1. 【10†4.2.1 Simultaneous Encoder】
+L21:       2. 【11†4.2.2 Vehicle Selection Decoder】
+L22:       3. 【12†4.2.3 Trip Construction Decoder】
+L23:     3. 【13†4.3 Computational Complexity Analysis】
+L24:     4. 【14†4.4 Policy Model Training】
+L25:   6. 【15†5 Experiments】
+L26:     1. 【16†5.1 Problem Sets Generation】
+L27:     2. 【17†5.2 Experimental Settings】
+L28:     3. 【18†5.3 Baselines】
+L29:     4. 【19†5.4 Evaluation Metrics】
+L30:     5. 【20†5.5 Performance Analysis】
+L31:     6. 【21†5.6 Generalization on Problems of Different Scales】
+L32:     7. 【22†5.7 Comparative Performance Analysis with Varied Maximum Working Hours Constraints】
+L33:     8. 【23†5.8 Ablation Study】
+L34:     9. 【24†5.9 Comparative Performance Analysis with Different Vehicle Selection Strategies】
+L35:     10. 【25†5.10 Routing Quality Analysis】
+L36:   7. 【26†6 Conclusion】
+L37:   8. 【27†7 Acknowledgments】
+L38:   9. 【28†References】
+L39:   10. 【29†A Appendix A】
+L40: 【30†License: CC BY 4.0†info.arxiv.org】
+L41: 
+L42: arXiv:2503.04085v1 [cs.AI] 06 Mar 2025
+L43: # SED2AM: Solving Multi-Trip Time-Dependent Vehicle Routing Problem using Deep Reinforcement Learning
+L44: 
+L45: DOI: 【31†10.1145/3721983†doi.org】Journal: TKDD 3 CCS: Mathematics of computing CCS: Mathematics of computing Combinatorial optimization CCS: Computing methodologies Sequential decision making
+L46: Arash Mozhdehi email: <EMAIL_REMOVED> Affiliation: University of Calgary, 2500 University Dr. NW, Calgary, Alberta, Canada, T2N 1N4 , Yunli Wang Affiliation: National Research Council Canada, Ottawa, Canada email: <EMAIL_REMOVED> , Sun Sun Affiliation: National Research Council Canada, Waterloo, Canada email: <EMAIL_REMOVED> and Xin Wang Affiliation: University of Calgary, 2500 University Dr. NW, Calgary, Alberta, Canada, T2N 1N4 email: <EMAIL_REMOVED>
+L47: Received  27 February 2025
+L48: ###### Abstract.
+L49: Deep reinforcement learning (DRL)-based frameworks, featuring Transformer-style policy networks, have demonstrated their efficacy across various vehicle routing problem (VRP) variants. However, the application of these methods to the multi-trip time-dependent vehicle routing problem (MTTDVRP) with maximum working hours constraints—a pivotal element of urban logistics—remains largely unexplored.
+L50: This paper introduces a DRL-based method called the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM), tailored for the MTTDVRP with maximum working hours constraints. The proposed method introduces a temporal locality inductive bias to the encoding module of the policy networks, enabling it to effectively account for the time-dependency in travel distance/time.
+L51: The decoding module of SED2AM includes a vehicle selection decoder that selects a vehicle from the fleet, effectively associating trips with vehicles for functional multi-trip routing. Additionally, this decoding module is equipped with a trip construction decoder leveraged for constructing trips for the vehicles.
+L52: This policy model is equipped with two classes of state representations, fleet state and routing state, providing the information needed for effective route construction in the presence of maximum working hours constraints. Experimental results using real-world datasets from two major Canadian cities not only show that SED2AM outperforms the current state-of-the-art DRL-based and metaheuristic-based baselines but also demonstrate its generalizability to solve larger-scale problems.
+L53: ###### Keywords:
+L54: 
+L55: Multi-Trip Time Dependent Vehicle Routing Problem, Combinatorial Optimization, Deep Reinforcement Learning, Attention Model
+L56: ## 1. Introduction
+L57: The multi-trip time-dependent vehicle routing problem with the maximum working hours constraints (MTTDVRP) is a practical variant of the traditional vehicle routing problem (VRP) tailored to meet the complex demands of urban logistics. MTTDVRP seeks to determine a set of trips, each starting and ending at the depot, as illustrated in Figure 【32†1】, for a fleet of vehicles with the goal of minimizing total travel time under traffic conditions that vary throughout the day.
+L58: This optimization problem allows each vehicle to perform multiple trips within a single working day, provided that the cumulative travel time across trips for each vehicle does not exceed the maximum allowable working hours set for the driver, ensuring compliance with traffic regulations (【33†Services, 2021】).
+L59: Figure 【32†1】 illustrates an example of MTTDVRP with the maximum working hours constraints, showing multiple trips carried out by two different vehicles within a fleet, while adhering to the maximum working hours for each vehicle and the maximum capacity constraint for each individual trip.
+L60: 【34†Image: [Uncaptioned image]】
+L61: Figure 1. Example of MTTDVRP with maximum working hours constraints. This illustration depicts multiple trips conducted by two vehicles within a fleet, adhering to a maximum working hours limit of 13 hours (7 AM to 8 PM) and a vehicle capacity of 25 units per trip. The red numbers above each customer location represent the customer number, while the green labels indicate travel times between each origin and destination based on traffic conditions.
+L62: The table summarizes the time each customer is served, the customer’s demand, and which vehicle on which trip served the customer.
+L63: VRPs, as NP-hard combinatorial optimization problems, were traditionally solved using exact and heuristic methods. Although exact methods, such as branch-and-bound, provide optimal solutions, they struggle with exponential computational complexity, making them impractical for real-world problems that involve serving a large number of customers.
+L64: On the other hand, heuristic solvers, such as the Clarke and Wright saving algorithm and the genetic algorithm, deliver sub-optimal solutions within a reasonable computational time. However, these solvers suffer from limitations that have been widely discussed in the literature (【35†Burke et al., 2013】; 【36†Bello et al., 2016】; 【37†Li et al., 2020】), such as a lack of generalizability and reliance on human-crafted heuristics.
+L65: Recently, deep reinforcement learning (DRL)-based methods (【36†Bello et al., 2016】; 【38†Nazari et al., 2018】) have been employed to overcome the shortcomings of the traditional methods. Among these DRL-based methods, those employing Transformer-style policy networks (【39†Kool et al., 2018】; 【37†Li et al., 2020】; 【40†Xu et al., 2021】; 【41†Li et al., 2021】; 【42†Zong et al., 2022】; 【43†Zhang et al., 2022b】; 【44†Chen et al., 2023】; 【45†Zong et al., 2024】) showed promising results.
+L66: Despite the success of this class of DRL-based methods in solving various VRPs, they are ineffective in solving MTTDVRP with maximum working hours constraints due to the following shortcomings:
+L67:   1. (1)
+L68: Intrinsic inability to capture the dynamicity in travel times: For DRL-based approaches, routing effectiveness critically depends on accurately modeling the dynamic relationship between customers and the depot (【40†Xu et al., 2021】; 【46†Li et al., 2024】; 【47†Wang et al., 2024】). A key component of this relationship is the travel time and distance between locations, which directly impact route optimization (【48†Lei et al., 2022】; 【49†Duan et al., 2020】).
+L69: However, existing methods fall short in addressing the variability of travel time and distance due to fluctuating traffic conditions over time. This limitation arises because these methods often employ encoders restricted to embedding static, one-dimensional features, thereby neglecting the critical time-dependent dimension.
+L70: However, in reality, travel time and even distance (such as road closure) between locations are not fixed and are influenced by fluctuating traffic and road conditions (e.g., road closures). Figure 【50†2】 illustrates how the same locations can yield different optimal routes under changing traffic conditions.
+L71:   2. (2)
+L72: Failure to directly associate the constructed trips to the corresponding vehicle: For multi-trip routing, the cost of each trip, starting and ending at the depot, can vary significantly depending on the starting time due to fluctuating traffic conditions throughout the day. Consequently, trips with identical sequences of customer may incur different costs based on their initiation times, influenced by the vehicle’s previous trips.
+L73: However, the existing methods fail to associate the trips undertaken to the respective vehicles, planning routes independently instead. These DRL-based approaches do not allow the routes to be constructed based on the actual timing of trips, thereby rendering these methods ineffective for multi-trip, time-dependent routing.
+L74:   3. (3)
+L75: Insufficiency of vehicle-specific state information: When a fleet is performing multi-trip routing under maximum working hours constraints, allowing the model to select vehicles based on remaining working hours as state information can aid the policy model in rational decision-making. In fact, with this routing problem variant, vehicles are constrained not only by their capacity but also by their limited maximum operational time.
+L76: The existing methods do not utilize remaining working hours in the decision-making process as a critical vehicle-specific state information, rendering them ineffective for multi-trip routing when maximum working hours constraints are in place. Additionally, for time-dependent routing, the ability to effectively construct routes is closely tied to the traffic conditions that the vehicle will encounter during the trips, which, in turn, depend on the location and starting time of the trips.
+L77: Capturing this information in the state is critical for time-dependent routing; however, existing methods fail to exploit this information in their state representation.
+L78: 【51†Image: Refer to caption】 (a) Starting at 7 AM
+L79: 
+L80: 【52†Image: Refer to caption】 (b) Starting at 4 PM
+L81: 
+L82: Figure 2. Cases where the same locations resulted in different optimal routes due to varying traffic conditions at different times of the day, 7 AM vs. 4 PM. Blue pin-drops indicate customers’ locations, with numbers showing the visiting order, and the red pin-drop represents the depot’s location.
+L83: In this paper, to effectively solve the MTTDVRP with a maximum working hours constraints, we propose a DRL-based approach named the Simultaneous Encoder and Dual Decoder Attention Model (SED2AM). The major contributions of this paper can be summarized as follows:
+L84: 
+L85:   * •
+L86: To effectively capture the time dependency of travel distances and times, we introduce a temporal locality inductive bias to the Transformer-based policy network. This approach is based on the rationale that selecting the next destination for each vehicle is primarily influenced by the immediate and relevant traffic conditions encountered during travel, rather than by traffic conditions at other times.
+L87: Based on this inductive bias, we design a Transformer-style encoder, referred to as the simultaneous encoder, to capture the relationships between locations in alignment with the dynamic nature of real-world traffic. This encoder co-embeds the features of each node—representing either the depot or a customer—along with the time-dependent travel times between pairs of locations as edge features.
+L88: Considering the introduced inductive bias, this co-embedding operation is performed separately for different periods of the day, ensuring the effective capture of time dependency while minimizing computational complexity.
+L89:   * •
+L90: To enable the model to effectively associate routes constructed by each vehicle, a dual-decoder attention model is proposed. This model includes a vehicle selection decoder that chooses a vehicle from the fleet to expand its current route, allowing each vehicle to track its own routes. This decoder employs a simple yet effective network for fast and efficient multi-trip routing.
+L91: Following vehicle selection, the trip construction decoder identifies the next location—either a depot or customer—for the vehicle to visit, using an attention-based mechanism. Additionally, we introduced a state representation comprising the fleet state and routing state, providing the policy model with sufficient vehicle-specific information to make informed decisions under maximum working hours constraints in time-dependent multi-trip vehicle routing scenarios.
+L92:   * •
+L93: 
+L94: We evaluate SED2AM’s performance on problem sets derived from Edmonton and Calgary, using real traffic data to estimate travel times. Experimental results show that SED2AM outperforms heuristic- and state-of-the-art DRL-based approaches in total travel time, while achieving faster runtimes than traditional methods. Additionally, SED2AM demonstrates strong generalizability to larger problem instances.
+L95: The remainder of this paper is organized as follows: Section 【5†2】 briefly reviews related work. In Section 【6†3】, we formally describe and define the MTTDVRP with the maximum working hours constraints. We elaborate on SED2AM in Section 【7†4】. In Section 【15†5】, the computational experiments and analysis are presented. Finally, Section 【26†6】 concludes this paper.
+L96: ## 2. Related Works
+L97: 
+L98: In this section, we briefly review the traditional methods for solving VRP variants, including multi-trip time-dependent VRP (MTTDVRP), as well as approaches in the DRL literature for solving general VRPs.
+L99: MTTDVRP is a variant of VRP that has rarely been studied, but given its application for real-world problems, merits more investigation. As an inspiring approach for solving a variant of MTTDVRP, Pan et al. (【53†Pan et al., 2021】) introduced three functions: a time-dependent travel time function, a time-dependent ready time function, and a time-dependent duration function, for feasibility evaluation of the routing problem.
+L100: This study introduced an innovative and efficient method to derive them through an iterative process. The authors proposed a hybrid algorithm that integrates the exploration capability of Variable Neighborhood Descent (VND) within a neighborhood with Adaptive Large Neighborhood Search (ALNS) to perturb solutions when VND becomes stuck in local optima. Zhao et al.
+L101: (【54†Zhao et al., 2024】), alternatively proposed another pioneering hybrid approach, combining a dynamic programming-based algorithm to partition a sequence of customer stops—a "giant tour"—into feasible vehicle trips. Additionally, they developed a hybrid genetic algorithm (GA), which integrates GA with a local search procedure to efficiently construct these giant tours.
+L102: In one of the pioneering studies using a DRL-based method to solve VRPs, Nazari et al. (【38†Nazari et al., 2018】) proposed a DRL algorithm with a policy network consisting of an RNN-based decoder only network to address the basic VRP, training the policy model using an aggregated Euclidean distance metric as the feedback signal. In a subsequent study, Kool et al.
+L103: (【39†Kool et al., 2018】) proposed a Transformer-based policy network trained with a self-critic reinforcement learning (RL) algorithm, achieving performance that surpassed established benchmarks, including Google OR-Tools.
+L104: Duan et al. (【49†Duan et al., 2020】) highlighted the ineffectiveness of previous studies, such as those by Nazari et al. and Kool et al., for real-world logistics operations where the objective is to minimize total road network travel distance or time, rather than total Euclidean-based distance or time.
+L105: Alternatively, the proposed methods introduced a DRL-based algorithm called GCN-NPEC, featuring a GCN-based encoder and two decoders: one gated recurrent unit (GRU) and one multi-layer perceptron (MLP) as its policy network. GCN-NPEC successfully outperformed the competitive baseline, Google OR-Tools, in solving the VRP with the objective of minimizing the total road network travel distance/time.
+L106: However, due to the use of GRU units, the model lacks parallelism and has inferior computational efficiency compared to the Transformer-style architecture employed by Kool et al. Alternatively, Zhang et al. (【55†Zhang et al., 2022a】) proposed an edge selection-based approach called GAT-Edge, which utilizes the real traveling distance between nodes in its objective function rather than Euclidean distances by leveraging a Transformer-based architecture. GAT-Edge outperformed the AM, GCN-NPEC, and OR-Tools.
+L107: Node selection-based methods, such as AM and GCN-NPEC, are of linear order with respect to the routing problem size. However, GAT-Edge at each decoding step outputs a probability distribution for the edges, which is of quadratic order of problem size, leading to significantly higher computational time, particularly for large-scale problems. Lei et al.
+L108: (【48†Lei et al., 2022】) introduced an alternative method, named residual E-GAT, that utilizes edge information along with node-based information for solving the basic VRP. As E-GAT is a node-selection-based method, it avoids the aforementioned drawbacks of GAT-Edge. Nonetheless, GAT-Edge faces limitations due to its use of concatenation and inability to update edge information at each attention layer, resulting in reduced representational power.
+L109: Although these three methods leverage edge information in their objective function rather than relying on the unrealistic estimation of traveling distance via Euclidean distance, they fail to account for the dynamic nature of traffic—and, consequently, the dynamic nature of travel time or optimal travel distance—which is a crucial factor in real-world road networks.
+L110: ## 3. Preliminaries
+L111: 
+L112: In this section, we present the preliminaries for MTTDVRP with a maximum working hours constraints, describe the problem, and introduce the MDP-based formulation. For ease of reference, a list of notations used throughout this paper is provided in Appendix 【29†A】.
+L113: ###### Definition 0.
+L114: 
+L115: (Customer-Depot Graph). A customer-depot graph $G$ is a directed and complete graph defined as $G=(V,E)$, where $V=\{v_{0},\dots,v_{n}\}$ and $E=\{e_{i,j}\mid 0\leq i,j\leq n,i\neq j\}$ represent the sets of nodes and edges of the graph, respectively, and $n$ denotes the number of customers. The set $V_{c}=V\setminus\{v_{0}\}$ comprises the $n$ customer nodes, while the node $v_{0}$ denotes the depot.
+L116: In MTTDVRP with the maximum working hours constraints, the traveling time between locations varies with the vehicles’ departure time, so a time-dependent travel cost function is defined to represent these varying travel times.
+L117: ###### Definition 0.
+L118: (Time-Dependent Travel Cost Function). Given the set of nodes $V$ of the customer-depot graph $G$ and a time-interval set $TI=\{1,2,\dots,|TI|\}$, a time-dependent travel cost function $<WINDOWS_PATH> is defined, where $|TI|$ is the length of the time-interval set. $\forall v_{i},v_{j}\in V$, the value of $c(v_{i},v_{j},p)$ represents the travel cost, i.e., the travel time, associated with traveling from $v_{i}$ to $v_{j}$ during the time interval $p\in TI$.
+L119: ###### Definition 0.
+L120: 
+L121: (Node-based Feature Vector). Given the customer-depot graph $G$’s node set $V$, a node-based feature vector $\mathcal{X}=\{(x_{v_{0}},y_{v_{0}},d_{v_{0}}),\dots,(x_{v_{n}},y_{v_{n}},d_{v_{n}})\}$ is defined. For each element $\chi_{v_{i}}\in\mathcal{X}$, corresponding to a node $v_{i}$, $(x_{v_{i}},y_{v_{i}})$ are the 2-dimensional location coordinates of the node, and $d_{v_{i}}$ indicates the demand at that node (with $d_{v_{0}}$ set to 0).
+L122: ###### Definition 0.
+L123: 
+L124: (Edge-based Feature Tensor). Given the edge set $E$ of the customer-depot graph $G$ and the time-dependent travel cost function $c$, an edge-based feature tensor $\mathcal{E}=\{c(v_{i},v_{j},p)|v_{i},v_{j}\in V,p\in TI\}$ is defined to represent the travel time from $v_{i}$ to $v_{j}$ during the time-interval $p$. Each element ${\varepsilon_{ij,p}}$ of this tensor is equal to $c(v_{i},v_{j},p)$.
+L125: In the MTTDVRP with maximum working hours, the objective is to minimize total travel time using a fleet of vehicles $F=\{1,\dots,f\}$, while serving customer $V_{c}$’s demands. Each vehicle has a maximum capacity of $Q$, starts working at time 0, and must return to the depot before $T_{max}$, which denotes the end of the workday. The day is divided into $|TI|$ time intervals, with travel time remaining constant within each interval.
+L126: The vehicles, denoted by $(k,r)$ for the $k$-th vehicle’s $r$-th trip, can undertake multiple trips per day, where $R_{k}$ represents the set of possible trips for vehicle $k$.
+L127: Solving the MTTDVRP with the maximum working hours constraints in a constructive manner can be deemed as a sequential decision-making problem. This process is modeled as a Markov Decision Process (MDP), represented by a 4-tuple $\{S,A,\mathcal{T},r\}$, where the elements denote the state space, action space, a transition function, and a reward function, respectively, each defined as follows:
+L128: 
+L129:   * •
+L130: State: The state of the system at step $t$ is represented by $s^{t}=(s_{F}^{t},s_{R}^{t})\in S$. The first element, $s_{F}^{t}$, corresponds to the fleet of vehicles’ state. This element is expressed by $s_{F}^{t}=\left\{s^{t}_{1},\dots,s^{t}_{f}\right\}=\left\{\left[rc_{1}^{t},\mathcal{V}_{1}^{t},\tau_{1}^{t},p_{1}^{t},rt_{1}^{t}\right],\dots,\left[rc_{f}^{t},\mathcal{V}_{f}^{t},\tau_{f}^{t},p_{f}^{t},rt_{f}^{t}\right]\right\}$.
+L131: Here, $rc_{i}^{t}$ indicates the remaining capacity and $\mathcal{V}_{i}^{t}$ denotes the current location of vehicle $i$. $\tau_{i}^{t}$ is the vehicle’s remaining working hours. $p_{i}^{t}$ refers to the current time-interval for the vehicle, and $rt_{i}^{t}$ is the time left in this interval. The second part, $s^{t}_{R}$, shows the routing state, represented by $s_{R}^{t}=\left\{V^{t}_{visited},V^{t}_{to\textunderscore visit}\right\}$.
+L132: $V^{t}_{visited}$ lists all customer nodes visited so far, and $V^{t}_{to\textunderscore visit}$ includes all nodes yet to be served.
+L133:   * •
+L134: 
+L135: Action: The action at step $t$ is expressed by a 2-tuple $a^{t}=(i^{t},{v_{j}}^{t})\in A$, indicating that node $v_{j}$ is visited by vehicle $i$ at step $t$. $A$ denotes the action space.
+L136: 
+L137:   * •
+L138: Transition: The state transition function, denoted as $s_{t+1}=\mathcal{T}(a_{t},s_{t})$, updates the current system state $s_{t}$ to the next state $s_{t+1}$ based on the last taken action $a_{t}$. Given a vehicle $k$ and a node $v_{j}$ selected by the policy at step $t$, the state transition function updates every five elements of each vehicle $i$’s state according to the following rules:
+L139: (1)  |  | $\displaystyle rc_{i}^{t+1}=\begin{cases}Q,&\text{if }i=k=0\\
+L140: rc_{i}^{t}-d_{v_{j}},&\text{if }i=k\neq 0\\
+L141: rc_{i}^{t},&\text{otherwise},\end{cases}$  |
+L142: (2)  |  | $\displaystyle\mathcal{V}_{i}^{t+1}=\begin{cases}v_{j},&\text{if }i=k\\
+L143: \mathcal{V}_{i}^{t},&\text{otherwise},\end{cases}$  |
+L144: (3)  |  | $\displaystyle\tau_{i}^{t+1}=\begin{cases}\tau_{i}^{t}-c({V}_{i}^{t},v_{j},p_{i}^{t}),&\text{if }i=k\\
+L145: \tau_{i}^{t},&\text{otherwise},\end{cases}$  |
+L146: (4)  |  | $\displaystyle p_{i}^{t+1}=\begin{cases}p_{i}^{t}+\left\lceil\frac{T_{max}-\tau_{i}^{t+1}}{T_{max}}\times|TI|\right\rceil,&\text{if }i=k\text{ and }T_{max}-\tau_{i}^{t+1}\geq tw^{p_{i}^{t}+1}\\
+L147: p_{i}^{t},&\text{otherwise},\end{cases}$  |
+L148: (5)  |  | $\displaystyle rt_{i}^{t+1}=\begin{cases}tw^{p_{i}^{t}+1}-tw^{p_{i}^{t}}+rt_{i}^{t}-c({V}_{i}^{t},v_{j},p_{i}^{t}),&\text{if }i=k\text{ and }T_{max}-\tau_{i}^{t+1}\geq tw^{p_{i}^{t}+1}\\
+L149: rt_{i}^{t}-c({V}_{i}^{t},v_{j},p_{i}^{t}),&\text{if }i=k\text{ and }T_{max}-\tau_{i}^{t+1}<tw^{p_{i}^{t}+1}\\
+L150: rt_{i}^{t},&\text{otherwise},\end{cases}$  |
+L151: Rule 【56†1】 reduces the selected vehicle’s remaining capacity by the customer node’s demand, or resets it, for the depot node. Rule 【57†2】 updates the vehicle’s current location to the node selected at step $t$. The rule 【58†3】 adjusts the remaining working hours of the selected vehicle $i$’. Rule 【59†4】 determines the vehicle’s current time interval, bounded by the period $\left[tw^{p_{i}^{t}},tw^{p_{i}^{t}+1}\right]$, based on its working hours.
+L152: Finally, Rule 【60†5】 modifies the vehicle’s remaining time in the current interval. Similarly, if $j\neq 0$ the two elements of the routing state would be updated as follows:
+L153: (6)  |  | $\displaystyle V^{t+1}_{visited}=V^{t}_{visited}\cup\{v_{j}\},\quad\quad\quad\quad\quad V^{t+1}_{to\textunderscore visit}=V^{t}_{to\textunderscore visit}\setminus\{v_{j}\}.$  |
+L154: 
+L155:   * •
+L156: 
+L157: Rewards: For each step $t$, a single-step reward is defined as follows:
+L158: 
+L159: (7)  |  | $\displaystyle r(s^{t},a^{t})=-c(\mathcal{V}_{i}^{t-1},\mathcal{V}_{i}^{t},p_{i}^{t-1}).$  |
+L160: 
+L161: Therefore, given a solution $\Pi$, the aggregated reward function $R$ can be expressed as
+L162: (8)  |  | $\displaystyle R(\Pi)=\sum_{t=1}^{T}r(s^{t},a^{t}),$  |
+L163: 
+L164: where $T$ denotes the number of decision steps in a complete episode.
+--------------------------------------------------------------------------------
+LMask: Learn to Solve Constrained Routing Problems with Lazy Masking (https://proceedings.iclr.cc/paper_files/paper/2026/hash/ade039c1db0391106a3375bd2feb310a-Abstract-Conference.html)
+citeturn15view1 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://proceedings.iclr.cc/paper_files/paper/2026/hash/ade039c1db0391106a3375bd2feb310a-Abstract-Conference.html","lineno":null}); Total lines: 19
+L0: # LMask: Learn to Solve Constrained Routing Problems with Lazy Masking
+L1: 
+L2: Tianyou Li, Haijun Zou, JIAYUAN WU, Zaiwen Wen
+L3: 
+L4: 【0†International Conference on Learning Representations 2026 (ICLR 2026)】 Conference
+L5: 
+L6: 【1†Bibtex】 【2†Paper】
+L7: ## Abstract
+L8: Routing problems are canonical combinatorial optimization tasks with wide-ranging applications in logistics, transportation, and supply chain management. However, solving these problems becomes significantly more challenging when complex constraints are involved. In this paper, we propose LMask, a novel learning framework that utilizes dynamic masking to generate high-quality feasible solutions for constrained routing problems.
+L9: LMask introduces the LazyMask decoding method, which lazily refines feasibility masks with the backtracking mechanism. In addition, it employs the refinement intensity embedding to encode the search trace into the model, mitigating representation ambiguities induced by backtracking. To further reduce sampling cost, LMask sets a backtracking budget during decoding, while constraint violations are penalized in the loss function during training to counteract infeasibility caused by this budget.
+L10: We provide theoretical guarantees for the validity and probabilistic optimality of our approach. Extensive experiments on the traveling salesman problem with time windows (TSPTW) and TSP with draft limits (TSPDL) demonstrate that LMask achieves state-of-the-art feasibility rates and solution quality, outperforming existing neural methods.
+L11: #### Name Change Policy
+L12: 
+L13: Requests for name changes in the electronic proceedings will be accepted with no questions asked. However name changes may cause bibliographic tracking issues. Authors are asked to consider this carefully and discuss it with their co-authors prior to requesting a name change in the electronic proceedings.
+L14: 
+L15: Use the "Report an Issue" link to request a name change.
+L16: 
+L17: 【3†Report an Issue†iclr.cc】    |    【4†Name Change Policy】
+L18: Do not remove: This comment is monitored to verify that the site is working properly
+--------------------------------------------------------------------------------
+Learning to Handle Complex Constraints for Vehicle Routing Problems (https://proceedings.nips.cc/paper_files/paper/2024/hash/a9d2a5fd12d34250c21b5e4fa8d906b0-Abstract-Conference.html)
+citeturn15view2 [wordlim: 200] Crawled: 5 days ago; Content type: text/html; Source: open({"ref_id":"https://proceedings.nips.cc/paper_files/paper/2024/hash/a9d2a5fd12d34250c21b5e4fa8d906b0-Abstract-Conference.html","lineno":null}); Total lines: 22
+L0: # Learning to Handle Complex Constraints for Vehicle Routing Problems
+L1: 
+L2: Jieyi Bi, Yining Ma, Jianan Zhou, Wen Song, Zhiguang Cao, Yaoxin Wu, Jie Zhang
+L3: 
+L4: 【0†Advances in Neural Information Processing Systems 37 (NeurIPS 2024)】 Main Conference Track
+L5: 
+L6: 【1†Bibtex】 【2†Paper】
+L7: ## Abstract
+L8: Vehicle Routing Problems (VRPs) can model many real-world scenarios and often involve complex constraints. While recent neural methods excel in constructing solutions based on feasibility masking, they struggle with handling complex constraints, especially when obtaining the masking itself is NP-hard. In this paper, we propose a novel Proactive Infeasibility Prevention (PIP) framework to advance the capabilities of neural methods towards more complex VRPs.
+L9: Our PIP integrates the Lagrangian multiplier as a basis to enhance constraint awareness and introduces preventative infeasibility masking to proactively steer the solution construction process. Moreover, we present PIP-D, which employs an auxiliary decoder and two adaptive strategies to learn and predict these tailored masks, potentially enhancing performance while significantly reducing computational costs during training.
+L10: To verify our PIP designs, we conduct extensive experiments on the highly challenging Traveling Salesman Problem with Time Window (TSPTW), and TSP with Draft Limit (TSPDL) variants under different constraint hardness levels. Notably, our PIP is generic to boost many neural methods, and exhibits both a significant reduction in infeasible rate and a substantial improvement in solution quality.
+L11: ## DOI
+L12: 
+L13: 【3†10.52202/079017-2964†doi.org】
+L14: #### Name Change Policy
+L15: 
+L16: Requests for name changes in the electronic proceedings will be accepted with no questions asked. However name changes may cause bibliographic tracking issues. Authors are asked to consider this carefully and discuss it with their co-authors prior to requesting a name change in the electronic proceedings.
+L17: 
+L18: Use the "Report an Issue" link to request a name change.
+L19: 
+L20: 【4†Report an Issue†neurips.cc】    |    【5†Name Change Policy】
+L21: Do not remove: This comment is monitored to verify that the site is working properly
+

@@ -1,0 +1,57 @@
+{
+  "updated_utc": "2026-11-13T01:28:12.095828+00:00",
+  "package_status": "EXPERIMENT_DESIGN_SURVEY_COMPLETE",
+  "user_decision": "A_APPROVED",
+  "primary_domain": "S_const",
+  "cost_cap": "Cw(Rw)+1e-7",
+  "epsilon": 0,
+  "objective": "Mw_complete_return",
+  "global_research_status": "ACTIVE_NOT_COMPLETE",
+  "G0": "NOT_PASSED",
+  "G3": "NOT_PASSED",
+  "training_started_this_package": false,
+  "new_checkpoints": 0,
+  "new_scientific_maps": 0,
+  "new_author_solves": 0,
+  "new_alns_runs": 0,
+  "new_formal_runs": 0,
+  "subagents": 0,
+  "mac_work": "public HTTP, source text extraction, bibliography, documentation and file hashes only",
+  "<REMOVED_ENDPOINT>_work": "archive and byte-hash verification only",
+  "search": {
+    "discovery_queries": 20,
+    "raw_metadata_records": 208,
+    "deduplicated_doi_or_exact_normalized_title_groups": 189,
+    "http_requests": 38,
+    "http_status_counts": {
+      "200": 35,
+      "429": 1,
+      "None": 1,
+      "403": 1
+    },
+    "dedup_rule": "transitive union of equal DOI or punctuation/HTML-insensitive exact title; not an assertion of independent studies",
+    "screening_scope": "bounded purposive experiment-design survey; discovery titles are not full-text reads",
+    "failed_requests_retained": [
+      "CR02_HET_TRIP",
+      "OA15_ARC",
+      "P15_ARC_PUBLISHER"
+    ]
+  },
+  "source_summary": {
+    "selected_source_records": 22,
+    "new_accessible_full_texts": 16,
+    "reused_full_texts": 5,
+    "experiment_or_evaluation_section_reads": 21,
+    "metadata_only": 1,
+    "independent_replication_claim": false,
+    "note": "P03/P16 are linked follow-ups, not independent corroboration. R01 is a thesis chapter, not the journal article bytes. NR means not established in inspected sections."
+  },
+  "population_proposal_not_frozen": {
+    "main_training_seeds_per_learning_method": 10,
+    "formal_base_maps": 240,
+    "wind_conditions_per_map": 3
+  },
+  "old_population": "40 identities /126 comparisons and calibration24/24 unchanged",
+  "user_decision_needed": false,
+  "next": "Partial resource-label recurrence vs ordinary per-deletion DP and bidirectional joining, before any new numerical witness."
+}

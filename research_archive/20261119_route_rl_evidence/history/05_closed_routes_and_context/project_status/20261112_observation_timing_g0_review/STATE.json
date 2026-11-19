@@ -1,0 +1,65 @@
+{
+  "schema": "root_static_g0_review_v1",
+  "date_local": "2026-11-12",
+  "status": "G0_NO_GO_OBSERVATION_TIMING_STANDARD_POSMDP",
+  "candidate": "observation_timing_with_TARGET_RETURN",
+  "candidate_closed": true,
+  "project_complete": false,
+  "root_only": true,
+  "changed_branch_field": "LATEST_STATUS.md latest prefix / observation_timing candidate status",
+  "gates": {
+    "G0": "NOT_PASSED",
+    "G1": "LIMITED_ENGINEERING_ONLY",
+    "G3": "NOT_PASSED",
+    "G4": "NOT_PASSED",
+    "G5_G8": "INCOMPLETE"
+  },
+  "scientific_execution_this_package": {
+    "experiments": 0,
+    "training": 0,
+    "author_solving": 0,
+    "quality_evaluations": 0,
+    "new_maps": 0,
+    "subagents": 0,
+    "server_connections": 0
+  },
+  "hypothesis": "Route actions may change later information timing in a dynamic model; useful effect remains unproved.",
+  "why_closed": [
+    "Standard POSMDP/history-rollout transformation; no distinct estimator or route construction step",
+    "Static construction environment has no new weather observations",
+    "No strict Liu-cap physical opportunity witness or qualified strongest nonRL"
+  ],
+  "static_contract": {
+    "actions": [
+      "(slot,target)",
+      "(slot,RETURN)"
+    ],
+    "cost_epsilon": 0,
+    "per_map_cost_tolerance": 1e-07,
+    "objective": "M_return",
+    "whole_map_budgets_s": [
+      6,
+      12
+    ],
+    "station_deployment_fixed": true,
+    "station_types_fixed": true,
+    "target_station_fixed": true,
+    "cumulative_duty_preserved": true,
+    "MTC_auxiliary_only": true
+  },
+  "baseline_sha256": "0819c064a21810217b054edbaf15812c82923d8928000b97a8dd9ed29837a52f",
+  "modified_sha256": "c8b5e9fd293535c2aae22a5c95a92dce9e0d389bdcac0affa0073cf5b3944cfa",
+  "baseline_file": "<LOCAL_PATH>",
+  "modified_file": "<LOCAL_PATH>",
+  "live_file": "<LOCAL_PATH>",
+  "new_primary_PDFs": 3,
+  "new_PDF_total_pages_extracted": 56,
+  "reading_scope": "Selected method sections; not full-paper or SI audit",
+  "original99_audit_unchanged": {
+    "verified": 82,
+    "mismatch": 2,
+    "manual_needed": 15
+  },
+  "next_bounded_work": "Primary metadata/version verification for the 15 manual_needed entries; no scientific execution",
+  "needs_user_decision": false
+}

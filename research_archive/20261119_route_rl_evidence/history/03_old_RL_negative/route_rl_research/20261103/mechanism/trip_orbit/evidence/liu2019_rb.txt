@@ -1,0 +1,555 @@
+           Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+
+            Runjing Liu 1 Jeffrey Regier 2 Nilesh Tripuraneni 2 Michael I. Jordan 1 2 Jon McAuliffe 1 3
+
+
+                          Abstract                                  the focus of this paper, the exact gradient is computationally
+     We wish to compute the gradient of an expec-                   intractable. Thus, in order to optimize L(η), we seek low-
+     tation over a finite or countably infinite sample              variance stochastic approximations of the gradient.
+     space having K ≤ ∞ categories. When K is in-                   The “reparametrization trick” (Spall, 2003; Kingma &
+     deed infinite, or finite but very large, the relevant          Welling, 2014) provides efficient stochastic gradients when
+     summation is intractable. Accordingly, various                 qη is a continuous distribution, but it does not apply when z
+     stochastic gradient estimators have been proposed.             is discrete. Two well-known possibilities in the discrete case
+     In this paper, we describe a technique that can                are continuous relaxation (Maddison et al., 2017; Jang et al.,
+     be applied to reduce the variance of any such                  2017) and REINFORCE (Williams, 1992) (also known as
+     estimator, without changing its bias—in particu-               the score function estimator). The former replaces the dis-
+     lar, unbiasedness is retained. We show that our                crete random variable with a continuous relaxation so that
+     technique is an instance of Rao-Blackwellization,              the reparametrization trick can be applied. However, it re-
+     and we demonstrate the improvement it yields on                sults in biased gradient estimates. The latter is impractical
+     a semi-supervised classification problem and a                 for most purposes due to its high variance.
+     pixel attention task.
+                                                                    Control variate methodology provides a general framework
+                                                                    for variance reduction. Specific examples include RE-
+                                                                    LAX (Grathwohl et al., 2018), REBAR (Tucker et al., 2017),
+1. Introduction
+                                                                    NVIL (Mnih & Gregor, 2014), and MuProp (Gu et al., 2016).
+Let z be a discrete random variable over K ≤ ∞ categories,          These methods provide a mechanism for reducing the vari-
+with distribution qη (z) parameterized by a real vector η and       ance of REINFORCE, but unfortunately they do not reduce
+differentiable in η. We aim to minimize                             the variance enough for many applications.
+                                       K
+                                       X                            In the current paper, we show how to achieve further vari-
+       L(η) := Ez∼qη (z) [fη (z)] =          qη (k)fη (k),   (1)    ance reduction via a meta-procedure that can be applied to
+                                       k=1                          any discrete-distribution stochastic-gradient procedure (e.g.,
+                                                                    REINFORCE or REINFORCE with control variate). Our
+where the real-valued integrand fη also depends differen-
+                                                                    framework reduces variance without changing the bias. In
+tiably on η. If K is finite and small enough, we can compute
+                                                                    particular, an unbiased stochastic gradient remains unbiased
+the exact gradient as
+                                                                    after application of our approach. Further, our approach is
+                                                                    “anytime” in the sense that it can reduce stochastic-gradient
+                                                                    variances given any computational budget—the larger the
+    ∇η Eqη (z) [fη (z)]
+                                                                    budget, the greater the variance reduction. Hence it is well
+            K n
+          X                                            o     (2)    suited to our chosen setting, where K is infinite or very
+       =           [∇η qη (k)] fη (k) + qη (k)∇η fη (k) .           large, and/or qη · fη is expensive to evaluate.
+           k=1
+                                                                    Our method is particularly apt in the setting where the prob-
+On the other hand, K may be infinite, or large relative to the      ability mass qη (z) is concentrated on only a few categories.
+cost of evaluating qη · fη . In either of these cases, which are    For example, in extreme classification, only a few labels out
+   1
+                                                                    of many are plausible. In reinforcement learning, only a
+     Department of Statistics, University of California, Berkeley   few actions in the possible action space are advantageous.
+2
+ Department of Electrical Engineering and Computer Sciences,
+University of California, Berkeley 3 The Voleon Group. Correspon-   Neither control-variate methods nor continuous-relaxation
+dence to: Runjing Liu <runjing <EMAIL_REMOVED>>.                   techniques take advantage of this “sparsity,” and we show
+                                                                    that the variance reduction of our method in this setting can
+Proceedings of the 36 th International Conference on Machine        be dramatic.
+Learning, Long Beach, California, PMLR 97, 2019. Copyright
+2019 by the author(s).                                              We show that our variance-reduction meta-procedure
+                                Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+is an instance of a general statistical method called                Eqη (z) [g(z)] into two components: one containing the high-
+Rao-Blackwellization (Casella & Robert, 1996). Rao-                  probability atoms of qη , and one containing the remaining
+Blackwellization has been used in previous work to reduce            atoms. We compute the exact contribution of the high-
+the variance of stochastic gradients (Ranganath et al., 2014;        probability component to the expectation, and we use a
+Titsias K & Lázaro-Gredilla, 2015), but in a setting orthog-        stochastic estimator for the other component. The idea
+onal to ours, one with multivariate discrete random vari-            comes from observing that in many applications, qη (z) only
+ables. Our focus here is on a univariate discrete random             puts significant mass on a few categories. If g(z) is rea-
+variable with many categories. Our method can be applied             sonably well behaved over z, then qη (z)g(z) is large when
+in conjunction with the former work to extend to the case            qη (z) attains its largest values and smaller elsewhere. By
+of multivariate discrete random variables, each with a large         computing the high-probability component of the expecta-
+number of categories. This extension is not discussed in             tion exactly, we obtain a value already close to correct. A
+the present work, and we leave it as an avenue of future             stochastic estimator is then added to correct, on average, for
+exploration.                                                         what error remains.
+The paper is organized as follows. We present our variance-          Formally, let Ck be the set of z such that qη (z) assumes one
+reduction procedure in Section 2 and make the connection to          of its k largest values. Ties may be broken arbitrarily. Let
+Rao-Blackwellization in Section 3, demonstrating that our            C¯k denote the complement of Ck . Then
+technique necessarily reduces stochastic-gradient variances.
+In Section 4 we discuss related work. In Section 5, we                   ∇η Eqη (z) [fη (z)] = Eqη (z) [g(z)]                   (5)
+exhibit the benefits of our procedure on synthetic data, a                   = Eqη (z) [g(z)1{z ∈ Ck } + g(z)1{z ∈ C¯k }]       (6)
+semi-supervised classification problem, and a pixel attention                  X
+                                                                             =      qη (z)g(z) + Eqη (z) [g(z)1{z ∈ C¯k }].     (7)
+task. We conclude in Section 6.
+                                                                                z∈Ck
+
+
+2. Method                                                            It remains to approximate the expectation in the second term.
+                                                                     We use an importance-sampling approximation based on a
+We consider the situation where the number of categories             single draw from an importance distribution. We choose a
+K is infinite, or very large in the sense that computing the         simple importance distribution: the distribution of qη con-
+exact gradient in Equation (2) is intractable. One possible          ditional on the event C¯k . We denote this importance distri-
+stochastic estimator for the gradient is the REINFORCE               bution by qη |C̄k . By construction, the importance weighting
+estimator,                                                           function is identically equal to qη (C¯k ), regardless of which
+                                                                     z ∼ qη |C̄k we draw. (Note that the indicator inside the
+        fη (z)∇η log qη (z) + ∇η fη (z) z ∼ qη (z),           (3)    second term of (7) always equals one, because we are only
+                                                                     sampling from z ∈ C¯k .)
+which one can check is unbiased for the true gradient in
+Equation (2).                                                        Our estimator assumes that, given k, the set Ck can be
+                                                                     identified at little cost. This certainly holds in the case
+In practice, the REINFORCE estimator often has variance              of inference: using variational Bayes, q(z) is a variational
+too large to be useful. Control variates have been proposed          approximate posterior chosen from a set we designate.
+to decrease the variance of the REINFORCE estimator. The
+key observation is that the score function ∇η log qη (z) has         In summary, we estimate the gradient as
+zero expectation under qη (z), so                                                     X
+                                                                              ĝ(v) =      qη (z)g(z) + qη (C¯k )g(v)           (8)
+   [fη (z) − C]∇η log qη (z) + ∇η fη (z) z ∼ qη (z)           (4)                        z∈Ck
+
+                                                                                   v ∼ qη |C̄k ,
+is still unbiased for the true gradient. Several proposals have
+been put forth for choosing C to reduce the variance (Mnih           which also satisfies Ev [ĝ(v)] = ∇η Eqη (z) [fη (z)].
+& Gregor, 2014; Gu et al., 2016; Tucker et al., 2017).
+                                                                     We see that the first term of this estimator is deterministic
+In this paper, we present a meta-procedure that can be ap-           and the second term is random, but scaled by qη (C¯k ), which
+plied to any stochastic estimator for the gradient of a dis-         is small when qη is concentrated on a small number of
+crete expectation obtained by sampling from qη (z). Let              atoms. Therefore, we intuitively expect this estimator to
+g(z) be any such estimator which is unbiased1 , i.e., satis-         have smaller variance than the original estimator, g(z).
+fies Eqη (z) [g(z)] = ∇η Eqη (z) [fη (z)]. An example is the
+                                                                     In the next section, we confirm this intuition by inter-
+REINFORCE estimator. We decompose the expectation
+                                                                     preting the construction of the estimator ĝ(v) as Rao-
+    1
+      Our technique applies to biased estimators as well. For con-   Blackwellization (which always reduces variance). Hence,
+creteness, we focus on the unbiased case.                            we call ĝ(v) the Rao-Blackwellized gradient estimator.
+                                 Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+3. Theory                                                                       ≥ E[V[g(z)|b]]                                        (18)
+We begin by describing how a suitable representation of the                     = V[g(z)|z ∈ C¯k ] + (1 − )V[g(z)|z ∈ Ck ]
+original discrete variable z ∼ qη (z) allows us to interpret                    ≥ V[g(z)|z ∈ C¯k ].
+our estimator as an instance of Rao-Blackwellization. Let
+qη |Ck denote the distribution of qη conditional on the event      But V[ĝ(v)] = 2 V[g(z)|z ∈ C¯k ], which in combination
+Ck . Consider the three independent random variables               with the above yields the result.
+
+                    u ∼ qη |Ck ,                            (9)    The multiplicative factor of variance reduction guaranteed
+                     v ∼ qη |C̄k ,                         (10)    by Rao-Blackwellization can be significant if the probability
+                and b ∼ Bernoulli qη (C¯k ) .                      mass of qη (z) is concentrated on just a few categories. But
+                                           
+                                                           (11)
+                                                                   while Rao-Blackwellization reduces the variance of g(z),
+The triplet (u, v, b) provides a distributionally equivalent       this comes at the cost of evaluating g(z) a total k + 1 times
+representation of z:                                               (cf. Equation (8)). An initial stochastic gradient g(z) such
+                                     d                             as REINFORCE will only require a single evaluation of g.
+                        T (u, v, b) = z,                   (12)
+                                                                   There is an alternative approach to reducing the variance
+where                                                              of an initial estimator g(z) via multiple evaluations of g(z):
+                                                                   minibatching, i.e., simple Monte-Carlo averaging over in-
+                    T (u, v, b) := u1−b v b .              (13)
+                                                                   dependent draws of z. Thus, the question arises: given a
+                                                                   budget of N < K evaluations of g(z), is it better to Rao-
+The estimator in Equation (8) can then be written as               Blackwellize or minibatch? Computationally, our method
+                 ĝ(v) = E [g(T (u, v, b))|v] ,            (14)    is parallelizable in the same way that minibatching is par-
+                                                                   allelizable. The next proposition shows constructively that
+where g(z) is the original unbiased gradient estimator. To         there is a choice of k ≤ N for which Rao-Blackwellization
+see this, break the right-hand side of (14) into two terms         reduces variance at least as much as minibatching.
+according to the value of b, then simplify. Equation (14)
+                                                                   Proposition 2. Suppose we have a budget of N evaluations
+demonstrates directly that our estimator is an instance of
+                                                                   of g. Consider the estimators
+Rao-Blackwellization. As such, it has the same expec-
+tation as the original estimator g(z), a fact about Rao-                                                               N −k
+                                                                                     X                       qη (C¯k ) X
+Blackwellization that follows immediately from iterated               ĝN,k (v) :=          qη (u)g(u) +                    g(vj ),   (19)
+expectation. In particular, if g(z) is unbiased as we have                                                   N − k j=1
+                                                                                     u∈Ck
+assumed, so too is our estimator.                                                       iid
+                                                                         v1 , ..., vN −k ∼ qη |C̄k
+An application of the conditional variance decomposition
+gives                                                              and
+
+    V [g(z)] =V [ĝ(v)] + E {V [g(T (u, v, b))|v]} ,       (15)                             N
+                                                                                      1 X                                iid
+                                                                         gN (z) :=          g(zj ),        z1 , ..., zN ∼ qη .        (20)
+showing that ĝ has lower variance than g, by at least as much                        N j=1
+as the last term in Equation (15). This too is a standard result
+about Rao-Blackwellization.                                        If we choose
+Proposition 1 further quantifies this variance reduction,                                                    qη (C¯k )
+showing the variance of ĝ(v) must be less then the vari-                               k̂ = arg min                                  (21)
+                                                                                                k∈{0,...,N } N − k
+ance of g(v) by the multiplicative factor qη (C¯k ).
+Proposition 1. Let g(z) be an unbiased gradient estimator          then V[ĝN,k̂ (v)] ≤ V[gN (z)].
+as in Equation (5) and ĝ(v) denote the Rao-Blackwellized
+estimator defined in Equation (8). Then                            Proof. Let V1 = V[g1 (z)]. Then V[gN (z)] = (1/N )V1 ,
+                                                                                                                 qη (C̄k )
+                                                                   while Proposition 1 shows that V[ĝN,k (v)] ≤ N   −k V1 .
+                 V[ĝ(v)] ≤ qη (C¯k )V[g(z)].              (16)          ηq (C̄ )
+                                                                            k   1
+                                                                   Since N −k = N when k = 0, the result follows.
+
+Proof. We apply the conditional variance decomposition.
+                                                                   Together, Propositions 1 and 2 imply the following:
+Let  = qη (C¯k ) and recall the Bernoulli random variable b
+defined in Equation (11). First,
+                                                                      • Rao-Blackwellization leads to a significant variance
+   V[g(z)] = E[V[g(z)|b]] + V[E[g(z)|b]]                   (17)         reduction if the mass of qη (z) is concentrated.
+                               Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+  • Even when restricting minibatched versions of the ini-        text of reinforcement learning (Titsias K, 2014; Liang et al.,
+    tial and Rao-Blackwellized estimators to an equal num-        2018), though to our knowledge we are the first to make the
+    ber of evaluations of g, Rao-Blackwellization yields          connection with Rao-Blackwellization. In MAPO (Liang
+    equal or lower variance, for a computable choice of k.        et al., 2018), a procedure to create a memory buffer of trajec-
+                                                                  tories for policy optimization, the terms with high rewards
+4. Related Work                                                   (or small loss) are kept and summed. In contrast, we choose
+                                                                  to sum terms with high probability. In our setting, it is the
+Methods to reduce the variance of stochastic gradients for        loss fη (z), not the probability, qη (z), that is expensive to
+discrete distributions generally fall into two broad cate-        evaluate for all categories z.
+gories: continuous relaxation methods and control variate
+                                                                  Finally, the problem of having a large number of categories
+methods.
+                                                                  also manifests in language models, and methods such as
+In the first category, the Concrete distribution (Maddison        noise contrastive estimation (Gutmann & Hyvärinen, 2012)
+et al., 2017) approximates the discrete random variable with      and hierarchical softmax (Morin & Bengio, 2005) have been
+a reparametrizable continuous random variable so that the         introduced. However, these methods are applied when the
+standard reparametrization trick can be applied. While this       normalizing constant for qη (z) is intractable. In our work,
+continuous relaxation reduces the variance of the stochas-        we restrict ourselves to scenarios where qη (z) is normalized.
+tic gradient, the resulting estimators are biased. Thus the
+Gumbel-softmax procedure (Jang et al., 2017) introduced an        5. Experiments
+annealing step into the optimization whereby the continuous
+relaxation converges towards the discrete random variable         In our experiments, we will consider applying the Rao-
+as the optimization path moves forward.                           Blackwellization procedure to either the REINFORCE esti-
+                                                                  mator,
+In the second category, control variate methods include
+black-box variational inference (BBVI) (Ranganath et al.,                   g(z) = fη (z)∇η log qη (z) + ∇η fη (z),
+2014), NVIL (Mnih & Gregor, 2014), DARN (Gregor et al.,                                                                          (22)
+                                                                                                                 z ∼ qη (z),
+2014), and MuProp (Gu et al., 2016). BBVI uses multiple
+samples at each step to estimate the ‘optimal’ control variate.   or REINFORCE with a control variate C,
+NVIL introduces an observation dependent control variate
+learned by a separate neural network. DARN uses a Taylor              g(z) = [fη (z) − C]∇η log qη (z) + ∇η fη (z),
+                                                                                                                                 (23)
+expansion of fη (z) to compute a control variate, but this                                                        z ∼ qη (z).
+results in a biased estimator; MuProp proposes an estimate
+of this bias and corrects it.                                     A simple choice of control variate that works well in practice
+                                                                  is to take C = fη (z 0 ) for an independent draw z 0 ∼ qη . We
+Finally, RELAX (Grathwohl et al., 2018) and RE-                   abbreviate this estimator as REINFORCE+ .
+BAR (Tucker et al., 2017) are a combination of the two
+broad methods and use a continuous relaxation to construct        Note that in both REINFORCE and REINFORCE+ , g(z)
+a control variate.                                                is unbiased for the true gradient. (In the second case, g(z)
+                                                                  is unbiased conditional on z 0 , and hence unconditionally
+Section 5 compares both continuous relaxation and control         unbiased as well.)
+variate methods to our Rao-Blackwellization.
+A Rao-Blackwellization procedure for gradient estimation          5.1. Bernoulli latent variables
+was also applied in BBVI and “local expectation gradi-
+                                                                  We fix a vector p = [0.6, 0.51, 0.48]> and seek to minimize
+ents” (Titsias K & Lázaro-Gredilla, 2015), but for a different
+                                                                  the loss function
+purpose. In their setting, the expectation is decomposed
+over a multivariate (discrete or continuous) random variable                                              3
+                                                                                                         nX                  o
+using iterated expectation. BBVI approximates each con-                      E         iid                     (bi − pi )2       (24)
+                                                                               b1 ,b2 ,b3 ∼ Bern(σ(η))
+ditional expectation by sampling (with a control variate),                                               i=1
+
+while local expectation gradients compute each conditional        over η ∈ R, where σ(η) is the sigmoid function. Here, the
+expectation analytically. This Rao-Blackwellization is or-        discrete random vector b = [b1 , b2 , b3 ]> is supported over
+thogonal to our approach: while they consider multiple dis-       K = 23 = 8 categories. The optimal value of σ(η) is 1,
+crete random variables, our approach focuses on a univariate      approached as η → ∞.
+discrete with many categories.
+                                                                  Figure 1 shows the performance of Rao-Blackwellizing RE-
+The process of summing out a few terms and sampling the           INFORCE and REINFORCE+ . We initialized η at η = −4,
+remainder for gradient estimation has appeared in the con-        so the sampling distribution has large mass at b = (0, 0, 0).
+                                Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+
+
+
+Figure 1. The loss function at each iteration in the Bernoulli ex-
+periments. Each line is an average over 20 trials from the same      Figure 2. The distribution of gradient estimates from
+initialization. Zero categories summed is the original estimator,    REINFORCE+ in the Bernoulli experiments. We examine
+while eight categories summed returns the exact gradient.            the gradients at η = 0 and η = −4, as a function of k, the number
+                                                                     of categories summed. Summing out categories reduces variance.
+                                                                     The reduction is large at η = −4 where the variational distribution
+The optimal distribution on the other hand should put all
+                                                                     is concentrated on just one category. (Note there is still some
+mass at b = (1, 1, 1). In other words, we initialized the op-        random noise when we sum out all 8 categories here, because of
+timization procedure such that the mass is concentrated on           the random control variate.)
+the wrong point. The Rao-Blackwellized gradient is there-
+fore initially slightly slower than the original gradient, since
+we are analytically summing the wrong category. However,                            iid
+                                                                         yn |zn , µ ∼ N (µzn , σy2 Id×d ), n = 1, . . . , N.      (27)
+Rao-Blackwellization improves the performance of both
+gradient estimators at the end of the path.
+                                                                     Here each µk is a Gaussian centroid and each zn is a cluster
+Figure 2 shows the variances of the gradient estimates at            membership indicator.
+η = 0 and η = −4, as a function of k, the categories an-
+alytically summed. As expected, the variance decreases               As exact inference of the posterior p(µ, z|y) is intractable,
+as more categories are analytically summed. At η = 0,                we approximate it variationally (Blei et al., 2017) with the
+the corresponding qη distribution is uniform, i.e., maxi-            mean-field family
+mally anti-concentrated, so the variance reduction of Rao-
+Blackwellization is not large. However, the gains are quite                                       K
+                                                                                                  Y              N
+                                                                                                                 Y
+substantial at η = −4, where qη is concentrated around the                           q(µ,z) =           q(µk )         q(zn ).    (28)
+point b = (0, 0, 0). In this case, analytically summing out                                       k=1            n=1
+
+one category removes nearly all the variance.
+                                                                     Here
+5.2. Gaussian mixture model
+                                                                                          q(µk ) = δ{µk = µ̂k },                  (29)
+For our next experiment, we draw N = 200 observations
+(yn ) from a d-dimensional Gaussian mixture model with                                    q(zn ) = Categorical (π̂n ) ,           (30)
+K = 10 components, taking d = 2.
+                                                                     where δ{· = µ̂k } is the Dirac-delta function.
+              iid
+           zn ∼ Categorical(π1:K ), n = 1, . . . , N,       (25)
+                                                                     We then seek to minimize KL(q(µ, z)kp(µ, z|y)) over the
+              iid
+           µk ∼ N (0, σ02 Id×d ), k = 1, . . . , K,         (26)     variational parameters µ̂ and π̂. This is equivalent to maxi-
+                               Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+mizing the ELBO
+ N                                           K
+ X              h    p(yn |µ̂, zn )p(zn ) i X
+     Eq(zn ;πn ) log                       +   log p(µ̂k ).
+ n=1
+                           q(zn )
+                                             k=1
+                                                          (31)
+
+Note that the expectation over zn is a summation over
+K = 10 categories. Figure 3 compares the performance of
+unbiased stochastic gradients produced from REINFORCE+
+to the Rao-Blackwellization of REINFORCE+ for optimiza-
+tion of the ELBO in Equation (31).
+Unlike the Bernoulli example, we are also optimizing pa-
+rameters inside the expectation; specifically, in this case we
+are jointly optimizing the variational mean parameters µ̂k
+alongside the π̂n . We expect that more quickly learning the
+latent categories zn aids the optimization process, since the
+mean parameters depend on the cluster memberships.
+We initialized the optimization with K-means. Figure 3
+shows that Rao-Blackwellization improves the convergence          Figure 3. Results for Gaussian mixture model experiment. (Top)
+                                                                  Simulated data. (Bottom) Solid lines display the negative ELBO
+rate, with faster convergence when more categories are
+                                                                  per iteration using REINFORCE+ , for k categories summed. Zero
+summed. With summing just three categories, we nearly re-         categories summed is the original REINFORCE+ estimator, while
+cover the same ELBO trajectory of the exact gradient, which       10 categories summed returns the analytic gradient. Dashed lines
+sums all ten categories. We chose K = 10 as an example so         show performance when n ∈ {2, 4} draws of the REINFORCE+
+we can compare against the exact gradient; with larger K,         estimator are averaged at each iteration to reduce variance. Each
+computing the exact gradient will become intractable and          line is an average over 20 trials from the same initialization.
+stochastic methods such as ours will be required.
+We also examine here the computational trade-off. Our                      := Eqφ (z|x,y) [log pθ (x|y, z)+
+Rao-Blackwellized estimator with k categories summed
+                                                                                log pθ (z) + log pθ (y) − log qφ (z|x, y)] (33)
+requires k + 1 evaluations of the original REINFORCE+
+estimator. For a fairer comparison, we also consider the          On unlabeled data, the unknown label y is treated as a latent
+benefits of variance reduction obtained from simple Monte-        variable and integrated out,
+Carlo sampling, where k + 1 samples of the REINFORCE+
+estimator are averaged at each iteration. In this experi-             log pθ (x) ≥ LU (x)                                     (34)
+ment, Rao-Blackwellization yields better performance than
+                                                                                  := Eqφ (z|x,y)qφ (y|x) [log pθ (x|y, z)+
+Monte-Carlo averaging. This is because for most observa-
+tions, memberships are fairly unambiguous and so q(z) is                               log pθ (z) + log pθ (y)−
+concentrated. This is the regime where our theory suggests                             log qφ (z|x, y) − log qφ (y|x)]        (35)
+significant variance reduction using Rao-Blackwellization.                                      L
+                                                                                  = Eqφ (y|x) [L (x, y) − log qφ (y|x)]       (36)
+5.3. Generative semi-supervised classification                    The full objective to be maximized is
+5.3.1. S EMI - SUPERVISED MODELS
+                                                                     J = Ex∼DU [LU (x)] + E(x,y)∼DL [LL (x, y)]
+The goal of a semi-supervised classification task is to pre-                                + αE(x,y)∼DL [log qφ (y|x)]       (37)
+dict labels y from x, but where the training set consists of
+both labeled data (x, y) ∼ DL and unlabeled data x ∼ DU .         where the third term is added for the classifier qφ (y|x) to
+The approach proposed by Kingma et al. (2014) uses a vari-        also train on labeled data. α is a hyperparameter which we
+ational autoencoder (VAE) whose latent space is joint over        set to 1.0 in our experiments.
+a Gaussian variable z and the discrete label y. The training
+                                                                  We take z to be a continuous random variable with a stan-
+objective is to learn a classifier qφ (y|x), an inference model
+                                                                  dard Gaussian prior. Hence, gradients can flow through
+qφ (z|x, y), and a generative model pθ (x|y, z). On labeled
+                                                                  z using the reparametrization trick. However, y is a dis-
+data, the variational lower bound is
+                                                                  crete label. The original approach proposed by Kingma et
+  log pθ (x, y) ≥ LL (x, y)                               (32)    al. (2014) computed the expectation in Equation (36) by
+                                 Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+
+                                                                     Table 1. Accuracies and timing results on semi-supervised MNIST
+                                                                     classification. Standard errors of test accuracies are over 10 runs
+                                                                     of each method. Standard deviations of timing are over the 100
+                                                                     epochs of 10 runs. Training was run on a p3.2xlarge instance on
+                                                                     Amazon Web Services.
+                                                                      Method                  test acc. (SE)     secs/epoch (SD)
+                                                                      RB-REINFORCE            0.965 (0.001)         17.5 (1.8)
+                                                                      Exact sum               0.966 (0.001)         31.4 (3.2)
+                                                                      REINFORCE               0.940 (0.002)         15.7 (1.6)
+                                                                      REINFORCE+              0.953 (0.001)         17.2 (1.7)
+                                                                      RELAX                   0.966 (0.001)         29.8 (3.0)
+                                                                      NVIL                    0.956 (0.002)         17.5 (1.8)
+                                                                      Gumbel-softmax          0.954 (0.001)         16.4 (1.7)
+Figure 4. Results on the semisupervised MNIST task. Plotted is
+test set negative ELBO evaluated at the MAP label. Paths are
+averages over 10 runs from the same initialization. Vertical lines   upon the convergence rate of REINFORCE. We slightly im-
+are standard errors. Our method (red) is comparable with summing     prove on RELAX. On this example, REINFORCE+ , NVIL,
+out all ten categories (black).                                      and Gumbel-softmax also give results comparable to ours.
+exactly summing over the ten categories. However, most
+images are unambiguous in their classification, so qφ (y|x)          5.4. Moving MNIST
+is often concentrated on just one category. We will show             In this section, we use a hard-attention mechanism (Mnih
+that applying our Rao-Blackwellization procedure with one            et al., 2014; Gregor et al., 2015) to model non-centered
+category summed gives results comparable to computing                MNIST digits. We choose this problem because, as will
+the the full sum, more quickly.                                      be seen, the exact stochastic gradient is intractable due to
+                                                                     the large number of categories. However, only a few of the
+5.3.2. E XPERIMENTAL R ESULTS                                        categories will have significant probabilities.
+We work with the MNIST dataset (Lecun et al., 1998). We              Like the original VAE work (Kingma & Welling, 2014),
+used 50 000 MNIST digits in the training set, 10 000 digits          we learn an inference model qφ (z|x) and generative model
+in the validation set, and 10 000 digits in the test set. Among      pθ (x|z), where z is a low-dimensional, continuous repre-
+the 50 000 MNIST digits in the training set, 5 000 were              sentation of the MNIST digit x. Unlike the previous section,
+randomly selected to be labeled, and the remaining 45 000            we are no longer using the class label. However, we now
+were unlabeled.                                                      work with a non-centered MNIST digit, and in order to train
+To optimize, we Rao-Blackwellized the REINFORCE es-                  the inference and generative models, we must also infer the
+timator. We compared against REINFORCE without Rao-                  pixel at which the MNIST digit is centered.
+Blackwellization; the exact gradient with all 10 categories          More precisely, our generative model is as follows. For each
+summed; REINFORCE+ ; Gumbel-softmax (Jang et al.,                    image, we sample a two-vector representing the pixel at
+2017); NVIL (Mnih & Rezende, 2016); and RELAX (Grath-                which to center the original 28 × 28 MNIST image:
+wohl et al., 2018).
+                                                                                      ` ∼ Categorical(H × W ).                     (38)
+For all methods, we used performance on the validation set
+to choose step-sizes and other parameters. See Appendix              Here H and W are respectively the height and width, in
+for details concerning parameters and model architecture.            pixels, of the larger image frame on which the MNIST digit
+Figure 4 shows the negative ELBO, −LL (x, y) from Equa-              will be placed. We take H = W = 68 in our experiments.
+tion (33), on the test set evaluated at the MAP label as a func-     Next, we generate the non-centered MNIST digit as
+tion of epoch. In this experiment, our Rao-Blackwellization
+with one category summed (RB-REINFORCE) achieves                                 z ∼ N (0, Id ),                                   (39)
+the same convergence rate as the original approach where                            ind
+all ten categories are analytically summed. Moreover, our                xh,w |`, z ∼ Bernoulli(µ(z)[h − `0 , w − `1 ]), .         (40)
+method achieves comparable test accuracy, at 97%. Finally,
+                                                                     for h ∈ {0, ..., H − 1} and w ∈ {0, ..., W − 1}. Here µ
+our method requires about 18 seconds per epoch, compared
+                                                                     is a neural network that maps z ∈ Rd to a grid of mean
+to 31 seconds per epoch when using the full sum (Table 1).
+                                                                     parameters µ(z) ∈ R28×28 . In Equation (40), we take
+In comparing with other approaches, we clearly improve                                        / [0, 28]2 .
+                                                                     µ(z)[a, b] = 0 if (a, b) ∈
+                                Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+
+
+
+      Figure 5. Examples of non-centered MNIST digits
+
+In this way, x ∈ RH×W is a random sample of an image
+containing a single non-centered MNIST digit on a blank
+background (Figure 5).
+Hence, we need to learn not only the generative model
+for an MNIST digit, but also the pixel at which the digit
+is centered. Our two latent variables are zn and `n . We
+find a variational approximation to the posterior using an
+approximating family of the form                                  Figure 6. Results on the moving MNIST task. Plotted is test set
+                                                                  negative ELBO evaluated at the MAP pixel location. Paths are
+             `n |xn ∼ Categorical(ζ(xn )),                 (41)
+                                                                  averages over 10 runs from the same initialization. Vertical lines
+         zn |xn , `n ∼ N (hµ (xn , `n ), hΣ (xn , `n )),   (42)   are standard errors. Our Rao-Blackwellization (red) with summing
+                                                                  out the top five categories exhibits the fastest convergence and
+where ζ, hµ , and hΣ are neural networks. The appendix            reaches a smaller negative ELBO than NVIL and REINFORCE+ .
+details the architecture for the neural networks.
+REINFORCE was too high variance to be practical                   Table 2. Timing results on the moving MNIST task. Standard
+here, so we started with REINFORCE+ and its Rao-                  deviations of timing are over the 50 epochs of 10 runs. Training
+Blackwellization. Here, we chose to sum the top five cat-         was run on a p3.2xlarge instance on Amazon Web Services.
+                                                                    Method                   secs/epoch (SD)
+egories. We again compare with NVIL, Gumbel-softmax,
+and RELAX. For all the methods, we use a validation set to          RB-REINFORCE+                  15.4 (2.3)
+tune step-sizes and other parameters.                               REINFORCE+                      8.9 (1.3)
+                                                                    RELAX                          11.1 (1.6)
+Figure 6 shows the negative ELBO on the test set evaluated          NVIL                            9.5 (1.4)
+at the MAP pixel location as a function of epoch. RELAX             Gumbel-softmax                  8.7 (1.2)
+converged to a similar ELBO as our method, but did so
+at a slower rate. While NVIL also converged quickly, it
+converged to a worse negative ELBO than our method.
+                                                                  have presented a general method to reduce the variance of
+Gumbel-softmax did not appear to converge to a reason-            stochastic estimates of this gradient, without changing the
+able ELBO. We believe that the bias of this procedure was         bias. Our method is grounded in the classical technique
+too high in this application. In particular, because we are       of Rao-Blackwellization. Experiments on synthetic data
+constrained to sampling discrete values for the pixel atten-      and two large-scale MNIST modeling problems show the
+tion, we must use the straight-through version of Gumbel-         practical benefits of our variance-reduced estimators.
+softmax (Bengio et al., 2013; Jang et al., 2017), which
+                                                                  We have focused on the particular setting where z is a uni-
+suffers from even higher bias.
+                                                                  variate discrete random variable, which is relevant for many
+Our method is more computationally expensive per epoch            applications. In other situations, multiple discrete variables
+than the others (Table 2). However, the gains in convergence      will naturally appear in the expectations being optimized.
+are still substantive: for example, it takes about 44 seconds     Treating these as a single discrete variable over the Carte-
+for our method to reach a negative ELBO of 500, while it          sian product of the sample spaces may make such problems
+takes RELAX about 110 seconds.                                    amenable to our Rao-Blackwellization approach.
+Our method performs best because it is the only one that          In addition, many multivariate discrete distributions aris-
+takes advantage of the fact that only a few digit positions       ing in modeling applications will be structured (e.g., the
+have high probabilities. Summing these positions analyti-         discrete-space latent Markov chain of an HMM). Local
+cally removes much of the variance.                               expectation gradients (Titsias K & Lázaro-Gredilla, 2015)
+                                                                  reduce high-dimensional expectations over these multivari-
+6. Discussion                                                     ate discrete distributions to iterated univariate expectations
+                                                                  through appropriate conditioning on variable sets. Our tech-
+Efficient stochastic approximation of the gradient                nique can then be applied for variance reduction in comput-
+∇η Eqη (z) [fη (z)], where z is discrete, is a basic problem      ing the univariate expectations. This is an avenue of future
+that arises in many probabilistic modelling tasks. We             research.
+                             Rao-Blackwellized Stochastic Gradients for Discrete Distributions
+
+References                                                     Liang, C., Norouzi, M., Berant, J., Le, Q., and Lao, N. Mem-
+                                                                 ory augmented policy optimization for program synthesis
+Bengio, Y., Leonard, N., and Courville, A. Estimating or
+                                                                 with generalization. In Neural Information Processing
+  propagating gradients through stochastic neurons for con-
+                                                                 Systems, 2018.
+  ditional computation. 2013. URL https://arxiv.
+  org/abs/1308.3432.                                           Maddison, C. J., Mnih, A., and Teh, Y. W. The concrete
+Blei, D. M., Kucukelbir, A., and McAuliffe, J. D. Varia-        distribution: A continuous relaxation of discrete random
+  tional inference: A review for statisticians. Journal of      variables. In International Conference on Learning Rep-
+  the American Statistical Association, 112(518):859–877,       resentations, 2017.
+  2017.                                                        Mnih, A. and Gregor, K. Neural variational inference and
+Casella, G. and Robert, C. P. Rao-Blackwellisation of sam-      learning in belief networks. In International Conference
+  pling schemes. Biometrika, 83(1):81–94, 1996.                 on Machine Learning, 2014.
+
+Grathwohl, W., Choi, D., Wu, Y., Roeder, G., and Duve-         Mnih, A. and Rezende, D. J. Variational inference for Monte
+  naud, D. Backpropagation through the void: Optimizing         Carlo objectives. In International Conference on Machine
+  control variates for black-box gradient estimation. In        Learning, 2016.
+  International Conference on Learning Representations,
+                                                               Mnih, V., Heess, N., Graves, A., et al. Recurrent models
+  2018.
+                                                                of visual attention. In Advances in Neural Information
+Gregor, K., Mnih, A., and Wierstra, D. Deep autoregres-         Processing Systems, 2014.
+  sive networks. In International Conference on Machine
+                                                               Morin, F. and Bengio, Y. Hierarchical probabilistic neural
+  Learning, 2014.
+                                                                network language model. In International Conference on
+Gregor, K., Danihelka, I., Graves, A., Rezende, D., and         Artificial Intelligence and Statistics, 2005.
+  Wierstra, D. DRAW: a recurrent neural network for im-
+  age generation. In International Conference on Machine       Ranganath, R., Gerrish, S., and Blei, D. M. Black box
+  Learning, 2015.                                                variational inference. In International Conference on
+                                                                 Artificial Intelligence and Statistics, 2014.
+Gu, S., Levine, S., Sutskever, I., and Mnih, A. MuProp:
+  Unbiased backpropagation for stochastic neural networks.     Royle, J. A. N-mixture models for estimating population
+  In International Conference on Learning Representations,       size from spatially replicated counts. Biometrics, 60(1):
+  2016.                                                         108–115, 2004.
+
+Gutmann, M. and Hyvärinen, A. Noise-contrastive esti-         Spall, J. C. Introduction to Stochastic Search and Optimiza-
+  mation: A new estimation principle for unnormalized            tion. John Wiley & Sons, Inc., New York, NY, USA, 1st
+  statistical models. In International Conference on Artifi-     edition, 2003.
+  cial Intelligence and Statistics, 2012.
+                                                               Titsias K, M. Combine Monte Carlo with exhaustive search:
+Jang, E., Gu, S., and Poole, B. Categorical reparameteriza-       Effective variational inference and policy gradient rein-
+  tion with Gumbel-softmax. In International Conference           forcement learning. In NIPS Workshop: Advances in
+  on Learning Representations, 2017.                             Approximate Inference, 2014.
+Kingma, D. and Welling, M. Auto-encoding variational           Titsias K, M. and Lázaro-Gredilla, M. Local expectation
+  Bayes. In International Conference on Learning Repre-          gradients for black box variational inference. In Neural
+  sentations, 2014.                                              Information Processing Systems, 2015.
+Kingma, D. P. and Ba, J. Adam: a method for stochastic         Tucker, G., Mnih, A., Maddison, C. J., Lawson, J., and Sohl-
+  optimization. In International Conference for Learning         Dickstein, J. REBAR: Low-variance, unbiased gradient
+  Representations, 2015.                                         estimates for discrete latent variable models. In Neural
+                                                                 Information Processing Systems, 2017.
+Kingma, D. P., Rezende, D. J., Mohamed, S., and Welling,
+  M. Semi-supervised learning with deep generative             Williams, R. J. Simple statistical gradient-following algo-
+  models. CoRR, abs/1406.5298, 2014. URL http:                  rithms for connectionist reinforcement learning. Machine
+  //arxiv.org/abs/1406.5298.                                    learning, 8(3-4):229–256, 1992.
+Lecun, Y., Bottou, L., Bengio, Y., and Haffner, P. Gradient-
+  based learning applied to document recognition. Proceed-
+  ings of the IEEE, 86(11):2278–2324, Nov 1998.
+

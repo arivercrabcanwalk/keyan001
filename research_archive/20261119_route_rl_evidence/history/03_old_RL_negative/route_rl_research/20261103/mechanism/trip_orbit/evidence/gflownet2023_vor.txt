@@ -1,0 +1,3119 @@
+Journal of Machine Learning Research 24 (2023) 1-55             Submitted 4/22; Revised 5/23; Published 6/23
+
+
+
+
+                                  GFlowNet Foundations
+
+Yoshua Bengio∗                                                          <EMAIL_REMOVED>
+Mila, Universié de Montréal, CIFAR, IVADO
+Salem Lahlou∗                                                                  <EMAIL_REMOVED>
+Mila, Universié de Montréal
+Tristan Deleu∗                                                                 <EMAIL_REMOVED>
+Mila, Universié de Montréal
+Edward J. Hu                                                                <EMAIL_REMOVED>
+Mila, Universié de Montréal, Microsoft
+Mo Tiwari                                                                    <EMAIL_REMOVED>
+Stanford University
+Emmanuel Bengio                                                               <EMAIL_REMOVED>
+Mila, McGill University
+
+
+Editor: David Sontag
+
+
+                                                Abstract
+     Generative Flow Networks (GFlowNets) have been introduced as a method to sample a
+     diverse set of candidates in an active learning context, with a training objective that makes
+     them approximately sample in proportion to a given reward function. In this paper, we
+     show a number of additional theoretical properties of GFlowNets, including a new local and
+     efficient training objective called detailed balance for the analogy with MCMC. GFlowNets
+     can be used to estimate joint probability distributions and the corresponding marginal dis-
+     tributions where some variables are unspecified and, of particular interest, can represent
+     distributions over composite objects like sets and graphs. GFlowNets amortize the work
+     typically done by computationally expensive MCMC methods in a single but trained gen-
+     erative pass. They could also be used to estimate partition functions and free energies,
+     conditional probabilities of supersets (supergraphs) given a subset (subgraph), as well as
+     marginal distributions over all supersets (supergraphs) of a given set (graph). We introduce
+     variations enabling the estimation of entropy and mutual information, continuous actions
+     and modular energy functions.
+
+
+1. Introduction
+
+Building upon the introduction of Generative Flow Networks (GFlowNets) by Bengio et al.
+(2021), we provide here an in-depth formal foundation and expansion of the set of theoretical
+results in ways that may be of interest for the active learning scenario of Bengio et al. (2021)
+but also much more broadly.
+
+
+∗. Equal Contribution
+
+
+c 2023 Yoshua Bengio, Salem Lahlou, Tristan Deleu, Edward J. Hu, Mo Tiwari, Emmanuel Bengio.
+License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/. Attribution requirements are
+provided at http://jmlr.org/papers/v24/22-0364.html.
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+1.1 What is a GFlowNet ?
+
+GFlowNets have properties which make them well-suited to perform amortized probabilistic
+inference in general, whether for sampling or for marginalizing. Sampling takes place at
+training time while run-time sampling or computations of marginalized quantities can be
+done in a single pass through a sequence of constructive stochastic steps. This makes
+GFlowNets an interesting alternative to Monte-Carlo Markov chains (MCMC) and related
+to amortized variational inference (Malkin et al., 2023).
+    Because sampling of a compositional object s can be achieved through a sequence of
+stochastic steps, very rich multimodal distributions PT (s) over such objects can be repre-
+sented, and the offline training objectives make it possible to explore and discover modes of
+the distribution of interest. The key property of GFlowNets is that their sampling policy is
+trained to make the probability PT (s) of sampling an object s approximately proportional
+to the value R(s) of a given reward function applied to that object. We also talk of an en-
+ergy function E(s) = − log R(s), i.e., the reward function is non-negative and corresponds
+to an unnormalized probability. Whereas one typically trains a generative model from a
+dataset of positive examples, a GFlowNet is trained to match the given energy or reward
+function and convert it into a sampler. We view that sampler as a generative policy because
+the composite object s is constructed through a sequence of smaller stochastic steps (see
+Fig. 1), often corresponding to constructively composing different elements of s, like the
+edges of a graph.
+    This conversion of an energy function or unnormalized probability function to a sampler
+is similar to what MCMC methods achieve but once trained, GFlowNets will generate a
+sample in one shot instead of generating a long sequence of samples whose distribution would
+gradually approach the desired one. GFlowNets thus avoid the lengthy stochastic search in
+the space of such objects and the associated mode-mixing intractability challenge of MCMC
+methods (Jasra et al., 2005; Bengio et al., 2013; Pompe et al., 2020). Multiple iid samples
+can be obtained from the GFlowNet by calling the sampler multiple times. GFlowNets
+exchange that intractability of sampling with MCMC for the challenge of amortized training
+of the generative policy. The latter problem would be equally intractable if the modes of the
+reward function did not have a inherent (but not necessarily known) structure over which
+the learner could generalize, i.e., the learner had almost no chance to correctly guess where
+to find new modes based on (i.e., training on) those it had already visited.
+    The energy function or reward function (exponential of minus energy) is evaluated only
+at the end of the sequential construction process for objects s, in what we call a terminating
+state. Every such constructive sequence starts in the single initial state s0 and ends in a
+terminal state. As illustrated in Figure 2, we can visualize the set of all trajectories starting
+from s0 and ending in a terminal state s. The term ”flow” in ”generative flow networks”
+refers to unnormalized probabilities that can be learned by GFlowNet learning procedures.
+The flow in an intermediate state s is a weighted sum of the non-negative rewards of the
+terminating states reachable from s. Those weights are such as to avoid double-counting:
+if we were to inject a fixed flow of liquid in s0 and dispatch that liquid in each child of any
+state s proportionally to the GFlowNet policy for choosing a child of s, we would obtain
+the flow at each state and the flow at terminating states would match the reward function
+at those states. As shown in greater detail here and for the first time in the first GFlowNet
+
+                                               2
+                                            GFlowNet Foundations
+
+
+
+
+                           2
+                                                                              draw at ∼ π(A|st )
+            st =   1                        GFlowNet PF       π(A|st )     at = “Add a new node
+                                                                            connected to node 2”
+                           3
+     asdf
+
+
+
+
+             T (st , at ) determines st+1
+
+
+
+                           2
+
+            st+1 = 1                                          π(A|st+1 )   draw at+1 ∼ π(A|st+1 )
+                                   4        GFlowNet PF
+                                                                               at+1 = “. . . ”
+
+                           3
+
+
+Figure 1: A diagram of how a GFlowNet iteratively constructs an object. We adopt notation
+that is common in the reinforcement learning literature: st represents the state of the
+partially constructed object (in this case, a graph) at time t, at represents the action taken
+by the GFlowNet at time t to transition to state st+1 = T (st , at ). In this diagram, the
+GFlowNet takes a 3-node graph as input and determines an action to take. The action,
+combined with the environment transition function T (st , at ), determines st+1 : a four-node
+graph. This process repeats until an exit action is sampled and the sample is complete.
+
+
+paper (Bengio et al., 2021), this can be achieved with a flow constraint at each state: the
+sum of incoming flows must match the sum of outgoing flows.
+
+1.2 Contributions of this paper
+In this paper, an important contribution is the notion of conditional GFlowNet, which en-
+ables estimation of intractable sums corresponding to marginalization over many steps of
+object construction, and can thus be used to compute free energies1 over different types
+of joint distributions, perhaps most interestingly over sets and graphs. This marginaliza-
+tion also enables estimation of entropies, conditional entropies and mutual information.
+GFlowNets can thus be generalized to estimate multiple flows corresponding to modeling a
+rich outcome (rather than a scalar reward function) .
+    We refer the reader to Bengio et al. (2021) and Sec. 7 for a discussion of related ap-
+proaches and differences with common generative models and reinforcement learning (RL)
+methods. In an RL context, two interesting properties of GFlowNets already noted in that
+paper are that they (1) can be trained in an offline manner with trajectories sampled from a
+distribution different from the one represented by the GFlowNet and (2) they match the re-
+ward function in probability rather than try to find a configuration which maximizes rewards
+or returns. The latter property is particularly interesting in the context of exploration, to
+ensure the configurations sampled from the generative policy are both interesting and di-
+1. In machine learning, a free energy is the logarithm of an unnormalized marginal probability, a generally
+   intractable sum of exponentiated negative energies.
+
+
+                                                          3
+                                Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+                                                                        Initial state                 Terminating state
+                                                                                                           s ∈ Sf
+  s0           s1    s3           s5          s7                   s0        s1            s3           s5        s7
+
+ F                                                       s9                                                                   s9
+  (s 0                     sf                                                                    sf                                      R(s9 )
+   →                                          s8                                                                   s8
+           )   s2                                                            s2
+         s2                                                   sf                                                                    sf
+                    s4           s6                 sf                                  s4             s6                sf
+                                            s10                                                                  s10
+
+                                                                                  R(s4 )
+                          sf           sf                                                       sf          sf                     Terminal
+                                                   sf                                                                   sf
+                                                                                                                                     state
+
+
+Figure 2: Illustration of the structure of a Generative Flow Network (GFlowNet), as a
+pointed DAG over states s, with particles flowing along edges to represent the flow function.
+Any object sampled by the GFlowNet policy can be obtained by starting from initial state
+s0 and then at each step choosing a child with probability proportional to the GFlowNet
+policy’s transition probability. This process stops when a terminating action is chosen
+from a terminating state s (yielding a terminal state sf ), at which point a reward R(s) is
+obtained. The figure shows a tiny GFlowNet and the possible trajectories from s0 to any
+of the terminal states. It illustrates that in general a state can be reached through several
+trajectories. GFlowNet algorithms learn a policy such that the probability of sampling
+terminating state s is proportional to R(s). It tries to learn a flow function F (s) and
+F (s → s0 ) over all states (including intermediate states) s and transitions s → s0 with
+F (s) = R(s) at terminal states and F (s0 ) being the sum of rewards over all terminal states.
+A sufficient property to achieve this is that at each state the sum of incoming flows equals
+the sum of outgoing flows.
+
+
+verse. It is also interesting to transform GFlowNets into amortized probabilistic inference
+machines: if we choose the reward function to be a prior (over some random variable) times
+a likelihood (how well some data is fit given that choice of random variable value), then the
+GFlowNet policy learns to sample from the corresponding Bayesian posterior (which is pro-
+portional to prior times likelihood). The ability of GFlowNets to generate a diverse set of
+samples then corresponds to the ability to sample from the modes of the target distribution.
+    An important source of inspiration for GFlowNets is the way information propagates
+in temporal-difference RL methods (Sutton and Barto, 2018). Both rely on a principle of
+coherence for credit assignment which may only be achieved asymptotically when training
+converges. While exact gradient calculation may be intractable, because the number of
+paths in state space to consider is exponentially large, both methods rely on local coherence
+between different components and a training objective that states that if all the learned
+components are coherent with each other locally, then we obtain a system that estimates
+the quantities of interest globally. Examples include estimation of expected discounted
+returns in temporal-difference methods and probability measures with GFlowNets.
+    This paper extends the theory of the original GFlowNet construction (Bengio et al.,
+2021) in several directions, including a new local training objective called detailed balance
+(for the analogy with the detailed balance condition of Monte-Carlo Markov chains) which
+avoids forming explicit sums required by the previously proposed flow matching loss, as
+well as formulations enabling the calculation of marginal probabilities (or free energies)
+
+                                                                   4
+                                GFlowNet Foundations
+
+
+
+
+for subsets of variables, more generally for subsets of larger sets, or subgraphs, and their
+application to estimating entropy and mutual information. Finally, whereas the basic for-
+mulation of GFlowNets assumes a given reward or energy function, this paper considers
+how the energy function could be jointly learned with the GFlowNet, opening the door to
+novel energy-based modeling methodologies and a modular structure for both the energy
+function and the GFlowNet.
+
+
+1.3 GFlowNets in other works
+
+In addition to the theory presented in this paper, Malkin et al. (2023) and Zimmermann
+et al. (2022) prove some partial equivalences between GFlowNets and hierarchical variational
+methods, providing yet more theoretical evidence for the efficacy of GFlowNets in learning
+to sample proportionally to a given reward function. These works also provide evidence for
+the superiority of GFlowNets in off-policy settings.
+
+    GFlowNets have found a wide array of applications due to the associated diversity of
+generated samples. In contexts where a cheap proxy for the true reward function exists,
+GFlowNets have been used to surface samples under which to query the proxy before more
+expensive evaluation under the true reward function. In these settings, the diversity of
+samples generated by GFlowNets can be used for robustness to proxy misspecification and
+to incorporate epistemic uncertainty. For example, Zhang et al. (2023) use GFlowNets to
+produce sample schedules for operations in a computation graph, where evaluating the run-
+times of sample schedules via a proxy is fast but evaluating the same schedules on target
+hardware is expensive. In active learning problems, Jain et al. (2022, 2023) use GFlowNet
+sampling as a subroutine inside an active learning loop as a substitute for Bayesian Op-
+timization or RL-based methods. Jain et al. (2022) apply GFlowNets to search for novel
+anti-microbial peptides, discover DNA sequences that have high binding activity with hu-
+man transcription factors, and to find proteins with high fluorescence. Additionally, Jain
+et al. (2023) develops preference-conditional GFlowNets, where a preference weight vector
+is used to scalarize multiple objective functions into a single reward. The authors apply
+their techniques to various molecule and DNA sequence generation tasks and find that their
+methods are able to find different Pareto-optimal samples along the Pareto frontier.
+
+    GFlowNets have found applications in several other machine learning problems. For ex-
+ample, Zhang et al. (2022) simultaneously train an energy-based model and a GFlowNet; the
+energy function is trained with samples from a GFlowNet, which, in turn, uses the energy
+function to form its reward. Their method results in a generative model for binary vectors
+in high dimensions, e.g., binarized digits. Deleu et al. (2022) use a GFlowNet for structure
+learning; the GFlowNet produces samples that approximates the true posterior over causal
+graphs given a dataset. Their method works on both observational and interventional data,
+and compares favorably to MCMC- and variational inference-based methods. Hu et al.
+(2023) find maximum-likelihood estimates of latent variable models with discrete composi-
+tional latents by jointly training a GFlowNet to approximately sample from the generally
+intractable posterior in the E-step of the expectation-maximization (EM) algorithm.
+
+                                             5
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+2. Flow Networks and Markovian Flows
+2.1 Some elements of graph theory
+In this section, we recall some basic definitions and properties of graphs, which are the basis
+of flow networks and GFlowNets.
+
+Definition 1 A directed graph is a tuple G = (S, A), where S is a finite set of states, and
+A a subset of S × S representing directed edges. Elements of A are denoted s→s0 and called
+edges or transitions.
+A trajectory in such a graph is a sequence τ = (s1 , . . . , sn ) of elements of S such that every
+transition st →st+1 ∈ A and n > 1. We denote s ∈ τ to mean that s is in the trajectory τ ,
+i.e., ∃t ∈ {1, . . . , n} st = s, and similarly s→s0 ∈ τ to mean that ∃t ∈ {1, . . . , n − 1} st =
+s, st+1 = s0 . For convenience, we also use the notation τ = s1 → · · · → sn . The length of
+a trajectory is the number of edges in it (the length of τ = (s1 , . . . , sn ) is thus n − 1).
+A directed acyclic graph (DAG) is a directed graph in which there is no trajectory τ =
+(s1 , . . . , sn ) satisfying sn = s1 .
+
+    Given a DAG G = (S, A), and two states s, s0 ∈ S, if there exists a trajectory in G
+starting in s and ending in s0 , then we write s < s0 . The binary relationship “<” defines a
+strict partial order (i.e. it is irreflexive, asymmetric and transitive). We write s ≤ s0 if
+s < s0 or s = s0 . The binary relation “≤” is a (non-strict) partial order (i.e. it is reflexive,
+antisymmetric and transitive).
+    If there is no order relation between s and s0 , we write s ≶ s0 .
+
+Definition 2 Given a DAG G = (S, A), the parent set of a state s ∈ S, which we denote
+P ar(s), contains all of the direct parents of s in G, i.e., P ar(s) = {s0 ∈ S : s0 →s ∈
+A}; similarly, the child set Child(s) contains all of the direct children of s in G, i.e.,
+Child(s) = {s0 ∈ S : s→s0 ∈ A}.
+
+Definition 3 Given a DAG G = (S, A). G is called a pointed DAG if there exist two
+states s0 , sf ∈ S that satisfy:
+
+                      ∀s ∈ S \ {s0 } s0 < s and ∀s ∈ S \ {sf } s < sf .
+
+s0 is called the source state or initial state. sf is called the sink state or final state.
+Because “<” is a strict partial order, these two states are unique.
+     A complete trajectory in such a DAG is any trajectory starting in s0 and ending in
+sf . We denote such a trajectory as τ = (s0 , s1 , . . . , sn , sn+1 = sf ).
+     We denote by T the set of all complete trajectories in G, and by T partial the set of
+(possibly incomplete) trajectories in G.
+     A state s ∈ S is called a terminating state if it is a parent of the sink state, i.e.
+s → sf ∈ A. The transition s → sf is called a terminating edge. We denote by:
+
+   • A−f = {s → s0 ∈ A, s0 6= sf }, the set of non-terminating edges in G,
+
+   • Af = {s → s0 ∈ A, s0 = sf } = A \ A−f , the set of terminating edges in G,
+
+   • S f = {s ∈ S, s → sf ∈ Af } = P ar(sf ), the set of terminating states in G.
+
+                                                6
+                                    GFlowNet Foundations
+
+
+
+
+                               s4
+                                                                s0     Initial state
+                   s1
+
+                               s5                              sf      Sink state
+
+         s0        s2                      sf                          Terminating state (S f )
+                               s6
+                                                                       Terminating edge (Af )
+                   s3
+                                                                       Non-terminating edge (A−f )
+                               s7
+
+
+Figure 3: Example of a pointed DAG G illustrating the notions of initial state (s0 ), final or
+sink state (sf ), terminating states in S f , with a transition to sf called a terminating edge,
+in Af . A terminating state may have other children different from the sink state (e.g., the
+terminating state s7 ).
+
+
+    In Fig. 3, we visualize the concepts introduced in the previous definitions.
+    Note that the constraint of a single source state and single sink state is only a mathemati-
+cal convenience since a bijection exists between general DAGs and those with this constraint
+(by the addition of a unique source/sink state connected to all the other source/sink states).
+
+Definition 4 Let G be a pointed DAG with source state s0 and sink state sf . A forward
+(resp. backward) probability function consistent withPG is any non-negative function
+P̂F (resp. P̂B ) defined on A that satisfies ∀s ∈ S \ {sf },                    0
+                                                             s0 ∈Child(s) P̂F (s | s) = 1 (resp.
+∀s ∈ S \ {s0 }, s0 ∈P ar(s) P̂B (s0 | s) = 1).
+                P
+
+
+    With pointed DAGs, consistent forward and backward probability functions, that are
+probabilities over states, can be used to define probabilities over trajectories, i.e. probability
+measures on some subsets of T partial . The following lemma shows how to construct such
+factorized probability measures:
+
+Lemma 5 Let G = (S, A) be a pointed DAG, and consider a forward probability function
+PˆF , and a backward probability function PˆB both consistent with G. For any state s ∈
+S \ {sf }, we denote by Ts,f ⊆ T partial the set of trajectories in G starting in s and ending
+in sf ; and for any state s ∈ S \ {s0 }, we denote by T0,s ⊆ T partial the set of trajectories in
+G starting in s0 and ending in s.
+     Consider the extensions of P̂F and P̂B on T partial defined by:
+
+                                                                     n−1
+                                                                     Y
+                   ∀τ = (s1 , . . . , sn ) ∈ T partial P̂F (τ ) :=         P̂F (st+1 | st )          (1)
+                                                                     t=1
+                                                                     n−1
+                                                                     Y
+                   ∀τ = (s1 , . . . , sn ) ∈ T partial P̂B (τ ) :=         P̂B (st | st+1 )          (2)
+                                                                     t=1
+
+
+                                                    7
+                              Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+We have the following:
+                                                                      X
+                                           ∀s ∈ S \ {sf }                     P̂F (τ ) = 1                                              (3)
+                                                                   τ ∈Ts,f
+                                                                      X
+                                          ∀s0 ∈ S \ {s0 }                     P̂B (τ ) = 1                                              (4)
+                                                                   τ ∈T0,s0
+
+
+Proof For convenience, we will use Ts→s0 ,sf to denote the set of trajectories starting with
+s → s0 and ending in sf , and T0,s→s0 to denote the set of trajectories starting in s0 and
+ending with s → s0 . This allows to write:
+                                    [
+      ∀s 6= sf Ts,f =                         Ts→s0 ,sf , {Ts→s0 ,sf , s0 ∈ Child(s)} pairwise disjoint,
+                              s0 ∈Child(s)
+                                    [
+      ∀s0 6= s0 T0,s0 =                       T0,s→s0 , {T0,s→s0 , s ∈ P ar(s0 )} pairwise disjoint.
+                                s∈P ar(s0 )
+
+
+Additionally, for any s 6= sf , we denote by ds,f the maximum trajectory length in Ts,f ; and
+for any s0 6= s0 , we denote by d0,s0 the maximum trajectory length in T0,s .
+    We will prove Eq. (3) by strong induction on ds,f and Eq. (4) by strong induction on
+d0,s0 .
+    Base cases: If ds,f = 1 and d0,s0 = 1, then Ts,f = {(s → sf )} and T0,s0 = {(s0 → s0 )}.
+        P
+Hence, τ ∈Ts,f P̂F (τ ) = P̂F (s → sf ) = P̂F (sf | s) = 1 given that sf is the only child of s
+(otherwise ds,f cannot be 1), and τ ∈T 0 P̂B (τ ) = P̂B (s0 | s0 ) = 1 given that s0 is the only
+                                     P
+                                          0,s
+parent of s0 (otherwise d0,s0 cannot be 1).
+    Induction steps: Consider s 6= sf such that ds,f > 1 and s0 6= s0 such that d0,s0 > 1.
+Because of the disjoint unions written above, we have:
+          X                          X            X                            X                              X
+                   P̂F (τ ) =                                P̂F (τ ) =                     P̂F (s̃ | s)                P̂F (τ ) = 1,
+         τ ∈Ts,f                s̃∈Child(s) τ ∈Ts→s̃,f                     s̃∈Child(s)                      τ ∈Ts̃,f
+        X                         X             X                            X                                X
+                 P̂B (τ ) =                                 P̂B (τ ) =                    P̂B (s̃0 | s0 )               P̂B (τ ) = 1,
+      τ ∈T0,s0                s̃0 ∈P ar(s0 ) τ ∈T0,s̃0 →s                s̃0 ∈P ar(s0 )                     τ ∈T0,s̃0
+
+
+where we used the induction hypotheses in the third equality of each line.
+
+
+
+2.2 Trajectories and Flows
+We augment pointed DAGs it with a function F called a flow. An analogy which helps to
+picture flows is a stream of particles flowing through a network where each particle starts at
+s0 and flowing through some trajectory terminating in sf . The flow F (τ ) associated with
+each complete trajectory τ contains the number of particles sharing the same path τ .
+
+Definition 6 Given a pointed DAG, a trajectory flow (or “flow”) is any non-negative
+function F : T 7→ R+ defined on the set of complete trajectories T . F induces a measure
+
+                                                                  8
+                                  GFlowNet Foundations
+
+
+
+
+over the σ-algebra Σ = 2T , the power set on the set of complete trajectories T . In particular,
+for every subset A ⊆ T , we have
+                                               X
+                                     F (A) =       F (τ ).                                   (5)
+                                                     τ ∈A
+
+The pair (G, F ) is called a flow network.
+
+This definition ensures that (T , 2T , F ) is a measure space. We abuse the notation here,
+using F to denote both a function of complete trajectories, and its corresponding measure
+over (T , 2T ). A special case is when the event A is the singleton trajectory {τ }, where we
+just write its measure as F (τ ). We also abuse the notation to define the flow through either
+a particular state s, or through a particular edge s→s0 in the following way.
+Definition 7 The flow through a state (or state flow) F : S 7→ R+ corresponds to the
+measure of the set of complete trajectories going through a particular state:
+                                                         X
+                       F (s) := F ({τ ∈ T : s ∈ τ }) =         F (τ ).           (6)
+                                                                   τ ∈T : s∈τ
+
+Similarly, the flow through an edge (or edge flow) F : A 7→ R+ corresponds to the
+measure of the set of complete trajectories going through a particular edge:
+                                                             X
+                  F (s→s0 ) := F ({τ ∈ T : s→s0 ∈ τ }) =             F (τ ).  (7)
+                                                                        τ ∈T : s→s0 ∈τ
+
+Note that with this definition, we have F (s→s0 ) = 0 if s→s0 ∈  / A is not an edge in the
+pointed DAG (since F (∅) = 0). We call the flow of a terminating transition F (s→sf ) a
+terminating flow. The following proposition relates the state flows and the edge flows:
+Proposition 8 Given a flow network (G, F ). The state flows and edge flows satisfy:
+                                              X
+                     ∀s ∈ S \ {sf } F (s) =          F (s → s0 )                                        (8)
+                                                         s0 ∈Child(s)
+                                                             X
+                          ∀s0 ∈ S \ {s0 } F (s0 ) =                     F (s → s0 )                     (9)
+                                                          s∈P ar(s0 )
+
+Proof Given s 6= sf , the set of complete trajectories going through s is the (disjoint) union
+of the sets of trajectories going through s → s0 , for all s0 ∈ Child(s):
+                                            [
+                      {τ ∈ T : s ∈ τ } =            {τ ∈ T : s → s0 ∈ τ }.
+                                             s0 ∈Child(s)
+
+Therefore, it follows that:
+                      X                  X           X                          X
+            F (s) =       F (τ ) =                              F (τ ) =                  F (s → s0 )
+                    τ : s∈τ          s0 ∈Child(s) τ : s→s0 ∈τ              s0 ∈Child(s)
+
+Similarly, Eq. (9) follows by writing the set of complete trajectories going though s0 6= s0
+as the (disjoint) union of the sets of trajectories going through s → s0 for all s ∈ P ar(s0 ).
+
+
+
+                                                     9
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+2.3 Flow Induced Probability Measures
+Definition 9 Given a flow network (G, F ), the total flow Z is the measure of the whole
+set T , corresponding to the sum of the flows of all the complete trajectories:
+                                                        X
+                                   Z := F (T ) =              F (τ ).                      (10)
+                                                       τ ∈T
+
+
+Proposition 10 The flow through the initial state equals the flow through the final state
+equals the total flow Z.
+
+Proof Since ∀τ ∈ T , s0 , sf ∈ τ , applying Eq. (6) to s0 and sf yields
+                                                X
+                                    F (s0 ) =          F (τ ) = Z,                         (11)
+                                                τ ∈T
+                                                X
+                                   F (sf ) =           F (τ ) = Z.                         (12)
+                                                τ ∈T
+
+
+
+
+Intuitively, Prop. 10 justifies the use of the term “flow”, introduced by Bengio et al. (2021),
+by analogy with a stream of particles flowing from the initial state to the final states.
+   We use the letter Z in Def. 9, often used to denote the partition function in probabilistic
+models and statistical mechanics, because it is a normalizing constant which can turn the
+measure space (T , 2T , F ) defined above into the probability space (T , 2T , P ):
+
+Definition 11 Given a flow network (G, F ), the flow probability is the probability mea-
+sure P over the measurable space (T , 2T ) associated with F :
+
+                                                       F (A)    F (A)
+                              ∀A ⊆ T P (A) :=                 =       .                    (13)
+                                                       F (T )     Z
+
+For two events A, B ⊆ T , the conditional probability P (A | B) thus satisfies:
+
+                                                       F (A∩B)
+                                    P (A | B) :=               .                           (14)
+                                                        F (B)
+
+Similar to the flow F , we abuse the notation P to define the probability of going through
+a state:
+                                                     F (s)
+                                 ∀s ∈ S     P (s) :=       ,                           (15)
+                                                      Z
+and similarly for the probability of going through anPedge. Note that P (s) does not corre-
+spond to a distribution over states, in the sense that s∈S P (s) 6= 1; in particular, it is easy
+to see that P (s0 ) = 1 (in other words, the probability of a trajectory passing through the
+initial state s0 is 1). Additionally, for a trajectory τ ∈ T , we also use the abuse of notation
+P (τ ) instead of P ({τ }) to denote the probability of going through a specific trajectory τ .
+
+
+                                                  10
+                                     GFlowNet Foundations
+
+
+
+
+Definition 12 Given a flow network (G, F ), the forward transition probability opera-
+tor PF is a function on S × S, that is a special case of the conditional probabilities induced
+by F (Eq. (14)):
+
+                                                                             F (s→s0 )
+                      ∀s → s0 ∈ A PF (s0 | s) := P (s→s0 | s) =                        .               (16)
+                                                                               F (s)
+
+Similarly, the backwards transition probability is the operator defined by:
+
+                                                                              F (s→s0 )
+                      ∀s → s0 ∈ A PB (s | s0 ) := P (s→s0 | s0 ) =                      .              (17)
+                                                                                F (s0 )
+
+Note how PF and PB are consistent with G (in the sense of Def. 4), as a consequence of
+Prop. 8.
+
+    Because flows define probabilities over states and edges, they can be used to define
+probability distributions over the terminating states of a graph (denoted by S f = P ar(sf ))
+as follows:
+
+Definition 13 Given a flow network (G, F ), the terminating state probability PT is
+the probability over terminating states S f under the flow probability P :
+
+                                                                        F (s → sf )
+                             ∀s ∈ S f PT (s) := P (s → sf ) =                                          (18)
+                                                                             Z
+
+Contrary to the probability P (s) of going through a state s, the terminating state probability
+PT is a well-defined distribution over the terminating states s ∈ S f , in the following sense:
+
+Proposition 14 The terminating state probability PT is a well-defined distribution over
+the terminating states s ∈ S f , in that PT (s) ≥ 0 for all s ∈ S f , and
+                                           X
+                                                   PT (s) = 1.
+                                           s∈S f
+
+
+Proof Since the flow F (s → sf ) is non-negative, it is easy to see that PT (s) ≥ 0. Moreover,
+using the definition of S f = P ar(sf ), Prop. 8 (relating the edge flows and the state flows),
+and Prop. 10 (F (sf ) = Z), we have
+
+           X                 1 X                1            X                          F (sf )
+                  PT (s) =        F (s → sf ) =                         F (s → sf ) =           = 1.
+                             Z                  Z                                         Z
+          s∈S f                 f
+                               s∈S                        s∈P ar(sf )
+
+
+
+
+The terminating state probability is particularly important in the context of estimating flow
+networks (see Sec. 3), as it shows that a flow network (G, F ) induces a probability distribu-
+tion over terminating states which is proportional to the terminating flows F (s → sf ), the
+normalization constant Z being given by initial flow F (s0 ).
+
+                                                     11
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+2.4 Markovian Flows
+Defining a flow requires the specification of |T | non-negative values (one for every trajectory
+τ ∈ T ), which is generally exponential in the number of graph edges. Markovian flows
+however have the remarkable property that they can be defined with much fewer “numbers”,
+given that trajectory flows factorize according to G.
+
+Definition 15 Let (G, F ) be a flow network, with flow probability measure P . F is called
+a Markovian flow (or equivalently (G, F ) a Markovian flow network) if, for any state
+s 6= s0 , outgoing edge s→s0 , and for any trajectory τ = (s0 , s1 , . . . , sn = s) ∈ T partial
+starting in s0 and ending in s:
+
+                           P (s→s0 | τ ) = P (s→s0 | s) = PF (s0 | s).                     (19)
+
+    Note that the Markovian property does not hold for all of the flows as defined in the
+previous sections (e.g. Fig. 4). Intuitively, a flow can be considered non-Markovian if a
+particle in the “flow stream” can remember its past history; if not, its future behavior can
+only depend on its current state and the flow must be Markovian. In this work, we will
+primarily be concerned with Markovian flows, though later we will re-introduce a form of
+memory via state-conditional flows that allow each flow “particle” to remember parts of its
+history. The following proposition shows that Markovian flows have the property that the
+flows at (or the probabilities of) complete trajectories factorize according the the graph,
+and that it is a sufficient condition for defining Markovian flows.
+
+Proposition 16 Let (G, F ) be a flow network, and P the corresponding flow probability.
+The following three statements are equivalent:
+
+  1. F is a Markovian flow
+
+  2. There exists a unique probability function P̂F consistent with G such that for all com-
+     plete trajectories τ = (s0 , . . . , sn+1 = sf ):
+
+                                                 n+1
+                                                 Y
+                                      P (τ ) =         P̂F (st | st−1 ).                   (20)
+                                                 t=1
+
+
+      Moreover, the probability function P̂F is exactly the forward transition probability as-
+      sociated with the flow probability P : P̂F = PF .
+
+  3. There exists a unique probability function P̂B consistent with G such that for all com-
+     plete trajectories τ = (s0 , . . . , sn+1 = sf ):
+
+                                                 n+1
+                                                 Y
+                                      P (τ ) =         P̂B (st−1 | st ).                   (21)
+                                                 t=1
+
+
+      Moreover, the probability function P̂B is exactly the backwards transition probability
+      associated with the flow probability P : P̂B = PB .
+
+                                                 12
+                                           GFlowNet Foundations
+
+
+
+
+Proof Recall from Lemma 5 the notations T0,s to denote the set of partial trajectories
+from s0 to s, and Ts0 ,f to denote the set of partial trajectories from s0 to sf . We will prove
+the equivalences 1 ⇔ 2 and 1 ⇔ 3.
+
+   • 1 ⇒ 2: Suppose that F is a Markovian flow. Then using the laws of probability,
+     the Markov property in Eq. (19), and P (s0 ) = 1, for some complete trajectory τ =
+     (s0 , . . . , sn+1 = sf ):
+
+                                                                                n
+                                                                                Y
+        P (τ ) = P (s0 → s1 → . . . → sn+1 ) = P (s0 → s1 )                           P (st → st+1 | s0 → . . . → st )
+                                                                                t=1
+                                    n
+                                    Y
+              = P (s0 → s1 )              P (st → st+1 | st )
+                                    t=1
+                                            n
+                                            Y
+              = P (s0 )PF (s1 | s0 )              PF (st+1 | st )
+                                            t=1
+                  n+1
+                  Y
+              =         PF (st | st−1 ),
+                  t=1
+
+      where the second line uses to Markov property, and the third line uses the definition
+      of the forward transition probability PF . PF thus satisfies Eq. (20) for all complete
+      trajectories.
+      To show uniqueness of PF , assume Eq. (20) is satisfied by some P̂F for all complete
+      trajectories. By definition of the forward transition probability:
+
+                                                                                  P (s → s0 )
+                                    PF (s0 | s) := P (s → s0 | s) =                           .
+                                                                                     P (s)
+
+      Any complete trajectory τ going through a state s can be (uniquely) decomposed into
+      a partial trajectory τ 0 ∈ T0,s from s0 to s, and a partial trajectory τ 00 ∈ Ts,f from s to
+      sf . Using the definition of P (s), we have:
+                        X                   X           Y
+           P (s) =              P (τ ) =                           P̂F (st+1 | st )
+                      τ : s∈τ              τ : s∈τ (st →st+1 )∈τ
+                                                                                                                      
+                          X            Y                                      X             Y
+                  =                                P̂F (st+1 | st )                                    P̂F (st+1 | st )
+                        τ 0 ∈T0,s (st →st+1 )∈τ 0                           τ 00 ∈Ts,f (st →st+1 )∈τ 00
+                                                                        |                        {z                      }
+                                                                                         =1     (Lemma 5)
+                        X            Y
+                  =                               P̂F (st+1 | st ).
+                      τ 0 ∈T0,s (st →st+1 )∈τ 0
+
+
+      Similarly, any complete trajectory going through s → s0 can be (uniquely) decomposed
+      into a partial trajectory τ 0 ∈ T0,s from s0 to s, and a partial trajectory τ 00 ∈ Ts0 ,f from
+
+                                                             13
+                        Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+  s0 to sf . Again, using the definition of P (s → s0 ):
+                        X                              X             Y
+  P (s → s0 ) =                   P (τ ) =                                       P̂F (st+1 | st )
+                  τ : (s→s0 )∈τ                    τ : (s→s0 )∈τ (st →st+1 )∈τ
+                                                                                                                                           
+                       X             Y                                                           X                Y
+             =                                     P̂F (st+1 | st ) P̂F (s0 | s)                                            P̂F (st+1 | st )
+                      τ 0 ∈T0,s (st →st+1 )∈τ 0                                                τ 00 ∈Ts0 ,f (st →st+1 )∈τ 00
+                  |                           {z                      }                    |                          {z                      }
+                                         = P (s)                                                              =1     (Lemma 5)
+
+             = P (s)P̂F (s0 | s).
+
+  Combining the two results above, we get:
+
+                                                           P (s → s0 )
+                                     PF (s0 | s) =                     = P̂F (s0 | s).
+                                                              P (s)
+
+• 2 ⇒ 1: Suppose that there exists a probability function P̂F consistent with G such
+  that for some complete trajectory τ = (s0 , . . . , sn+1 = sf )
+
+                                                            n+1
+                                                            Y
+                                               P (τ ) =           P̂F (st | st−1 ).
+                                                            t=1
+
+
+  For the same reasons as those used to justify the uniqueness in the 1 ⇒ 2 proof, P̂F
+  is necessarily equal to the forward transition probability PF , associated with P .
+  We now want to show that the flow F associated with P is Markovian, by showing
+  the Markov property from Eq. (19). Let τ 0 ∈ T0,s be any partial trajectory from s0 to
+  s; using the definition of conditional probability:
+
+                                                              P (s0 → . . . → s → s0 )
+                                  P (s → s0 | τ 0 ) =                                  .
+                                                                 P (s0 → . . . → s)
+
+  Following the same idea as above, we will now rewrite P (s0 → . . . → s), as a sum over
+  complete trajectories that share the same prefix trajectory τ 0 . Any such complete
+  trajectory τ can be (uniquely) decomposed into this common prefix τ 0 , and a partial
+  trajectory τ 00 ∈ Ts,f from s to sf .
+                                   X                        X             Y
+    P (s0 → . . . → s) =                      P (τ ) =                               PF (st+1 | st )
+                                 τ : τ 0 ⊆τ               τ : τ 0 ⊆τ (st →st+1 )∈τ
+                                                                                                                                 
+                                          Y                                      X                  Y
+                             =                        PF (st | st−1 )                                          PF (st+1 | st )
+                                     st−1 →st ∈τ 0                             τ 00 ∈T   s,f (st →st+1   )∈τ 00
+                                                                           |                             {z                         }
+                                      Y                                                         =1      (Lemma 5)
+                             =                      PF (st | st−1 ).
+                                 st−1 →st ∈τ 0
+
+
+
+                                                             14
+                                            GFlowNet Foundations
+
+
+
+
+  Similarly, any complete trajectory τ that share the same prefix trajectory (s0 , . . . , s, s0 )
+  can be (uniquely) decomposed into this common prefix, and a partial trajectory τ 00 ∈
+  Ts0 ,f from s0 to sf , leading to:
+                            P (s0 → . . . → s → s0 ) = P (s0 → . . . → s)PF (s0 | s)
+  Combining the two results above, we can conclude that P satisfies the Markov prop-
+  erty, and therefore that the flow F is Markovian:
+                                            P (s0 → . . . → s → s0 )
+             P (s0 → s | τ 0 ) =                                     = PF (s0 | s) = P (s0 → s | s)
+                                               P (s0 → . . . → s)
+
+• {1, 2} ⇒ 3: Suppose that F is a Markovian flow. We have shown above that this is
+  equivalent to P being decomposed into a product of forward transition probabilities
+  PF . For some complete trajectory τ = (s0 , . . . , sn+1 = sf ):
+             n+1                             n+1                             n+1                           n+1
+             Y                               Y        P (st−1 → st )   Y P (st−1 → st )   Y
+  P (τ ) =         PF (st | st−1 ) =                                 =                  =   PB (st−1 | st ),
+                                                         P (st−1 )           P (st )
+             t=1                             t=1                             t=1                            t=1
+
+  where the third equality uses the fact that P (s0 ) = P (sf ) = 1, and using the definition
+  of the backwards transition probability PB . The proof of uniqueness of PB is similar
+  to that of PF in 1 ⇒ 2, and uses:
+                  X                  X           Y
+  P (s → s0 ) =          P (τ ) =                        P̂B (st | st+1 )
+                    τ : (s→s0 )∈τ                     τ : (s→s0 )∈τ (st →st+1 )∈τ
+                                                                                                                                        
+                          X              Y                                                    X               Y
+               =                                        P̂B (st | st+1 ) P̂B (s | s0 )                                   P̂B (st | st+1 )
+                        τ 0 ∈T   0,s (st →st+1   )∈τ 0                                      τ 00 ∈Ts0 ,f (st →st+1 )∈τ 00
+                    |                            {z                      }              |                          {z                      }
+                                       =1    (Lemma 5)                                                          = P (s0 )
+
+               = P (s0 )P̂B (s | s0 ),
+
+• 3 ⇒ 1: Similar to the proof of 2 ⇒ 1, P̂B is necessarily equal to the backwards
+  transition probability PB associated with P . Additionally, PB is related to the forward
+  transition probability PF :
+                                   P (s → s0 ) = PB (s | s0 )P (s0 ) = PF (s0 | s)P (s).
+  We can therefore write the decomposition of P in terms of PF , instead of PB . For
+  some complete trajectory τ = (s0 , . . . , sn+1 = sf ):
+                   n+1                                n+1                                              n+1
+                   Y                                  Y     P (st−1 )                   P (s0 ) Y
+      P (τ ) =           PB (st−1 | st ) =                            PF (st+1 | st ) =           PF (st+1 | st )
+                                                             P (st )                    P (sf )
+                   t=1                                t=1                                              t=1
+                   n+1
+                   Y
+              =          PF (st+1 | st ),
+                   t=1
+
+  where we used the fact that P (s0 ) = P (sf ) = 1. Using “2 ⇒ 1”, we can conclude that
+  F is a Markovian flow.
+
+                                                                 15
+                           Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+    The decomposition of Eq. (20) shows how Markovian flows can be used to draw termi-
+nating states from the terminating state probability PT (Eq. (18)). Namely, we have the
+following result:
+
+Corollary 17 Let (G, F ) be a Markovian flow network, and PF the corresponding forward
+transition probability. Consider the procedure starting from s = s0 , and iteratively draw-
+ing one sample from PF (. | s) until reaching sf . Then the probability of the procedure
+terminating in a state s is PT (s).
+
+Proof First, note that the procedure terminates with probability 1, given that G is acyclic.
+    For the procedure to terminate in a state s, it means that the trajectory τ ∈ T im-
+plicitly constructed during the procedure contains the edge s → sf . The probability of the
+procedure terminating in s is thus:
+                      X          Y
+                                      PF (s00 | s0 ) = P (s → sf ) = PT (s)
+                     τ ∈T :s→sf ∈τ     s0 →s00 ∈τ
+                                       |            {z        }
+                                     P (τ ), according to Eq. (20)
+
+
+
+
+The following proposition shows that, as a consequence of the Prop. 16, we obtain three
+different parametrizations of Markovian flows.
+
+Proposition 18 Given a pointed DAG G = (S, A), a Markovian flow on G is completely
+and uniquely specified by one of the following:
+
+  1. the combination of the total flow Ẑ and the forward transition probabilities P̂F (s0 | s)
+     for all edges s → s0 ∈ A,
+
+  2. the combination of the total flow Ẑ and the backward transition probabilities P̂B (s | s0 )
+     for all edges s → s0 ∈ A.
+
+  3. the combination of the terminating flows F̂ (s→sf ) for all terminating edges s → sf ∈
+     Af and the backwards transition probabilities P̂B (s | s0 ) for all non-terminating edges
+     s → s0 ∈ A−f ,
+
+Proof In the first two settings, we define a flow function F : T → R+ , at a trajectory
+τ = (s0 , s1 , . . . , sn , sn+1 = sf ) as:
+                    Qn+1
+  1. F (τ ) := Ẑ    t=1 P̂F (st | st−1 ),
+                    Qn+1
+  2. F (τ ) := Ẑ    t=1 P̂B (st−1 | st )
+
+We need to prove that it is the only Markovian flow that can be defined for both settings.
+The proof for the third setting will follow from that of the second setting.
+   First setting:
+
+                                                         16
+                                       GFlowNet Foundations
+
+
+
+
+   First, we need to show that the total flow Z associated with the flow function F
+(Eq. (10)) matches Ẑ. This is a consequence of Lemma 5:
+                     X                                X                  n+1
+                                                                         Y
+                Z=           F (τ ) = Ẑ                                        P̂F (st | st−1 ) = Ẑ
+                     τ ∈T                  τ =(s0 ,s1 ,...,sn+1 =sf )∈T t=1
+                                           |                       {z                         }
+                                                    =1 , according to Lemma 5
+
+     Then, we need to show that the forward transition probability function PF associated
+with F (Eq. (16)) matches P̂F , and that the flow F is Markovian. To this end, note that
+the corresponding flow probability P satisfies Eq. (20). Thus, as a consequence of Prop. 16,
+F is a Markovian flow, and its forward transition probability function is P̂F .
+     As a last requirement, we need to show that if a Markovian flow F 0 has a partition
+function Z 0 = Ẑ and a forward transition probability function PF0 = P̂F , then it is necessarily
+equal to F . This is a direct consequence of Prop. 16, given that for any τ = (s0 , . . . , sn+1 =
+sf ) ∈ T :
+                                  n+1
+                                  Y                         n+1
+                                                            Y
+                   F 0 (τ ) = Z 0     PF0 (st | st−1 ) = Ẑ     P̂F (st | st−1 ) = F (τ )
+                                 t=1                              t=1
+   Second setting:
+   First, we show that as a consequence of Lemma 5, the total flow Z associated with F
+matches Ẑ:
+                      X                               X                   n+1
+                                                                          Y
+                Z=           F (τ ) = Ẑ                                        P̂B (s−1 | st ) = Ẑ
+                      τ ∈T                 τ =(s0 ,s1 ,...,sn+1 =sf )∈T t=1
+                                           |                       {z                        }
+                                                    =1 , according to Lemma 5
+
+    Second, we note that the flow probability P associated with F satisfies Eq. (21). Thus,
+as a consequence of Prop. 16, F is a Markovian flow, and its backward transition probability
+function is P̂B .
+    Finally, if a Markovian flow F 0 has a partition function Z 0 = Ẑ and a backward transition
+probability function PB0 = P̂B , then following Prop. 16, ∀τ ∈ T , F 0 (τ ) = F (τ ).
+    Third setting:
+    From the terminating flows F̂ (s → sf ) and the backwards transition probabilities P̂B (s |
+ 0
+s ) for non-terminating edges, we can uniquely define a total flow Ẑ, and extend P̂B to all
+edges as follows:
+                                             X
+                                     Ẑ :=          F̂ (s → sf )
+                                                  s∈P ar(sf )
+                                                  (
+                                                   P̂B (s | s0 )        if s0 6= sf
+                               P̂B (s | s0 ) :=      F̂ (s→sf )
+                                                                   otherwise.
+                                                          Ẑ
+
+This takes us back to the second setting, for which we have already proven that with Ẑ and
+P̂B defined for all edges, a Markovian flow is uniquely defined.
+
+
+
+
+                                                         17
+                        Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+2.5 Flow Matching Conditions
+In Prop. 18, we saw how forward and backward probability functions can be used to uniquely
+define a Markovian flow. We will show in the next proposition how non-negative functions
+of states and edges can be used to define a Markovian flow. Such functions cannot be
+unconstrained (as P̂F and Ẑ in Prop. 18 e.g.), as we have seen in Prop. 8.
+
+Proposition 19 Let G = (S, A) be a pointed DAG. Consider a non-negative function F̂
+taking as input either a state s ∈ S or a transition s→s0 ∈ A. Then F̂ corresponds to a
+flow if and only if the flow matching conditions:
+                                                 X
+                           ∀s0 > s0 , F̂ (s0 ) =     F̂ (s→s0 )
+                                                     s∈P ar(s0 )
+                                                            X
+                             ∀s0 < sf , F̂ (s0 ) =                     F̂ (s0 →s00 )                          (22)
+                                                     s00 ∈Child(s0 )
+
+
+are satisfied. More specifically, F̂ uniquely defines a Markovian flow F matching F̂ on
+states and transitions:
+                                                            Qn+1
+                                                                  F̂ (st−1 →st )
+                 ∀τ = (s0 , . . . , sn+1 = sf ) ∈ T F (τ ) = t=1
+                                                              Qn                 .  (23)
+                                                                 t=1 F̂ (st )
+
+Proof Necessity is a direct consequence of Prop. 8. Let’s show sufficiency. Let P̂F be the
+forward probability function defined by:
+
+                                                                   F̂ (s → s0 )
+                              ∀s → s0 ∈ A P̂F (s0 | s) :=                         .
+                                                                        F̂ (s)
+
+P̂F is consistent with G given that F̂ satisfies the flow matching conditions (Eq. (22)). Let
+Ẑ = F̂ (s0 ). According to Prop. 18, there exists a unique Markovian flow F with forward
+transition probability function PF = P̂F and partition function Z = Ẑ, and such that for a
+trajectory τ = (s0 , . . . , sn+1 = sf ) ∈ T :
+
+                                                     n+1                          Qn+1
+                                                                                       t=1 F̂ (st−1 →st )
+                                                     Y
+    ∀τ = (s0 , . . . , sn+1 = sf ) ∈ T F (τ ) = Ẑ          P̂F (st | st−1 ) =          Qn                .   (24)
+                                                      t=1                                  t=1 F̂ (st )
+
+Additionally, similar to the proof of Prop. 16, we can write for any state s0 6= s0 :
+                                    X       Y
+                       F (s0 ) = Ẑ                P̂F (st+1 | st )
+                                      τ ∈T0,s0 (st →st+1 )∈τ
+
+                                      F̂ (s0 ) X            Y
+                               = Ẑ                                    P̂B (st | st+1 )
+                                      F̂ (s0 ) τ ∈T 0 (s →s )∈τ
+                                                   0,s  t  t+1
+                                               |               {z                       }
+                                                   =1 , according to Lemma 5
+
+                               = F̂ (s0 ),
+
+
+                                                     18
+                                             GFlowNet Foundations
+
+
+
+                                  0
+where P̂B (s0 | s) := F̂ (s→s
+                            0
+                              )
+                                defines a backward probability function consistent with G. And
+                        F̂ (s )
+because ∀s → s0 ∈ A PF (s0 | s) = P̂F (s0 | s), it follows that ∀s → s0 ∈ A F (s → s0 ) =
+F̂ (s → s0 ).
+     To show uniqueness, let’s consider a Markovian flow F 0 that matches F̂ on states and
+edges. Following Prop. 16, for any trajectory τ = (s0 , . . . , sn+1 = sf ) ∈ T
+
+                                      n+1                         Qn+1
+                                                                   t=1 F̂ (st−1 →st )
+                                      Y
+                    0
+                  F (τ ) = Ẑ               P̂F (st | st−1 ) =      Qn                = F (τ ).
+                                      t=1                              t=1 F̂ (st )
+
+
+
+
+Note how Eq. (22) can be used to recursively define the flow in all the states if Z is given
+and either the forward or the backwards transition probabilities are given. Either way,
+we would start from the flow at one of the extreme states s0 or sf and then distribute it
+recursively through the directed acyclic graph of the flow network, either going forward or
+going backward. A setting of particular interest, that will be central in Sec. 3, is when we
+are given all the terminal flows F (s→sf ), and we would like to deduce a state flow function
+F (s) and a forward transition probability function PF (s0 | s) for the rest of the flow network.
+    Next, we will see how to parametrize Markovian flows using forward and backward
+probability functions consistent with the DAG. Unlike the condition in Prop. 19, the new
+condition does not involve a sum over transitions, which could be problematic if each state
+can have a large number of successors or if the state-space is continuous. Interestingly, the
+resulting condition is analogous to the detailed balance condition of Monte-Carlo Markov
+chains.
+
+Definition 20 Given a pointed DAG G = (S, A), a forward transition probability function
+P̂F and a backward transition probability function P̂B consistent with G, P̂F and P̂B are
+compatible if there exists an edge flow function F̂ : A → R+ such that
+
+                                                F̂ (s→s0 )                                          F̂ (s→s0 )
+  ∀s → s0 ∈ A P̂F (s0 | s) = P                                       , P̂B (s | s0 ) = P
+                                                                0                                                  00 0
+                                            s0 ∈Child(s) F̂ (s→s )                             s00 ∈P ar(s0 ) F̂ (s →s )
+                                                                                                                     (25)
+
+Proposition 21 Let G = (S, A) be a pointed DAG. Consider a non-negative function F̂
+over states, a forward transition probability function P̂F and a backwards transition proba-
+bility function P̂B consistent with G. Then, F̂ , P̂B , and PˆF jointly correspond to a flow if
+and only if the detailed balance conditions holds:
+
+                          ∀s→s0 ∈ A              F̂ (s)P̂F (s0 | s) = F̂ (s0 )P̂B (s | s0 ).                         (26)
+
+More specifically, F̂ , P̂F , and P̂B uniquely define a Markovian flow F matching F̂ on states,
+and with transition probabilities matching P̂F and P̂B . Furthermore, when this condition is
+satisfied, the forward and backward transition probability functions P̂F and P̂B are compat-
+ible.
+
+                                                             19
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+Proof For necessity, consider a flow F , with state flow function denoted F , and forward
+and backward transitions PF and PB . It is clear from the definition of PF and PB (Def. 12)
+that Eq. (26) holds. We prove the sufficiency of the condition by first defining the edge flow
+
+                           ∀s → s0 ∈ A F̂ (s→s0 ) := F̂ (s)P̂F (s0 | s).                                                     (27)
+
+We then sum both sides of Eq. (26) over s, yielding
+                      X                                                     X
+          ∀s0 > s0          F̂ (s)P̂F (s0 | s) = F̂ (s0 )                               P̂B (s | s0 ) = F̂ (s0 )             (28)
+                       s∈P ar(s0 )                                       s∈P ar(s0 )
+
+where we used the fact that P̂B is a normalized probability distribution. Combining this
+with Eq. (27), we get                          X
+                          ∀s0 > s0 F̂ (s0 ) =       F̂ (s→s0 )                      (29)
+                                                            s∈P ar(s0 )
+
+which is the first equality of the flow-matching condition (Eq. (22)) of Prop. 19. We can ob-
+tain the second equality by first using the normalization of P̂ , and then using our definition
+of the edge flow (Eq. (27)):
+                                                      X
+                         ∀s0 > s0 F̂ (s0 ) = F̂ (s0 )       P̂F (s00 | s0 )
+                                                              s00 ∈Child(s0 )
+                                                          X
+                                                 =                     F̂ (s0 )P̂F (s00 | s0 )
+                                                     s00 ∈Child(s0 )
+                                                          X
+                                                 =                     F̂ (s0 →s00 ).                                        (30)
+                                                     s00 ∈Child(s0 )
+
+Following Prop. 19, there exists a unique Markovian flow F with state and edge flows given
+by F̂ . Using Eq. (27) and Eq. (26), it follows that F has transition probabilities P̂F and
+P̂B as required. The uniqueness is also a consequence of Eq. (27). This proves sufficiency.
+    To show that P̂F and P̂B are compatible (Def. 20), we first combine Eq. (27) and Eq. (30)
+(with relabeling of variables) to obtain
+
+                                                                          F̂ (s→s0 )
+                       ∀s → s0 ∈ A P̂F (s0 | s) = P                                               ,
+                                                                                       0
+                                                                   s0 ∈Child(s) F̂ (s→s )
+
+we then isolate P̂B in Eq. (26), yielding
+
+                                     F̂ (s)                       F̂ (s→s0 )                      F̂ (s→s0 )
+     ∀s → s0 ∈ A P̂B (s | s0 ) =                P̂F (s0 | s) =                    =P                                     ,
+                                     F̂ (s0 )                          F̂ (s0 )                                 00  0
+                                                                                            s00 ∈P ar(s0 ) F̂ (s → s )
+
+We thus get Eq. (25) of Def. 20, as desired.
+
+
+    At first glance, it may seem that when P̂B is unconstrained, the detailed balance condi-
+tion can trivially be achieved by setting
+                                                                       P̂F (s0 | s)F̂ (s)
+                           ∀s → s0 ∈ A P̂B (s | s0 ) =                                                                       (31)
+                                                                             F̂ (s0 )
+
+                                                         20
+                                  GFlowNet Foundations
+
+
+
+
+However, because we also have the constraint s∈P ar(s0 ) P̂B (s | s0 ) = 1, then Eq. (31) can
+                                                    P
+only be satisfied if the flows are consistent with the forward transition:
+                                  X
+                                         P̂F (s0 | s)F̂ (s) = F̂ (s0 ).
+                               s∈P ar(s0 )
+
+
+2.6 Backwards Transitions can be Chosen Freely
+Consider the setting in which we are given terminating flows to be matched, i.e. where
+the goal is to find a flow function with the right terminating flows. This is the setting
+introduced in Bengio et al. (2021), and that will be studied in Sec. 3. In this case, Prop. 18
+tells us that in order to fully determine the forward transition probabilities and the state
+or state-action flows, it is not sufficient in general to specify only the terminating flows; it
+is also necessary to specify the backwards transition probabilities on the edges other than
+the terminal ones (the latter being given by the terminating flows).
+    What this means is that the terminating flows do not specify the flow completely, e.g.,
+because many different paths can land in the same terminating state. The preference over
+such different ways to achieve the same final outcome is specified by the backwards transition
+probability PB (except for PB (s | sf ) which is a function of the terminating flows and Z).
+For example, we may want to give equal weight to all parents of a node s, or we may prefer
+shorter paths, which can be achieved if we keep track in the state s of the length of the
+shortest path to the node s, or we may let a learner discover a PB that makes learning PF
+or F easier.
+
+2.7 Equivalence Between Flows
+In the previous sections, we have seen that Markovian flows have the property that trajec-
+tory flows or probabilities factorize according to the DAG, and we have seen different ways
+of characterizing Markovian flows. In Sec. 3, we show how to approximate Markovian flows
+in order to define probability measures over terminating states. In this section, through
+an equivalence relation between trajectory flows, we justify the focus on Markovian flows.
+Given a pointed DAG G = (S, A), we denote by:
+
+   • F(G): the set of flows on G, i.e. the set of functions from T , the set of complete
+     trajectories in G, to R+ ,
+
+   • FM arkov (G): the set of flows in F(G) that are Markovian.
+
+Definition 22 Let G = (S, A) be a pointed DAG, and F1 , F2 ∈ F(G) two trajectory flow
+functions. We say that F1 and F2 are equivalent if they coincide on edge-flows, i.e.:
+
+                           ∀s → s0 ∈ A       F1 (s → s0 ) = F2 (s → s0 )
+
+Fig. 4 shows four flow functions in a simple pointed DAG that are pairwise equivalent.
+    This defines an equivalence relation (i.e., a relation that is reflexive, symmetric, and
+transitive). Hence, each flow F belongs to an equivalence class, and the set of flows F(G)
+can be partitioned into equivalence classes. Note that if two flows are equivalent, then the
+corresponding state flow functions also coincide (as a direct consequence of Prop. 8).
+
+                                                 21
+                         Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+                    s3                           τ              F1 (τ )   F2 (τ )   F3 (τ )   F4 (τ )
+          s1
+                                            s0 , s2 , sf          1        4/5        1        6/5
+ s0                                      s0 , s1 , s2 , sf        1        6/5        1        4/5
+          s2                             s0 , s2 , s3 , sf        1        6/5        2        9/5
+                    sf                 s0 , s1 , s2 , s3 , sf     2        9/5        1        6/5
+
+Figure 4: Equivalent flows and Markovian flows. Flows F1 and F2 are equivalent. F3 and
+F4 are equivalent, but not equivalent to F1 and F2 . F2 and F4 are Markovian. F1 and F3
+are not Markovian. F1 , F2 , F3 and F4 coincide on the terminating flows i.e. at s2 → sf and
+s3 → sf .
+
+
+Proposition 23 Given a pointed DAG G. If two flow function F1 , F2 ∈ FM arkov (G) are
+equivalent, then they are equal. Additionally, for any flow function F 0 ∈ F(G), there exists
+a unique Markovian flow function F ∈ FM arkov (G) such that F and F 0 are equivalent.
+
+Proof Because F1 and F2 are Markovian, then for any trajectory τ = (s0 , . . . , sn+1 = sf ):
+                                          Qn+1
+                                               F1 (st−1 → st )
+                                 F1 (τ ) = t=1Qn
+                                               t=1 F1 (st )
+                                          Qn+1
+                                               F2 (st−1 → st )
+                                         = t=1Qn
+                                               t=1 F2 (st )
+                                       = F2 (τ ),
+
+where we combined the definition of equivalent flows and Prop. 16.
+    Given a flow function F 0 , because its state and edge flow functions satisfy the flow
+matching conditions (as a consequence of Prop. 8), then according to Prop. 19, the flow F
+defined by:
+                                                           Qn+1 0
+                                                                F (st−1 → st )
+               ∀τ := (s0 , . . . , sn+1 = sf ) ∈ T F (τ ) = t=1Qn    0
+                                                                t=1 F (st )
+
+is Markovian, and coincides with F 0 on state and edge flows. Combining this with the
+statement above, we conclude that F is the unique Markovian flow that is equivalent to F 0 .
+
+
+The previous proposition shows that in each equivalence class stands out a particular flow
+function, that has a property the other flows in the same equivalence class don’t have: it is
+Markovian.
+    A consequence of this is that, if we care essentially about state and edge flows, instead
+of dealing with the full set of flows F(G), it suffices to restrict any flow learning problem to
+the set of Markovian flows FM arkov (G). The advantage of this restriction is that defining
+a flow requires the specification of F (τ ) for all trajectories τ ∈ T , whereas defining a
+Markovian flow requires the specification of F (s → s0 ) for all edges s → s0 ∈ A, which
+is generally exponentially smaller than T (note that the edge flows still need to satisfy
+the flow-matching conditions in Prop. 19). Thus, in order to approximate or learn a flow
+
+                                                 22
+                                  GFlowNet Foundations
+
+
+
+
+function that satisfies some conditions on its edge or state values, it suffices to approximate
+or learn a Markovian flow, by learning the edge flow function, which is a much smaller
+object than the actual flow function.
+
+3. GFlowNets: Learning a Flow
+With the theoretical preliminaries established in Sec. 1 and Sec. 2, we now consider the
+general class of problems introduced by Bengio et al. (2021) where some constraints or
+preferences over flows are given. Our goal is to find functions such as the state flow function
+F (s) or the transition probability function P (s→s0 | s) that best match these desiderata
+using corresponding estimators F̂ (s) and P̂ (s→s0 | s) which may not correspond to a proper
+flow. Such learning machines are called Generative Flow Networks (or GFlowNets for short).
+We focus on scenarios where we are given a target reward function R : S f → R+ , and aim
+at estimating flows F that satisfy:
+
+                                 ∀s ∈ S f   F (s → sf ) = R(s)                             (32)
+
+    Because of the equivalences that exist in the set of flows, then without loss of generality,
+we choose GFlowNets to approximate Markovian flows only. We are thus interested in the
+following set of flows:
+
+             FM arkov (G, R) = {F ∈ FM arkov (G), ∀s ∈ S f F (s → sf ) = R(s)}             (33)
+For now, we informally define a GFlowNet as an estimator of a Markovian flow
+function F ∈ FM arkov (G, R). We provide a more formal definition later-on.
+    With an estimator F̂ of such a Markovian flow F , we can define an approximate forward
+transition probability function P̂F , as in Prop. 16, in order to draw trajectories τ ∈ T (the
+set of complete trajectories in G) by iteratively sampling each state given the previous one,
+starting at s0 and then with st+1 ∼ P̂F (. | st ) until we reach the sink state sn+1 = sf for
+some n.
+    Next, we will clarify how such an estimator can be obtained.
+
+3.1 GFlowNets as an Alternative to MCMC Sampling
+The main established methods to approximately sample from the distribution associated
+with an energy function E are Monte-Carlo Markov chain (MCMC) methods, which require
+significant computation (running a potentially very long Markov chain) to obtain samples.
+Instead, the GFlowNet approach amortizes upfront computation to train a generator that
+yields very efficient computation (a single configuration is constructed, no chain needed)
+for each new sample. For example, Bengio et al. (2021) build a GFlowNet that constructs
+a molecule via a small sequence of actions, each of which adds an atom or a molecular
+substructure to an existing molecule represented by a graph, starting from an empty graph.
+Only one such configuration needs to be considered, in contrast with MCMC methods, which
+require potentially very long chains of such configurations, and suffer from the challenge of
+mode-mixing (Jasra et al., 2005; Bengio et al., 2013; Pompe et al., 2020), which can take
+time exponentially long in the distance between modes. In GFlowNets, this computational
+challenge is avoided but the computational demand is converted to that of training the
+
+                                              23
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+GFlowNet. To see how this can be extremely beneficial, consider having already constructed
+some configurations x and obtained their unnormalized probability or reward R(x). With
+these pairs (x, R(x)), a machine learning system could potentially generalize about the value
+of R elsewhere, and if it is a generative model, sample new x’s in places of large R(x). Hence,
+if there is an underlying statistical structure in how the modes of R are related to each other,
+a generative learner that generalizes could guess the presence of modes it has not visited
+yet, taking advantage of the patterns it has already uncovered from the (x, R(x)) pairs it
+has seen. On the other hand, if there is no structure (the modes are randomly placed), then
+we should not expect GFlowNets to do significantly better than MCMC because training
+becomes intractable in high-dimensional spaces (since it requires visiting every area of the
+configuration space to ascertain its reward).
+
+3.2 GFlowNets and flow-matching losses
+We have seen in Sec. 2.4 and Sec. 2.5 different ways of parametrizing a flow. For ex-
+ample, with a partition function and forward transition probabilities, or with edge flows
+that satisfy the flow matching conditions. Because there are many ways to parametrize
+GFlowNets, we start with an abstract formulation for them, where o ∈ O represents a pa-
+rameter configuration (e.g., resulting from or while training of a GFlowNet), Π(o) gives the
+corresponding probability measure over trajectories τ ∈ T , and H maps a Markovian flow
+F to its parametrization o. In the following definition, we show what conditions should be
+satisfied in order for such a parametrization to be valid.
+
+Definition 24 Given a pointed DAG G = (S, A), with an initial and sink states s0 and sf
+respectively, and a target reward function R : S f → R+ , we say that the triplet (O, Π, H) is
+a flow parametrization of (G, R) if:
+
+  1. O is a non-empty set,
+
+  2. Π is a function mapping each object o ∈ O to an element Π(o) ∈ ∆(T ), the set of
+     probability distributions on T ,
+
+  3. H is an injective functional from FM arkov (G, R) to O,
+
+  4. For any F ∈ FM arkov (G, R), Π(H(F )) is the probability measure associated with the
+     flow F (Def. 11).
+
+To each object o ∈ O, the distribution Π(o) implicitly defines a terminating state prob-
+ability measure:
+                                                 X
+                         ∀s ∈ S f PT (s) :=              Π(o)(τ ),                  (34)
+                                                τ ∈T :s→sf ∈τ
+
+where the dependence on o in PT is omitted for clarity.
+
+   The intuition behind the introduction of (O, Π, H) is that we can define a probability
+measure over T for each object o ∈ O, but only some of these objects correspond to a
+Markovian flow with the right terminating flows. For such objects o (i.e. those that can
+
+                                              24
+                                    GFlowNet Foundations
+
+
+
+
+be written as o = H(F ) for some flow F ∈ FM arkov (G, R)), the probability measure PT
+corresponds to the distribution of interest, according to Def. 13, i.e.:
+
+                                     ∀s ∈ S f            PT (s) ∝ R(s)
+
+GFlowNets thus provide a solution to the generally intractable problem of sampling from a
+target reward function R, or its associated energy function:
+
+                                  ∀s ∈ S f        E(s) := − log R(s)                                       (35)
+
+Directly approximating flows F ∈ FM arkov (G, R) is a hard problem, whereas with some sets
+O, searching for an object o ∈ H(FM arkov (G, R)) ⊆ O is a simpler problem that can be
+tackled with function approximation techniques.
+    Note that not the set O cannot be arbitrary, as there needs to be a way to define an
+injective function from FM arkov (G, R) to O. Below, for a given DAG G, we show three
+examples clarifying the abstract concept of parametrization:
+Example 1 Edge-flow parametrization: Consider Oedge = F(A−f , R+ ), the set of func-
+tions from A−f to R+ , and the functionals Hedge : FM arkov (G, R) → Oedge and Πedge :
+Oedge → ∆(T ) defined by:
+
+                           Hedge (F ) : (s → s0 ) ∈ A−f 7→ F (s → s0 ),
+
+                                                                              n
+                                                                              Y
+               ∀τ = (s0 , . . . , sn = sf ) ∈ T           Πedge (F̂ )(τ ) ∝         PF̂ (st | st−1 ),
+                                                                              t=1
+
+where                                
+                                               F̂ (s→s0 )
+                                                                         if s0 6= sf
+                                                F̂ (s→s00 )+R(s)
+                                     P
+                                          s00 6=s
+                      PF̂ (s0 | s) =          f
+                                                  R(s)
+                                                                                                           (36)
+                                     
+                                      P 00 F̂ (s→s00 )+R(s)              if s0 = sf
+                                        s 6=s       f
+
+    The injectivity of Hedge follows directly from Prop. 23 (two Markovian flows that coin-
+cide on both their terminating and non-terminating edge flow values are equal). And for
+any Markovian flow F ∈ FM arkov (G, R), Πedge (Hedge (F )) equals the probability measure
+associated with F , as is shown in Prop. 16.
+    (Oedge , Πedge , Hedge ) is thus a valid flow parametrization of (G, R).
+
+Example 2 Forward transition probability parametrization: Consider the set OP F =
+O1 × O2 , where O1 = F(S \ {sf }, R+ ) is the set of function from S \ {sf } to R+ and
+O2 is the set of forward probability functions P̂F consistent with G , and the functionals
+HP F : FM arkov (G, R) → OP F and ΠP F : OP F → ∆(T ) defined by:
+
+               HP F (F ) = s ∈ S \ {sf } 7→ F (s), (s → s0 ) ∈ A 7→ PF (s0 | s) ,
+                                                                               
+
+
+                                                                                 n
+                                                                                 Y
+             ∀τ = (s0 , . . . , sn = sf ) ∈ T           ΠP F (F̂ , P̂F )(τ ) ∝         P̂F (st | st−1 ),
+                                                                                 t=1
+
+
+                                                          25
+                         Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+where PF is the forward transition probability function associated with F (Eq. (16)). To ver-
+ify that HP F is injective, consider F1 , F2 ∈ FM arkov (G, R) such that HP F (F1 ) = HP F (F2 ).
+                                                                            0)             0)
+It means that ∀s ∈ S f , F1 (s) = F2 (s), and ∀s → s0 ∈ A, F1F(s→s    1 (s)
+                                                                               = F2F(s→s
+                                                                                     2 (s)
+                                                                                              . It fol-
+lows that ∀s → s ∈ A, F1 (s → s ) = F2 (s → s ). Which, according to Prop. 23, means
+                    0                  0             0
+
+that F1 = F2 . And for any Markovian flow F ∈ FM arkov (G, R), ΠP F (HP F (F )) equals the
+probability measure associated with F , as is shown in Prop. 16.
+    (OP F , ΠP F , HP F ) is thus a valid flow parametrization of (G, R).
+
+Example 3 Transition probabilities parametrization: Similar to Ex. 2, we can parametrize
+a Markovian flow using the state-flow function and both its forward and backward transition
+probabilities, i.e. with OP F B = OP F × O3 , HP F B , and ΠP F B defined as:
+                                                                            
+                    HP F B (F ) = HP F (F ), (s → s0 ) ∈ A−f 7→ PB (s | s0 ), ,
+
+                                                                                n
+                                                                                Y
+            ∀τ = (s0 , . . . , sn = sf ) ∈ T   ΠP F B (F̂ , P̂F , P̂B )(τ ) ∝         P̂F (st | st−1 ),
+                                                                                t=1
+
+where PB is the function defined by Eq. (17). and O3 is the set of backward probability
+functions P̂B consistent with G. The injectivity of HP F B is a direct consequence of that
+of HP F . And for any Markovian flow F , ΠP F B (HP F B (F )) equals the probability measure
+associated with F , as is shown in Prop.3.
+   (OP F B , ΠP F B , HP F B ) is thus a valid flow parametrization of (G, R).
+
+    We now have all the ingredients to formally define a GFlowNet:
+Definition 25 A GFlowNet is a tuple (G, R, O, Π, H), where:
+   • G = (S, A) is a pointed DAG with initial state s0 and sink state sf ,
+   • R : S f → R+ a target reward function,
+   • (O, Π, H) a flow parametrization of (G, R).
+    Each object o ∈ O is called a GFlowNet configuration. When it is clear from context, we
+will use the term GFlowNet to refer to both (G, R, O, Π, H) and a particular configuration
+o; similar to how the term “Neural Network” refers to both the class of functions that can be
+represented with a particular architecture, and to a particular element of that class / weight
+configuration.
+    If o ∈ H(FM arkov (G, R)), then the corresponding terminating state probability measure
+(Eq. (34)) is proportional to the target reward R.
+    Once we have a GFlowNet (G, R, O, Π, H), we still need a way to find objects o ∈
+H(FM arkov (G, R)) ⊆ O. To this end, it suffices to design a loss function L on O that
+equals zero on objects o ∈ H(FM arkov (G, R)) and only on those objects. If our loss function
+L is chosen to be non-negative, then an approximation of the target distribution (on S f )
+is obtained by approximating the minimum of the function L. This provides a recipe for
+casting the search problem of interest to a minimization problem, as we typically do in ma-
+chine learning. Such loss functions can be easily designed for the natural parametrizations
+we considered in Ex. 1, Ex. 2, and Ex. 3, as we will illustrate below.
+
+                                                    26
+                                 GFlowNet Foundations
+
+
+
+
+Definition 26 Let (G, R, O, Π, H) be a GFlowNet. A flow-matching loss is any function
+L : O → R+ such that:
+
+                  ∀o ∈ O    L(o) = 0 ⇔ ∃F ∈ FM arkov (G, R) o = H(F )                     (37)
+
+We say that L is edge-decomposable, if there exists a function L : O × A → R+ such that:
+                                           X
+                          ∀o ∈ O L(o) =          L(o, s → s0 ),
+                                              s→s0 ∈A
+
+We say that L is state-decomposable, f there exists a function L : O × S → R+ such that:
+                                              X
+                             ∀o ∈ O L(o) =        L(o, s),
+                                                    s∈S
+
+We say that L is trajectory-decomposable if there exists a function L : O × T → R+
+such that:                                  X
+                             ∀o ∈ O L(o) =     L(o, τ )
+                                                    τ ∈T
+
+   As mentioned above, with a such a loss function, our search problems can be written as
+minimization problems of the form
+                                       min L(o),                                     (38)
+                                          o∈O
+
+which can be tackled with gradient-based learning if the function L is differentiable. Note
+that with an edge-decomposable flow-matching loss, the minimization problem in Eq. (38)
+is equivalent to:
+                              min E(s→s0 )∼πT [L(o, s → s0 )],                         (39)
+                                o∈O
+
+where πT is any full support probability distribution on A, i.e. a probability distribution
+such that ∀s → s0 ∈ A πT (s → s0 ) > 0. A similar statement can be made for state-
+decomposable or trajectory-decomposable flow-matching losses.
+
+Example 4 Consider the edge-flow parametrization (Oedge , Πedge , Hedge ), and the function
+LF M : Oedge × S → R+ defined for each F̂ ∈ Oedge and s0 ∈ S as
+                                                                          2
+                                        δ+ s∈P ar(s0 ) F̂ (s→s0 )
+                                          P
+                                                                                 if s0 6= sf ,
+                          
+                           log
+        LF M (F̂ , s0 ) =       δ+R(s0 )+ s00 ∈Child(s0 )\{s } F̂ (s0 →s00 )
+                                         P
+                                                            f
+                          
+                          0 otherwise
+
+where δ ≥ 0 is a hyper-parameter. The function LF M mapping each F̂ ∈ Oedge to
+                                            X
+                               LF M (F̂ ) =   LF M (F̂ , s)                               (40)
+                                              s∈S
+
+is a flow-matching loss, that is (by definition) state-decomposable.
+    To see this, let F̂ ∈ Oedge such that LF M (F̂ ) = 0, and extend it to terminating edge:
+
+                                ∀s ∈ S f F̂ (s → sf ) := R(s)
+
+                                              27
+                        Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+Now that F̂ is defined for all edges in G, we can write that
+                                  X                                X
+                     ∀s0 ∈ S                 F̂ (s → s0 ) =                   F̂ (s0 → s00 ).
+                               s∈P ar(s0 )                    s00 ∈Child(s)
+
+
+Which, according to Prop. 19, means that there exists a Markovian flow F ∈ FM arkov (G, R)
+such that Hedge (F ) = F̂ . The converse
+
+                          ∀F ∈ FM arkov (G, R) LF M (Hedge (F )) = 0
+
+is a trivial consequence of Prop. 19.
+    This is the loss function proposed in Bengio et al. (2021). δ allows to reduce the im-
+portance given to small flows (those smaller than δ), and the usage of the square of the
+log-ratio is justified as a way to ensure that states with large flows do not contribute to the
+gradients of LF M much more than states with small flows.
+
+Example 5 Detailed-balance loss: Consider the transition probabilities parametrization
+(OP F B , ΠP F B , HP F B ), and the function LDB : OP F B ×A → R+ defined for each (F̂ , P̂F , P̂B ) ∈
+OP F B and s → s0 ∈ A as
+                                                                       2
+                                                                    0
+                                             log δ+F̂ (s)P̂F (s |s)
+                                            
+                                                                               if s0 6= sf ,
+                                        0           δ+F̂ (s0 )P̂B (s|s0 )
+             LDB (F̂ , P̂F , P̂B , s → s ) =                     0
+                                                                        2
+                                             log δ+F̂ (s)P̂F (s |s)
+                                                                             otherwise,
+                                                        δ+R(s)
+
+
+where δ ≥ 0 is a hyper-parameter. The function LDB mapping each (F̂ , P̂F , P̂B ) ∈ OP F B
+to                                          X
+                    LDB (F̂ , P̂ , P̂B )) =   LDB (F̂ , P̂ , P̂B , s → s0 )
+                                                 s→s0 ∈A
+
+is a flow-matching loss that is (by definition) edge-decomposable. The proof of this statement
+is similar to the one of the example above, using Prop. 21.
+
+    According to Sec. 2.6, the reward function does not completely specify the flow. Thus,
+the detailed-balance loss of Ex. 5 can be used with the (OP F , ΠP F , HP F ) parametrization,
+using any function P̂B ∈ O3 as input to the detailed-balance loss.
+
+Example 6 Trajectory-balance loss: This loss has been introduced in Malkin et al. (2022)
+for the parametrization (OT B , ΠT B , HT B ), where OT B = O1 × O2 × O3 , with O1 = R+
+parametrizes the partition function Ẑ, and O2 and O3 introduced in Ex. 2 and Ex. 3 (the
+set of forward and backward probabilities consistent with G). HT B maps a Markovian flow
+in FM arkov (G, R) to the corresponding triplet (Z, PF , PB ), and ΠT B maps a parametrization
+(Ẑ, P̂F , P̂B ) to a probability over trajectories defined by P̂F as in Ex. 2. Prop. 18 justifies
+the validity of this parametrization. The loss LT B maps each (Ẑ, P̂F , P̂B ) ∈ OT B to:
+                                                     X
+                           LT B (Ẑ, P̂F , P̂B ) =          LT B (Ẑ, P̂F , P̂B , τ ),
+                                                     τ ∈T
+
+
+                                                      28
+                                      GFlowNet Foundations
+
+
+
+
+where
+                                                                              Qn+1                    !2
+                                                                         Ẑ  t=1 P̂F (st | st−1 )
+  ∀τ = (s0 , . . . , sn+1 = sf ) ∈ T LT B (Ẑ, P̂F , P̂B , τ ) =   log                                     .
+                                                                       R(sn ) nt=1 P̂B (st−1 | st )
+                                                                             Q
+
+                                                                                        (41)
+Malkin et al. (2022) prove that LT B is a flow-matching loss and call it trajectory balance.
+It is trajectory-decomposable by definition.
+
+Training by stochastic gradient descent: In the examples of the previous section,
+given a GFlowNet (G, R, O, Π, H) and a flow-matching loss L, objects o ∈ O are themselves
+functions or combinations of functions, and we can thus parametrize O with function ap-
+proximators such as Neural Networks. However, most of the times, the evaluation (let alone
+the minimization) of L(o) is intractable, given that even with a full support distribution,
+only a subset of edges (or states or trajectories) can be visited in finite time. In practice,
+with an edge-decomposable loss e.g., we resort to a stochastic gradient, such as
+
+                                    ∇o L(o, s → s0 ), s → s0 ∼ πo                                      (42)
+
+for edge-decomposable losses, or
+
+                                          ∇o L(o, τ ), τ ∼ πo                                          (43)
+
+for trajectory-decomposable losses, where πo , called the training distribution, is a dis-
+tribution over edges or trajectories that can be associated with Π(o), corresponding to the
+online setting in RL, or defined in other ways, corresponding to the behavior policy in offline
+RL, see Sec. 3.3.3 below.
+
+3.3 Extensions
+In this section, we discuss possible relaxations to the GFlowNet training paradigm intro-
+duced thus far.
+
+3.3.1 Introducing Time Stamps to Allow Cycles
+Note that the state-space of a GFlowNet can easily be modified to accommodate an un-
+derlying state space for which the transitions do not form a DAG, e.g., to allow cycles.
+Let S be such an underlying state-space. Define the augmented state space S 0 = S × N,
+where N = {0, 1, 2, . . .} is the set of natural numbers, and s0t = (st , t) is the augmented
+state, where t is the position of the state st in the trajectory. With this augmented state
+space, we automatically avoid cycles. Furthermore, we may design or train the backwards
+transition probabilities PB (s0t | s0t+1 = (st+1 , t + 1)) to create a preference for shorter paths
+towards st+1 , as discussed in Sec. 2.6. Note that we can further generalize this setup by
+replacing N with any totally ordered indexing set; the augmented state space will still have
+an associated DAG. The ordering “<” in the original state-space is lifted to the augmented
+state-space: (st , t) < (s0t0 , t0 ) if and only if t < t0 and st < s0t .
+
+                                                    29
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+3.3.2 Stochastic Rewards
+We also consider the setting in which the given reward is stochastic rather than being a
+deterministic function of the state, yielding training procedures based on stochastic gradient
+descent. For example, with the trajectory balance loss of Eq. (41), if R(s) is stochastic
+(even when given s), we can think of what is being really optimized is the squared loss
+with log R(s) replaced by its expectation (given s). This is a straightforward consequence
+of minimizing the expected value of a squared error loss (as for example in neural networks
+trained with a squared error loss and a stochastic target output, where the neural network
+effectively tries to estimate the expected value of that target).
+
+3.3.3 GFlowNets can be trained offline
+As discussed in Sec. 3.2, we do not need to train a GFlowNet using samples from its
+own trajectory distribution P̂ = Π(o). Those training trajectories can be drawn from any
+training distribution πT with full support, as already shown by Bengio et al. (2021). It
+means that a GFlowNet can be trained offline, as in offline reinforcement learning (Ernst
+et al., 2005; Riedmiller, 2005; Lange et al., 2012).
+    It should also be noted that with a proper adaptive choice of πT , and assuming that
+computing R is cheaper or comparable in cost to running the GFlowNet on a trajectory, it
+should be more efficient to continuously draw new training samples from πT than to rehearse
+the same trajectories multiple times. An exception would be rehearsing the trajectories
+leading to high rewards if these are rare.
+    How should one choose the training distribution πT ? It needs to cover the support
+of R but if it were uniform it would be very wasteful and if it were equal to the current
+GFlowNet policy π it might not have sufficient effective support and thus miss modes of
+R, i.e., regions where R(x) is substantially greater than 0 but R(x)  PT (x). Hence the
+training distribution should be sampled from an exploratory policy that visits places that
+have not been visited yet and may have a high reward. High epistemic uncertainty around
+the current policy would make sense and the literature on acquisition functions for Bayesian
+optimization (Srinivas et al., 2010) may be a good guide. More generally, this means the
+training distribution should be adaptive. For example, πT could be the policy of a second
+GFlowNet trained mostly to match a different reward function that is high when the losses
+observed by the main GFlowNet are large. It would also be good to regularly visit those
+trajectories corresponding to known large R, i.e., according to samples from π, to make
+sure those are not forgotten, even temporarily.
+
+3.4 Exploiting Data as Known Terminating States
+In some applications we may have access to a dataset of (s, R(s)) pairs and we would like to
+use them in a purely offline way to train a GFlowNet, or we may want to combine such data
+with queries of the reward function R to train the GFlowNet. For example, the dataset may
+contain examples of some of the high-reward terminating states s which would be difficult to
+obtain by sampling from a randomly initialized GFlowNet. How can we compute a gradient
+update for the GFlowNet parameters using such (s, R(s)) pairs?
+    If we choose to parametrize the backwards transition probabilities PB (which is nec-
+essary for implementing the detailed balance loss), then we can just sample a trajectory
+
+                                             30
+                                      GFlowNet Foundations
+
+
+
+
+τ leading to s using PB and use these trajectories to update the flows and forward tran-
+sition probabilities along the traversed transitions. However, this alone is not guaranteed
+to produce the correct GFlowNet sampling distribution because the empirical distribution
+over training trajectories τ defined as above does not have full support. Suppose for ex-
+ample that the dataset only contains high-reward terminating states with R(s) = 1. The
+GFlowNet could then just sample trajectories uniformly (which would be wrong, we would
+like the probability of most states not in the training set to be very small). On the other
+hand, if we combine the distribution of trajectories leading to terminal transitions in the
+dataset with a training distribution whose support covers all possible trajectories, then the
+offline property of GFlowNet guarantees that we can recover a flow-matching model.
+
+
+4. Conditional Flows and Free energies
+
+A remarkable property of flow networks is that we can recover the normalizing constant Z
+from the initial state flow F (s0 ) (Prop. 10). Z also gives us the partition function associated
+with a given terminal reward function R specifying the terminating flows.
+    What about internal states s with s0 < s < sf ? If we had something like a normalizing
+constant for only the terminating flows achievable from s, we would be able to obtain a form
+of marginalization given state s, i.e., a conditional probability for terminating states s0 ≥ s,
+given s. Naturally, one could ask: does the flow F (s) through state s give us that kind of
+marginalization over only the downstream terminating flows? Unfortunately in general, the
+answer to this question is no, as illustrated in Fig. 5: in this example F (s2 ) = 4, whereas the
+sum of terminating flows achievable from s2 is 6 (the terminating states reachable from s2
+are {s5 , s6 , s7 }). The discrepancy is caused by the flow through (s0 , s1 , s5 ) that contributes
+to the terminating flow F (s5 →sf ), but not to F (s2 ) since there is no order relation between
+s1 and s2 .
+
+
+                          4       2                         4                                   4
+                      2
+            1                                  1                                  1
+                      2                                 2
+       5        1         5       3                         5       3                           5       3
+                      1                                 1                                   3
+ 0     3    2                         0        2                        0         2
+                      1                                 1                                   1
+       2                  6       2                         6       2                           6       2
+                      2                                 2                                   2
+            3         2       1                3                1                 3                 1
+
+                          7       1                         7       1                           7       1
+
+
+                (a)                             (b)                                   (c)
+
+Figure 5: Example of a state-conditional flow network. (a) The original (Markovian) flow
+network. (b) The subgraph of states reachable from s2 ; there is a flow through (s0 , s1 , s5 )
+that contributed to F (s5 →sf ), but not to F (s2 ), showing that F (s2 ) does not marginalize
+the rewards of its descendant. (c) State-conditional flow network Fs2 , which differs from
+the original flow F on the subgraph, but satisfies the desired marginalization property.
+
+
+                                                   31
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+    In Sec. 5.3, we show how GFlowNets applied to sampling sets of random variables can be
+used to estimate the marginal probability for the values given to a subset of the variables. It
+requires computing the kind of intractable sum discussed above (over the rewards associated
+with all the descendants of a state s, with s corresponding to such a subset of variables
+and a descendant to a full specification of all the variables). That motivates the following
+definition:
+
+Definition 27 Given a pointed DAG G = (S, A), the corresponding partial order denoted
+by ≥, and a function E : S → R, called the energy function, we define the free energy
+F(s) of a state s as:
+                                                    0
+                                            X
+                                e−F (s) :=     e−E(s ) .                          (44)
+                                             s0 :s0 ≥s
+
+Free energies are generic formulations for the marginalization operation (i.e. summing over
+a large number of terms) associated with energy functions, and we find their estimation to
+open the door to interesting applications where expensive MCMC methods would typically
+be the main approach otherwise.
+
+4.1 Conditional flow networks
+In Sec. 2.2, we defined a flow network as a DAG, augmented with some function F over the
+set of complete trajectories T . We can extend this notion of flow networks by conditioning
+each component on some information x. In general, this conditioning variable can represent
+any conditioning information, either external to the flow network (but influencing the ter-
+minating flows), or internal (e.g., x can be a property of complete trajectories over another
+flow network, like passing through a particular state).
+
+Definition 28 Let X be a set of conditioning variables. We consider a family of DAGs
+Gx = (Sx , Ax ) indexed by x ∈ X , along with a family of initial and terminal states denoted
+by (s0 | x) ∈ Sx and (sf | x) ∈ Sx respectively. For each DAG Gx , we denote by Tx the set
+of complete trajectories in Gx , and we denote by T their union:
+                                              [
+                                        T =       Tx .
+                                              x∈X
+
+A conditional flow network is the specification of X , the family {Gx , x ∈ X }, along
+with a conditional flow function F , i.e. a function F : X × T → R+ such that F (x, τ ) = 0
+if τ ∈
+     / Tx . For clarity, we will denote, for each x ∈ X , by Fx the function mapping each
+τ ∈ Tx to F (x, τ ). Similar to Sec. 2.2, Fx induces a measure of the σ-algebra 2Tx for each
+x.
+
+    Conditional flow networks effectively represent a family of flow networks, indexed by
+the value of x. Since conditional flow networks are defined using the same components
+as an unconditional flow network, they inherit from all the properties of flow networks for
+all DAGs Gx and flow functions Fx . In particular, we can directly extend the notion of
+probability distribution over flows, state and edge flows, forward and backward transition
+probabilities (Sec. 2.3), of Markovian flows (Sec. 2.4), and any flow matching condition
+
+                                              32
+                                 GFlowNet Foundations
+
+
+
+
+(Sec. 2.5) to conditional flows; the only difference is that now every term explicitly depends
+of the conditioning variable x.
+    In Sec. 4.2 and Sec. 4.3, we will elaborate two important examples of conditional flow
+networks: flow networks conditioned on external information that changes the reward R(s |
+x), and state-conditional flow networks that depend on internal information, i.e., previously
+visited states.
+
+4.2 Reward-conditional flow networks
+Definition 29 Let X be a set of conditioning variables. Consider a flow network given by
+a pointed DAG G = (S, A) and a flow function F . Consider a family R of non-negative
+functions of S: {Rx : S f → R+ , x ∈ X }. A reward-conditional flow network com-
+patible with the family R is a conditional flow network (Def. 28), with Gx = G for every
+x ∈ X , such that the edge-flow functions induced by the conditional flow function F satisfy:
+
+                          ∀x ∈ X ∀s ∈ S f Fx (s → sf ) = Rx (s).
+
+We will use the notations Rx (s) and R(s | x) interchangeably.
+
+Note that the definition above implies that all the DAGs of a reward-conditional flow
+network are identical, and only the terminating flows differ amongst the members of the
+family.
+
+Example 7 We will see in Sec. 4.4 that we can estimate a conditional flow network using
+a GFlowNet (Sec. 3), given a reward function R(s | x). In an Energy-Based Model, the
+model Pθ (s) is associated with a given energy function Eθ (s), parametrized by θ, with
+
+                                              exp(−Eθ (s))
+                                   Pθ (s) =                .
+                                                 Z(θ)
+
+This model can be parametrized using a reward-conditional flow network, conditioned on θ
+with the reward function R(s | θ) = exp(−Eθ (s)). We show in Sec. 4.5 how to use such a
+conditional flow-network to learn an Energy-Based Model.
+
+4.3 State-conditional flow networks
+Definition 30 Consider a flow network given by a DAG G = (S, A) and a flow function
+F . For each state s ∈ S, let Gs be the subgraph of G containing all the states s0 such that
+s0 ≥ s. A state-conditional flow network is given by the family        {Gs , s ∈ S}, along
+with a conditional flow function F : S × T → R+ , where T = s∈S Ts , and Ts the set of
+                                                                S
+complete trajectories in Gs , that satisfies:
+
+                                 Fs (s0 → sf ) = F (s0 → sf ).                           (45)
+
+    Note that in the definition above, we abused the notation F to refer to both flow
+functions and edge flow functions, but also used Fs to refer to the conditional flow function
+(or the corresponding edge flow function) τ 7→ F (s, τ ). Unlike the reward-conditional flow
+networks defined in Sec. 4.2, the structure of the DAG in a state-conditional flow network
+
+                                               33
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+depends on the anchor state s. In particular, this means that the initial state (s0 | s) = s
+changes, but the final state (sf | s) = sf remains unchanged, for any state s.
+   Since the definition of a state-conditional flow network depends on an original flow
+network, we must ensure that this definition is indeed correct, i.e. that such a state-
+conditional flow network that satisfies the conditions in Eq. (45) exists.
+
+Proposition 31 For any flow network given by a DAG G = (S, A) and a flow F, we can
+define a state-conditional flow network as per Def. 30.
+
+Proof Let s ∈ S be a state. Since the structure of the DAG Gs is clearly well-defined, we
+just need to show that there exists a flow function Fs : Ts → R+ that satisfies Eq. (45). If
+such a function exists for every s ∈ S, then it would suffice to define the conditional flow
+function F : S × T → R+ as:
+                                           (
+                                            Fs (τ ) if τ ∈ Ts
+                               F (s, τ ) =
+                                            0 otherwise.
+
+Let As0 |s be the set of complete trajectories in Ts terminating in s0 ≥ s; the condition in
+Eq. (45) then reads:
+                                                   X
+                     Fs (s0 →sf ) = Fs (As0 |s ) =    Fs (τ ) = F (s0 →sf ).            (46)
+                                                     τ ∈As0 |s
+
+
+Note that in Eq. (46), F (s0 →sf ) is a given quantity because the flow F is known. Since
+the sets of trajectories {As0 |s , , s0 ≥ s} form a partition of all the complete trajectories Ts ,
+Eq. (46) is a system of linear equations, whose unknowns are Fs (τ ) for all τ ∈ Ts , where
+each equation involves separate sets of unknowns. Therefore there exists at least a solution
+Fs (τ ) of this system.
+    We can construct such a solution in the following way. For some τ ∈ Ts , we can first
+start by selecting the complete trajectories τ̄ ∈ T that contain τ :
+
+                                       Cτ = {τ̄ ∈ T : τ ⊆ τ̄ }.
+
+The key difference between the DAG G and the subgraph Gs though is that G may contain
+trajectories that terminate in some s0 ≥ s but do not pass through s, and those are therefore
+not covered by the trajectories of Gs . Let Us0 |s be the set of complete trajectories of G
+defined as
+
+                        Us0 |s = {τ̄ ∈ T : ∃s00 > s, s00 ∈ τ̄ , s0 ∈ τ̄ , s ∈
+                                                                            / τ̄ }.
+For all τ ∈ Ts such that τ terminates in some s0 ≥ s, we can therefore construct the flow
+Fs (τ ) as
+                                                       1
+                                   Fs (τ ) := F (Cτ ) + F (Us0 |s ),
+                                                       n
+where n = |As0 |s | is the number of trajectories τ ∈ Ts that terminate in s0 . It is easy to
+                                                       0
+
+verify that Fs (τ ) is a solution of Eq. (46).
+
+
+
+                                                    34
+                                  GFlowNet Foundations
+
+
+
+
+    While we saw in Prop. 10 that the initial flow F (s0 ) was equal to the partition function,
+the initial state-conditional flow also benefit from a marginalizing property, and is now
+related to the free energy at s.
+Proposition 32 Given a state-conditional flow network (G, F ) as in Def. 30, for any state
+s, the initial flow of the state-conditional flow network corresponds to marginalizing the
+terminating flows F (s0 → sf ) for s0 ≥ s:
+                                           X
+                    Fs (s0 | s) = Fs (s) =      F (s0 → sf ) = exp(−F(s)),
+                                              s0 : s0 ≥s
+
+where F(s) is the free energy associated to the energy function E(s0 ) = − log F (s0 →sf ).
+
+Proof This is a direct consequence of Prop. 10, applied to the state-conditional flow
+function Fs , along with Def. 27.
+
+                                        X                     X
+                        Fs (s0 | s) =           Fs (τ ) =                Fs (s0 →sf )
+                                        τ ∈Ts               s0 : s0 ≥s
+                                                                                           0
+                                          X                                X
+                                   =                 F (s0 →sf ) =                    e−E(s )
+                                        s0 : s0 ≥s                       s0 : s0 ≥s
+
+
+
+
+    Note that the definition of state-conditional flow networks is consistent with our original
+definition of (unconditional) flow networks in Section 2.1, in the sense that the original flow
+network is a valid state-conditional flow networks anchored at the initial state.
+    Another quantity of interest that state-conditional flow networks allow us to evaluate,
+is the probability of terminating a trajectory in a state s0 if all terminating edge flows were
+diverted towards an earlier state s < s0 :
+Corollary 33 Consider a flow network given by a DAG G = (S, A) and a flow F , from
+which we define any state-conditional flow network, as per Def. 30. Given a state s, the
+flow function Fs induces a probability distribution over {s00 ∈ S f : s00 ≥ s} ⊆ S f , that we
+denote by PT (. | s).
+    Under this measure, the probability of terminating a trajectory in Gs in a state s0 (i.e.
+the last edge of the trajectory is s0 → sf ) is:
+                                                                   0
+                                PT (s0 | s) = 1s0 ≥s e−E(s )+F (s) ,                            (47)
+
+where E is the energy function mapping each state s0 that is parent of sf to − log F (s0 → s),
+and F is the corresponding free energy function.
+
+Proof Because Fs is a flow function, Def. 11 and Prop. 10 tell us that:
+                                             0
+                                       Fs (s → sf ) if s0 ≥ s
+                                      
+                              0
+                         PT (s | s) =       Fs (s)
+                                       0             otherwise
+                                      
+
+
+                                                       35
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+Combining this with Prop. 32, and Eq. (45), we obtain for s0 ≥ s:
+                                                    F (s0 → sf )
+                                 PT (s0 | s) = 1s0 ≥s
+                                                       e−F (s)
+                                                          0
+                                                    e−E(s )
+                                            = 1s0 ≥s −F (s)
+                                                    e
+
+
+
+
+4.4 Conditional GFlowNets
+Similar to the way we used a GFlowNet to estimate the flow of a flow network, we can also
+use a (conditional) GFlowNet in order to estimate a conditional flow network, with given
+target reward functions. A conditional GFlowNet follows the construction presented in Sec-
+tion 3, with the exception that all quantities to be learned now depend on the conditioning
+variable x ∈ X (e.g., x is an additional input of the neural network).
+    All parametrizations and losses presented in Sec. 3.2 could in principle be used to train
+a conditional GFlowNet, regardless of the conditioning set. Below we discuss yet another
+loss, first presented in Deleu et al. (2022), that could be used to train both GFlowNets and
+conditional GFlowNets.
+Example 8 Given a family of DAGs Gx and reward functions Rx indexed by x ∈ X , where
+each state s ∈ Gx is terminating (i.e. is a parent of sf ), and following Exs. 2 and 3,
+we consider a parametrization given by the forward and backward transition probabilities
+OPx = O2x × O3x , where O2x (resp. O3x ) is the set of forward (resp. backward) probability
+functions P̂F (resp. P̂B ) consistent with Gx for every x ∈ X , and (ΠxP , HPx ) defined as in
+Ex. 3. Each (OPx , ΠxP , HPx ) is a flow parametrization of (Gx , Rx ), which can be trained with
+an edge-decomposable flow-matching loss, as proved in Deleu et al. (2022), and defined for
+every s → s0 ∈ A−f :
+                                                Rx (s0 )PB (s | s0 , x)PF (sf | s, x) 2
+                                                                                    
+                                     0
+             LDB (P̂F , P̂B , s → s , x) = log
+                                                Rx (s)PF (s0 | s, x)PF (sf | s0 , x)
+
+4.5 Training Energy-Based Models with a GFlowNet
+A GFlowNet can be trained to convert an energy function into an approximate correspond-
+ing sampler. Thus, it can be used as an alternative to MCMC sampling (Sec. 3.1). Consider
+the model Pθ (s) associated with a given parametrized energy function Eθ (s) with param-
+                   −E (s)
+eters θ: Pθ (s) = e Zθ . Sampling from Pθ (s) could be approximated by sampling from
+the terminating probability distribution PT (s) of a GFlowNet trained with target terminal
+reward R(s) = e−Eθ (s) (see Eq. (34)). In practice, P̂T would be an estimator for the true Pθ
+because the GFlowNet training objective is not zeroed (insufficient capacity or finite train-
+ing time). The GFlowNet samples drawn according to P̂T could then be used to obtain a
+stochastic gradient estimator for the negative log-likelihood of observed data x with respect
+to parameters θ of an energy function Eθ :
+                          ∂ − log Pθ (x)   ∂Eθ (x) X            ∂Eθ (s)
+                                         =        −      Pθ (s)         .                (48)
+                               ∂θ            ∂θ       s
+                                                                  ∂θ
+
+                                                36
+                                    GFlowNet Foundations
+
+
+
+
+An approximate stochastic estimator of the second term could thus be obtained by sampling
+one or more terminating states s ∼ P̂T (s), i.e., from the trained GFlowNet’s sampler.
+Furthermore, if the GFlowNet’s loss is 0, i.e. P̂T = Pθ , the gradient estimator would be
+unbiased.
+    One could thus potentially jointly train an energy function Eθ and a corresponding
+GFlowNet by alternating updates of θ using the above equation (with sampling from Pθ
+replaced by sampling from P̂T ) and updates of the GFlowNet using the updated energy
+function for the target terminal reward.
+    If we fix F̂ (s→sf ) = R(s) by construction (which we can do if the reward function
+is deterministic), then we can parametrize the energy function with the same neural net-
+work that computes the flow, since E(s) = − log R(s) = − log F̂ (s→sf ). Hence the same
+parameters are used for the energy function and for the GFlowNet, which is appealing.
+    The above strategy for learning jointly an energy function and how to sample from it
+could be generalized to learning conditional distributions by using a conditional
+GFlowNet instead. Let x be an observed random variable and h be a hidden variable,
+with the GFlowNet generating the pair (x, h) in two sub-trajectories: either first generate
+x and then generate h given x, or first generate h and then generate x given h. This can
+be achieved by introducing a 6-valued component u in the state to make sure that both h
+and x are generated before exiting into sf , with the following values and constraints:
+
+              s = s0 ⇒ u = 0                                                             (49)
+              s = sf ⇒ u = 5                                                             (50)
+          (ut →ut+1 ) ∈ {0→1, 0→2, 1→1, 2→2, 1→3, 2→4, 3→3, 4→4, 3→5, 4→5}               (51)
+
+where u = 1 indicates that x is being generated (before h), u = 2 indicates that h is
+being generated (before x), u = 3 indicates that h is being generated (conditioned on x),
+and u = 4 indicates that x is being generated (given h). The GFlowNet cannot reach
+the final state sf until both x and h have been generated. The conditional GFlowNet can
+thus approximately sample PT (x), PT (h | x), PT (h), PT (x | h) as well as PT (x, h). If we
+only want to sample x (or only h), we allow exiting as soon as it is generated (resp. h is
+generated). See Sec. 5.3 for a more general discussion on how to represent, estimate and
+sample marginal distributions.
+    Let us denote by Pθ (x, h) ∝ e−Eθ (x,h) the joint distribution over (x, h) associated with
+the energy function, i.e., with F (s → sf ). When x is observed but h is not, θ could thus be
+updated by approximating the marginal log-likelihood gradient
+
+             ∂ − log Pθ (x) X            ∂Eθ (x, h) X              ∂Eθ (x0 , h)
+                           =  PT (h | x)           −   PT (x0 , h)                       (52)
+                  ∂θ                        ∂θ       0
+                                                                       ∂θ
+                                h                        x ,h
+
+
+using samples from the estimated terminal sampling probabilities P̂T of a trained GFlowNet
+to approximate in a stochastic gradient way the above sums (using one or a batch of
+samples).
+    Note how we now have outer loop updates (of the energy function, i.e., the reward
+function) from actual data, and an inner loop updates (of the GFlowNet) using the energy
+function as a driving target for the GFlowNet. How many inner loop updates are necessary
+
+                                             37
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+for such a scheme to work is an interesting open question but most likely depends on the
+form of the underlying data generating distribution. If the work on GANs (Goodfellow et al.,
+2014) is a good analogy, a good strategy may be to interleave updates of the energy function
+(as minus the log-terminal flow of a GFlowNet) based on a batch of data, and updates of the
+GFlowNet as a sampler based on both these samples (trajectories can be sampled backwards
+from a terminating state s using PB ) and forward samples from the tempered training policy
+πT defined by the forward transition probabilities of the GFlowNet.
+
+4.6 Active Learning with a GFlowNet
+
+An interesting variant on the above scheme is one where the GFlowNet sampler is used not
+just to produce negative examples for the energy function but also to actively explore the
+environment. Jain et al. (2022) use an active learning scheme where the GFlowNet is used
+to sample candidates x for which we expect the reward R(x) to be generally large (since the
+GFlowNet approximately samples proportionally to R(x)). The challenge is that evaluating
+the true reward R for any x is computationally expensive and can potentially be noisy (for
+example, a biological assay to measure the binding energy of a drug to a given target
+protein). Thus, instead of using the true reward directly, the authors introduce a proxy fˆ
+(which approximates the true reward function f ), which is used to train the GFlowNet. This
+would lead to a setup similar to Sec. 4.5, with an inner loop where a GFlowNet is trained to
+match the proxy fˆ, and an outer-loop where the proxy fˆ is learned in a supervised fashion
+using (x, y) pairs, where x is proposed by the GFlowNet, and y is the corresponding true
+reward from the environment (for example, outcome of a biological of chemical assay). It
+is important to note here that the GFlowNet and the proxy are intricately linked since the
+coverage of proxy fˆ over the domain of x relies on diverse candidates from the GFlowNet.
+And similarly, since the GFlowNet matches a reward distribution defined by the proxy
+reward function fˆ, it also depends on the quality of the true reward function f .
+    This setup can be further extended by incorporating information about how novel a
+given candidate is, or how much epistemic uncertainty, u(x, f ), there is in the prediction
+of fˆ. We can use the acquisition function heuristics (like Upper Confidence Bound (UCB)
+or Expected Improvement (EI)) from Bayesian optimization (Močkus, 1975; Srinivas et al.,
+2010) to combine the predicted usefulness fˆ(x) of configuration x with an estimate of
+the epistemic uncertainty around that prediction. Using this as the reward can allow the
+GFlowNet to explore areas where the predicted usefulness is high (fˆ(x) is large) and at the
+same time explore areas where there is more information to be gathered about useful con-
+figurations of x. The uncertainty over the predictions of fˆ with the appropriate acquisition
+function can provide more control over the exploratory behaviour of GFlowNets.
+    As discussed by Bengio et al. (2021) when comparing GFlowNets with return-maximizing
+reinforcement learning methods, an interesting property of sufficiently trained GFlowNets
+is that they will sample from all the modes of the reward function, which is particularly
+desirable in a setting where exploration is required, as in active learning. The experiments
+in the paper also demonstrate this advantage experimentally in terms of the diversity of the
+solutions sampled by the GFlowNet compared with PPO, an RL method that had previ-
+ously been used for generating molecular graphs and that tends to focus on a single mode
+of the reward function.
+
+                                             38
+                                  GFlowNet Foundations
+
+
+
+
+4.7 Estimating Entropies, Conditional Entropies and Mutual Information
+Definition 34 Given a reward function R with 0 ≤ R(s) < 1 ∀s, we define the entropic
+reward function R0 associated with R as:
+
+                                     R0 (s) = −R(s) log R(s).                           (53)
+
+In brief, in this section, we show that we can estimate entropies by training two GFlowNets:
+one that estimates flows as usual for a target terminal reward function R(s), and one that
+estimates flows for the corresponding entropic reward function. We show below that we
+obtain an estimator of entropy by looking up the flow in the initial state, and if we do this
+exercise with conditional flows, we get conditional entropy. Once we have the conditional
+entropy, we can also estimate the mutual information.
+
+Proposition 35 Consider a flow network (G, F ) such that the terminating flows match
+a given reward function R, i.e. ∀s ∈ S f , F (s → sf ) = R(s), with R(s) < 1 for all s,
+and a second flow network (G, F 0 ) with the same pointed DAG, but with a flow function
+for which the terminating flows match the entropic reward function R0 (Eq. (53)), then the
+entropy H[S] associated with the terminating state random variable S ∈ S f with distribution
+PT (S = s) = R(s)
+               Z (Eq. (18)) is
+
+                                 X                         F 0 (s0 )
+                     H[S] := −       PT (s) log PT (s) =             + log F (s0 ).     (54)
+                                 s
+                                                           F (s0 )
+
+Proof First apply the definition of PT (s), then Eq. (11) on both flows:
+              X                           X R(s)
+          −       PT (s) log PT (s) = −            (log R(s) − log F (s0 ))
+              s                           s
+                                           F (s0 )
+                                        P                                  P 
+                                     − s R(s) log R(s) + log F (s0 ) s R(s)
+                                  =
+                                                           F (s0 )
+                                     0
+                                    F (s0 )
+                                  =         + log F (s0 ).
+                                    F (s0 )
+
+Note that we need R(s) < 1 to make sure that the rewards R0 (s) (and thus the flows) are
+positive.
+
+
+Proposition 36 Given a set X of conditioning variables, consider a conditional flow net-
+work defined by a conditional flow function F , for which the terminating flows match a
+target reward R family (conditioned on x ∈ X ) that satisfies Rx (s) < 1 for all s, and a
+second conditional flow network defined by a conditional flow function F 0 , for which the
+terminating flows match the entropic reward functions Rx0 (Eq. (53)), then the conditional
+entropy H[S | x] of random terminating states S ∈ S f consistent with condition x is given
+by
+                                      F 0 (s0 | x)
+                          H[S | x] =               + log F (s0 | x).                  (55)
+                                      F (s0 | x)
+
+                                                39
+                        Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+In particular, for a state-conditional GFlowNet (X = S is the state space of the DAG), we
+obtain
+                                             F 0 (s | s)
+                                H[S | s] =               + log F (s | s).                          (56)
+                                             F (s | s)
+More generally, the mutual information MI(S; X) between the random draw of a terminating
+state S = s according to PT (s | x) and the conditioning random variable X is
+                                                                         0
+                                         F 0 (s0 )                        F (s0 | X)
+                                                                                                      
+MI(S; X) = H[S] − EX [H[S | X]] =                  + log F (s0 ) − EX                + log F (s0 | X)
+                                          F (s0 )                         F (s0 | X)
+                                                                                                   (57)
+where F (s) and F 0 (s) indicate the unconditional flows (trained with no condition x given)
+while F (s | x) and F 0 (s | x) are their conditioned counterparts.
+Proof The proof of Eq. (55) follows from the fact that each (Gx , Fx ) is a flow network,
+to which we can apply Prop. 35. Eq. (57) is a direct consequence of the definition of the
+Mutual Information, Eq. (54) and Eq. (55).
+
+
+    If we have a sampling mechanism for P (X), we can thus approximate the expectation
+in Eq. (57) by a Monte-Carlo average with draws from P (X).
+
+5. GFlowNets on Sets, Graphs, and to Marginalize Joint Distributions
+5.1 Set GFlowNets
+We first define an action space for constructing sets and we view the GFlowNet as a means
+to generate a random set S and to estimate quantities like probabilities, conditional prob-
+abilities or marginal probabilities for realizations of this random variable. The elements of
+those sets are taken from a larger “universe” set U.
+Definition 37 Given a “universe” set U, consider the pointed DAG G = (S, A), where
+S := 2U ∪ {sf } is the set of all subsets of U with an additional state sf , s0 = {} is the empty
+set, and for any two subsets s, s0 of U, s → s0 ∈ A ⇔ ∃a ∈ U \ s, s0 = s ∪ {a}; meaning that
+each transition in the DAG corresponds to adding one element of U to the current subset.
+Additionally all subsets are connected to sf , i.e. ∀s ∈ S, s → sf ∈ A. A set flow network
+is a flow network on this graph G, and a set GFlowNet is an estimator of such a flow
+network, as defined in Sec. 3. The target terminal reward function R : s 7→ F (s → sf )
+satisfies:                                   X
+                                       Z=       R(s) < ∞.                                    (58)
+                                             s∈2U
+A set flow network defines a terminating probability distribution PT on states (see Def. 13
+and Eq. (44)), with
+                                                        F (s→sf )
+                              PT (s) = e−E(s)+F (s0 ) =                               (59)
+                                                          F (s0 )
+where E represents the energy − log R. Similarly, Cor. 33 provides us with a formula for
+conditional probabilities of a given superset s0 of a given set s under PT ,
+                                                         0       F (s0 →sf )
+                           PT (s0 | s0 ⊇ s) := e−E(s )+F (s) =                                    (60)
+                                                                  F (s | s)
+
+                                                    40
+                                 GFlowNet Foundations
+
+
+
+
+where F indicates free energy (see Def. 27).
+   Remember that with a GFlowNet with state and edge flow estimator F̂ , it is not guar-
+anteed that F̂ (s) = R(s) for all states s ∈ S \ {sf }, so we could estimate probabilities
+with
+                                              F̂ (s→sf )
+                                    P̂T (s) =                                        (61)
+                                                 F̂ (s0 )
+or alternatively
+                                                          R(s)
+                                          P̂T (s) =                  .                   (62)
+                                                          F̂ (s0 )
+Similarly, we can estimate conditional superset probabilities with Eq. (60) or with
+
+                                                                R(s0 )
+                                 P̂T (s0 | s0 ⊇ s) =                       ,             (63)
+                                                              F̂ (s | s)
+
+none of which are guaranteed to exactly sum to 1.
+   We can also compute the marginal probability over all supersets of a given set s, as
+shown below.
+
+Proposition 38 Following the notations of Def. 37, let S(s) = {s0 ⊇ s} be the set of all
+supersets of a set s. The probability of drawing any element from S(s) given a set flow
+network is
+                                    X             e−F (s)   F (s | s)
+                       PT (S(s)) =     PT (s0 ) =         =           .            (64)
+                                    0
+                                                    Z        F (s0 )
+                                        s ⊇s
+
+Proof We can rewrite the sum as follows, first applying the definition of PT (Eq. (18)),
+and Prop. 32:
+                                X                    X F (s0 →sf )
+                                        PT (s0 ) =
+                                                                F (s0 )
+                                s0 ⊇s                s0 ≥s
+                                                     F (s | s)
+                                               =
+                                                      F (s0 )
+                                                     e−F (s)
+                                               =
+                                                       Z
+where we notice that for states that are sets, the order relationship s ≤ s0 is equivalent to
+the subset relationship s ⊆ s0 .
+
+
+    To summarize, a GFlowNet which is trained to match a given energy function (i.e.
+derived rewards) over sets can be used to represent that distribution, sample from it, esti-
+mate the probability of a set under it, estimate the partition function, search for the lowest
+energy set, sample a conditional distribution over supersets of a given set, estimate that
+conditional distribution for a given pair of set and superset, compute the marginal proba-
+bility of a subset (i.e., summing over the probabilities of the supersets), and compute the
+entropy of the set distribution or of the conditional distribution of supersets of a set. For
+example, using a GFlowNet to model distributions over sets has been successfully used in
+
+                                                     41
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+Malik et al. (2023), where the goal is to iteratively select an informative batch of points
+for efficient active learning. The authors additionally show that the distribution over sets
+defined by a mutual information-based reward (Sec. 4.7) can be approximated to satisfying
+levels using a neural network as a function approximator for the GFlowNet policy.
+
+5.2 GFlowNet on Graphs
+
+A graph is a special kind of set in which there are two kinds of elements: nodes and edges,
+with edges being pairs of node indices. Graphs may also have content attached to nodes
+and/or edges. The set operations described in the previous section can thus be specialized
+accordingly. Some actions (i.e. edges in the GFlowNet DAG) could insert a node while
+other actions could insert an edge. The set of allowable actions can be limited, for example
+to make sure the graph has a single connected component, or to ensure acyclicity. Like for
+sets in general, one cannot have an action which adds a node or edge which is already in the
+set. Deleu et al. (2022) used a GFlowNet over DAGs in order to learn an approximation
+of the posterior distribution over the graphical structure of a Bayesian Network. While the
+GFlowNet was learned by minimizing some loss derived from flow-matching conditions as
+in Sec. 3.2, they showed that the resulting distribution is an accurate approximation of the
+target posterior. Since graphs are sets, all the GFlowNet operations on sets can be applied
+on graphs.
+
+5.3 Marginalizing over Missing Variables
+
+The ability of GFlowNets to capture probability distributions over sets can be applied to
+modeling the joint distribution over random variables, to calculating marginal probabilities
+over given subsets of variable values, and to sampling or computing probabilities for any
+conditional (e.g., for a subset of variables given another subset of variables).
+    Let X = (X1 , X2 , . . . , Xn ) be a composite random variable with n element random
+variables Xi , 1 ≤ i ≤ n, each with possible values xi ∈ Xi (not necessarily numbers). If
+we are given an energy function or a terminal reward function R(x) to score any instance
+X = x, we can train a particular kind of set GFlowNet for which the set elements are
+pairs (i, xi ) and at most one element in the set with index i, for all i. The only allowed
+terminating transitions are when the set has exactly size n and every size-n set s terminates
+on the next transition.
+    Note how that GFlowNet can sample an X in any possible order, if PB allows that
+order. Given an existing set of (i, xi ) pairs (represented by a state s = {(i, xi )}i ), we can
+estimate the marginal probability of that subset of variables (implicitly summing over all the
+missing ones, see Eq. (64)). We can sample the other variables by setting the state at s and
+continuing to sample from the GFlowNet’s policy (the learned forward transition probability
+function). We can sample from a chosen subset S 0 of the other variables by constraining
+that policy to only add elements which are in S 0 . In addition, we can do all the other things
+that are feasible on set GFlowNets, such as estimating the partition function, sampling
+in an order which prefers the early subsequences with the largest marginal probability,
+searching for the most probable configuration of variables, or estimating the entropy of the
+distribution.
+
+                                              42
+                                   GFlowNet Foundations
+
+
+
+
+5.4 Modular Energy Function Decomposition
+Let us see how we can apply the graph GFlowNet framework to a special kind of graph: a
+factor graph (Kschischang et al., 2001) with reusable factors. This will yield a distribution
+PT (g) over graphs g, each of which is associated with an energy function value E(g) (and
+associated reward R(g)). Energy-based models are convenient because they can decom-
+pose a joint probability into independent pieces (possibly corresponding to independent
+mechanisms, Schölkopf et al., 2012; Goyal et al., 2019; Goyal and Bengio, 2020), each cor-
+responding to a factor of a factor graph. In our case, we would like a shared set of factors
+F to be reusable across many factor graphs g. The factor graph will provide an energy and
+a probability over a set of random variables V. Let the graph g = {(F i , v i )}i be written
+as a set of pieces (F i , v i ), where F i ∈ F is the index of a factor with energy function term
+EF i , selected from the pool F of possible factors, and where v i = (v1 , v2 , . . .) is a list of
+realizations of the random variables Vj ← vj , where Vj ∈ V is a node of the factor graph.
+That list defines the edges of the factor graph connecting variable Vj with the j-th argument
+of EF i . Let us denote EF i (v i ) the value of this energy function term EF i applied to those
+values v i , i.e.,
+                                       EF i (v i ) = EF i (v1 , v2 , . . .).                   (65)
+The total energy function of such a graph can then be decomposed as follows
+                                           X
+                                    E(g) =    EF i (v i ).                                    (66)
+                                                i
+
+What is interesting with this construction is that the graph GFlowNet can now sample a
+graph g, possibly given some conditioning observations x: see Sec. 4.5 on how GFlowNets
+can be trained jointly with an energy function, including the case where only some ran-
+dom variables are observed. Hence, given some observed variables (not necessarily always
+the same), the graph GFlowNet can sample a latent factor graph containing and connect-
+ing (with energy function terms) both observed and latent random variables, and whose
+structure defines an energy function over values of the joint observed and latent variables.
+    Not only can we use the compositional nature of the objects generated by a GFlowNet to
+decompose the total energy into reusable energy terms corresponding to ideally independent
+mechanisms, but we can also decompose the GFlowNet itself into modules associated with
+each mechanism. The action space of this graph GFlowNet is fairly complex, with each
+action corresponding with the addition of a latent variable Vk or the addition of a graph
+piece (F i , v i ). Such an action is taken in the context of the state of the GFlowNet, which
+is a partially constructed graph (arising from the previous actions). The GFlowNet and
+its associated energy function parameters are thus decomposed into modules. Each module
+knows how to compute an energy function EFi and how to score and sample competitively
+(against the other modules) a new graph piece (to insert the corresponding factor in the
+graph).
+    Consider some observed variables (a subset of the Vj ’s with their values vj ), collectively
+denoted x. Consider a graph g among those compatible with x (i.e. with some nodes
+corresponding to Vj = vj for the observed variables) and denote h the specification of the
+part of g not already provided by x. We can think about latent variable h as the explanation
+for the observed x. Note how marginalizing over all the possible h, we can compute the
+
+                                                43
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+free energy of x. The principles of Sec. 4.5 can be applied to train such an energy-based
+GFlowNet. It also makes sense to represent a prior over graph structures in the energy
+function. For example, we may prefer sparse factors (with few arguments), and we may
+introduce soft or hard constraints having to do with a notion of type that is commonly used
+in computer programming and in natural language. Each random variable in the graph
+can have as one of its attributes a type, and each factor energy function argument can
+expect a type. Energy function terms can be added to construct this prior by favouring
+graph pieces (Fi , v i = (vk )k ) in which the type of variable Vk (of which vk is a realization)
+matches the type expected of the k-th argument of Fi . This is very similar to attention
+mechanisms (Bahdanau et al., 2014; Vaswani et al., 2017), which can be seen to match a
+query (an expected type) with a key (the type associated with an element). For instance,
+Pan et al. (2023) propose the Forward-Looking GFlowNet framework that exploits the
+modularity of the energy function, as in Eq. (66) and obtain a better approximation of the
+target distribution than those resulting from regular losses.
+
+6. Continuous or Hybrid Actions and States
+All of the mathematical developments above have used sums over states or actions, with
+the idea that these would be elements of a discrete space. However, for the most part one
+can replace these sums by integrals in case the states or actions are either continuous or
+hybrid (with some discrete components and some continuous components). Beyond this,
+we discuss below what the presence of continuous-valued actions and states changes to the
+GFlowNet framework.
+    Although there are explicit sums respectively over successors and predecessors which
+come up in Eq. (40), such sums are also hiding in the detailed balance constraint of Eq. (26).
+Indeed, these sums are implicit as part of the normalizing constant in the conditional density
+of the next state or previous state in PF (st+1 | st ) and PB (st | st+1 ). We consider below
+ideas to deal with this challenge.
+
+6.1 Integrable Normalization Constants
+We first note that if we can handle a continuous state, we can also handle a hybrid state,
+as follows. Let the state be decomposed into
+
+                                             s = (si , sx )                                 (67)
+
+where si is discrete and sx is continuous. Then we can decompose any of the transition
+conditionals as follows:
+
+                        PF (st+1 | st ) = P (sxt+1 | sit+1 , st )P (sit+1 | st ).           (68)
+
+We note that this is formally equivalent to decomposing the transition into two transitions,
+first to perform the discrete choice into the next state, and second to perform the continuous
+choice into the next state (given the discrete choice). Having continuous-valued inputs to a
+neural net is no problem. The challenge is to represent continuous densities on the output,
+with the need to both being able to compute the density of a particular value (say P (sxt+1 |
+sit+1 , st )) and to be able to sample from it. Computing categorical probabilities and sampling
+
+                                                   44
+                                    GFlowNet Foundations
+
+
+
+
+from a conditional categorical is standard fare, so we only discuss the continuous conditional.
+One possibility is to parametrize sxt+1 | sit+1 , st with a density for which the normalization
+constant is a known tractable integral, like the Gaussian. However, that may limit capacity
+too much, and may prevent a good minimization of the detailed balance or flow-matching
+loss. One workaround is to augment the discrete part of the state si with extra dimensions
+corresponding to “cluster IDs”, i.e., partition the continuous density into a mixture. We
+know that with enough mixture components, we can arbitrarily well approximate densities
+from a very large family. Other approaches include modeling the conditional density with
+an autogressive or normalizing flow model (Rezende and Mohamed, 2015, with a different
+meaning of the word flow), or, like in denoising diffusion models (Sohl-Dickstein et al., 2015),
+decomposing sampling of sx into several resampling steps, transforming its ditribution from
+a simple one to complex one.
+     To guarantee that the detailed balance constraint can be exactly satisfied, we could go
+further and think about parametrizing the edge flow F ((si , sx )→(s0i , s0x )), and note that this
+is the natural parametrization if we use the node-based flow-matching loss. For example,
+keeping with the Gaussian example, we would now have a joint Gaussian energy in the vector
+(sx , s0x ) for each feasible discrete component indexed by (si , s0i ). Note that in practical
+applications of GFlowNets, not all the transitions that satisfy the order relationship are
+generally allowed in the GFlowNet’s underlying DAG. For example, with set GFlowNets, the
+only allowed actions add one element to the set (not an arbitrary number of elements). These
+constraints on the action space mean that the number of legal (si , s0i ) pairs is manageable
+and correspond to the number of discrete actions. The overall action is therefore seen as
+having a discrete part (choosing s0i given si ) and a continuous part (choosing s0x given s0i , si
+and sx ). With such a joint flow formulation, the forward and backward conditional densities
+can be computed exactly and be compatible with each other.
+
+
+6.2 GFlowNets in GFlowNets
+
+Another way to implement an edge flow involving continuous variables is to use a lower-level
+hGFlowNet, energy functioni pair to represent its flow, conditional probabilities and sample
+from them. Remember that such a pair can be trained following the approach discussed
+in Sec. 4.5. Instead of a joint Gaussian for (sx , s0x ) given (si , s0i ) we could have a smaller-scale
+GFlowNet and energy function (representing an edge flow in the outer GFlowNet) to handle
+a whole family of transitions of a particular type in a larger-scale outer GFlowNet. Imagine
+that we have a fairly arbitrary energy function for such a transition, with parameters that
+we will learn. Then we can also train a GFlowNet to sample in either direction (either from
+st to st+1 or from st+1 to st ) and to evaluate the corresponding normalizing constants (and
+hence, the corresponding conditional probabilities). The discrete aspect of the state and
+of its transition may correspond to a family of transitions (e.g., insert a particular type of
+node in a graph GFlowNet), and a separate hGFlowNet, energy functioni module may be
+specialized and trained to handle such transitions.
+   While this paper was under review, Lahlou et al. (2023) extended the theory of GFlowNets
+to more general state spaces, including continuous ones, and experimentally validated that
+the usual losses can be used to effectively perform inference in continuous domains.
+
+                                                  45
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+7. Related Work
+There are several classes of related literature that concern the problem of generating a
+diversity of samples, given some energy or reward signal, in particular:
+   • generative models (in particular deep learning ones),
+   • RL methods that maximize reward with some form of exploratory behavior or smooth-
+     ness prior,
+   • MCMC methods that solve the problem of sampling from p(x) ∝ f (x) in principle,
+   • evolutionary methods, that can leverage group diversity through iterations over a
+     population of solutions.
+    In what follows we discuss these and offer insights into similarities and differences be-
+tween GFlowNets and these approaches. Note that the literature related to this problem is
+much larger than we can reference here, and extends to many other subfields of ML, such
+as GANs (Kumar et al., 2019), VAEs (Kingma and Welling, 2013; Kusner et al., 2017),
+and normalizing flows (Dinh et al., 2014, 2016; Rezende and Mohamed, 2015). Yet another
+related type of approach are the Bayesian optimization methods (Močkus, 1975; Srinivas
+et al., 2010), which have also been used for searching in the space of molecules (Griffiths
+and Hernández-Lobato, 2017). The main relation with Bayesian optimization methods is
+that GFlowNets are generative and can thus complement Bayesian optimization methods
+which scan a tractable list of candidates. When the search space is too large to be able to
+separately compute a Bayesian optimization acquisition function score on every candidate,
+using a generative model is appealing. In addition, GFlowNets are used to explore the
+modes of the distribution rather than to search for the single most dominant mode. This
+difference is similar to that with classical RL methods, discussed further below.
+
+7.1 Contrast with Generative Models
+The main difference between GFlowNets and established deep generative models like VAEs
+or GANs is that whereas the latter are trained by being provided a finite set of examples
+sampled from the distribution of interest, a GFlowNet is normally trained by being provided
+an energy function or a reward function.
+    This reward function tells us not just about the samples that are likely under the dis-
+tribution of interest (which we can think of as positive examples) but also about those that
+are unlikely (which we can think of as negative examples) and also about those in-between
+(whose reward is not large but is not zero either). If we think of the maximum likelihood
+training objective in those terms, it is like a reward function that gives a high reward to
+every training example (seen as a positive example, where the probability should be high)
+and a zero reward everywhere else. However, other reward functions are possible, as seen
+in the application of GFlowNets to the discovery of new molecules (Bengio et al., 2021),
+where the reward is not binary and increases monotonically as a function of the value of a
+desirable property of the candidate molecule.
+    Note however that the difference with other generative modeling approaches blurs when
+we include the learning of the energy function along with the learning of the GFlowNet sam-
+pler, as outlined in Sec. 4.5. In that case, the pair comprising the trainable GFlowNet sam-
+pler and the trainable energy function achieves a similar objective as a trainable generative
+
+                                             46
+                                 GFlowNet Foundations
+
+
+
+
+model. Note that GFlowNets have been designed for generating discrete variable-size com-
+positional structures (like sets or graphs), for both latent and observed variables, whereas
+GANs, VAEs or normalizing flows start from the point of view of modeling real-valued
+fixed-size vectors using real-valued fixed-size latent variables.
+    An interesting difference between GFlowNets and most generative model training frame-
+works (typically some variation on maximum likelihood) is in the very nature of the train-
+ing objective for GFlowNets, which came about in the context of active learning scenarios.
+Whereas the GFlowNet training pairs (s, R(s)) can come from any distribution over s (any
+full-support training policy πT ), which does not have to be stationary (and indeed will
+generally not be, in an active learning setting), the maximum likelihood framework is very
+sensitive to changes in the distribution of the data it sees. This is connected to the “offline
+learning” property of the flow matching objective (Sec. 3.3.3, among others).
+
+7.2 Contrast with Regularized Reinforcement Learning
+The flow-matching loss of GFlowNets (Bengio et al., 2021) arose from the inspiration of the
+temporal-difference training (Sutton and Barto, 2018) objectives associated with the Bell-
+man equation. The flow-matching equations are analogous to the Bellman equation in the
+sense that the training objective is local (in time and states), credit assignment propagates
+through a bootstrap process and tries to fix the parametrization so that these equations
+are satisfied, knowing that if they were (everywhere), we would obtain the desired proper-
+ties. However, these desired properties are different, as elaborated in the next paragraph.
+The context in which GFlowNets were developed is also different from the typical way of
+thinking about agents learning in some environment: we can think of the deterministic en-
+vironments of GFlowNets as involving internal actions typically needed by a cognitive agent
+that needs to perform some kind of inference through a sequence of steps (predict or sample
+some things given other things), i.e., through actions internal to the agent and controlling
+its computation. This is in contrast with the origins of RL, focused on the actions of an
+agent in an external and unknown stochastic environment. GFlowNets were introduced
+as a tool for learning an internal policy, similar to the use of attention in modern deep
+learning, where we know the effect of actions, and the composition of these actions defines
+an inference machinery for that agent.
+    Classical RL (Sutton and Barto, 2018) control methods work by maximizing return in
+Markov Decision Processes (MDPs); their focus is on finding the policy π ∗ ∈ argmaxπ V π (s) ∀s
+maximizing the expected return V π (s), which happens to provably be achieved with a de-
+terministic policy (Sutton and Barto, 2018), even in stochastic MDPs. In a deterministic
+MDP, of interest here, this means that training an RL agent is a search for the most re-
+warding trajectory, or in the case of terminal-reward-only MDPs (again of interest here),
+the most rewarding terminating state.
+    Another perspective, that emerged out of both the probabilistic inference literature (Tou-
+ssaint and Storkey, 2006) and the bandits literature (Auer et al., 2002), is concerned with
+finding policies of the form π(a|s) ∝ f (s, a). It turns out that maximizing both return and
+entropy (Ziebart et al., 2008) of policies in a control setting yield policies such that
+                                    −1
+                                   TY                           T −1
+                           "                             #                      !
+                                                                X
+                    p(τ ) = p(s0 )     P (st+1 |st , at ) exp η      R(st , at )          (69)
+                                  t=0                        t=0
+
+
+                                              47
+                        Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+where τ = (s0 , a0 , s1 , a1 , . . . , sT ) and η can be seen as a temperature parameter. This result
+can also be found under the control-as-inference framework (Haarnoja et al., 2017; Levine,
+2018). In deterministic MDPs with terminal rewards and no discounting of future rewards,
+this simplifies to p(τ ) ∝ exp(ηρ(τ )), where ρ is the return.
+    In recent literature, this entropy maximization (MaxEnt) is often interpreted as a reg-
+ularization scheme (Nachum et al., 2017), entropy being used either as an intrinsic reward
+signal or as an explicit regularization objective to be maximized. Another way to under-
+stand this scheme is to imagine ourselves in an adversarial bandit setting (Auer et al., 2002)
+where each arm corresponds to a unique trajectory, drawn with probability ∝ exp(ρ(τ )).
+    An important distinction to make between MaxEnt RL and GFlowNets is that, in the
+general case they do not find the same result. A GFlowNet learns a policy such that PT (s) ∝
+R(s), whereas MaxEnt RL (with appropriately chosen temperature and R) learns a policy
+such that PT (s) ∝ n(s)R(s), where n(s) is the number of paths in the DAG of all trajectories
+that lead to s (a proof is provided in Bengio et al., 2021). An equivalence only exists if the
+DAG minus sf is a tree rooted at s0 , which has been found to be useful (Buesing et al., 2019).
+What this overweighting by a factor n(s) means practically is that states corresponding to
+longer sequences (which typically will have exponentially more paths to them) will tend to
+be sampled much more often (typically exponentially more often) than states corresponding
+to shorter sequences. Clearly, this breaks the objective of sampling terminating states in
+proportion to their reward and provides a strong motivation for considering GFlowNets
+instead.
+    Another perspective on maximizing entropy in RL is that one can also maximize entropy
+on the states’ stationary distribution dπ (Ziebart et al., 2008), rather than the policy. In
+fact, one can show that the objective of training a policy such that PT (s) ∝ R(s) is equiv-
+alent to training a policy that maximizes r(s, a) = log R(s, a) − log dπ (s, a). Unfortunately,
+computing stationary distributions, although possible (Nachum et al., 2019; Wen et al.,
+2020), is not always tractable nor precise enough for purposes of reward regularization.
+
+7.3 Contrast with Monte-Carlo Markov Chain methods
+MCMC has a long and rich history (Metropolis et al., 1953; Hastings, 1970; Andrieu et al.,
+2003), and is particularly relevant to the present work, since it is also a principled class of
+methods towards sampling from PT (s) ∝ R(s). MCMC-based methods have already found
+some amount of success with learned deep neural networks used to drive sampling (Grath-
+wohl et al., 2021; Dai et al., 2020; Xie et al., 2021; Nash and Durkan, 2019; Seff et al.,
+2019).
+    An important drawback of MCMC is its reliance on iterative sampling (forming the
+Markov chain, one configuration at a time, each of which is like a terminating state of a
+GFlowNet): a new state configuration is obtained at each step of the chain by making a
+small stochastic change to the configuration in the previous step. Although these methods
+guarantee that asymptotically (in the length of the chain) we obtain samples drawn from
+the correct distribution, there is an important set of distributions for which finite chains
+are unlikely to provide enough diversity of the modes of the distribution.
+    This is known as the mode-mixing problem (Jasra et al., 2005; Bengio et al., 2013;
+Pompe et al., 2020): the chances of going from one mode to a neighboring one may become
+
+                                                 48
+                                 GFlowNet Foundations
+
+
+
+
+exponentially small (and thus require exponentially long chains) if the modes are separated
+by a long sequence of low-probability configurations. This can be alleviated by burning
+more computation (sampling longer chains) but becomes exponentially unsustainable with
+increased mode separation. The issue can also be reduced by introducing random sampling
+(e.g., drawing multiple chains) and simulated annealing (Andrieu et al., 2003) to facilitate
+jumping between modes. However, this becomes less effective in high dimensions and when
+the modes occupy a tiny volume (which can become an exponentially small fraction of the
+total space as its dimension increases) since random sampling is unlikely to land in the
+neighborhood of a mode.
+    In contrast, GFlowNets belong to the family of amortized sampling methods (which
+includes VAEs, Kingma and Welling, 2013), where we train a machine learning system to
+produce samples: we have exchanged the complexity of sampling through long chains for
+the complexity of training the sampler. The potential advantage of such amortized samplers
+is when the distribution of interest has generalizable structure: when it is possible to guess
+reasonably well where high-probability samples can be found, based on the knowledge of a
+set of known high-probability samples (the training set). This is what makes deep generative
+models work in the first place and thus suggests that in such high-dimensional settings where
+modes occupy tiny volumes (as per the manifold hypothesis, Cayton, 2005; Narayanan and
+Mitter, 2010; Rifai et al., 2011), one can capitalize on the already observed (x, R(x)) pairs
+(where x is an already visited configuration and R(x) its reward) to “jump” from known
+modes to yet unvisited ones, even if these are far from the ones already visited.
+    How well this will work then depends on the ability to generalize of the learner, i.e.,
+on the strength and appropriateness of its inductive biases, as usual in machine learning.
+In the case where there is no structure at all (and thus no possibility to generalize when
+learning about the distribution), there is no reason to expect that amortized ML methods
+will fare better than MCMC. But if there is structure, then the exponential cost of mixing
+between modes could go away. There is plenty of evidence that ML methods can do a good
+job in such high-dimensional spaces (like the space of natural images) and this suggests
+that GFlowNets and other amortized sampling methods would be worth considering where
+ML generally works well. Molecular graph generation experiments (Bengio et al., 2021)
+comparing GFlowNets and MCMC methods appear to confirm this.
+    Another factor to consider (independent of the mode mixing issue) is the amortization
+of the computational costs: GFlowNets pay a large price upfront to train the network and
+then a small price (sampling once from PT ) to generate each new sample. Instead, MCMC
+has no upfront cost but pays a lot for each independent sample. Hence, if we want to only
+sample once, MCMC may be more efficient, whereas if we want to generate a lot of samples,
+amortized methods may be advantageous. One can imagine settings where GFlowNets and
+MCMC could be combined to achieve some of the advantages of both approaches.
+
+Evolutionary Methods Evolutionary methods work similarly to MCMC methods, via
+an iterative process of stochastic local search, and populations of candidates are found
+that maximize one or many objectives (Brown et al., 2004; Salimans et al., 2017; Jensen,
+2019; Swersky et al., 2020). From such a perspective, they have similar advantages and
+disadvantages. One practical advantage of these methods is that natural diversity is easily
+obtainable via group metrics and subpopulation selection (Mouret and Doncieux, 2012).
+
+                                             49
+                       Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+This is not something that is explicitly tackled by GFlowNet, which instead relies on i.i.d.
+sampling and giving non-zero probability to suboptimal samples as a diversity mechanism.
+Sequential Monte-Carlo Sequential Monte Carlo (SMC, Naesseth et al., 2019; Aru-
+lampalam et al., 2002) methods are a class of methods aimed at solving inference prob-
+lems. Similar to GFlowNets, SMC samplers are trained to sample from a distribution given
+by its unnormalized probability density, and require forward and backward kernels, as in
+GFlowNets. Unlike GFlowNets though, they require specifying intermediate targets γt (zt ).
+In addition, with GFlowNets, the reward normally only comes at the end of the sequence,
+unlike the per-time-step likelihoods used to reweight particles in SMC. GFlowNets can be
+applied in settings which do not fit the typical particle filter setting, such as those whose in-
+termediate states do not correspond to valid elements of the sample space. The trajectories
+do not necessarily represent a sequence of latent variables associated with corresponding
+observations, as in filtering tasks. The GFlowNet trajectory distributions are only defined
+by the terminal state reward function.
+
+8. Conclusions and Open Questions
+This paper extends and deepens the mathematical framework and mathematical properties
+of GFlowNets (Bengio et al., 2021). It connects the notion of flow in GFlowNets with that
+of measure over trajectories and introduces a novel training objective (the detailed balance
+loss) which makes it possible to choose a parametrization separating the backward policy
+PB which controls preferences over the order in which things are done from the constraints
+imposed by the target reward function.
+    An important contribution of this paper is the mathematical framework for marginaliza-
+tion or free energy estimation using GFlowNets. It relies on the simple idea of conditioning
+the GFlowNet so as to push the ability to estimate a partition function already introduced
+by Bengio et al. (2021) to a much more general setting. This makes it possible in principle
+to estimate intractable sums of rewards over the terminating states reachable by an arbi-
+trary state, opening the door to marginalization over supergraphs of graphs, supersets of
+sets, and supersets of (variable,value) pairs. In turn, this provides formulae for estimating
+entropies, conditional entropies and mutual information.
+    Many open questions obviously remain, from the extension to continuous actions and
+states to hierarchical versions of GFlowNets with abstract actions and integrating the energy
+function in the GFlowNet parametrization itself, enabling an interesting form of modular-
+ization and knowledge decomposition. Importantly, many of the mathematical formulations
+presented in this paper will require empirical validation to ascertain their usefulness, im-
+prove these ideas, turn them into impactful algorithms and explore a potentially very broad
+range of interesting applications, from replacing MCMC or being combined with MCMC
+in some settings, to probabilistic reasoning to further applications in active learning for
+scientific discovery.
+
+Acknowledgements
+The authors want to acknowledge the useful suggestions and feedback on the paper and
+its ideas provided by Alexandra Volokhova, Marc Bellemare, Valentin Thomas, Modjtaba
+
+                                               50
+                                 GFlowNet Foundations
+
+
+
+
+Shokrian Zini, Mohammad Pedramfar, and Axel Nguyen Kerbel. They are also grateful for
+the financial support from CIFAR, Samsung, IBM, Google, Microsoft, JP Morgan Chase,
+and the Thomas C. Nelson Stanford Interdisciplinary Graduate Fellowship.
+
+    This research was funded in part by JPMorgan Chase & Co. Any views or opinions
+expressed herein are solely those of the authors listed, and may differ from the views and
+opinions expressed by JPMorgan Chase & Co. or its affiliates. This material is not a product
+of the Research Department of J.P. Morgan Securities LLC. This material should not be
+construed as an individual recommendation for any particular client and is not intended as a
+recommendation of particular securities, financial instruments or strategies for a particular
+client. This material does not constitute a solicitation or offer in any jurisdiction.
+
+References
+C. Andrieu, N. De Freitas, A. Doucet, and M. I. Jordan. An introduction to mcmc for
+  machine learning. Machine learning, 50(1):5–43, 2003.
+
+M. Arulampalam, S. Maskell, N. Gordon, and T. Clapp. A tutorial on particle filters for on-
+ line nonlinear/non-gaussian bayesian tracking. IEEE Transactions on Signal Processing,
+ 50(2):174–188, 2002. doi: 10.1109/78.978374.
+
+P. Auer, N. Cesa-Bianchi, Y. Freund, and R. E. Schapire. The nonstochastic multiarmed
+  bandit problem. SIAM journal on computing, 32(1):48–77, 2002.
+
+D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to
+  align and translate. ICLR’2015, arXiv:1409.0473, 2014.
+
+E. Bengio, M. Jain, M. Korablyov, D. Precup, and Y. Bengio. Flow network based generative
+  models for non-iterative diverse candidate generation. NeurIPS’2021, arXiv:2106.04399,
+  2021.
+
+Y. Bengio, G. Mesnil, Y. Dauphin, and S. Rifai. Better mixing via deep representations. In
+  International conference on machine learning, pages 552–560. PMLR, 2013.
+
+N. Brown, B. McKay, F. Gilardoni, and J. Gasteiger. A graph-based genetic algorithm and
+  its application to the multiobjective evolution of median molecules. Journal of chemical
+  information and computer sciences, 44(3):1079–1087, 2004.
+
+L. Buesing, N. Heess, and T. Weber. Approximate inference in discrete distributions with
+  monte carlo tree search and value functions, 2019.
+
+L. Cayton. Algorithms for manifold learning. Univ. of California at San Diego Tech. Rep,
+  12(1-17):1, 2005.
+
+H. Dai, R. Singh, B. Dai, C. Sutton, and D. Schuurmans. Learning discrete energy-based
+  models via auxiliary-variable local exploration. In Neural Information Processing Systems
+  (NeurIPS), 2020.
+
+                                             51
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+T. Deleu, A. Góis, C. Emezue, M. Rankawat, S. Lacoste-Julien, S. Bauer, and Y. Bengio.
+  Bayesian structure learning with generative flow networks. In Uncertainty in Artificial
+  Intelligence, pages 518–528. PMLR, 2022.
+
+L. Dinh, D. Krueger, and Y. Bengio. Nice: Non-linear independent components estimation.
+  ICLR’2015 Workshop, arXiv:1410.8516, 2014.
+
+L. Dinh, J. Sohl-Dickstein, and S. Bengio. Density estimation using real NVP. ICLR’2017,
+  arXiv:1605.08803, 2016.
+
+D. Ernst, P. Geurts, and L. Wehenkel. Tree-based batch mode reinforcement learning.
+  Journal of Machine Learning Research, 6:503–556, 2005.
+
+I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville,
+   and Y. Bengio. Generative adversarial nets. Advances in neural information processing
+   systems, 27, 2014.
+
+A. Goyal and Y. Bengio. Inductive biases for deep learning of higher-level cognition. arXiv,
+  abs/2011.15091, 2020. https://arxiv.org/abs/2011.15091.
+
+A. Goyal, A. Lamb, J. Hoffmann, S. Sodhani, S. Levine, Y. Bengio, and B. Schölkopf.
+  Recurrent independent mechanisms. ICLR’2021, arXiv:1909.10893, 2019.
+
+W. Grathwohl, K. Swersky, M. Hashemi, D. Duvenaud, and C. J. Maddison. Oops i took
+ a gradient: Scalable sampling for discrete distributions, 2021.
+
+R.-R. Griffiths and J. M. Hernández-Lobato. Constrained bayesian optimization for auto-
+  matic chemical design. arXiv preprint arXiv:1709.05501, 2017.
+
+T. Haarnoja, H. Tang, P. Abbeel, and S. Levine. Reinforcement learning with deep energy-
+  based policies. In International Conference on Machine Learning, pages 1352–1361.
+  PMLR, 2017.
+
+W. K. Hastings. Monte carlo sampling methods using markov chains and their applications.
+ Biometrika, 1970.
+
+E. Hu, N. Malkin, M. Jain, K. Everett, A. Graikos, and Y. Bengio. Gflownet-em for learning
+  compositional latent variable models. arvix, 2023.
+
+M. Jain, E. Bengio, A. Hernandez-Garcia, J. Rector-Brooks, B. F. P. Dossou, C. Ekbote,
+ J. Fu, T. Zhang, M. Kilgour, D. Zhang, L. Simine, P. Das, and Y. Bengio. Biological
+ sequence design with gflownets. International Conference on Machine Learning (ICML),
+ 2022.
+
+M. Jain, S. C. Raparthy, A. Hernandez-Garcia, J. Rector-Brooks, Y. Bengio, S. Miret, and
+ E. Bengio. Multi-objective gflownets. arXiv preprint arXiv:2210.12765, 2023.
+
+A. Jasra, C. C. Holmes, and D. A. Stephens. Markov chain monte carlo methods and the
+  label switching problem in bayesian mixture modeling. Statistical Science, pages 50–67,
+  2005.
+
+                                            52
+                                GFlowNet Foundations
+
+
+
+
+J. H. Jensen. A graph-based genetic algorithm and generative model/monte carlo tree
+  search for the exploration of chemical space. Chemical science, 10(12):3567–3572, 2019.
+
+D. P. Kingma and M. Welling.          Auto-encoding variational bayes.     arXiv preprint
+  arXiv:1312.6114, 2013.
+
+F. R. Kschischang, B. J. Frey, and H.-A. Loeliger. Factor graphs and the sum-product
+  algorithm. IEEE Transactions on information theory, 47(2):498–519, 2001.
+
+R. Kumar, S. Ozair, A. Goyal, A. Courville, and Y. Bengio. Maximum entropy generators
+  for energy-based models, 2019.
+
+M. J. Kusner, B. Paige, and J. M. Hernández-Lobato. Grammar variational autoencoder.
+ In International Conference on Machine Learning, pages 1945–1954. PMLR, 2017.
+
+S. Lahlou, T. Deleu, P. Lemos, D. Zhang, A. Volokhova, A. Hernández-Garcı́a, L. N. Ezzine,
+   Y. Bengio, and N. Malkin. A theory of continuous generative flow networks. International
+   Conference on Machine Learning (ICML), 2023.
+
+S. Lange, T. Gabel, and M. Riedmiller. Batch reinforcement learning. In Reinforcement
+  learning, pages 45–73. Springer, 2012.
+
+S. Levine. Reinforcement learning and control as probabilistic inference: Tutorial and
+  review. arXiv preprint arXiv:1805.00909, 2018.
+
+S. A. Malik, S. Lahlou, A. Jesson, M. Jain, N. Malkin, T. Deleu, Y. Bengio, and Y. Gal.
+  Batchgfn: Generative flow networks for batch active learning. arXiv preprint arXiv:
+  2306.15058, 2023.
+
+N. Malkin, M. Jain, E. Bengio, C. Sun, and Y. Bengio. Trajectory balance: Improved credit
+  assignment in gflownets. arXiv preprint arXiv:2201.13259, 2022.
+
+N. Malkin, S. Lahlou, T. Deleu, X. Ji, E. Hu, K. Everett, D. Zhang, and Y. Bengio.
+  GFlowNets and variational inference. International Conference on Learning Representa-
+  tions (ICLR), 2023.
+
+N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller. Equation
+  of state calculations by fast computing machines. The journal of chemical physics, 21(6):
+  1087–1092, 1953.
+
+J. Močkus. On bayesian methods for seeking the extremum. In Optimization techniques
+   IFIP technical conference, pages 400–404. Springer, 1975.
+
+J.-B. Mouret and S. Doncieux. Encouraging Behavioral Diversity in Evolutionary Robotics:
+   An Empirical Study. Evolutionary Computation, 20(1):91–133, 03 2012. ISSN 1063-6560.
+   doi: 10.1162/EVCO\ a\ 00048. URL https://doi.org/10.1162/EVCO_a_00048.
+
+O. Nachum, M. Norouzi, K. Xu, and D. Schuurmans. Bridging the gap between value and
+  policy based reinforcement learning. arXiv preprint arXiv:1702.08892, 2017.
+
+                                            53
+                      Bengio, Lahlou, Deleu, Hu, Tiwari, Bengio
+
+
+
+
+O. Nachum, Y. Chow, B. Dai, and L. Li. Dualdice: Behavior-agnostic estimation of dis-
+  counted stationary distribution corrections. arXiv preprint arXiv:1906.04733, 2019.
+
+C. A. Naesseth, F. Lindsten, T. B. Schön, et al. Elements of sequential monte carlo.
+  Foundations and Trends R in Machine Learning, 12(3):307–392, 2019.
+
+H. Narayanan and S. Mitter. Sample complexity of testing the manifold hypothesis. In
+  NIPS’2010, pages 1786–1794, 2010.
+
+C. Nash and C. Durkan. Autoregressive energy machines. In International Conference on
+  Machine Learning, pages 1735–1744. PMLR, 2019.
+
+L. Pan, N. Malkin, D. Zhang, and Y. Bengio. Better training of gflownets with local credit
+  and incomplete trajectories. arXiv preprint arXiv: 2302.01687, 2023.
+
+E. Pompe, C. Holmes, and K. Latuszyński. A framework for adaptive mcmc targeting
+  multimodal distributions. The Annals of Statistics, 48(5):2930–2952, 2020.
+
+D. Rezende and S. Mohamed. Variational inference with normalizing flows. In International
+  conference on machine learning, pages 1530–1538. PMLR, 2015.
+
+M. Riedmiller. Neural fitted q iteration–first experiences with a data efficient neural rein-
+ forcement learning method. In European conference on machine learning, pages 317–328.
+ Springer, 2005.
+
+S. Rifai, Y. N. Dauphin, P. Vincent, Y. Bengio, and X. Muller. The manifold tangent
+  classifier. Advances in neural information processing systems, 24:2294–2302, 2011.
+
+T. Salimans, J. Ho, X. Chen, S. Sidor, and I. Sutskever. Evolution strategies as a scalable
+  alternative to reinforcement learning, 2017.
+
+B. Schölkopf, D. Janzing, J. Peters, E. Sgouritsa, K. Zhang, and J. Mooij. On causal and
+  anticausal learning. In ICML’2012, pages 1255–1262, 2012.
+
+A. Seff, W. Zhou, F. Damani, A. Doyle, and R. P. Adams. Discrete object generation with
+  reversible inductive construction. arXiv preprint arXiv:1907.08268, 2019.
+
+J. Sohl-Dickstein, E. Weiss, N. Maheswaranathan, and S. Ganguli. Deep unsupervised
+  learning using nonequilibrium thermodynamics. In International Conference on Machine
+  Learning, pages 2256–2265. PMLR, 2015.
+
+N. Srinivas, A. Krause, S. M. Kakade, and M. Seeger. Gaussian process optimization in
+  the bandit setting: No regret and experimental design. In International Conference on
+  Machine Learning (ICML), 2010.
+
+R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction. MIT press, 2018.
+
+K. Swersky, Y. Rubanova, D. Dohan, and K. Murphy. Amortized bayesian optimization over
+  discrete spaces. In Conference on Uncertainty in Artificial Intelligence, pages 769–778.
+  PMLR, 2020.
+
+                                             54
+                               GFlowNet Foundations
+
+
+
+
+M. Toussaint and A. Storkey. Probabilistic inference for solving discrete and continuous
+ state markov decision processes. In Proceedings of the 23rd international conference on
+ Machine learning, pages 945–952, 2006.
+
+A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and
+  I. Polosukhin. Attention is all you need. In Advances in neural information processing
+  systems, pages 5998–6008, 2017.
+
+J. Wen, B. Dai, L. Li, and D. Schuurmans. Batch stationary distribution estimation. arXiv
+   preprint arXiv:2003.00722, 2020.
+
+Y. Xie, C. Shi, H. Zhou, Y. Yang, W. Zhang, Y. Yu, and L. Li. {MARS}: Markov molecular
+  sampling for multi-objective drug discovery. In International Conference on Learning
+  Representations, 2021. URL https://openreview.net/forum?id=kHSu4ebxFXY.
+
+D. Zhang, N. Malkin, Z. Liu, A. Volokhova, A. Courville, and Y. Bengio. Generative
+  flow networks for discrete probabilistic modeling. International Conference on Machine
+  Learning (ICML), 2022.
+
+D. W. Zhang, C. Rainone, M. Peschl, and R. Bondesan. Robust scheduling with gflownets.
+  International Conference on Learning Representations (ICLR), 2023.
+
+B. D. Ziebart, A. L. Maas, J. A. Bagnell, A. K. Dey, et al. Maximum entropy inverse
+  reinforcement learning. In Aaai, volume 8, pages 1433–1438. Chicago, IL, USA, 2008.
+
+H. Zimmermann, F. Lindsten, J.-W. van de Meent, and C. A. Naesseth. A variational
+  perspective on generative flow networks. arXiv preprint 2210.07992, 2022.
+
+
+
+
+                                           55
+

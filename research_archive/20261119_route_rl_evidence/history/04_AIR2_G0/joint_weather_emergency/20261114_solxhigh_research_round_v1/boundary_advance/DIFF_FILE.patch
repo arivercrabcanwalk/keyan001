@@ -1,0 +1,27 @@
+--- ORIGINALS/air2_before.py
++++ MODIFIED_FILE.py
+@@ -352,3 +352,24 @@
+     return {'status': 'COMPLETE_REGISTERED_PAIR_DOMAIN_ONLY', 'rows': rows,
+             'buckets': buckets, 'attempted_including_duplicates': attempted,
+             'distinct_structural_candidates_scored': len(seen)}
++
++
++def advance_next_token(station, slot, target):
++    """Move only the execution boundary of an already compatible witness.
++
++    Unlike arbitrary-action force(), consuming a singleton must not promote
++    the next trip before the consumed target joins the current prefix.
++    """
++    if type(slot) is not int or slot not in (0, 1) or len(station) != 2:
++        raise ValueError('VALID_PHYSICAL_SLOT_REQUIRED')
++    out = list(station)
++    done, prefix, suffix, future = station[slot]
++    if target is None:
++        if not prefix or suffix:
++            raise ValueError('RETURN_IS_NOT_NEXT_WITNESS_TOKEN')
++        out[slot] = norm((done + (prefix,), (), (), future))
++    else:
++        if type(target) is not int or not suffix or suffix[0] != target:
++            raise ValueError('TARGET_IS_NOT_NEXT_WITNESS_TOKEN')
++        out[slot] = (done, prefix + (target,), suffix[1:], future)
++    return tuple(out)

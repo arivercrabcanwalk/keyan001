@@ -1,0 +1,71 @@
+{
+  "groups": [
+    {
+      "group": "full_J0",
+      "source_JSON_file_count": 1201,
+      "retained_JSONL_records": 478,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_J1",
+      "source_JSON_file_count": 1201,
+      "retained_JSONL_records": 460,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_J1b",
+      "source_JSON_file_count": 1201,
+      "retained_JSONL_records": 446,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_J2",
+      "source_JSON_file_count": 1201,
+      "retained_JSONL_records": 443,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_J2b",
+      "source_JSON_file_count": 1201,
+      "retained_JSONL_records": 395,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_P1",
+      "source_JSON_file_count": 601,
+      "retained_JSONL_records": 303,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "full_P2",
+      "source_JSON_file_count": 601,
+      "retained_JSONL_records": 300,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "semfix_full_P1",
+      "source_JSON_file_count": 601,
+      "retained_JSONL_records": 300,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "semfix_full_P2",
+      "source_JSON_file_count": 601,
+      "retained_JSONL_records": 296,
+      "retention": "full fields of every locally readable JSON row; missing raw rows are explicitly listed"
+    },
+    {
+      "group": "no_wind_g3_confirm",
+      "source_final_solution_files": 108,
+      "retained_final_solution_records": 108,
+      "retention": "full final witness plus candidate-certificate count/histogram; source hash retained"
+    },
+    {
+      "group": "no_wind_g3_pop",
+      "source_final_solution_files": 33,
+      "retained_final_solution_records": 33,
+      "retention": "full final witness plus candidate-certificate count/histogram; source hash retained"
+    }
+  ],
+  "important_limit": "No unreadable row is counted as a missing scientific outcome; this is only local artifact availability. All no-wind core summary/statistics tables are retained."
+}

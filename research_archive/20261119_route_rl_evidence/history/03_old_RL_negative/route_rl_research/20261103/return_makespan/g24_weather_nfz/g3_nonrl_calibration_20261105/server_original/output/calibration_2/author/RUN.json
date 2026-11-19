@@ -1,0 +1,130 @@
+{
+  "anchor_eligible": true,
+  "artifacts": {
+    "independent_audit.json": "d930e13e007d16a87f88acfba3e7441214d3b21434863ae777461ef0bf9d4636",
+    "reference.json": "791b18237a673bd793d2fb2b36ee0526ef6c458b895ce9e082280cfa59f2f80d",
+    "return_score.json": "77826c9fa92557a290bfb19a570eb454b991d33f3b3df117cc5f6070445c8252",
+    "solution.json": "f3aef5c80b0ffa44a4df2b7c03c77099df998eda58fc5880d80ed488b20d1374",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "cf54c65c159c4eb918f87dae33c385c2d84af83ea07c6a95c7ce24421d1d7990"
+  },
+  "build_manifest_sha256": "a79414054b0db62c72a8a1d0f3af912db28deb9f79380dcfc18c89cc779021ab",
+  "class_hashes": {
+    "test1/ALNSSolver$DestroyResult.class": "203c9826d8842f309baf23e1cf0c84fc3a06b106040437f0ed856342e9b51e14",
+    "test1/ALNSSolver.class": "48c9a1bb236d09ca77c9b87f8dfe43e78c2ccd82c7efebb66cf3dcc0903b3654",
+    "test1/Calculator.class": "34f6ea6e9aaca471c00bd2b9d8dbcfd8106065ef8557f527defd79d8e67b53e8",
+    "test1/Check.class": "50b60c2948066c6ac3f8aa797f4282bdde9a992bc121ac8e13fb2a12f0fe9580",
+    "test1/FileReaderUtil.class": "587df0549c8efc47e9fcb4716ee85c6c4df4e8940b9aece727718bfaec351fff",
+    "test1/GreedyProbe.class": "168c94f82cd8383ba0b72fbc89278f9f38b5987a3c2c5c65feb4294d2ab690c0",
+    "test1/Init.class": "9bda21c54a5c3a02ad5f5042446990a2d7fa119e193331b4953daf179c43e04c",
+    "test1/LocationOperator.class": "9ead9188fbbfcf3a9d64b106e16c5e918f20708b0d214215e34cc09ae0b9f243",
+    "test1/Main.class": "4319af51ad1c6a8b49632c45113d345e1f23daf60b7b27dc1a83a3d432f9d923",
+    "test1/Node.class": "b98e8206f467eef75ec09bd39e76e1cec06dc6eae497186e4fc6bfd47f1da1d4",
+    "test1/ReferenceRecorder.class": "97caae0e961a8079ecfc28fb03c4d31a158bf1f67d82cf8d09538f834535cd2d",
+    "test1/ReplayRandom.class": "e4ab980c22b8ca190f7d6e1821370e59944bd9dafdbfdca18683fcd90bed0b95",
+    "test1/Round4Guard.class": "472036627e53bbe384a6494d1a1b336a0af3ec22c001dd7ceebe39381c3f9206",
+    "test1/RoutingOperator$InsertionCandidate.class": "9efdffa439f056b790569bb30b49f30ab7535896576166018207f4c82f612c63",
+    "test1/RoutingOperator$InsertionPosition.class": "1aa172301acc0bf3ab1be30d428bcd32471b07fa497891961b374d9cf6d93e17",
+    "test1/RoutingOperator$NodeRemovalCandidate.class": "dd03c9c563982480c431f0b5f8d55a795a341ea7524b513ed79a5d0130bf986e",
+    "test1/RoutingOperator$RemovalPosition.class": "0ce81ccb759b515af5d999ca2232fe012a7a9b01fe909e18792a97c420c67ad4",
+    "test1/RoutingOperator.class": "c2a6b2a65c322d5cdd73716d1a3e4968b9354230c20e7660867fd106d8f90b25",
+    "test1/Solution.class": "f61b5e3fe692088e00782cb9785c646dc0429588abaac2bab5ac2a3ffc52fb3c",
+    "test1/SolutionAuditProbe.class": "967f37fafa573b78f5829c25d9fe2805e6e6bcaf8a1ca0154ae4504560a89635"
+  },
+  "command": [
+    "<EXECUTION_PATH>",
+    "-XX:ActiveProcessorCount=1",
+    "-XX:+UseSerialGC",
+    "-Xms32m",
+    "-Xmx512m",
+    "-Drepro.instance=<EXECUTION_PATH>",
+    "-Drepro.seed=4429980145609240498",
+    "-Drepro.seconds=0",
+    "-Drepro.output=<EXECUTION_PATH>",
+    "-Drepro.guard=true",
+    "-cp",
+    "<EXECUTION_PATH>",
+    "test1.Main"
+  ],
+  "independent_dependency_hashes": {
+    "<REMOVED_ABSOLUTE_REMOTE>": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0",
+    "<REMOVED_ABSOLUTE_REMOTE>__508dad15da76": "f03c2f4201cdea977644d84ab0ad704eb47d4c4389b06b2ac86b9d264463b1cc",
+    "<REMOVED_ABSOLUTE_REMOTE>__83150c23b517": "c6e156b2d770cec2f663eada37c2d39bff1583f672bda4116f81493484409135"
+  },
+  "input_path": "<EXECUTION_PATH>",
+  "input_sha256": "10bfe589571b6f9e0da371ca87274edbee1f1b9bd7bf658a4be980172b0a581f",
+  "instance_name_is_display_only": "instance",
+  "java": {
+    "path": "<EXECUTION_PATH>",
+    "sha256": "1cbc413cc7899678039a0d0c6209a35cab3f249e3bbfe84cebd41345dc43cd19",
+    "version": "openjdk version \"17.0.21\" 2026-10-20 LTS\nOpenJDK Runtime Environment Corretto-<NETWORK_ADDRESS>.10 (build 17.0.21+10-LTS)\nOpenJDK 64-Bit Server VM Corretto-<NETWORK_ADDRESS>.10 (build 17.0.21+10-LTS, mixed mode, sharing)"
+  },
+  "process": {
+    "command": [
+      "<EXECUTION_PATH>",
+      "-XX:ActiveProcessorCount=1",
+      "-XX:+UseSerialGC",
+      "-Xms32m",
+      "-Xmx512m",
+      "-Drepro.instance=<EXECUTION_PATH>",
+      "-Drepro.seed=4429980145609240498",
+      "-Drepro.seconds=0",
+      "-Drepro.output=<EXECUTION_PATH>",
+      "-Drepro.guard=true",
+      "-cp",
+      "<EXECUTION_PATH>",
+      "test1.Main"
+    ],
+    "elapsed_process_seconds": 2.7501393193379045,
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "profile": "J1b",
+  "runner_sha256": "7a829c9ac46396bc63dac9274746ac9b3916a9cc588f7aff13295f27f4df64d3",
+  "schema": "single_author_anchor_run_v1",
+  "seed": 4429980145609240498,
+  "seed_selection": "supplied_prospectively; never_selected_by_cost_or_M",
+  "source_identity": {
+    "accepted_build_manifest_sha256": "75374929a86c5e3b22800f0342d7bd7b018501cc8c38c60fcd1091c8dc986c17",
+    "official_source_lock_sha256": "75969858622a8f44e02dc0f269e0fd7241f409c94186a0d9e37e0e2717df6ccf",
+    "parameters": {
+      "alns_iterations": 5000,
+      "feasibility_guard": true,
+      "identity": "released_java_parameter_profile",
+      "local_iterations": 100,
+      "outer_iterations": 500,
+      "pre_alns_guard": false,
+      "weight_lower": 0.1,
+      "weight_upper": 5.0
+    },
+    "profile": "J1b",
+    "source_hashes": {
+      "ALNSSolver.java": "4875aa68f5a50e6fa1ed2c6faeb4d4a167f51696f683c603948fa40e987278fb",
+      "Calculator.java": "51351bc6b47ffbf80524be4fca8b0dc80f3336a0a50568040eafac186c2d4bc6",
+      "Check.java": "ea0f541cb5eb0b90772e8fc1cadc62e72ba3338d6a6d005dae0ac43abbd54d23",
+      "FileReaderUtil.java": "26d0e9bd02f5e4ae5c970108dc6a5ff5f93a7a5d50616dde4747fd5e491e8b6c",
+      "GreedyProbe.java": "8675076e2363a5ac63d2635925743527de1f494f07e752013956900fc3a1b2d7",
+      "Init.java": "d1ce2773d73a3da36d362eec7494eb62ff0cd582eff90a96aa5bc1fc65c13e97",
+      "LocationOperator.java": "0f813461e336e435feb0d05a7c3b5d9c0677e3dce87dbbd7899f441e90e79a54",
+      "Main.java": "21b1f59d54a312198817fc2815b666ffe80200db0a97aafacb128c3619f5edd3",
+      "Node.java": "ec4b9b474cb708b0713e5a002395ba304cbffd8594f61cb32497916f3b2ab9c5",
+      "ReferenceRecorder.java": "a3ba984cb354cefcf9ffbe3a317b3bde2bf20e63b0ca6b5b443b190cf1ff677a",
+      "ReplayRandom.java": "b6d832ce01674b06955d6eb7150818de74ef395eb7f7e714f1cad5f4bca347a9",
+      "Round4Guard.java": "9da2af00061d5f13f908447c925ed073e76a7bbc0677c90ef92451028de16708",
+      "RoutingOperator.java": "23237bf17c35c04e943ec5e3e941d7389d9f7b8c14d3774fe3f9bcfdf7d07d59",
+      "Solution.java": "bf471a64dc85f848fd458ae950a4f041832495aa466e69ecff555e36eca7ef60",
+      "SolutionAuditProbe.java": "b549b136996d23be54e798d637689f625f4eb7439c8bbfd9d2109b66ac97db59"
+    }
+  },
+  "status": "ok",
+  "timeout_seconds": 180,
+  "total_elapsed_seconds": 2.935745087917894,
+  "witness_audit": {
+    "audit_errors": [],
+    "source_integrity_issues": [],
+    "source_objective_abs_error": 0.0,
+    "source_reported_cost": 271.4618941517864,
+    "source_reported_latest_time": 93.52473104632341,
+    "witness_passed": true
+  }
+}

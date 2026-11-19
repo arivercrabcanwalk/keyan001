@@ -1,0 +1,48 @@
+{
+  "scope": "synthetic-only engineering tests; not quality, RL gain, or strict IEEE optimum evidence",
+  "attempts": [
+    {
+      "command": "python3 -m unittest discover -s route_rl_research/20261103/joint_route_env -p test_station_dp.py -v",
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "input": "Only deterministic synthetic fixtures built by test_station_dp.py; no real maps; no server",
+      "stdout": "",
+      "stderr": "test_dabs_small_slot_uses_large_station_radius_and_duration (test_station_dp.StationSplitDPTests.test_dabs_small_slot_uses_large_station_radius_and_duration) ... ok\ntest_empty_stations_and_slots_have_complete_witness (test_station_dp.StationSplitDPTests.test_empty_stations_and_slots_have_complete_witness) ... ok\ntest_expired_deadline_is_returned_not_uncaught (test_station_dp.StationSplitDPTests.test_expired_deadline_is_returned_not_uncaught) ... ok\ntest_fixed_owner_matches_independent_exhaustive_enumeration (test_station_dp.StationSplitDPTests.test_fixed_owner_matches_independent_exhaustive_enumeration) ... ok\ntest_fixed_owner_sabs_and_joint_sabs_match_exhaustive_multitrips (test_station_dp.StationSplitDPTests.test_fixed_owner_sabs_and_joint_sabs_match_exhaustive_multitrips) ... ok\ntest_heterogeneous_battery_forces_target_to_large_slot (test_station_dp.StationSplitDPTests.test_heterogeneous_battery_forces_target_to_large_slot) ... ok\ntest_independent_evaluator_rejects_corrupted_witnesses (test_station_dp.StationSplitDPTests.test_independent_evaluator_rejects_corrupted_witnesses) ... ok\ntest_infeasible_pool_is_not_called_reference (test_station_dp.StationSplitDPTests.test_infeasible_pool_is_not_called_reference) ... ok\ntest_invalid_index_type_target_and_coverage_rejected (test_station_dp.StationSplitDPTests.test_invalid_index_type_target_and_coverage_rejected) ... ok\ntest_invalid_owner_partitions_are_rejected (test_station_dp.StationSplitDPTests.test_invalid_owner_partitions_are_rejected) ... ok\ntest_joint_dabs_matches_exhaustive_assignment_partition_and_route_orders (test_station_dp.StationSplitDPTests.test_joint_dabs_matches_exhaustive_assignment_partition_and_route_orders) ... ok\ntest_resource_eps_boundary_on_tiny_axis_aligned_fixture (test_station_dp.StationSplitDPTests.test_resource_eps_boundary_on_tiny_axis_aligned_fixture) ... ok\ntest_returns_do_not_reset_cumulative_duty (test_station_dp.StationSplitDPTests.test_returns_do_not_reset_cumulative_duty) ... ok\ntest_size_cap_remains_unresolved (test_station_dp.StationSplitDPTests.test_size_cap_remains_unresolved) ... ok\ntest_state_cap_remains_unresolved_before_work (test_station_dp.StationSplitDPTests.test_state_cap_remains_unresolved_before_work) ... ok\ntest_transition_cap_is_returned_not_uncaught (test_station_dp.StationSplitDPTests.test_transition_cap_is_returned_not_uncaught) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.029s\n\nOK\n",
+      "exit_status": 0,
+      "elapsed_wall_seconds": 0.4456868749111891,
+      "source_sha256_before": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_station_dp.py": "1ae12250b45d654c3d60f587b2edde4c908cc860d75c3fafb3c1b087e6eef87f",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/station_split_dp.py": "9b9bb690ac1372c9742e93edb15a8b6465d8ec22e21e1b8c016fea094d20af34",
+        "WORKSPACE/route_rl_research/20261103/source_snapshot/lrphsd/evaluator.py": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0"
+      },
+      "source_sha256_after": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_station_dp.py": "1ae12250b45d654c3d60f587b2edde4c908cc860d75c3fafb3c1b087e6eef87f",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/station_split_dp.py": "9b9bb690ac1372c9742e93edb15a8b6465d8ec22e21e1b8c016fea094d20af34",
+        "WORKSPACE/route_rl_research/20261103/source_snapshot/lrphsd/evaluator.py": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0"
+      }
+    },
+    {
+      "command": "python3 -m unittest discover -s route_rl_research/20261103/joint_route_env -p test_station_dp.py -v",
+      "cwd": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+      "input": "Same deterministic synthetic-only 16-test suite; literal evaluator coverage/energy revision; no real maps; no server",
+      "stdout": "",
+      "stderr": "test_dabs_small_slot_uses_large_station_radius_and_duration (test_station_dp.StationSplitDPTests.test_dabs_small_slot_uses_large_station_radius_and_duration) ... ok\ntest_empty_stations_and_slots_have_complete_witness (test_station_dp.StationSplitDPTests.test_empty_stations_and_slots_have_complete_witness) ... ok\ntest_expired_deadline_is_returned_not_uncaught (test_station_dp.StationSplitDPTests.test_expired_deadline_is_returned_not_uncaught) ... ok\ntest_fixed_owner_matches_independent_exhaustive_enumeration (test_station_dp.StationSplitDPTests.test_fixed_owner_matches_independent_exhaustive_enumeration) ... ok\ntest_fixed_owner_sabs_and_joint_sabs_match_exhaustive_multitrips (test_station_dp.StationSplitDPTests.test_fixed_owner_sabs_and_joint_sabs_match_exhaustive_multitrips) ... ok\ntest_heterogeneous_battery_forces_target_to_large_slot (test_station_dp.StationSplitDPTests.test_heterogeneous_battery_forces_target_to_large_slot) ... ok\ntest_independent_evaluator_rejects_corrupted_witnesses (test_station_dp.StationSplitDPTests.test_independent_evaluator_rejects_corrupted_witnesses) ... ok\ntest_infeasible_pool_is_not_called_reference (test_station_dp.StationSplitDPTests.test_infeasible_pool_is_not_called_reference) ... ok\ntest_invalid_index_type_target_and_coverage_rejected (test_station_dp.StationSplitDPTests.test_invalid_index_type_target_and_coverage_rejected) ... ok\ntest_invalid_owner_partitions_are_rejected (test_station_dp.StationSplitDPTests.test_invalid_owner_partitions_are_rejected) ... ok\ntest_joint_dabs_matches_exhaustive_assignment_partition_and_route_orders (test_station_dp.StationSplitDPTests.test_joint_dabs_matches_exhaustive_assignment_partition_and_route_orders) ... ok\ntest_resource_eps_boundary_on_tiny_axis_aligned_fixture (test_station_dp.StationSplitDPTests.test_resource_eps_boundary_on_tiny_axis_aligned_fixture) ... ok\ntest_returns_do_not_reset_cumulative_duty (test_station_dp.StationSplitDPTests.test_returns_do_not_reset_cumulative_duty) ... ok\ntest_size_cap_remains_unresolved (test_station_dp.StationSplitDPTests.test_size_cap_remains_unresolved) ... ok\ntest_state_cap_remains_unresolved_before_work (test_station_dp.StationSplitDPTests.test_state_cap_remains_unresolved_before_work) ... ok\ntest_transition_cap_is_returned_not_uncaught (test_station_dp.StationSplitDPTests.test_transition_cap_is_returned_not_uncaught) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.042s\n\nOK\n",
+      "exit_status": 0,
+      "elapsed_wall_seconds": 0.39647041680291295,
+      "source_sha256_before": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_station_dp.py": "1ae12250b45d654c3d60f587b2edde4c908cc860d75c3fafb3c1b087e6eef87f",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/station_split_dp.py": "8f4d05da5d0a829b8d6ce0889a10e0f5e990a3e1687505b36e61b28eb1c8da06",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "0277984a1540250c94d4648ece05a3095d3a995fdd5d85f5b8fc6bbfacd86a11",
+        "WORKSPACE/route_rl_research/20261103/source_snapshot/lrphsd/evaluator.py": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0"
+      },
+      "source_sha256_after": {
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/test_station_dp.py": "1ae12250b45d654c3d60f587b2edde4c908cc860d75c3fafb3c1b087e6eef87f",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/station_split_dp.py": "8f4d05da5d0a829b8d6ce0889a10e0f5e990a3e1687505b36e61b28eb1c8da06",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/G2_STATION_SPLIT_DP_PROTOCOL.md": "6dbfd7135c86fb80543fa8a0c9d1cc6f249fe81ad961d1a3bfcdf658b188e50e",
+        "WORKSPACE/route_rl_research/20261103/joint_route_env/run_station_g2.py": "0277984a1540250c94d4648ece05a3095d3a995fdd5d85f5b8fc6bbfacd86a11",
+        "WORKSPACE/route_rl_research/20261103/source_snapshot/lrphsd/evaluator.py": "ae4f1aa070717865ec58bdd86d1493eb7b54561ab524cbc4f215af0daec19ff0"
+      }
+    }
+  ],
+  "latest_exit_status": 0
+}

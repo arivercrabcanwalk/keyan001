@@ -1,0 +1,27 @@
+{
+  "package": "20261114_storm_source_feasibility_v1",
+  "updated_local_date": "2026-11-14",
+  "status": "SOURCE_FEASIBILITY_COMPLETE_DESIGN_ONLY",
+  "scope": "primary-source weather, forecast, radar, outage, and UAV asset data fit; exposure law and independent alarm-job ledger design",
+  "local_raw_weather_files_matching_standard_formats": 0,
+  "data_downloaded": false,
+  "scientific_population_created": false,
+  "simulator_modified": false,
+  "training_started": false,
+  "author_or_alns_solve_started": false,
+  "formal_started": false,
+  "gates": {
+    "G0": "NOT_PASSED",
+    "G3": "NOT_PASSED",
+    "W_science_admitted": false
+  },
+  "open_dependencies": [
+    "target operating region and asset class not bound to an empirical data source",
+    "target-level fault/event records paired with exposure and observation coverage are absent from the reviewed workspace",
+    "target-level emergency response-window source is absent",
+    "native public forecast vintages do not match the frozen 60-minute independent-publication cadence",
+    "radar/track exit is interval-valued at observation cadence; uncertainty propagation must be implemented"
+  ],
+  "next_bounded_work": "engineering-only timestamped storm-cell track adapter with interval-censored target exit records and event/job replay fixtures; do not fit E2 or run scientific policies",
+  "user_decision_required_now": false
+}

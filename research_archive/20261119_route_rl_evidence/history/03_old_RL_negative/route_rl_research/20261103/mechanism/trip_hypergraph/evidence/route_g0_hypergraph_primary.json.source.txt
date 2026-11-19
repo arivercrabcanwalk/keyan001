@@ -1,0 +1,329 @@
+Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution (https://arxiv.org/html/2503.10421v1)
+citeturn18view0 [wordlim: 200] Crawled: 5 days ago; Content type: text/html; Source: open({"ref_id":"https://arxiv.org/html/2503.10421v1","lineno":null}); Total lines: 528
+L0: ##### Report GitHub Issue
+L1: 
+L2: [Button: ×]
+L3: 
+L4: Title: [Input: Enter title]
+L5: 
+L6: Content selection saved. Describe the issue below:
+L7: 
+L8: Description:
+L9: 
+L10: [Button: Submit without GitHub] [Button: Submit in GitHub]
+L11: 
+L12: 【0†Why HTML?†info.arxiv.org】 Report Issue 【1†Back to Abstract】 【2†Download PDF】 Contents Reading mode Colour theme
+L13:   1. 【3†Abstract】
+L14:   2. 【4†1 Introduction】
+L15:   3. 【5†2 Preliminaries】
+L16:     1. 【6†2.1 Problem Formulation】
+L17:       1. 【7†Pairwise Graph Definition】
+L18:       2. 【8†Hypergraph Definition】
+L19:   4. 【9†3 Methodology】
+L20:     1. 【10†3.1 Graph Feature Augmentation】
+L21:     2. 【11†3.2 Encoder with Hypergraph Learning】
+L22:       1. 【12†3.2.1 Constraint-based Adaptive Hyperedges Reconstruction】
+L23:         1. 【13†Selection of hyperedge nodes】
+L24:         2. 【14†Learning to Reconstruct Hyperedge Nodes】
+L25:       2. 【15†3.2.2 MHA Node representation learning】
+L26:         1. 【16†Hyperedge Embedding Generation】
+L27:         2. 【17†MHA Node Embedding Update】
+L28:     3. 【18†3.3 Dual-Pointer Decoder】
+L29:       1. 【19†3.3.1 Dual Probability Calculation】
+L30:   5. 【20†4 Experiment】
+L31:     1. 【21†4.1 Experiment Setup】
+L32:       1. 【22†Datasets and Parameters】
+L33:       2. 【23†Baseline Models】
+L34:     2. 【24†4.2 Experiment Results and Analysis】
+L35:       1. 【25†Overall Performance】
+L36:       2. 【26†Ablation Study】
+L37:       3. 【27†Sensitivity Analysis】
+L38:   6. 【28†5 Conclusion】
+L39:   7. 【29†References】
+L40:   8. 【30†Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution Appendix】
+L41:     1. 【31†1 Graph Data Augmentation】
+L42:     2. 【32†2 Reinforcement Learning】
+L43:       1. 【33†State】
+L44:       2. 【34†Action】
+L45:       3. 【35†Reward】
+L46:     3. 【36†3 Reinforce Self-Critic Training】
+L47:       1. 【37†3.1 Reinforce with Greedy Baseline Rollout】
+L48:       2. 【38†3.2 Context Embedding】
+L49:       3. 【39†3.3 Self-critic Training】
+L50:     4. 【40†4 Baselines】
+L51:     5. 【41†5 Training Curves】
+L52:     6. 【42†References】
+L53: 【43†License: CC BY 4.0†info.arxiv.org】
+L54: 
+L55: arXiv:2503.10421v1 [cs.LG] 13 Mar 2025
+L56: # Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution
+L57: 
+L58: Zhenwei Wang Affiliation: University of Nottingham Ningbo China Email: {Zhenwei.Wang    Ruibin Bai Affiliation: University of Nottingham Ningbo China Email: Ruibin.Bai}@nottingham.edu.cn    Tiehua Zhang Affiliation: Tongji University Email: <EMAIL_REMOVED>
+L59: ###### Abstract
+L60: The application of learning based methods to vehicle routing problems (VRP) has emerged as a pivotal area of research in combinatorial optimization. These problems are characterized by vast solution spaces and intricate constraints, making traditional approaches such as exact mathematical models or heuristic methods prone to high computational overhead or reliant on the design of complex heuristic operators to achieve optimal or near-optimal solutions.
+L61: Meanwhile, although some recent learning-based methods can produce good performance for VRP with straightforward constraint scenarios, they often fail to effectively handle hard constraints that are common in practice. This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems.
+L62: A central innovation of this work is the development of a constraint-oriented dynamic hyperedge reconstruction strategy within an encoder, which significantly enhances hypergraph representation learning. Additionally, the decoder leverages a double-pointer attention mechanism to iteratively generate solutions.
+L63: The proposed model is trained by incorporating asynchronous parameter updates informed by hypergraph constraints and optimizing a dual loss function comprising constraint loss and policy gradient loss. The experiment results on benchmark datasets demonstrate that the proposed approach not only eliminates the need for sophisticated heuristic operators but also achieves substantial improvements in solution quality.
+L64: ## 1 Introduction
+L65: 
+L66: The Vehicle Routing Problem (VRP) is a fundamental combinatorial optimization problem characterized by its inherent graph structure. It has garnered extensive research attention in fields such as logistics, operations research, and transportation. Due to its formulation as a discrete combinatorial sequence decision problem, VRP is prone to combinatorial explosion when addressing large-scale instances, firmly establishing its status as a well-known NP-hard problem.
+L67: There are two primary approaches to solving such problems: exact methods and approximate methods (【44†1】). Exact methods, such as linear programming and branch and pricing, leverage mathematical modeling to identify optimal solutions (【45†2】). However, due to the vastness of the solution space, these methods often become computationally prohibitive, especially for large-scale problems, as obtaining an optimal solution within a practical time-frame may be infeasible.
+L68: To overcome this limitation, approximate methods are commonly employed, with heuristic techniques such as neighborhood search (【46†3】), genetic algorithms (【47†40】), and genetic programming (【48†50】, 【49†51】) being widely used. These methods aim to efficiently search near-optimal solutions by starting with an initial feasible solution and then iteratively improving its quality through carefully designed heuristic operators.
+L69: A significant limitation of these methods is the extensive computation time required, which may hinder their practical applications.
+L70: Additionally, recent advancements in artificial intelligence have reinvigorated interest in using machine learning-based approaches, offering new possibilities for efficiently approximating solutions to combinatorial optimization problems. Some learning-based methods address VRP as a sequence-to-sequence decision problem, often referred to as a constructive heuristic (【50†25】).
+L71: These methods draw inspiration from natural language processing, adopting sequence-to-sequence strategies such as pointer networks (【51†35】) and attention mechanisms (【52†33】) to generate solutions in an auto-regressive manner. Given the challenges associated with obtaining high-quality labeled solutions, unsupervised learning techniques, particularly deep reinforcement learning, are frequently employed to train models on a large number of problem instances.
+L72: By learning the underlying data distribution and the relationships between nodes, these approaches iteratively produce solutions that adhere to the required constraints. This end-to-end framework allows the model to efficiently infer near-optimal solutions without relying on domain experts’ knowledge, see classical studies (【53†4】, 【54†29】, 【55†19】, 【56†20】).
+L73: Building on these paradigms, some studies introduce further optimizations, such as leveraging pre-trained models for cross-distribution challenges (【57†62】, 【58†60】, 【59†56】), employing multi-pointer mechanisms for solution refinement(【60†58】), and utilizing Lagrangian methods to address constraint violations in infeasible predictions(【61†59】).
+L74: In contrast, alternative learning-based approaches focus on optimizing feasible solutions rather than directly constructing them. These methods, known as perturbative heuristics, utilize machine learning techniques to refine initial solutions. They are often enhanced by incorporating perturbation mechanisms, such as 2-opt, guided local search, to learn and improve the solution optimization process (【62†6】).
+L75: This iterative improvement framework enables these methods to balance exploration and exploitation, further enhancing solution quality effectively, albeit with increased computation time.
+L76: Whether adopting constructive or improvement learning approaches, the use of graph neural networks (GNNs) to solve VRPs has become increasingly popular due to the inherently graphical nature of the problem (i.e. the set of geographically dispersed customers).
+L77: However, most prior studies (【63†17】, 【64†26】, 【65†54】, 【66†48】, 【67†22】, 【68†53】) have primarily relied on pairwise-based GNNs, such as Random Walk Message Passing (【69†61】), Graph Convolutional Networks (GCN) (【70†12】), and Graph Attention Networks (GAT) (【71†34】), for node representation learning.
+L78: A significant challenge lies in the limited feature space of the VRP, which constrains the expressiveness and effectiveness of node feature representations. Moreover, during the graph learning process, problem-specific constraints related to the routing tasks are often underutilized, leading to performance bottlenecks in the final solutions. Another notable limitation is the inability of these methods to effectively capture high-order and sequential information.
+L79: In step-by-step constructive approaches, where nodes are incrementally selected to form partial solutions, relying solely on low-order neighbor information can negatively influence the selection of subsequent nodes. This short-sightedness increases the risk of the overall solution becoming trapped in a local optimum, thereby limiting the quality of the final result.
+L80: Addressing these issues requires more advanced methods capable of leveraging problem-specific constraints and incorporating richer structural and sequential information into the learning process.
+L81: This paper proposes an end-to-end hypergraph learning framework for addressing the constraints in VRPs and their variants. The method enhances the representation of node features by not only learning from low-order neighbor information but also dynamically integrating problem-specific constraint information into the hypergraph learning process.
+L82: Specifically, the approach constructs constraint-oriented hyperedges to capture high-order neighbor relationships, which are then used to augment pairwise node representations. In the solution generation phase, a multi-head attention mechanism is employed to iteratively produce approximate optimal solutions. Key innovations of this work are summarized as follows:
+L83:   * •
+L84: 
+L85: Integration of Constraint-oriented Hypergraph Learning into Routing Problems To the best of our knowledge, this is the first work to incorporate hypergraph learning into routing problems. A novel constraint-oriented dynamic hyperedge construction encoder is introduced, enabling the model to effectively capture high-order node relationships while satisfying problem-specific constraints.
+L86: 
+L87:   * •
+L88: Dual-Pointer Attention-Based Decoder with Route Recording We propose a dual-pointer decoder that leverages an attention mechanism that combines partial solution features and local node features. This design supports the auto-regressive generation of solutions while dynamically updating the hypergraph encoder using a reinforcement learning policy gradient, which ensures continuous improvement of the solution quality.
+L89: 
+L90:   * •
+L91: Extensive Experimental Validation We have conducted extensive experiments to validate the effectiveness of our proposed model. The experimental results demonstrate that the proposed hypergraph learning framework achieves a leading level of performance in VRP and its variants up to 7.38%.
+L92: 
+L93: 【72†Image: Refer to caption】 Figure 1: Encoding Process Based on Adaptive Hypergraph Learning.
+L94: ## 2 Preliminaries
+L95: 
+L96: This section first introduces the graph-based modeling approach for the routing problem and defines hyperedges within the hypergraph structure.
+L97: ### 2.1 Problem Formulation
+L98: The VRP can be formulated on a graph $\mathcal{G=(V,A)}$ where $\mathcal{V}$ is the nodes including a depot node (node 0) and a set of customer nodes to be serviced. $\mathcal{A}$ is the set of arcs between nodes. Vehicles depart from the depot, service the demand of each customer node exactly once, and return to the depot. Each vehicle is imposed with a capacity constraint—where the total demands of customer nodes served by a single vehicle cannot exceed its capacity.
+L99: Formally, it is called Capacitated Vehicle Routing Problem (CVRP). The objective is to determine the shortest route while satisfying all given constraints. The mathematical model of CVRP in set partitioning form can be expressed as follows:
+L100:  | $$\min\sum_{r\in\Omega}c_{r}z_{r}$$  |  | (1)
+L101: 
+L102: subject to
+L103: 
+L104:  | $$\sum_{r\in\Omega}z_{r}=|\mathcal{K}|$$  |  | (2)
+L105:  | $$\sum_{r\in\Omega}a_{i,r}z_{r}=1,\quad\forall i\in\mathcal{V}\backslash\{0\}$$  |  | (3)
+L106:  | $$z_{r},a_{i,r}\in\{0,1\},\quad\forall r\in\Omega,\forall i\in\mathcal{V}\backslash\{0\}$$  |  | (4)
+L107: Formula (1) defines the objective function of the CVRP in its set partitioning form. Here, $\Omega$ denotes the set of all feasible routes satisfying vehicle capacity constraints, $c_{r}$ represents the cost of route $r\in\Omega$, and $z_{r}$ is a binary decision variable indicating whether a route $r$ is included in the final solution ($z_{r}=1$) or not ($z_{r}=0$). The objective is to minimize the total cost by selecting a set of feasible routes that collectively form a feasible solution.
+L108: Constraint (2) restricts the number of selected routes to the number of vehicles $\mathcal{K}$ available. $a_{i,r}$ is an indicator that takes value of 1 if rout $r$ covers node $i$ and 0 otherwise. Constraint (3) ensures that each node $i$ is visited exactly once across all vehicles, while Constraint (4) enforces the binary nature of the decision variables.
+L109: ##### Pairwise Graph Definition
+L110: 
+L111: Consider a pairwise graph $\mathcal{G}=(\mathcal{V},\mathcal{E})$, nodes set $\mathcal{V}=\{v_{0},v_{1}...v_{n}\}$, where $v_{0}$ represents the warehouse, while $v_{1}$ to $v_{n}$ symbolize the customer nodes and edges set $\mathcal{E}=\{(v_{i},v_{j})|v_{i},v_{j}\in\mathcal{V},i\neq j\}$ signify the connections between the nodes, indicating the potential paths that vehicles travel.
+L112: ##### Hypergraph Definition
+L113: Given a hypergraph $\mathcal{\hat{G}}=(\mathcal{V},\mathcal{\hat{E}})$, where $\mathcal{V}=\{v_{0},v_{1},\dots,v_{n}\}$ is the node set and $\mathcal{\hat{E}}=\{e_{1},\dots,e_{m}\}$ is the hyperedge set, each hyperedge $e_{i}\in\mathcal{\hat{E}}$ is defined as a subset of nodes, $e_{i}=\{v_{i},v_{i+1},\dots,v_{i+\Delta}\}$. The degree of a hyperedge, $\Delta$, represents the number of nodes it contains.
+L114: Hyperedge formation exhibits strong aggregation properties, grouping highly correlated nodes under heterogeneous constraints. If each hyperedge $e_{i}$ satisfies Constraint (3) and forms subsets of $\Omega$, i.e., $e_{i}\subseteq r\in\Omega$, this structure effectively supports the sequential decision-making process.
+L115: ## 3 Methodology
+L116: The proposed constraint-oriented hypergraph learning framework offers an end-to-end solution in an Encoder-Decoder structure. The encoder dynamically constructs constraint-compliant hyperedges and integrates their representations with node features via a multi-head attention mechanism for effective graph representation learning.
+L117: The decoder then autoregressively utilizes a dual-pointer attention mechanism, combining current and historical nodes as context to compute attention scores and sequentially generate nodes based on learned probability distributions. Details of the key components are provided in the following subsections.
+L118: ### 3.1 Graph Feature Augmentation
+L119: Node features in routing problems are often sparse, limiting their informativeness. To address this, we apply node-level data augmentation inspired by POMO (【56†20】), using transformations like rotation, symmetry, and folding to capture diverse spatial states. Unlike POMO, we incorporate augmented results as extended node features, enhancing the attention mechanism. Additionally, polar coordinates encode distances and angles between nodes.
+L120: These features are fused using a graph attention network, producing the final augmented node embeddings as follows:
+L121:  | $$\boldsymbol{x}_{i}=\boldsymbol{f}_{aug}(\boldsymbol{v}_{i})||\boldsymbol{f}_{pola}(\boldsymbol{v}_{i})\quad i=0...n$$  |  | (5)
+L122:  | $$\boldsymbol{H}_{0}^{enc}=\left\{\begin{array}[]{ll}GAT(BN(FF(\boldsymbol{x}_{i})))&i=0\\
+L123: GAT(BN(FF(\boldsymbol{x}_{i}||\boldsymbol{q}_{i})))&i=1...n\\
+L124: \end{array}\right.$$  |  | (6)
+L125: The two mapping functions in Equation (【73†5】) enhance the original node coordinates $v_{i}$: $\boldsymbol{f}_{aug}$ applies transformations like flipping, rotation, and folding to the 2D Euclidean coordinates, while $\boldsymbol{f}_{pola}$ converts them into polar coordinates (details in Appendix 1). Equation (【74†6】) models pairwise node representations based on the enhanced features $\boldsymbol{x}_{i}$.
+L126: Depot and service nodes are treated differently: service nodes include a demand feature $q_{i}$, while depot $v_{0}$ has none. Here, FF is a feedforward neural network, BN is batch normalization (【75†13】), and GAT is a graph attention network layer. GAT encoding captures pairwise features before hypergraph learning, preserving low-order information for dynamic hyperedge construction. The encoder input for hypergraph representation learning is denoted as $H_{0}^{enc}$.
+L127: ### 3.2 Encoder with Hypergraph Learning
+L128: The proposed hypergraph learning-based encoder consists of two modules: Constraint-oriented Adaptive Hyperedge Reconstruction and Attention-based Node Representation Learning. The first module dynamically constructs hyperedges by learning node weight coefficients and filtering nodes to form constraint-compliant, highly correlated groups. The second module employs a multi-head attention mechanism to update hyperedge features at the node level.
+L129: The encoding process is summarized in Fig.【76†1】, with detailed explanations provided in the following subsections.
+L130: #### 3.2.1 Constraint-based Adaptive Hyperedges Reconstruction
+L131: This module generates high-quality node representations by grouping nodes within hyperedges based on spatial similarities and constraint adherence. During training, node memberships are dynamically adjusted using learnable weights optimized via the loss function. A linear layer evaluates these weights to determine if nodes meet threshold requirements. The module comprises two steps: Hyperedge Node Selection and Learning to Reconstruct Hyperedge Nodes, detailed below.
+L132: ##### Selection of hyperedge nodes
+L133: As illustrated in Fig. 【76†1】(b), a master node $\hat{v}_{i}$ forms its associated hyperedge node set $\hat{e}(\hat{v}_{i})$ by selecting nodes around itself. All nodes, including the master node, are first projected into a high-dimensional space through a linear transformation layer $\Theta$. Feature similarity is then measured via a dot product, and nodes exceeding the threshold $\delta$ are selected as candidates, ensuring strong feature-space correlation within the hyperedge.
+L134: Additionally, the candidate set $\mathcal{S}(\hat{v}_{i})$ must satisfy problem-specific constraints. To handle the complexity of routing problems, heterogeneous hyperedges are constructed for each master node $\hat{v}_{i}$, with each hyperedge tailored to a specific constraint $Con_{j}$. This approach ensures that all nodes within a hyperedge adhere to the corresponding constraint.
+L135: To capture the full problem context, each node takes turns as a master node, enabling the construction of diverse constraint-based hyperedges.
+L136: The selection of hyperedge nodes set $\hat{e}(\hat{v}_{i}^{Con_{j}})$based on the master node $\hat{v}_{i}$ is illustrated in the equation (【77†7】) and (【78†8】).
+L137: 
+L138:  | $$\mathcal{S}(\hat{v}_{i})=\{v|v\in\mathcal{V}\backslash\{\hat{v}_{i}\},\Theta_{\hat{v}_{i}}(v)>\delta\}$$  |  | (7)
+L139:  | $$\hat{e}^{Con_{j}}(\hat{v}_{i})=\{v|v\in\mathcal{\hat{S}}(\hat{v}_{i}),\mathcal{\hat{S}}(\hat{v}_{i})=f_{Con_{j}}(\mathcal{S}(\hat{v}_{i}))\}$$  |  | (8)
+L140: In Equation (【77†7】), $\Theta$ denotes the weights of the linear layer associated with each instance node, with $\hat{v}_{i}$ as the master node. The threshold hyperparameter $\delta$, whose sensitivity is analyzed in the next section, acts as a filtering mechanism. It maps the weights to the master node $\hat{v}_{i}$ and all other nodes $v\in\mathcal{V}$, represented as $\Theta_{\hat{v}_{i}}(v)$.
+L141: In Equation (【78†8】), $f_{Con_{j}}$ captures the influence of the $j$th constraint on the candidate node set $\mathcal{S}(\hat{v}_{i})$. A penalty-based mechanism is applied, allowing nodes that violate constraints to incur penalties rather than being strictly excluded. This soft constraint approach provides flexibility, especially in routing problems where constraints like time or cost penalties are critical.
+L142: Ultimately, the various constraint-based hyperedges associated with the master node $\hat{v}_{i}$ can be expressed as: $\mathcal{\hat{E}}(\hat{v}_{i})=\hat{e}^{Con_{j}}(\hat{v}_{i}),\quad\forall i\in v,\,j=\{1,\ldots,m\}$.
+L143: ##### Learning to Reconstruct Hyperedge Nodes
+L144: 
+L145: As shown in Fig.【76†1】(c), hyperedge nodes are dynamically reconstructed during training based on the neural network’s weight mapping $\Theta$. To enable adaptive parameter tuning, we propose a composite loss function with two components: node correlation loss and hyperedge constraint loss.
+L146: The node correlation loss measures the feature similarity between the master node and its hyperedge nodes. Minimizing this loss ensures semantic consistency and improves the representational quality of the hyperedge, resulting in a more cohesive and meaningful hypergraph structure. The hyperedge constraint loss enforces problem-specific constraints by penalizing violations within the hyperedge.
+L147: Instead of excluding non-compliant nodes, penalties are applied based on the degree of violation, allowing flexible handling of soft constraints. This design ensures adaptability to diverse scenarios while maintaining feasibility under hard constraints, enhancing the model’s robustness and applicability to complex tasks.
+L148: The computation of node correlation loss is as follows:
+L149: 
+L150:  | $\displaystyle\mathcal{L}_{node}=\sum_{i=1}^{n}\left\|H_{0}^{enc}(\hat{v}_{i})\cdot\theta_{proj}-\Theta_{\hat{v}_{i}}^{Con}(v)\cdot H_{0}^{enc}(\hat{e}^{Con}(\hat{v}_{i}))\right\|_{2}$  |  | (9)
+L151: $H_{0}^{enc}(\cdot)$ represents the augmented node representation, while $\theta_{{proj}}$ denotes the weights of a linear layer that projects the master node into a high-dimensional space. Equation 【79†9】 computes the mean squared error (MSE) between the master node and its associated slave nodes within hyperedges, considering various constraints in the high-dimensional space. A lower MSE reflects stronger feature correlation among hyperedge nodes.
+L152: The reconstruction of hyperedge nodes is guided by the learnable reconstruction projection coefficient vector $\Theta_{\hat{v}_{i}}^{Con}(v)$ for constraints, where $\hat{v}_{i}$ represents the master node. Following (【80†55】), we incorporate two regularization terms into this coefficient vector, as described in Equation (【81†10】).
+L153: 
+L154:  | $$\mathcal{L}_{rec\_node}=\mathcal{L}_{node}+\|\Theta_{\hat{v}}^{Con}(v)\|_{1}+\lambda\|\Theta_{\hat{v}}^{Con}(v)\|_{2}$$  |  | (10)
+--------------------------------------------------------------------------------
+[2503.10421] Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems (https://arxiv.org/abs/2503.10421)
+citeturn18view1 [wordlim: 200] Crawled: 3 days ago; Content type: text/html; Source: open({"ref_id":"https://arxiv.org/abs/2503.10421","lineno":null}); Total lines: 168
+L0: 【0†Search】 【1†Submit】 【2†Donate†info.arxiv.org】 【3†Log in】
+L1: 
+L2: Search arXiv [Input: Search papers by title, author, abstract, or ID...] [Input] [Input]
+L3: 
+L4: Press Enter to search · 【4†Advanced search】
+L5: 
+L6: # Computer Science > Machine Learning
+L7: 
+L8: [Submitted on 13 Mar 2025 (【5†v1】), last revised 3 Sep 2026 (this version, v2)]
+L9: # Title:Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems
+L10: 
+L11: Authors:【6†Zhenwei Wang】, 【7†Tiehua Zhang】, 【8†Jing Liu】, 【9†Heng Yu】, 【10†Kaizhu Huang】, 【11†Ruibin Bai】
+L12: 
+L13: View a PDF of the paper titled Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems, by Zhenwei Wang and 5 other authors
+L14: 
+L15: 【12†View PDF】 【13†HTML (experimental)】
+L16: > Abstract:The application of learning based methods to vehicle routing problems has emerged as a pivotal area of research in combinatorial optimization. These problems are characterized by vast solution spaces and intricate constraints, making traditional approaches such as exact mathematical models or heuristic methods prone to high computational overhead or reliant on the design of complex heuristic operators to achieve optimal or near optimal solutions.
+L17: Meanwhile, although some recent learning-based methods can produce good performance for VRP with straightforward constraint scenarios, they often fail to effectively handle hard constraints that are common in practice. This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems.
+L18: A central innovation of this work is the development of a constraint-oriented dynamic hyperedge reconstruction strategy within an encoder, which significantly enhances hypergraph representation learning. Additionally, the decoder leverages a double-pointer attention mechanism to iteratively generate solutions.
+L19: The proposed model is trained by incorporating asynchronous parameter updates informed by hypergraph constraints and optimizing a dual loss function comprising constraint loss and policy gradient loss. The experiment results on benchmark datasets demonstrate that the proposed approach not only eliminates the need for sophisticated heuristic operators but also achieves substantial improvements in solution quality.
+L20: Subjects:  | Machine Learning (cs.LG); Neural and Evolutionary Computing (cs.NE)
+L21: Cite as:  | 【14†arXiv:2503.10421】 [cs.LG]
+L22:    | (or 【15†arXiv:2503.10421v2】 [cs.LG] for this version)
+L23:    | 【16†https://doi.org/10.48550/arXiv.2503.10421†doi.org】 arXiv-issued DOI via DataCite
+L24: ## Submission history
+L25: 
+L26: From: Zhenwei Wang [【17†view email】]
+L27: 【5†[v1]】 Thu, 13 Mar 2025 14:42:44 UTC (499 KB)
+L28: [v2] Thu, 3 Sep 2026 12:55:12 UTC (1,217 KB)
+L29: 
+L30: Full-text links:
+L31: 
+L32: ## Access Paper:
+L33: 
+L34: View a PDF of the paper titled Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems, by Zhenwei Wang and 5 other authors
+L35: 
+L36:   * 【12†View PDF】
+L37:   * 【13†HTML (experimental)】
+L38:   * 【18†TeX Source】
+L39: 
+L40: 【19†view license†creativecommons.org】
+L41: ### Additional Features
+L42: 
+L43:   * 【20†Audio Summary】
+L44: 
+L45: ### Current browse context:
+L46: 
+L47: cs.LG
+L48: 
+L49: 【21†< prev】   |   【22†next >】
+L50: 
+L51: 【23†new】 | 【24†recent】 | 【25†2025-03】
+L52: 
+L53: Change to browse by:
+L54: 
+L55: 【26†cs】
+L56: 【27†cs.NE】
+L57: 
+L58: ### References & Citations
+L59: 
+L60:   * 【28†SciX†scixplorer.org】
+L61:   * 【29†Google Scholar†scholar.google.com】
+L62:   * 【30†Semantic Scholar†api.semanticscholar.org】
+L63: 
+L64: [Button: export BibTeX citation] Loading...
+L65: 
+L66: ## BibTeX formatted citation
+L67: 
+L68: [Button: ×]
+L69: 
+L70: loading...
+L71: 
+L72: Data provided by:
+L73: 
+L74: ### Bookmark
+L75: 
+L76: [Input] Bibliographic Tools
+L77: # Bibliographic and Citation Tools
+L78: 
+L79: [Input] Bibliographic Explorer Toggle
+L80: 
+L81: Bibliographic Explorer (【31†What is the Explorer?†info.arxiv.org】)
+L82: 
+L83: [Input] Connected Papers Toggle
+L84: 
+L85: Connected Papers (【32†What is Connected Papers?†www.connectedpapers.com】)
+L86: 
+L87: [Input] Litmaps Toggle
+L88: 
+L89: Litmaps (【33†What is Litmaps?†www.litmaps.co】)
+L90: 
+L91: [Input] scite.ai Toggle
+L92: 
+L93: scite Smart Citations (【34†What are Smart Citations?†www.scite.ai】)
+L94: 
+L95: [Input] Code, Data, Media
+L96: # Code, Data and Media Associated with this Article
+L97: 
+L98: [Input] alphaXiv Toggle
+L99: 
+L100: alphaXiv (【35†What is alphaXiv?†alphaxiv.org】)
+L101: 
+L102: [Input] Links to Code Toggle
+L103: 
+L104: CatalyzeX Code Finder for Papers (【36†What is CatalyzeX?†www.catalyzex.com】)
+L105: 
+L106: [Input] DagsHub Toggle
+L107: 
+L108: DagsHub (【37†What is DagsHub?†dagshub.com】)
+L109: 
+L110: [Input] GotitPub Toggle
+L111: 
+L112: Gotit.pub (【38†What is GotitPub?†gotit.pub】)
+L113: 
+L114: [Input] Huggingface Toggle
+L115: 
+L116: Hugging Face (【39†What is Huggingface?†huggingface.co】)
+L117: 
+L118: [Input] ScienceCast Toggle
+L119: ScienceCast (【40†What is ScienceCast?†sciencecast.org】)
+L120: 
+L121: [Input] Demos
+L122: # Demos
+L123: 
+L124: [Input] Replicate Toggle
+L125: 
+L126: Replicate (【41†What is Replicate?†replicate.com】)
+L127: 
+L128: [Input] Spaces Toggle
+L129: 
+L130: Hugging Face Spaces (【42†What is Spaces?†huggingface.co】)
+L131: 
+L132: [Input] Spaces Toggle
+L133: 
+L134: TXYZ.AI (【43†What is TXYZ.AI?†txyz.ai】)
+L135: 
+L136: [Input] Related Papers
+L137: # Recommenders and Search Tools
+L138: 
+L139: [Input] Link to Influence Flower
+L140: 
+L141: Influence Flower (【44†What are Influence Flowers?†influencemap.cmlab.dev】)
+L142: 
+L143: [Input] Core recommender toggle
+L144: 
+L145: CORE Recommender (【45†What is CORE?†core.ac.uk】)
+L146: 
+L147: [Input] IArxiv recommender toggle
+L148: 
+L149: IArxiv Recommender (【46†What is IArxiv?†iarxiv.org】)
+L150: 
+L151:   * Author
+L152:   * Venue
+L153:   * Institution
+L154:   * Topic
+L155: 
+L156: [Input] About arXivLabs
+L157: # arXivLabs: experimental projects with community collaborators
+L158: 
+L159: arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+L160: 
+L161: Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+L162: Have an idea for a project that will add value for arXiv's community? 【47†Learn more about arXivLabs†info.arxiv.org】.
+L163: 
+L164: 【48†Which authors of this paper are endorsers?】 | Disable MathJax (【49†What is MathJax?†info.arxiv.org】)
+L165: 
+L166: We gratefully acknowledge support from our 【50†major funders†info.arxiv.org】, 【51†member institutions†info.arxiv.org】, , and all contributors.
+L167: 【52†About†info.arxiv.org】 · 【53†Help†info.arxiv.org】 · 【54†Contact†info.arxiv.org】 · 【55†Subscribe†info.arxiv.org】 · 【56†Copyright†info.arxiv.org】 · 【57†Privacy†info.arxiv.org】 · 【58†Accessibility†info.arxiv.org】 · 【59†Operational Status (opens in new tab)†status.arxiv.org】
+

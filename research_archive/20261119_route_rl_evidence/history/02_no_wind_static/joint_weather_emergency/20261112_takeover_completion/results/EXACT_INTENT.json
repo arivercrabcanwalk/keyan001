@@ -1,0 +1,101 @@
+{
+  "budget": {
+    "declared_cpu": "1 core, single process, no subprocesses",
+    "max_n_exact": 14,
+    "per_map_wall_limit_s": 600.0,
+    "selfcheck_max_n": 8
+  },
+  "excluded_from_summary": [
+    "4x20_o1"
+  ],
+  "maps": [
+    {
+      "author_solution_sha256": "cf8d3f0e001053860c7d5d8bf01af75ce26d74257188bcc499a29ec90e24ad5f",
+      "name": "3x10_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "f32c450b27fe556d1fc52bf297ec9c0503f5c3e68506a91456872ee7a0d47243"
+    },
+    {
+      "author_solution_sha256": "6ed460198a28ec007ad1fd82853fc3eb1fbe2c0349f1c1bb2c1d4e75994b68e9",
+      "name": "3x15_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "bc3f9d54661809cf1e5f50b7ad562a2a9f566df74b8f24d49fd48d81df958b7b"
+    },
+    {
+      "author_solution_sha256": "5b223838583715ffef03ff33456bc2c9f0d5e0801393df6f3603d51d3d66a68e",
+      "name": "3x20_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "38bd5346b59b8be8fb21c8bee2d038ca085b96b7cd1da883232da465423d6651"
+    },
+    {
+      "author_solution_sha256": "d5ed0795d9abf48e0c9083c7c2f69eef2bfc46c6cbd7827ae4561ea4b781cfdc",
+      "name": "4x20_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "4c1dad25ecc2be3c0034f0fdf9739babc012254abbd745ea063f8637ce1f8781"
+    },
+    {
+      "author_solution_sha256": "6c77d6ab825fa9828f2c244ffcc2100b5e8bd506535c31a0ef035d3893ccec27",
+      "name": "4x25_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "e173dab64634fd8788e7f7ca8a85c8cb8fd144444dba82f55cfd31eabe8246d1"
+    },
+    {
+      "author_solution_sha256": "0a95056d846b541d421f319d12f118fc88fc1341d03e8dfbe1e925f821a6f0ea",
+      "name": "4x30_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "1a3b3534815b284173ece990b02afbdaeac4947f3665221e5928ade1561ae0ad"
+    },
+    {
+      "author_solution_sha256": "60164f9f8e81bead3365c3abd5507c067e8f6c67648302525c50d403d1e72963",
+      "name": "5x35_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "938f793dfd908b3b793f0ee7c7986bab3e0d9f25a2dbfe56eff4e8054211eb2c"
+    },
+    {
+      "author_solution_sha256": "cd3b444d8307981585c069f50f67e0de028fe2b0d6620b1b5dd7ea814f78b44a",
+      "name": "6x50_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "67a83103d5158dfc3a3fafce23e441d3e532c9c678ae8d4268272fbbb46189b0"
+    },
+    {
+      "author_solution_sha256": "1caf67e3e80aaf1b63c005919c1021e91dc3736dbe2b888a7fcc69bf1a2998c8",
+      "name": "7x65_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "01f30896c4d8ec0734cf1d42434cfbcaafd1f1a7fa83a0f3a035a3884dc137ad"
+    },
+    {
+      "author_solution_sha256": "ad9d5ec2e5de049e379c74761801789ffdb2acad29aa638389df90ce59ef583c",
+      "name": "8x80_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "daf0afc82dd1b96565c9bc4c74e8bd5077b550c9245d6fe65096dc9e6d83c16c"
+    },
+    {
+      "author_solution_sha256": "988f05b44ec09c16876ee5127678429e0cfbf2c9c2309994b240800a913ebbee",
+      "name": "9x95_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "e0ae8575009433bbdaf42256c7809948c54d54f17259cf22fd859c5335cc3679"
+    },
+    {
+      "author_solution_sha256": "348b395fc37b71ed564d6da9ca3c79dc8c671a3d7c5748f7f7abff6264079465",
+      "name": "10x110_o1",
+      "path": "<EXECUTION_PATH>",
+      "raw_sha256": "920bee0182957d36b99ef9944f75b8ec4b69666f6981d9eb8e21b975304eda34"
+    }
+  ],
+  "method": {
+    "global": "exact step-function scan: min T with sum_s min{op: M_s<=T} <= cap_op",
+    "non_exact_rule": "any station with n_targets > max_n_exact is reported not_exact with a proven makespan lower bound; the map then reports UNKNOWN, never an optimum",
+    "per_station": "exact: Held-Karp TSP per target subset; set-partition DP d_j(U) (3^n transitions) per slot; station frontier over all subset splits U of the station's target set",
+    "selfcheck": "independent exponential reference (all set partitions x all slot assignments, tours by permutation enumeration) for stations with n <= selfcheck_max_n"
+  },
+  "objective": "min M_return  s.t.  cost <= anchor.cost + 1e-7, epsilon=0, station_types and target_station fixed to the anchor",
+  "registered_at_local": "2026-11-12T08:11:34+0000",
+  "registered_at_utc": "2026-11-12T08:11:34Z",
+  "schema": "takeover_exact_minmax_intent_v1",
+  "source_sha256": {
+    "exact_minmax.py": "e38fd6fd9715a5c4b4c33246b1f280a2213e60b0e86dc6f4f5c0e918c5141779",
+    "global_env.py": "b903f7df68cbb1d2faae6fb324ef3ed3ab1f3592c1c56aa2144eddedd54f5428",
+    "problem.py": "f03c2f4201cdea977644d84ab0ad704eb47d4c4389b06b2ac86b9d264463b1cc",
+    "scorer.py": "c6e156b2d770cec2f663eada37c2d39bff1583f672bda4116f81493484409135"
+  }
+}

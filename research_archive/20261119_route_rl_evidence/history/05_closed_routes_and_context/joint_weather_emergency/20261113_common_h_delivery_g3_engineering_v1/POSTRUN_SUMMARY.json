@@ -1,0 +1,626 @@
+{
+  "updated_utc": "2026-11-13T11:49:27.295430+00:00",
+  "scope": "POSTRUN_READONLY_EXISTING_RESULTS_NO_NEW_SCORER_OR_SOLVER",
+  "status": "LIMITED_COMMON_H_DELIVERY_ENGINEERING_PASSED",
+  "child_cpu_seconds": 0.978834,
+  "whole_child_process_wall_seconds": 2.0663138483650982,
+  "phase_count": 4,
+  "failed_phases": 0,
+  "source_repairs": 0,
+  "validator_repairs_used": 0,
+  "successful_timing_reruns": 0,
+  "audit": {
+    "physical_bank_rechecks_including_repetition": 174,
+    "new_route_records": 158,
+    "changed_trip_group_records": 142,
+    "on_H_deliveries": 8,
+    "fallback_deliveries": 0,
+    "configuration_records_both_modes": 8,
+    "H0_anchor_fallback_checks": 8,
+    "cross_station_compensation_witnesses": 2,
+    "objective_witnesses": 2,
+    "typed_pair_witnesses": 1,
+    "complete_process_delivery_tests": 2,
+    "G0": "UNPASSED",
+    "G3": "UNPASSED",
+    "training": 0,
+    "Formal": 0
+  },
+  "configurations": [
+    {
+      "phase": "BASELINE",
+      "case_index": 0,
+      "wind_index": 0,
+      "anchor_cost": 97.45037299564174,
+      "anchor_M": 6.9268716313841985,
+      "H": 6.234184468245779,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 96.00206992001556,
+      "M_return": 5.747695404944723,
+      "bank_sizes": [
+        11,
+        12
+      ],
+      "evaluated": [
+        20,
+        25
+      ],
+      "accepted": [
+        1,
+        2
+      ]
+    },
+    {
+      "phase": "BASELINE",
+      "case_index": 0,
+      "wind_index": 1,
+      "anchor_cost": 97.46934065128303,
+      "anchor_M": 6.946302735269581,
+      "H": 6.251672461742624,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 96.02250358631824,
+      "M_return": 5.74683493585591,
+      "bank_sizes": [
+        11,
+        12
+      ],
+      "evaluated": [
+        20,
+        25
+      ],
+      "accepted": [
+        1,
+        2
+      ]
+    },
+    {
+      "phase": "BASELINE",
+      "case_index": 1,
+      "wind_index": 0,
+      "anchor_cost": 83.98739036048661,
+      "anchor_M": 14.88936640696601,
+      "H": 13.40042976626941,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 80.81902316386693,
+      "M_return": 9.948576898144125,
+      "bank_sizes": [
+        10,
+        10
+      ],
+      "evaluated": [
+        15,
+        20
+      ],
+      "accepted": [
+        3,
+        1
+      ]
+    },
+    {
+      "phase": "BASELINE",
+      "case_index": 1,
+      "wind_index": 1,
+      "anchor_cost": 84.02123042964652,
+      "anchor_M": 14.935939357397475,
+      "H": 13.442345421657727,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 80.83963569818623,
+      "M_return": 9.967259797200846,
+      "bank_sizes": [
+        10,
+        10
+      ],
+      "evaluated": [
+        15,
+        20
+      ],
+      "accepted": [
+        3,
+        1
+      ]
+    },
+    {
+      "phase": "MODIFIED",
+      "case_index": 0,
+      "wind_index": 0,
+      "anchor_cost": 97.45037299564174,
+      "anchor_M": 6.9268716313841985,
+      "H": 6.234184468245779,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 96.00206992001556,
+      "M_return": 5.747695404944723,
+      "bank_sizes": [
+        12,
+        12
+      ],
+      "evaluated": [
+        25,
+        25
+      ],
+      "accepted": [
+        2,
+        2
+      ]
+    },
+    {
+      "phase": "MODIFIED",
+      "case_index": 0,
+      "wind_index": 1,
+      "anchor_cost": 97.46934065128303,
+      "anchor_M": 6.946302735269581,
+      "H": 6.251672461742624,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 96.02250358631824,
+      "M_return": 5.74683493585591,
+      "bank_sizes": [
+        12,
+        12
+      ],
+      "evaluated": [
+        25,
+        25
+      ],
+      "accepted": [
+        2,
+        2
+      ]
+    },
+    {
+      "phase": "MODIFIED",
+      "case_index": 1,
+      "wind_index": 0,
+      "anchor_cost": 83.98739036048661,
+      "anchor_M": 14.88936640696601,
+      "H": 13.40042976626941,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 80.81902316386693,
+      "M_return": 9.948576898144125,
+      "bank_sizes": [
+        10,
+        10
+      ],
+      "evaluated": [
+        15,
+        20
+      ],
+      "accepted": [
+        3,
+        1
+      ]
+    },
+    {
+      "phase": "MODIFIED",
+      "case_index": 1,
+      "wind_index": 1,
+      "anchor_cost": 84.02123042964652,
+      "anchor_M": 14.935939357397475,
+      "H": 13.442345421657727,
+      "status": "FULL_WITNESS_AT_H",
+      "fallback": false,
+      "cost": 80.83963569818623,
+      "M_return": 9.967259797200846,
+      "bank_sizes": [
+        10,
+        10
+      ],
+      "evaluated": [
+        15,
+        20
+      ],
+      "accepted": [
+        3,
+        1
+      ]
+    }
+  ],
+  "deliveries": [
+    {
+      "label": "GOOD",
+      "decision": {
+        "schema": "physical_route_delivery_decision_v1",
+        "contract": "actual_exit_and_independent_validation_v1",
+        "delivery_status": "ONTIME_VALID",
+        "failure_reason": null,
+        "exit_status": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "budget_s": 2.0,
+        "process_wall_s": 0.16658606799319386,
+        "admission_wall_s": 0.16769912280142307,
+        "method": "common_h",
+        "seed": 202611138,
+        "input_sha256": "9a15a84245423ac59fe4fea5793ec738ff653f43ac629861a43331cb900bef5c",
+        "raw_output_sha256": "4cd550c9d67f68d2e4c73802480ee9b873cb49d5abeace8496b8f19c7d12cd49",
+        "raw_output_retained": true,
+        "raw_validation": {
+          "schema": "constant_wind_return_makespan_score_v1",
+          "physics_sha256": "ffff7eadfb34e0c8a2b0096c32cc3b6cb42b72233e7bcdb5d9353ba2804761a4",
+          "instance_sha256": "f2f6556016334f9bce17f26206f471e3fcf2e99453b0b2819cb467117710931a",
+          "parameter_sha256": "8ebcb8aae89e079f2e2990d5e82560dfb2578bc61f80edb65e351eef52094d7b",
+          "original_feasible": true,
+          "issues": [],
+          "cost": 96.00206992001556,
+          "M_return": 5.747695404944723,
+          "M_service": 4.28831964544481,
+          "mean_target_completion": 2.910816113076413,
+          "p90_target_completion_nearest_rank": 4.28831964544481,
+          "target_completion": {
+            "3": 2.168678931644819,
+            "1": 2.00135870471219,
+            "2": 4.28831964544481,
+            "6": 2.5612678440462053,
+            "4": 2.339761837992836,
+            "5": 4.105509714617617
+          },
+          "target_station": {
+            "3": 0,
+            "1": 0,
+            "2": 0,
+            "6": 1,
+            "4": 1,
+            "5": 1
+          },
+          "slot_duty": [
+            {
+              "station": 0,
+              "slot": 0,
+              "duty_min": 3.3425702063198646
+            },
+            {
+              "station": 0,
+              "slot": 1,
+              "duty_min": 5.747695404944723
+            },
+            {
+              "station": 1,
+              "slot": 0,
+              "duty_min": 3.7297673407711516
+            },
+            {
+              "station": 1,
+              "slot": 1,
+              "duty_min": 5.584106887995385
+            }
+          ],
+          "station_makespan": [
+            5.747695404944723,
+            5.584106887995385
+          ],
+          "trips": [
+            {
+              "station": 0,
+              "slot": 0,
+              "trip": 0,
+              "targets": [
+                3
+              ],
+              "length_m": 1898.4203960134857,
+              "duration_min": 3.3425702063198646,
+              "energy": 0.14856626371375756,
+              "energy_slack": 0.8514337362862424
+            },
+            {
+              "station": 0,
+              "slot": 1,
+              "trip": 0,
+              "targets": [
+                1,
+                2
+              ],
+              "length_m": 2243.31053397682,
+              "duration_min": 5.747695404944723,
+              "energy": 0.29585851728900503,
+              "energy_slack": 0.514141482710995
+            },
+            {
+              "station": 1,
+              "slot": 0,
+              "trip": 0,
+              "targets": [
+                6
+              ],
+              "length_m": 1886.7962264113207,
+              "duration_min": 3.7297673407711516,
+              "energy": 0.17833581213388072,
+              "energy_slack": 0.8216641878661193
+            },
+            {
+              "station": 1,
+              "slot": 1,
+              "trip": 0,
+              "targets": [
+                4,
+                5
+              ],
+              "length_m": 2275.359617679225,
+              "duration_min": 5.584106887995385,
+              "energy": 0.2965139239839169,
+              "energy_slack": 0.5134860760160831
+            }
+          ],
+          "solution_sha256": "526c3c6efe3a7757b52cec00339b9b74af40874e6baa28801fae905c821d0123",
+          "fixed_cost": 86.8,
+          "operating_minutes": 18.404139840031124,
+          "operating_cost": 9.202069920015562,
+          "total_distance_m": 8303.886774080851,
+          "total_energy": 0.9192745171205603,
+          "nonempty_trip_count": 4,
+          "ignored_empty_trip_count": 0,
+          "visited_count": 6,
+          "domain_issues": [],
+          "domain_valid": true,
+          "cost_cap_satisfied": true,
+          "cost_budget": 97.45037299564174,
+          "epsilon": 0.0,
+          "absolute_cost_tolerance": 1e-07,
+          "raw_cost_minus_cap": -1.4483030756261854,
+          "raw_cost_minus_anchor": -1.4483030756261854,
+          "anchor_solution_sha256": "18b34872a62442cc354d2df0f5ac402dee3a37e2ecf71fe1be9b8b90bed1f9e1",
+          "admissible": true
+        },
+        "accepted": true,
+        "itt_anchor_used": false,
+        "itt_M_return": 5.747695404944723,
+        "itt_cost": 96.00206992001556,
+        "anchor_M_return": 6.9268716313841985,
+        "anchor_cost": 97.45037299564174,
+        "itt_solution": {
+          "instance": "eng_common_h_delivery_a",
+          "instance_sha256": "f2f6556016334f9bce17f26206f471e3fcf2e99453b0b2819cb467117710931a",
+          "physics_sha256": "ffff7eadfb34e0c8a2b0096c32cc3b6cb42b72233e7bcdb5d9353ba2804761a4",
+          "routes": [
+            [
+              [
+                [
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  2
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  6
+                ]
+              ],
+              [
+                [
+                  4,
+                  5
+                ]
+              ]
+            ]
+          ],
+          "schema_version": 1,
+          "station_types": [
+            2,
+            2
+          ]
+        },
+        "delivered_solution_file": "<EXECUTION_PATH>",
+        "run_role": "NEW_END_TO_END_ENGINEERING_NOT_SCIENTIFIC",
+        "scientific_primary_changed": false,
+        "new_scientific_population_qualified": false
+      }
+    },
+    {
+      "label": "EARLY_SAVED_LATE",
+      "decision": {
+        "schema": "physical_route_delivery_decision_v1",
+        "contract": "actual_exit_and_independent_validation_v1",
+        "delivery_status": "NO_ONTIME_VALID_OUTPUT",
+        "failure_reason": "PROCESS_LATE_OR_TIMEOUT",
+        "exit_status": -9,
+        "timed_out": true,
+        "launch_error": null,
+        "budget_s": 1.0,
+        "process_wall_s": 1.0019132671877742,
+        "admission_wall_s": 1.0032653831876814,
+        "method": "common_h",
+        "seed": 202611138,
+        "input_sha256": "9a15a84245423ac59fe4fea5793ec738ff653f43ac629861a43331cb900bef5c",
+        "raw_output_sha256": "d8ddae78bea3397e5bb0781dc9da327991a0cf2b9f408d75168b7855da924ce6",
+        "raw_output_retained": true,
+        "raw_validation": {
+          "schema": "constant_wind_return_makespan_score_v1",
+          "physics_sha256": "ffff7eadfb34e0c8a2b0096c32cc3b6cb42b72233e7bcdb5d9353ba2804761a4",
+          "instance_sha256": "f2f6556016334f9bce17f26206f471e3fcf2e99453b0b2819cb467117710931a",
+          "parameter_sha256": "8ebcb8aae89e079f2e2990d5e82560dfb2578bc61f80edb65e351eef52094d7b",
+          "original_feasible": true,
+          "issues": [],
+          "cost": 96.00206992001556,
+          "M_return": 5.747695404944723,
+          "M_service": 4.28831964544481,
+          "mean_target_completion": 2.910816113076413,
+          "p90_target_completion_nearest_rank": 4.28831964544481,
+          "target_completion": {
+            "3": 2.168678931644819,
+            "1": 2.00135870471219,
+            "2": 4.28831964544481,
+            "6": 2.5612678440462053,
+            "4": 2.339761837992836,
+            "5": 4.105509714617617
+          },
+          "target_station": {
+            "3": 0,
+            "1": 0,
+            "2": 0,
+            "6": 1,
+            "4": 1,
+            "5": 1
+          },
+          "slot_duty": [
+            {
+              "station": 0,
+              "slot": 0,
+              "duty_min": 3.3425702063198646
+            },
+            {
+              "station": 0,
+              "slot": 1,
+              "duty_min": 5.747695404944723
+            },
+            {
+              "station": 1,
+              "slot": 0,
+              "duty_min": 3.7297673407711516
+            },
+            {
+              "station": 1,
+              "slot": 1,
+              "duty_min": 5.584106887995385
+            }
+          ],
+          "station_makespan": [
+            5.747695404944723,
+            5.584106887995385
+          ],
+          "trips": [
+            {
+              "station": 0,
+              "slot": 0,
+              "trip": 0,
+              "targets": [
+                3
+              ],
+              "length_m": 1898.4203960134857,
+              "duration_min": 3.3425702063198646,
+              "energy": 0.14856626371375756,
+              "energy_slack": 0.8514337362862424
+            },
+            {
+              "station": 0,
+              "slot": 1,
+              "trip": 0,
+              "targets": [
+                1,
+                2
+              ],
+              "length_m": 2243.31053397682,
+              "duration_min": 5.747695404944723,
+              "energy": 0.29585851728900503,
+              "energy_slack": 0.514141482710995
+            },
+            {
+              "station": 1,
+              "slot": 0,
+              "trip": 0,
+              "targets": [
+                6
+              ],
+              "length_m": 1886.7962264113207,
+              "duration_min": 3.7297673407711516,
+              "energy": 0.17833581213388072,
+              "energy_slack": 0.8216641878661193
+            },
+            {
+              "station": 1,
+              "slot": 1,
+              "trip": 0,
+              "targets": [
+                4,
+                5
+              ],
+              "length_m": 2275.359617679225,
+              "duration_min": 5.584106887995385,
+              "energy": 0.2965139239839169,
+              "energy_slack": 0.5134860760160831
+            }
+          ],
+          "solution_sha256": "526c3c6efe3a7757b52cec00339b9b74af40874e6baa28801fae905c821d0123",
+          "fixed_cost": 86.8,
+          "operating_minutes": 18.404139840031124,
+          "operating_cost": 9.202069920015562,
+          "total_distance_m": 8303.886774080851,
+          "total_energy": 0.9192745171205603,
+          "nonempty_trip_count": 4,
+          "ignored_empty_trip_count": 0,
+          "visited_count": 6,
+          "domain_issues": [],
+          "domain_valid": true,
+          "cost_cap_satisfied": true,
+          "cost_budget": 97.45037299564174,
+          "epsilon": 0.0,
+          "absolute_cost_tolerance": 1e-07,
+          "raw_cost_minus_cap": -1.4483030756261854,
+          "raw_cost_minus_anchor": -1.4483030756261854,
+          "anchor_solution_sha256": "18b34872a62442cc354d2df0f5ac402dee3a37e2ecf71fe1be9b8b90bed1f9e1",
+          "admissible": true
+        },
+        "accepted": false,
+        "itt_anchor_used": true,
+        "itt_M_return": 6.9268716313841985,
+        "itt_cost": 97.45037299564174,
+        "anchor_M_return": 6.9268716313841985,
+        "anchor_cost": 97.45037299564174,
+        "itt_solution": {
+          "instance": "eng_common_h_delivery_a",
+          "instance_sha256": "f2f6556016334f9bce17f26206f471e3fcf2e99453b0b2819cb467117710931a",
+          "physics_sha256": "ffff7eadfb34e0c8a2b0096c32cc3b6cb42b72233e7bcdb5d9353ba2804761a4",
+          "routes": [
+            [
+              [
+                [
+                  1
+                ],
+                [
+                  3
+                ]
+              ],
+              [
+                [
+                  2
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  4
+                ],
+                [
+                  6
+                ]
+              ],
+              [
+                [
+                  5
+                ]
+              ]
+            ]
+          ],
+          "schema_version": 1,
+          "station_types": [
+            2,
+            2
+          ]
+        },
+        "delivered_solution_file": null,
+        "run_role": "NEW_END_TO_END_ENGINEERING_NOT_SCIENTIFIC",
+        "scientific_primary_changed": false,
+        "new_scientific_population_qualified": false
+      }
+    }
+  ],
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "training": 0,
+  "checkpoint": 0,
+  "author_solves": 0,
+  "full_ALNS_solves": 0,
+  "new_scientific_maps": 0,
+  "Formal": 0,
+  "subagents": 0
+}

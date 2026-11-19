@@ -1,0 +1,3303 @@
+{
+  "generated_at_utc": "2026-11-12T08:11:42Z",
+  "intent": "EXACT_INTENT.json",
+  "rows": [
+    {
+      "anchor": {
+        "M_return": 56.09808217264509,
+        "cost": 160.45232236633666,
+        "operating_minutes": 147.3046447326733,
+        "solution_sha256": "97858aad2a4de1525f5939a9fbe8546f0ff9197f0675cb53226575a4cba8f1b0"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 160.45232246633665,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 147.30464493267328,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 56.09808217264509,
+        "exact_M": 44.61106804469995,
+        "exact_vs_anchor_pct": -20.476661024869255,
+        "joint12_M": 44.61106804469995,
+        "joint12_headroom_captured_pct": 100.0,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 44.61106804469995,
+        "joint6_headroom_captured_pct": 100.0,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 44.61106804469995,
+        "lpt_headroom_captured_pct": 100.0,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 0.0,
+        "abs_diff_operating_vs_prediction": 0.0,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 44.61106804469995,
+        "cap_slack_operating": 0.9032633137623804,
+        "cost": 160.00069080945545,
+        "headroom_vs_anchor_min": 11.487014127945145,
+        "headroom_vs_anchor_pct": 20.476661024869255,
+        "operating_minutes": 146.4013816189109,
+        "per_station_makespan": [
+          44.56319158242145,
+          44.61106804469995,
+          0.0
+        ],
+        "per_station_operating": [
+          60.983777207032404,
+          85.4176044118785,
+          0.0
+        ]
+      },
+      "instance_sha256": "f32c450b27fe556d1fc52bf297ec9c0503f5c3e68506a91456872ee7a0d47243",
+      "map": "3x10_o1",
+      "scorer_recheck": {
+        "M_return": 44.61106804469995,
+        "admissible": true,
+        "cost": 160.00069080945545,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 146.4013816189109
+      },
+      "sites": 3,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "a28c4cc6519bda00bcd78d5cb2d53a70061119ab83282c481193ecbb97c13e55",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                32.179383292,
+                62.101001978
+              ],
+              [
+                44.563191582,
+                60.983777207
+              ]
+            ],
+            "frontier_size": 2,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                32.179383292,
+                62.101001978
+              ],
+              [
+                44.563191582,
+                60.983777207
+              ]
+            ],
+            "partitions": 15
+          },
+          "dp_transitions": 71,
+          "enumeration": "held_karp states 2^n*n=64; partition DP transitions=71; subset splits=16",
+          "exact": true,
+          "frontier": [
+            [
+              32.179383292495125,
+              62.10100197768657
+            ],
+            [
+              44.56319158242145,
+              60.983777207032404
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 2,
+          "held_karp_states": 64,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 26.455573285448875,
+          "n_targets": 4,
+          "raw_point_count": 16,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1720,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 16,
+          "station": 0,
+          "tsp_lb_m": 11620.031913807972
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                44.611068045,
+                85.417604412
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                44.611068045,
+                85.417604412
+              ]
+            ],
+            "partitions": 203
+          },
+          "dp_transitions": 519,
+          "enumeration": "held_karp states 2^n*n=384; partition DP transitions=519; subset splits=64",
+          "exact": true,
+          "frontier": [
+            [
+              44.61106804469995,
+              85.4176044118785
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 384,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 37.32733264682569,
+          "n_targets": 6,
+          "raw_point_count": 64,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1234,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 64,
+          "station": 1,
+          "tsp_lb_m": 13189.198764286237
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 2
+        }
+      ],
+      "status": "EXACT",
+      "targets": 10,
+      "wall_s": 0.057
+    },
+    {
+      "anchor": {
+        "M_return": 106.9813430088696,
+        "cost": 171.13655408164607,
+        "operating_minutes": 199.87310816329216,
+        "solution_sha256": "32843a1df701a0572887f1ffe94ecbd4aeb3aabfa92687c0682e1eb815bf93a5"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 171.13655418164606,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 199.87310836329215,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 106.9813430088696,
+        "exact_M": 92.71457841212577,
+        "exact_vs_anchor_pct": -13.335750136882277,
+        "joint12_M": 92.71457841212577,
+        "joint12_headroom_captured_pct": 100.0,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 92.71457841212577,
+        "joint6_headroom_captured_pct": 100.0,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 92.71457841212577,
+        "lpt_headroom_captured_pct": 100.0,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 0.0,
+        "abs_diff_operating_vs_prediction": 0.0,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 92.71457841212577,
+        "cap_slack_operating": 1.9999998812636477e-07,
+        "cost": 171.13655408164607,
+        "headroom_vs_anchor_min": 14.266764596743826,
+        "headroom_vs_anchor_pct": 13.335750136882277,
+        "operating_minutes": 199.87310816329216,
+        "per_station_makespan": [
+          0.0,
+          51.969385037388804,
+          92.71457841212577
+        ],
+        "per_station_operating": [
+          0.0,
+          51.969385037388804,
+          147.90372312590335
+        ]
+      },
+      "instance_sha256": "bc3f9d54661809cf1e5f50b7ad562a2a9f566df74b8f24d49fd48d81df958b7b",
+      "map": "3x15_o1",
+      "scorer_recheck": {
+        "M_return": 92.71457841212577,
+        "admissible": true,
+        "cost": 171.13655408164607,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 199.87310816329216
+      },
+      "sites": 3,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "ed5d685061a00ac1b3d8e7e59bba9de3c2a47089363ec0a867997ada89292468",
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 0
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                51.969385037,
+                51.969385037
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                51.969385037,
+                51.969385037
+              ]
+            ],
+            "partitions": 15
+          },
+          "dp_transitions": 35,
+          "enumeration": "held_karp states 2^n*n=64; partition DP transitions=35; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              51.969385037388804,
+              51.969385037388804
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 64,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 47.260556279628965,
+          "n_targets": 4,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 64,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 1,
+          "tsp_lb_m": 6534.500651666067
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 47557,
+          "enumeration": "held_karp states 2^n*n=22528; partition DP transitions=47557; subset splits=2048",
+          "exact": true,
+          "frontier": [
+            [
+              77.27180659411603,
+              153.2293687409297
+            ],
+            [
+              77.8405029855113,
+              149.4953580718157
+            ],
+            [
+              92.71457841212577,
+              147.90372312590335
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 22528,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 64.56802029544643,
+          "n_targets": 11,
+          "raw_point_count": 2048,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 184,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 2048,
+          "station": 2,
+          "tsp_lb_m": 17222.436531803578
+        }
+      ],
+      "status": "EXACT",
+      "targets": 15,
+      "wall_s": 0.104
+    },
+    {
+      "anchor": {
+        "M_return": 66.8239536946117,
+        "cost": 250.17894371088477,
+        "operating_minutes": 271.15788742176954,
+        "solution_sha256": "530038181efb2fcce50fdf7b9d74a4d615df6c8e14a9dc54e6c968cd61453049"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 250.17894381088476,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 271.15788762176953,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 66.8239536946117,
+        "exact_M": 66.8239536946117,
+        "exact_vs_anchor_pct": 0.0,
+        "joint12_M": 66.8239536946117,
+        "joint12_headroom_captured_pct": null,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 66.8239536946117,
+        "joint6_headroom_captured_pct": null,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 66.8239536946117,
+        "lpt_headroom_captured_pct": null,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 0.0,
+        "abs_diff_operating_vs_prediction": 0.0,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 66.8239536946117,
+        "cap_slack_operating": 1.9999998812636477e-07,
+        "cost": 250.17894371088477,
+        "headroom_vs_anchor_min": 0.0,
+        "headroom_vs_anchor_pct": 0.0,
+        "operating_minutes": 271.15788742176954,
+        "per_station_makespan": [
+          66.8239536946117,
+          53.152981715601584,
+          64.20971116771219
+        ],
+        "per_station_operating": [
+          110.90362787320252,
+          53.152981715601584,
+          107.10127783296542
+        ]
+      },
+      "instance_sha256": "38bd5346b59b8be8fb21c8bee2d038ca085b96b7cd1da883232da465423d6651",
+      "map": "3x20_o1",
+      "scorer_recheck": {
+        "M_return": 66.8239536946117,
+        "admissible": true,
+        "cost": 250.17894371088477,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 271.15788742176954
+      },
+      "sites": 3,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "ff306d0fe80fa7d35b387eea30457e4b30280378972da6c1940cdc415d88fc69",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                56.818083945,
+                111.512930424
+              ],
+              [
+                66.823953695,
+                110.903627873
+              ]
+            ],
+            "frontier_size": 2,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                56.818083945,
+                111.512930424
+              ],
+              [
+                66.823953695,
+                110.903627873
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 3273,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=3273; subset splits=256",
+          "exact": true,
+          "frontier": [
+            [
+              56.81808394482762,
+              111.5129304240445
+            ],
+            [
+              66.8239536946117,
+              110.90362787320252
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 2,
+          "held_karp_states": 2048,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 49.94824528454961,
+          "n_targets": 8,
+          "raw_point_count": 256,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 648,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 256,
+          "station": 0,
+          "tsp_lb_m": 17906.84151218929
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                53.152981716,
+                53.152981716
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                53.152981716,
+                53.152981716
+              ]
+            ],
+            "partitions": 15
+          },
+          "dp_transitions": 39,
+          "enumeration": "held_karp states 2^n*n=64; partition DP transitions=39; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              53.152981715601584,
+              53.152981715601584
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 64,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 47.53564456832015,
+          "n_targets": 4,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 116,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 1,
+          "tsp_lb_m": 6782.080111488134
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                54.253353672,
+                108.223077687
+              ],
+              [
+                54.895601912,
+                108.212348863
+              ],
+              [
+                61.127878628,
+                108.158187247
+              ],
+              [
+                64.209711168,
+                107.101277833
+              ]
+            ],
+            "frontier_size": 4,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                54.253353672,
+                108.223077687
+              ],
+              [
+                54.895601912,
+                108.212348863
+              ],
+              [
+                61.127878628,
+                108.158187247
+              ],
+              [
+                64.209711168,
+                107.101277833
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 3823,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=3823; subset splits=256",
+          "exact": true,
+          "frontier": [
+            [
+              54.25335367168915,
+              108.22307768692505
+            ],
+            [
+              54.89560191197619,
+              108.21234886311802
+            ],
+            [
+              61.12787862751709,
+              108.15818724689385
+            ],
+            [
+              64.20971116771219,
+              107.10127783296542
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 4,
+          "held_karp_states": 2048,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 46.723048311273345,
+          "n_targets": 8,
+          "raw_point_count": 256,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 858,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 256,
+          "station": 2,
+          "tsp_lb_m": 12101.486960292024
+        }
+      ],
+      "status": "EXACT",
+      "targets": 20,
+      "wall_s": 0.917
+    },
+    {
+      "anchor": {
+        "M_return": 79.47485804779748,
+        "cost": 249.41126588643058,
+        "operating_minutes": 269.6225317728612,
+        "solution_sha256": "db517964c7e391d0b3e09a7412ca29340ad76b50bc0b5cf822666cac9e88fc91"
+      },
+      "anchor_eligible": false,
+      "cap": {
+        "cost_budget": 249.41126598643058,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 269.62253197286117,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 79.47485804779748,
+        "exact_M": 69.44480420005257,
+        "exact_vs_anchor_pct": -12.620411151552696
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 0.0,
+        "abs_diff_operating_vs_prediction": 0.0,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 69.44480420005257,
+        "cap_slack_operating": 1.9999998812636477e-07,
+        "cost": 249.41126588643058,
+        "headroom_vs_anchor_min": 10.03005384774491,
+        "headroom_vs_anchor_pct": 12.620411151552696,
+        "operating_minutes": 269.6225317728612,
+        "per_station_makespan": [
+          47.404403738669316,
+          67.66183816053679,
+          69.44480420005257,
+          0.0
+        ],
+        "per_station_operating": [
+          47.404403738669316,
+          107.65953735398836,
+          114.55859068020348,
+          0.0
+        ]
+      },
+      "instance_sha256": "4c1dad25ecc2be3c0034f0fdf9739babc012254abbd745ea063f8637ce1f8781",
+      "map": "4x20_o1",
+      "scorer_recheck": {
+        "M_return": 69.44480420005257,
+        "admissible": true,
+        "cost": 249.41126588643058,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 269.6225317728612
+      },
+      "sites": 4,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "13eeced95417452e078d0a14033e8a2e9128bf345f2df9cebe69f1b4786ec09d",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                47.404403739,
+                47.404403739
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                47.404403739,
+                47.404403739
+              ]
+            ],
+            "partitions": 15
+          },
+          "dp_transitions": 39,
+          "enumeration": "held_karp states 2^n*n=64; partition DP transitions=39; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              47.404403738669316,
+              47.404403738669316
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 64,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 44.51360853004024,
+          "n_targets": 4,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 122,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 0,
+          "tsp_lb_m": 4062.247677036216
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                55.563494404,
+                110.223827205
+              ],
+              [
+                57.661387356,
+                108.178062674
+              ],
+              [
+                67.661838161,
+                107.659537354
+              ]
+            ],
+            "frontier_size": 3,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                55.563494404,
+                110.223827205
+              ],
+              [
+                57.661387356,
+                108.178062674
+              ],
+              [
+                67.661838161,
+                107.659537354
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 3418,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=3418; subset splits=256",
+          "exact": true,
+          "frontier": [
+            [
+              55.56349440389853,
+              110.22382720489766
+            ],
+            [
+              57.66138735625778,
+              108.17806267378569
+            ],
+            [
+              67.66183816053679,
+              107.65953735398836
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 2048,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 47.2468052538397,
+          "n_targets": 8,
+          "raw_point_count": 256,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 690,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 256,
+          "station": 1,
+          "tsp_lb_m": 13044.249456911462
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                60.286908643,
+                119.29125475
+              ],
+              [
+                68.645627355,
+                118.11346997
+              ],
+              [
+                69.4448042,
+                114.55859068
+              ]
+            ],
+            "frontier_size": 3,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                60.286908643,
+                119.29125475
+              ],
+              [
+                68.645627355,
+                118.11346997
+              ],
+              [
+                69.4448042,
+                114.55859068
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 3099,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=3099; subset splits=256",
+          "exact": true,
+          "frontier": [
+            [
+              60.286908643494286,
+              119.29125474976965
+            ],
+            [
+              68.64562735525027,
+              118.11346997034084
+            ],
+            [
+              69.44480420005257,
+              114.55859068020348
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 2048,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 49.54278840770027,
+          "n_targets": 8,
+          "raw_point_count": 256,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 572,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 256,
+          "station": 2,
+          "tsp_lb_m": 17177.019133860485
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 3
+        }
+      ],
+      "status": "ANCHOR_NOT_ELIGIBLE_REFERENCE_ONLY",
+      "targets": 20,
+      "wall_s": 0.881
+    },
+    {
+      "anchor": {
+        "M_return": 120.94155339867748,
+        "cost": 303.4640424912845,
+        "operating_minutes": 322.12808498256896,
+        "solution_sha256": "d6b263f7e9d6bcc8dff935019fb2d04d24ed2f1012f2e8294faf26b5833bcf29"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 303.4640425912845,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 322.12808518256895,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 120.94155339867748,
+        "exact_M": 120.94155339867747,
+        "exact_vs_anchor_pct": -1.1750183717548812e-14,
+        "joint12_M": 120.94155339867747,
+        "joint12_headroom_captured_pct": null,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 120.94155339867747,
+        "joint6_headroom_captured_pct": null,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 120.94155339867747,
+        "lpt_headroom_captured_pct": null,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 0.0,
+        "abs_diff_operating_vs_prediction": 0.0,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 120.94155339867747,
+        "cap_slack_operating": 1.9999998812636477e-07,
+        "cost": 303.4640424912845,
+        "headroom_vs_anchor_min": 1.4210854715202004e-14,
+        "headroom_vs_anchor_pct": 1.1750183717548812e-14,
+        "operating_minutes": 322.12808498256896,
+        "per_station_makespan": [
+          40.82471942655216,
+          120.94155339867747,
+          50.31580035361806,
+          63.16110601459169
+        ],
+        "per_station_operating": [
+          70.93920131998678,
+          120.94155339867747,
+          67.08622424931303,
+          63.16110601459169
+        ]
+      },
+      "instance_sha256": "e173dab64634fd8788e7f7ca8a85c8cb8fd144444dba82f55cfd31eabe8246d1",
+      "map": "4x25_o1",
+      "scorer_recheck": {
+        "M_return": 120.94155339867747,
+        "admissible": true,
+        "cost": 303.4640424912845,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 322.12808498256896
+      },
+      "sites": 4,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "d5bc34da6358cfc0908b41025cb083792b6f59b313afbe41300d877bd53b6c2f",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                40.824719427,
+                70.93920132
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                40.824719427,
+                70.93920132
+              ]
+            ],
+            "partitions": 52
+          },
+          "dp_transitions": 192,
+          "enumeration": "held_karp states 2^n*n=160; partition DP transitions=192; subset splits=32",
+          "exact": true,
+          "frontier": [
+            [
+              40.82471942655216,
+              70.93920131998678
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 160,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 31.353739423904,
+          "n_targets": 5,
+          "raw_point_count": 32,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1476,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 32,
+          "station": 0,
+          "tsp_lb_m": 11436.730963027198
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 11935,
+          "enumeration": "held_karp states 2^n*n=10240; partition DP transitions=11935; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              120.94155339867747,
+              120.94155339867747
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 10240,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 112.66235001034883,
+          "n_targets": 10,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 0,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 1,
+          "tsp_lb_m": 11396.115009313951
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                38.55980499,
+                70.687449348
+              ],
+              [
+                39.430351799,
+                69.377527724
+              ],
+              [
+                42.312375606,
+                68.17648438
+              ],
+              [
+                50.315800354,
+                67.086224249
+              ]
+            ],
+            "frontier_size": 4,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                38.55980499,
+                70.687449348
+              ],
+              [
+                39.430351799,
+                69.377527724
+              ],
+              [
+                42.312375606,
+                68.17648438
+              ],
+              [
+                50.315800354,
+                67.086224249
+              ]
+            ],
+            "partitions": 52
+          },
+          "dp_transitions": 214,
+          "enumeration": "held_karp states 2^n*n=160; partition DP transitions=214; subset splits=32",
+          "exact": true,
+          "frontier": [
+            [
+              38.559804990171074,
+              70.68744934830828
+            ],
+            [
+              39.43035179906141,
+              69.37752772403863
+            ],
+            [
+              42.312375606166086,
+              68.17648437980512
+            ],
+            [
+              50.31580035361806,
+              67.08622424931303
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 4,
+          "held_karp_states": 160,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 29.611505996137222,
+          "n_targets": 5,
+          "raw_point_count": 32,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1662,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 32,
+          "station": 2,
+          "tsp_lb_m": 8300.710793047001
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                63.161106015,
+                63.161106015
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                63.161106015,
+                63.161106015
+              ]
+            ],
+            "partitions": 52
+          },
+          "dp_transitions": 111,
+          "enumeration": "held_karp states 2^n*n=160; partition DP transitions=111; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              63.16110601459169,
+              63.16110601459169
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 160,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 57.0109748534909,
+          "n_targets": 5,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 32,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 3,
+          "tsp_lb_m": 6309.877368141811
+        }
+      ],
+      "status": "EXACT",
+      "targets": 25,
+      "wall_s": 0.101
+    },
+    {
+      "anchor": {
+        "M_return": 130.68509860174757,
+        "cost": 317.88261003537605,
+        "operating_minutes": 375.36522007075206,
+        "solution_sha256": "6adbf341077cdbe4940f38622840dc142a9e129a78d667e91d912f33783abdbe"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 317.88261013537607,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 375.36522027075205,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 130.68509860174757,
+        "exact_M": 96.92640890392394,
+        "exact_vs_anchor_pct": -25.832088018466855,
+        "joint12_M": 96.92640890392394,
+        "joint12_headroom_captured_pct": 100.0,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 96.92640890392394,
+        "joint6_headroom_captured_pct": 100.0,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 96.92640890392394,
+        "lpt_headroom_captured_pct": 100.0,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 5.684341886080802e-14,
+        "abs_diff_operating_vs_prediction": 1.1368683772161603e-13,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 96.92640890392394,
+        "cap_slack_operating": 1.999999312829459e-07,
+        "cost": 317.88261003537605,
+        "headroom_vs_anchor_min": 33.75868969782363,
+        "headroom_vs_anchor_pct": 25.832088018466855,
+        "operating_minutes": 375.3652200707521,
+        "per_station_makespan": [
+          48.54398759181251,
+          96.92640890392394,
+          0.0,
+          94.45592224566312
+        ],
+        "per_station_operating": [
+          89.41956117479468,
+          131.77637229344282,
+          0.0,
+          154.1692866025146
+        ]
+      },
+      "instance_sha256": "1a3b3534815b284173ece990b02afbdaeac4947f3665221e5928ade1561ae0ad",
+      "map": "4x30_o1",
+      "scorer_recheck": {
+        "M_return": 96.92640890392394,
+        "admissible": true,
+        "cost": 317.882610035376,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 375.365220070752
+      },
+      "sites": 4,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "48c8aaca262dda1b9cae406945fc58ade1745b0fb0cfb9a20d7d7b9d11eecb81",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                48.030079249,
+                95.456056376
+              ],
+              [
+                48.543987592,
+                89.419561175
+              ]
+            ],
+            "frontier_size": 2,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                48.030079249,
+                95.456056376
+              ],
+              [
+                48.543987592,
+                89.419561175
+              ]
+            ],
+            "partitions": 877
+          },
+          "dp_transitions": 1518,
+          "enumeration": "held_karp states 2^n*n=896; partition DP transitions=1518; subset splits=128",
+          "exact": true,
+          "frontier": [
+            [
+              48.030079249161005,
+              95.45605637555815
+            ],
+            [
+              48.54398759181251,
+              89.41956117479468
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 2,
+          "held_karp_states": 896,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 40.44640470218493,
+          "n_targets": 7,
+          "raw_point_count": 128,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1117,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 128,
+          "station": 0,
+          "tsp_lb_m": 9803.528463932866
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 62327,
+          "enumeration": "held_karp states 2^n*n=22528; partition DP transitions=62327; subset splits=2048",
+          "exact": true,
+          "frontier": [
+            [
+              68.80697114458818,
+              135.44722608334519
+            ],
+            [
+              69.83245278001743,
+              133.233169574969
+            ],
+            [
+              93.25878509992779,
+              132.59312614817793
+            ],
+            [
+              96.69692913193194,
+              131.82765053873496
+            ],
+            [
+              96.92640890392394,
+              131.77637229344282
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 5,
+          "held_karp_states": 22528,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 60.00809743567235,
+          "n_targets": 11,
+          "raw_point_count": 2048,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 286,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 2048,
+          "station": 1,
+          "tsp_lb_m": 9014.57538421023
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 2
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 103047,
+          "enumeration": "held_karp states 2^n*n=49152; partition DP transitions=103047; subset splits=4096",
+          "exact": true,
+          "frontier": [
+            [
+              79.73159449234268,
+              158.098910360567
+            ],
+            [
+              93.94810557021721,
+              156.89101408643586
+            ],
+            [
+              94.45592224566312,
+              154.1692866025146
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 49152,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 69.57768747052441,
+          "n_targets": 12,
+          "raw_point_count": 4096,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 123,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 4096,
+          "station": 3,
+          "tsp_lb_m": 17239.83744694395
+        }
+      ],
+      "status": "EXACT",
+      "targets": 30,
+      "wall_s": 0.402
+    },
+    {
+      "anchor": {
+        "M_return": 177.08268094693847,
+        "cost": 373.2586748213813,
+        "operating_minutes": 461.7173496427626,
+        "solution_sha256": "ff1769ca48c154fe136e8f5e1d9d756d0c17695b071ca3ac1f68357b52ad0d71"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 373.2586749213813,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 461.7173498427626,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 177.08268094693847,
+        "exact_M": 136.81458559978296,
+        "exact_vs_anchor_pct": -22.73971408825776,
+        "joint12_M": 136.81458559978296,
+        "joint12_headroom_captured_pct": 100.0,
+        "joint12_remaining_gap_vs_exact_pct": 0.0,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 136.81458559978296,
+        "joint6_headroom_captured_pct": 100.0,
+        "joint6_remaining_gap_vs_exact_pct": 0.0,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 136.81458559978296,
+        "lpt_headroom_captured_pct": 100.0,
+        "lpt_remaining_gap_vs_exact_pct": 0.0,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "consistency": {
+        "abs_diff_M_return_vs_independent_eval": 0.0,
+        "abs_diff_M_return_vs_prediction": 0.0,
+        "abs_diff_cost_vs_independent_eval": 0.0,
+        "abs_diff_cost_vs_prediction": 5.684341886080802e-14,
+        "abs_diff_operating_vs_prediction": 5.684341886080802e-14,
+        "independent_eval_issues": [],
+        "match_1e-9": true,
+        "required_agreement": 1e-09
+      },
+      "exact": {
+        "M_return": 136.81458559978296,
+        "cap_slack_operating": 0.628178939850045,
+        "cost": 372.9445854514563,
+        "headroom_vs_anchor_min": 40.26809534715551,
+        "headroom_vs_anchor_pct": 22.73971408825776,
+        "operating_minutes": 461.08917090291254,
+        "per_station_makespan": [
+          67.73271145432875,
+          51.84608441484785,
+          87.21376413862741,
+          0.0,
+          136.81458559978296
+        ],
+        "per_station_operating": [
+          67.73271145432875,
+          51.84608441484785,
+          153.7234357396467,
+          0.0,
+          187.7869392940892
+        ]
+      },
+      "instance_sha256": "938f793dfd908b3b793f0ee7c7986bab3e0d9f25a2dbfe56eff4e8054211eb2c",
+      "map": "5x35_o1",
+      "scorer_recheck": {
+        "M_return": 136.81458559978296,
+        "admissible": true,
+        "cost": 372.94458545145625,
+        "cost_cap_satisfied": true,
+        "domain_valid": true,
+        "issues": [],
+        "operating_minutes": 461.0891709029125
+      },
+      "sites": 5,
+      "solution_path": "<EXECUTION_PATH>",
+      "solution_sha256": "c4e66726ceabcad77d36ec4f85a2ce54d3f24c48199b0033836caaa01fcf599f",
+      "station_frontiers": [
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                67.732711454,
+                67.732711454
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                67.732711454,
+                67.732711454
+              ]
+            ],
+            "partitions": 52
+          },
+          "dp_transitions": 97,
+          "enumeration": "held_karp states 2^n*n=160; partition DP transitions=97; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              67.73271145432875,
+              67.73271145432875
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 160,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 60.45651677007667,
+          "n_targets": 5,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 19,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 0,
+          "tsp_lb_m": 9410.865093069002
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                51.846084415,
+                51.846084415
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                51.846084415,
+                51.846084415
+              ]
+            ],
+            "partitions": 15
+          },
+          "dp_transitions": 39,
+          "enumeration": "held_karp states 2^n*n=64; partition DP transitions=39; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              51.84608441484785,
+              51.84608441484785
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 64,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 46.92952726623264,
+          "n_targets": 4,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 85,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 1,
+          "tsp_lb_m": 6236.574539609379
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 143951,
+          "enumeration": "held_karp states 2^n*n=49152; partition DP transitions=143951; subset splits=4096",
+          "exact": true,
+          "frontier": [
+            [
+              77.17432238855041,
+              154.33824166960585
+            ],
+            [
+              78.28497182291409,
+              154.30042132328742
+            ],
+            [
+              87.21376413862741,
+              153.7234357396467
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 49152,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 69.06161667702607,
+          "n_targets": 12,
+          "raw_point_count": 4096,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 185,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 4096,
+          "station": 2,
+          "tsp_lb_m": 16310.91001864693
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 3
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 552607,
+          "enumeration": "held_karp states 2^n*n=229376; partition DP transitions=552607; subset splits=16384",
+          "exact": true,
+          "frontier": [
+            [
+              97.19910149453386,
+              189.3007520963115
+            ],
+            [
+              136.81458559978296,
+              187.7869392940892
+            ],
+            [
+              187.42500730840024,
+              187.42500730840024
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 2.842170943040401e-14,
+          "frontier_size": 3,
+          "held_karp_states": 229376,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 81.87479915166958,
+          "n_targets": 14,
+          "raw_point_count": 16384,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 36,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 16384,
+          "station": 4,
+          "tsp_lb_m": 21374.638473005227
+        }
+      ],
+      "status": "EXACT",
+      "targets": 35,
+      "wall_s": 1.359
+    },
+    {
+      "anchor": {
+        "M_return": 182.00159493058095,
+        "cost": 479.8245266796109,
+        "operating_minutes": 643.6490533592219,
+        "solution_sha256": "b6e17e5819cdacefa8c158f05962141de08db45452c19ee02a2fab2fa818278a"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 479.82452677961095,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 643.6490535592219,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 182.00159493058095,
+        "joint12_M": 134.6288149050901,
+        "joint12_status": "ONTIME_VALID",
+        "joint6_M": 134.6288149050901,
+        "joint6_status": "ONTIME_VALID",
+        "lpt_M": 142.45984397583175,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "instance_sha256": "67a83103d5158dfc3a3fafce23e441d3e532c9c678ae8d4268272fbbb46189b0",
+      "map": "6x50_o1",
+      "sites": 6,
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 8191,
+          "enumeration": "held_karp states 2^n*n=4608; partition DP transitions=8191; subset splits=512",
+          "exact": true,
+          "frontier": [
+            [
+              63.70166871485865,
+              124.94530161237404
+            ],
+            [
+              65.39730681900433,
+              124.85998913285582
+            ],
+            [
+              65.61789611024872,
+              124.85944295334369
+            ],
+            [
+              65.75525504206279,
+              123.8381771335716
+            ],
+            [
+              66.10286749904462,
+              121.54659488940104
+            ],
+            [
+              71.35705833239476,
+              120.96397876738608
+            ],
+            [
+              77.83050489746235,
+              119.84309768204172
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 7,
+          "held_karp_states": 4608,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 53.040314768926,
+          "n_targets": 9,
+          "raw_point_count": 512,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 457,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 512,
+          "station": 0,
+          "tsp_lb_m": 14472.5665840668
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 1
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 114.95810220237783,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 200.0,
+            "tsp_lb_m": 26924.583964280107,
+            "tsp_lb_min": 29.916204404755675
+          },
+          "makespan_lb": 114.95810220237783,
+          "n_targets": 20,
+          "station": 2,
+          "tsp_lb_m": 26924.583964280107
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 3
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                37.399112638,
+                37.399112638
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                37.399112638,
+                37.399112638
+              ]
+            ],
+            "partitions": 5
+          },
+          "dp_transitions": 13,
+          "enumeration": "held_karp states 2^n*n=24; partition DP transitions=13; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              37.39911263784838,
+              37.39911263784838
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 24,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 35.750231230796686,
+          "n_targets": 3,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 239,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 4,
+          "tsp_lb_m": 5175.208107717019
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 98.43842931298771,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 180.0,
+            "tsp_lb_m": 15189.172763377872,
+            "tsp_lb_min": 16.876858625975412
+          },
+          "makespan_lb": 98.43842931298771,
+          "n_targets": 18,
+          "station": 5,
+          "tsp_lb_m": 15189.172763377872
+        }
+      ],
+      "status": "UNKNOWN_NONEXACT_STATION",
+      "targets": 50,
+      "unknown": {
+        "bracket_width": 19.67071270271228,
+        "global_M_lower_bound": 114.95810220237783,
+        "global_M_upper_bound_from_feasible": 134.6288149050901,
+        "nonexact_stations": [
+          2,
+          5
+        ],
+        "reason": "at least one station has more targets than max_n_exact=14"
+      },
+      "wall_s": 0.049
+    },
+    {
+      "anchor": {
+        "M_return": 229.58557696944607,
+        "cost": 600.5632582000899,
+        "operating_minutes": 829.5265164001798,
+        "solution_sha256": "91fdee294f1a9f7f4b5fa69789bd9e1419b87e4988ac4af7bdb0dfebd035c6da"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 600.5632583000898,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 829.5265166001799,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 229.58557696944607,
+        "joint12_M": 228.24534670779357,
+        "joint12_status": "ONTIME_VALID",
+        "lpt_M": 229.58557696944607,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "instance_sha256": "01f30896c4d8ec0734cf1d42434cfbcaafd1f1a7fa83a0f3a035a3884dc137ad",
+      "map": "7x65_o1",
+      "sites": 7,
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 71167,
+          "enumeration": "held_karp states 2^n*n=22528; partition DP transitions=71167; subset splits=2048",
+          "exact": true,
+          "frontier": [
+            [
+              70.26910705958275,
+              139.91755133872527
+            ],
+            [
+              70.33241164225687,
+              138.60489379888986
+            ],
+            [
+              70.71891926989483,
+              138.11824283911415
+            ],
+            [
+              71.21247999344507,
+              135.77884589631344
+            ],
+            [
+              71.62699554416038,
+              135.71759759486383
+            ],
+            [
+              71.7695758020534,
+              135.4008940589337
+            ],
+            [
+              73.83569033716722,
+              135.21825482806463
+            ],
+            [
+              95.26419524699779,
+              134.96287947210857
+            ],
+            [
+              100.44895986103421,
+              134.69746923231028
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 9,
+          "held_karp_states": 22528,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 60.98209219390165,
+          "n_targets": 11,
+          "raw_point_count": 2048,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 399,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 2048,
+          "station": 0,
+          "tsp_lb_m": 10767.765949022973
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                96.714707101,
+                96.714707101
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                96.714707101,
+                96.714707101
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 1848,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=1848; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              96.71470710142253,
+              96.71470710142253
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 2048,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 88.69757390747249,
+          "n_targets": 8,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 0,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 1,
+          "tsp_lb_m": 7827.816516725243
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 82.91430236113167,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 150.0,
+            "tsp_lb_m": 14245.744250037018,
+            "tsp_lb_min": 15.828604722263353
+          },
+          "makespan_lb": 82.91430236113167,
+          "n_targets": 15,
+          "station": 2,
+          "tsp_lb_m": 14245.744250037018
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 1,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 202.40391201520376,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 1,
+            "sum_service_min": 180.0,
+            "tsp_lb_m": 20163.520813683375,
+            "tsp_lb_min": 22.40391201520375
+          },
+          "makespan_lb": 202.40391201520376,
+          "n_targets": 18,
+          "station": 3,
+          "tsp_lb_m": 20163.520813683375
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 4
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 5
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 252859,
+          "enumeration": "held_karp states 2^n*n=106496; partition DP transitions=252859; subset splits=8192",
+          "exact": true,
+          "frontier": [
+            [
+              89.43774118393489,
+              175.40832576544312
+            ],
+            [
+              92.34582581855369,
+              172.84951966094206
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 2,
+          "held_karp_states": 106496,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 75.17425731773382,
+          "n_targets": 13,
+          "raw_point_count": 8192,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 56,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 8192,
+          "station": 6,
+          "tsp_lb_m": 18313.663171920874
+        }
+      ],
+      "status": "UNKNOWN_NONEXACT_STATION",
+      "targets": 65,
+      "unknown": {
+        "bracket_width": 25.841434692589814,
+        "global_M_lower_bound": 202.40391201520376,
+        "global_M_upper_bound_from_feasible": 228.24534670779357,
+        "nonexact_stations": [
+          2,
+          3
+        ],
+        "reason": "at least one station has more targets than max_n_exact=14"
+      },
+      "wall_s": 0.755
+    },
+    {
+      "anchor": {
+        "M_return": 240.78810976112106,
+        "cost": 692.5286116546125,
+        "operating_minutes": 1013.457223309225,
+        "solution_sha256": "0c1fda1467cf02076ca5be5ebecb0c061dcb83bf11f1f99616c8aa37b9f1bf62"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 692.5286117546125,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 1013.4572235092251,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 240.78810976112106,
+        "lpt_M": 199.71161345458106,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "instance_sha256": "daf0afc82dd1b96565c9bc4c74e8bd5077b550c9245d6fe65096dc9e6d83c16c",
+      "map": "8x80_o1",
+      "sites": 8,
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 140847,
+          "enumeration": "held_karp states 2^n*n=106496; partition DP transitions=140847; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              159.62768106624628,
+              159.62768106624628
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 106496,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 143.59053973645152,
+          "n_targets": 13,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 0,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 0,
+          "tsp_lb_m": 12231.48576280637
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 1
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 62675,
+          "enumeration": "held_karp states 2^n*n=49152; partition DP transitions=62675; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              147.33032003364877,
+              147.33032003364877
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 49152,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 133.1279631292122,
+          "n_targets": 12,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 0,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 2,
+          "tsp_lb_m": 11815.166816290968
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 3
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 129.17092990401494,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 230.0,
+            "tsp_lb_m": 25507.67382722689,
+            "tsp_lb_min": 28.341859808029877
+          },
+          "makespan_lb": 129.17092990401494,
+          "n_targets": 23,
+          "station": 4,
+          "tsp_lb_m": 25507.67382722689
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 5
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 123.01683381346275,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 220.0,
+            "tsp_lb_m": 23430.300864232948,
+            "tsp_lb_min": 26.033667626925496
+          },
+          "makespan_lb": 123.01683381346275,
+          "n_targets": 22,
+          "station": 6,
+          "tsp_lb_m": 23430.300864232948
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 23833,
+          "enumeration": "held_karp states 2^n*n=10240; partition DP transitions=23833; subset splits=1024",
+          "exact": true,
+          "frontier": [
+            [
+              65.31054372144546,
+              129.56685645138356
+            ],
+            [
+              65.46003393594404,
+              129.54158308623022
+            ],
+            [
+              76.1155303692929,
+              126.89474274603037
+            ],
+            [
+              101.37041599964759,
+              126.44741723774007
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 4,
+          "held_karp_states": 10240,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 58.049138061119585,
+          "n_targets": 10,
+          "raw_point_count": 1024,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 415,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1024,
+          "station": 7,
+          "tsp_lb_m": 14488.44851001525
+        }
+      ],
+      "status": "UNKNOWN_NONEXACT_STATION",
+      "targets": 80,
+      "unknown": {
+        "bracket_width": 40.08393238833477,
+        "global_M_lower_bound": 159.62768106624628,
+        "global_M_upper_bound_from_feasible": 199.71161345458106,
+        "nonexact_stations": [
+          4,
+          6
+        ],
+        "reason": "at least one station has more targets than max_n_exact=14"
+      },
+      "wall_s": 0.598
+    },
+    {
+      "anchor": {
+        "M_return": 247.67794867766273,
+        "cost": 881.6416447003799,
+        "operating_minutes": 1218.0832894007597,
+        "solution_sha256": "65ffa54a3613927a1d02febd8ec66c6037cfceff66b2fcf3af6b005a4a9d460b"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 881.6416448003798,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 1218.0832896007596,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 247.67794867766273,
+        "lpt_M": 247.67794867766273,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "instance_sha256": "e0ae8575009433bbdaf42256c7809948c54d54f17259cf22fd859c5335cc3679",
+      "map": "9x95_o1",
+      "sites": 9,
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 762058,
+          "enumeration": "held_karp states 2^n*n=229376; partition DP transitions=762058; subset splits=16384",
+          "exact": true,
+          "frontier": [
+            [
+              89.91514668117975,
+              179.5971415587683
+            ],
+            [
+              90.31900017848318,
+              179.48229396923685
+            ],
+            [
+              91.91860034974411,
+              179.32102620785287
+            ],
+            [
+              96.28138810862185,
+              178.7331139250432
+            ],
+            [
+              97.70138457368878,
+              178.03507691944566
+            ],
+            [
+              98.1262839965652,
+              177.9412752554872
+            ],
+            [
+              139.1873544328839,
+              177.9202293299142
+            ],
+            [
+              140.78695460414482,
+              177.75896156853022
+            ],
+            [
+              148.042541631507,
+              177.73782356071746
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 2.842170943040401e-14,
+          "frontier_size": 9,
+          "held_karp_states": 229376,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 78.86233085692473,
+          "n_targets": 14,
+          "raw_point_count": 16384,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 63,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 16384,
+          "station": 0,
+          "tsp_lb_m": 15952.195542464526
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 176.23668210349163,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 320.0,
+            "tsp_lb_m": 29226.027786284936,
+            "tsp_lb_min": 32.47336420698326
+          },
+          "makespan_lb": 176.23668210349163,
+          "n_targets": 32,
+          "station": 1,
+          "tsp_lb_m": 29226.027786284936
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 120.76654682993299,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 220.0,
+            "tsp_lb_m": 19379.7842938794,
+            "tsp_lb_min": 21.533093659865997
+          },
+          "makespan_lb": 120.76654682993299,
+          "n_targets": 22,
+          "station": 2,
+          "tsp_lb_m": 19379.7842938794
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                18.766945571,
+                18.766945571
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                18.766945571,
+                18.766945571
+              ]
+            ],
+            "partitions": 1
+          },
+          "dp_transitions": 1,
+          "enumeration": "held_karp states 2^n*n=2; partition DP transitions=1; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              18.766945570766694,
+              18.766945570766694
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 2,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 18.766945570766694,
+          "n_targets": 1,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 1027,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 3,
+          "tsp_lb_m": 7890.2510136900255
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 679002,
+          "enumeration": "held_karp states 2^n*n=229376; partition DP transitions=679002; subset splits=16384",
+          "exact": true,
+          "frontier": [
+            [
+              90.8500559222228,
+              181.23403498670248
+            ],
+            [
+              91.09878724521039,
+              180.73541377515932
+            ],
+            [
+              93.02277117502533,
+              178.28726148916004
+            ],
+            [
+              139.13395330653066,
+              176.94079569846832
+            ],
+            [
+              142.2431554511876,
+              176.6595743361844
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 2.842170943040401e-14,
+          "frontier_size": 5,
+          "held_karp_states": 229376,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 78.73733229245454,
+          "n_targets": 14,
+          "raw_point_count": 16384,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 62,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 16384,
+          "station": 4,
+          "tsp_lb_m": 15727.198126418178
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 5
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                39.026802444,
+                39.026802444
+              ]
+            ],
+            "frontier_size": 1,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                39.026802444,
+                39.026802444
+              ]
+            ],
+            "partitions": 5
+          },
+          "dp_transitions": 13,
+          "enumeration": "held_karp states 2^n*n=24; partition DP transitions=13; subset splits=1",
+          "exact": true,
+          "frontier": [
+            [
+              39.02680244399721,
+              39.02680244399721
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 1,
+          "held_karp_states": 24,
+          "kind": 1,
+          "lower_bound": null,
+          "makespan_lb": 36.27103799969048,
+          "n_targets": 3,
+          "raw_point_count": 1,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 283,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "1": 0.81
+          },
+          "slot_duty_limit": 480.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1,
+          "station": 6,
+          "tsp_lb_m": 5643.934199721429
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 10612,
+          "enumeration": "held_karp states 2^n*n=4608; partition DP transitions=10612; subset splits=512",
+          "exact": true,
+          "frontier": [
+            [
+              60.41929251548751,
+              116.72724917248166
+            ],
+            [
+              60.573409875632436,
+              113.95118721774644
+            ],
+            [
+              61.616428488298894,
+              112.18496881595345
+            ],
+            [
+              98.29590978199974,
+              110.98783284314206
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 4,
+          "held_karp_states": 4608,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 50.20844173815106,
+          "n_targets": 9,
+          "raw_point_count": 512,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 716,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 512,
+          "station": 7,
+          "tsp_lb_m": 9375.195128671901
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 8
+        }
+      ],
+      "status": "UNKNOWN_NONEXACT_STATION",
+      "targets": 95,
+      "unknown": {
+        "bracket_width": 71.4412665741711,
+        "global_M_lower_bound": 176.23668210349163,
+        "global_M_upper_bound_from_feasible": 247.67794867766273,
+        "nonexact_stations": [
+          1,
+          2
+        ],
+        "reason": "at least one station has more targets than max_n_exact=14"
+      },
+      "wall_s": 2.403
+    },
+    {
+      "anchor": {
+        "M_return": 318.73686391098266,
+        "cost": 1006.0276002415224,
+        "operating_minutes": 1435.6552004830446,
+        "solution_sha256": "2ce209249daa8b25b9a317065b0af04436ef03cc77c91f7173902b1cb81ac743"
+      },
+      "anchor_eligible": true,
+      "cap": {
+        "cost_budget": 1006.0276003415223,
+        "cost_tolerance": 1e-07,
+        "epsilon": 0.0,
+        "operating_cap_min": 1435.6552006830445,
+        "operating_cap_rule": "cap_op = anchor_operating + 2 * cost_tolerance"
+      },
+      "comparison": {
+        "anchor_M": 318.73686391098266,
+        "lpt_M": 255.35405615247157,
+        "lpt_status": "ONTIME_VALID"
+      },
+      "instance_sha256": "920bee0182957d36b99ef9944f75b8ec4b69666f6981d9eb8e21b975304eda34",
+      "map": "10x110_o1",
+      "sites": 10,
+      "station_frontiers": [
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 0
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 23212,
+          "enumeration": "held_karp states 2^n*n=10240; partition DP transitions=23212; subset splits=1024",
+          "exact": true,
+          "frontier": [
+            [
+              64.60728989297068,
+              128.64744790917376
+            ],
+            [
+              67.05133401879476,
+              128.63384322969185
+            ],
+            [
+              75.90671094479214,
+              126.90824098832579
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 10240,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 57.25660834455019,
+          "n_targets": 10,
+          "raw_point_count": 1024,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 405,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 1024,
+          "station": 1,
+          "tsp_lb_m": 13061.895020190332
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 124.25970510692477,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 220.0,
+            "tsp_lb_m": 25667.46919246459,
+            "tsp_lb_min": 28.519410213849543
+          },
+          "makespan_lb": 124.25970510692477,
+          "n_targets": 22,
+          "station": 2,
+          "tsp_lb_m": 25667.46919246459
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 168.0972894572186,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 300.0,
+            "tsp_lb_m": 32575.12102299349,
+            "tsp_lb_min": 36.194578914437216
+          },
+          "makespan_lb": 168.0972894572186,
+          "n_targets": 30,
+          "station": 3,
+          "tsp_lb_m": 32575.12102299349
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 2,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 95.4572314023929,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 2,
+            "sum_service_min": 170.0,
+            "tsp_lb_m": 18823.016524307237,
+            "tsp_lb_min": 20.91446280478582
+          },
+          "makespan_lb": 95.4572314023929,
+          "n_targets": 17,
+          "station": 4,
+          "tsp_lb_m": 18823.016524307237
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                25.413437458,
+                44.625148536
+              ],
+              [
+                29.573289758,
+                42.820742505
+              ],
+              [
+                39.833162196,
+                39.833162196
+              ]
+            ],
+            "frontier_size": 3,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                25.413437458,
+                44.625148536
+              ],
+              [
+                29.573289758,
+                42.820742505
+              ],
+              [
+                39.833162196,
+                39.833162196
+              ]
+            ],
+            "partitions": 5
+          },
+          "dp_transitions": 26,
+          "enumeration": "held_karp states 2^n*n=24; partition DP transitions=26; subset splits=8",
+          "exact": true,
+          "frontier": [
+            [
+              25.41343745819999,
+              44.62514853601431
+            ],
+            [
+              29.573289757586736,
+              42.820742504538586
+            ],
+            [
+              39.83316219564749,
+              39.83316219564749
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 24,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 19.605855538907157,
+          "n_targets": 3,
+          "raw_point_count": 8,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 2000,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 8,
+          "station": 5,
+          "tsp_lb_m": 8290.539970032884
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 6
+        },
+        {
+          "bruteforce": null,
+          "dp_transitions": 0,
+          "exact": true,
+          "frontier": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "kind": 0,
+          "lower_bound": null,
+          "n_targets": 0,
+          "note": "empty station",
+          "splits": 1,
+          "station": 7
+        },
+        {
+          "bruteforce": {
+            "bf_head": [
+              [
+                57.575471435,
+                114.762448252
+              ],
+              [
+                61.426708204,
+                112.43604626
+              ],
+              [
+                67.274935293,
+                109.894226773
+              ]
+            ],
+            "frontier_size": 3,
+            "match": true,
+            "max_abs_M_diff": 0.0,
+            "ours_head": [
+              [
+                57.575471435,
+                114.762448252
+              ],
+              [
+                61.426708204,
+                112.43604626
+              ],
+              [
+                67.274935293,
+                109.894226773
+              ]
+            ],
+            "partitions": 4140
+          },
+          "dp_transitions": 3151,
+          "enumeration": "held_karp states 2^n*n=2048; partition DP transitions=3151; subset splits=256",
+          "exact": true,
+          "frontier": [
+            [
+              57.5754714351514,
+              114.76244825155632
+            ],
+            [
+              61.42670820376634,
+              112.43604625969382
+            ],
+            [
+              67.2749352927164,
+              109.89422677275326
+            ]
+          ],
+          "frontier_achievable_max_abs_diff": 0.0,
+          "frontier_size": 3,
+          "held_karp_states": 2048,
+          "kind": 2,
+          "lower_bound": null,
+          "makespan_lb": 46.992854637178894,
+          "n_targets": 8,
+          "raw_point_count": 256,
+          "sample_dominance": {
+            "ok": true,
+            "samples_tested": 623,
+            "violations": 0
+          },
+          "slot_capacity": {
+            "0": 1.0,
+            "1": 0.81
+          },
+          "slot_duty_limit": 600.0,
+          "solve_note": "exact reduction: TSP per subset + set-partition DP per slot + subset split",
+          "splits": 256,
+          "station": 8,
+          "tsp_lb_m": 12587.13834692201
+        },
+        {
+          "bruteforce": null,
+          "exact": false,
+          "frontier": [],
+          "kind": 1,
+          "lower_bound": {
+            "formula": "(tsp_lb_m/speed + sum_service)/n_slots  <=  makespan_s",
+            "makespan_lb": 221.54623127901752,
+            "note": "not exact: station target count above the exact cap",
+            "slots": 1,
+            "sum_service_min": 200.0,
+            "tsp_lb_m": 19391.608151115768,
+            "tsp_lb_min": 21.54623127901752
+          },
+          "makespan_lb": 221.54623127901752,
+          "n_targets": 20,
+          "station": 9,
+          "tsp_lb_m": 19391.608151115768
+        }
+      ],
+      "status": "UNKNOWN_NONEXACT_STATION",
+      "targets": 110,
+      "unknown": {
+        "bracket_width": 33.80782487345405,
+        "global_M_lower_bound": 221.54623127901752,
+        "global_M_upper_bound_from_feasible": 255.35405615247157,
+        "nonexact_stations": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "reason": "at least one station has more targets than max_n_exact=14"
+      },
+      "wall_s": 0.529
+    }
+  ],
+  "schema": "takeover_exact_minmax_v1",
+  "summary": {
+    "all_bruteforce_ok": true,
+    "all_consistency_ok": true,
+    "all_exact_not_worse_than_heuristics": true,
+    "exact_maps": [
+      "3x10_o1",
+      "3x15_o1",
+      "3x20_o1",
+      "4x25_o1",
+      "4x30_o1",
+      "5x35_o1"
+    ],
+    "exact_maps_reference_only": [
+      "4x20_o1"
+    ],
+    "rows": 12,
+    "unknown_maps": [
+      "6x50_o1",
+      "7x65_o1",
+      "8x80_o1",
+      "9x95_o1",
+      "10x110_o1"
+    ]
+  }
+}

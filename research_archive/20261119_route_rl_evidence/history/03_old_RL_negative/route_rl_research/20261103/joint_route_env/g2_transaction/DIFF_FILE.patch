@@ -1,0 +1,1366 @@
+--- BASELINE_FILE/station_split_dp.py
++++ <LOCAL_PATH>
+@@ -1,4 +1,4 @@
+-"""Bounded exact reference for one fixed LRPHSD station target pool."""
++"""Bounded exhaustive numerical reference for a fixed station target pool."""
+ from __future__ import annotations
+ 
+ from dataclasses import dataclass
+@@ -27,7 +27,7 @@
+         self.transitions += transitions
+         if self.transitions > self.max_transitions:
+             raise BoundExceeded("transition_bound")
+-        if self.transitions % 4096 == 0 and time.perf_counter() > self.deadline:
++        if (self.transitions <= 1 or self.transitions % 1024 == 0) and time.perf_counter() >= self.deadline:
+             raise BoundExceeded("map_wallclock_cap")
+ 
+ 
+@@ -85,7 +85,7 @@
+     min_energy_slack = math.inf
+     for mask in range(1, size):
+         slack = battery - trip_energy[mask]
+-        if slack >= -EPS:
++        if trip_energy[mask] <= battery + EPS:
+             feasible_trip[mask] = True
+             min_energy_slack = min(min_energy_slack, slack)
+ 
+@@ -147,6 +147,10 @@
+             detail=kwargs.get("detail"),
+         )
+ 
++    complete_status = ("COMPLETE_FIXED_OWNER_REFERENCE" if fixed_slot_target_ids is not None
++                       else "COMPLETE_JOINT_REFERENCE")
++    if not (0 <= station_idx < len(instance.stations)):
++        return result("INPUT_INVALID", detail="station index outside instance")
+     if len(ids) != len(set(ids)):
+         return result("INPUT_INVALID", detail="duplicate target IDs")
+     missing = set(ids) - set(instance.target_ids)
+@@ -158,14 +162,14 @@
+         if ids:
+             return result("INPUT_INVALID", detail="closed station has nonempty target pool")
+         return result(
+-            "COMPLETE_REFERENCE", routes=[[], []], operating_minutes_dp=0.0,
++            complete_status, routes=[[], []], operating_minutes_dp=0.0,
+             slot_target_ids={"0": [], "1": []}, slot_dp_minutes={"0": 0.0, "1": 0.0},
+             slot_energy_slack_min={"0": None, "1": None},
+             slot_duty_slack={"0": None, "1": None},
+         )
+     if not ids:
+         return result(
+-            "COMPLETE_REFERENCE", routes=[[], []], operating_minutes_dp=0.0,
++            complete_status, routes=[[], []], operating_minutes_dp=0.0,
+             slot_target_ids={"0": [], "1": []}, slot_dp_minutes={"0": 0.0, "1": 0.0},
+             slot_energy_slack_min={"0": None, "1": None},
+             slot_duty_slack={"0": None, "1": None},
+@@ -178,7 +182,7 @@
+     targets = [instance.nodes[nid] for nid in ids]
+     radius = p.small_radius if station_type == 1 else p.large_radius
+     coverage_slack = [radius - _distance(station, node) for node in targets]
+-    if any(slack < -EPS for slack in coverage_slack):
++    if any(math.hypot(station.x - node.x, station.y - node.y) > radius + EPS for node in targets):
+         return result("INPUT_INVALID", detail="station pool violates fixed-type coverage")
+ 
+     slots = (1,) if station_type == 1 else (0, 1)
+@@ -187,7 +191,8 @@
+     speed = p.speed
+     n = len(ids)
+     size = 1 << n
+-    state_cells = 2 * n * size + 13 * size
++    # Conservative dense table, parent and reconstructed sequence cell count.
++    state_cells = (5 * n * size) // 2 + 11 * size + n * n + 4 * n + 128
+     if state_cells > MAX_STATE_CELLS:
+         return result("UNRESOLVED_STATE_BOUND", detail=f"{state_cells}>{MAX_STATE_CELLS}", state_cells=state_cells)
+ 
+@@ -206,72 +211,73 @@
+             for nid in values:
+                 forced_masks[slot] |= 1 << id_to_idx[nid]
+ 
+-    origin = [_distance(station, node) for node in targets]
+-    between = [[_distance(a, b) for b in targets] for a in targets]
+-    service_sum = [0.0] * size
+-    target_energy_sum = [0.0] * size
+-    for mask in range(1, size):
+-        bit = mask & -mask
+-        idx = bit.bit_length() - 1
+-        rest = mask ^ bit
+-        service_sum[mask] = service_sum[rest] + targets[idx].service
+-        target_energy_sum[mask] = target_energy_sum[rest] + targets[idx].energy
+-
+-    # Held-Karp open paths are accumulated in visit order; closing edge is added last.
+-    path = [[math.inf] * n for _ in range(size)]
+-    predecessor = [[-1] * n for _ in range(size)]
+-    tour_length = [math.inf] * size
+-    trip_sequence = [None] * size
+-    for j in range(n):
+-        path[1 << j][j] = origin[j]
+-
+-    for mask in range(1, size):
++    try:
++        budget.check(0)
++        origin = [_distance(station, node) for node in targets]
++        between = [[_distance(a, b) for b in targets] for a in targets]
++        service_sum = [0.0] * size
++        target_energy_sum = [0.0] * size
++        for mask in range(1, size):
++            bit = mask & -mask
++            idx = bit.bit_length() - 1
++            rest = mask ^ bit
++            service_sum[mask] = service_sum[rest] + targets[idx].service
++            target_energy_sum[mask] = target_energy_sum[rest] + targets[idx].energy
++    
++        # Held-Karp open paths are accumulated in visit order; closing edge is added last.
++        path = [[math.inf] * n for _ in range(size)]
++        predecessor = [[-1] * n for _ in range(size)]
++        tour_length = [math.inf] * size
++        trip_sequence = [None] * size
+         for j in range(n):
+-            if not (mask & (1 << j)):
+-                continue
+-            previous = mask ^ (1 << j)
+-            if not previous:
+-                continue
+-            best = math.inf
+-            best_k = -1
+-            for k in range(n):
+-                if previous & (1 << k):
++            path[1 << j][j] = origin[j]
++    
++        for mask in range(1, size):
++            for j in range(n):
++                if not (mask & (1 << j)):
++                    continue
++                previous = mask ^ (1 << j)
++                if not previous:
++                    continue
++                best = math.inf
++                best_k = -1
++                for k in range(n):
++                    if previous & (1 << k):
++                        budget.check()
++                        value = path[previous][k] + between[k][j]
++                        if value < best:
++                            best = value
++                            best_k = k
++                path[mask][j] = best
++                predecessor[mask][j] = best_k
++    
++            best_closed = math.inf
++            best_last = -1
++            for j in range(n):
++                if mask & (1 << j):
+                     budget.check()
+-                    value = path[previous][k] + between[k][j]
+-                    if value < best:
+-                        best = value
+-                        best_k = k
+-            path[mask][j] = best
+-            predecessor[mask][j] = best_k
+-
+-        best_closed = math.inf
+-        best_last = -1
+-        for j in range(n):
+-            if mask & (1 << j):
+-                budget.check()
+-                value = path[mask][j] + origin[j]
+-                if value < best_closed:
+-                    best_closed = value
+-                    best_last = j
+-        tour_length[mask] = best_closed
+-        order = []
+-        cursor_mask = mask
+-        cursor = best_last
+-        while cursor_mask:
+-            order.append(cursor)
+-            prev = predecessor[cursor_mask][cursor]
+-            cursor_mask ^= 1 << cursor
+-            cursor = prev
+-        trip_sequence[mask] = tuple(reversed(order))
+-
+-    trip_cost = [0.0] * size
+-    trip_energy = [0.0] * size
+-    for mask in range(1, size):
+-        trip_time = tour_length[mask] / speed
+-        trip_cost[mask] = trip_time + service_sum[mask]
+-        trip_energy[mask] = trip_time * p.flight_energy + target_energy_sum[mask]
+-
+-    try:
++                    value = path[mask][j] + origin[j]
++                    if value < best_closed:
++                        best_closed = value
++                        best_last = j
++            tour_length[mask] = best_closed
++            order = []
++            cursor_mask = mask
++            cursor = best_last
++            while cursor_mask:
++                order.append(cursor)
++                prev = predecessor[cursor_mask][cursor]
++                cursor_mask ^= 1 << cursor
++                cursor = prev
++            trip_sequence[mask] = tuple(reversed(order))
++    
++        trip_cost = [0.0] * size
++        trip_energy = [0.0] * size
++        for mask in range(1, size):
++            trip_time = tour_length[mask] / speed
++            trip_cost[mask] = trip_time + service_sum[mask]
++            trip_energy[mask] = trip_time * p.flight_energy + target_energy_sum[mask]
++    
+         per_slot = {}
+         for slot in slots:
+             dp, parent_trip, min_energy_slack = _trip_partition(
+@@ -296,7 +302,7 @@
+             small_dp, _, _ = per_slot[1]
+             best_mask = (1 << n) - 1
+             if not math.isfinite(small_dp[best_mask]) or small_dp[best_mask] > duty_limit + EPS:
+-            return result("UNRESOLVED_NO_FEASIBLE_PARTITION", detail="SABS pool has no feasible route partition", state_cells=state_cells)
++                return result("UNRESOLVED_NO_FEASIBLE_PARTITION", detail="SABS pool has no feasible route partition", state_cells=state_cells)
+             assigned = {1: best_mask}
+             operating = small_dp[best_mask]
+         else:
+@@ -351,6 +357,8 @@
+         visited = [nid for slot_routes in routes for trip in slot_routes for nid in trip]
+         if sorted(visited) != list(ids) or len(visited) != len(ids):
+             return result("INTERNAL_WITNESS_ERROR", detail="witness is not exact-once station coverage", state_cells=state_cells)
++        if time.perf_counter() >= budget.deadline:
++            raise BoundExceeded("map_wallclock_cap")
+         return result(
+             "COMPLETE_FIXED_OWNER_REFERENCE" if forced_masks is not None else "COMPLETE_JOINT_REFERENCE",
+             routes=routes, operating_minutes_dp=operating,
+--- BASELINE_FILE/test_station_dp.py
++++ <LOCAL_PATH>
+@@ -1,8 +1,13 @@
++"""Synthetic-only engineering checks, not quality or IEEE-optimality evidence."""
++import copy
+ import hashlib
+ import itertools
++import json
++import math
+ import sys
+ import unittest
+ from pathlib import Path
++from unittest.mock import patch
+ 
+ HERE = Path(__file__).resolve().parent
+ ROOT = HERE.parents[2]
+@@ -12,38 +17,37 @@
+ 
+ from lrphsd.evaluator import evaluate
+ from lrphsd.problem import Instance, Node, Parameters, empty_solution
++import station_split_dp as dp_module
+ from station_split_dp import WorkBudget, solve_station
+ 
+ 
+-def make_instance(target_count=3, **overrides):
++def make_instance(target_count=3, points=None, energies=None, services=None, **overrides):
+     station = Node(0, 0.0, 0.0, 0.0, 0.0)
+-    points = ((100.0, 0.0), (200.0, 0.0), (-200.0, 0.0),
+-              (0.0, 250.0), (0.0, -250.0), (300.0, 100.0),
+-              (-300.0, -100.0), (150.0, 150.0), (-150.0, -150.0),
+-              (350.0, 0.0), (0.0, 350.0), (-350.0, 0.0),
+-              (0.0, -350.0))
+-    targets = tuple(
+-        Node(i + 1, x, y, 0.01, 1.0)
+-        for i, (x, y) in enumerate(points[:target_count])
+-    )
+-    parameters = {
+-        "speed": 100.0,
+-        "flight_energy": 0.1,
+-        "small_battery": 0.8,
+-        "large_battery": 1.0,
+-        "small_radius": 500.0,
+-        "large_radius": 500.0,
+-        "small_duration": 480.0,
+-        "large_duration": 600.0,
+-        "time_cost": 0.5,
+-    }
++    default_points = ((100.0, 0.0), (200.0, 0.0), (-200.0, 0.0),
++                      (0.0, 250.0), (0.0, -250.0), (300.0, 100.0),
++                      (-300.0, -100.0), (150.0, 150.0), (-150.0, -150.0),
++                      (350.0, 0.0), (0.0, 350.0), (-350.0, 0.0),
++                      (0.0, -350.0))
++    points = tuple(default_points if points is None else points)[:target_count]
++    if len(points) != target_count:
++        raise ValueError("fixture target_count does not match supplied points")
++    energies = [0.01] * target_count if energies is None else list(energies)
++    services = [1.0] * target_count if services is None else list(services)
++    targets = tuple(Node(i + 1, x, y, energies[i], services[i])
++                    for i, (x, y) in enumerate(points))
++    parameters = {"speed": 100.0, "flight_energy": 0.1,
++                  "small_battery": 0.8, "large_battery": 1.0,
++                  "small_radius": 500.0, "large_radius": 500.0,
++                  "small_duration": 480.0, "large_duration": 600.0,
++                  "time_cost": 0.5}
+     parameters.update(overrides)
+-    raw = "|".join(map(str, (station,) + targets)).encode()
++    raw = repr(((station,) + targets, parameters)).encode()
+     return Instance("station_dp_fixture", targets, (station,), hashlib.sha256(raw).hexdigest(),
+                     Parameters(**parameters))
+ 
+ 
+ def _partitions(items):
++    """Enumerate unordered nonempty set partitions independently of DP."""
+     items = tuple(items)
+     if not items:
+         yield ()
+@@ -61,11 +65,11 @@
+         blocks.append([item])
+         yield from visit(index + 1, blocks)
+         blocks.pop()
+-
+     yield from visit(0, [])
+ 
+ 
+ def _route_sets(target_ids):
++    """Enumerate all trip orders and all within-trip permutations."""
+     if not target_ids:
+         yield []
+         return
+@@ -76,19 +80,23 @@
+                 yield [list(trip) for trip in trip_order]
+ 
+ 
+-def brute_force_station_cost(instance, station_type, target_ids):
++def brute_force_station_cost(instance, station_type, target_ids, fixed_owners=None):
++    """Independent tiny enumeration, scored solely by the complete evaluator."""
+     ids = tuple(sorted(target_ids))
+-    best = float("inf")
++    best = math.inf
+     for ld_mask in range(1 << len(ids)):
+-        if station_type == 1 and ld_mask:
++        if station_type != 2 and ld_mask:
+             continue
+         ld_ids = tuple(ids[i] for i in range(len(ids)) if ld_mask & (1 << i))
+         sd_ids = tuple(nid for nid in ids if nid not in set(ld_ids))
+-        ld_routes = _route_sets(ld_ids) if station_type == 2 else ([[]] if not ld_ids else [])
+-        sd_routes = _route_sets(sd_ids)
+-        for route0, route1 in itertools.product(ld_routes, sd_routes):
++        if fixed_owners is not None:
++            if (set(ld_ids) != set(fixed_owners.get(0, ()))
++                    or set(sd_ids) != set(fixed_owners.get(1, ()))):
++                continue
++        route0 = _route_sets(ld_ids) if station_type == 2 else ([],)
++        for routes_ld, routes_sd in itertools.product(route0, _route_sets(sd_ids)):
+             solution = empty_solution(instance, [station_type])
+-            solution["routes"][0] = [route0, route1]
++            solution["routes"][0] = [routes_ld, routes_sd]
+             audit = evaluate(instance, solution)
+             if audit["feasible"]:
+                 best = min(best, audit["operating_minutes"])
+@@ -96,68 +104,220 @@
+ 
+ 
+ class StationSplitDPTests(unittest.TestCase):
+-    def setUp(self):
+-        self.budget = lambda: WorkBudget(deadline=float("inf"))
+-
+-    def test_dabs_matches_exhaustive_partition_and_route_enumeration(self):
+-        ins = make_instance(3)
+-        ids = ins.target_ids
+-        result = solve_station(ins, 0, 2, ids, self.budget())
+-        self.assertEqual(result.status, "COMPLETE_REFERENCE", result.detail)
+-        audit_solution = empty_solution(ins, [2])
+-        audit_solution["routes"][0] = result.routes
+-        audit = evaluate(ins, audit_solution)
++    def budget(self):
++        return WorkBudget(deadline=math.inf)
++
++    def full_audit(self, ins, kind, result):
++        solution = empty_solution(ins, [kind])
++        solution["routes"][0] = result.routes
++        return solution, evaluate(ins, solution)
++
++    def assert_reference(self, ins, kind, result, expected_status="COMPLETE_JOINT_REFERENCE"):
++        self.assertEqual(result.status, expected_status, result.detail)
++        solution, audit = self.full_audit(ins, kind, result)
+         self.assertTrue(audit["feasible"], audit["issues"])
+-        brute = brute_force_station_cost(ins, 2, ids)
+-        self.assertAlmostEqual(audit["operating_minutes"], brute, delta=1e-8)
+-        self.assertAlmostEqual(result.operating_minutes_dp, brute, delta=1e-8)
+-
+-    def test_sabs_matches_exhaustive_and_reconstructs_multiple_trips(self):
++        self.assertAlmostEqual(result.operating_minutes_dp, audit["operating_minutes"], delta=1e-8)
++        self.assertEqual(sorted(n for slot in result.routes for trip in slot for n in trip),
++                         sorted(ins.target_ids))
++        self.assertTrue(all(trip for slot in result.routes for trip in slot))
++        self.assertEqual(json.loads(json.dumps(result.as_dict()))["status"], expected_status)
++        return solution, audit
++
++    def test_joint_dabs_matches_exhaustive_assignment_partition_and_route_orders(self):
++        for count in (1, 2, 3, 4):
++            with self.subTest(target_count=count):
++                ins = make_instance(count)
++                result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
++                _, audit = self.assert_reference(ins, 2, result)
++                brute = brute_force_station_cost(ins, 2, ins.target_ids)
++                self.assertAlmostEqual(audit["operating_minutes"], brute, delta=1e-8)
++
++    def test_fixed_owner_matches_independent_exhaustive_enumeration(self):
++        ins = make_instance(4)
++        for owners in ({0: [1, 3], 1: [2, 4]}, {0: [], 1: [1, 2, 3, 4]},
++                       {0: [1, 2, 3, 4], 1: []}):
++            with self.subTest(owners=owners):
++                result = solve_station(ins, 0, 2, ins.target_ids, self.budget(),
++                                       fixed_slot_target_ids=owners)
++                _, audit = self.assert_reference(ins, 2, result, "COMPLETE_FIXED_OWNER_REFERENCE")
++                self.assertEqual({k: set(v) for k, v in result.slot_target_ids.items()},
++                                 {str(k): set(v) for k, v in owners.items()})
++                brute = brute_force_station_cost(ins, 2, ins.target_ids, owners)
++                self.assertAlmostEqual(audit["operating_minutes"], brute, delta=1e-8)
++
++    def test_fixed_owner_sabs_and_joint_sabs_match_exhaustive_multitrips(self):
+         ins = make_instance(3, small_battery=0.5, small_duration=30.0)
+-        result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
+-        self.assertEqual(result.status, "COMPLETE_REFERENCE", result.detail)
+-        self.assertGreater(len(result.routes[1]), 1)
+-        solution = empty_solution(ins, [1])
+-        solution["routes"][0] = result.routes
+-        audit = evaluate(ins, solution)
+-        self.assertTrue(audit["feasible"], audit["issues"])
+         brute = brute_force_station_cost(ins, 1, ins.target_ids)
+-        self.assertAlmostEqual(audit["operating_minutes"], brute, delta=1e-8)
+-
+-    def test_dabs_small_slot_uses_dabs_radius_and_duty(self):
++        for owners in (None, {1: ins.target_ids}):
++            with self.subTest(fixed=owners is not None):
++                result = solve_station(ins, 0, 1, ins.target_ids, self.budget(),
++                                       fixed_slot_target_ids=owners)
++                status = "COMPLETE_FIXED_OWNER_REFERENCE" if owners else "COMPLETE_JOINT_REFERENCE"
++                _, audit = self.assert_reference(ins, 1, result, status)
++                self.assertEqual(result.routes[0], [])
++                self.assertGreater(len(result.routes[1]), 1)
++                self.assertAlmostEqual(audit["operating_minutes"], brute, delta=1e-8)
++
++    def test_dabs_small_slot_uses_large_station_radius_and_duration(self):
+         ins = make_instance(1, small_radius=50.0, small_duration=1.0,
+                             large_radius=500.0, large_duration=20.0)
++        result = solve_station(ins, 0, 2, ins.target_ids, self.budget(),
++                               fixed_slot_target_ids={0: [], 1: [1]})
++        self.assert_reference(ins, 2, result, "COMPLETE_FIXED_OWNER_REFERENCE")
++        self.assertEqual(result.slot_target_ids["1"], [1])
++        self.assertAlmostEqual(result.slot_duty_slack["1"], 17.0)
++        rejected = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++        self.assertEqual(rejected.status, "INPUT_INVALID")
++
++    def test_heterogeneous_battery_forces_target_to_large_slot(self):
++        ins = make_instance(1, small_battery=0.1, large_battery=0.8)
+         result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
+-        self.assertEqual(result.status, "COMPLETE_REFERENCE", result.detail)
+-        self.assertEqual(result.slot_target_ids["0"], [])
+-        self.assertEqual(result.slot_target_ids["1"], [ins.target_ids[0]])
+-        solution = empty_solution(ins, [2])
+-        solution["routes"][0] = result.routes
+-        self.assertTrue(evaluate(ins, solution)["feasible"])
+-
+-    def test_empty_physical_slot_is_preserved(self):
++        self.assert_reference(ins, 2, result)
++        self.assertEqual(result.slot_target_ids["0"], [1])
++        self.assertEqual(result.slot_target_ids["1"], [])
++        forced = solve_station(ins, 0, 2, ins.target_ids, self.budget(),
++                               fixed_slot_target_ids={0: [], 1: [1]})
++        self.assertEqual(forced.status, "UNRESOLVED_FIXED_OWNER_INFEASIBLE")
++
++    def test_returns_do_not_reset_cumulative_duty(self):
++        ins = make_instance(2, points=((100.0, 0.0), (-100.0, 0.0)),
++                            small_battery=0.3, large_battery=0.3,
++                            small_duration=5.0, large_duration=5.0)
++        result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++        self.assertEqual(result.status, "UNRESOLVED_NO_FEASIBLE_PARTITION")
++        self.assertIsNone(result.routes)
++        solution = empty_solution(ins, [1])
++        solution["routes"][0][1] = [[1], [2]]
++        audit = evaluate(ins, solution)
++        self.assertFalse(audit["feasible"])
++        self.assertIn("cumulative_time:0:1", audit["issues"])
++        self.assertFalse(any(i.startswith("energy:") for i in audit["issues"]))
++        joint = solve_station(ins, 0, 2, ins.target_ids, self.budget())
++        self.assert_reference(ins, 2, joint)
++        self.assertTrue(joint.routes[0] and joint.routes[1])
++
++    def test_empty_stations_and_slots_have_complete_witness(self):
++        ins = make_instance(0)
++        for kind in (0, 1, 2):
++            with self.subTest(kind=kind):
++                result = solve_station(ins, 0, kind, (), self.budget())
++                self.assert_reference(ins, kind, result)
++                self.assertEqual(result.routes, [[], []])
++                self.assertEqual(result.operating_minutes_dp, 0.0)
+         ins = make_instance(1)
+         result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
+-        self.assertEqual(result.status, "COMPLETE_REFERENCE")
++        self.assert_reference(ins, 2, result)
+         self.assertTrue(any(not trips for trips in result.routes))
+ 
+-    def test_station_size_cutoff_is_predeclared_and_kept_unresolved(self):
++    def test_size_cap_remains_unresolved(self):
+         ins = make_instance(13)
+         result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
+         self.assertEqual(result.status, "UNRESOLVED_SIZE_LIMIT")
+         self.assertIsNone(result.routes)
+-
+-    def test_infeasible_station_pool_is_not_called_an_optimum(self):
++        self.assertEqual(result.transition_checks, 0)
++
++    def test_state_cap_remains_unresolved_before_work(self):
++        ins = make_instance(3)
++        with patch.object(dp_module, "MAX_STATE_CELLS", 0):
++            result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
++        self.assertEqual(result.status, "UNRESOLVED_STATE_BOUND")
++        self.assertIsNone(result.routes)
++        self.assertGreater(result.state_cells, 0)
++        self.assertEqual(result.transition_checks, 0)
++
++    def test_transition_cap_is_returned_not_uncaught(self):
++        ins = make_instance(3)
++        result = solve_station(ins, 0, 2, ins.target_ids,
++                               WorkBudget(deadline=math.inf, max_transitions=0))
++        self.assertEqual(result.status, "UNRESOLVED_BOUND")
++        self.assertEqual(result.detail, "transition_bound")
++        self.assertIsNone(result.routes)
++
++    def test_expired_deadline_is_returned_not_uncaught(self):
++        ins = make_instance(3)
++        result = solve_station(ins, 0, 2, ins.target_ids, WorkBudget(deadline=-math.inf))
++        self.assertEqual(result.status, "UNRESOLVED_BOUND")
++        self.assertEqual(result.detail, "map_wallclock_cap")
++        self.assertIsNone(result.routes)
++
++    def test_invalid_owner_partitions_are_rejected(self):
++        ins = make_instance(3)
++        for owners in ({0: [1, 2], 1: [2, 3]}, {0: [1], 1: [2]},
++                       {0: [1, 2], 1: [3, 99]}, {2: [1, 2, 3]}):
++            with self.subTest(owners=owners):
++                result = solve_station(ins, 0, 2, ins.target_ids, self.budget(),
++                                       fixed_slot_target_ids=owners)
++                self.assertEqual(result.status, "INPUT_INVALID")
++                self.assertIsNone(result.routes)
++        illegal_slot = solve_station(ins, 0, 1, ins.target_ids, self.budget(),
++                                     fixed_slot_target_ids={0: [1, 2, 3]})
++        self.assertEqual(illegal_slot.status, "INPUT_INVALID")
++
++    def test_invalid_index_type_target_and_coverage_rejected(self):
++        ins = make_instance(3)
++        cases = ((-1, 2, ins.target_ids), (1, 2, ins.target_ids),
++                 (0, 3, ins.target_ids), (0, 2, (1, 1)), (0, 2, (999,)),
++                 (0, 0, ins.target_ids))
++        for index, kind, ids in cases:
++            with self.subTest(index=index, kind=kind, ids=ids):
++                result = solve_station(ins, index, kind, ids, self.budget())
++                self.assertEqual(result.status, "INPUT_INVALID")
++                self.assertIsNone(result.routes)
++        outside = make_instance(1, small_radius=50.0, large_radius=50.0)
++        result = solve_station(outside, 0, 2, outside.target_ids, self.budget())
++        self.assertEqual(result.status, "INPUT_INVALID")
++
++    def test_infeasible_pool_is_not_called_reference(self):
+         ins = make_instance(1, small_battery=0.1, large_battery=0.1)
+         result = solve_station(ins, 0, 2, ins.target_ids, self.budget())
+         self.assertEqual(result.status, "UNRESOLVED_NO_FEASIBLE_PARTITION")
+         self.assertIsNone(result.routes)
+-
+-    def test_work_budget_marks_unresolved(self):
+-        ins = make_instance(3)
+-        budget = WorkBudget(deadline=float("inf"), max_transitions=0)
+-        result = solve_station(ins, 0, 2, ins.target_ids, budget)
+-        self.assertEqual(result.status, "UNRESOLVED_BOUND")
++        self.assertTrue(math.isinf(brute_force_station_cost(ins, 2, ins.target_ids)))
++
++    def test_resource_eps_boundary_on_tiny_axis_aligned_fixture(self):
++        # Engineering predicate check only; not a general floating optimum proof.
++        for deficit, feasible in ((0.5e-7, True), (2e-7, False)):
++            with self.subTest(resource="battery", deficit=deficit):
++                ins = make_instance(1, small_battery=0.21 - deficit)
++                result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++                if feasible:
++                    self.assert_reference(ins, 1, result)
++                else:
++                    self.assertEqual(result.status, "UNRESOLVED_NO_FEASIBLE_PARTITION")
++            with self.subTest(resource="duty", deficit=deficit):
++                ins = make_instance(1, small_duration=3.0 - deficit)
++                result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++                if feasible:
++                    self.assert_reference(ins, 1, result)
++                else:
++                    self.assertEqual(result.status, "UNRESOLVED_NO_FEASIBLE_PARTITION")
++            with self.subTest(resource="coverage", deficit=deficit):
++                ins = make_instance(1, small_radius=100.0 - deficit)
++                result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++                if feasible:
++                    self.assert_reference(ins, 1, result)
++                else:
++                    self.assertEqual(result.status, "INPUT_INVALID")
++
++    def test_independent_evaluator_rejects_corrupted_witnesses(self):
++        ins = make_instance(3)
++        result = solve_station(ins, 0, 1, ins.target_ids, self.budget())
++        good, _ = self.assert_reference(ins, 1, result)
++        duplicate = copy.deepcopy(good)
++        duplicate["routes"][0][1].append([1])
++        audit = evaluate(ins, duplicate)
++        self.assertFalse(audit["feasible"])
++        self.assertIn("duplicate:1", audit["issues"])
++        missing = copy.deepcopy(good)
++        missing["routes"][0][1] = [[n for n in trip if n != 1]
++                                            for trip in missing["routes"][0][1]]
++        self.assertIn("missing:1", evaluate(ins, missing)["issues"])
++        wrong_slot = copy.deepcopy(good)
++        wrong_slot["routes"][0] = [wrong_slot["routes"][0][1], []]
++        self.assertIn("large_drone_at_small_station:0", evaluate(ins, wrong_slot)["issues"])
++        wrong_hash = copy.deepcopy(good)
++        wrong_hash["instance_sha256"] = "wrong"
++        self.assertIn("instance_hash", evaluate(ins, wrong_hash)["issues"])
+ 
+ 
+ if __name__ == "__main__":
+--- BASELINE_FILE/G2_STATION_SPLIT_DP_PROTOCOL.md
++++ <LOCAL_PATH>
+@@ -1,59 +1,51 @@
+-# G2 Station Split-DP Opportunity Diagnostic Protocol
++# G2 Station Split-DP Opportunity Diagnostic — v2
+ 
+-Date: 2026-11-03. Freeze before implementation execution.
++Date: 2026-11-03. This revision replaces the unexecuted v1; the original bytes and initial reviews remain in g2_transaction/BASELINE_FILE and ../audit. Freeze this document, code, unit-test evidence and input identities before map execution. No 24-map DP outcomes have been inspected when defining this revision.
+ 
+-## Question and scope
++## Purpose, scope and provenance
+ 
+-Measure the route-only opportunity from reassigning station-owned targets between eligible physical drone slots and reoptimizing closed multi-trip routes, holding every station location, station type, and target-to-station assignment fixed. This is a historical exposed-data diagnostic, not new development, a formal test, an innovation, or evidence that RL is necessary.
++Measure fixed-outer-decision route opportunity, including station-internal LD/SD reassignment, in the original LRPHSD model. Freeze station locations/types and target-to-station assignment from the frozen Greedy parent. Decisions are physical slot ownership, next target, route order and RETURN/trip boundaries, not algorithm/operator choices. This is an exposed historical-data diagnostic and standard non-RL numerical reference, not an innovative method, fair-budget solver comparison, development set, training source or Formal test. G0/G4 do not pass automatically.
+ 
+-The only decisions in the DP witness are physical target ownership by eligible slot, route visit order, and trip boundaries/returns. No search operator or solver operator is selected.
++All 24 names/hashes in source_snapshot/ROUTE_RL_STAGEA_FREEZE_20261102.json:data_split.validation_maps are used without filtering, maps lexicographically sorted and stations in input order. Hash-check all inputs and frozen source files before solving; reconstruct frozen Greedy once/map; validate complete exact-once coverage independently. Preserve every complete parent and its station-union and per-slot ownership. Closed and empty stations remain rows. Expected old replay counts (132 stations, 98 nonempty) are integrity checks, never inclusion filters.
+ 
+-## Frozen inputs
++## Mathematical reference and numerical boundary
+ 
+-- Use all 24 Stage-A validation map names and SHA256 identities in `source_snapshot/ROUTE_RL_STAGEA_FREEZE_20261102.json` under `data_split.validation_maps`; no filtering.
+-- Re-read and hash-check each instance before use. Reconstruct its deterministic Greedy parent with the frozen source snapshot `lrphsd/greedy.py`; independently validate the complete parent.
+-- Freeze each station's `station_type` and its target set `T_s`, defined as the union of that station's parent route targets. Verify exact once-only coverage, no cross-station overlap, and complete target identity before optimization.
+-- Record source code/input hashes, process wall time, per-map wall time and per-station time. Include Greedy construction and full evaluator costs in end-to-end diagnostic accounting.
+-- Do not use any DP label, route, feature, or action as input to a trained policy. No training, search tuning, new maps, solver quality matrix, or Formal run is included.
++For each complete station union T_s with n<=12, use Held–Karp to find one minimum-length closed station-rooted tour for each nonempty subset Q, recording parent pointers. Time(Q)=length/speed+sum(service); energy(Q)=length/speed*flight_energy+sum(target_energy). For each eligible slot, subset partition DP minimizes total trip minutes over disjoint nonempty battery-feasible subsets; a pivot removes only trip-list permutation symmetry. Battery and per-slot cumulative duty are enforced; RETURN never resets cumulative duty. Objective and duty use the same operating minutes, so one minimum-time scalar per subset suffices in the mathematical recurrence. DABS enumerates every LD subset A, including empty/full, with SD=T_s\A, and enforces separate duty limits.
+ 
+-## Exact station formulation
++kind0: no routes/targets. SABS kind1: SD slot1 only; small battery/radius/duration. DABS kind2: LD slot0 large battery, SD slot1 small battery; BOTH use large station radius/duration. Empty slots have [] trips; no empty trip is emitted. Coverage is independently checked with the original evaluator.
+ 
+-For every nonempty station pool with `n=|T_s|<=12`, enumerate every target subset and every eligible slot. The size cutoff is on the complete station union, before any slot split; it is fixed from the existing small-instance exact-DP limit and is not tuned from results. For each nonempty trip subset `Q`, use the shortest closed station-rooted Hamilton tour through `Q`. Its operating time is `tour_length/speed + sum(service_i)` and its trip energy is `(tour_length/speed)*flight_energy + sum(energy_i)`. Reject a trip if any target violates the fixed station-type coverage radius or if trip energy exceeds the slot battery plus `1e-7`.
++Compute BOTH (a) reference restricted to the parent's fixed slot owners and (b) joint-slot reference using the same full station union cutoff. Do not solve individual small slots of an oversized union and call that a joint reference. Fixed-owner then joint is the frozen per-station order; they share the map wall deadline, but each has its own transition/state limit.
+ 
+-For each slot and target subset `A`, subset partition DP minimizes the sum of trip operating times over an exact partition of `A` into nonempty battery-feasible trip subsets. A fixed pivot in every partition recurrence removes only permutation symmetry among trips. The minimum route time is feasible only if it is at most the station-type duty limit plus `1e-7`; duty accumulates across all trips and RETURN does not reset it. Because route objective contribution and duty use the same operating minutes, one scalar minimum-time label per subset is sufficient.
++This is exhaustive DP under a frozen floating-point recurrence. Additive real-arithmetic reasoning does not establish equivalence to every evaluator IEEE summation/order or boundary case. Even COMPLETE_*_REFERENCE means an exhaustively computed numerical reference with independently validated witness, NOT a strict real/IEEE global optimum certificate. Store DP scalar, evaluator operating minutes/cost and residual independently.
+ 
+-- Closed station (`kind=0`): target set must be empty; both physical slots remain empty.
+-- SABS (`kind=1`): only SD slot 1 is eligible; use small battery, small radius, and small duration.
+-- DABS (`kind=2`): slots 0=LD and 1=SD are both eligible; use large battery for LD and small battery for SD; both slots use the DABS station's large radius and large duration.
+-- DABS station optimum reference: enumerate every subset `A subset T_s` for LD, including `A=empty` and `A=T_s`; SD receives exactly `T_s\\A`. Minimize the two feasible slot route-time values. Do not replace per-slot duty checks with a joint total-duty check.
+-- Empty slots are valid and have no trips. Empty trips are never emitted.
+-- Coverage, energy, duty, duplicates, station/type compatibility, and full original objective are rechecked using the frozen independent evaluator. Its `1e-7` feasibility convention is used; it is not a cost-rounding tolerance.
++Frozen arithmetic: DP edge lengths use sqrt(dx**2+dy**2) like evaluator trip lengths; Held–Karp accumulates open path edges in visit order and adds the closing edge last. Target service/energy subset sums add the low-bit target after its smaller-mask sum; partition time is trip_cost[sub]+dp[remaining], with ascending mask enumeration, descending submasks and strict-less-than first-encountered tie choice. These subset/partition accumulation orders may differ from the evaluator reconstruction order, so numerical-reference status remains qualified. Coverage predicate uses literal hypot distance>radius+1e-7, and battery predicate uses literal energy<=battery+1e-7; every full witness is still independently rescored. Numerical constants have distinct roles: 1e-7 is ONLY the evaluator's battery/coverage/duty feasibility convention; 1e-8 absolute full-cost residual is DP-to-witness reconciliation; 1e-8 absolute full-cost parent regression is a separate implementation screening threshold. Store raw differences, including tiny negative values, and raw signs; never round an effect to zero. A regression beyond threshold, residual failure, malformed witness or evaluator rejection yields NUMERICAL_OR_IMPLEMENTATION_UNRESOLVED. Keep the rejected witness and diagnostics. No silent repair, clipping or EPS adjustment. For unresolved rows the separately assembled feasible partial incumbent explicitly retains parent routes and is labelled as such, not as that station's DP optimum. Any slight accepted regression is also visible. Known numerical uncertainty cannot support an opportunity upper bound.
+ 
+-The implementation must return complete target-ID route sequences and trip boundaries with parent pointers. It must also preserve both the source and candidate complete solution for each map. An independent evaluator rejection, malformed witness, duplicate/missing target, changed station type/ownership, or candidate cost regression beyond the predeclared `1e-8` absolute map-cost reconciliation tolerance marks the affected station/map `NUMERICAL_OR_IMPLEMENTATION_UNRESOLVED`; it must not be silently repaired or claimed optimal.
++## Frozen compute bounds and clocks
+ 
+-## Bounds, limits and unresolved cases
++n<=12 is a NEW station-union computational cutoff, not a claim that historical whole-instance DP validated this station implementation. At most 4096 masks; conservative dense allocation-cell estimate (5*n*2^n)/2+11*2^n+n*n+4*n+128 <=180000 per reference; all allocations are made only after this hard structural check. Transition cap=2,000,000 per reference. WorkBudget checks entry, at <=1024-transition intervals, and completion. Parent-pointer output is bounded by n and cells. These are explicit allocation/cell limits, not an OS-level resident-memory guarantee; peak Python allocation and process RSS are also recorded without calling them a hard OS cap.
+ 
+-- Every station in all 24 maps remains in the output denominator.
+-- A nonempty station with `n>12` is `UNRESOLVED_SIZE_LIMIT`; no partial fixed-owner solve may be relabelled station-exact.
+-- Any station exceeding the predeclared 12-second per-map wall-clock cap, transition/state bound, or producing evaluator/numerical inconsistency is unresolved. The cap is diagnostic compute, not a 6s/12s solver-quality comparison.
+-- `max_states=2^12` masks per station/slot; `max_transition_checks=2,000,000` per station. If an implementation reaches a bound, preserve its last valid incumbent/witness if available and mark unresolved; never call an incumbent an optimum.
+-- For unresolved stations, retain the original parent routes in the candidate full map. A candidate that replaces only solved stations can demonstrate a **realized feasible improvement** if the full evaluator confirms it; it does not bound the remaining opportunity from above.
+-- A map is `FULL_STATION_DOMAIN_REFERENCE` only when all its stations are complete, all witnesses reconstruct, and the complete candidate passes the independent evaluator. Otherwise the map is `PARTIAL_REFERENCE_WITH_UNRESOLVED_STATIONS`, even if its partial candidate is feasible.
++Per-map DP scheduling deadline=12 seconds, starts before instance hash/read and Greedy construction. No new station reference starts after that deadline. Running DP exits at the next bounded check. Independent validation and durable serialization still complete after the deadline if necessary and are charged: record actual end-to-end seconds and cap overrun, never call it a hard 12-second end-to-end solver. Batch scheduling deadline=360 seconds; remaining maps still receive hash/parent/status/output, no new DP. There is no performance ranking against archived 6s/12s timings. Preserve size, state, transition, deadline, memory/error and infeasible outcomes separately. No changing order/bounds or rerunning to seek a positive result.
+ 
+-## Outcomes and aggregation
++## Witness integration and complete-map status
+ 
+-Per map, record the full original parent and candidate evaluator costs, fixed-cost and operating-minute decomposition, percentage change `(C_parent-C_candidate)/C_parent`, all station statuses, DP route witnesses, slacks, independent evaluator results, and elapsed/wall-clock accounting. Per station, preserve pool size, type, eligible slots, slot target masks, trips/sequences, DP objective, evaluator objective and residuals, battery/duty/coverage margins, status and timing.
++For every numerical result, reconstruct full target-ID routes. Validate it in a copy of the COMPLETE parent map, preserving all other stations. Check station type, station union, fixed-owner identity where applicable, exact-once coverage, battery/duty/coverage, full original objective and DP-to-evaluator residual. Save raw witness and audit even when rejected. A rejected/unsolved reference retains the original station in its separately assembled full-map incumbent. Save full parent, fixed-owner partial/reference candidate and joint partial/reference candidate plus their complete audits.
+ 
+-The primary unit for descriptive summaries is the map, never a station, slot, seed-cell, transition, or evaluator call. Include all 24 maps, with unresolved maps visible; report completeness count, mean/median map effects, win/tie/loss counts, and the full per-map table. Do not compute confirmatory p-values or generalize to unseen maps from this exposed set. A DP optimum/reference is not a 6s/12s fair-budget method result; include its runtime separately and later compare actual methods under the frozen end-to-end budgets in G3/G4.
++A map is FULL_STATION_DOMAIN_NUMERICAL_REFERENCE only if every station completed BOTH references and all integration/reconciliation checks pass; otherwise PARTIAL_FEASIBLE_INCUMBENT_WITH_UNRESOLVED_STATIONS (or INVALID_FULL_MAP if validation fails). Empty/closed stations use the applicable COMPLETE_FIXED_OWNER_REFERENCE/COMPLETE_JOINT_REFERENCE names. Unresolved stations/maps always remain in denominator; no feasible partial candidate bounds remaining opportunity from above. Without valid lower bounds for EVERY unresolved station, map-wide opportunity ceiling is INCONCLUSIVE. We introduce no new lower-bound certificate in this diagnostic. Even fully completed maps retain the numerical-reference qualification.
+ 
+-Positive station/map effects quantify only this fixed-outer-decision route opportunity. They do not prove algorithmic novelty, RL superiority, sufficient G4 headroom on new maps, or full LRPHSD global optimality. No G0/G4 gate is auto-passed by this result.
++## Archived comparators, decomposition and analysis
+ 
+-## Pre-execution verification
++Reuse, DO NOT rerun, saved route_alns complete solutions/meta for all 24 maps x budgets6/12 x seeds101/102/103 in source_snapshot/results/route_rl_stageA/eval_seed23_3solver_6_12. Check archive hashes, frozen input/source/method/budget/seed identity; independently re-evaluate saved complete solutions; verify same station types, station union and fixed slot owners. Every missing/hash/identity/domain/evaluator mismatch remains a row, and the corresponding comparator summary is unresolved. Report each archived cell; best-of-three is explicitly three archived runs, not a single budget result, and runtime provenance is retained rather than fabricated. This is a historical anchor, not a new same-hardware comparison.
+ 
+-Before processing the 24 frozen maps, the DP must pass:
++All effects use COMPLETE original evaluator cost including fixed fees, service, travel and every station. Primary descriptive unit=map, all24. Report per-map and all-map mean/median/raw win-tie-loss:
++1. Greedy -> fixed-owner: ordinary route order/trip reorganization from this parent.
++2. Greedy -> joint-slot: total realized route-domain improvement from this parent.
++3. Fixed-owner -> joint-slot: added reassignment difference, attribution only where BOTH whole-map references are complete; on partial maps show a labelled mixed-coverage difference, not pure reassignment gain.
++4. Each saved ALNS and labelled best-of3 by budget -> joint reference/partial incumbent: historical residual comparison, not proof of attainable RL improvement or opportunity ceiling.
+ 
+-1. Exhaustive brute-force equivalence on declared tiny SABS and DABS fixtures, including an empty slot, a multi-trip solution, heterogeneous batteries, DABS duty/radius semantics, and a rejected infeasible witness.
+-2. Witness reconstruction plus independent full evaluator on every tiny fixture.
+-3. JSON/schema validation and a dry-run that reads hashes/config only and launches no solver.
++Stratify by complete/partial maps, size family and station type; retain zero/negative/failed cases. Record target/slot assignments, routes, trip energy/duty/radius slacks, raw DP/evaluator residuals, changed owner counts, source/input hashes and full costs. No confirmatory p-values or generalization claim from old maps. No innovation, necessity of RL, new-development headroom or G4 admission follows automatically. An insufficient/partial domain stays inconclusive rather than becoming a NO-GO ceiling.
+ 
+-The protocol and implementation hashes must be saved before the 24-map diagnostic is run. All results and failures are retained; this protocol is not adjusted after observing map outcomes.
++## Required pre-execution checks and one-run freeze
++
++Before map DP: tiny exhaustive SABS/DABS partition/permutation equivalence, fixed-owner restriction, multi-trip, empty slot/closed station, heterogeneous batteries, DABS SD large radius/duty, cumulative RETURN duty, invalid witness/input, size/state/transition/deadline outcomes; all with independent evaluator where applicable. Tests are engineering checks, not an all-instance IEEE proof.
++
++Provide metadata-only --dry-run: input/source/archive hashes, map identities, config/schema; no Greedy/DP/evaluator. Freeze protocol+implementation+test+dry-run hashes and actual cross-audit verdicts. Execute once into a previously absent output directory. Lock file prevents rerun/overwrite. Every result/failure retained; no post-outcome adjustment to this protocol. Root owns execution; agents review independently then exchange concrete objections. Keep G0/G4/new training/Formal/paper gates unchanged.
+--- BASELINE_FILE/run_station_g2.py
++++ <LOCAL_PATH>
+@@ -0,0 +1,350 @@
++#!/usr/bin/env python3
++"""One-shot exposed-map station-DP opportunity diagnostic, not a quality test."""
++from __future__ import annotations
++import argparse
++import collections
++import copy
++from datetime import datetime, timezone
++import gzip
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++import platform
++import resource
++import statistics
++import sys
++import time
++import traceback
++import tracemalloc
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parents[2]
++SNAPSHOT = HERE.parent / 'source_snapshot'
++FREEZE = SNAPSHOT / 'ROUTE_RL_STAGEA_FREEZE_20261102.json'
++ARCHIVE = SNAPSHOT / 'results/route_rl_stageA/eval_seed23_3solver_6_12'
++INSTANCE_DIR = ROOT / 'completion/code/external/LRPHSD<EXECUTION_PATH>'
++CONFIG = dict(station_union_max_targets=12, max_transition_checks=2_000_000,
++              max_state_cells=180_000, map_scheduling_seconds=12.0,
++              batch_scheduling_seconds=360.0, feasibility_eps=1e-7,
++              cost_reconciliation_abs=1e-8, parent_regression_abs=1e-8,
++              order='lexicographic_map/input_station/fixed_then_joint',
++              archive_budgets=[6, 12], archive_seeds=[101, 102, 103])
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def read(path):
++    path = Path(path)
++    return json.loads(gzip.decompress(path.read_bytes()) if path.suffix == '.gz' else path.read_bytes())
++
++
++def write(path, value):
++    path = Path(path)
++    payload = json.dumps(value, indent=2, allow_nan=False) + '\n'
++    with path.open('w') as handle:
++        handle.write(payload)
++        handle.flush()
++        os.fsync(handle.fileno())
++
++
++def domain(solution, by_slot=False):
++    if by_slot:
++        return [[sorted(n for trip in trips for n in trip) for trips in station]
++                for station in solution['routes']]
++    return [sorted(n for trips in station for trip in trips for n in trip)
++            for station in solution['routes']]
++
++
++def pct(before, after):
++    return (before - after) / before * 100.0
++
++
++def metadata():
++    start = time.perf_counter()
++    freeze = read(FREEZE)
++    retrieval = read(SNAPSHOT / 'RETRIEVAL_MANIFEST.json')
++    sources = {}
++    for rel, expected in freeze['source_file_hashes'].items():
++        actual = sha(SNAPSHOT / rel)
++        if actual != expected:
++            raise RuntimeError('frozen source mismatch: ' + rel)
++        sources[str(SNAPSHOT / rel)] = actual
++    maps = []
++    files = [HERE / 'station_split_dp.py', HERE / 'test_station_dp.py',
++             HERE / 'run_station_g2.py', HERE / 'G2_STATION_SPLIT_DP_PROTOCOL.md',
++             HERE / 'g2_transaction/UNIT_TESTS.json', FREEZE,
++             HERE / 'test_g2_driver.py', HERE / 'g2_transaction/DRIVER_TESTS.json',
++             HERE.parent / 'failure/G2_ALNS_REUSE_MANIFEST.json',
++             HERE.parent / 'failure/G2_ALNS_GREEDY_PARENTS.json']
++    archive_files = {}
++    for name, expected in sorted(freeze['data_split']['validation_maps'].items()):
++        path = INSTANCE_DIR / (name + '.txt')
++        actual = sha(path)
++        if actual != expected:
++            raise RuntimeError('input hash mismatch: ' + name)
++        maps.append(dict(name=name, path=str(path), sha256=actual))
++        for budget in CONFIG['archive_budgets']:
++            for seed in CONFIG['archive_seeds']:
++                stem = f'{name}__route_alns__s{seed}__b{budget}'
++                for ext in ('.json', '.solution.json.gz'):
++                    f = ARCHIVE / (stem + ext)
++                    rel = str(f.relative_to(SNAPSHOT))
++                    actual_f = sha(f)
++                    if actual_f != retrieval[rel]['sha256']:
++                        raise RuntimeError('archive hash mismatch: ' + rel)
++                    archive_files[str(f)] = actual_f
++    reuse = read(HERE.parent / 'failure/G2_ALNS_REUSE_MANIFEST.json')
++    if reuse['issues'] or reuse['verified_rows'] != 144 or not reuse['source']['matches']:
++        raise RuntimeError('archived identity audit incomplete')
++    tests = read(HERE / 'g2_transaction/UNIT_TESTS.json')
++    if tests['latest_exit_status'] != 0:
++        raise RuntimeError('unit tests did not pass')
++    for path in (HERE/'station_split_dp.py', HERE/'test_station_dp.py', SNAPSHOT/'lrphsd/evaluator.py'):
++        if tests['attempts'][-1]['source_sha256_after'][str(path)] != sha(path):
++            raise RuntimeError('unit test identity is stale '+str(path))
++    return dict(schema='station_g2_metadata_only_v2', created_utc=datetime.now(timezone.utc).isoformat(),
++                config=CONFIG, maps=maps, source_hashes=sources,
++                files={str(f): sha(f) for f in files}, archive_hashes=archive_files,
++                elapsed_seconds=time.perf_counter()-start,
++                imports_of_project_code=0, greedy_calls=0, dp_calls=0, evaluator_calls=0)
++
++
++def validate_reference(ins, parent, parent_audit, si, result, evaluate, fixed):
++    record = result.as_dict()
++    record['integration_accepted'] = False
++    if not result.status.startswith('COMPLETE_'):
++        return record
++    candidate = copy.deepcopy(parent)
++    candidate['routes'][si] = result.routes
++    audit = evaluate(ins, candidate)
++    result.raw_full_trial_audit = audit
++    record['complete_trial_audit'] = audit
++    old_minutes = sum(x['time_min'] for x in parent_audit['details'] if x['station'] == si)
++    expected_cost = parent_audit['cost'] + (result.operating_minutes_dp - old_minutes)*ins.params.time_cost
++    valid_cost = isinstance(audit.get('cost'), (int,float)) and math.isfinite(audit['cost'])
++    residual = audit['cost'] - expected_cost if valid_cost else None
++    regression = audit['cost'] - parent_audit['cost'] if valid_cost else None
++    violations = []
++    if candidate['station_types'] != parent['station_types']: violations.append('station_type_changed')
++    if domain(candidate) != domain(parent): violations.append('station_union_changed')
++    if fixed and domain(candidate, True) != domain(parent, True): violations.append('fixed_owner_changed')
++    if not audit['feasible']: violations.append('independent_evaluator_rejected')
++    if not valid_cost: violations.append('nonfinite_or_missing_evaluator_cost')
++    elif abs(residual) > CONFIG['cost_reconciliation_abs']: violations.append('dp_evaluator_residual')
++    if regression is not None and regression > CONFIG['parent_regression_abs']: violations.append('parent_cost_regression')
++    record.update(raw_dp_status=result.status, complete_trial_audit=audit,
++                  dp_predicted_complete_cost=expected_cost,
++                  complete_cost_dp_evaluator_residual=residual,
++                  complete_cost_candidate_minus_parent=regression,
++                  station_evaluator_minutes=sum(x['time_min'] for x in audit.get('details',[]) if x['station']==si),
++                  coverage_slack_min=(min((ins.radius(result.station_type) - math.hypot(ins.nodes[n].x-ins.stations[si].x,ins.nodes[n].y-ins.stations[si].y) for n in result.target_ids),default=None)),
++                  validation_violations=violations)
++    if violations:
++        record['status'] = 'NUMERICAL_OR_IMPLEMENTATION_UNRESOLVED'
++    else:
++        record['integration_accepted'] = True
++    return record
++
++
++def archived_comparators(ins, parent, joint_audit, evaluate):
++    rows = []
++    for budget in CONFIG['archive_budgets']:
++        for seed in CONFIG['archive_seeds']:
++            stem = f'{ins.name}__route_alns__s{seed}__b{budget}'
++            mp, sp = ARCHIVE/(stem+'.json'), ARCHIVE/(stem+'.solution.json.gz')
++            row = dict(budget=budget, seed=seed, meta_path=str(mp), solution_path=str(sp))
++            meta=solution=None
++            try:
++                row.update(meta_sha256=sha(mp), solution_sha256=sha(sp))
++                meta, solution = read(mp), read(sp)
++                audit = evaluate(ins, solution)
++                row['independent_audit'] = audit
++                issues=[]
++                for key, expected in [('instance',ins.name),('instance_sha256',ins.sha256),
++                                      ('method','route_alns'),('solver_seed',seed),('budget_seconds',float(budget)),
++                                      ('solution_sha256',row['solution_sha256'])]:
++                    if meta.get(key)!=expected: issues.append('identity_'+key)
++                if meta.get('status')!='ok': issues.append('stored_status')
++                if meta.get('task_identity')!=f'{ins.name}|route_alns|s{seed}|b{budget}': issues.append('task_identity')
++                if solution.get('instance')!=ins.name or solution.get('instance_sha256')!=ins.sha256: issues.append('solution_identity')
++                if solution.get('schema_version')!=1: issues.append('solution_schema')
++                if solution['station_types']!=parent['station_types']: issues.append('station_types')
++                if domain(solution)!=domain(parent): issues.append('station_unions')
++                if domain(solution,True)!=domain(parent,True): issues.append('fixed_owners')
++                if not audit['feasible']: issues.append('evaluator_feasibility')
++                if abs(audit['cost']-meta['final_cost'])>CONFIG['cost_reconciliation_abs']: issues.append('saved_cost_residual')
++                row.update(status='VALID_ARCHIVED_FIXED_OWNER_ANCHOR' if not issues else 'ARCHIVE_UNRESOLVED',
++                           issues=issues, independent_audit=audit, saved_cost=meta['final_cost'],
++                           cost_residual=audit['cost']-meta['final_cost'],
++                           historical_end_to_end_seconds=meta.get('end_to_end_seconds'),
++                           historical_search_seconds=meta.get('search_seconds'),
++                           historical_model_load_seconds=meta.get('model_load_seconds'),
++                           joint_candidate_gain_pct=pct(audit['cost'],joint_audit['cost']))
++                if issues:
++                    row['archived_meta'] = meta
++                    row['archived_solution'] = solution
++            except Exception as exc:
++                row.update(status='ARCHIVE_UNRESOLVED', issues=[type(exc).__name__+': '+str(exc)], traceback=traceback.format_exc())
++                row['archived_meta']=meta
++                row['archived_solution']=solution
++            rows.append(row)
++    best={}
++    for budget in CONFIG['archive_budgets']:
++        cells=[r for r in rows if r['budget']==budget]
++        if len(cells)==3 and all(r['status']=='VALID_ARCHIVED_FIXED_OWNER_ANCHOR' for r in cells):
++            selected=min(cells,key=lambda r:r['independent_audit']['cost'])
++            best[str(budget)] = dict(status='THREE_ARCHIVED_RUNS_NOT_SINGLE_BUDGET',
++                                    cost=selected['independent_audit']['cost'], seed=selected['seed'],
++                                    joint_candidate_gain_pct=selected['joint_candidate_gain_pct'],
++                                    sum_historical_end_to_end_seconds=sum(r['historical_end_to_end_seconds'] for r in cells))
++        else: best[str(budget)] = dict(status='ARCHIVE_UNRESOLVED')
++    return rows,best
++
++
++def run_map(item, out, batch_deadline, evaluate, build, read_instance, WorkBudget, solve_station):
++    started=time.perf_counter(); deadline=min(started+CONFIG['map_scheduling_seconds'],batch_deadline)
++    name=item['name']; md=out/name; md.mkdir()
++    if sha(item['path'])!=item['sha256']: raise RuntimeError('input hash changed')
++    ins=read_instance(item['path']); greedy_started=time.perf_counter(); parent=build(ins)
++    greedy_seconds=time.perf_counter()-greedy_started
++    saved_parent=next(r for r in read(HERE.parent/'failure/G2_ALNS_GREEDY_PARENTS.json')['maps'] if r['map']==name)
++    if parent != saved_parent['canonical_solution']:
++        raise RuntimeError('reconstructed Greedy differs from archived parent '+name)
++    parent_audit=evaluate(ins,parent)
++    if not parent_audit['feasible']: raise RuntimeError('Greedy infeasible '+name)
++    all_ids=[n for station in domain(parent) for n in station]
++    if sorted(all_ids)!=sorted(ins.target_ids) or len(all_ids)!=len(set(all_ids)):
++        raise RuntimeError('invalid parent target partition')
++    fixed,joint=copy.deepcopy(parent),copy.deepcopy(parent); stations=[]
++    for si,kind in enumerate(parent['station_types']):
++        ids=domain(parent)[si]
++        fixed_ids={slot: domain(parent,True)[si][slot] for slot in ((1,) if kind==1 else (0,1))}
++        row=dict(station_idx=si,station_type=kind,target_ids=ids,target_count=len(ids),parent_slot_target_ids=fixed_ids)
++        for key,forced in [('fixed_owner',fixed_ids),('joint',None)]:
++            budget=WorkBudget(deadline=deadline,max_transitions=CONFIG['max_transition_checks'])
++            result=None
++            if time.perf_counter() >= deadline:
++                row[key]=dict(status=('UNATTEMPTED_BATCH_DEADLINE' if time.perf_counter() >= batch_deadline
++                                      else 'UNATTEMPTED_MAP_DEADLINE'), integration_accepted=False)
++                continue
++            try:
++                result=solve_station(ins,si,kind,ids,budget,fixed_slot_target_ids=forced)
++                checked=validate_reference(ins,parent,parent_audit,si,result,evaluate,key=='fixed_owner')
++            except Exception as exc:
++                checked=dict(status='UNRESOLVED_EXCEPTION',integration_accepted=False,
++                             exception_type=type(exc).__name__,detail=str(exc),traceback=traceback.format_exc(),
++                             raw_result=(result.as_dict() if result is not None else None),
++                             raw_trial_audit=getattr(result,'raw_full_trial_audit',None))
++            row[key]=checked
++            if checked['integration_accepted']:
++                (fixed if key=='fixed_owner' else joint)['routes'][si]=checked['routes']
++        stations.append(row)
++    fixed_audit,joint_audit=evaluate(ins,fixed),evaluate(ins,joint)
++    complete=all(s[k]['integration_accepted'] for s in stations for k in ('fixed_owner','joint'))
++    valid=fixed_audit['feasible'] and joint_audit['feasible']
++    status=('INVALID_FULL_MAP' if not valid else 'FULL_STATION_DOMAIN_NUMERICAL_REFERENCE' if complete
++            else 'PARTIAL_FEASIBLE_INCUMBENT_WITH_UNRESOLVED_STATIONS')
++    archived,best=archived_comparators(ins,parent,joint_audit,evaluate)
++    for label,solution,audit in [('parent',parent,parent_audit),('fixed_owner',fixed,fixed_audit),('joint',joint,joint_audit)]:
++        write(md/(label+'.solution.json'),solution); write(md/(label+'.audit.json'),audit)
++    write(md/'stations.json',stations); write(md/'archived_comparators.json',archived)
++    old_owners=domain(parent,True); new_owners=domain(joint,True)
++    changed=sum(len(set(old_owners[s][0])^set(new_owners[s][0])) for s in range(len(old_owners)))
++    record=dict(map=name,input_sha256=ins.sha256,status=status,station_count=len(stations),
++                active_stations=sum(bool(s['target_ids']) for s in stations),
++                targets=len(ins.target_ids),parent_cost=parent_audit['cost'],parent_fixed_cost=parent_audit['fixed_cost'],
++                parent_operating_minutes=parent_audit['operating_minutes'],
++                fixed_owner_cost=fixed_audit['cost'],joint_cost=joint_audit['cost'],
++                fixed_owner_operating_minutes=fixed_audit['operating_minutes'],joint_operating_minutes=joint_audit['operating_minutes'],
++                greedy_to_fixed_owner_gain_pct=pct(parent_audit['cost'],fixed_audit['cost']),
++                greedy_to_joint_gain_pct=pct(parent_audit['cost'],joint_audit['cost']),
++                fixed_owner_to_joint_gain_pct=pct(fixed_audit['cost'],joint_audit['cost']),
++                reassignment_difference_attribution=('COMPLETE_NUMERICAL_REFERENCES' if complete else 'MIXED_COVERAGE_NOT_PURE_REASSIGNMENT_EFFECT'),
++                target_slot_owner_changes=changed,fixed_and_joint_feasible=valid,
++                remaining_opportunity_upper_bound='NOT_CERTIFIED; INCONCLUSIVE_FOR_UNRESOLVED_DOMAIN',
++                archived_best_of3=best,archive_cells_verified=sum(r['status']=='VALID_ARCHIVED_FIXED_OWNER_ANCHOR' for r in archived),
++                greedy_seconds=greedy_seconds,station_status_counts={key:dict(collections.Counter(s[key]['status'] for s in stations)) for key in ('fixed_owner','joint')},
++                elapsed_seconds_before_record_write=time.perf_counter()-started,
++                peak_tracemalloc_bytes=tracemalloc.get_traced_memory()[1],
++                process_peak_rss_native=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
++    write(md/'map.json',record)
++    elapsed=time.perf_counter()-started
++    timing=dict(end_to_end_through_map_fsync_seconds=elapsed,scheduling_seconds=CONFIG['map_scheduling_seconds'],
++                cap_overrun_seconds=max(0.0,elapsed-CONFIG['map_scheduling_seconds']))
++    write(md/'TIMING.json',timing);record.update(timing)
++    return record
++
++
++def descriptive(rows,field):
++    values=[r[field] for r in rows if isinstance(r.get(field),(float,int))]
++    return dict(n_maps=len(rows),n_valid=len(values),n_missing=len(rows)-len(values),
++                mean_pct=statistics.mean(values) if values else None,
++                median_pct=statistics.median(values) if values else None,
++                win_raw=sum(v>0 for v in values),tie_exact=sum(v==0 for v in values),loss_raw=sum(v<0 for v in values))
++
++
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--dry-run',action='store_true');p.add_argument('--out',type=Path,required=True)
++    p.add_argument('--freeze',type=Path);args=p.parse_args()
++    if args.dry_run:
++        if args.out.exists(): raise RuntimeError('metadata output already exists')
++        d=metadata(); write(args.out,d)
++        print(json.dumps(dict(status='METADATA_ONLY_PASS',maps=len(d['maps']),archive_files=len(d['archive_hashes']),out=str(args.out),sha256=sha(args.out))))
++        return
++    if not args.freeze: raise RuntimeError('--freeze required')
++    frozen=read(args.freeze); now=metadata()
++    for field in ('config','maps','source_hashes','files','archive_hashes'):
++        if frozen[field]!=now[field]: raise RuntimeError('freeze mismatch '+field)
++    args.out.mkdir(exist_ok=False)
++    write(args.out/'RUN_LOCK.json',dict(pid=os.getpid(),freeze_path=str(args.freeze),freeze_sha256=sha(args.freeze),created_utc=datetime.now(timezone.utc).isoformat()))
++    # Project modules are imported only AFTER metadata-only path returns.
++    sys.path.insert(0,str(SNAPSHOT));sys.path.insert(0,str(HERE))
++    from lrphsd.evaluator import evaluate
++    from lrphsd.greedy import build
++    from lrphsd.problem import read_instance
++    from station_split_dp import WorkBudget,solve_station
++    start=time.perf_counter(); batch_deadline=start+CONFIG['batch_scheduling_seconds'];tracemalloc.start()
++    rows=[]
++    try:
++        for item in frozen['maps']:
++            try:
++                row=run_map(item,args.out,batch_deadline,evaluate,build,read_instance,WorkBudget,solve_station)
++            except Exception as exc:
++                row=dict(map=item['name'],input_sha256=item['sha256'],status='UNRESOLVED_MAP_EXCEPTION',
++                         error_type=type(exc).__name__,detail=str(exc),traceback=traceback.format_exc(),
++                         fixed_and_joint_feasible=False,station_count=0,active_stations=0,
++                         station_inventory_unavailable=True,archive_cells_verified=0,archived_best_of3={},
++                         greedy_to_joint_gain_pct=None,end_to_end_through_map_fsync_seconds=None)
++                md=args.out/item['name'];md.mkdir(exist_ok=True);write(md/'FAILURE.json',row)
++            rows.append(row)
++            print(json.dumps(dict(map=row['map'],status=row['status'],greedy_to_joint_gain_pct=row['greedy_to_joint_gain_pct'],elapsed=row['end_to_end_through_map_fsync_seconds'])),flush=True)
++        complete=[r for r in rows if r['status']=='FULL_STATION_DOMAIN_NUMERICAL_REFERENCE']
++        fields=['greedy_to_fixed_owner_gain_pct','greedy_to_joint_gain_pct','fixed_owner_to_joint_gain_pct']
++        report=dict(schema='station_g2_opportunity_exposed_v2',status='DIAGNOSTIC_COMPLETED',
++                    scope='historical exposed-data numerical opportunity; NOT new development, Formal, novelty or RL superiority',
++                    config=CONFIG,freeze_sha256=sha(args.freeze),python=sys.version,platform=platform.platform(),
++                    elapsed_core_batch_seconds=time.perf_counter()-start,
++                    metadata_preflight_seconds=now['elapsed_seconds'],maps=rows,
++                    map_count=len(rows),station_count=sum(r['station_count'] for r in rows),
++                    active_stations=sum(r['active_stations'] for r in rows),complete_maps=len(complete),
++                    all_full_incumbents_feasible=all(r['fixed_and_joint_feasible'] for r in rows),
++                    archived_cells_verified=sum(r['archive_cells_verified'] for r in rows),
++                    all_map_descriptive={field:descriptive(rows,field) for field in fields},
++                    complete_map_descriptive={field:descriptive(complete,field) for field in fields},
++                    pure_reassignment_attribution='complete-map stratum only; partial difference has mixed solve coverage',
++                    remaining_domain_opportunity_upper_bound='INCONCLUSIVE; no formal lower bound for unresolved domain',
++                    rl_superiority_proven=False,innovation_proven=False,g4_admitted=False)
++        report['strata_by_size_family']={family:{field:descriptive([r for r in rows if r['map'].rsplit('_',1)[0]==family],field) for field in fields} for family in sorted(set(r['map'].rsplit('_',1)[0] for r in rows))}
++        report['archived_best_of3_descriptive']={str(b):descriptive([dict(anchor_gain=r['archived_best_of3'].get(str(b),{}).get('joint_candidate_gain_pct')) for r in rows],'anchor_gain') for b in (6,12)}
++        write(args.out/'REPORT.json',report)
++        print(json.dumps({k:v for k,v in report.items() if k in ('status','map_count','station_count','active_stations','complete_maps','all_full_incumbents_feasible','archived_cells_verified','all_map_descriptive','archived_best_of3_descriptive')}),flush=True)
++    except Exception as exc:
++        write(args.out/'FAILURE.json',dict(error=str(exc),traceback=traceback.format_exc(),completed_maps=rows))
++        raise
++
++
++if __name__=='__main__': main()
+--- BASELINE_FILE/test_g2_driver.py
++++ <LOCAL_PATH>
+@@ -0,0 +1,304 @@
++import copy
++import gzip
++import hashlib
++import importlib.util
++import json
++from pathlib import Path
++import tempfile
++import time
++import unittest
++from types import SimpleNamespace
++from unittest.mock import patch
++
++
++DRIVER_PATH = Path(__file__).with_name("run_station_g2.py")
++SPEC = importlib.util.spec_from_file_location("station_g2_driver_under_test", DRIVER_PATH)
++driver = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(driver)
++
++
++class DummyBudget:
++    def __init__(self, **kwargs):
++        self.__dict__.update(kwargs)
++
++
++def _sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++class FakeResult:
++    def __init__(self, status, routes=None, minutes=10.0, station_type=2, target_ids=(1, 2)):
++        self.status = status
++        self.station_idx = 0
++        self.station_type = station_type
++        self.target_ids = tuple(target_ids)
++        self.routes = copy.deepcopy(routes)
++        self.operating_minutes_dp = minutes
++        self.slot_target_ids = None
++        self.slot_dp_minutes = None
++        self.slot_energy_slack_min = None
++        self.slot_duty_slack = None
++        self.trip_metrics = None
++        self.state_cells = 0
++        self.transition_checks = 0
++        self.elapsed_seconds = 0.0
++        self.detail = None
++
++    def as_dict(self):
++        return {
++            "status": self.status,
++            "station_idx": self.station_idx,
++            "station_type": self.station_type,
++            "target_ids": list(self.target_ids),
++            "routes": copy.deepcopy(self.routes),
++            "operating_minutes_dp": self.operating_minutes_dp,
++            "state_cells": self.state_cells,
++            "transition_checks": self.transition_checks,
++        }
++
++
++def _fixture(tmp, name="synthetic"):
++    instance_file = Path(tmp) / f"{name}.txt"
++    instance_file.write_text("fixture input identity\n")
++    instance_sha = _sha(instance_file)
++    parent = {
++        "schema_version": 1,
++        "instance": name,
++        "instance_sha256": instance_sha,
++        "station_types": [2],
++        "routes": [[[[1]], [[2]]]],
++    }
++    ins = SimpleNamespace(
++        name=name,
++        sha256=instance_sha,
++        params=SimpleNamespace(time_cost=1.0),
++        target_ids=(1, 2),
++        stations=[SimpleNamespace(x=0.0, y=0.0)],
++        nodes={1: SimpleNamespace(x=1.0, y=0.0), 2: SimpleNamespace(x=2.0, y=0.0)},
++        radius=lambda kind: 10.0,
++    )
++    audit = {
++        "feasible": True,
++        "cost": 100.0,
++        "fixed_cost": 90.0,
++        "operating_minutes": 10.0,
++        "details": [{"station": 0, "time_min": 10.0}],
++        "issues": [],
++    }
++    return instance_file, ins, parent, audit
++
++
++def _evaluate(ins, solution):
++    routes = solution["routes"]
++    if len(solution.get("station_types", [])) != 1 or len(routes) != 1:
++        return {"feasible": False, "cost": None, "fixed_cost": 90.0, "operating_minutes": 0.0,
++                "details": [], "issues": ["station_dimension"]}
++    targets = [nid for slot in routes[0] for trip in slot for nid in trip]
++    feasible = solution["station_types"] == [2] and sorted(targets) == [1, 2]
++    return {"feasible": feasible, "cost": 100.0 if feasible else None,
++            "fixed_cost": 90.0, "operating_minutes": 10.0 if feasible else None,
++            "details": [{"station": 0, "time_min": 10.0}] if feasible else [],
++            "issues": [] if feasible else ["invalid_fixture_solution"]}
++
++
++def _archive_cells(directory, ins, parent, omit=None):
++    directory.mkdir(parents=True, exist_ok=True)
++    for budget in driver.CONFIG["archive_budgets"]:
++        for seed in driver.CONFIG["archive_seeds"]:
++            stem = f"{ins.name}__route_alns__s{seed}__b{budget}"
++            if omit == stem:
++                continue
++            solution_path = directory / f"{stem}.solution.json.gz"
++            solution_path.write_bytes(gzip.compress(json.dumps(parent).encode()))
++            meta = {
++                "status": "ok", "instance": ins.name, "instance_sha256": ins.sha256,
++                "method": "route_alns", "solver_seed": seed, "budget_seconds": float(budget),
++                "solution_sha256": _sha(solution_path), "task_identity": f"{ins.name}|route_alns|s{seed}|b{budget}",
++                "final_cost": 100.0, "end_to_end_seconds": float(budget), "search_seconds": float(budget),
++                "model_load_seconds": 0.0,
++            }
++            (directory / f"{stem}.json").write_text(json.dumps(meta))
++
++
++class G2DriverSyntheticTests(unittest.TestCase):
++    def test_rejected_reference_with_missing_cost_is_retained(self):
++        _, ins, parent, parent_audit = _fixture(tempfile.mkdtemp())
++        result = FakeResult("COMPLETE_JOINT_REFERENCE", parent["routes"][0])
++
++        def reject(_ins, _solution):
++            return {"feasible": False, "cost": None, "details": [], "issues": ["bad_witness"]}
++
++        checked = driver.validate_reference(ins, parent, parent_audit, 0, result, reject, False)
++        self.assertEqual(checked["status"], "NUMERICAL_OR_IMPLEMENTATION_UNRESOLVED")
++        self.assertFalse(checked["integration_accepted"])
++        self.assertIsNone(checked["complete_cost_dp_evaluator_residual"])
++        self.assertEqual(checked["complete_trial_audit"]["issues"], ["bad_witness"])
++        self.assertEqual(checked["routes"], parent["routes"][0])
++
++    def test_fixed_owner_slot_change_is_rejected(self):
++        _, ins, parent, parent_audit = _fixture(tempfile.mkdtemp())
++        changed = [[[1, 2]], []]
++        result = FakeResult("COMPLETE_FIXED_OWNER_REFERENCE", changed)
++        checked = driver.validate_reference(ins, parent, parent_audit, 0, result, _evaluate, True)
++        self.assertEqual(checked["status"], "NUMERICAL_OR_IMPLEMENTATION_UNRESOLVED")
++        self.assertTrue(checked["complete_trial_audit"]["feasible"])
++        self.assertNotIn("station_union_changed", checked["validation_violations"])
++        self.assertIn("fixed_owner_changed", checked["validation_violations"])
++
++    def test_archived_comparator_preserves_missing_cell_and_disables_best3(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            _, ins, parent, _ = _fixture(tmp)
++            archive = Path(tmp) / "archive"
++            missing = f"{ins.name}__route_alns__s102__b6"
++            _archive_cells(archive, ins, parent, omit=missing)
++            with patch.object(driver, "ARCHIVE", archive):
++                rows, best = driver.archived_comparators(ins, parent, _evaluate(ins, parent), _evaluate)
++            self.assertEqual(len(rows), 6)
++            row = next(r for r in rows if r["seed"] == 102 and r["budget"] == 6)
++            self.assertEqual(row["status"], "ARCHIVE_UNRESOLVED")
++            self.assertTrue(row["issues"])
++            self.assertEqual(best["6"]["status"], "ARCHIVE_UNRESOLVED")
++            self.assertEqual(best["12"]["status"], "THREE_ARCHIVED_RUNS_NOT_SINGLE_BUDGET")
++
++    def test_run_map_keeps_parent_routes_for_unresolved_station(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            input_path, ins, parent, parent_audit = _fixture(tmp)
++            archive = Path(tmp) / "archive"
++            _archive_cells(archive, ins, parent)
++            out = Path(tmp) / "out"
++            out.mkdir()
++            expected_saved = {"maps": [{"map": ins.name, "canonical_solution": parent}]}
++            original_read = driver.read
++            canonical_path = driver.HERE.parent / "failure/G2_ALNS_GREEDY_PARENTS.json"
++
++            def fake_read(path):
++                if Path(path) == canonical_path:
++                    return expected_saved
++                return original_read(path)
++
++            def fake_build(_ins):
++                return copy.deepcopy(parent)
++
++            calls = []
++
++            def fake_solve(_ins, si, kind, ids, budget, fixed_slot_target_ids=None):
++                calls.append((si, fixed_slot_target_ids))
++                if fixed_slot_target_ids is None:
++                    return FakeResult("UNRESOLVED_TRANSITION_LIMIT", None, None, kind, ids)
++                return FakeResult("COMPLETE_FIXED_OWNER_REFERENCE", parent["routes"][0], 10.0, kind, ids)
++
++            with patch.object(driver, "read", side_effect=fake_read), patch.object(driver, "ARCHIVE", archive):
++                row = driver.run_map(
++                    {"name": ins.name, "path": str(input_path), "sha256": ins.sha256}, out,
++                    float("inf"), _evaluate, fake_build, lambda _p: ins, DummyBudget, fake_solve,
++                )
++            partial = json.loads((out / ins.name / "joint.solution.json").read_text())
++            self.assertEqual(row["status"], "PARTIAL_FEASIBLE_INCUMBENT_WITH_UNRESOLVED_STATIONS")
++            self.assertTrue(row["fixed_and_joint_feasible"])
++            self.assertEqual(partial, parent)
++            self.assertEqual(calls[0][1], {0: [1], 1: [2]})
++            self.assertIsNone(calls[1][1])
++            self.assertEqual(row["remaining_opportunity_upper_bound"],
++                             "NOT_CERTIFIED; INCONCLUSIVE_FOR_UNRESOLVED_DOMAIN")
++
++    def test_reconstructed_parent_must_match_saved_canonical_solution(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            input_path, ins, parent, _ = _fixture(tmp)
++            out = Path(tmp) / "out"
++            out.mkdir()
++            changed = copy.deepcopy(parent)
++            changed["routes"][0][0][0] = [2]
++            canonical_path = driver.HERE.parent / "failure/G2_ALNS_GREEDY_PARENTS.json"
++            original_read = driver.read
++
++            def fake_read(path):
++                if Path(path) == canonical_path:
++                    return {"maps": [{"map": ins.name, "canonical_solution": parent}]}
++                return original_read(path)
++
++            with patch.object(driver, "read", side_effect=fake_read):
++                with self.assertRaisesRegex(RuntimeError, "differs from archived parent"):
++                    driver.run_map(
++                        {"name": ins.name, "path": str(input_path), "sha256": ins.sha256}, out,
++                        float("inf"), _evaluate, lambda _ins: changed, lambda _p: ins,
++                        DummyBudget, lambda *_a, **_k: self.fail("solver should not run"),
++                    )
++
++    def test_archived_comparator_preserves_solution_identity_mismatch(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            _, ins, parent, _ = _fixture(tmp)
++            archive = Path(tmp) / "archive"
++            _archive_cells(archive, ins, parent)
++            stem = f"{ins.name}__route_alns__s101__b6"
++            sp, mp = archive / f"{stem}.solution.json.gz", archive / f"{stem}.json"
++            changed = copy.deepcopy(parent)
++            changed["instance_sha256"] = "wrong-instance-sha"
++            sp.write_bytes(gzip.compress(json.dumps(changed).encode()))
++            meta = json.loads(mp.read_text())
++            meta["solution_sha256"] = _sha(sp)
++            mp.write_text(json.dumps(meta))
++            with patch.object(driver, "ARCHIVE", archive):
++                rows, best = driver.archived_comparators(ins, parent, _evaluate(ins, parent), _evaluate)
++            cell = next(r for r in rows if r["budget"] == 6 and r["seed"] == 101)
++            self.assertEqual(len(rows), 6)
++            self.assertEqual(cell["status"], "ARCHIVE_UNRESOLVED")
++            self.assertIn("solution_identity", cell["issues"])
++            self.assertEqual(cell["archived_solution"], changed)
++            self.assertEqual(best["6"]["status"], "ARCHIVE_UNRESOLVED")
++
++    def test_archived_comparator_retains_infeasible_audit_with_null_cost(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            _, ins, parent, _ = _fixture(tmp)
++            archive = Path(tmp) / "archive"
++            _archive_cells(archive, ins, parent)
++
++            def rejecting_audit(_ins, _solution):
++                return {"feasible": False, "cost": None, "details": [], "issues": ["synthetic_rejection"]}
++
++            with patch.object(driver, "ARCHIVE", archive):
++                rows, best = driver.archived_comparators(ins, parent, _evaluate(ins, parent), rejecting_audit)
++            self.assertEqual(len(rows), 6)
++            self.assertTrue(all(r["status"] == "ARCHIVE_UNRESOLVED" for r in rows))
++            self.assertTrue(all(r["independent_audit"]["issues"] == ["synthetic_rejection"] for r in rows))
++            self.assertTrue(all(r["archived_solution"] == parent for r in rows))
++            self.assertEqual(best["6"]["status"], "ARCHIVE_UNRESOLVED")
++            self.assertEqual(best["12"]["status"], "ARCHIVE_UNRESOLVED")
++
++    def test_run_map_expired_batch_records_unattempted_without_solve(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            input_path, ins, parent, _ = _fixture(tmp)
++            out = Path(tmp) / "out"
++            out.mkdir()
++            archive = Path(tmp) / "archive"
++            _archive_cells(archive, ins, parent)
++            canonical_path = driver.HERE.parent / "failure/G2_ALNS_GREEDY_PARENTS.json"
++            original_read = driver.read
++
++            def fake_read(path):
++                if Path(path) == canonical_path:
++                    return {"maps": [{"map": ins.name, "canonical_solution": parent}]}
++                return original_read(path)
++
++            with patch.object(driver, "read", side_effect=fake_read), patch.object(driver, "ARCHIVE", archive):
++                row = driver.run_map(
++                    {"name": ins.name, "path": str(input_path), "sha256": ins.sha256}, out,
++                    time.perf_counter() - 1.0, _evaluate, lambda _i: copy.deepcopy(parent), lambda _p: ins,
++                    DummyBudget, lambda *_a, **_k: self.fail("solve must not run after deadline"),
++                )
++            stations = json.loads((out / ins.name / "stations.json").read_text())
++            self.assertEqual(stations[0]["fixed_owner"]["status"], "UNATTEMPTED_BATCH_DEADLINE")
++            self.assertEqual(stations[0]["joint"]["status"], "UNATTEMPTED_BATCH_DEADLINE")
++            self.assertEqual(row["status"], "PARTIAL_FEASIBLE_INCUMBENT_WITH_UNRESOLVED_STATIONS")
++
++    def test_reference_cost_residual_is_separate_from_feasibility(self):
++        _, ins, parent, parent_audit = _fixture(tempfile.mkdtemp())
++        result = FakeResult("COMPLETE_JOINT_REFERENCE", parent["routes"][0], 10.01)
++        checked = driver.validate_reference(ins, parent, parent_audit, 0, result, _evaluate, False)
++        self.assertTrue(checked["complete_trial_audit"]["feasible"])
++        self.assertFalse(checked["integration_accepted"])
++        self.assertIn("dp_evaluator_residual", checked["validation_violations"])
++        self.assertNotIn("independent_evaluator_rejected", checked["validation_violations"])
++
++
++if __name__ == "__main__":
++    unittest.main()

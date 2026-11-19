@@ -1,0 +1,220 @@
+{
+  "schema": "takeover_completion_state_v1",
+  "identity": "20261112_takeover_completion",
+  "date_local": "2026-11-12",
+  "timezone": "Asia/Shanghai",
+  "operator": "DeepSeek Harness (single principal), parallel subagents per user instruction 2026-11-12",
+  "goal": "take over and complete the remaining programme; no fabricated positives; no gate skipping",
+  "gates": {
+    "G0": {
+      "status": "NO_GO",
+      "decision": "NO_NEW_DISTINCT_MECHANISM_NO_TRAINING",
+      "scope": "static S contract",
+      "evidence": "G0_DECISION.md; MECHANISM_SPEC.md"
+    },
+    "G1": {
+      "status": "LIMITED_ENGINEERING_PASS_HISTORICAL",
+      "note": "unchanged from history"
+    },
+    "G2": {
+      "status": "LIMITED_DIAGNOSIS_PLUS_NEW_G3_DEV_HEADROOM",
+      "note": "new: 12-map new population headroom measured"
+    },
+    "G3": {
+      "status": "NOT_PASSED_BUT_STRONGEST_NONRL_NOW_ESTABLISHED",
+      "partial_progress": "cost-neutral floor (exact, 47 maps) + a non-learning min-max ALNS that beats the floor on 22/46 maps with 0 losses and 46/46 admissible",
+      "blockers": [
+        "no end-to-end same-wall-clock comparison against the author's full pipeline",
+        "no Formal population",
+        "no RL comparison (0 training)"
+      ]
+    },
+    "G4": {
+      "status": "NOT_STARTED_BLOCKED_BY_G0_G3"
+    },
+    "G5": {
+      "status": "NOT_STARTED"
+    },
+    "G6": {
+      "status": "NOT_STARTED"
+    },
+    "G7": {
+      "status": "NOT_STARTED"
+    },
+    "G8": {
+      "status": "IN_PROGRESS_DOCUMENTATION"
+    },
+    "G1_PUBLIC_ROLLOUT": {
+      "status": "ENGINEERING_READY_WITHIN_IMPLEMENTED_SCOPE",
+      "evidence": [
+        "public_rollout/tests/run_all.py",
+        "public_rollout_receipts/receipts/SUMMARY.json",
+        "public_rollout_receipts/receipts/MUTATION.json",
+        "public_rollout_receipts/receipts/driver/rows.jsonl",
+        "public_rollout/DOCS_IMPLEMENTATION.md"
+      ],
+      "result": "T1-T11 all PASS, 72 assertions",
+      "assertion_counts": {
+        "T1": 18,
+        "T2": 5,
+        "T3": 6,
+        "T4": 5,
+        "T5": 6,
+        "T6": 6,
+        "T7": 6,
+        "T8": 5,
+        "T9": 5,
+        "T10": 5,
+        "T11": 5
+      },
+      "alarm_law": "AlarmLaw pre-draws, per target and before the episode, whether a fault occurs and its post-sweep delay (-1 = none); the alarm is realised only when the target is actually swept. Parameters p=0.2 and delay U[0,20] are ENGINEERING DEFAULTS, not fitted values",
+      "bug_fixed": "the engine used to schedule a fresh alarm after every service completion, so an alarm re-visit spawned another alarm; now each target yields at most one fault",
+      "mutation_check": "8/8 injected defects caught",
+      "not_claimed": [
+        "alarm parameters lack physical provenance or TRAIN calibration",
+        "no batch driver or parallel scheduler",
+        "latent-phase model parameters are also engineering defaults"
+      ]
+    }
+  },
+  "new_scientific_receipts": [
+    {
+      "id": "R1",
+      "claim": "On 11 new maps, exact cost-neutral slot relabelling lowers M_return by mean 12.919% (median 17.059%), map-level bootstrap 95% CI [-18.788%, -6.696%], W/T/L 7/4/0",
+      "evidence": "results/g3_pop/EXACT_REASSIGN_RESULTS.json; stats/STATS.json",
+      "verifier": "analysis/compute_stats.py (B=10000, seed=20261112)"
+    },
+    {
+      "id": "R2",
+      "claim": "A 1 ms LPT heuristic attains the exact cost-neutral optimum on 10/11 maps; only 6x50_o1 differs by 1.36%",
+      "evidence": "results/g3_pop/NONRL_RESULTS.json vs EXACT_REASSIGN_RESULTS.json"
+    },
+    {
+      "id": "R3",
+      "claim": "Route-level descent adds only 0.599% beyond the cost-neutral optimum (n=8, CI [-1.651%, -0.000%]) and times out on 8x80/9x95/10x110 at 6 s and 12 s",
+      "evidence": "results/g3_pop/NONRL_RESULTS.json; stats/STATS.json"
+    },
+    {
+      "id": "R4",
+      "claim": "Author recording defect: 4x20_o1 recorded slot assignment swaps two trips at station #2, making Java latest-time 86.5649 vs scorer M_return 79.4749 at identical cost",
+      "evidence": "results/g3_pop/author/4x20_o1/{RUN.json,reference.json,return_score.json,stdout.log}"
+    }
+  ],
+  "not_established": [
+    "no RL advantage",
+    "no new distinct mechanism",
+    "no cost-neutral-class-exceeding routing gain certified (1 map only)",
+    "no W-contract result",
+    "no Formal"
+  ],
+  "untouched": [
+    "120 official maps reproduction",
+    "two science STATE files",
+    "all historical packages and receipts",
+    "all closed identities"
+  ],
+  "final_numbers": {
+    "population_maps_allocated": 48,
+    "anchors_eligible": 47,
+    "development_maps": 11,
+    "confirmation_maps": 36,
+    "exact_cost_neutral_vs_anchor_pooled": {
+      "mean_pct": -11.4115,
+      "median_pct": -10.902,
+      "ci95": [
+        -14.7962,
+        -8.1793
+      ],
+      "wins": 27,
+      "ties": 20,
+      "losses": 0,
+      "n": 47
+    },
+    "replication": "REPLICATED (confirmation -10.951%, CI [-14.852, -7.354], 20/16/0)",
+    "lpt_vs_exact_pooled": {
+      "mean_pct": 0.0997,
+      "ci95": [
+        0,
+        0.2702
+      ],
+      "wins": 0,
+      "ties": 45,
+      "losses": 2,
+      "n": 47
+    },
+    "joint_minmax_12s_vs_exact": {
+      "valid_only": {
+        "mean_pct": -0.31,
+        "n": 35
+      },
+      "itt": {
+        "mean_pct": 3.607,
+        "ci95": [
+          1.25,
+          6.407
+        ],
+        "n": 47
+      }
+    },
+    "exact_global_optimum_maps": 6,
+    "lpt_equals_exact_on_those": "6/6, diff 0.0",
+    "strong_nonrl_floor_comparison": {
+      "pooled_n": 46,
+      "mean_vs_floor_pct": -3.041,
+      "median_vs_floor_pct": 0,
+      "wins": 22,
+      "losses": 0,
+      "all_admissible": true,
+      "fallbacks": 0,
+      "development_n": 10,
+      "development_mean_vs_floor_pct": -4.001,
+      "confirmation_n": 36,
+      "confirmation_mean_vs_floor_pct": -2.775,
+      "mean_vs_anchor_pct": -13.928,
+      "median_vs_anchor_pct": -13.802,
+      "best_map": {
+        "map": "8x80_o1",
+        "anchor": 240.78810976112106,
+        "floor": 199.71161345458106,
+        "alns": 159.62768106624628,
+        "vs_floor_pct": -20.071,
+        "cost_delta": -3.096
+      }
+    }
+  },
+  "process_receipts": {
+    "solution_persistence_added": true,
+    "rerun_after_persistence": "03_run_nonrl.py re-executed on both sets; point estimates unchanged",
+    "intent_missing_on_first_runs": [
+      "03_run_nonrl.py",
+      "04_exact_reassign.py"
+    ],
+    "intent_added_after": true,
+    "lpt_duty_limit_hypothesis": "REFUTED: LPT_DUTY_PROBE.json over 47 maps, 0 maps differ",
+    "provenance_freeze": "RESULTS_MANIFEST.json (477 files)",
+    "confirmation_exposure": "one subagent read ~20 tail lines of logs/confirm.log during analysis; rules and estimand frozen before generation; disclosed",
+    "server_outage": "<COMPUTE_HOST> SSH port refused 2026-11-12 ~08:28Z; service restored ~11:45Z; interrupted confirmation run restarted with the same seed and completed 72/72 rows",
+    "public_rollout": "implemented and tested on <COMPUTE_HOST> at <EXECUTION_PATH> receipts copied to public_rollout_receipts/"
+  },
+  "corrections_to_prior_records": [
+    "WX-E pilot V_cluster shown as -0.40625 in the handoff prompt and main STATE is from an invalidated toy run; the valid figure is 0.0 with cost ratio 1.086307",
+    "the 40 previous new identities are all family [3,20] with one shared weather block: one population sampled 40 times",
+    "cost under cost-neutral reassignment is mathematically identical but numerically differs by up to 2.27e-13 (1 ulp), not bit-identical",
+    "the development-set 'route-level adds 0.599%' is a delivered-only conditional statistic; under ITT it is 3.6% worse than the floor"
+  ],
+  "p3_exact_optimum_extension": {
+    "attempted": "exact_minmax.py --max-n-exact 16 on 6x50_o1, 7x65_o1",
+    "result": "UNKNOWN_NONEXACT_STATION for both",
+    "reason": "the author's target_station assignment concentrates 18-20 targets in one station on these maps; the exact partition DP is 3^n, so n=18 (3.9e8) and n=20 (3.5e9) are out of reach in pure Python",
+    "measured_max_targets_per_station": {
+      "6x50_o1": 20,
+      "7x65_o1": 18,
+      "8x80_o1": 23,
+      "9x95_o1": 32,
+      "10x110_o1": 30
+    },
+    "conclusion": "P3 is infeasible for the large maps with this algorithm; a branch-and-bound or ILP formulation would be needed",
+    "evidence": "logs/exact16.log (remote)"
+  },
+  "next_bounded_item": "P1h: give the alarm and latent-phase parameters a stated provenance (physics or an independent TRAIN calibration protocol with receipts), then freeze them in a config file; P2 still needs a user decision"
+}

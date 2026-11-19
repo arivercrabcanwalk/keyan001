@@ -1,0 +1,82 @@
+{
+  "candidate": {
+    "decision": "CLOSE_ECHO_TRANSFER_NO_DISTINCT_NEW_STEP",
+    "id": "ECHO_TRANSFER_AS_NEW_MECHANISM",
+    "scope": "direct transfer of ECHO PFCA/edge encoding/heterogeneous multi-trip decoder as new mechanism; not all future fixed-wind route RL"
+  },
+  "date_local": "2026-11-13",
+  "execution_host": "<COMPUTE_HOST>",
+  "gates": {
+    "G0": "NO_NEW_DISTINCT_MECHANISM_NO_TRAINING",
+    "G1": "FINITE_PINNED_SOURCE_SEMANTICS_PASS_ONLY",
+    "G3": "NOT_PASSED",
+    "G4": "NOT_ADMITTED_FOR_THIS_CANDIDATE",
+    "G5_FORMAL": "NOT_STARTED",
+    "G8": "NOT_COMPLETE"
+  },
+  "goal_status": "active",
+  "legacy_quota": {
+    "actual_comparisons": 126,
+    "calibration_validation_max": 24,
+    "calibration_validation_used": 24,
+    "refunded": false,
+    "unique_identities": 40
+  },
+  "new_counts": {
+    "alns_calls": 0,
+    "author_solves": 0,
+    "author_source_files_read": 3,
+    "bounded_modules": 5,
+    "checkpoints": 0,
+    "formal_maps": 0,
+    "module_exit0": 5,
+    "module_exit_nonzero": 0,
+    "paper_versions_read": 1,
+    "scientific_maps": 0,
+    "scientific_route_quality_calls": 0,
+    "semantic_tensor_cases": 3,
+    "source_environment_traces": 1,
+    "subagents": 0,
+    "training_calls": 0
+  },
+  "next_candidate": "NOT_SELECTED",
+  "next_work": "NEXT_BOUNDED_WORK.md",
+  "owner": "root",
+  "project_complete": false,
+  "protected_hashes": {
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9"
+  },
+  "remote_receipts_archive_sha256": "680abeeb3526e427b99f2cad3e87c875e2b80576e3494efe7412c8803c2df57f",
+  "remote_root": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+  "resources": {
+    "actual_cost_definition": "sum of five supervised child terminal receipts, includes rollback child and its descendants; excludes reading/transport/packaging",
+    "child_cpu_s_actual": 7.3200769999999995,
+    "child_maxrss_kib_max": 241576,
+    "child_wall_s_sum": 8.195760347414762,
+    "registered_cpu_s_max": 105,
+    "registered_modules_max": 7,
+    "registered_wall_s_max": 175
+  },
+  "results": {
+    "autograd_max_error": 0.0,
+    "pfca_singleton_weight_gradient_zero": true,
+    "primary_modified_retained": true,
+    "probability_max_error": 0.0,
+    "return_resets_used_capacity": true,
+    "return_retains_cumulative_time": true,
+    "rollback_verified": true,
+    "source_small_input_topk_failure_retained": true,
+    "terminal_cost_includes_implicit_return": true,
+    "whole_pfca_gradient_zero_claim": false
+  },
+  "scientific_success_claim": false,
+  "status": "ECHO_READING_AND_PINNED_SEMANTICS_COMPLETE_NO_NEW_MECHANISM",
+  "timezone": "Asia/Shanghai",
+  "user_decision": {
+    "dependent_scientific_batches_started": false,
+    "existing": "WIND_COMPARISON_PROTOCOL A/B",
+    "new_questions": 0,
+    "status": "AWAITING_EXISTING_REPLY"
+  }
+}

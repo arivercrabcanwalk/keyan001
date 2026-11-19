@@ -1,0 +1,68 @@
+{
+  "schema": "route_reversal_orbit_screen_v1_state",
+  "identity": "20261114_route_reversal_orbit_screen_v1",
+  "updated_local": "2026-11-14",
+  "changed_field": "constant_wind_trip_reversal_orbit_gradient",
+  "decision": "CLOSED_NO_GO_AS_DISTINCT_G0; NO_PRACTICAL_VARIANCE_PER_COMPUTE_ADVANTAGE",
+  "scope": {
+    "host": "<REMOVED_CONNECTION_OR_CREDENTIAL>",
+    "domain": "fixed uniform wind, simple linear energy, hand-authored engineering fixtures",
+    "actions": [
+      "(slot,target)",
+      "(slot,RETURN)"
+    ],
+    "scientific_population": false,
+    "training": false,
+    "formal": false
+  },
+  "frozen_inputs": {
+    "screen_script_sha256": "fdae8f8b7fa61882784364cdbaa9d6ef413fb65515232b5241b502b30bee2297",
+    "global_env_sha256": "af66c8e77c0d9d2e7dc1a9ac7effb80431173f6ff992bac8a182c231fb4be269",
+    "prefix_sampler_sha256": "f78f5ccbbfb0928465f5fd63d49d81c3dc3ff0fa108e479225308d9bb3a9c817",
+    "wind_scorer_sha256": "0698b6e0d7aae5f138840dba7f33f2093e4664f2d99c6e6cd1f41a1305ebd153",
+    "problem_sha256": "f03c2f4201cdea977644d84ab0ad704eb47d4c4389b06b2ac86b9d264463b1cc",
+    "python": "3.10.12"
+  },
+  "physical_result": {
+    "attempted_reversal_schedules": 48,
+    "feasible": 48,
+    "cap_acceptance_unchanged": 48,
+    "public_T_feasible": 48,
+    "mask_complete": 48,
+    "involution": 48,
+    "max_raw_cost_delta": 7.105427357601002e-15,
+    "max_raw_M_return_delta": 1.7763568394002505e-15,
+    "max_public_T_cost_delta": 7.105427357601002e-15,
+    "max_public_T_M_return_delta": 3.552713678800501e-15,
+    "max_trip_duration_delta": 1.7763568394002505e-15,
+    "max_trip_energy_delta": 5.551115123125783e-17
+  },
+  "gradient_result": {
+    "settings": 6,
+    "trajectories_per_setting": 160,
+    "admissible_per_setting": 108,
+    "max_gradient_mean_abs_error": 5.551115123125783e-17,
+    "variance_ratio_range": [
+      0.9893102941640696,
+      0.9925807702608691
+    ],
+    "operation_count_ratio_range": [
+      1.6782370745416855,
+      1.7401199131997893
+    ],
+    "actual_neural_wall_clock_measured": false
+  },
+  "failures_preserved": [
+    "local_time_flag_incompatible",
+    "remote_time_binary_missing",
+    "initial_public_T_anchor_comparison_assertion",
+    "initial_trace_reversal_position_index_error"
+  ],
+  "project_gates": {
+    "G0": "NOT_PASSED",
+    "G3": "NOT_PASSED",
+    "training": "NOT_ADMITTED",
+    "formal": "NOT_ADMITTED"
+  },
+  "next_bounded_work": "Screen one materially distinct bank-outside typed physical route generation/update step against primary-source prior art and matched non-learning/ordinary-RL controls; close at formula stage if no distinct step exists."
+}

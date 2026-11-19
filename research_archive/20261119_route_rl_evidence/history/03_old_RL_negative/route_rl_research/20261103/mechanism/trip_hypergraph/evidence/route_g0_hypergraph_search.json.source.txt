@@ -1,0 +1,385 @@
+Deep Policy Dynamic Programming for Vehicle Routing Problems | Wouter Kool (https://wouterkool.github.io/publication/deep-policy-dynamic-programming/)
+citeturn17search0 [wordlim: 200] Published: 4.7 years ago; Crawled: 3.8 years ago; # Deep Policy Dynamic Programming for Vehicle Routing Problems
+
+Wouter Kool, Herke van Hoof, Joaquim Gromicho, Max Welling ... International Conference on the Integration of Constraint Programming, Artificial Intelligence, and Operations Research (CPAIOR), 2022
+
+# Deep Policy Dynamic Programming for Vehicle Routing Problems
+
+Wouter Kool, Herke van Hoof, Joaquim Gromicho, Max Welling
+
+March 2022
+
+PDF [Button: Cite ] Code Project Slides Video
+
+Image Deep Policy Dynamic Programming
+
+### Abstract
+
+Routing problems are a class of combinatorial problems with many practical applications. Recently, end-to-end deep learning methods have been proposed to learn approximate solution heuristics for such problems. In contrast, classical dynamic programming (DP) algorithms guarantee optimal solutions, but scale badly with the problem size. We propose Deep Policy Dynamic Programming (DPDP), which aims to combine the strengths of learned neural heuristics with those of DP algorithms. DPDP prioritizes and restricts the DP state space using a policy derived from a deep neural network, which is trained to predict edges from example solutions. We evaluate our framework on the travelling salesman problem (TSP), the vehicle routing problem (VRP) and TSP with time windows (TSPTW) and show that the neural policy improves the performance of (restricted) DP algorithms, making them competitive to strong alternatives such as LKH, while also outperforming most other `neural approaches’ for solving TSPs, VRPs and TSPTWs with 100 nodes.
+
+Type
+
+Conference paper
+
+Publication
+
+International Conference on the Integration of Constraint Programming, Artificial Intelligence, and Operations Research (CPAIOR), 2022--------------------------------------------------------------------------------
+Deep Policy Dynamic Programming (https://wouterkool.github.io/pdf/paper-dpdp-final.pdf)
+citeturn17search12 [wordlim: 200] Published: 4.7 years ago; Wouter Kool*1,2[0000−0002−1837−1454], ... We propose *Deep Policy Dynamic Programming* (DPDP), which aims to combine the strengths of learned neural heuristics with those of DP algorithms. ... **Keywords:** Dynamic Programming · Deep Learning · Vehicle Routing.
+Deep Policy Dynamic Programming  
+for Vehicle Routing Problems
+
+Wouter Kool*1,2[0000−0002−1837−1454],  
+Herke van Hoof1[0000−0002−1583−3692],  
+Joaquim Gromicho1,2[0000−0002−1467−6656], and  
+Max Welling1[0000−0003−1484−2121]
+
+1 University of Amsterdam, The Netherlands  
+2 ORTEC, The Netherlands
+
+**Abstract.** Routing problems are a class of combinatorial problems with many practical applications. Recently, end-to-end deep learning methods have been proposed to learn approximate solution heuristics for such problems. In contrast, classical dynamic programming (DP) algorithms guarantee optimal solutions, but scale badly with the problem size. We propose *Deep Policy Dynamic Programming* (DPDP), which aims to combine the strengths of learned neural heuristics with those of DP algorithms. DPDP prioritizes and restricts the DP state space using a policy derived from a deep neural network, which is trained to predict edges from example solutions. We evaluate our framework on the travelling salesman problem (TSP), the vehicle routing problem (VRP) and TSP with time windows (TSPTW) and show that the neural policy improves the performance of (restricted) DP algorithms, making them competitive to strong alternatives such as LKH, while also outperforming most other ‘neural approaches’ for solving TSPs, VRPs and TSPTWs with 100 nodes.
+
+**Keywords:** Dynamic Programming · Deep Learning · Vehicle Routing.
+
+* Corresponding author: <EMAIL_REMOVED>--------------------------------------------------------------------------------
+Hypergraph Deep Reinforcement Learning for Electric Vehicle Charging Route Optimization - The Chinese University of Hong Kong (https://research.cuhk.edu.hk/en/publications/hypergraph-deep-reinforcement-learning-for-electric-vehicle-charg/)
+citeturn17search1 [wordlim: 200] Published: 4 months ago; Crawled: last month; # Hypergraph Deep Reinforcement Learning for Electric Vehicle Charging Route Optimization ... A hypergraph neural network (HGNN) is employed to extract hypergraph neighborhood features, which are input into a proximal policy optimization (PPO) algorithm for efficient online routing decisions.
+
+# Hypergraph Deep Reinforcement Learning for Electric Vehicle Charging Route Optimization
+
+  * Chengwei Liu
+  * , Jiangliang Jin^{*}
+  * , Liangliang Hao
+  * , Qisheng Huang
+  * , Yunjian Xu
+
+^{*}Corresponding author for this work
+
+  * Department of Mechanical and Automation Engineering
+
+  * Donghua University
+  * Shandong University
+  * Harbin Institute of Technology
+
+Research output: Chapters and Conference Papers with Proceedings › Conference paper published in conference proceedings › Academic research › peer-review
+
+## Abstract
+
+We study an electric vehicle (EV) routing problem in random traffic environments, time-varying energy prices, and uncertain service delays. Leveraging real-time information from intelligent transportation systems and smart grids, the EV's objective is to minimize the total cost of travel and charging. To capture multi-node relationships in transportation networks, we propose a hypergraph-based deep reinforcement learning method. A hypergraph neural network (HGNN) is employed to extract hypergraph neighborhood features, which are input into a proximal policy optimization (PPO) algorithm for efficient online routing decisions.
+
+Original language  | English
+Title of host publication  | 2026 IEEE 3rd International Conference on Electrical Power Systems and Intelligent Control, EPSIC 2026
+Publisher  | Institute of Electrical and Electronics Engineers Inc.
+Number of pages  | 5
+ISBN (Electronic)  | 9798331552534
+ISBN (Print)  | 9798331552541
+DOIs  | 
+
+  * https://doi.org/10.1109/EPSIC70071.2026.11590711
+Publication status  | Published - Jul 2026
+Event  | 3rd IEEE International Conference on Electrical Power Systems and Intelligent Control, EPSIC 2026 - Hybrid, Tianjin, China
+Duration: 22 May 2026 → 24 May 2026
+
+### Conference
+
+Conference  | 3rd IEEE International Conference on Electrical Power Systems and Intelligent Control, EPSIC 2026
+Country/Territory  | China
+City  | Hybrid, Tianjin
+Period  | 22/05/26 → 24/05/26
+
+### Bibliographical note
+
+Publisher Copyright:
+© 2026 IEEE.
+
+## Keywords
+
+  * deep reinforcement learning
+  * electric vehicle routing guidance
+  * hypergraph neural network
+
+## Access to Document
+
+  * 10.1109/EPSIC70071.2026.11590711
+
+## Cite this
+
+  * APA
+  * Author
+  * BIBTEX
+  * Harvard
+  * Standard
+  * RIS
+  * Vancouver
+
+Liu, C., Jin, J., Hao, L., Huang, Q., & Xu, Y. (2026). Hypergraph Deep Reinforcement Learning for Electric Vehicle Charging Route Optimization. In 2026 IEEE 3rd International Conference on Electrical Power Systems and Intelligent Control, EPSIC 2026 Institute of Electrical and Electronics Engineers Inc.. https://doi.org/10.1109/EPSIC70071.2026.11590711
+
+Liu, Chengwei ; Jin, Jiangliang ; Hao, Liangliang et al. / Hypergraph Deep Reinforcement Learning for Electric Vehicle Charging Route Optimization. 2026 IEEE 3rd International Conference on Electrical Power Systems and Intelligent Control, EPSIC 2026. Institute of Electrical and Electronics Engineers Inc., 2026.--------------------------------------------------------------------------------
+Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution (https://arxiv.org/abs/2503.10421)
+citeturn17academia13 [wordlim: 200] Published: 1.6 years ago; Title: Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution ... This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems.
+Title: Towards Constraint-Based Adaptive Hypergraph Learning for Solving Vehicle Routing: An End-to-End Solution
+Authors: Zhenwei Wang, Ruibin Bai, Tiehua Zhang
+Date: Thu Mar 13 14:42:44 2025
+
+The application of learning based methods to vehicle routing problems has emerged as a pivotal area of research in combinatorial optimization. These problems are characterized by vast solution spaces and intricate constraints, making traditional approaches such as exact mathematical models or heuristic methods prone to high computational overhead or reliant on the design of complex heuristic operators to achieve optimal or near optimal solutions. Meanwhile, although some recent learning-based methods can produce good performance for VRP with straightforward constraint scenarios, they often fail to effectively handle hard constraints that are common in practice. This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems. A central innovation of this work is the development of a constraint-oriented dynamic hyperedge reconstruction strategy within an encoder, which significantly enhances hypergraph representation learning. Additionally, the decoder leverages a double-pointer attention mechanism to iteratively generate solutions. The proposed model is trained by incorporating asynchronous parameter updates informed by hypergraph constraints and optimizing a dual loss function comprising constraint loss and policy gradient loss. The experiment results on benchmark datasets demonstrate that the proposed approach not only eliminates the need for sophisticated heuristic operators but also achieves substantial improvements in solution quality.--------------------------------------------------------------------------------
+Deep Policy Dynamic Programming for Vehicle Routing Problems (https://arxiv.org/abs/2102.11756)
+citeturn17academia14 [wordlim: 200] Published: 5.7 years ago; Title: Deep Policy Dynamic Programming for Vehicle Routing Problems
+Authors: Wouter Kool, Herke van Hoof, Joaquim Gromicho, Max Welling
+Title: Deep Policy Dynamic Programming for Vehicle Routing Problems
+Authors: Wouter Kool, Herke van Hoof, Joaquim Gromicho, Max Welling
+Date: Tue Feb 23 15:33:57 2021
+
+Routing problems are a class of combinatorial problems with many practical applications. Recently, end-to-end deep learning methods have been proposed to learn approximate solution heuristics for such problems. In contrast, classical dynamic programming (DP) algorithms guarantee optimal solutions, but scale badly with the problem size. We propose Deep Policy Dynamic Programming (DPDP), which aims to combine the strengths of learned neural heuristics with those of DP algorithms. DPDP prioritizes and restricts the DP state space using a policy derived from a deep neural network, which is trained to predict edges from example solutions. We evaluate our framework on the travelling salesman problem (TSP), the vehicle routing problem (VRP) and TSP with time windows (TSPTW) and show that the neural policy improves the performance of (restricted) DP algorithms, making them competitive to strong alternatives such as LKH, while also outperforming most other 'neural approaches' for solving TSPs, VRPs and TSPTWs with 100 nodes.--------------------------------------------------------------------------------
+4 | INTRODUCTION (https://pure.uva.nl/ws/files/93245283/Thesis.pdf)
+citeturn17search15 [wordlim: 200] Published: 11 months ago; In Chapter 4, adapted from our publication Kool et al. (2022a), we address this question and develop *deep policy dynamic programming* (DPDP) as a method to combine a learned graph neural network model (Joshi et al., 2019a) for vehicle routing problems with the principle of dynamic programming, for three different routing problems.
+4 | INTRODUCTION
+
+**RESEARCH QUESTION 2:** *How can we integrate machine learning models and dynamic programming for vehicle routing problems?*
+
+In Chapter 4, adapted from our publication Kool et al. (2022a), we address this question and develop *deep policy dynamic programming* (DPDP) as a method to combine a learned graph neural network model (Joshi et al., 2019a) for vehicle routing problems with the principle of dynamic programming, for three different routing problems.
+
+**1.2.2  Part ii: sampling & statistical estimation**
+
+Most of the problems considered in Part i are *deterministic*, such that duplicate samples are uninformative when training models to solve these problems. Therefore, Part ii of this thesis provides technical contributions that enable efficient *sampling without replacement* from models over combinatorial domains, and using these samples for gradient based optimization of those models.
+
+**RESEARCH QUESTION 3:** *How can we obtain unique samples from models over combinatorial domains?*
+
+To answer research question 3, we present *ancestral Gumbel-top-k sampling* (Kool et al., 2020a), a generalization of *stochastic beam search* (Kool et al., 2019c) in Chapter 5. This algorithm, an extension of ancestral sampling, can efficiently draw multiple samples without replacement from a distribution defined over a combinatorial domain.
+
+**RESEARCH QUESTION 4:** *How can we improve gradient based training of neural network models using unique samples?*
+
+In Chapter 6, adapted from our publication Kool et al. (2020b), we answer research question 4 by deriving the *Unordered Set Policy Gradient Estimator*, which can be used to train models with SGD using samples without replacement, obtained using ancestral Gumbel-top-k sampling (or any other algorithm).--------------------------------------------------------------------------------
+Wouter Kool, Herke van Hoof, Joaquim Gromicho, and Max Welling. Deep policy dynamic programming for vehicle routing problems. In *Integration of Constraint Programming, Artificial Intelligence, and Operations Research: 19th International Conference*, 2022. (https://proceedings.mlr.press/v216/jiang23a/jiang23a.pdf)
+citeturn17search16 [wordlim: 200] Published: 3.4 years ago; Wouter Kool, Herke van Hoof, Joaquim Gromicho, and Max Welling. Deep policy dynamic programming for vehicle routing problems. In *Integration of Constraint Programming, Artificial Intelligence, and Operations Research: 19th International Conference*, 2022.
+Wouter Kool, Herke van Hoof, Joaquim Gromicho, and Max Welling. Deep policy dynamic programming for vehicle routing problems. In *Integration of Constraint Programming, Artificial Intelligence, and Operations Research: 19th International Conference*, 2022.
+
+Yeong-Dae Kwon, Jinho Choo, Byoungjip Kim, Iljoo Yoon, Youngjune Gwon, and Seungjai Min. Pomo: Policy optimization with multiple optima for reinforcement learning. In *Proc. of NeurIPS*, 2020.
+
+Jure Leskovec, Jon Kleinberg, and Christos Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations. *knowledge discovery and data mining*, 2005.
+
+Zhuwen Li, Qifeng Chen, and Vladlen Koltun. Combinatorial optimization with graph convolutional networks and guided tree search. *Proc. of NeurIPS*, 2018.
+
+Yixin Liu, Ming Jin, Shirui Pan, Chuan Zhou, Yu Zheng, Feng Xia, and Philip Yu. Graph self-supervised learning: A survey. *IEEE Transactions on Knowledge and Data Engineering*, 2022.
+
+Hao Lu, Xingwen Zhang, and Shuang Yang. A learning-based iterative method for solving vehicle routing problems. In *Proc. of ICLR*, 2019.
+
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. *Proc. of NeurIPS*, 2013.
+
+Bryan Perozzi, Rami Al-Rfou, and Steven Skiena. Deepwalk: Online learning of social representations. *knowledge discovery and data mining*, 2014.
+
+Jiezhong Qiu, Qibin Chen, Yuxiao Dong, Jing Zhang, Hongxia Yang, Ming Ding, Kuansan Wang, and Jie Tang. Gcc: Graph contrastive coding for graph neural network pre-training. In *Proc. of KDD*, 2020.
+
+Eduardo Queiroga, Ruslan Sadykov, Eduardo Uchoa, and Thibaut Vidal. 10,000 optimal cvrp solutions for testing machine learning based heuristics. In *Proc. of AAAI*, 2021.
+
+Gerhard Reinelt. Tsplib—a traveling salesman problem library. *ORSA journal on computing*, 1991.
+
+Silvan Sievers, Michael Katz, Shirin Sohrabi, Horst Samulowitz, and Patrick Ferber. Deep learning for cost-optimal planning: Task-dependent planner selection. In *Proc. of AAAI*, 2019.
+
+Jian Tang, Meng Qu, Mingzhe Wang, Ming Zhang, Jun Yan, and Qiaozhu Mei. Line: Large-scale information network embedding. *the web conference*, 2015.
+
+Yonglong Tian, Dilip Krishnan, and Phillip Isola. Contrastive multiview coding. In *Proc. of ECCV*, 2020.
+
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. *Proc. of NeurIPS*, 2017.
+
+Thibaut Vidal. Hybrid genetic search for the cvrp: Open-source implementation and swap neighborhood. *Computers & Operations Research*, 2022.
+
+Oriol Vinyals, Meire Fortunato, and Navdeep Jaitly. Pointer networks. In *Proc. of NeurIPS*, 2015.
+
+Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. *Machine learning*, 1992.
+
+Lirong Wu, Haitao Lin, Cheng Tan, Zhangyang Gao, and Stan Z Li. Self-supervised learning on graphs: Contrastive, generative, or predictive. *IEEE Transactions on Knowledge and Data Engineering*, 2021a.
+
+Yaoxin Wu, Wen Song, Zhiguang Cao, Jie Zhang, and Andrew Lim. Learning improvement heuristics for solving routing problems.. *IEEE transactions on neural networks and learning systems*, 2021b.
+
+Zhirong Wu, Yuanjun Xiong, Stella X Yu, and Dahua Lin. Unsupervised feature learning via non-parametric instance discrimination. In *Proc. of CVPR*, 2018.
+
+Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? *arXiv preprint arXiv:1810.00826*, 2018.
+
+Yihang Yin, Qingzhong Wang, Siyu Huang, Haoyi Xiong, and Xiang Zhang. Autogl: Automated graph contrastive learning via learnable view generators. In *Proc. of AAAI*, 2022.
+
+Yuning You, Tianlong Chen, Yongduo Sui, Ting Chen, Zhangyang Wang, and Yang Shen. Graph contrastive learning with augmentations. *Proc. of NeurIPS*, 2020.
+
+Yuning You, Tianlong Chen, Yang Shen, and Zhangyang Wang. Graph contrastive learning automated. In *Proc. of ICML*, 2021.
+
+Yifei Zhang, Hao Zhu, Zixing Song, Piotr Koniusz, and Irwin King. Costa: Covariance-preserving feature augmentation for graph contrastive learning. In *Proc. of KDD*, 2022a.
+
+Zeyang Zhang, Ziwei Zhang, Xin Wang, and Wenwu Zhu. Learning to solve travelling salesman problem with hardness-adaptive curriculum. In *Proc. of AAAI*, 2022b.
+
+Zhongzhi Zhang, Tong Shan, and Guanrong Chen. Random walks on weighted networks. *Physical Review E*, 2013.
+
+993--------------------------------------------------------------------------------
+Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems | The Latest in AI (https://thelatestinai.com/papers/2503.10421)
+citeturn17search2 [wordlim: 200] Published: 1.6 years ago; Crawled: 4 weeks ago; # Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems ... This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems.
+
+cs.LG·2503.10421 Copy arXiv ID·Mar 13, 2025
+
+Save
+
+# Learning Constraints-Based Adaptive Hypergraph Neural Networks for Solving Vehicle Routing Problems
+
+Authors: Zhenwei Wang, Tiehua Zhang, Jing Liu, Heng Yu, Kaizhu Huang, Ruibin Bai
+
+Organizations: University of Nottingham Ningbo China, 199 East Taikang Road, Ningbo, 315100, Zhejiang, China · Tongji University, 1239,Siping Road, Shanghai, 200092, Shanghai, China · State Key Laboratory for Novel Software Technology, Nanjing University, 163,Xianlin Road, Nanjing, 210023, Jiangsu, China · Duke Kunshan University, 8,Duke Road, Suzhou, 215316, Jiangsu, China
+
+Read PDF ↗
+
+## Abstract
+
+The application of learning based methods to vehicle routing problems has emerged as a pivotal area of research in combinatorial optimization. These problems are characterized by vast solution spaces and intricate constraints, making traditional approaches such as exact mathematical models or heuristic methods prone to high computational overhead or reliant on the design of complex heuristic operators to achieve optimal or near optimal solutions. Meanwhile, although some recent learning-based methods can produce good performance for VRP with straightforward constraint scenarios, they often fail to effectively handle hard constraints that are common in practice. This study introduces a novel end-to-end framework that combines constraint-oriented hypergraphs with reinforcement learning to address vehicle routing problems. A central innovation of this work is the development of a constraint-oriented dynamic hyperedge reconstruction strategy within an encoder, which significantly enhances hypergraph representation learning. Additionally, the decoder leverages a double-pointer attention mechanism to iteratively generate solutions. The proposed model is trained by incorporating asynchronous parameter updates informed by hypergraph constraints and optimizing a dual loss function comprising constraint loss and policy gradient loss. The experiment results on benchmark datasets demonstrate that the proposed approach not only eliminates the need for sophisticated heuristic operators but also achieves substantial improvements in solution quality.
+
+### Resources
+
+arXiv record
+
+Topics
+    
+
+Vehicle Routing ProblemCombinatorial OptimizationHypergraphsGraph Neural NetworksNeural Network
+
+Keyphrases
+    
+
+  * reinforcement learning
+  * combinatorial optimization
+  * hypergraph representation learning
+  * constraint-oriented dynamic hyperedge reconstruction strategy
+--------------------------------------------------------------------------------
+Related papers: Towards Multi-agent Reinforcement Learning based Traffic Signal Control through Spatio-temporal Hypergraphs (https://fugumt.com/fugumt/paper_check/2404.11014v2_enmode)
+citeturn17search3 [wordlim: 200] Published: 1.6 years ago; Crawled: 4 months ago; This method fuses hypergraph and spatio-temporal graph structures to encode traffic data and capture the complex spatio-temporal correlations between multiple intersections. ... We address dynamic vehicle routing through a multi-agent reinforcement learning (MARL) framework for coordinated, network-aware fleet navigation.<n>We first propose Adaptive Navigation (AN), a decentralized MARL model where each intersection agent provides routing guidance based on local traffic and neighborhood state.<n>To improve scalability in large networks, we further propose Hierarchical Hub-based Adaptive Navigation (HHAN), an extension of AN that assigns agents only to key intersections (hubs)<n> Experiments on synthetic grids and real urban maps (Toronto, Manhattan) show that AN reduces average travel time versus SPF and learning baselines, maintaining 100% routing success.
+To address this, we propose a novel TSCS framework to realize intelligent traffic control. This framework collaborates with multiple neighboring edge computing servers to collect traffic information across the road network. To elevate the efficiency of traffic signal control, we have crafted a multi-agent soft actor-critic (MA-SAC) reinforcement learning algorithm. Within this algorithm, individual agents are deployed at each intersection with a mandate to optimize traffic flow across the road network collectively. Furthermore, we introduce hypergraph learning into the critic network of MA-SAC to enable the spatio-temporal interactions from multiple intersections in the road network. This method fuses hypergraph and spatio-temporal graph structures to encode traffic data and capture the complex spatio-temporal correlations between multiple intersections. Our empirical evaluation, tested on varied datasets, demonstrates the superiority of our framework in minimizing average vehicle travel times and sustaining high-throughput performance. This work facilitates the development of more intelligent urban traffic management solutions. We release the code to support the reproducibility of this work at https://github.com/Edun-Eyes/TSC
+
+#### Related papers
+
+  * Network-Constrained Policy Optimization for Adaptive Multi-agent Vehicle Routing [1.4273866043218153]
+We address dynamic vehicle routing through a multi-agent reinforcement learning (MARL) framework for coordinated, network-aware fleet navigation.<n>We first propose Adaptive Navigation (AN), a decentralized MARL model where each intersection agent provides routing guidance based on local traffic and neighborhood state.<n>To improve scalability in large networks, we further propose Hierarchical Hub-based Adaptive Navigation (HHAN), an extension of AN that assigns agents only to key intersections (hubs)<n> Experiments on synthetic grids and real urban maps (Toronto, Manhattan) show that AN reduces average travel time versus SPF and learning baselines, maintaining 100% routing success.
+--------------------------------------------------------------------------------
+Scalable Algorithms for Bicriterion Trip-Based Transit Routing - TRID (https://trid.trb.org/View/2441944)
+citeturn17search4 [wordlim: 200] Published: 2.1 years ago; Crawled: last month; # Scalable Algorithms for Bicriterion Trip-Based Transit Routing ... Inspired by Hypergraph-based Round-based Public Transit Routing (HypRAPTOR), the authors present Hypergraph-based TBTR (HypTBTR), a partitioning variant aimed at improving TBTR’s query times.
+# Scalable Algorithms for Bicriterion Trip-Based Transit Routing
+
+The paper introduces innovative techniques to enhance Trip-Based Transit Routing (TBTR), a popular bicriterion transit routing approach. Inspired by Hypergraph-based Round-based Public Transit Routing (HypRAPTOR), the authors present Hypergraph-based TBTR (HypTBTR), a partitioning variant aimed at improving TBTR’s query times. However, this improvement in HypTBTR (and HypRAPTOR) comes with increased preprocessing requirements. To address this issue, the authors propose two novel techniques: a One-To-Many variant of TBTR and multilevel partitioning. The authors' One-To-Many algorithm efficiently handles profile queries, and integrating multilevel graph partitioning in both HypTBTR and HypRAPTOR significantly reduces preprocessing computations. Extensive experiments on large-scale GTFS datasets of Switzerland, Netherlands, and Sweden, showcase the efficacy of the proposed algorithms. Empirically, HypTBTR outperforms TBTR by 23–37%, the One-To-Many variant shows a speed-up of 90–95%, and multilevel partitioning reduces preprocessing calculations by up to 53%. --------------------------------------------------------------------------------
+(PDF) Adversarial Neural Trip Recommendation (https://www.researchgate.net/publication/354867923_Adversarial_Neural_Trip_Recommendation)
+citeturn17search5 [wordlim: 200] Published: 5.1 years ago; Crawled: 2 months ago; Deﬁnition 1 (Trip Hypergraph). ... graph retrieval for different trip queries are smaller than the
+
+As for a trip query, it is usually not necessary to take all
+
+the POIs into consideration to plan a reasonable trip. For in-
+
+stance, those POIs that are too far away from the start POI
+
+are impossible to be part of the trip. Here we propose a rule-
+
+based retrieval procedure to pick up a small amount of POI
+
+candidates from the large POI corpus, named candidate set,
+
+which incorporates the impact of connection among trips
+
+and geographic inﬂuence.
+
+Drawing Lessons from Other Trips If a user requests a
+
+trip at the start location l 0, former trips that are associated
+
+with l 0 are promising to provide a reference. Inspired by this,
+
+we could assume that given the start POI l 0 of a trip query,
+
+those POIs that once co-occurred with l 0 in the same trip
+
+could be potential options for the trip query, which can be
+
+named drawing lessons from other trips. Hypergraph pro-
+
+vides a natural way to gather POIs belonging to different
+
+trips and also to glimpse other trips via hyperedges.
+
+𝑙!
+
+𝑙"
+
+𝑙#𝑙$
+
+𝑙%
+
+𝑙&
+
+𝑙'
+
+𝑙(
+
+𝑆!=𝑙", 𝑙#, 𝑙$
+
+𝑆#=𝑙%, 𝑙#, 𝑙&
+
+𝑆'=𝑙!, 𝑙#, 𝑙', 𝑙(
+
+Trips
+
+𝑒"
+
+𝑒!
+
+𝑒#
+
+Figure 2: An instance of hypergraph construction.
+
+Deﬁnition 1 (Trip Hypergraph).Let G= (L, E)denote a
+
+hypergraph, where L is the vertex set and E is the hyperedge
+
+set. Each vertex represents a POI l i and each hyperedge e∈
+
+E connects two or more vertices, representing a trip.
+
+Speciﬁcally, we use trips in the training set to build the
+
+trip hypergraph. On one hand, all the POIs in the same trip
+
+are linked by a hyperedge, which preserves the matching
+
+information between POIs and trips. On the other hand, a
+
+POI may exist in arbitrary hyperedges, connecting different
+
+--------------------------------------------------------------------------------
+KERNEL (https://kernel.iisc.ac.in/routing-with-math/)
+citeturn17search6 [wordlim: 200] Published: 1.9 years ago; Crawled: last month; Prateek and Tarun, instead, propose an alternative: an approach called Hyper-graph Based Transit Routing. ... Imagine representing a transit route as a node in a hypergraph, which is different from a regular graph where each edge connects only two nodes. ... A recent study led by Rito Brata Nath, a PhD student in his lab, tried to solve the problem of charging and trip assignment for electric buses.
+All bus stops and route connections between the stops together create a network. Conventional solutions use variants of a mathematical tool called Dijkstra’s algorithm to find the shortest route between two points in a graph where each edge has a weight – the cost of traversing that edge. But travellers will also be concerned about the number of changes in routes they have to make, which is not addressed by Dijkstra’s algorithm.
+
+Prateek and Tarun, instead, propose an alternative: an approach called Hyper-graph Based Transit Routing. The network is first divided into regions. “We don’t just partition it into, say, four regions, but we again partition them into smaller regions,” adds Tarun.  Each region has certain boundary points or cutstops. The efficient paths between these cutstops are then computed and saved. This boosts the query time. The algorithm only needs to calculate the shortest path between the user and nearby cutstops.
+
+ImageAn example of partitioning a transit graph. The original routes are shown in (a). --------------------------------------------------------------------------------
+dblp: ICIC 2026 - Part II (https://dblp.uni-trier.de/db/conf/icic/icic2026-2.html)
+citeturn17search7 [wordlim: 200] Crawled: 6 days ago; Target-Aware GNN-DQN Adaptive Routing for LEO Satellite Networks. ... A Dual-View Hypergraph World Model for Multi-agent Reinforcement Learning.
+Qinghe Cai, Tianchen Feng, Shuaijun Liu, Lixiang Liu:
+Target-Aware GNN-DQN Adaptive Routing for LEO Satellite Networks. 571-582
+
+Tianchen Feng, Qinghe Cai, Shuaijun Liu, Lixiang Liu:
+Queue-Aware Hybrid PPO with Attention-Enhanced Critic for LEO Satellite Beam Hopping Resource Allocation. 583-593
+
+Tingting Zhao, Jiaxin Huang, Zeyan He, Huijuan Zhang, Jianzheng Liu, Yuan Wang:
+Task-Driven State Representation for Long-Horizon World Model. 594-605
+
+Shuo Peng, Tingjuan Li, Ran Hu, Xiaoming Zhang:
+A Dual-View Hypergraph World Model for Multi-agent Reinforcement Learning. 606-617
+
+Md. Rakib Hossain, Xingyu Liu, Chuan Li:
+Transferring FX Features and WDLP Heads to Accelerate AlphaZero for Gomoku. 618-630--------------------------------------------------------------------------------
+Pieter Smet — NUMA Research Unit, KU Leuven (https://numa.cs.kuleuven.be/numa-members/00074650/view?fromnr=71&pubsonpage=10&pubtype=&sortby=scdate)
+citeturn17search8 [wordlim: 200] Crawled: today;   * Vehicle routing for passenger transportation; 2026 ; PhD Project - Indra Coppens.
+  * Deep learning enhanced combinatorial optimization for cutting and packing problems; 2025 ; PhD Project - Jan Martens.
+--------------------------------------------------------------------------------
+A Supply–Demand Balance Guided Hierarchical Reinforcement Learning Approach for Truck-Cargo Matching | Data Science and Engineering | Springer Nature Link (https://springerlink.fh-diploma.de/article/10.1007/s41019-025-00299-6)
+citeturn17search9 [wordlim: 200] Published: 1.4 years ago; Crawled: 3 weeks ago; To address the challenges in truck-cargo matching, we propose a supply–demand balance guided hierarchical reinforcement learning framework that consists of two main components: a supply–demand gap prediction module and a multi-objective optimization matching module, as illustrated in Fig. ... To be specific, the supply–demand gap prediction module includes a hypergraph attention network that captures spatial-temporal dependencies among multiple influencing factors, combined with an adaptive confidence interval optimization mechanism that reduces the impact of irreducible errors. The multi-objective optimization matching module is based on the hierarchical reinforcement learning framework.
+--------------------------------------------------------------------------------
+Bulletin of the Polish Academy of Sciences Technical Sciences - PAS Journals (https://pgc.czasopisma.pan.pl/bpasts/146618)
+citeturn17search10 [wordlim: 200] Crawled: today; Fixed fleet open vehicle routing problem: Mathematical model and a modified ant colony optimization ... The fixed fleet heterogeneous open vehicle routing problem (HFFOVRP) is one of the most practical versions of the vehicle routing problem (VRP) defined because the use of rental vehicles reduces the cost of purchasing and routing for shipping companies nowadays.
+--------------------------------------------------------------------------------
+Learning for routing: A guided review of recent developments and future directions - ScienceDirect (https://doi.org/10.1016/j.tre.2025.104278)
+citeturn17search11 [wordlim: 200] Crawled: last week; Alternatively, instead of Q-values, it is possible to directly learn a policy that indicates which action to choose given an environment state using the REINFORCE algorithm (Williams, 1992). ... DP  | Dynamic Programming ... One such paper is Kwon et al. (2020) introducing POMO (Policy Optimization with Multiple Optima). ... These subpaths are then optimized by a deviation of the architecture of Kool et al. (2019), adapted to output the shortest path between the two given end-nodes of the original subpath while visiting all other nodes occurring in the original subpath. ... (2024)  | Sourcing and routing  | Heuristic-based  | Assign dynamic customers  | Deep Q-learning  | Heuristic  | USL (AE) + RL(DQN)  | Graph Auto Encoder + MLP
+--------------------------------------------------------------------------------
+Scalable Algorithms for Bicriterion Trip-Based Transit Routing (https://arxiv.org/abs/2111.06654)
+citeturn17academia17 [wordlim: 200] Published: 5.0 years ago; Title: Scalable Algorithms for Bicriterion Trip-Based Transit Routing ... Additional analysis studying the effect of hypergraph partitioning tools (hMETIS, KaHyPar, and an integer program) along with different weighting schemes is also presented.
+

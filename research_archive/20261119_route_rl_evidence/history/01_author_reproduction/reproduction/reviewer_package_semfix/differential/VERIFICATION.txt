@@ -1,0 +1,90 @@
+Empty-station repair differential
+Date: 2026-11-02
+
+Fixture
+  One opened DABS station (kind=2) at (0,0): id 10 in local C/Python and id
+  100 in Java. The ID differs only to avoid Check.calculateDroneTime's
+  reservation of Java node id 0 for route separators.
+  Two empty drone slots: routes=[[[],[]]].
+  One pending target, id 1 at (100,0), service energy 0.01, service time 2.
+  Default Liu parameters; the target is covered and individually feasible.
+
+Source evidence
+  Java loadBalancingInsertion iterates stationRoutes and scores a new singleton
+  path for each drone at RoutingOperator.java:1193-1238.
+  Java prioritizedInsertion checks each empty opened drone first at
+  RoutingOperator.java:1404-1433.
+  Python covered_drones skips a station with no route lists at
+  fidelity_ops_v5.py:395.
+  C covered_pairs skips a station with zero trip counts at r6_kernel.c:751-764.
+
+Observed BASELINE result
+  Python op=2: routes=[[[],[]]], incomplete, test assertion passed.
+  C op=2: rc=0, routes=[[[],[]]], incomplete, test assertion passed.
+  Python op=3: routes=[[[],[]]], incomplete, test assertion passed.
+  C op=3: rc=0, routes=[[[],[]]], incomplete, test assertion passed.
+
+Observed MODIFIED result, isolated patch only
+  Python op=2: routes=[[[[1]],[]]], complete and independently feasible.
+  C op=2: rc=1, routes=[[[[1]],[]]], complete and independently feasible.
+  Python op=3: routes=[[[[1]],[]]], complete and independently feasible.
+  C op=3: rc=1, routes=[[[[1]],[]]], complete and independently feasible.
+
+Observed rollback control
+  With target service energy changed to 2.0, Python baseline/patched and C
+  baseline/patched all leave routes=[[[],[]]]; tests pass for op=2 and op=3.
+
+SABS guard control
+  The modified Python receiver lands in storage slot 0, then physical() merges
+  it into the single SD and the independent evaluator accepts it. J1b's
+  Round4Guard intentionally rejects SABS work in slot 0. This source-storage
+  guard distinction is separate from the DABS result above. The Java probe
+  prints the J1b guard outcome for kind=1 and kind=2.
+
+Verification command
+  PYTHONPATH=reproduction/reviewer_package python reproduction/differential/test/test_empty_station_repair.py
+  Result after rollback-control addition: 4 tests passed.
+
+Observed Java J1b result (rerun on remote JDK 17, station id 100)
+  The corrected probe was staged at `<EXECUTION_PATH>`. The
+  exact remote staging and compile/run command exited 0:
+<CONNECTION_COMMAND_REMOVED>
+<CONNECTION_COMMAND_REMOVED>
+  Full stdout:
+    JAVA kind=2 op=2 source_guard=true equal_cost_accept_before_guard=true equal_cost_accept_after_guard=true result={"station_types":[2],"routes":[[[[1]],[]]],"reference_reported_cost":44.51111111111111,"reference_integrity_issues":[]}
+    JAVA kind=2 op=3 source_guard=true equal_cost_accept_before_guard=true equal_cost_accept_after_guard=true result={"station_types":[2],"routes":[[[[1]],[]]],"reference_reported_cost":44.51111111111111,"reference_integrity_issues":[]}
+    JAVA op=0 pending=[1,4] returned_original=true assigned_targets=[2, 3]
+    JAVA kind=1 op=2 source_guard=false equal_cost_accept_before_guard=true equal_cost_accept_after_guard=false result={"station_types":[1],"routes":[[[[1]],[]]],"reference_reported_cost":28.91111111111111,"reference_integrity_issues":[]}
+    JAVA kind=1 op=3 source_guard=false equal_cost_accept_before_guard=true equal_cost_accept_after_guard=false result={"station_types":[1],"routes":[[[[1]],[]]],"reference_reported_cost":28.91111111111111,"reference_integrity_issues":[]}
+
+  This confirms both Java operators create the DABS slot-0 route and the J1b
+  guard allows it. The SABS result is deliberately rejected by Round4Guard.
+  Local C/Python and Java fixtures now match in geometry, target energy,
+  service time, and parameters; only station ID differs to avoid Java's
+  node-id-0 separator convention.
+
+Observed nearest-insertion whole-candidate rollback
+  Fixture: SABS at (0,0) and DABS at (1000,0); existing route target 2 at the
+  SABS uses 479 service minutes and 0.12 energy; existing DABS route target 3
+  uses 1 service minute and 0.31 energy. Ordered pending targets are target 1
+  (near SABS, energy 0.90, service 2) then target 4 (at DABS, energy 0.01,
+  service 1). Nearest fallback places target 1 at the SABS, where it violates
+  capacity and cumulative time; target 4 can still be inserted at the DABS.
+  Java prints `returned_original=true assigned_targets=[2, 3]`; Python v5
+  returns the original destroyed state. Native C repair produces a complete
+  but invalid raw candidate; the `tsalns_v6` caller's snapshot restore returns
+  the same original destroyed routes. This verifies whole-repair rollback
+  after a later pending target is successfully routed.
+
+Observed op1 multi-pending duration witness
+  The independent operator matrix records a DABS at (0,0), source routes
+  `[[[[1]],[]]]`, existing target 1 at (100,100), and pending IDs `[16,14]`.
+  Target 16 at (900,0) has energy 0.964/service 598; target 14 at (600,500)
+  has energy 0.01/service 2. Java and Python return the original route after
+  target 16 causes a duration-invalid singleton. Native baseline and patched
+  C both produce raw `[[[[1],[16],[14]],[]]]`, `valid=false`; the native caller
+  restores `[[[[1]],[]]]`. A speculative C cumulative-time prefilter instead
+  skipped 16 and inserted 14, yielding the valid but source-inconsistent
+  `[[[[14,1]],[]]]`; it was removed because filtering changes source operator
+  selection instead of preserving caller-level whole-candidate rollback.
+  Full matrix output and command are in `matrix/RESULTS.md`.

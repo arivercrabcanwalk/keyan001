@@ -1,0 +1,401 @@
+[
+  {
+    "kind": "PFA_60_SUMMARY_REFERENCES_PFA_30",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "J19",
+    "display": "173.70",
+    "value": "173.697",
+    "formula": "of:=AVERAGE([$'PFA Psi = 30 - all'.$I$2:.$I$1001])",
+    "value_type": "float"
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "J12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$J$3:.$J$1002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "181.234",
+    "independently_evaluated_source_formula": "181.234",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "K12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$K$3:.$K$1002])*[.J12]",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "179.7356633",
+    "independently_evaluated_source_formula": "179.735663309890",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "L12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$I$3:.$I$1002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "917.35784",
+    "independently_evaluated_source_formula": "917.35784",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "M12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$L$3:.$L$1002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "26.762",
+    "independently_evaluated_source_formula": "26.762",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "N12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$O$3:.$O$1002])/1000",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "783.547856",
+    "independently_evaluated_source_formula": "783.547856",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "O12",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$P$3:.$P$1002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 200,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "200": 999,
+      "300": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "1.848696906",
+    "independently_evaluated_source_formula": "1.848696906",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "J13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$J$1003:.$J$2002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "270.421",
+    "independently_evaluated_source_formula": "270.421",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "K13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$K$1003:.$K$2002])*[.J13]",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "268.3095723",
+    "independently_evaluated_source_formula": "268.309572302312",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "L13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$I$1003:.$I$2002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "1360.56982",
+    "independently_evaluated_source_formula": "1360.56982",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "M13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$L$1003:.$L$2002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "38.821",
+    "independently_evaluated_source_formula": "38.821",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "N13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$O$1003:.$O$2002])/1000",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "1166.46482",
+    "independently_evaluated_source_formula": "1166.46482",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "O13",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$P$1003:.$P$2002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 300,
+    "numeric_source_cells": 1000,
+    "referenced_record_sizes": {
+      "300": 999,
+      "400": 1
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      1002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "10.31048442",
+    "independently_evaluated_source_formula": "10.31048442",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "J14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$J$2003:.$J$3002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "358.9419419",
+    "independently_evaluated_source_formula": "358.9419419419419419419419419",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "K14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$K$2003:.$K$3002])*[.J14]",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "355.9821742",
+    "independently_evaluated_source_formula": "355.9821741957263109109109109",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "L14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$I$2003:.$I$3002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "1848.771842",
+    "independently_evaluated_source_formula": "1848.771841841841841841841842",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "M14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$L$2003:.$L$3002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "59.39239239",
+    "independently_evaluated_source_formula": "59.39239239239239239239239239",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "N14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$O$2003:.$O$3002])/1000",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "1551.80988",
+    "independently_evaluated_source_formula": "1551.80987987987987987987988",
+    "cache_matches_formula_within_1e_6": true
+  },
+  {
+    "kind": "SUMMARY_RANGE_NOT_SIZE_GROUP",
+    "sheet": "Summary - bar{l}=60min",
+    "cell": "O14",
+    "formula": "of:=AVERAGE([$'myopic Psi = 60 - all'.$P$2003:.$P$3002])",
+    "source_sheet": "myopic Psi = 60 - all",
+    "intended_sheet_by_label": "myopic Psi = 60 - all",
+    "size_label": 400,
+    "numeric_source_cells": 999,
+    "referenced_record_sizes": {
+      "400": 999
+    },
+    "intended_records": 1000,
+    "excluded_intended_source_rows": [
+      2002
+    ],
+    "source_domain_matches_label": false,
+    "cached_value": "40.14443914",
+    "independently_evaluated_source_formula": "40.14443913913913913913913914",
+    "cache_matches_formula_within_1e_6": true
+  }
+]

@@ -1,0 +1,356 @@
+{
+  "phase": "MODIFIED",
+  "status": "BOUNDARY_ADAPTER_PASS",
+  "source_sha256": "791846864403d2caba01bf372b408cc773a816fc8f29f00b634e91e71bdff628",
+  "preserved": 7,
+  "cases_total": 7,
+  "invalid_next_rejected": 2,
+  "rows": [
+    {
+      "id": "singleton_then_future",
+      "before": [
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "singleton_then_two_futures",
+      "before": [
+        [
+          [
+            [
+              9
+            ]
+          ],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [
+            [
+              9
+            ]
+          ],
+          [
+            1
+          ],
+          [],
+          [
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "multi_target_current",
+      "before": [
+        [
+          [],
+          [],
+          [
+            1,
+            2
+          ],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "open_prefix_target",
+      "before": [
+        [
+          [],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [],
+          [
+            1,
+            2
+          ],
+          [],
+          [
+            [
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "return_then_future",
+      "before": [
+        [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [
+            [
+              1
+            ]
+          ],
+          [],
+          [
+            2,
+            3
+          ],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "final_target",
+      "before": [
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "after": [
+        [
+          [],
+          [
+            1
+          ],
+          [],
+          []
+        ],
+        [
+          [],
+          [],
+          [],
+          []
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    },
+    {
+      "id": "small_slot_target",
+      "before": [
+        [
+          [],
+          [],
+          [],
+          []
+        ],
+        [
+          [],
+          [],
+          [
+            1
+          ],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ]
+      ],
+      "after": [
+        [
+          [],
+          [],
+          [],
+          []
+        ],
+        [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            [
+              2,
+              3
+            ]
+          ]
+        ]
+      ],
+      "complete_routes_preserved": true,
+      "same_executed_lock": true
+    }
+  ],
+  "rejects": [
+    {
+      "id": "non_next_target",
+      "rejected": true
+    },
+    {
+      "id": "return_before_witness_end",
+      "rejected": true
+    }
+  ],
+  "AIR2_enumeration_executed": false,
+  "training": 0,
+  "scientific_maps": 0
+}

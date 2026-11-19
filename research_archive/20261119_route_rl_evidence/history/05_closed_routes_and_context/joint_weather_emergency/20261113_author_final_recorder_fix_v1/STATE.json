@@ -1,0 +1,30 @@
+{
+  "status": "PASS_FINAL_RECORDER_FIX_ENGINEERING_ONLY",
+  "root_only": true,
+  "required_execution_host": "<COMPUTE_HOST>",
+  "baseline_tests": 3,
+  "modified_direct_tests": 3,
+  "full_main_invocations": 2,
+  "full_main_engineering_qualified": 2,
+  "final_main_bytes_unchanged": 2,
+  "rollback_original_hashes_restored": 2,
+  "rollback_literal_stdout_matches": 3,
+  "primary_modified_retained": true,
+  "phases_terminal": 5,
+  "repair_used": 0,
+  "remaining_phases": 0,
+  "resources": "RESOURCE_SUMMARY.json",
+  "scientific_maps": 0,
+  "training": 0,
+  "checkpoint": 0,
+  "Formal": 0,
+  "G0": "UNPASSED",
+  "G3": "UNPASSED",
+  "ssh": "RECOVERED",
+  "user_decision_required": false,
+  "next_bounded_work": "../20261113_conflict_credit_screen_v1/NEXT_GENERATION_QUESTION.md",
+  "scientific_states_preserved": {
+    "route_rl_research/20261103/return_makespan/STATE.json": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9",
+    "joint_weather_emergency/20261106_E_continuation_acceptance/STATE.json": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e"
+  }
+}

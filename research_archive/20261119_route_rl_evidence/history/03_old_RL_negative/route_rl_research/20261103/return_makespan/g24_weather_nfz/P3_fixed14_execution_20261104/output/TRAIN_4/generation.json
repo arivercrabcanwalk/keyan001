@@ -1,0 +1,1056 @@
+{
+  "canonical_geometry_sha256": "2fea1ab7037f4e03d58a8bdd46cc4c4f78899bff3fd0229403a0f894e7c0edee",
+  "failure_reason": null,
+  "metadata": {
+    "accepted_nodes_IID_uniform_over_square": false,
+    "accepted_sites": 3,
+    "accepted_targets": 20,
+    "allocation_identity": {
+      "coordinate_seed_u64": 1408316617229734659,
+      "family": [
+        3,
+        20
+      ],
+      "namespace": "<COMPUTE_HOST>-ordinary-route-p3-fixed14-20261104-v1:TRAIN_4",
+      "ordinal": 1,
+      "partition": "opportunity",
+      "target_id_seed_u64": 3274679873028586713
+    },
+    "canonical_geometry_sha256": "2fea1ab7037f4e03d58a8bdd46cc4c4f78899bff3fd0229403a0f894e7c0edee",
+    "cap_probability_qualification": "ideal independent uniform-grid model only; no fixed-seed PRNG guarantee",
+    "exact_author_generator_reproduction": false,
+    "exclusion_record_count": 12143,
+    "exclusion_sources": [
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 12120,
+        "schema": "permanent_exposed_and_pilot_geometry_exclusion_manifest_v1",
+        "sha256": "90ea8233bbe281adc978af0c421ec6a0962346877125dbe21d7382015f8862d6"
+      },
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 1,
+        "schema": "supplemental_synthetic_engineering_exclusion_v1",
+        "sha256": "6e62b16158f9332d782068390889034899a80a4a46363e4f6c862eae8c60ace2"
+      },
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 4,
+        "schema": "sequential_v2_synthetic_engineering_exclusion_v1",
+        "sha256": "623be2a46ee20e93d0997cba4903e8eba7df35ef352af5338646143440beae63"
+      },
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 6,
+        "schema": "sequential_v2_exposed_windows_development_exclusion_v1",
+        "sha256": "8d78dfd793557645f8410aac4d6034c39683f991c67375bd0bbc949acae44161"
+      },
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 4,
+        "schema": "four_calibration_exposure_exclusion_sidecar_v1",
+        "sha256": "a8d43c449dff1533442cc5a6cfbf8337cb105529aaf474560c4bbc56f0613264"
+      },
+      {
+        "path": "<EXECUTION_PATH>",
+        "record_count": 8,
+        "schema": "ordinary_pilot_exposure_sidecar_v1",
+        "sha256": "a45947c9df78c03c8ca836f147b81362928bbae2fc7308a4bc4798324a2cc4df"
+      }
+    ],
+    "failure_reason": null,
+    "family": [
+      3,
+      20
+    ],
+    "generator_version": "2.0.0-engineering",
+    "identity_collisions": [],
+    "label_word_cap": 128,
+    "node_attempts": [
+      {
+        "accepted": true,
+        "kind": "site",
+        "placement_position": 1,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 2,
+          "state_hex": "4ffa4bf373d70b2d"
+        },
+        "rng_before": {
+          "draws": 0,
+          "state_hex": "138b588075421303"
+        },
+        "x": "9591.422096505989092207755675190128386020660400390625",
+        "x_grid_u53": 6170846425682502,
+        "y": "5795.6565724611739387484021790442056953907012939453125",
+        "y_grid_u53": 3728759540014787
+      },
+      {
+        "accepted": true,
+        "kind": "site",
+        "placement_position": 2,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 4,
+          "state_hex": "8c693f66726c0357"
+        },
+        "rng_before": {
+          "draws": 2,
+          "state_hex": "4ffa4bf373d70b2d"
+        },
+        "x": "2467.092251899780652735216790460981428623199462890625",
+        "x_grid_u53": 1587256535192070,
+        "y": "13142.588472145136702096124281524680554866790771484375",
+        "y_grid_u53": 8455565220833802
+      },
+      {
+        "accepted": true,
+        "kind": "site",
+        "placement_position": 3,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 6,
+          "state_hex": "c8d832d97100fb81"
+        },
+        "rng_before": {
+          "draws": 4,
+          "state_hex": "8c693f66726c0357"
+        },
+        "x": "3577.7551674211676147052685337257571518421173095703125",
+        "x_grid_u53": 2301825262688691,
+        "y": "6744.143487757890742528843475156463682651519775390625",
+        "y_grid_u53": 4338988871199942
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 1,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 8,
+          "state_hex": "0547264c6f95f3ab"
+        },
+        "rng_before": {
+          "draws": 6,
+          "state_hex": "c8d832d97100fb81"
+        },
+        "x": "377.8172777691330974647598850424401462078094482421875",
+        "x_grid_u53": 243076821625029,
+        "y": "5800.6330951312861099466999803553335368633270263671875",
+        "y_grid_u53": 3731961292249461
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 2,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 10,
+          "state_hex": "41b619bf6e2aebd5"
+        },
+        "rng_before": {
+          "draws": 8,
+          "state_hex": "0547264c6f95f3ab"
+        },
+        "x": "8230.8520403562521750018277089111506938934326171875",
+        "x_grid_u53": 5295494597412872,
+        "y": "794.7414850421561371973666609846986830234527587890625",
+        "y_grid_u53": 511313922270247
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 2,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 12,
+          "state_hex": "7e250d326cbfe3ff"
+        },
+        "rng_before": {
+          "draws": 10,
+          "state_hex": "41b619bf6e2aebd5"
+        },
+        "x": "6518.2011930078929129450671098311431705951690673828125",
+        "x_grid_u53": 4193624066279467,
+        "y": "11043.250728653786207900111548951826989650726318359375",
+        "y_grid_u53": 7104911409503450
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 3,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 14,
+          "state_hex": "ba9400a56b54dc29"
+        },
+        "rng_before": {
+          "draws": 12,
+          "state_hex": "7e250d326cbfe3ff"
+        },
+        "x": "2816.08315771573014529849388054572045803070068359375",
+        "x_grid_u53": 1811787294247556,
+        "y": "6964.8617142639246413438058880274184048175811767578125",
+        "y_grid_u53": 4480992660149435
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 4,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 16,
+          "state_hex": "f702f41869e9d453"
+        },
+        "rng_before": {
+          "draws": 14,
+          "state_hex": "ba9400a56b54dc29"
+        },
+        "x": "8049.712626743001919749076478183269500732421875",
+        "x_grid_u53": 5178954683748480,
+        "y": "2937.9858668089495754571771612972952425479888916015625",
+        "y_grid_u53": 1890216007854367
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 5,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 18,
+          "state_hex": "3371e78b687ecc7d"
+        },
+        "rng_before": {
+          "draws": 16,
+          "state_hex": "f702f41869e9d453"
+        },
+        "x": "13848.429909977679752586254835478030145168304443359375",
+        "x_grid_u53": 8909683397463130,
+        "y": "12438.38258368172144940899670473299920558929443359375",
+        "y_grid_u53": 8002499309851524
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 5,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 20,
+          "state_hex": "6fe0dafe6713c4a7"
+        },
+        "rng_before": {
+          "draws": 18,
+          "state_hex": "3371e78b687ecc7d"
+        },
+        "x": "9817.990202994877346753810343216173350811004638671875",
+        "x_grid_u53": 6316613859962130,
+        "y": "1205.82991843330145087520577362738549709320068359375",
+        "y_grid_u53": 775796453046916
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 6,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 22,
+          "state_hex": "ac4fce7165a8bcd1"
+        },
+        "rng_before": {
+          "draws": 20,
+          "state_hex": "6fe0dafe6713c4a7"
+        },
+        "x": "6340.6350900309698115364653858705423772335052490234375",
+        "x_grid_u53": 4079383118393681,
+        "y": "8219.440158801811779909485267126001417636871337890625",
+        "y_grid_u53": 5288152519481990
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 7,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 24,
+          "state_hex": "e8bec1e4643db4fb"
+        },
+        "rng_before": {
+          "draws": 22,
+          "state_hex": "ac4fce7165a8bcd1"
+        },
+        "x": "4699.416537556065254221948634949512779712677001953125",
+        "x_grid_u53": 3023470081056606,
+        "y": "2999.9114063213585534839467072742991149425506591796875",
+        "y_grid_u53": 1930057127379053
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 8,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 26,
+          "state_hex": "252db55762d2ad25"
+        },
+        "rng_before": {
+          "draws": 24,
+          "state_hex": "e8bec1e4643db4fb"
+        },
+        "x": "7939.308569771106771639779253746382892131805419921875",
+        "x_grid_u53": 5107923873771506,
+        "y": "2760.62594456267706988228383124805986881256103515625",
+        "y_grid_u53": 1776107710748828
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 9,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 28,
+          "state_hex": "619ca8ca6167a54f"
+        },
+        "rng_before": {
+          "draws": 26,
+          "state_hex": "252db55762d2ad25"
+        },
+        "x": "13900.5705232418959038653838433674536645412445068359375",
+        "x_grid_u53": 8943229175529929,
+        "y": "239.299798873987779046501600532792508602142333984375",
+        "y_grid_u53": 153958640719818
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 9,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 30,
+          "state_hex": "9e0b9c3d5ffc9d79"
+        },
+        "rng_before": {
+          "draws": 28,
+          "state_hex": "619ca8ca6167a54f"
+        },
+        "x": "3295.0392562484636105324398158700205385684967041015625",
+        "x_grid_u53": 2119933938087391,
+        "y": "10032.178138255402277678740574629046022891998291015625",
+        "y_grid_u53": 6454416246451638
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 10,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 32,
+          "state_hex": "da7a8fb05e9195a3"
+        },
+        "rng_before": {
+          "draws": 30,
+          "state_hex": "9e0b9c3d5ffc9d79"
+        },
+        "x": "12243.394759180342479254477439098991453647613525390625",
+        "x_grid_u53": 7877049725027782,
+        "y": "4032.661285225890512862179093644954264163970947265625",
+        "y_grid_u53": 2594498837350678
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 11,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 34,
+          "state_hex": "16e983235d268dcd"
+        },
+        "rng_before": {
+          "draws": 32,
+          "state_hex": "da7a8fb05e9195a3"
+        },
+        "x": "13168.5160786713437719441799345077015459537506103515625",
+        "x_grid_u53": 8472246300703807,
+        "y": "12304.323399654347070963922305963933467864990234375",
+        "y_grid_u53": 7916249468247056
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 11,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 36,
+          "state_hex": "535876965bbb85f7"
+        },
+        "rng_before": {
+          "draws": 34,
+          "state_hex": "16e983235d268dcd"
+        },
+        "x": "5622.36234551457680908015390741638839244842529296875",
+        "x_grid_u53": 3617266994885908,
+        "y": "8809.92656950275776495118407183326780796051025390625",
+        "y_grid_u53": 5668054573653436
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 12,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 38,
+          "state_hex": "8fc76a095a507e21"
+        },
+        "rng_before": {
+          "draws": 36,
+          "state_hex": "535876965bbb85f7"
+        },
+        "x": "374.7748129209329537303574397810734808444976806640625",
+        "x_grid_u53": 241119386831223,
+        "y": "2620.8985814468725994430542414193041622638702392578125",
+        "y_grid_u53": 1686211124968571
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 12,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 40,
+          "state_hex": "cc365d7c58e5764b"
+        },
+        "rng_before": {
+          "draws": 38,
+          "state_hex": "8fc76a095a507e21"
+        },
+        "x": "3183.7156360247116371198217166238464415073394775390625",
+        "x_grid_u53": 2048311507436359,
+        "y": "6408.33201075728897677663553622551262378692626953125",
+        "y_grid_u53": 4122937379387564
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 13,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 42,
+          "state_hex": "08a550ef577a6e75"
+        },
+        "rng_before": {
+          "draws": 40,
+          "state_hex": "cc365d7c58e5764b"
+        },
+        "x": "12815.1692788748998719228211484733037650585174560546875",
+        "x_grid_u53": 8244913084147261,
+        "y": "11662.0549896218090868416084049385972321033477783203125",
+        "y_grid_u53": 7503032357947859
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 13,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 44,
+          "state_hex": "45144462560f669f"
+        },
+        "rng_before": {
+          "draws": 42,
+          "state_hex": "08a550ef577a6e75"
+        },
+        "x": "1148.3131843310274700087347810040228068828582763671875",
+        "x_grid_u53": 738791832722549,
+        "y": "8392.006289530126839082413425785489380359649658203125",
+        "y_grid_u53": 5399176628345534
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 14,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 46,
+          "state_hex": "818337d554a45ec9"
+        },
+        "rng_before": {
+          "draws": 44,
+          "state_hex": "45144462560f669f"
+        },
+        "x": "12504.969985686693600968055761768482625484466552734375",
+        "x_grid_u53": 8045339738259690,
+        "y": "5628.89177608536783736781217157840728759765625",
+        "y_grid_u53": 3621467843612416
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 15,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 48,
+          "state_hex": "bdf22b48533956f3"
+        },
+        "rng_before": {
+          "draws": 46,
+          "state_hex": "818337d554a45ec9"
+        },
+        "x": "12287.2566199723547430977532712859101593494415283203125",
+        "x_grid_u53": 7905269190730451,
+        "y": "11206.457728765097048295729109668172895908355712890625",
+        "y_grid_u53": 7209914121629958
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 15,
+        "proposal_attempt": 2,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 50,
+          "state_hex": "fa611ebb51ce4f1d"
+        },
+        "rng_before": {
+          "draws": 48,
+          "state_hex": "bdf22b48533956f3"
+        },
+        "x": "4777.5425859648186222017329782829619944095611572265625",
+        "x_grid_u53": 3073734144271119,
+        "y": "6469.8387690208505329536592398653738200664520263671875",
+        "y_grid_u53": 4162509067044213
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 16,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 52,
+          "state_hex": "36d0122e50634747"
+        },
+        "rng_before": {
+          "draws": 50,
+          "state_hex": "fa611ebb51ce4f1d"
+        },
+        "x": "1945.56376201170877493495936505496501922607421875",
+        "x_grid_u53": 1251720033374496,
+        "y": "6406.9101011898770270391878511873073875904083251953125",
+        "y_grid_u53": 4122022563473571
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 17,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 54,
+          "state_hex": "733f05a14ef83f71"
+        },
+        "rng_before": {
+          "draws": 52,
+          "state_hex": "36d0122e50634747"
+        },
+        "x": "4741.2167213670028953487189937732182443141937255859375",
+        "x_grid_u53": 3050363122804457,
+        "y": "4171.086390656587372660624168929643929004669189453125",
+        "y_grid_u53": 2683557587813022
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 18,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 56,
+          "state_hex": "afadf9144d8d379b"
+        },
+        "rng_before": {
+          "draws": 54,
+          "state_hex": "733f05a14ef83f71"
+        },
+        "x": "7343.7449642776171376823413083911873400211334228515625",
+        "x_grid_u53": 4724755297803519,
+        "y": "8648.4683279562351021496624525752849876880645751953125",
+        "y_grid_u53": 5564176962729891
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 19,
+        "proposal_attempt": 1,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 58,
+          "state_hex": "ec1cec874c222fc5"
+        },
+        "rng_before": {
+          "draws": 56,
+          "state_hex": "afadf9144d8d379b"
+        },
+        "x": "4235.592806303393853539773772354237735271453857421875",
+        "x_grid_u53": 2725059169165874,
+        "y": "13117.8687852291251392244930684682913124561309814453125",
+        "y_grid_u53": 8439661281864707
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 20,
+        "proposal_attempt": 1,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 60,
+          "state_hex": "288bdffa4ab727ef"
+        },
+        "rng_before": {
+          "draws": 58,
+          "state_hex": "ec1cec874c222fc5"
+        },
+        "x": "9304.7186766307123928498867826419882476329803466796875",
+        "x_grid_u53": 5986389652123053,
+        "y": "12636.565675266684838362607479211874306201934814453125",
+        "y_grid_u53": 8130004638053406
+      },
+      {
+        "accepted": false,
+        "kind": "target",
+        "placement_position": 20,
+        "proposal_attempt": 2,
+        "rejection_reasons": [
+          "target_nearest_site_gt_5000m"
+        ],
+        "rng_after": {
+          "draws": 62,
+          "state_hex": "64fad36d494c2019"
+        },
+        "rng_before": {
+          "draws": 60,
+          "state_hex": "288bdffa4ab727ef"
+        },
+        "x": "8824.909380312337514595810716855339705944061279296875",
+        "x_grid_u53": 5677694085250434,
+        "y": "11833.3182119339550553149820188991725444793701171875",
+        "y_grid_u53": 7613218212831752
+      },
+      {
+        "accepted": true,
+        "kind": "target",
+        "placement_position": 20,
+        "proposal_attempt": 3,
+        "rejection_reasons": [],
+        "rng_after": {
+          "draws": 64,
+          "state_hex": "a169c6e047e11843"
+        },
+        "rng_before": {
+          "draws": 62,
+          "state_hex": "64fad36d494c2019"
+        },
+        "x": "12718.1809530144562803144481222261674702167510986328125",
+        "x_grid_u53": 8182513571546635,
+        "y": "4422.9764440639749434325267429812811315059661865234375",
+        "y_grid_u53": 2845616437907857
+      }
+    ],
+    "placement_order_private": [
+      {
+        "kind": "site",
+        "placement_position": 1,
+        "proposal_attempt": 1,
+        "solver_node_id": 21,
+        "x": "9591.422096505989092207755675190128386020660400390625",
+        "y": "5795.6565724611739387484021790442056953907012939453125"
+      },
+      {
+        "kind": "site",
+        "placement_position": 2,
+        "proposal_attempt": 1,
+        "solver_node_id": 22,
+        "x": "2467.092251899780652735216790460981428623199462890625",
+        "y": "13142.588472145136702096124281524680554866790771484375"
+      },
+      {
+        "kind": "site",
+        "placement_position": 3,
+        "proposal_attempt": 1,
+        "solver_node_id": 23,
+        "x": "3577.7551674211676147052685337257571518421173095703125",
+        "y": "6744.143487757890742528843475156463682651519775390625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 1,
+        "proposal_attempt": 1,
+        "solver_node_id": 15,
+        "x": "377.8172777691330974647598850424401462078094482421875",
+        "y": "5800.6330951312861099466999803553335368633270263671875"
+      },
+      {
+        "kind": "target",
+        "placement_position": 2,
+        "proposal_attempt": 2,
+        "solver_node_id": 13,
+        "x": "6518.2011930078929129450671098311431705951690673828125",
+        "y": "11043.250728653786207900111548951826989650726318359375"
+      },
+      {
+        "kind": "target",
+        "placement_position": 3,
+        "proposal_attempt": 1,
+        "solver_node_id": 3,
+        "x": "2816.08315771573014529849388054572045803070068359375",
+        "y": "6964.8617142639246413438058880274184048175811767578125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 4,
+        "proposal_attempt": 1,
+        "solver_node_id": 8,
+        "x": "8049.712626743001919749076478183269500732421875",
+        "y": "2937.9858668089495754571771612972952425479888916015625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 5,
+        "proposal_attempt": 2,
+        "solver_node_id": 6,
+        "x": "9817.990202994877346753810343216173350811004638671875",
+        "y": "1205.82991843330145087520577362738549709320068359375"
+      },
+      {
+        "kind": "target",
+        "placement_position": 6,
+        "proposal_attempt": 1,
+        "solver_node_id": 11,
+        "x": "6340.6350900309698115364653858705423772335052490234375",
+        "y": "8219.440158801811779909485267126001417636871337890625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 7,
+        "proposal_attempt": 1,
+        "solver_node_id": 7,
+        "x": "4699.416537556065254221948634949512779712677001953125",
+        "y": "2999.9114063213585534839467072742991149425506591796875"
+      },
+      {
+        "kind": "target",
+        "placement_position": 8,
+        "proposal_attempt": 1,
+        "solver_node_id": 10,
+        "x": "7939.308569771106771639779253746382892131805419921875",
+        "y": "2760.62594456267706988228383124805986881256103515625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 9,
+        "proposal_attempt": 2,
+        "solver_node_id": 14,
+        "x": "3295.0392562484636105324398158700205385684967041015625",
+        "y": "10032.178138255402277678740574629046022891998291015625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 10,
+        "proposal_attempt": 1,
+        "solver_node_id": 9,
+        "x": "12243.394759180342479254477439098991453647613525390625",
+        "y": "4032.661285225890512862179093644954264163970947265625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 11,
+        "proposal_attempt": 2,
+        "solver_node_id": 12,
+        "x": "5622.36234551457680908015390741638839244842529296875",
+        "y": "8809.92656950275776495118407183326780796051025390625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 12,
+        "proposal_attempt": 2,
+        "solver_node_id": 16,
+        "x": "3183.7156360247116371198217166238464415073394775390625",
+        "y": "6408.33201075728897677663553622551262378692626953125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 13,
+        "proposal_attempt": 2,
+        "solver_node_id": 18,
+        "x": "1148.3131843310274700087347810040228068828582763671875",
+        "y": "8392.006289530126839082413425785489380359649658203125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 14,
+        "proposal_attempt": 1,
+        "solver_node_id": 1,
+        "x": "12504.969985686693600968055761768482625484466552734375",
+        "y": "5628.89177608536783736781217157840728759765625"
+      },
+      {
+        "kind": "target",
+        "placement_position": 15,
+        "proposal_attempt": 2,
+        "solver_node_id": 5,
+        "x": "4777.5425859648186222017329782829619944095611572265625",
+        "y": "6469.8387690208505329536592398653738200664520263671875"
+      },
+      {
+        "kind": "target",
+        "placement_position": 16,
+        "proposal_attempt": 1,
+        "solver_node_id": 2,
+        "x": "1945.56376201170877493495936505496501922607421875",
+        "y": "6406.9101011898770270391878511873073875904083251953125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 17,
+        "proposal_attempt": 1,
+        "solver_node_id": 20,
+        "x": "4741.2167213670028953487189937732182443141937255859375",
+        "y": "4171.086390656587372660624168929643929004669189453125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 18,
+        "proposal_attempt": 1,
+        "solver_node_id": 17,
+        "x": "7343.7449642776171376823413083911873400211334228515625",
+        "y": "8648.4683279562351021496624525752849876880645751953125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 19,
+        "proposal_attempt": 1,
+        "solver_node_id": 19,
+        "x": "4235.592806303393853539773772354237735271453857421875",
+        "y": "13117.8687852291251392244930684682913124561309814453125"
+      },
+      {
+        "kind": "target",
+        "placement_position": 20,
+        "proposal_attempt": 3,
+        "solver_node_id": 4,
+        "x": "12718.1809530144562803144481222261674702167510986328125",
+        "y": "4422.9764440639749434325267429812811315059661865234375"
+      }
+    ],
+    "proposal_support": "{k*L/2^53:k=0,...,2^53-1}^2; x then y",
+    "protocol": "constraint-reconstructed-sequential-conditional-uniform-proposal",
+    "raw_sha256": "3ff0992592e13fe11d135aeeb62dec245c3e814d745dee5f3c164501e1f7f753",
+    "replacement_on_failure": false,
+    "retained_slot": true,
+    "rng": {
+      "algorithm": "SplitMix64",
+      "coordinate_final": {
+        "draws": 64,
+        "state_hex": "a169c6e047e11843"
+      },
+      "coordinate_initial": {
+        "draws": 0,
+        "state_hex": "138b588075421303"
+      },
+      "label_final": {
+        "draws": 19,
+        "state_hex": "eb9008c30b84b268"
+      },
+      "label_initial": {
+        "draws": 0,
+        "state_hex": "2d71fffe98fd7cd9"
+      },
+      "version": "2015-02-16-reference-variant-v1"
+    },
+    "schema": "sequential_constraint_reconstructed_metadata_v2",
+    "site_proposal_cap": 32,
+    "square_side_m": 14000,
+    "status": "generated",
+    "synthetic_engineering_only": false,
+    "target_label_word_attempts": [
+      {
+        "accepted": true,
+        "bound": 20,
+        "limit_exclusive": 18446744073709551600,
+        "word_attempt": 1,
+        "word_u64": 12790728516923730803
+      },
+      {
+        "accepted": true,
+        "bound": 19,
+        "limit_exclusive": 18446744073709551599,
+        "word_attempt": 1,
+        "word_u64": 15453367444621406107
+      },
+      {
+        "accepted": true,
+        "bound": 18,
+        "limit_exclusive": 18446744073709551600,
+        "word_attempt": 1,
+        "word_u64": 4840037150016554728
+      },
+      {
+        "accepted": true,
+        "bound": 17,
+        "limit_exclusive": 18446744073709551615,
+        "word_attempt": 1,
+        "word_u64": 6132547605593011124
+      },
+      {
+        "accepted": true,
+        "bound": 16,
+        "limit_exclusive": 18446744073709551616,
+        "word_attempt": 1,
+        "word_u64": 2326594722818434817
+      },
+      {
+        "accepted": true,
+        "bound": 15,
+        "limit_exclusive": 18446744073709551615,
+        "word_attempt": 1,
+        "word_u64": 598085590184864974
+      },
+      {
+        "accepted": true,
+        "bound": 14,
+        "limit_exclusive": 18446744073709551614,
+        "word_attempt": 1,
+        "word_u64": 6029549309238115332
+      },
+      {
+        "accepted": true,
+        "bound": 13,
+        "limit_exclusive": 18446744073709551613,
+        "word_attempt": 1,
+        "word_u64": 2773333104348066965
+      },
+      {
+        "accepted": true,
+        "bound": 12,
+        "limit_exclusive": 18446744073709551612,
+        "word_attempt": 1,
+        "word_u64": 2906034358935621241
+      },
+      {
+        "accepted": true,
+        "bound": 11,
+        "limit_exclusive": 18446744073709551611,
+        "word_attempt": 1,
+        "word_u64": 10967026503054806878
+      },
+      {
+        "accepted": true,
+        "bound": 10,
+        "limit_exclusive": 18446744073709551610,
+        "word_attempt": 1,
+        "word_u64": 517303837617066628
+      },
+      {
+        "accepted": true,
+        "bound": 9,
+        "limit_exclusive": 18446744073709551609,
+        "word_attempt": 1,
+        "word_u64": 5903421375939117372
+      },
+      {
+        "accepted": true,
+        "bound": 8,
+        "limit_exclusive": 18446744073709551616,
+        "word_attempt": 1,
+        "word_u64": 11203119314656362648
+      },
+      {
+        "accepted": true,
+        "bound": 7,
+        "limit_exclusive": 18446744073709551614,
+        "word_attempt": 1,
+        "word_u64": 757257031815978735
+      },
+      {
+        "accepted": true,
+        "bound": 6,
+        "limit_exclusive": 18446744073709551612,
+        "word_attempt": 1,
+        "word_u64": 16605360557304814129
+      },
+      {
+        "accepted": true,
+        "bound": 5,
+        "limit_exclusive": 18446744073709551615,
+        "word_attempt": 1,
+        "word_u64": 13533123142689073286
+      },
+      {
+        "accepted": true,
+        "bound": 4,
+        "limit_exclusive": 18446744073709551616,
+        "word_attempt": 1,
+        "word_u64": 17686999923155240316
+      },
+      {
+        "accepted": true,
+        "bound": 3,
+        "limit_exclusive": 18446744073709551615,
+        "word_attempt": 1,
+        "word_u64": 4839957064390677824
+      },
+      {
+        "accepted": true,
+        "bound": 2,
+        "limit_exclusive": 18446744073709551616,
+        "word_attempt": 1,
+        "word_u64": 11055352135893939030
+      }
+    ],
+    "target_proposal_cap": 1024,
+    "uniform_over_globally_feasible_map_set": false
+  },
+  "raw_sha256": "3ff0992592e13fe11d135aeeb62dec245c3e814d745dee5f3c164501e1f7f753",
+  "retained_complete_or_partial_text": "CUST_NO XCOORD YCOORD SERVICE_ENERGY SERVICE_TIME\n1 12504.969985686693600968055761768482625484466552734375 5628.89177608536783736781217157840728759765625 0.2 10\n2 1945.56376201170877493495936505496501922607421875 6406.9101011898770270391878511873073875904083251953125 0.2 10\n3 2816.08315771573014529849388054572045803070068359375 6964.8617142639246413438058880274184048175811767578125 0.2 10\n4 12718.1809530144562803144481222261674702167510986328125 4422.9764440639749434325267429812811315059661865234375 0.2 10\n5 4777.5425859648186222017329782829619944095611572265625 6469.8387690208505329536592398653738200664520263671875 0.2 10\n6 9817.990202994877346753810343216173350811004638671875 1205.82991843330145087520577362738549709320068359375 0.2 10\n7 4699.416537556065254221948634949512779712677001953125 2999.9114063213585534839467072742991149425506591796875 0.2 10\n8 8049.712626743001919749076478183269500732421875 2937.9858668089495754571771612972952425479888916015625 0.2 10\n9 12243.394759180342479254477439098991453647613525390625 4032.661285225890512862179093644954264163970947265625 0.2 10\n10 7939.308569771106771639779253746382892131805419921875 2760.62594456267706988228383124805986881256103515625 0.2 10\n11 6340.6350900309698115364653858705423772335052490234375 8219.440158801811779909485267126001417636871337890625 0.2 10\n12 5622.36234551457680908015390741638839244842529296875 8809.92656950275776495118407183326780796051025390625 0.2 10\n13 6518.2011930078929129450671098311431705951690673828125 11043.250728653786207900111548951826989650726318359375 0.2 10\n14 3295.0392562484636105324398158700205385684967041015625 10032.178138255402277678740574629046022891998291015625 0.2 10\n15 377.8172777691330974647598850424401462078094482421875 5800.6330951312861099466999803553335368633270263671875 0.2 10\n16 3183.7156360247116371198217166238464415073394775390625 6408.33201075728897677663553622551262378692626953125 0.2 10\n17 7343.7449642776171376823413083911873400211334228515625 8648.4683279562351021496624525752849876880645751953125 0.2 10\n18 1148.3131843310274700087347810040228068828582763671875 8392.006289530126839082413425785489380359649658203125 0.2 10\n19 4235.592806303393853539773772354237735271453857421875 13117.8687852291251392244930684682913124561309814453125 0.2 10\n20 4741.2167213670028953487189937732182443141937255859375 4171.086390656587372660624168929643929004669189453125 0.2 10\n21 9591.422096505989092207755675190128386020660400390625 5795.6565724611739387484021790442056953907012939453125 0 0\n22 2467.092251899780652735216790460981428623199462890625 13142.588472145136702096124281524680554866790771484375 0 0\n23 3577.7551674211676147052685337257571518421173095703125 6744.143487757890742528843475156463682651519775390625 0 0\n",
+  "schema": "sequential_constraint_reconstructed_result_v2",
+  "solver_input_text": "CUST_NO XCOORD YCOORD SERVICE_ENERGY SERVICE_TIME\n1 12504.969985686693600968055761768482625484466552734375 5628.89177608536783736781217157840728759765625 0.2 10\n2 1945.56376201170877493495936505496501922607421875 6406.9101011898770270391878511873073875904083251953125 0.2 10\n3 2816.08315771573014529849388054572045803070068359375 6964.8617142639246413438058880274184048175811767578125 0.2 10\n4 12718.1809530144562803144481222261674702167510986328125 4422.9764440639749434325267429812811315059661865234375 0.2 10\n5 4777.5425859648186222017329782829619944095611572265625 6469.8387690208505329536592398653738200664520263671875 0.2 10\n6 9817.990202994877346753810343216173350811004638671875 1205.82991843330145087520577362738549709320068359375 0.2 10\n7 4699.416537556065254221948634949512779712677001953125 2999.9114063213585534839467072742991149425506591796875 0.2 10\n8 8049.712626743001919749076478183269500732421875 2937.9858668089495754571771612972952425479888916015625 0.2 10\n9 12243.394759180342479254477439098991453647613525390625 4032.661285225890512862179093644954264163970947265625 0.2 10\n10 7939.308569771106771639779253746382892131805419921875 2760.62594456267706988228383124805986881256103515625 0.2 10\n11 6340.6350900309698115364653858705423772335052490234375 8219.440158801811779909485267126001417636871337890625 0.2 10\n12 5622.36234551457680908015390741638839244842529296875 8809.92656950275776495118407183326780796051025390625 0.2 10\n13 6518.2011930078929129450671098311431705951690673828125 11043.250728653786207900111548951826989650726318359375 0.2 10\n14 3295.0392562484636105324398158700205385684967041015625 10032.178138255402277678740574629046022891998291015625 0.2 10\n15 377.8172777691330974647598850424401462078094482421875 5800.6330951312861099466999803553335368633270263671875 0.2 10\n16 3183.7156360247116371198217166238464415073394775390625 6408.33201075728897677663553622551262378692626953125 0.2 10\n17 7343.7449642776171376823413083911873400211334228515625 8648.4683279562351021496624525752849876880645751953125 0.2 10\n18 1148.3131843310274700087347810040228068828582763671875 8392.006289530126839082413425785489380359649658203125 0.2 10\n19 4235.592806303393853539773772354237735271453857421875 13117.8687852291251392244930684682913124561309814453125 0.2 10\n20 4741.2167213670028953487189937732182443141937255859375 4171.086390656587372660624168929643929004669189453125 0.2 10\n21 9591.422096505989092207755675190128386020660400390625 5795.6565724611739387484021790442056953907012939453125 0 0\n22 2467.092251899780652735216790460981428623199462890625 13142.588472145136702096124281524680554866790771484375 0 0\n23 3577.7551674211676147052685337257571518421173095703125 6744.143487757890742528843475156463682651519775390625 0 0\n",
+  "status": "generated"
+}

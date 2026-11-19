@@ -1,0 +1,836 @@
+            Sym-NCO: Leveraging Symmetricity for
+              Neural Combinatorial Optimization
+
+
+                         Minsu Kim Junyoung Park Jinkyoo Park
+                   Korea Advanced Institute of Science and Technology (KAIST)
+                             Dept. Industrial & Systems Engineering
+                   {min-su, Junyoungpark, jinkyoo.park}@kaist.ac.kr
+
+
+
+                                              Abstract
+
+         Deep reinforcement learning (DRL)-based combinatorial optimization (CO) meth-
+         ods (i.e., DRL-NCO) have shown significant merit over the conventional CO solvers
+         as DRL-NCO is capable of learning CO solvers less relying on problem-specific ex-
+         pert domain knowledge (heuristic method) and supervised labeled data (supervised
+         learning method). This paper presents a novel training scheme, Sym-NCO, which
+         is a regularizer-based training scheme that leverages universal symmetricities in
+         various CO problems and solutions. Leveraging symmetricities such as rotational
+         and reflectional invariance can greatly improve the generalization capability of
+         DRL-NCO because it allows the learned solver to exploit the commonly shared
+         symmetricities in the same CO problem class. Our experimental results verify that
+         our Sym-NCO greatly improves the performance of DRL-NCO methods in four CO
+         tasks, including the traveling salesman problem (TSP), capacitated vehicle routing
+         problem (CVRP), prize collecting TSP (PCTSP), and orienteering problem (OP),
+         without utilizing problem-specific expert domain knowledge. Remarkably, Sym-
+         NCO outperformed not only the existing DRL-NCO methods but also a competitive
+         conventional solver, the iterative local search (ILS), in PCTSP at 240× faster speed.
+         Our source code is available at https://github.com/alstn12088/Sym-NCO.
+
+
+1   Introduction
+Combinatorial optimization problems (COPs), mathematical optimization problems on discrete input
+space, have been used to solve numerous valuable applications, including vehicle routing problems
+(VRPs) [1, 2], drug discovery [3, 4], and semi-conductor design [5, 6, 7, 8, 9]. However, finding
+an optimal solution to COP is difficult due to its NP-hardness. Therefore, computing near-optimal
+solutions fast is essential from a practical point of view.
+Conventionally, COPs are solved by integer program (IP) solvers or hand-crafted (meta) heuris-
+tics. Recent advances in computing infrastructures and deep learning have conceived the field
+of neural combinatorial optimization (NCO), a deep learning-based COP solving strategy. De-
+pending on the training scheme, NCO methods are generally classified into supervised learning
+[10, 11, 12, 13, 14] and reinforcement learning (RL) [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27].
+Depending on the solution generation scheme, NCO methods are also classified into improve-
+ment [17, 16, 15, 28, 18, 19, 25] and constructive heuristics [20, 21, 22, 23, 24, 26, 27]. Among
+the NCO approaches, deep RL (DRL)-based constructive heuristics (i.e., DRL-NCO) are favored
+over conventional approaches for two major reasons. First, RL can be applied to train the NCO
+model in less explorered CO tasks because training RL does not require domain expert knowl-
+edge and supervised labels from a verified solver. Second, it is easy to produce qualified feasi-
+ble solutions because the constructive process can easily avoid constraint-violated actions [21].
+Despite the strength of DRL-NCO, there exists a performance gap between the state-of-the-art
+
+36th Conference on Neural Information Processing Systems (NeurIPS 2022).
+           (a) Problem symmetricity                                 (b) Solution symmetricity
+                   Figure 2: Illustration of symmetricities in CO (exampled in TSP)
+conventional heuristics and DRL-NCO. In an effort to close the gap, there have been attempts to
+employ problem-specific heuristics to existing DRL-NCO methods [23, 29]. However, devising
+a general training scheme to improve the performance of DRL-NCO still remains challenging.
+In this study, we propose the Symmetric Neural
+Combinatorial Optimization (Sym-NCO), a gen-
+eral training scheme applicable to universal CO
+problems. Sym-NCO is a regularization-based
+training scheme that leverages the symmetrici-                  Symmetric Space
+ties commonly found in COPs to increase the                     Optimal Parameter
+performance of existing DRL-NCO methods.
+Sym-NCO leverages two types of symmetrici-
+ties innate in COP that are defined on the Eu-
+clidean graph. First, the problem symmetricity
+is derived from the rotational invariance of the
+                                                                                       Previous
+                                                                                       DRL-NCO
+solution; the rotated graph must exhibit the same             Sym-NCO
+optimal solution as the original graph as shown
+in Fig. 2a. Second, the solution symmetricity
+refers to the property that solutions have identi-
+cal output values (See Fig. 2b).                    Figure 1: Illustration that describes an advantage
+                                                    of Sym-NCO. An optimal training parameter is
+To train an effective NCO solver while lever- in symmetric space. Sym-NCO makes a more
+aging the symmetricities, we employ REIN- compact training space compared with previous
+FORCE algorithm with the baselines terms spe- DRL-NCO and supports the NCO model efficiently
+cially designed to impart solution and problem converges in near-optimal parameters.
+symmetricities. REINFORCE algorithm is used
+because the well-known effective NCO solvers are trained by REINFORCE; thus, we can improve
+such solvers by just modifying their baseline with our symmetricity-considered baseline terms.
+Specifically, we sample multiple solutions from the transformed problems and use the average return
+of them. Then, REINFORCE pushes each solution sampled by the solver to excel this baseline
+during training, thus improving the policy and making all the solutions the same, i.e., the problem
+and solution symmetricities are realized.
+Motivation for learning symmetricity. Leveraging symmetricity is important to train CO models for
+two major reasons. Firstly, symmetricity is a strong inductive bias that can support the training process
+of DRL by making compact training space as shown in Fig. 1. Secondly, learning symmetricity
+is beneficial to increasing generalization capability for unseen CO problems because symmetricity
+induces the invariant representation that every COP contains.
+Novelty. The major novelty of the proposed learning strategy is that it can easily improve existing
+powerful CO models; existing equivariant neural network schemes must be re-designed at the
+architecture level for adapting to CO.
+
+2   Symmetricity in Combinatorial Optimization Markov Decision Process
+This section presents several symmetric characteristics found in combinatorial optimization, which is
+formulated in the Markov decision process. The objective of NCO is to train the θ-parameterized
+solver Fθ by solving the following problem:
+                            θ∗ = arg max EP ∼ρ Eπ∼Fθ (P ) R(π; P )
+                                                                    
+                                                                                                 (1)
+                                       θ
+
+where P = (x, f ) is a problem instance with the N node coordinates x = {xi }Ni=1 and corresponding
+N features f = {fi }N                                                               N
+                     i=1 . The ρ is a problem generating distribution. The π = {πi }i=1 is a solution
+
+
+                                                   2
+where each element is index value πi ∈ {1, ..., N } for coordinates x = {xi }N
+                                                                             i=1 . The R(π; P ) is
+objective value for π on problem P .
+For example, assume that we solve TSP with five cities (i.e. N = 5). Then the problem instance
+P contains five city coordinates x = {xi }5i=1 where the salesman must visit. The solution π is a
+sequence of city indices; if π = {1, 3, 2, 5, 4}, the salesman visits city coordinates as x1 → x3 →
+x2 → x5 → x4 → x1 (the salesman must go back to first visited city to complete a tour). In TSP,
+each city contains the homogeneous features f . Thus, objective R of the TSP            is defined as the
+                                         P4
+negative of tour length: R(π; P ) = −       i=1 ||x π i+1
+                                                          − x π i
+                                                                  || + ||x π5
+                                                                              − xπ 1
+                                                                                     || . This combinatorial
+decision process can be expressed as Markov decision process, and the solver Fθ (π|P ) can be
+expressed as instance conditioned policy. To this end, we can utilize deep reinforcement learning
+for training solver Fθ (π|P ). We formally define the Markov decision process for CO in the below
+chapter.
+
+2.1   Combinatorial optimization Markov decision process
+
+We define the combinatorial optimization Markov decision process (CO-MDP) as the sequential
+construction of a solution of COP. For a given P , the components of the corresponding CO-MDP are
+defined as follows:
+ • State. The state st = (a1:t , x, f ) is the t-th (partially complete) solution, where a1:t represents
+    the previously selected nodes. The initial and terminal states s0 and sT are equivalent to the
+    empty and completed solution, respectively. In this paper, we denote the solution π(P ) as the
+    completed solution.
+ • Action. The action at is the selection of a node from the un-visited nodes (i.e., at ∈ At =
+    {{1, ..., N } \ {a1:t−1 }}).
+ • Reward. The reward function R(π; P ) maps the objective value from given π of problem P . We
+    assume that the reward is a function of a1:T (solution sequences), ||xi − xj ||i,j∈{1,...N } (relative
+    distances) and f (nodes features). In TSP, capacitated VRP (CVRP), and prize collecting TSPs
+    (PCTSP), the reward is the negative of the tour length. In orienteering problem (OP), the reward
+    is the sum of the prizes.
+                                                                                        QT
+Having defined CO-MDP, we define the solution mapping as follows: π ∼ Fθ (·|P ) = t=1 pθ (at |st )
+where pθ (at |st ) is the policy that produces at at st , and T is the maximum number of states in the
+solution construction process.
+
+2.2   Symmetricities in CO-MDP
+
+Symmetricities are found in various COPs. We conjecture that imposing those symmetricities on Fθ
+improves the generalization and sample efficiency of Fθ . We define the two identified symmetricities
+that are commonly found in various COPs:
+                                                                                                  sym
+Definition 2.1 (Problem Symmetricity). Problem P i and P j are problem symmetric (P i ←−→ P j )
+if their optimal solution sets are identical.
+                                                                                                        sym
+Definition 2.2 (Solution Symmetricity). Two solutions π i and π j are solution symmetric (π i ←−→
+π j ) on problem P if R(π i ; P ) = R(π j ; P ).
+An exemplary problem symmetricity found in various COPs is the rotational symmetricity:
+Theorem 2.1 (Rotational symmetricity). For any orthogoanl matrix Q, the problem P and Q(P ) ≜
+                                                sym
+{{Qxi }N
+       i=1 , f } are problem symmetric: i.e., P ←−→ Q(P ). See Appendix A for the proof.
+Rotational problem symmetricity is identified in every Euclidean COPs. On the other hand, solution
+symmetricity cannot be identified easily as the properties of the solutions are distinct for every COP.
+
+3     Symmetric Neural Combinatorial Optimization
+This section presents Sym-NCO, an effective training scheme that leverages the symmetricities of
+COPs. Sym-NCO learns a solve Fθ by minimizing the total loss function:
+                         Ltotal = LSym-RL + αLinv = Lps + βLss + αLinv                       (2)
+
+
+                                                     3
+                                Figure 3: An overview of Sym-NCO
+where LSym-RL is REINFORCE loss term supported by symmetricity and Linv is the regularization
+loss to induce that invariant representation. The LSym-RL is composed with Lss , the REINFORCE
+loss term of Eq. (1) with solution symmetricity regularizing mechanism, and Lps , the REINFORCE
+loss term of Eq. (1) with both solution and problem symmetricity regularization. α, β ∈ [0, 1] are the
+weight coefficients. In the following subsections, we explain each loss term in detail.
+
+3.1   Regularizing REINFORCE with problem and solution symmetricities via LSym-RL
+
+As discussed in Section 2.2, COPs have problem and solution symmetricities. We explain how to
+learn solver Fθ using REINFORCE with the specially designed baseline to approximately impose
+symmetricities. We provide the policy gradients to Lss (π(P )) and Lps (π(P )) in the context of the
+REINFORCE algorithm [30] with the proposed baseline schemes.
+Leveraging solution symmetricity. As defined in Definition 2.2, the symmetric solutions must have
+the same objective values. We propose the REINFORCE loss Lss with the baseline specially designed
+to exploit the solution symmetricity of CO as follows:
+                                                  
+                      Lss = −Eπ∼Fθ (·|P ) R(π; P )                                             (3)
+                                         h                          i
+                   ∇θ Lss = −Eπ∼Fθ (·|P ) R(π; P ) − b(P ) ∇θ log Fθ                           (4)
+                                K                   K
+                              1 X h              1 X                       i
+                                    R(π k ; P ) −     R(π k ; P ) ∇θ log Fθ
+                                                                 
+                         ≈−                                                                        (5)
+                              K                   K
+                                 k=1                    k=1
+
+where {π k }K
+            k=1 are the solutions of P sampled from Fθ (π|P ), log Fθ is the log-likelihood of Fθ , K
+is the number of sampled solutions, b(P ) is a shared baseline which is the average reward from K
+solutions for the identical problem P .
+The Lss approximately imposes solution symmetricity using REINFORCE algorithm with a novel
+baseline b(P ). The sum of advantage in the solution group {π k }K
+                                                                 k=1 is always zero:
+
+                             K                   K
+                           1 X h              1 X            i
+                                 R(π k ; P ) −     R(π k ; P ) = 0                                 (6)
+                           K                   K
+                              k=1                     k=1
+
+The Lss induces competition among the rewards, R(π 1 ; P ), ..., R(π K ; P ) which can be seen as a
+zero-sum game. Therefore, Lss improves the overall reward quality of the solution group using the
+proposed competitive REINFORCE scheme, making the solver generate high-rewarded solutions but
+a small reward deviation between solutions. The small reward-deviation indicates Lss approximately
+imposes solution symmetricity to solver Fθ .
+The POMO [23] employed a similar training technique with our Lss , that finds symmetric solutions
+by forcing Fθ to visit all possible initial cities when solving TSP and CVRP. However, the reward of
+COPs, including CVRP, PCTSP, and OP, is usually sensitive to first-city selection. Therefore, POMO
+can be an excellent standalone method for TSP but can be further improved using our Lss loss term in
+other tasks including CVRP.
+Leveraging problem symmetricity. As discussed in Section 2.2, the rotational problem symmetricity
+is common in various COPs. We propose the REINFORCE loss Lps which is equipped with problem
+
+
+                                                  4
+symmetricity:
+                                                      
+              Lps = −EQl ∼Q Eπ∼Fθ (·|Ql (P )) R(π; P )                                            (7)
+                                              h                           i
+                                                                 
+           ∇θ Lps = −EQl ∼Q Eπ∼Fθ (·|Ql (P )) R(π; P ) − b(P , Q) ∇θ log Fθ                       (8)
+                       L K                  L K                     i
+                     1 X X h   l,k       1 XX     l,k
+                                                         
+                  ≈          R(π ; P ) −        R(π ; P ) ∇θ log Fθ                               (9)
+                    LK                   LK
+                          l=1 k=1                        l=1 k=1
+
+
+where Q is the distribution of random orthogonal matrices, Ql is the lth sampled rotation matrix,
+and π l,k is the k th sample solution of the lth rotated problem. We construct L problem symmetric
+problems, Q1 (P ), ..., QL (P ), by using the sampled rotation matrices, and smaple K symmetric
+solutions from each of the L problems. Then, the shared baseline b(P , Q) is constructed by averaging
+L × K solutions.
+Similar to the regularization scheme of Lss , the advantage term of Lps also induces competition
+between solutions sampled from rotationally symmetric problems. Since the rotational symmetricity
+is defined such that x and Ql (x) have the same solution, the negative advantage value forces the
+solver to find a better solution. As mentioned in Section 2.2, problem symmetricity in COPs is
+usually pre-identified (i.e. there is provable guaranteed symmetricity such as rotational symmetricity
+Theorem 2.1); Lps are applicable to general COPs. Moreover, multiple solutions are sampled for
+each symmetric problem so that Lps can also identify and exploit the solution symmetricity with a
+similar approach taken for Lss . We provide detailed implementation and design guides regarding the
+integration strategy of Lss and Lps in Appendix C.2.
+
+3.2   Learning invariant representation with Pre-identified Symmetricity: Linv .
+
+By Theorem 2.1, the original problem x and its rotated problem Q(x) have identical solutions.
+Therefore the encoder of Fθ can be enforced to have invariant representation by leveraging the
+pre-identified symmetricity: rotation symmetricity.
+We denote h(x) and h (Q(x)) as the hidden representations of x and Q(x), respectively. To impose
+the rotational invariant property on h(x), we train solver Fθ with an additional regularization loss
+term Linv defined as:
+                                                                 
+                                                                  
+                              Linv = −Scos g h(x) , g h Q(x)                                    (10)
+
+where Scos (a, b) is the cosine similarity between a and b. g is the MLP-parameterized projection
+head.
+For learning the invariant representation on rotational symmetricity, we penalize the difference
+between the projected representation g(h(x)) and g(h(Q(x))), instead of directly penalizing the
+difference between h(x) and h(Q(x). This penalizing scheme allows the use of an arbitrary encoder
+network architecture while maintaining the diversity of h [31]. We empirically verified that this
+approach attains stronger solvers as described in Section 6.1.
+
+4     Related Works
+Deep construction heuristics. Bello et al. [20] propose one of the earliest DRL-NCO methods,
+based on pointer network (PointerNet) [10], and trained it with an actor-critic method. Attention
+model (AM) [21] successfully extends [20] by swapping PointerNet with Transformer [32], and it is
+currently the de-facto standard method for NCO. Notably, AM verifies its problem agnosticism by
+solving several classical routing problems and their practical extensions [7, 19]. The multi-decoder
+AM (MDAM) [26] extends AM by employing an ensemble of decoders. However, such an extension
+is inapplicable for stochastic routing problems. The policy optimization for multiple optimal (POMO)
+[23] extends AM by exploiting the solution symmetricities in TSP and CVRP. Even though POMO
+shows significant improvements from AM, it relies on problem-specific solution symmetricities
+for TSP. Our method can be seen as a general-purpose symmetric learning scheme, extended from
+POMO, which can be applied in more general CO tasks.
+
+
+                                                  5
+Equivariant deep learning. In deep learning, symmetricities are often enforced by employing spe-
+cific network architectures. Niu et al. [33] proposes a permutation equivariant graph neural network
+(GNN) that produces equivariant outputs to the input order permutations. The SE(3)-Transformer
+[34] restricts the Transformer so that it is equivariant to SE(3) group input transformation. Similarly,
+equivariant GNN (EGNN) [35] proposes a GNN architecture that produces O(n) group equivariant
+output. These network architectures can dramatically reduce the search space of the model parameters.
+Some research applies equivariant neural networks to RL tasks to improve sample efficiency [36].
+Also, there are several works that exploited the symmetric nature of CO. Ouyang et al. [37] proposed
+equivariant encoding scheme by giving rule-based input transformation to input graph. Hudson et
+al. [38] suggested a line-graph embedding scheme, which is beneficial to process CO graphs with
+rotational equivariant. Our Sym-NCO is a regularization method that is capable of learning existing
+powerful CO models without giving rule-based hard constraints to the structure. We empirically study
+the benefit of Sym-NCO over other symmetricity-based approaches in Section 6.1 and Appendix D.5.
+
+5     Experiments
+This section provides the experimental results of Sym-NCO for TSP, CVRP, PCTSP, and OP. Focusing
+on the fact that Sym-NCO can be applied to any encoder-decoder-based NCO method, we implement
+Sym-NCO on top of POMO [23] to solve TSP and CVRP, and AM [21] to solve PCTSP and OP,
+respectively. We additionally validate the effectiveness of Sym-NCO on PointerNet [10] at TSP
+(N = 100).
+
+5.1   Tasks and baseline selections
+
+TSP aims to find the Hamiltonian cycle with a minimum tour length. We employ Concorde [39]
+and LKH-3 [40] as the non-learnable baselines, and PointerNet [10], the structured-to-vector deep-
+Q-network (S2V-DQN) [41], AM [21], POMO [23] and MDAM [26] as the neural constructive
+baselines.
+CVRP is an extension of TSP that aims to find a set of tours with minimal total tour lengths while
+satisfying the capacity limits of the vehicles. We employ LKH-3 [40] as the non-learnable baselines,
+and Nazari et al. [22], AM [21], POMO [23] and MDAM [26] as the constructive neural baselines.
+PCTSP is a variant of TSP that aims to find a tour with minimal tour length while satisfying the prize
+constraints. We employ the iterative local search (ILS) [21] as the non-learnable baseline, and AM
+[21] and MDAM [26] as the constructive neural baselines.
+OP is a variant of TSP that aims to find the tour with maximal total prizes while satisfying the tour
+length constraint. We employ compass [42] as the non-learnable baseline, and AM [21] and MDAM
+[26] as the constructive neural baselines.
+
+5.2   Experimental setting
+
+Problem size. We provide the results of problems with N = 100 for the four problem classes, and
+real-world TSP problems with 50 < N < 250 from TSPLIB.
+
+Hyperparameters. We apply Sym-NCO to POMO, AM, and PointerNet. To make fair comparisons,
+we use the same network architectures and training-related hyperparameters from their original papers
+to train their Sym-NCO-augmented models. Please refer to Appendix Appendix C.1 for more details.
+
+Dataset and Computing Resources. We use the benchmark dataset [21] to evaluate the perfor-
+mance of the solvers. To train the neural solvers, we use Nvidia A100 GPU. To evaluate the inference
+speed, we use an Intel Xeon E5-2630 CPU and Nvidia RTX2080Ti GPU to make fair comparisons
+with the existing methods as proposed in [26].
+
+5.3   Performance metrics
+
+This section provides detailed performance metrics:
+Average cost. We report an average cost of 10,000 benchmark instances which is proposed by [21].
+
+
+                                                   6
+Table 1: Performance evaluation results for TSP and CVRP. Bold represents the best performances in
+each task. ‘-’ indicates that the solver does not support the problem. ‘s’ indicates multi-start sampling,
+‘bs’ indicates the beam search. ‘×5 for the MDAM indicates the 5 decoder ensemble.
+                       Method                              TSP (N = 100)            CVRP (N = 100)
+                                                    Cost ↓      Gap      Time    Cost ↓     Gap      Time
+      Handcrafted Heuristic-based Classical Methods
+      Concorde                    Heuristic [39]     7.76      0.00%       3m                –
+      LKH3                        Heuristic [40]     7.76      0.00%       21m   15.65     0.00%     13h
+      RL-based Deep Constructive Heuristic methods with greedy rollout
+      PointerNet {greedy.}       NIPS’15 [10, 20]    8.60      6.90 %       –               –
+      S2V-DQN {greedy.}           NIPS’17 [41]       8.31      7.03 %       –               –
+      RL {greedy.}               NeurIPS’18 [22]                 –               17.23    10.12%      –
+      AM {greedy.}                ICLR’19 [21]       8.12      4.53%       2s    16.80    7.34%      3s
+      MDAM {greedy.× 5}           AAAI’21 [25]       7.93      2.19%       36s   16.40    4.86%      45s
+      POMO {greedy.}             NeurIPS’20 [23]     7.85      1.04%       2s    16.26    3.93%      3s
+      Sym-NCO {greedy.}             This work        7.84      0.94%       2s    16.10    2.88%      3s
+      RL-based Deep Constructive Heuristic methods with multi-start rollout
+      Nazari et al. {bs.10}      NeurIPS’18 [22]                 –               16.96     8.39%       –
+      AM {s.1280}                 ICLR’19 [21]       7.94      2.26%       41m   16.23     3.72%     54m
+      POMO {s. 100}              NeurIPS’20 [23]     7.80      0.44%       13s   15.90     1.67%     16s
+      MDAM {bs. 30 × 5}           AAAI’21 [25]       7.80      0.48%       20m   16.03     2.49%      1h
+      Sym-NCO {s.100}               This work        7.79      0.39%       13s   15.87     1.46%     16s
+
+ Table 2: Performance evaluation results for PCTSP and OP. Notations are the same with Table 1.
+                        Method                         PCTSP (N = 100)               OP (N = 100)
+                                                    Cost ↓     Gap       Time    Obj ↑    Gap      Time
+       Handcrafted Heuristic-based Classical Methods
+       ILS C++                    Heuristic [21]    5.98      0.00%        12h              –
+       Compass                    Heuristic [42]                –                33.19    0.00%     15m
+       RL-based Deep Constructive Heuristic methods with greedy rollout (zero-shot inference)
+       AM {greedy .}              ICLR’19 [21]      6.25      4.46%        2s    31.62    4.75%     2s
+       MDAM {greedy .× 5}         AAAI’21 [25]      6.17      3.13%        34s   32.32    2.61%     32s
+       Sym-NCO {greedy .}           This work       6.05      1.23%        2s    32.51    2.03%     2s
+       RL-based Deep Constructive Heuristic methods with multi-start rollout (Post-processing)
+       AM {s. 1280}               ICLR’19 [21]      6.08       1.67%     27m     32.68    1.55%     25m
+       MDAM {bs. 30× 5}           AAAI’21 [25]      6.07       1.46%     16m     32.91    0.84%     14m
+       Sym-NCO {s. 200}             This work       5.98      -0.02%     3m      33.04    0.45%     3m
+
+
+Evaluation speed. We report the evaluation speeds of solvers in a out-of-the-box manner as they are
+used in practice. In that regard, the execution time of non-neural and neural methods are measured on
+CPU and GPU, respectively.
+Greedy/Multi-start performance. For neural solvers, it is a common practice to measure multi-start
+performance as its final performance. However, when those are employed in practice, such resource
+consuming multi-start may not be possible. Hence, we discuss greedy and multi-start separately.
+
+5.4   Experimental results
+
+Results of TSP and CVRP. As shown in Table 1, Sym-NCO outperforms the NCO baselines
+in both the greedy rollout and multi-start settings with the fastest inference speed. Remarkably,
+Sym-NCO achieves a 0.95% gap in TSP using the greedy rollout. In the TSP greedy setting, it solves
+TSP 10,000 instances in a few seconds.
+
+Results of PCTSP and OP. As shown in Table 2, Sym-NCO outperforms the NCO baselines in
+both the greedy rollout and multi-start settings. In the multi-start setting, Sym-NCO outperforms the
+classical PCTSP baseline (i.e., ILS) with the 43200
+                                                 180 ≈ 240× faster speed.
+
+
+
+
+                                                        7
+                                                                                                                                                                                                                              POMO + Sym-NCO
+                                                 PointerNet + Sym-NCO                               9.00                                  AM + Sym-NCO                                9.5
+                                                                                                                                          AM                                                                                  POMO
+                  11.0
+
+
+
+                                                                                                                                                                    Validation Cost
+                                                 PointerNet
+
+
+
+
+Validation Cost                                                                   Validation Cost
+                                                                                                    8.75
+                  10.5                                                                                                                                                                9.0
+                  10.0                                                                              8.50
+
+                   9.5                                                                              8.25                                                                              8.5
+
+                   9.0
+                          30,000 35,000 40,000 45,000 50,000                                                           20,000             40,000                                            0                   20,000           40,000
+                                       Step                                                                                 Step                                                                                     Step
+
+                              (a) PointerNet                                                                          (b) AM                                                                                   (c) POMO
+                            Figure 4: The applications of Sym-NCO to DRL-NCO methods in TSP (N = 100)
+                          Concorde                                   16.4                                                                                        ILS
+                                                                                                                                                                 AM                                     33.0
+                          AM                                                                                                        6.2                          MDAM
+             7.90         POMO
+                                                                     16.2                                   LKH-3                                                Sym-NCO (Ours)
+                          MDAM
+                                                                                                            AM
+                                                                                                                             Cost
+                                                                                                                                                                                                        32.5                 Compass
+                                                                                                                                                                                                Prize
+                          Sym-NCO (Ours)
+Cost         7.85                                             Cost   16.0
+                                                                                                            POMO
+                                                                                                                                    6.1
+                                                                                                            MDAM                                                                                                             AM
+                                                                                                            Sym-NCO (Ours)
+                                                                                                                                                                                                        32.0                 MDAM
+             7.80                                                    15.8
+                                                                                                                                    6.0                                                                                      Sym-NCO (Ours)
+
+                             101        102        103                      101              102     103        104                       101      102     103           104                                       101         102        103
+                                   Time (Sec.)                                                Time (Sec.)                                          Time (Sec.)                                                           Time (Sec.)
+
+
+                   (a) TSP (N = 100)                                 (b) CVRP (N = 100)                                             (c) PCTSP (N = 100)                                                    (d) OP (N = 100)
+Figure 5: Time vs. cost plots. Green, orange, and blue colored lines visualize the results of hand-craft
+heuristics, neural baselines, and Sym-NCO, respectively. For OP (d), higher y-axis values are better.
+
+Results of the real-world TSP. We evaluate POMO and Sym-NCO on                                                                                                                                                                          Gap
+TSPLib [43]. Table 3 shows that Sym-NCO outperforms POMO. Please refer                                                                                                                                          POMO                   1.87%
+to Appendix D.2 for the full benchmark results.                                                                                                                                                                 Sym-NCO                1.62%
+
+Application to various DRL-NCO methods. As discussed in Section 3, Table 3: Optimality
+Sym-NCO can be applied to various various DRL-NCO methods. We validate gap on TSPLIB
+that Sym-NCO significantly improves the existing DRL-NCO methods as
+shown in Fig. 4.
+
+Time-performance analysis for multi-starts. Multi-starts is a common method that improves
+the solution qualities while requiring a longer time budget. We use the rotation augments [23] to
+produce multiple inputs (i.e., starts). As shown in Fig. 5, Sym-NCO achieves the Pareto frontier
+for all benchmark datasets. In other words, Sym-NCO exhibits the best solution quality among the
+baselines within the given time consumption.
+
+6                    Discussion
+6.1                      Discussion of Regularization based Symmetricity Learning
+
+Ablation Study of Linv . As shown in Fig. 6b, Linv increases the cosine similarity of the projected
+representation (i.e., g(h)). We can conclude that Linv contributes to the performance improvements
+(see Fig. 6a). We further verify that imposing similarity on h degrades the performance as demon-
+strated in Fig. 6c. This proves the importance of maintaining the expression power of the encoder as
+we mentioned in Section 3.2.
+
+Comparison with EGNN. EGNN [35] provably guarantees to process coordinate graph with
+rotational equivalency. Also, EGNN empirically verified its’ high performance in point cloud tasks.
+Therefore, we implemented a simple EGNN-based CO policy (simply termed EGNN in this paper),
+to check the feasibility of CO. We leverage six EGNN layers with 128 hidden dimensions, to replace
+the POMO encoder where the POMO decoder is unchanged.
+In the experimental results, we observed that EGNN significantly underperforms Sym-NCO and fails
+to converge as shown Fig. 7b. This is because the euclidian CO has a fully connected input graph
+containing informative coordinates, and we believe the equivariant neural network should be carefully
+crafted to consider such unique input graph structures of CO tasks. On the other hand, Sym-NCO
+could leverage the existing powerful NCO model without fine modification of the neural network.
+These numerical results conform well with our hypothesis that equivariance is necessary but not
+
+
+                                                                                                                             8
+                                                                                    1.0                                                                    9.5
+               8.6                 Lss + L ps + Linv (Ours)                                                                                                                      w/ proj. head
+
+
+
+
+                                                                Cosine Similarity                                                        Validation Cost
+                                   Lss + L ps                                       0.8                                                                                          w/o proj. head
+               8.4
+
+Objective
+                                   Lss (POMO)                                                                                                              9.0
+               8.2                                                                  0.5
+                                                                                                                              w/ Linv
+               8.0                                                                                                                                         8.5
+                                                                                                                              w/o Linv
+                                                                                    0.2
+                      0        200,000      400,000   600,000                             0   500,000    1,000,000 1,500,000                                     0   20,000    40,000      60,000
+                                         Step                                                           Step                                                                  Step
+
+ (a) Cost curves of the loss designs                                                 (b) Cosine similarity curves                        (c) Projection head ablation results
+Figure 6: Loss design ablation results (a) Effect of loss components to the costs, (b) Cosine similarity
+curves of the models with and with Linv , (c) Costs of the models with and without g(·).
+
+                    1.0                                                                                                       25
+
+
+
+
+Cosine Similarity
+                                                                                                                                                                                          Sym-NCO
+
+
+
+
+                                                                                                            Validation Cost
+                                                                                                                                                                                          EGNN
+                                                                                                                              20
+                    0.8
+                                                                                                                              15
+                                                                               Sym-NCO
+                    0.6                                                                                                       10
+                                                                               EGNN
+
+                           0         500,000        1,000,000     1,500,000                                                        0         20,000                   40,000            60,000
+                                                  Step                                                                                                               Step
+
+                               (a) Cosine similarity curves                                                                                                (b) Cost curves
+                                                      Figure 7: Comparisons of Sym-NCO and EGNN
+
+
+sufficient for obtaining the optimal parameters for the solver. Therefore, we expect our approach
+can be simply extended to other domains requiring symmetricity and geometricity as positioned to
+leverage the existing legacy of powerful non-equivariant neural networks.
+
+
+6.2                       Limitations & future directions
+
+Extended problem symmetricities. In this work, we employ the rotational symmetricity (Theo-
+rem 2.1) as the problem symmetricity. However, for some COPs, different problem symmetricities,
+such as scaling and translating P , can also be considered. Employing these additional symmetricities
+may further enhance the performance of Sym-NCO. We leave this for future research.
+
+Large scale adaptation. Large scale applicability is essential to NCO. In this work we simply
+present scale adaptation capability of Sym-NCO using the effective active search (EAS) [44]; see
+Appendix D.3. We expect curriculum- [45], and meta-learning approaches may improve the general-
+izability of NCO to larger-sized problems.
+
+Extension to the graph COP. This work finds the problem symmetricity that is universally
+applicable for Euclidean COPs. However, some COPs are defined in non-Euclidean spaces such as
+asymmetric TSP. Furthermore, there are also a bunch of existing neural combinatorial optimization
+models that can solve graph COP [46, 47, 48, 49, 50, 51], where we can improve with a symmetricity
+regularization scheme. We also leave finding the universal symmetricities of non-Euclidean COPs
+and applying them to existing graph COP models for future research.
+
+
+6.3                       Social Impacts
+
+Design automation through NCO research affects various industries including logistics and trans-
+portation industries. From a negative perspective, this automation process may have some concerns
+to lead to unemployment in certain jobs. However, automation of logistics, transportation, and design
+automation can increase the efficiency of industries, reducing CO2 emissions (by reducing total tour
+length) and creating new industries and jobs.
+
+
+                                                                                                  9
+Acknowledgments and Disclosure of Funding
+We thank Jiwoo Son, Hyeonah Kim, Haeyeon Rachel Kim, Fangying Chen, and anonymous reviews
+for proving helpful feedback for preparing our manuscripts. This work was supported by a grant of the
+KAIST-KT joint research project through AI2XL Laboratory, Institute of convergence Technology,
+funded by KT [Project No. G01210696, Development of Multi-Agent Reinforcement Learning
+Algorithm for Efficient Operation of Complex Distributed Systems].
+
+References
+ [1] Stefan Irnich, Paolo Toth, and Daniele Vigo. Chapter 1: The Family of Vehicle Routing
+     Problems, pages 1–33.
+ [2] Matthew Veres and Medhat Moussa. Deep learning for intelligent transportation systems: A sur-
+     vey of emerging trends. IEEE Transactions on Intelligent Transportation Systems, 21(8):3152–
+     3168, 2020.
+ [3] Sungsoo Ahn, Junsu Kim, Hankook Lee, and Jinwoo Shin. Guiding deep molecular optimization
+     with genetic exploration. Advances in neural information processing systems, 33:12008–12021,
+     2020.
+ [4] Sungsoo Ahn, Binghong Chen, Tianzhe Wang, and Le Song. Spanning tree-based graph
+     generation for molecules. In International Conference on Learning Representations, 2021.
+ [5] Azalia Mirhoseini, Hieu Pham, Quoc V. Le, Benoit Steiner, Rasmus Larsen, Yuefeng Zhou,
+     Naveen Kumar, Mohammad Norouzi, Samy Bengio, and Jeff Dean. Device placement optimiza-
+     tion with reinforcement learning. In Doina Precup and Yee Whye Teh, editors, Proceedings of
+     the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine
+     Learning Research, pages 2430–2439. PMLR, 06–11 Aug 2017.
+ [6] Azalia Mirhoseini, Anna Goldie, Mustafa Yazgan, Joe Jiang, Ebrahim M. Songhori, Shen Wang,
+     Young-Joon Lee, Eric Johnson, Omkar Pathak, Sungmin Bae, Azade Nazi, Jiwoo Pak, Andy
+     Tong, Kavya Srinivasa, William Hang, Emre Tuncer, Anand Babu, Quoc V. Le, James Laudon,
+     Richard C. Ho, Roger Carpenter, and Jeff Dean. Chip placement with deep reinforcement
+     learning. CoRR, abs/2004.10746, 2020.
+ [7] Haiguang Liao, Qingyi Dong, Xuliang Dong, Wentai Zhang, Wangyang Zhang, Weiyi Qi, Elias
+     Fallon, and Levent Burak Kara. Attention routing: track-assignment detailed routing using
+     attention-based reinforcement learning, 2020.
+ [8] Minsu Kim, Hyunwook Park, Seongguk Kim, Keeyoung Son, Subin Kim, Kyunjune Son,
+     Seonguk Choi, Gapyeol Park, and Joungho Kim. Reinforcement learning-based auto-router
+     considering signal integrity. In 2020 IEEE 29th Conference on Electrical Performance of
+     Electronic Packaging and Systems (EPEPS), pages 1–3, 2020.
+ [9] Minsu Kim, Hyunwook Park, Keeyoung Son, Seongguk Kim, Haeyeon Kim, Jihun Kim,
+     Jinwook Song, Youngmin Ku, Jounggyu Park, and Joungho Kim. Imitation learning for
+     simultaneous escape routing. In 2021 IEEE 30th Conference on Electrical Performance of
+     Electronic Packaging and Systems (EPEPS), pages 1–3, 2021.
+[10] Oriol Vinyals, Meire Fortunato, and Navdeep Jaitly. Pointer networks. In C. Cortes, N. Lawrence,
+     D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing
+     Systems, volume 28, pages 2692–2700. Curran Associates, Inc., 2015.
+[11] Chaitanya K. Joshi, Quentin Cappart, Louis-Martin Rousseau, Thomas Laurent, and Xavier
+     Bresson. Learning tsp requires rethinking generalization, 2020.
+[12] Wouter Kool, Herke van Hoof, Joaquim A. S. Gromicho, and Max Welling. Deep policy
+     dynamic programming for vehicle routing problems. CoRR, abs/2102.11756, 2021.
+[13] Zhang-Hua Fu, Kai-Bin Qiu, and Hongyuan Zha. Generalize a small pre-trained model to
+     arbitrarily large tsp instances, 2020.
+
+
+                                                 10
+[14] André Hottung, Bhanu Bhandari, and Kevin Tierney. Learning a latent search space for
+     routing problems using variational autoencoders. In International Conference on Learning
+     Representations, 2020.
+
+[15] André Hottung and Kevin Tierney. Neural large neighborhood search for the capacitated vehicle
+     routing problem. CoRR, abs/1911.09539, 2019.
+
+[16] Yaoxin Wu, Wen Song, Zhiguang Cao, Jie Zhang, and Andrew Lim. Learning improvement
+     heuristics for solving routing problems, 2020.
+
+[17] Paulo R d O da Costa, Jason Rhuggenaath, Yingqian Zhang, and Alp Akcay. Learning 2-opt
+     heuristics for the traveling salesman problem via deep reinforcement learning. In Sinno Jialin
+     Pan and Masashi Sugiyama, editors, Proceedings of The 12th Asian Conference on Machine
+     Learning, volume 129 of Proceedings of Machine Learning Research, pages 465–480, Bangkok,
+     Thailand, 18–20 Nov 2020. PMLR.
+
+[18] Sungsoo Ahn, Younggyo Seo, and Jinwoo Shin. Learning what to defer for maximum inde-
+     pendent sets. In Hal Daumé III and Aarti Singh, editors, Proceedings of the 37th International
+     Conference on Machine Learning, volume 119 of Proceedings of Machine Learning Research,
+     pages 134–144. PMLR, 13–18 Jul 2020.
+
+[19] Minsu Kim, Jinkyoo Park, and Joungho Kim. Learning collaborative policies to solve np-hard
+     routing problems. In Advances in Neural Information Processing Systems, 2021.
+
+[20] Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, and Samy Bengio. Neural combi-
+     natorial optimization with reinforcement learning, 2017.
+
+[21] Wouter Kool, Herke van Hoof, and Max Welling. Attention, learn to solve routing problems! In
+     International Conference on Learning Representations, 2019.
+
+[22] Mohammadreza Nazari, Afshin Oroojlooy, Lawrence Snyder, and Martin Takác. Reinforcement
+     learning for solving the vehicle routing problem. Advances in neural information processing
+     systems, 31, 2018.
+
+[23] Yeong-Dae Kwon, Jinho Choo, Byoungjip Kim, Iljoo Yoon, Youngjune Gwon, and Seungjai
+     Min. Pomo: Policy optimization with multiple optima for reinforcement learning. Advances in
+     Neural Information Processing Systems, 33:21188–21198, 2020.
+
+[24] Junyoung Park, Jaehyeong Chun, Sang Hun Kim, Youngkook Kim, and Jinkyoo Park. Learning
+     to schedule job-shop problems: representation and policy learning using graph neural network
+     and reinforcement learning. International Journal of Production Research, 59(11):3360–3377,
+     2021.
+
+[25] Yining Ma, Jingwen Li, Zhiguang Cao, Wen Song, Le Zhang, Zhenghua Chen, and Jing
+     Tang. Learning to iteratively solve routing problems with dual-aspect collaborative transformer.
+     Advances in Neural Information Processing Systems, 34, 2021.
+
+[26] Liang Xin, Wen Song, Zhiguang Cao, and Jie Zhang. Multi-decoder attention model with em-
+     bedding glimpse for solving vehicle routing problems. In Proceedings of 35th AAAI Conference
+     on Artificial Intelligence, pages 12042–12049, 2021.
+
+[27] Junyoung Park, Sanjar Bakhtiyar, and Jinkyoo Park. Schedulenet: Learn to solve multi-agent
+     scheduling problems with reinforcement learning. arXiv preprint arXiv:2106.03051, 2021.
+
+[28] Xinyun Chen and Yuandong Tian. Learning to perform local rewriting for combinatorial
+     optimization. In Advances in Neural Information Processing Systems, 2019.
+
+[29] Hansen Wang, Zefang Zong, Tong Xia, Shuyu Luo, Meng Zheng, Depeng Jin, and Yong Li.
+     Rewriting by generating: Learn heuristics for large-scale vehicle routing problems, 2021.
+
+[30] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforce-
+     ment learning. Machine learning, 8(3):229–256, 1992.
+
+
+                                                 11
+[31] Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. A simple framework
+     for contrastive learning of visual representations. In International conference on machine
+     learning, pages 1597–1607. PMLR, 2020.
+
+[32] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
+     Ł ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In I. Guyon, U. V. Luxburg,
+     S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural
+     Information Processing Systems, volume 30, pages 5998–6008. Curran Associates, Inc., 2017.
+
+[33] Chenhao Niu, Yang Song, Jiaming Song, Shengjia Zhao, Aditya Grover, and Stefano Ermon.
+     Permutation invariant graph generation via score-based generative modeling. In International
+     Conference on Artificial Intelligence and Statistics, pages 4474–4484. PMLR, 2020.
+
+[34] Fabian Fuchs, Daniel Worrall, Volker Fischer, and Max Welling. Se (3)-transformers: 3d
+     roto-translation equivariant attention networks. Advances in Neural Information Processing
+     Systems, 33:1970–1981, 2020.
+
+[35] Vıéctor Garcia Satorras, Emiel Hoogeboom, and Max Welling. E (n) equivariant graph neural
+     networks. In International Conference on Machine Learning, pages 9323–9332. PMLR, 2021.
+
+[36] Elise van der Pol, Daniel Worrall, Herke van Hoof, Frans Oliehoek, and Max Welling. Mdp
+     homomorphic networks: Group symmetries in reinforcement learning. Advances in Neural
+     Information Processing Systems, 33:4199–4210, 2020.
+
+[37] Wenbin Ouyang, Yisen Wang, Paul Weng, and Shaochen Han. Generalization in deep rl for tsp
+     problems via equivariance and local search. arXiv preprint arXiv:2110.03595, 2021.
+
+[38] Benjamin Hudson, Qingbiao Li, Matthew Malencia, and Amanda Prorok. Graph neural network
+     guided local search for the traveling salesperson problem. arXiv preprint arXiv:2110.05291,
+     2021.
+
+[39] Vašek Chvátal David Applegate, Robert Bixby and William Cook. Concorde tsp solver.
+
+[40] Keld Helsgaun. An extension of the lin-kernighan-helsgaun tsp solver for constrained traveling
+     salesman and vehicle routing problems. 12 2017.
+
+[41] Elias Khalil, Hanjun Dai, Yuyu Zhang, Bistra Dilkina, and Le Song. Learning combinatorial
+     optimization algorithms over graphs. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach,
+     R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing
+     Systems, volume 30, pages 6348–6358. Curran Associates, Inc., 2017.
+
+[42] Gorka Kobeaga, María Merino, and Jose A Lozano. An efficient evolutionary algorithm for the
+     orienteering problem. Computers & Operations Research, 90:42–59, 2018.
+
+[43] Gerhard Reinelt. Tsplib—a traveling salesman problem library. ORSA journal on computing,
+     3(4):376–384, 1991.
+
+[44] André Hottung, Yeong-Dae Kwon, and Kevin Tierney. Efficient active search for combinatorial
+     optimization problems. arXiv preprint arXiv:2106.05126, 2021.
+
+[45] Michal Lisicki, Arash Afkanpour, and Graham W Taylor. Evaluating curriculum learning
+     strategies in neural combinatorial optimization. arXiv preprint arXiv:2011.06188, 2020.
+
+[46] Thomas Barrett, William Clements, Jakob Foerster, and Alex Lvovsky. Exploratory combina-
+     torial optimization with reinforcement learning. In Proceedings of the AAAI Conference on
+     Artificial Intelligence, volume 34, pages 3243–3250, 2020.
+
+[47] Iddo Drori, Anant Kharkar, William R Sickinger, Brandon Kates, Qiang Ma, Suwen Ge,
+     Eden Dolev, Brenda Dietrich, David P Williamson, and Madeleine Udell. Learning to solve
+     combinatorial optimization problems on real-world graphs in linear time. In 2020 19th IEEE
+     International Conference on Machine Learning and Applications (ICMLA), pages 19–24. IEEE,
+     2020.
+
+
+                                                12
+[48] Thomas D Barrett, Christopher WF Parsonson, and Alexandre Laterre. Learning to solve combi-
+     natorial graph partitioning problems via efficient exploration. arXiv preprint arXiv:2205.14105,
+     2022.
+[49] Shenshen Gu and Yue Yang. A deep learning algorithm for the max-cut problem based on pointer
+     network structure with supervised learning and reinforcement learning strategies. Mathematics,
+     8(2), 2020.
+[50] Kenshin Abe, Zijian Xu, Issei Sato, and Masashi Sugiyama. Solving np-hard problems on
+     graphs with extended alphago zero. arXiv preprint arXiv:1905.11623, 2019.
+[51] Zhuwen Li, Qifeng Chen, and Vladlen Koltun. Combinatorial optimization with graph convolu-
+     tional networks and guided tree search. Advances in neural information processing systems, 31,
+     2018.
+
+
+
+
+                                                 13
+1. For all authors...
+    (a) Do the main claims made in the abstract and introduction accurately reflect the paper’s
+        contributions and scope? [Yes]
+    (b) Have you read the ethics review guidelines and ensured that your paper conforms to
+        them? [Yes]
+    (c) Did you discuss any potential negative societal impacts of your work? [N/A]
+    (d) Did you describe the limitations of your work? [Yes] See Section 6.2
+2. If you are including theoretical results...
+    (a) Did you state the full set of assumptions of all theoretical results? [N/A]
+    (b) Did you include complete proofs of all theoretical results? [N/A]
+3. If you ran experiments...
+    (a) Did you include the code, data, and instructions needed to reproduce the main experi-
+        mental results (either in the supplemental material or as a URL)? [Yes] Source code
+        will be available after decision is made.
+    (b) Did you specify all the training details (e.g., data splits, hyperparameters, how they
+        were chosen)? [Yes] See Section 5.2.
+    (c) Did you report error bars (e.g., with respect to the random seed after running experi-
+        ments multiple times)? [N/A]
+    (d) Did you include the amount of compute and the type of resources used (e.g., type of
+        GPUs, internal cluster, or cloud provider)? [Yes] See Appendix C.
+4. If you are using existing assets (e.g., code, data, models) or curating/releasing new assets...
+    (a) If your work uses existing assets, did you cite the creators? [Yes]
+    (b) Did you mention the license of the assets? [N/A]
+    (c) Did you include any new assets either in the supplemental material or as a URL? [N/A]
+
+    (d) Did you discuss whether and how consent was obtained from people whose data you’re
+        using/curating? [N/A]
+    (e) Did you discuss whether the data you are using/curating contains personally identifiable
+        information or offensive content? [N/A]
+5. If you used crowdsourcing or conducted research with human subjects...
+    (a) Did you include the full text of instructions given to participants and screenshots, if
+        applicable? [N/A]
+    (b) Did you describe any potential participant risks, with links to Institutional Review
+        Board (IRB) approvals, if applicable? [N/A]
+    (c) Did you include the estimated hourly wage paid to participants and the total amount
+        spent on participant compensation? [N/A]
+
+
+
+
+                                            14
+

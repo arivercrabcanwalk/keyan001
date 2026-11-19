@@ -1,0 +1,93 @@
+{
+  "date_local": "2026-11-12",
+  "status": "STATIC_G0_REVIEW_COMPLETE_NO_GO_WITH_ACCESS_GAPS",
+  "g0_decision": "G0_NO_GO_CENTERED_DUAL_SCORE_STANDARD_AND_STATIC_ZERO",
+  "candidate": "centered_learned_value_information_penalty_for_physical_first_action",
+  "gates": {
+    "G0": "NO_GO",
+    "G1": "LIMITED_ENGINEERING_ACCEPTANCE",
+    "G2": "LIMITED_OPPORTUNITY_DIAGNOSIS",
+    "G3": "NOT_PASSED",
+    "G4": "NOT_PASSED",
+    "G5": "NOT_COMPLETED",
+    "G6": "NOT_COMPLETED",
+    "G7": "NOT_COMPLETED",
+    "G8": "NOT_COMPLETED"
+  },
+  "project_complete": false,
+  "rl_superiority_proven": false,
+  "innovation_proven": false,
+  "paper_writing_enabled": false,
+  "overall_goal_status": "active",
+  "static_penalty_exact_zero_under_fixed_full_instance_frozen_parameters_and_action": true,
+  "all_static_rl_disproved": false,
+  "original_bibliography_counts": {
+    "verified": 97,
+    "mismatch": 2,
+    "manual_needed": 0,
+    "total": 99
+  },
+  "scientific_execution_this_package": {
+    "experiments": 0,
+    "training": 0,
+    "author_solves": 0,
+    "quality_evaluations": 0,
+    "new_maps": 0,
+    "formal": 0,
+    "<REMOVED_ENDPOINT>_connections": 0,
+    "subagents": 0
+  },
+  "static_contract": {
+    "actions": [
+      "(slot,target)",
+      "(slot,RETURN)"
+    ],
+    "fixed": [
+      "deployment",
+      "station_type",
+      "target_station"
+    ],
+    "cumulative_duty_reset_on_return": false,
+    "primary": "M_return",
+    "per_map_cost_anchor": "C_Liu",
+    "cost_epsilon": 0,
+    "per_map_cost_tolerance": 1e-07,
+    "whole_map_budgets_s": [
+      6,
+      12
+    ],
+    "MTC": "auxiliary"
+  },
+  "supervised_learning_without_rl_updates_is_nonrl": true,
+  "main_and_si_authorized": true,
+  "needs_user_decision": false,
+  "next_bounded_work": "Accept only one explicit new construction/estimation step or newly acquired primary equation that changes the novelty comparison; otherwise keep G0 NO-GO and no training. Require full I/O, math, closest-prior delta, falsifiable predictions, strongest same-information/candidate/time nonRL and closure rule.",
+  "baseline_file": "<LOCAL_PATH>",
+  "baseline_sha256": "fce67b16dcd20b48a6f999bcfb35db1e75b9c8a3e63a2c505f3d02500f1eedaa",
+  "modified_file": "<LOCAL_PATH>",
+  "modified_sha256": "4cca3afb1f0ca1ae11b33874582b93b0f669a59c170f339961bad5a65d10c076",
+  "live_file": "<LOCAL_PATH>",
+  "changed_fields": [
+    "LATEST_STATUS.md: static G0 evidence prefix; previous content retained as exact suffix",
+    "package STATE.json: documentary candidate NO_GO; canonical scientific states unchanged"
+  ],
+  "canonical_scientific_states": [
+    {
+      "path": "<LOCAL_PATH>",
+      "sha256": "b0b5aab03caa333d5ea7e75c85261847ecee045d19a1d0bbe3d06b5b064932a9",
+      "bytes": 72223
+    },
+    {
+      "path": "<LOCAL_PATH>",
+      "sha256": "53a0c9e0b628b0118f22c2d45b3b2fd758e1f52fe8eedea94149682a8a31058e",
+      "bytes": 3547
+    }
+  ],
+  "source_index": "SOURCE_INDEX.json",
+  "protected_source_index": "PROTECTED_SOURCE_INDEX.json",
+  "access_status": "ACCESS_STATUS.json",
+  "report": "REPORT.md",
+  "mechanism_spec": "MECHANISM_SPEC.md",
+  "oracle_qualification": "ORACLE_QUALIFICATION.md",
+  "updated_at_utc": "2026-11-12T04:49:59.180797+00:00"
+}
