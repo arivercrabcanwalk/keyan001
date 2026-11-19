@@ -1,0 +1,170 @@
+[
+  {
+    "path": "DIFF_FILE.patch",
+    "sha256": "d2000d8c9851801e1fc24b6863b6d360a56da8904cca7ed99614e2a4e91c8131"
+  },
+  {
+    "path": "ORIGINALS/common_h_worker.py",
+    "sha256": "6b051b69687dab509713249cf2ffed0ffa6cc94c4eeefe6f8b2e9bc075b38347"
+  },
+  {
+    "path": "ORIGINALS/independent_control.py",
+    "sha256": "4685e959232a2f8350cd91b028c54913def89b20308d0ae296f9675246b9b3bb"
+  },
+  {
+    "path": "allocation.py",
+    "sha256": "bc635fbf8f380f50589ea5a519743bfe06652081fa6e125da874b12b720dc21e"
+  },
+  {
+    "path": "build_exclusions.py",
+    "sha256": "de87a2bbda83fda0f13fa12341bcc4516fb8f38d14737bc548d504de29cb9a2b"
+  },
+  {
+    "path": "common_h_worker.py",
+    "sha256": "56ac17be3d297a579316c729c1b937019bcaf2411cb0bf8c650ca974a662ee68"
+  },
+  {
+    "path": "control_cli.py",
+    "sha256": "4d2cbf97db77f687fb82f32f22397c325958cb53834eccfab2c7684c3f509464"
+  },
+  {
+    "path": "frozen/baselines/__init__.py",
+    "sha256": "c903859180ad0413897a8d6c9d987b2f8885a1f777ce2bfc4ce9f413c0fc692e"
+  },
+  {
+    "path": "frozen/baselines/constant_wind_adapter.py",
+    "sha256": "6deb20c25ca286c091b51fb63b3eaa04ea03a845ce7137c3eb6220494d19c119"
+  },
+  {
+    "path": "frozen/baselines/minmax_alns.py",
+    "sha256": "e43521f0f6284ddd45e3ce76890adb0f97cefaf3f87964e1ce016e27122e3e60"
+  },
+  {
+    "path": "frozen/baselines/original_scorer.py",
+    "sha256": "c6e156b2d770cec2f663eada37c2d39bff1583f672bda4116f81493484409135"
+  },
+  {
+    "path": "frozen/baselines/problem.py",
+    "sha256": "f03c2f4201cdea977644d84ab0ad704eb47d4c4389b06b2ac86b9d264463b1cc"
+  },
+  {
+    "path": "frozen/baselines/upstream_minmax_alns.py",
+    "sha256": "40dddeb09862cb905be4b6c7af7fd8ee45dd8722fe7d95be3aae8d99bd36e961"
+  },
+  {
+    "path": "frozen/baselines/wind_scorer.py",
+    "sha256": "0698b6e0d7aae5f138840dba7f33f2093e4664f2d99c6e6cd1f41a1305ebd153"
+  },
+  {
+    "path": "frozen/env/__init__.py",
+    "sha256": "81d98e300844680c63d0b48ebdd22aae97c1deb4454876426e91fac7c15b624f"
+  },
+  {
+    "path": "frozen/env/alarm_bridge.py",
+    "sha256": "6156e6a2e6cdc69891c7ff8416fb34ea2c5d74b29b487dd83c37da6ce59982e9"
+  },
+  {
+    "path": "frozen/env/causal_engine.py",
+    "sha256": "92804ec328a28c10839e333ea92637a95201dfbb8a163a2af44a9cf2cdd5e7b7"
+  },
+  {
+    "path": "frozen/env/constant_audit.py",
+    "sha256": "bfc4cacf8166ee450386319ea7156bbb5e83fcd1f5e72444212723323fa25479"
+  },
+  {
+    "path": "frozen/env/constant_wind.py",
+    "sha256": "8581a8aaeb587457ce044e52e38ce458b4fa3f8de3e9f2b367bbabac81d6c55e"
+  },
+  {
+    "path": "frozen/env/core.py",
+    "sha256": "f717575bf8881cccbdc6c73af22e836ccdcc4107f562dab814134af048deeaf7"
+  },
+  {
+    "path": "frozen/env/episode_audit.py",
+    "sha256": "13cd1d3f8913f0e45574c0bc8291ee509c9c98a9d0874477297e3e6fe1eed003"
+  },
+  {
+    "path": "frozen/env/exogenous_stream.py",
+    "sha256": "a885d3255c9de96207f692064706fe70c1092098bfce5c722c7f1809fb8a528c"
+  },
+  {
+    "path": "frozen/env/fault_conditioning.py",
+    "sha256": "88abd7e476e5b20e99afb552c51fa0b9c776ebd6875169dcfc69f776e9208727"
+  },
+  {
+    "path": "frozen/env/forecast_book.py",
+    "sha256": "f2a7c178641101b99b97eb527ff80e2bde141631a21af3fe07f46abe11876a29"
+  },
+  {
+    "path": "frozen/env/latent_phase.py",
+    "sha256": "24411445bca27b6fb25f074b00f16de1069fdb850e1db7a16143ae2324600d22"
+  },
+  {
+    "path": "frozen/env/metrics_w.py",
+    "sha256": "3d50af9294a3f720c700f13a900429ccc5d7f69d47ec8ba6110769cf3b9a6db1"
+  },
+  {
+    "path": "frozen/env/public_replay.py",
+    "sha256": "5570a621b2aeef2abe47736a9bfdb064b306bd4d07d0b6d7b74536aa54ff216f"
+  },
+  {
+    "path": "frozen/env/snapshot.py",
+    "sha256": "60d43ba9fb5f820720c658598f17014b7c4b57173403b1be3ab013e0facd96f6"
+  },
+  {
+    "path": "frozen/global_env.py",
+    "sha256": "af66c8e77c0d9d2e7dc1a9ac7effb80431173f6ff992bac8a182c231fb4be269"
+  },
+  {
+    "path": "frozen/prefix_sampler.py",
+    "sha256": "f78f5ccbbfb0928465f5fd63d49d81c3dc3ff0fa108e479225308d9bb3a9c817"
+  },
+  {
+    "path": "frozen/route_delivery.py",
+    "sha256": "a919e96caab1384c457ded0b129f0aa5fee933a777e2264e88645ea23670caf8"
+  },
+  {
+    "path": "frozen/route_method.py",
+    "sha256": "1e2baf5684a70b9e454989ed2dab27d10b5eb658ab765633cc431e4733eb9a56"
+  },
+  {
+    "path": "frozen/schedule_credit.py",
+    "sha256": "0642db80faa95c06e01a563426e3d14e55a89eac6acbc0624e6fb39231d4bdae"
+  },
+  {
+    "path": "full_author_cli.py",
+    "sha256": "71d5773d90757b177330ff7df6dc3eb03ed4056b2ca02eb2a0921cf16df09f1f"
+  },
+  {
+    "path": "generator_v2.py",
+    "sha256": "7a5f2e5c06acf7c70cccc55b20a1f8f1d30c481f73b14390b2b66b77894781e8"
+  },
+  {
+    "path": "independent_control.py",
+    "sha256": "0d502be9ea66720351134ada82250049fecd6b56865b983382e7a7740586665d"
+  },
+  {
+    "path": "preflight.py",
+    "sha256": "be22c38dad501d5618502a6b69f78b8f0b98c2ddff81b196ccaab15592215e36"
+  },
+  {
+    "path": "public_t.py",
+    "sha256": "1a81a2fd95fb49a4f324a0d0b3d23df039d83f3fa6a99abf66083d942f7ad5e7"
+  },
+  {
+    "path": "resolve_exposure_alias.py",
+    "sha256": "01be6bd026964fa6e985b273baaf36745762f824b9d2c01bf1d97f3b37ff99d9"
+  },
+  {
+    "path": "scientific_driver.py",
+    "sha256": "99a3cd0c5fd519533b33bd1790992ae27bf3d68e82d8ff597753fac384c2fb4e"
+  },
+  {
+    "path": "source_closure.py",
+    "sha256": "afd8c2b3a858a1a37f595188706b51dd5c1c67c647cc47a694bce69c8a64667c"
+  },
+  {
+    "path": "ticket_guard.py",
+    "sha256": "8f8542003a369832083dbbf8425ea3b6dcbd6f53b73c53257c6fd8d3892d77c9"
+  }
+]

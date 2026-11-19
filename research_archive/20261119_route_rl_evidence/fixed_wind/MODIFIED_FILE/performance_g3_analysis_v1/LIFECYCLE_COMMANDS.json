@@ -1,0 +1,26 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "-c",
+      "import json;from pathlib import Path;s=json.loads(Path('ORIGINALS/STATE.json').read_text());assert s['G3'].startswith('SCIENTIFIC_ADJUDICATION_PENDING');print('ORIGINAL_G3_ADJUDICATION_PENDING')"
+    ],
+    "input": "independent original status/source proof copy only; no scientific solve",
+    "stdout_literal": "ORIGINAL_G3_ADJUDICATION_PENDING\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": [
+      "/bin/sh",
+      "ROLLBACK.sh",
+      "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1/ROLLBACK_COPY"
+    ],
+    "input": "independent original status/source proof copy only; no scientific solve",
+    "stdout_literal": "PRE_ANALYSIS_PENDING_STATE_AND_ABSENT_AGGREGATOR_RESTORED\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  }
+]

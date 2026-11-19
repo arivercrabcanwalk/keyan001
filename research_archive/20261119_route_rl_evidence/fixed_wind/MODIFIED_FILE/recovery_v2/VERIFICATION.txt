@@ -1,0 +1,729 @@
+VERIFICATION -- 2026-11-14 actual four-task completion, EXECUTION_HOST only
+Changed field/branch: registered wind numeric representation at CostAnchor construction and delivery bundle, integer tuple -> tuple(float(v) for v in registered wind). Recovery reuses original REGISTRATION, all24 saved population files and completed A000 instead of invoking generator/author again. Routes, parameters, scorer, seed/order, full author iterations and deadlines unchanged.
+Original driver SHA256: 99a3cd0c5fd519533b33bd1790992ae27bf3d68e82d8ff597753fac384c2fb4e
+Modified driver SHA256: 61bd002e321d94dfdf2ce376c61c01e0bba794ec6a34e71c19621fc645b2d2bb
+A000 unchanged solution byte SHA256: bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61
+Four real artifacts:
+/Users/USER/Documents/ChatGPT/lunwen/joint_weather_emergency/20261114_f3_g3_authorized_v1/recovery_v2/MODIFIED_FILE
+/Users/USER/Documents/ChatGPT/lunwen/joint_weather_emergency/20261114_f3_g3_authorized_v1/recovery_v2/DIFF_FILE.patch
+/Users/USER/Documents/ChatGPT/lunwen/joint_weather_emergency/20261114_f3_g3_authorized_v1/recovery_v2/VERIFICATION.txt
+/Users/USER/Documents/ChatGPT/lunwen/joint_weather_emergency/20261114_f3_g3_authorized_v1/recovery_v2/ROLLBACK.sh
+
+BASELINE/MODIFIED/ROLLBACK exact executed commands, common cwd /root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2:
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/recovery_identity_check.py",
+      "--mode",
+      "BASELINE"
+    ],
+    "input": "existing registered A000 final witness only; zero draws or solves",
+    "stdout_literal": "{\"evaluated_physics_sha256\": \"dd88504e1117d10cce4c896fec3a79557da61cfabd508b6290b0d93286704400\", \"evaluated_wind\": [0, 0], \"input\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/QUALIFIED_WIND_SOLUTION.json\", \"input_sha256\": \"bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61\", \"issues\": [\"physics_hash_missing_or_mismatch\"], \"mode\": \"BASELINE\", \"new_author_solves\": 0, \"new_control_solves\": 0, \"new_draws\": 0, \"probe_source\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/MODIFIED_FILE\", \"registered_wind\": [0, 0], \"result\": \"KNOWN_INT_FLOAT_PHYSICS_IDENTITY_FAILURE; COMPLETED_AUTHOR_NOT_RERUN\", \"saved_physics_sha256\": \"bcafdfbd68f930c61a142e2ef7b7bc9567d424207a3925bc8f6b1d99e0f3501d\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "probe_source": null
+  },
+  {
+    "phase": "MODIFIED",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/recovery_identity_check.py",
+      "--mode",
+      "MODIFIED"
+    ],
+    "input": "existing registered A000 final witness only; zero draws or solves",
+    "stdout_literal": "{\"evaluated_physics_sha256\": \"bcafdfbd68f930c61a142e2ef7b7bc9567d424207a3925bc8f6b1d99e0f3501d\", \"evaluated_wind\": [0.0, 0.0], \"input\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/QUALIFIED_WIND_SOLUTION.json\", \"input_sha256\": \"bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61\", \"issues\": [], \"mode\": \"MODIFIED\", \"new_author_solves\": 0, \"new_control_solves\": 0, \"new_draws\": 0, \"probe_source\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/MODIFIED_FILE\", \"registered_wind\": [0, 0], \"result\": \"FLOAT_WIND_EXACT_SCORE_AND_ANCHOR_MATCH; SOLUTION_BYTES_UNCHANGED\", \"saved_physics_sha256\": \"bcafdfbd68f930c61a142e2ef7b7bc9567d424207a3925bc8f6b1d99e0f3501d\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "probe_source": null
+  },
+  {
+    "phase": "ROLLBACK_SOURCE",
+    "command": [
+      "/bin/sh",
+      "ROLLBACK.sh",
+      "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/ROLLBACK_COPY"
+    ],
+    "input": "existing registered A000 final witness only; zero draws or solves",
+    "stdout_literal": "ORIGINAL_V1_SOURCE_RESTORED; INT_FLOAT_IDENTITY_FAILURE_RESTORED\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "probe_source": null
+  },
+  {
+    "phase": "ROLLBACK_BEHAVIOR",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/recovery_identity_check.py",
+      "--mode",
+      "BASELINE"
+    ],
+    "input": "existing registered A000 final witness only; zero draws or solves",
+    "stdout_literal": "{\"evaluated_physics_sha256\": \"dd88504e1117d10cce4c896fec3a79557da61cfabd508b6290b0d93286704400\", \"evaluated_wind\": [0, 0], \"input\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/QUALIFIED_WIND_SOLUTION.json\", \"input_sha256\": \"bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61\", \"issues\": [\"physics_hash_missing_or_mismatch\"], \"mode\": \"BASELINE\", \"new_author_solves\": 0, \"new_control_solves\": 0, \"new_draws\": 0, \"probe_source\": \"/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/ROLLBACK_COPY/MODIFIED_FILE\", \"registered_wind\": [0, 0], \"result\": \"KNOWN_INT_FLOAT_PHYSICS_IDENTITY_FAILURE; COMPLETED_AUTHOR_NOT_RERUN\", \"saved_physics_sha256\": \"bcafdfbd68f930c61a142e2ef7b7bc9567d424207a3925bc8f6b1d99e0f3501d\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "probe_source": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/ROLLBACK_COPY/MODIFIED_FILE"
+  }
+]
+
+RESTORED: separate copy SOURCE tree equals original byte manifest; original integer-wind physics_hash_missing_or_mismatch behavior restored. Original scientific v1 failure remains exit1; harness exit0 records this expected failure. Main modified driver remains changed and is running. No successful scientific row or original A000 solve rerun.
+
+Original source closure, late-exit negative and production rollback exact commands/results:
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "-c",
+      "from pathlib import Path; assert not Path('ORIGINALS/production/scientific_driver.py').exists(); print('SCIENTIFIC_DRIVER_ABSENT')"
+    ],
+    "input": "frozen source closure and launch timing only; scientific canary remains a registered author row",
+    "stdout_literal": "SCIENTIFIC_DRIVER_ABSENT\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "MODIFIED_FULL_EXIT_NEGATIVE",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/ticket_guard.py",
+      "--ledger",
+      "PREFLIGHT_ROW_LEDGER.jsonl",
+      "--out",
+      "preflight_late",
+      "--row-id",
+      "external_clock_late_negative",
+      "--reserved-cpu-seconds",
+      "150",
+      "--wall-cap-seconds",
+      "9",
+      "--method-deadline-seconds",
+      "6",
+      "--",
+      "/usr/bin/python3",
+      "-c",
+      "import os,time,pathlib; assert float(os.environ['CONTROL_PROCESS_STARTED'])<=time.perf_counter(); pathlib.Path('EARLY_RAW_NEGATIVE.txt').write_text('SAVED_BEFORE_FULL_EXIT'); time.sleep(7)"
+    ],
+    "input": "frozen source closure and launch timing only; scientific canary remains a registered author row",
+    "stdout_literal": "{\"budget_and_cleanup_pass\": true, \"exit_status\": -9, \"remaining_descendants\": [], \"row_id\": \"external_clock_late_negative\", \"stop_reason\": \"CONTROL_PROCESS_DEADLINE\", \"total_debit_seconds\": 0.2907080000000096}\n",
+    "stderr_literal": "",
+    "exit_status": 4
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": [
+      "/bin/sh",
+      "ROLLBACK.sh",
+      "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/ROLLBACK_COPY"
+    ],
+    "input": "frozen source closure and launch timing only; scientific canary remains a registered author row",
+    "stdout_literal": "ORIGINAL_PRODUCTION_SOURCE_RESTORED; SCIENTIFIC_DRIVER_ABSENT\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "ROLLBACK_BEHAVIOR",
+    "command": [
+      "/usr/bin/python3",
+      "-c",
+      "from pathlib import Path; import hashlib; a=Path('ORIGINALS/production');b=Path('ROLLBACK_COPY/MODIFIED_FILE'); assert not (b/'scientific_driver.py').exists(); assert {str(p.relative_to(a)):hashlib.sha256(p.read_bytes()).hexdigest() for p in a.rglob('*') if p.is_file()}=={str(p.relative_to(b)):hashlib.sha256(p.read_bytes()).hexdigest() for p in b.rglob('*') if p.is_file()}; print('ORIGINAL_PRODUCTION_HASHES_AND_ABSENT_DRIVER_RESTORED')"
+    ],
+    "input": "frozen source closure and launch timing only; scientific canary remains a registered author row",
+    "stdout_literal": "ORIGINAL_PRODUCTION_HASHES_AND_ABSENT_DRIVER_RESTORED\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  }
+]
+
+Original scientific actual failure, TERMINAL receipt:
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "authorized_f3_g3_scientific_batch_v1",
+  "state": "TERMINAL",
+  "reserved_cpu_seconds": 172200.0,
+  "command": [
+    "/usr/bin/python3",
+    "MODIFIED_FILE/scientific_driver.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1",
+  "pinned_cpu": 0,
+  "container_cpu_start": 86.68223,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 379.577621666,
+  "exit_status": 1,
+  "stop_reason": null,
+  "container_cpu_delta_seconds": 11.930449999999993,
+  "total_debit_seconds": 12.191776999999993,
+  "method_started": 3711006.077346256,
+  "process_exit_observed_elapsed_s": 12.037759124767035,
+  "method_deadline_seconds": null,
+  "complete_process_ontime": true,
+  "wall_seconds": 12.039973420090973,
+  "remaining_descendants": [],
+  "budget_and_cleanup_pass": true
+}
+
+STDERR_LITERAL:
+Traceback (most recent call last):
+  File "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/MODIFIED_FILE/scientific_driver.py", line 142, in <module>
+    try:main()
+  File "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/MODIFIED_FILE/scientific_driver.py", line 112, in main
+    anchor=wind_scorer.CostAnchor.from_solution(ins,solution,wind=tuple(author['wind_m_per_min']))
+  File "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/MODIFIED_FILE/frozen/baselines/wind_scorer.py", line 254, in from_solution
+    raise ValueError(f"anchor is not a complete original-feasible witness: {score['issues']}")
+ValueError: anchor is not a complete original-feasible witness: ['physics_hash_missing_or_mismatch']
+
+Recovery preflight supervisor terminal and literal output:
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "recovery_v2_preflight",
+  "state": "TERMINAL",
+  "reserved_cpu_seconds": 300.0,
+  "command": [
+    "/usr/bin/python3",
+    "MODIFIED_FILE/recovery_preflight.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2",
+  "pinned_cpu": 0,
+  "container_cpu_start": 99.547953,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 391.990178666,
+  "exit_status": 0,
+  "stop_reason": null,
+  "container_cpu_delta_seconds": 0.7756449999999973,
+  "total_debit_seconds": 0.9210229999999973,
+  "method_started": 3711351.760726856,
+  "process_exit_observed_elapsed_s": 0.7987923817709088,
+  "method_deadline_seconds": null,
+  "complete_process_ontime": true,
+  "wall_seconds": 0.8013990456238389,
+  "remaining_descendants": [],
+  "budget_and_cleanup_pass": true
+}
+{"modified_driver_sha256": "61bd002e321d94dfdf2ce376c61c01e0bba794ec6a34e71c19621fc645b2d2bb", "modified_solution_bytes": false, "new_draws": 0, "new_solves": 0, "old_population_and_A000_reused": true, "original_driver_sha256": "99a3cd0c5fd519533b33bd1790992ae27bf3d68e82d8ff597753fac384c2fb4e", "prior_evidence_files": 145, "rollback_source_and_original_identity_failure_restored": true, "source_closure_files": 255, "status": "RECOVERY_IDENTITY_SOURCE_AND_ROLLBACK_PASS"}
+
+EXCLUSION UNION SHA256: a6fbb6a5fc7cfe7843c6f38a06328fe6c9721ee59eb13f16ed5bbc1789d33da8
+EXPOSURE_UNRESOLVED_JSON_FIELDS: 0
+POPULATION_READBACK: joint_weather_emergency/20261114_f3_g3_authorized_v1/server_evidence/20261114T050829Z/execution_v1/POPULATION_READBACK_AUDIT.json
+
+ACTUAL FULL AUTHOR ENTRY ACCEPTANCE:
+{
+  "alns_iterations": 5000,
+  "author_row_id": "A000",
+  "external_main_timeout_s": 1800,
+  "final_main_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/FINAL_MAIN.json",
+  "input_sha256": "0e2163610e9bd31a069cfc4bdeb2ed1f62f1e0b2def175510bf30d13c026c0e0",
+  "main_returned": true,
+  "original_registration_sha256": "031487b9c65a83ddfc16e729daff35cdc52ced1e8177af506d385f50a7f0f41e",
+  "outer_iterations": 500,
+  "qualification_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/QUALIFICATION.json",
+  "registered_attempt_counted": true,
+  "repro_seconds": 0,
+  "reused_not_rerun": true,
+  "solution_bytes_unchanged_sha256": "bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61",
+  "source_closure_sha256": "8a85a3d5dcf43476b9cc8016b4f81124e8a958320603c0937d7eb66c210879a3",
+  "source_manifest_sha256": "edbb6795ca7d04b47b2f50f25a0b753c398e2184d209f3567d6daa099979856d",
+  "source_score_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1/authors/3x10_o1/W00/SOURCE_SCORE.json",
+  "status": "PASS_FULL_SAME_WIND_MAIN_AND_TWO_INDEPENDENT_SCORERS",
+  "wind": [
+    0.0,
+    0.0
+  ]
+}
+
+ACTUAL SCIENTIFIC RECOVERY LAUNCH COMMAND:
+ulimit -v 4194304; ulimit -f 1048576; ulimit -t 172300; nohup /usr/bin/python3 MODIFIED_FILE/ticket_guard.py --ledger ../RESOURCE_LEDGER.jsonl --out scientific_batch_guard --row-id authorized_f3_g3_scientific_recovery_v2 --reserved-cpu-seconds 172200 --wall-cap-seconds 172300 -- /usr/bin/python3 MODIFIED_FILE/scientific_driver.py > SCIENTIFIC_BATCH_STDOUT.txt 2> SCIENTIFIC_BATCH_STDERR.txt < /dev/null &
+PID_LITERAL:
+1101
+
+AS_OF_COMPLETED_RECEIPT_SNAPSHOT (not terminal G3 or RL evidence):
+{
+  "Formal": 0,
+  "active_global_guard_rows": [
+    "authorized_f3_g3_scientific_recovery_v2"
+  ],
+  "as_of_utc": "20261114T050829Z",
+  "author_intents_unique_including_A000": 2,
+  "author_terminal_count": 2,
+  "authors_qualified": 2,
+  "by_method_deadline": {
+    "independent_common_H:12:ONTIME_VALID": 15,
+    "independent_common_H:6:ONTIME_VALID": 15,
+    "native_strong_minmax_ALNS:12:ONTIME_VALID": 15,
+    "native_strong_minmax_ALNS:6:ONTIME_VALID": 15
+  },
+  "completed_author_row_ids": [
+    "A000",
+    "A001"
+  ],
+  "controls_intents": 61,
+  "controls_statuses": {
+    "ONTIME_VALID": 60
+  },
+  "controls_terminal_count": 60,
+  "driver_progress_observed": {
+    "Formal": 0,
+    "authors_failed": 0,
+    "authors_qualified": 2,
+    "authors_reused_without_rerun": 1,
+    "authors_started": 2,
+    "controls_failed": 0,
+    "controls_ontime_valid": 60,
+    "controls_skipped_anchor_or_map": 0,
+    "controls_started": 60,
+    "current_control": "C0060",
+    "current_map": "3x10_o1",
+    "current_wind": "W04E",
+    "deadline_s": 6,
+    "map_failures": 0,
+    "maps_attempted": 24,
+    "maps_generated": 24,
+    "method": "independent_common_H",
+    "pid": 1102,
+    "registered_authors": 72,
+    "registered_controls": 2880,
+    "registered_maps": 24,
+    "state": "CONTROL_RUNNING",
+    "training": 0,
+    "updated_utc": "2026-11-14T05:08:29Z"
+  },
+  "first_four_completed_controls": [
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/common_h/seed_2026111401/budget_6/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.674800390843302,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 6,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "independent_common_H",
+        "row_id": "C0000",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0000",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/strong/seed_2026111401/budget_6/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.7790778242051601,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 6,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "native_strong_minmax_ALNS",
+        "row_id": "C0001",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0001",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/strong/seed_2026111401/budget_12/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.7799925091676414,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 12,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "native_strong_minmax_ALNS",
+        "row_id": "C0002",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0002",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/common_h/seed_2026111401/budget_12/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.6771162138320506,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 12,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "independent_common_H",
+        "row_id": "C0003",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0003",
+      "status": "ONTIME_VALID"
+    }
+  ],
+  "generated_unique_maps": 24,
+  "global_reserved_or_terminal_debit_seconds": 172592.911201666,
+  "guard_proc_state": "S",
+  "live_guard_pid": 1101,
+  "no_new_draws_or_solves_in_snapshot": true,
+  "observed_global_terminal_plus_running_container_cpu_seconds": 452.516222666,
+  "original_A000_solution_sha256": "bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61",
+  "registered_authors": 72,
+  "registered_controls": 2880,
+  "registered_maps": 24,
+  "schema": "as_of_completed_receipt_snapshot_v1",
+  "snapshot_root": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/snapshots/20261114T050829Z",
+  "source_closure_sha256": "8a85a3d5dcf43476b9cc8016b4f81124e8a958320603c0937d7eb66c210879a3",
+  "training": 0
+}
+
+LOCAL READBACK: all774 snapshot file paths opened and SHA256 matched. Three protected STATE hashes matched. Scientific solves and numeric evaluation occurred only on EXECUTION_HOST. Source-only AST/hashes and receipt display/archival occurred on Mac. No training/Formal. No new/resumed agents.
+
+FINAL_AS_OF_SNAPSHOT_READBACK:
+{
+  "Formal": 0,
+  "active_global_guard_rows": [
+    "authorized_f3_g3_scientific_recovery_v2"
+  ],
+  "as_of_utc": "20261114T051056Z",
+  "author_intents_unique_including_A000": 4,
+  "author_terminal_count": 4,
+  "authors_qualified": 4,
+  "by_method_deadline": {
+    "independent_common_H:12:ONTIME_VALID": 37,
+    "independent_common_H:6:ONTIME_VALID": 38,
+    "native_strong_minmax_ALNS:12:ONTIME_VALID": 37,
+    "native_strong_minmax_ALNS:6:ONTIME_VALID": 37
+  },
+  "completed_author_row_ids": [
+    "A000",
+    "A001",
+    "A002",
+    "A003"
+  ],
+  "controls_intents": 150,
+  "controls_statuses": {
+    "ONTIME_VALID": 149
+  },
+  "controls_terminal_count": 149,
+  "driver_progress_observed": {
+    "Formal": 0,
+    "authors_failed": 0,
+    "authors_qualified": 4,
+    "authors_reused_without_rerun": 1,
+    "authors_started": 4,
+    "controls_failed": 0,
+    "controls_ontime_valid": 149,
+    "controls_skipped_anchor_or_map": 0,
+    "controls_started": 149,
+    "current_control": "C0149",
+    "current_map": "3x15_o1",
+    "current_wind": "W04E",
+    "deadline_s": 6,
+    "map_failures": 0,
+    "maps_attempted": 24,
+    "maps_generated": 24,
+    "method": "native_strong_minmax_ALNS",
+    "pid": 1102,
+    "registered_authors": 72,
+    "registered_controls": 2880,
+    "registered_maps": 24,
+    "state": "CONTROL_RUNNING",
+    "training": 0,
+    "updated_utc": "2026-11-14T05:10:55Z"
+  },
+  "first_four_completed_controls": [
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/common_h/seed_2026111401/budget_6/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.674800390843302,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 6,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "independent_common_H",
+        "row_id": "C0000",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0000",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/strong/seed_2026111401/budget_6/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.7790778242051601,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 6,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "native_strong_minmax_ALNS",
+        "row_id": "C0001",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0001",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/strong/seed_2026111401/budget_12/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.7799925091676414,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 12,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "native_strong_minmax_ALNS",
+        "row_id": "C0002",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0002",
+      "status": "ONTIME_VALID"
+    },
+    {
+      "anchor_M_return": 61.910614979852014,
+      "anchor_cost": 189.59341892546774,
+      "controller_decision_file": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2/controls/3x10_o1/W00/common_h/seed_2026111401/budget_12/DECISION.json",
+      "guard_exit_status": 0,
+      "itt_M_return": 48.632453813597934,
+      "itt_cost": 189.34263948843181,
+      "itt_is_virtual_no_improvement": false,
+      "outer_exit_status": 0,
+      "outer_process_observed_elapsed_s": 0.6771162138320506,
+      "raw_output_exists": true,
+      "registration": {
+        "deadline_s": 12,
+        "map_id": "f3-g3-20261114-authorized-v1:opportunity:3x10:o1",
+        "method": "independent_common_H",
+        "row_id": "C0003",
+        "run_seed": 2026111401,
+        "status": "PLANNED_NOT_LAUNCHED",
+        "wind_id": "W00",
+        "wind_m_per_min": [
+          0,
+          0
+        ]
+      },
+      "row_id": "C0003",
+      "status": "ONTIME_VALID"
+    }
+  ],
+  "generated_unique_maps": 24,
+  "global_reserved_or_terminal_debit_seconds": 172592.911201666,
+  "guard_proc_state": "S",
+  "live_guard_pid": 1101,
+  "no_new_draws_or_solves_in_snapshot": true,
+  "observed_global_terminal_plus_running_container_cpu_seconds": 596.641166666,
+  "original_A000_solution_sha256": "bcccb1ebe73693444eb46a6ad52ea57cb9b90eeed2185d3c32c4eb1240a31b61",
+  "registered_authors": 72,
+  "registered_controls": 2880,
+  "registered_maps": 24,
+  "schema": "as_of_completed_receipt_snapshot_v1",
+  "snapshot_root": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/snapshots/20261114T051056Z",
+  "source_closure_sha256": "8a85a3d5dcf43476b9cc8016b4f81124e8a958320603c0937d7eb66c210879a3",
+  "training": 0
+}
+
+FINAL_SNAPSHOT_LOCAL_FILE_SHA256_READBACK: 1704 files matched; exit0. Earlier snapshot retained.
+
+FINAL_COMPLETION_CHECK_20261114:
+{
+  "Formal": 0,
+  "all_complete_process_deadlines_pass": true,
+  "all_row_cleanup_pass": true,
+  "arms": [
+    {
+      "deadline_s": 6,
+      "method": "independent_common_H",
+      "rows": 720
+    },
+    {
+      "deadline_s": 12,
+      "method": "independent_common_H",
+      "rows": 720
+    },
+    {
+      "deadline_s": 6,
+      "method": "native_strong_minmax_ALNS",
+      "rows": 720
+    },
+    {
+      "deadline_s": 12,
+      "method": "native_strong_minmax_ALNS",
+      "rows": 720
+    }
+  ],
+  "as_of_utc": "2026-11-14T10:19:31Z",
+  "audit_source_sha256": "d26fbb120b21d5ecd2101d097e61e686693b05848e20657bf4634995d2a50465",
+  "authors_qualified": 72,
+  "cell_count": 72,
+  "completed_at_beijing": "2026-11-14 17:53:52",
+  "controls_ontime_valid": 2880,
+  "controls_per_cell": 40,
+  "duplicate_terminal_events": 0,
+  "missing_rows": 0,
+  "new_author_solves": 0,
+  "new_control_solves": 0,
+  "new_draws": 0,
+  "outer_driver_exit_status": 0,
+  "outer_guard_cleanup_pass": true,
+  "raw_control_hashes_verified": 2880,
+  "registered_maps": 24,
+  "scientific_G0_G3_adjudication_not_inferred": true,
+  "source_closure_files_verified": 255,
+  "source_closure_sha256": "8a85a3d5dcf43476b9cc8016b4f81124e8a958320603c0937d7eb66c210879a3",
+  "source_or_method_changes": 0,
+  "status": "ALL_72_AUTHOR_AND_2880_CONTROL_TERMINAL_RECEIPTS_VERIFIED",
+  "training": 0
+}
+
+EXACT_AUDIT_COMMAND: /usr/bin/python3 completion_receipt_audit.py
+CWD: /root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2
+INPUT: immutable original registration and all72/2880 existing final records; no new solves
+AUDIT_STDOUT_LITERAL:
+{"Formal": 0, "all_complete_process_deadlines_pass": true, "all_row_cleanup_pass": true, "arms": [{"deadline_s": 6, "method": "independent_common_H", "rows": 720}, {"deadline_s": 12, "method": "independent_common_H", "rows": 720}, {"deadline_s": 6, "method": "native_strong_minmax_ALNS", "rows": 720}, {"deadline_s": 12, "method": "native_strong_minmax_ALNS", "rows": 720}], "as_of_utc": "2026-11-14T10:19:31Z", "audit_source_sha256": "d26fbb120b21d5ecd2101d097e61e686693b05848e20657bf4634995d2a50465", "authors_qualified": 72, "cell_count": 72, "completed_at_beijing": "2026-11-14 17:53:52", "controls_ontime_valid": 2880, "controls_per_cell": 40, "duplicate_terminal_events": 0, "missing_rows": 0, "new_author_solves": 0, "new_control_solves": 0, "new_draws": 0, "outer_driver_exit_status": 0, "outer_guard_cleanup_pass": true, "raw_control_hashes_verified": 2880, "registered_maps": 24, "scientific_G0_G3_adjudication_not_inferred": true, "source_closure_files_verified": 255, "source_closure_sha256": "8a85a3d5dcf43476b9cc8016b4f81124e8a958320603c0937d7eb66c210879a3", "source_or_method_changes": 0, "status": "ALL_72_AUTHOR_AND_2880_CONTROL_TERMINAL_RECEIPTS_VERIFIED", "training": 0}
+
+AUDIT_SUPERVISOR_TERMINAL:
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "completed_batch_receipt_audit_v1",
+  "state": "TERMINAL",
+  "reserved_cpu_seconds": 300.0,
+  "command": [
+    "/usr/bin/python3",
+    "completion_receipt_audit.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2",
+  "pinned_cpu": 0,
+  "container_cpu_start": 17160.559048,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 17606.071836666,
+  "exit_status": 0,
+  "stop_reason": null,
+  "container_cpu_delta_seconds": 5.6468540000023495,
+  "total_debit_seconds": 5.840290000002349,
+  "method_started": 3730082.874575307,
+  "process_exit_observed_elapsed_s": 5.663511624094099,
+  "method_deadline_seconds": null,
+  "complete_process_ontime": true,
+  "wall_seconds": 5.6661188383586705,
+  "remaining_descendants": [],
+  "budget_and_cleanup_pass": true
+}
+
+ARCHIVE_SUPERVISOR_TERMINAL:
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "completed_batch_evidence_archive_v1",
+  "state": "TERMINAL",
+  "reserved_cpu_seconds": 900.0,
+  "command": [
+    "/usr/bin/python3",
+    "../archive_completion_evidence.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2",
+  "pinned_cpu": 0,
+  "container_cpu_start": 17166.461513,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 17611.912126666004,
+  "exit_status": 0,
+  "stop_reason": null,
+  "container_cpu_delta_seconds": 10.836555000001681,
+  "total_debit_seconds": 11.124579000001681,
+  "method_started": 3730136.591477998,
+  "process_exit_observed_elapsed_s": 10.847225612960756,
+  "method_deadline_seconds": null,
+  "complete_process_ontime": true,
+  "wall_seconds": 10.849441677331924,
+  "remaining_descendants": [],
+  "budget_and_cleanup_pass": true
+}
+
+LOCAL_ARCHIVE_SHA_READBACK_PASS: 18821 files, exit0
+FINAL_BUDGET:
+{
+  "final_conservative_debit_seconds": 17623.036705666007,
+  "final_conservative_debit_core_hours": 4.895287973796113,
+  "cap_core_hours": 48,
+  "all_terminal_cleanup_pass": true,
+  "active_rows": [],
+  "includes_prior_300_second_conservative_provision": true,
+  "inner_row_ledger_not_added_again": true
+}
+MAIN_DRIVER_FINAL_STATUS: exit0; 24 maps/72 qualified authors/2880 ONTIME_VALID controls; no active scientific processes. Earlier running snapshots and original failed v1 remain historical evidence. G0 and scientific G3 adjudication not inferred; training/Formal0.

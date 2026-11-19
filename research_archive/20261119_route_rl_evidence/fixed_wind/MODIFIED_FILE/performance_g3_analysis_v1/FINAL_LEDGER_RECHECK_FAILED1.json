@@ -1,0 +1,9 @@
+{
+  "command": [
+    "CONNECTION_COMMAND_REMOVED"
+  ],
+  "exit_status": 1,
+  "stdout_literal": "",
+  "stderr_literal": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n  File \"<string>\", line 6, in <dictcomp>\nKeyError: 'row_id'\n",
+  "scope": "read-only ledger bookkeeping; no data/source/ledger mutation; failed because early engineering events have no row_id"
+}

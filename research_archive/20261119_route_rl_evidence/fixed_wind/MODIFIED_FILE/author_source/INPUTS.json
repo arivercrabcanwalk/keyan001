@@ -1,0 +1,24 @@
+{
+  "rows": [
+    {
+      "id": "dual_station_2d",
+      "input": "inputs/dual_station_2d.txt",
+      "input_sha256": "5ad86b43847aa120c45afc5c5ff8d48942963ae530cdc51305502e6830af59aa",
+      "seed": 2026111301,
+      "timeout_s": 15
+    },
+    {
+      "id": "large_station_2d",
+      "input": "inputs/large_station_2d.txt",
+      "input_sha256": "ef49dd8e68e9edf8ab3581ccbb166cd28878cd1f74616548b9d3616c3cdedbe5",
+      "seed": 2026111302,
+      "timeout_s": 15
+    }
+  ],
+  "schema": "hand_full_main_integration_inputs_v1",
+  "scientific_population": false,
+  "wind": [
+    540,
+    0
+  ]
+}

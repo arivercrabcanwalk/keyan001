@@ -1,0 +1,16 @@
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "f3_g3_performance_analysis_v1",
+  "state": "RUNNING",
+  "reserved_cpu_seconds": 900.0,
+  "command": [
+    "/usr/bin/python3",
+    "MODIFIED_FILE/aggregate.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1",
+  "pinned_cpu": 0,
+  "container_cpu_start": 17177.806455,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 17623.036705666007
+}

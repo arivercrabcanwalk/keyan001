@@ -1,0 +1,465 @@
+--- ORIGINALS/independent_control.py
++++ independent_control.py
+@@ -13,7 +13,7 @@
+ from baselines import minmax_alns as alns
+ from baselines.constant_wind_adapter import ConstantWindCtx
+ from baselines.wind_scorer import score_solution, cost_within_cap
+-from prefix_sampler import rebalance
++from public_t import rebalance_complete
+ from schedule_credit import Context
+ 
+ MODE = 'independent_h_cost'
+@@ -55,9 +55,10 @@
+     return [[list(t.seq) for t in plan.slots[si][slot]] for slot in (0, 1)]
+ 
+ 
+-def projected_slots(instance, anchor, ctx, si, new_slots):
++def projected_slots(instance, anchor, ctx, si, new_slots, deadline, stats):
+     raw = [[list(t.seq) for t in new_slots[slot]] for slot in (0, 1)]
+-    routes = rebalance(instance, si, anchor.station_types[si], raw, anchor.wind)
++    routes, receipt = rebalance_complete(instance, anchor, ctx, si, raw, deadline)
++    stats['public_T_statuses'][receipt['status']] = stats['public_T_statuses'].get(receipt['status'],0)+1
+     return [[ctx.make_trip(si, slot, trip) for trip in routes[slot]] for slot in (0, 1)]
+ 
+ 
+@@ -80,10 +81,11 @@
+                       'candidate_identity_count': 0, 'search_status': 'DEADLINE_EXHAUSTED',
+                       'budget_hit': True, 'deadline': deadline}
+     ctx = ConstantWindCtx(instance, anchor.station_types, dict(anchor.target_station), wind=anchor.wind)
+-    start_routes = rebalance(instance, si, anchor.station_types[si], template['routes'][si], anchor.wind)
++    absolute_deadline = perf_counter()+600.0 if deadline is None else deadline
++    start_routes, initial_T = rebalance_complete(instance, anchor, ctx, si, template['routes'][si], absolute_deadline)
+     plan = station_plan(ctx, template, si, start_routes)
+     seen = {canonical(template['routes'][si])}
+-    stats = {'evaluated': 0, 'accepted': 0, 'candidate_identity_count': 0,
++    stats = {'initial_public_T':initial_T,'public_T_statuses':{},'evaluated': 0, 'accepted': 0, 'candidate_identity_count': 0,
+              'invalid_projections': [], 'trace': [], 'station': si,
+              'initial_M': plan.station_mk(si), 'initial_operating': plan.stot[si],
+              'common_H': H, 'mode': mode, 'global_cap_gate_during_search': False,
+@@ -97,7 +99,7 @@
+ 
+     def register(slots, label):
+         try:
+-            candidate = projected_slots(instance, anchor, ctx, si, slots)
++            candidate = projected_slots(instance, anchor, ctx, si, slots, absolute_deadline, stats)
+         except AssertionError as exc:
+             stats['invalid_projections'].append({'label': label, 'reason': str(exc)})
+             return None
+@@ -114,6 +116,8 @@
+                             'S%d:option%d' % (si, stats['candidate_identity_count']))
+             # Keep full physically legal candidates. Shared H/cap combination
+             # decides what is useful, including temporary single-station cost rises.
++            if budget.over():
++                return None
+             bank.append(row)
+         return candidate
+ 
+--- ORIGINALS/common_h_worker.py
++++ common_h_worker.py
+@@ -1,44 +1,79 @@
+-"""New common-H worker connected to the existing whole-process controller."""
++"""Fixed three-H independent control; one full-map end-to-end deadline."""
+ from pathlib import Path
++from copy import deepcopy
+ import argparse
+-import importlib.util
++import hashlib
+ import json
+ import os
+ import socket
+ import sys
+ import time
+ 
+-assert socket.gethostname() == 'EXECUTION_HOST', 'HN01_ONLY'
+-BASE = Path(__file__).resolve().parent
+-sys.path[:0] = [str(BASE / 'frozen')]
+-from route_method import load_input, payload_for, write_json
++assert socket.gethostname()=='EXECUTION_HOST','HN01_ONLY'
++BASE=Path(__file__).resolve().parent
++sys.path[:0]=[str(BASE/'frozen'),str(BASE)]
++from route_method import load_input,payload_for,write_json
++from schedule_credit import Context
++from baselines import wind_scorer
++import independent_control as control
+ 
++NAMESPACE='f3-g3-20261114-authorized-v1'
++RHO=(1.0,.9,.8)
++
++def run(instance,anchor,run_seed,*,started,budget,reserve=.25):
++    if not 0<budget<float('inf') or not 0<=reserve<budget:
++        raise ValueError('FINITE_BUDGET_AND_SMALLER_RESERVE_REQUIRED')
++    end=started+budget-reserve
++    search_start=time.perf_counter()
++    banks=[[] for _ in instance.stations]
++    seen=[set() for _ in banks]
++    passes=[]
++    for j,rho in enumerate(RHO):
++        cutoff=search_start+(end-search_start)*(j+1)/len(RHO)
++        seed_json=json.dumps({'schema':'f3_g3_common_h_pass_seed_v1','namespace':NAMESPACE,
++                             'run_seed':run_seed,'pass_index':j},sort_keys=True,separators=(',',':'))
++        seed=int.from_bytes(hashlib.sha256(seed_json.encode()).digest()[:8],'big')
++        config={'base_seed':seed,'rounds':2**31-1,'max_evaluations_per_station':2**31-1,
++                'operator_order':['rebalance','merge','relocate','swap','move_trip','split']}
++        result=control.generate(instance,anchor,rho*anchor.makespan,config,deadline=cutoff)
++        added=[]
++        for si,bank in enumerate(result['banks']):
++            n=0
++            for old in bank:
++                key=json.dumps(old['routes'],separators=(',',':'))
++                if key in seen[si]:continue
++                seen[si].add(key);row=deepcopy(old)
++                row['id']=('S%d:anchor'%si if row['anchor'] else 'H%d:'%j+row['id'])
++                banks[si].append(row);n+=1
++            added.append(n)
++        passes.append({'index':j,'rho':rho,'H':rho*anchor.makespan,'seed_u64':str(seed),
++                       'absolute_cutoff':cutoff,'finished_at':time.perf_counter(),
++                       'added_bank_rows':added,'station_searches':result['station_searches']})
++    ctx=Context(banks,sum(instance.fixed(k) for k in anchor.station_types),instance.params.time_cost,anchor.cost)
++    H,selected,cost=ctx.solve()
++    solution=anchor.solution()
++    for si,row in enumerate(selected):solution['routes'][si]=deepcopy(row['routes'])
++    score=wind_scorer.validate_candidate(instance,solution,anchor)
++    assert score['admissible'] and score['cost']==cost and score['M_return']<=H
++    return solution,{'mode':'independent_three_H_union','rho':RHO,'passes':passes,'banks':banks,
++                     'selected_ids':[r['id'] for r in selected],'selected_H':H,
++                     'absolute_final_deadline':started+budget,'reserve_s':reserve,
++                     'shared_parent_pool_used':False}
+ 
+ def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument('--bundle', type=Path, required=True)
+-    parser.add_argument('--result', type=Path, required=True)
+-    parser.add_argument('--budget', type=float, required=True)
+-    parser.add_argument('--reserve-s', type=float, default=0.25)
+-    parser.add_argument('--delay-after-save', type=float, default=0.0)
+-    args = parser.parse_args()
+-    spec = importlib.util.spec_from_file_location('independent_control', BASE / 'MODIFIED_FILE.py')
+-    mod = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(mod)
+-    bundle, instance, anchor, input_hash = load_input(args.bundle)
+-    started = float(os.environ['ROUTE_DELIVERY_STARTED'])
+-    if not (0 < args.budget < float('inf')) or not (0 <= args.reserve_s < args.budget):
+-        raise ValueError('FINITE_POSITIVE_BUDGET_AND_SMALLER_NONNEGATIVE_RESERVE_REQUIRED')
+-    result = mod.generate(instance, anchor, bundle['common_H'], bundle['search'],
+-                          deadline=started + args.budget, delivery_reserve_s=args.reserve_s)
+-    payload = payload_for(instance, anchor, result['delivery']['solution'], input_hash, 'common_h')
+-    payload['details'] = result
+-    payload['method_output_ready_elapsed_s'] = time.perf_counter() - float(os.environ['ROUTE_DELIVERY_STARTED'])
+-    write_json(args.result, payload)
+-    print('METHOD=common_h COMPLETE_OUTPUT_DURABLE=true', flush=True)
+-    if args.delay_after_save:
+-        time.sleep(args.delay_after_save)
++    parser=argparse.ArgumentParser()
++    parser.add_argument('--bundle',type=Path,required=True)
++    parser.add_argument('--result',type=Path,required=True)
++    parser.add_argument('--budget',type=float,required=True)
++    parser.add_argument('--seed',type=int,required=True)
++    args=parser.parse_args()
++    bundle,instance,anchor,input_hash=load_input(args.bundle)
++    started=float(os.environ['ROUTE_DELIVERY_STARTED'])
++    solution,details=run(instance,anchor,args.seed,started=started,budget=args.budget)
++    payload=payload_for(instance,anchor,solution,input_hash,'common_h')
++    payload['details']=details
++    payload['method_output_ready_elapsed_s']=time.perf_counter()-started
++    write_json(args.result,payload)
++    print('METHOD=common_h THREE_H_UNION=true COMPLETE_OUTPUT_DURABLE=true',flush=True)
+ 
+-
+-if __name__ == '__main__':
+-    main()
++if __name__=='__main__':main()
+--- /dev/null
++++ public_t.py
+@@ -0,0 +1,56 @@
++"""Bounded typed intact-trip T; original heading scorer has final authority.
++
++Only complete schedules, never an executed/open physical prefix. Exactness is
++not claimed when the existing ALNS enumerator has >15 trips or hits deadline.
++"""
++from copy import deepcopy
++from time import perf_counter
++from types import SimpleNamespace
++import json
++import math
++
++from baselines import minmax_alns as alns
++from baselines import wind_scorer
++
++
++def rebalance_complete(instance, anchor, ctx, si, raw, deadline):
++    if not math.isfinite(deadline):
++        raise ValueError('FINITE_ABSOLUTE_T_DEADLINE_REQUIRED')
++    template = anchor.solution()
++    template['routes'][si] = deepcopy(raw)
++    source = wind_scorer.score_solution(instance, template, wind=anchor.wind)
++    if source['cost'] is None:
++        raise AssertionError('STRUCTURALLY_INVALID_T_INPUT')
++    ids = sorted(a for slot in raw for tr in slot for a in tr)
++    if ids != sorted(a for a,s in anchor.target_station if s==si):
++        raise AssertionError('T_TARGET_STATION_COVERAGE_CHANGED')
++    best = None
++    def consider(routes):
++        nonlocal best
++        proposal = anchor.solution()
++        proposal['routes'][si] = deepcopy(routes)
++        score = wind_scorer.score_solution(instance, proposal, wind=anchor.wind)
++        if not score['original_feasible'] or not wind_scorer.cost_within_cap(score['cost'], source['cost']):
++            return
++        key = (score['station_makespan'][si], score['cost'], json.dumps(routes,separators=(',',':')))
++        if best is None or key < best[0]:
++            best = key, deepcopy(routes)
++    consider(raw)
++    budget = alns.Budget(perf_counter(), max(0.0,deadline-perf_counter()), perf_counter)
++    if not budget.over():
++        view = SimpleNamespace(station_types=anchor.station_types, solution=lambda:deepcopy(template))
++        lpt = alns.lpt_plan(ctx, view)
++        consider(lpt.to_solution(template)['routes'][si])
++    count = sum(len(slot) for slot in raw)
++    enumerated = False
++    if not budget.over():
++        plan = alns.plan_from_solution(ctx, template)
++        for label, slots in alns.gen_rebalance(ctx, plan, si, budget):
++            consider([[list(tr.seq) for tr in slot] for slot in slots])
++            enumerated = True
++    status = ('APPROXIMATE_OR_TIMEOUT' if count>15 or budget.hit else
++              'BOUNDED_EXISTING_ENUMERATOR_COMPLETED' if enumerated else 'LPT_OR_ORIGINAL')
++    if best is None:
++        raise AssertionError('NO_TYPED_PHYSICALLY_VALID_T_ASSIGNMENT')
++    return best[1], {'trip_count':count,'status':status,'budget_hit':budget.hit,
++                     'cost_cap_reference':'input full schedule, not author local cap'}
+--- /dev/null
++++ full_author_cli.py
+@@ -0,0 +1,104 @@
++"""Full 500/5000 same-wind Main; reuses the fixed recorder's qualification.
++
++Shared anchor generation is charged separately, never a 6/12-second arm.
++No scientific gate is inferred from an individual valid wind witness.
++"""
++from pathlib import Path
++import argparse
++import importlib.util
++import json
++import math
++import re
++import socket
++import sys
++import time
++
++
++def main():
++    assert socket.gethostname()=='EXECUTION_HOST','HN01_ONLY'
++    parser=argparse.ArgumentParser()
++    parser.add_argument('--instance',type=Path,required=True)
++    parser.add_argument('--source-root',type=Path,required=True)
++    parser.add_argument('--build',type=Path,required=True)
++    parser.add_argument('--wind',type=float,nargs=2,required=True)
++    parser.add_argument('--seed',type=int,required=True)
++    parser.add_argument('--out',type=Path,required=True)
++    parser.add_argument('--timeout',type=int,choices=[1800],required=True)
++    parser.add_argument('--expected-input-sha256',required=True)
++    parser.add_argument('--expected-source-manifest-sha256',required=True)
++    args=parser.parse_args()
++    started=time.monotonic()
++    source=args.source_root.resolve();out=args.out.resolve();inp=args.instance.resolve();args.build=args.build.resolve()
++    assert args.build.resolve()==source/'builds/wind_adapted_fixed'
++    assert 0<=args.seed<2**63 and all(math.isfinite(x) for x in args.wind)
++    spec=importlib.util.spec_from_file_location('fixed_fullsolve',source/'validation/fullsolve_driver.py')
++    old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)
++    assert old.ROOT==source
++    man=old.verify_build('wind_adapted_fixed')
++    assert old.sha(args.build/'BUILD_MANIFEST.json')==args.expected_source_manifest_sha256
++    assert old.sha(inp)==args.expected_input_sha256
++    instance=old.problem.read_instance(inp)
++    out.mkdir(parents=True,exist_ok=False)
++    raw_path=out/'reference.json'
++    argv=[str(old.JDK/'bin/java'),*old.VM,f'-Drepro.instance={inp}',
++          f'-Drepro.seed={args.seed}','-Drepro.seconds=0',
++          f'-Drepro.wind.x={args.wind[0]}',f'-Drepro.wind.y={args.wind[1]}',
++          '-Drepro.guard=true',f'-Drepro.output={raw_path}',
++          '-Dengineering.postMainDelayMillis=0','-cp',str(args.build/'classes'),'test1.FullSolveEntry']
++    role='AUTHORIZED_F3_G3_SHARED_FULL_AUTHOR_ATTEMPT'
++    old.save(out/'INTENT.json',{'argv':argv,'instance_sha256':instance.sha256,'wind':args.wind,
++              'seed_i63':str(args.seed),'source_manifest_sha256':old.wind_scorer.identity(man),
++              'run_role':role,'outer_iterations':500,'alns_iterations':5000,
++              'repro_seconds':0,'external_main_timeout_s':1800,'repairs':0})
++    proc,stdout,stderr=old.execute(argv,out,args.timeout,out/'main')
++    result={'status':'REJECTED','process':proc,'main_returned':'FULL_MAIN_RETURNED=true' in stdout,
++            'wind_witness_qualified':False,'scientific_G3_qualified':False,
++            'raw_exists':raw_path.exists(),'final_output_issues':[]}
++    if raw_path.exists():
++        try:
++            raw=old.read(raw_path)
++            text=' '.join(map(str,raw['station_types']))+'\n'
++            for si,station in enumerate(raw['routes']):
++                for di,trips in enumerate(station):
++                    for trip in trips:text+=' '.join(map(str,[si,di,*trip]))+'\n'
++            witness=out/'witness.txt';witness.write_text(text)
++            audit_argv=[str(old.JDK/'bin/java'),*old.VM,
++                   f'-Drepro.wind.x={args.wind[0]}',f'-Drepro.wind.y={args.wind[1]}',
++                   '-cp',str(args.build/'classes'),'test1.WitnessAuditMain',str(inp),str(witness)]
++            ap,ao,_=old.execute(audit_argv,out,2,out/'source_audit')
++            assert ap['exit_status']==0 and not ap['timed_out'],'SOURCE_AUDIT_FAILED'
++            matches=re.findall(r'^FULL_WITNESS_AUDIT=(.+)$',ao,re.M)
++            assert len(matches)==1,'SOURCE_AUDIT_MISSING'
++            audit=json.loads(matches[0]);old.save(out/'SOURCE_SCORE.json',audit)
++            try:
++                final=old.final_main(stdout,instance);old.save(out/'FINAL_MAIN.json',final)
++                result['final_output_issues']=old.compare_final(raw,final,audit)
++            except (ValueError,AssertionError,KeyError) as exc:
++                result['final_output_issues'].append(str(exc))
++            rec={'anchor_identity':'AUTHOR_ALGORITHM_WIND_ADAPTED_FINAL_RECORD_FIXED','run_role':role,
++                 'source_manifest_sha256':old.wind_scorer.identity(man),'source_hashes':man['source_hashes'],
++                 'raw_output_sha256':old.sha(raw_path),'instance_sha256':instance.sha256,
++                 'parameter_sha256':old.wind_scorer.parameter_identity(instance),'source_wind':args.wind,
++                 'source_M_return':audit['M_return'],'source_guard_passed':audit['guard'],
++                 'process':{'exit_status':proc['exit_status'],'timed_out':proc['timed_out']}}
++            old.save(out/'QUALIFICATION_RECORD.json',rec)
++            q=old.qualify_output(instance,raw_path.read_bytes(),rec,wind=args.wind,verified_source_manifest=man)
++            if result['final_output_issues'] or not result['main_returned']:
++                q.update(source_record_qualified=False,wind_witness_qualified=False,issued_cost_anchor=None,
++                         status='FINAL_MAIN_OUTPUT_REJECTED')
++                q['issues']+=result['final_output_issues'] or ['full_main_not_returned']
++            old.save(out/'QUALIFICATION.json',q)
++            result['wind_witness_qualified']=q['wind_witness_qualified']
++            if q['wind_witness_qualified']:
++                old.save(out/'QUALIFIED_WIND_SOLUTION.json',q['wind_solution'])
++                result['status']='FULL_AUTHOR_WIND_WITNESS_QUALIFIED'
++        except Exception as exc:
++            result['audit_exception']={'type':type(exc).__name__,'message':str(exc)}
++    if proc['timed_out']:result['status']='TIMEOUT'
++    result['output_ready_including_audit_s']=time.monotonic()-started
++    result['input_sha256']=instance.sha256
++    old.save(out/'RUN.json',result)
++    print(json.dumps(result,sort_keys=True))
++
++
++if __name__=='__main__':main()
+--- /dev/null
++++ ticket_guard.py
+@@ -0,0 +1,126 @@
++"""Root-only serial CPU-ticket supervisor, including nested-session children.
++
++Read-only container cgroup usage is a conservative process-tree upper bound:
++it additionally charges unrelated container work. Children inherit one CPU.
++The termination reserve is withheld from work, not silently spent on a solve.
++"""
++import argparse
++import ctypes
++import fcntl
++import json
++import os
++from pathlib import Path
++import resource
++import signal
++import socket
++import subprocess
++import sys
++import time
++
++def usage():
++    return int(dict(line.split() for line in Path('/sys/fs/cgroup/cpu.stat').read_text().splitlines())['usage_usec'])/1e6
++
++def append(path,row):
++    with path.open('a') as f:
++        f.write(json.dumps(row,sort_keys=True,allow_nan=False)+'\n');f.flush();os.fsync(f.fileno())
++
++def debit(path):
++    fixed=0.;latest={}
++    if path.exists():
++        for line in path.read_text().splitlines():
++            r=json.loads(line)
++            if r.get('schema')=='ticket_guard_v1':latest[r['row_id']]=r
++            else:fixed+=r.get('total_debit_seconds',0.)
++    return fixed+sum(r.get('total_debit_seconds',r['reserved_cpu_seconds']) for r in latest.values()),latest
++
++def descendants():
++    links={}
++    for p in Path('/proc').iterdir():
++        if not p.name.isdigit():continue
++        try:
++            # comm may contain spaces and parentheses; fields begin after final ).
++            fields=(p/'stat').read_text().rsplit(')',1)[1].split()
++            links[int(p.name)]=int(fields[1])
++        except (FileNotFoundError,ProcessLookupError,PermissionError):continue
++    found=set();parents={os.getpid()}
++    while parents:
++        children={pid for pid,ppid in links.items() if ppid in parents}-found
++        found|=children;parents=children
++    return found
++
++def kill_owned():
++    # Every subprocess here is owned by this one invocation. PR_SET_CHILD_SUBREAPER
++    # keeps grandchildren whose launcher exited, including setsid workers.
++    for pid in sorted(descendants(),reverse=True):
++        try:os.kill(pid,signal.SIGKILL)
++        except ProcessLookupError:pass
++
++def main():
++    assert socket.gethostname()=='EXECUTION_HOST','HN01_ONLY'
++    p=argparse.ArgumentParser()
++    p.add_argument('--ledger',type=Path,required=True)
++    p.add_argument('--out',type=Path,required=True)
++    p.add_argument('--row-id',required=True)
++    p.add_argument('--reserved-cpu-seconds',type=float,required=True)
++    p.add_argument('--wall-cap-seconds',type=float,required=True)
++    p.add_argument('--ticket-cap-seconds',type=float,default=172800)
++    p.add_argument('--termination-reserve-seconds',type=float,default=120)
++    p.add_argument('command',nargs=argparse.REMAINDER)
++    a=p.parse_args();command=a.command[1:] if a.command[:1]==['--'] else a.command
++    assert command and 0<a.termination_reserve_seconds<a.reserved_cpu_seconds<a.ticket_cap_seconds<=172800
++    assert 0<a.wall_cap_seconds<float('inf')
++    a.out.mkdir(parents=True,exist_ok=False);a.ledger.parent.mkdir(parents=True,exist_ok=True)
++    lock=a.ledger.with_suffix(a.ledger.suffix+'.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
++    spent,latest=debit(a.ledger)
++    if a.row_id in latest:raise RuntimeError('ROW_ALREADY_ATTEMPTED_NEVER_RELAUNCH')
++    remaining=a.ticket_cap_seconds-spent
++    if remaining<a.reserved_cpu_seconds+a.termination_reserve_seconds:
++        (a.out/'NOT_STARTED.json').write_text(json.dumps({'status':'BUDGET_NOT_STARTED','remaining':remaining})+'\n');return 3
++    assert ctypes.CDLL(None,use_errno=True).prctl(36,1,0,0,0)==0,'SUBREAPER_REQUIRED'
++    cpu=min(os.sched_getaffinity(0));os.sched_setaffinity(0,{cpu})
++    first=usage();start=time.monotonic()
++    row={'schema':'ticket_guard_v1','row_id':a.row_id,'state':'RUNNING','reserved_cpu_seconds':a.reserved_cpu_seconds,
++         'command':command,'cwd':os.getcwd(),'pinned_cpu':cpu,'container_cpu_start':first,
++         'accounting':'container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance',
++         'termination_reserve_seconds':a.termination_reserve_seconds,'prior_debit_seconds':spent}
++    append(a.ledger,row);(a.out/'INTENT.json').write_text(json.dumps(row,indent=2)+'\n')
++    stop=None
++    with (a.out/'STDOUT.txt').open('wb') as stdout,(a.out/'STDERR.txt').open('wb') as stderr:
++        child=subprocess.Popen(command,stdout=stdout,stderr=stderr,start_new_session=True,
++             env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1'))
++        try:
++            while child.poll() is None:
++                used=usage()-first
++                if used<0:stop='CGROUP_COUNTER_RESET';break
++                if used>=min(a.reserved_cpu_seconds,remaining)-a.termination_reserve_seconds:
++                    stop='CPU_STOP_BEFORE_RESERVED_LIMIT';break
++                if time.monotonic()-start>=a.wall_cap_seconds:
++                    stop='WALL_STOP';break
++                if os.sched_getaffinity(0)!={cpu}:stop='AFFINITY_CHANGED';break
++                time.sleep(.02)
++        finally:
++            if stop or descendants()-{child.pid}:kill_owned()
++            if child.poll() is None:child.kill()
++            child.wait()
++            # Adopted descendants may briefly remain zombies; reap all.
++            limit=time.monotonic()+2
++            while descendants() and time.monotonic()<limit:
++                kill_owned()
++                try:
++                    while os.waitpid(-1,os.WNOHANG)[0]:pass
++                except ChildProcessError:pass
++                time.sleep(.01)
++    delta=usage()-first
++    own=resource.getrusage(resource.RUSAGE_SELF)
++    charged=delta+own.ru_utime+own.ru_stime+.1
++    alive=sorted(descendants())
++    ok=delta>=0 and not alive and charged<=a.reserved_cpu_seconds and spent+charged<=a.ticket_cap_seconds
++    terminal=dict(row,state='TERMINAL',exit_status=child.returncode,stop_reason=stop,
++                  container_cpu_delta_seconds=delta,total_debit_seconds=charged,
++                  wall_seconds=time.monotonic()-start,remaining_descendants=alive,
++                  budget_and_cleanup_pass=ok)
++    (a.out/'TERMINAL.json').write_text(json.dumps(terminal,indent=2)+'\n');append(a.ledger,terminal)
++    print(json.dumps({k:terminal[k] for k in ('row_id','exit_status','stop_reason','total_debit_seconds','remaining_descendants','budget_and_cleanup_pass')},sort_keys=True))
++    return 0 if ok and stop is None and child.returncode==0 else 4 if ok else 5
++
++if __name__=='__main__':sys.exit(main())

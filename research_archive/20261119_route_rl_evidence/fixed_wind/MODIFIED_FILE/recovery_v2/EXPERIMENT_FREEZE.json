@@ -1,0 +1,71 @@
+{
+  "schema": "f3_g3_actual_execution_freeze_v1",
+  "status": "FROZEN_BEFORE_FIRST_POPULATION_DRAW",
+  "user_scope": "latest user explicitly requires full exposure union, full same-wind author acceptance, integrated driver and actual approved-population startup",
+  "owner": "root",
+  "host": "EXECUTION_HOST",
+  "namespace": "f3-g3-20261114-authorized-v1",
+  "maps": 24,
+  "families": 12,
+  "ordinals": [
+    1,
+    2
+  ],
+  "winds_m_per_min": [
+    [
+      0,
+      0
+    ],
+    [
+      240,
+      0
+    ],
+    [
+      0,
+      480
+    ]
+  ],
+  "author_attempts_cap": 72,
+  "author_outer_iterations": 500,
+  "author_alns_iterations": 5000,
+  "author_repro_seconds": 0,
+  "author_external_timeout_s": 1800,
+  "author_canary": "first registered qualified author attempt is real entry acceptance, counted within72; no additional fixture or retry",
+  "controls": [
+    "native_strong_minmax_ALNS",
+    "independent_common_H"
+  ],
+  "solver_run_seeds": [
+    2026111401,
+    2026111402,
+    2026111403,
+    2026111404,
+    2026111405,
+    2026111406,
+    2026111407,
+    2026111408,
+    2026111409,
+    2026111410
+  ],
+  "deadlines_s": [
+    6,
+    12
+  ],
+  "control_registered_rows": 2880,
+  "total_cpu_seconds_cap": 172800,
+  "independent_author_cost_cap_epsilon": 1e-07,
+  "common_H_rho": [
+    1,
+    0.9,
+    0.8
+  ],
+  "timing": "guard sets shared monotonic start immediately before full controller Popen; Python startup, controller/worker imports, input, search, original scorer, durable output and complete process observed exit <= D",
+  "ITT": "all planned rows retained; invalid or late output virtual anchor coding explicitly separated from actual fallback; ineligible anchors skip40 rows, no map replacement",
+  "exposure_union_sha256": "a6fbb6a5fc7cfe7843c6f38a06328fe6c9721ee59eb13f16ed5bbc1789d33da8",
+  "control_order": "existing immutable allocation.planned_control_rows, ordinal-major, fixed rotated winds and balanced two-method order",
+  "resumption": "terminal row never relaunched; interrupted row reserved and not automatically retried; source/interface defect stops and retains evidence",
+  "G0": "AIR2 learning/scalability still pending, this authorized G3 nonRL foundation does not assert RL admission",
+  "training": 0,
+  "Formal": 0,
+  "new_agents": 0
+}

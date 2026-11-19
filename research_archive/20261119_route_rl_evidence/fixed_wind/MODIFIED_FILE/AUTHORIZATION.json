@@ -1,0 +1,57 @@
+{
+  "status": "AUTHORIZED_BY_EXPLICIT_USER_REPLY",
+  "recorded_utc": "2026-11-14T04:13:35.901746+00:00",
+  "user_reply_literal": "批准新增 48 核时、10 个运行 seed（推荐）",
+  "source": "current conversation async question reply",
+  "resource_namespace": "f3-g3-20261114-authorized-v1",
+  "host": "EXECUTION_HOST",
+  "scientific_execution_owner": "root",
+  "cpu_core_hours_total_cap": 48,
+  "cpu_seconds_total_cap": 172800,
+  "core_work_envelope_hours": 43.2,
+  "preparation_validation_reserve_hours": 4.8,
+  "fresh_base_maps": 24,
+  "family_count": 12,
+  "maps_per_family": 2,
+  "winds_m_per_min": [
+    [
+      0,
+      0
+    ],
+    [
+      240,
+      0
+    ],
+    [
+      0,
+      480
+    ]
+  ],
+  "wind_weights": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "new_full_author_attempts_cap": 72,
+  "author_iterations": {
+    "outer_iterations": 500,
+    "alns_iterations": 5000,
+    "timeout_seconds": 1800
+  },
+  "strong_controls": [
+    "native_strong_minmax_ALNS",
+    "independent_common_H"
+  ],
+  "solver_run_seeds_per_control": 10,
+  "full_end_to_end_deadlines_seconds": [
+    6,
+    12
+  ],
+  "control_calls_cap": 2880,
+  "old_balances_reallocated": false,
+  "new_instance_purchase_or_upgrade": false,
+  "training_and_Formal_included": false,
+  "G0": "PENDING_TECHNICAL_MECHANISM_QUALIFICATION",
+  "G3": "PENDING_FROZEN_POPULATION_DRIVER_AND_ACTUAL_QUALIFICATION",
+  "approval_is_not_scientific_pass": true
+}

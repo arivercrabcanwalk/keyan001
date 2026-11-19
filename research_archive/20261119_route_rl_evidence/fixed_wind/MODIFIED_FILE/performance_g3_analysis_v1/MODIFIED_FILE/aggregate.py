@@ -1,0 +1,240 @@
+"""Read-only post-collection F3 summaries; all scientific arithmetic on EXECUTION_HOST."""
+from pathlib import Path
+from collections import Counter, defaultdict
+from statistics import mean, median, stdev
+import csv, hashlib, json, math, platform, random, socket, sys, time
+
+assert socket.gethostname() == 'EXECUTION_HOST', 'HN01_ONLY'
+ROOT = Path(__file__).resolve().parent.parent
+P = ROOT.parent
+R, V = P/'recovery_v2', P/'execution_v1'
+METHODS = ['native_strong_minmax_ALNS', 'independent_common_H']
+DS = [6, 12]
+NAMES = ['ALNS6vsAuthor','H6vsAuthor','ALNS12vsAuthor','H12vsAuthor',
+         'HminusALNS6_author_percentage_points','HminusALNS12_author_percentage_points',
+         'ALNS12minus6_author_percentage_points','H12minus6_author_percentage_points']
+
+def sha(p):
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+INPUTS = {}
+def read(p):
+    p = Path(p); raw = p.read_bytes()
+    INPUTS[str(p)] = hashlib.sha256(raw).hexdigest()
+    return json.loads(raw)
+
+def save(p, x):
+    Path(p).write_text(json.dumps(x, indent=2, sort_keys=True, allow_nan=False)+'\n')
+
+def csvout(p, rows):
+    assert rows
+    with Path(p).open('x', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
+
+def quantile(values, p):
+    a = sorted(values); pos = (len(a)-1)*p; i = int(pos); f = pos-i
+    return a[i] if i == len(a)-1 else a[i]*(1-f)+a[i+1]*f
+
+def wdl(values):
+    return {'win':sum(v>0 for v in values), 'tie':sum(v==0 for v in values), 'loss':sum(v<0 for v in values)}
+
+def canonical_sha(x):
+    return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+
+def main():
+    out = ROOT/'results'; out.mkdir(exist_ok=False)
+    intent = read(ROOT/'ANALYSIS_INTENT.json')
+    reg = read(V/'REGISTRATION.json')
+    audit = read(R/'COMPLETION_RECEIPT_AUDIT.json')
+    pins = read(R/'COMPLETION_ROW_HASHES.json')
+    assert audit['controls_ontime_valid']==2880 and audit['authors_qualified']==72
+    control_pins = {x['row_id']:x for x in pins['controls']}
+    source = ROOT/'MODIFIED_FILE'
+    for x in read(ROOT/'LOCAL_SOURCE_MANIFEST.json'):
+        assert sha(source/x['path'])==x['sha256']
+    maps = reg['maps']; map_by_id = {x['map_id']:x for x in maps}
+    families = list(dict.fromkeys(tuple(x['family']) for x in maps))
+    assert len(maps)==24 and len(families)==12
+    ap = {x['row_id']:x for x in pins['authors']}
+    anchors = {}; author_rows = []
+    for a in reg['authors']:
+        p = Path(ap[a['row_id']]['run_file'])
+        assert sha(p)==ap[a['row_id']]['run_sha256']
+        run = read(p); q = read(p.parent/'QUALIFICATION.json')
+        assert sha(p.parent/'QUALIFICATION.json')==ap[a['row_id']]['qualification_sha256']
+        assert q['wind_witness_qualified'] and q['source_record_qualified'] and run['main_returned']
+        issued = q['issued_cost_anchor']; key = (a['map_id'], a['wind_id'])
+        bundle = read(R/'bundles'/a['short_id']/(a['wind_id']+'.json'))
+        anchors[key] = {'M':issued['M_return'],'cost':issued['cost'], 'solution_sha':canonical_sha(bundle['anchor'])}
+        author_rows.append({'row_id':a['row_id'],'map_id':a['map_id'],'short_id':a['short_id'],
+            'wind_id':a['wind_id'],'M_author':issued['M_return'],'cost_author':issued['cost'],
+            'generation_and_audit_wall_s':run['output_ready_including_audit_s'],
+            'main_wall_s':run['process']['wall_s'],'main_child_cpu_s':run['process']['child_cpu_s']})
+    rows = []; seen = set()
+    for c in reg['controls']:
+        rowid = c['row_id']; assert rowid not in seen; seen.add(rowid)
+        p = R/'guards/controls'/rowid/'FINAL_DELIVERY.json'
+        assert sha(p)==control_pins[rowid]['final_delivery_sha256']
+        final = read(p); dp = Path(final['controller_decision_file'])
+        assert sha(dp)==control_pins[rowid]['decision_sha256']
+        dec = read(dp); a = anchors[c['map_id'],c['wind_id']]
+        assert final['registration']==c and final['status']=='ONTIME_VALID' and dec['accepted']
+        assert final['anchor_M_return']==a['M'] and final['anchor_cost']==a['cost']
+        assert a['M']>0 and a['cost']>0 and dec['raw_validation']['admissible']
+        assert final['itt_M_return']==dec['itt_M_return'] and final['itt_cost']==dec['itt_cost']
+        M, cost = final['itt_M_return'], final['itt_cost']
+        assert M<=a['M'] and cost-a['cost']<=1e-7
+        assert final['outer_process_observed_elapsed_s']<=c['deadline_s']
+        m = map_by_id[c['map_id']]
+        rows.append({'row_id':rowid,'map_id':c['map_id'],'short_id':m['short_id'],
+            'family':'%dx%d'%tuple(m['family']),'ordinal':m['ordinal'],'wind_id':c['wind_id'],
+            'method':c['method'],'deadline_s':c['deadline_s'],'run_seed':c['run_seed'],
+            'status':final['status'],'M_author':a['M'],'M_return':M,'cost_author':a['cost'],'cost':cost,
+            'improvement_author_pct':100*(1-M/a['M']),
+            'cost_change_author_pct':100*(cost/a['cost']-1),
+            'cost_excess_absolute':cost-a['cost'],
+            'outer_complete_wall_s':final['outer_process_observed_elapsed_s'],
+            'exact_anchor_solution':dec['raw_validation']['solution_sha256']==a['solution_sha'],
+            'equal_anchor_M':M==a['M'],'virtual_ITT':final['itt_is_virtual_no_improvement']})
+    assert len(rows)==2880 and not any(x['virtual_ITT'] for x in rows)
+    cells = defaultdict(list)
+    for x in rows:cells[x['map_id'],x['wind_id'],x['method'],x['deadline_s']].append(x)
+    assert len(cells)==288 and set(map(len,cells.values()))=={10}
+    cell_rows = []; cell_lookup = {}
+    for (mi,wi,method,D),a in cells.items():
+        u = [x['improvement_author_pct'] for x in a]
+        d = {'map_id':mi,'short_id':a[0]['short_id'],'family':a[0]['family'],'wind_id':wi,
+             'method':method,'deadline_s':D,'run_seeds':10,'M_author':a[0]['M_author'],
+             'M_return_mean':mean(x['M_return'] for x in a),'improvement_author_pct':mean(u),
+             'run_seed_improvement_sd_pct':stdev(u),'run_seed_improvement_min_pct':min(u),
+             'run_seed_improvement_max_pct':max(u),'cost_change_author_pct':mean(x['cost_change_author_pct'] for x in a),
+             'outer_complete_wall_mean_s':mean(x['outer_complete_wall_s'] for x in a)}
+        cell_rows.append(d); cell_lookup[mi,wi,method,D] = d
+    map_rows=[]; U={}
+    for m in maps:
+        mi=m['map_id']
+        for method in METHODS:
+            for D in DS:
+                a=[x for x in cell_rows if x['map_id']==mi and x['method']==method and x['deadline_s']==D]
+                assert len(a)==3
+                U[mi,method,D]=mean(x['improvement_author_pct'] for x in a)
+                map_rows.append({'map_id':mi,'short_id':m['short_id'],'family':'%dx%d'%tuple(m['family']),
+                    'method':method,'deadline_s':D,'wind_count':3,'total_run_rows':30,
+                    'improvement_author_pct':U[mi,method,D],
+                    'cost_change_author_pct':mean(x['cost_change_author_pct'] for x in a),
+                    'mean_within_cell_seed_sd_pct':mean(x['run_seed_improvement_sd_pct'] for x in a)})
+    vectors=[]; map_effects=[]; indices=defaultdict(list)
+    for i,m in enumerate(maps):
+        mi=m['map_id']; a6,h6,a12,h12=[U[mi,M,D] for D in DS for M in METHODS]
+        vec=[a6,h6,a12,h12,h6-a6,h12-a12,a12-a6,h12-h6]
+        vectors.append(vec); indices[tuple(m['family'])].append(i)
+        map_effects.append({'map_id':mi,'short_id':m['short_id'],'family':'%dx%d'%tuple(m['family']),**dict(zip(NAMES,vec))})
+    assert all(len(x)==2 for x in indices.values())
+    rng=random.Random(intent['intervals']['bootstrap_seed']); B=intent['intervals']['bootstrap_reps']
+    boots=[[] for _ in NAMES]
+    for _ in range(B):
+        acc=[0.0]*8
+        for family in families:
+            ix=indices[family]
+            for k in (ix[rng.randrange(2)],ix[rng.randrange(2)]):
+                for j,v in enumerate(vectors[k]):acc[j]+=v
+        for j,v in enumerate(acc):boots[j].append(v/24)
+    contrasts=[]
+    for j,name in enumerate(NAMES):
+        vals=[x[j] for x in vectors]; lofo=[]
+        for family in families:
+            lofo.append(mean(vectors[i][j] for i,m in enumerate(maps) if tuple(m['family'])!=family))
+        contrasts.append({'name':name,'mean_pct_or_pp':mean(vals),'median_pct_or_pp':median(vals),
+            'map_sd_pct_or_pp':stdev(vals),'map_wdl_positive':wdl(vals),
+            'exploratory_pointwise95_percentile_CI':[quantile(boots[j],.025),quantile(boots[j],.975)],
+            'exploratory_bonferroni8_percentile_CI':[quantile(boots[j],.05/16),quantile(boots[j],1-.05/16)],
+            'leave_one_family_out_mean_range':[min(lofo),max(lofo)]})
+    summary=[]
+    for method in METHODS:
+        for D in DS:
+            ar=[x for x in rows if x['method']==method and x['deadline_s']==D]
+            mr=[x for x in map_rows if x['method']==method and x['deadline_s']==D]
+            times=[x['outer_complete_wall_s'] for x in ar]
+            summary.append({'method':method,'deadline_s':D,'rows':len(ar),'maps':24,'cells':72,
+                'mean_improvement_author_pct':mean(x['improvement_author_pct'] for x in mr),
+                'median_map_improvement_author_pct':median(x['improvement_author_pct'] for x in mr),
+                'map_wdl_vs_author':wdl([x['improvement_author_pct'] for x in mr]),
+                'row_wdl_vs_author':wdl([x['improvement_author_pct'] for x in ar]),
+                'mean_cost_change_author_pct':mean(x['cost_change_author_pct'] for x in ar),
+                'maximum_cost_excess_absolute':max(x['cost_excess_absolute'] for x in ar),
+                'mean_within_cell_seed_sd_pct':mean(x['run_seed_improvement_sd_pct'] for x in cell_rows if x['method']==method and x['deadline_s']==D),
+                'outer_complete_wall_mean_s':mean(times),'outer_complete_wall_median_s':median(times),
+                'outer_complete_wall_p90_s':quantile(times,.90),'outer_complete_wall_max_s':max(times),
+                'exact_anchor_solution_rows':sum(x['exact_anchor_solution'] for x in ar),
+                'equal_anchor_M_rows':sum(x['equal_anchor_M'] for x in ar),'virtual_ITT_rows':0})
+    family_rows=[]; wind_rows=[]
+    for label,key,outrows in [('family','family',family_rows),('wind','wind_id',wind_rows)]:
+        values=list(dict.fromkeys(x[key] for x in rows))
+        for value in values:
+            for method in METHODS:
+                for D in DS:
+                    ar=[x for x in rows if x[key]==value and x['method']==method and x['deadline_s']==D]
+                    outrows.append({label:value,'method':method,'deadline_s':D,'rows':len(ar),
+                        'base_maps':len({x['map_id'] for x in ar}),
+                        'mean_improvement_author_pct':mean(x['improvement_author_pct'] for x in ar),
+                        'mean_cost_change_author_pct':mean(x['cost_change_author_pct'] for x in ar),
+                        'outer_complete_wall_mean_s':mean(x['outer_complete_wall_s'] for x in ar)})
+    pairs=[]; deploy=[]
+    row_lookup={(x['map_id'],x['wind_id'],x['method'],x['deadline_s'],x['run_seed']):x for x in rows}
+    for D in DS:
+        permap=[]; seed_deltas=[]
+        for m in maps:
+            rel=[]
+            for wi in ['W00','W04E','W08N']:
+                ac=cell_lookup[m['map_id'],wi,METHODS[0],D];hc=cell_lookup[m['map_id'],wi,METHODS[1],D]
+                rel.append(100*(1-hc['M_return_mean']/ac['M_return_mean']))
+                for seed in range(2026111401,2026111411):
+                    aa=row_lookup[m['map_id'],wi,METHODS[0],D,seed];hh=row_lookup[m['map_id'],wi,METHODS[1],D,seed]
+                    seed_deltas.append(aa['M_return']-hh['M_return'])
+            permap.append(mean(rel))
+        pairs.append({'deadline_s':D,'commonH_vs_ALNS_relative_improvement_pct_mean24maps':mean(permap),
+            'map_wdl_using_mean_anchor_normalized_improvement':wdl([U[m['map_id'],METHODS[1],D]-U[m['map_id'],METHODS[0],D] for m in maps]),
+            'same_seed_index_pair_wdl_descriptive_only':wdl(seed_deltas)})
+        scores={M:mean(U[m['map_id'],M,D] for m in maps) for M in METHODS}
+        choice=METHODS[1] if scores[METHODS[1]]>scores[METHODS[0]] else METHODS[0]
+        deploy.append({'deadline_s':D,'method':choice,'calibration_mean_improvement_author_pct':scores[choice],
+            'global_only':True,'mandatory_future_RL_comparators':METHODS})
+    for name,data in [('ALL_REGISTERED_SEED_ROWS.csv',rows),('AUTHOR_ROWS.csv',author_rows),
+        ('CELL_SEED_SUMMARY.csv',cell_rows),('MAP_METHOD_SUMMARY.csv',map_rows),
+        ('ALL_24_MAP_EFFECTS.csv',map_effects),('FAMILY_DESCRIPTIVE.csv',family_rows),('WIND_DESCRIPTIVE.csv',wind_rows)]:csvout(out/name,data)
+    result={'status':'PERFORMANCE_SUMMARY_COMPLETE_POST_HOC_EXPLORATORY_INTERVALS',
+        'created_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'software':{'python':sys.version,'platform':platform.platform(),'libraries':'Python standard library only'},
+        'independent_base_maps':24,'families':12,'maps_per_family':2,'winds_per_map':3,'nonRL_run_seeds':10,
+        'author_count':72,'control_rows':2880,'missing_rows':0,'all_ITT_equals_valid_only':True,
+        'analysis_intent_sha256':sha(ROOT/'ANALYSIS_INTENT.json'),'source_sha256':sha(Path(__file__)),
+        'inference_status':'chosen after data collection/opening; exploratory only; no pvalues or confirmatory superiority claim',
+        'bootstrap':intent['intervals'],'eight_contrasts':contrasts,'method_budget_summary':summary,
+        'paired_method_comparisons':pairs,'deployment_selection':deploy,
+        'author_generation':{'shared_anchor_conditioning':'single full author seed permapwind; generation cost outside6/12control budget, so conditional refinement not end-to-end author comparison',
+            'total_generation_and_audit_wall_s':sum(x['generation_and_audit_wall_s'] for x in author_rows),
+            'total_main_child_cpu_s':sum(x['main_child_cpu_s'] for x in author_rows)},
+        'claim_limits':['no RL runs or learning benefit','no global optimality or residual RL headroom proof','only3fixed winds, not17windgeneralization','family n2 makes bootstrap calibration fragile','deployment selection is calibration on these exposed maps, not unbiased validation'],
+        'new_maps':0,'new_author_solves':0,'new_control_solves':0,'training':0,'Formal':0}
+    save(out/'SUMMARY.json',result); save(out/'INPUT_FILE_HASHES.json',INPUTS)
+    save(out/'DEPLOYMENT_BASELINE_FREEZE.json',{'status':'FROZEN_POST_G3_CALIBRATION_BEFORE_ANY_NEW_DEV','rules':intent['deployment_selection_rule'],
+        'choices':deploy,'analysis_summary_sha256':sha(out/'SUMMARY.json'),'population_exposed':True,
+        'cannot_use_selection_population_as_newDEV_orFormal':True,'both_controls_remain_mandatory':True})
+    text=['# 固定风性能汇总（事后探索性分析）','',
+        '24独立底图×3固定风×10运行seed，所有2880行保留；ITT与valid-only相同。',
+        '作者完整解为共同初始化及成本cap；下列是条件精修收益，作者生成成本另列，不是端到端同预算胜作者。','',
+        '|方法|预算s|相对作者平均M_return降幅%|地图胜/平/负|平均完整进程s|',
+        '|---|---:|---:|---|---:|']
+    for x in summary:
+        w=x['map_wdl_vs_author'];text.append('|%s|%s|%.6f|%s/%s/%s|%.6f|'%(x['method'],x['deadline_s'],x['mean_improvement_author_pct'],w['win'],w['tie'],w['loss'],x['outer_complete_wall_mean_s']))
+    text += ['', '## 全部八项地图级效应与探索性区间','', '|效应|均值%或百分点|逐项95%区间|八项Bonferroni区间|','|---|---:|---|---|']
+    for x in contrasts:text.append('|%s|%.6f|%s|%s|'%(x['name'],x['mean_pct_or_pp'],x['exploratory_pointwise95_percentile_CI'],x['exploratory_bonferroni8_percentile_CI']))
+    text += ['', '所有区间在数据完成后首次指定，不称预注册确认性检验。分层地图cluster bootstrap为每family重采2张地图，完整保留风/seed/方法/预算块；family内n=2，区间覆盖稳定性有限。未计算p值。',
+        '', '## 后续全局部署基线（本批用于校准）','']
+    for x in deploy:text.append('- %ss：%s；同时继续保留两强控制作为未来RL必比对象。'%(x['deadline_s'],x['method']))
+    text += ['', '逐图/逐风挑最好方法与best-of10均不作部署主基线；本24图已暴露，后续DEV/Formal使用新身份。',
+        'G0/AIR2学习增量、训练、消融与Formal未由本汇总通过。']
+    (out/'PERFORMANCE_SUMMARY_ZH.md').write_text('\n'.join(text)+'\n')
+    print(json.dumps({'status':result['status'],'method_budget_summary':summary,
+        'paired_method_comparisons':pairs,'deployment_selection':deploy,'eight_contrasts':contrasts},sort_keys=True),flush=True)
+
+if __name__=='__main__':main()

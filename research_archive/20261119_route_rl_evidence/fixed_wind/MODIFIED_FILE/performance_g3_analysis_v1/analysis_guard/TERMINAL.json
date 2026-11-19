@@ -1,0 +1,27 @@
+{
+  "schema": "ticket_guard_v1",
+  "row_id": "f3_g3_performance_analysis_v1",
+  "state": "TERMINAL",
+  "reserved_cpu_seconds": 900.0,
+  "command": [
+    "/usr/bin/python3",
+    "MODIFIED_FILE/aggregate.py"
+  ],
+  "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1",
+  "pinned_cpu": 0,
+  "container_cpu_start": 17177.806455,
+  "accounting": "container cgroup upper bound plus supervisor self CPU and 0.1s terminal allowance",
+  "termination_reserve_seconds": 120,
+  "prior_debit_seconds": 17623.036705666007,
+  "exit_status": 0,
+  "stop_reason": null,
+  "container_cpu_delta_seconds": 3.6401089999999385,
+  "total_debit_seconds": 3.8304049999999386,
+  "method_started": 3730661.157892898,
+  "process_exit_observed_elapsed_s": 3.6523579536005855,
+  "method_deadline_seconds": null,
+  "complete_process_ontime": true,
+  "wall_seconds": 3.6549759982153773,
+  "remaining_descendants": [],
+  "budget_and_cleanup_pass": true
+}

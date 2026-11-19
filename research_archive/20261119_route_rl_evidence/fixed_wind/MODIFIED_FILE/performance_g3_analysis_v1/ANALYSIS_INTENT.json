@@ -1,0 +1,54 @@
+{
+  "status": "STARTED_POST_COLLECTION_ANALYSIS_NOT_PREREGISTERED_INFERENCE",
+  "created_utc": "2026-11-14T10:26:34.221025+00:00",
+  "scope": "existing24maps72author2880control receipts only; no new solve/train/map",
+  "host": "EXECUTION_HOST",
+  "owner": "root",
+  "source_root": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/recovery_v2",
+  "registration_root": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/execution_v1",
+  "independent_unit": "24base maps;12fixed families x2;wind/solver seeds repeated within map",
+  "estimand": "U_map=mean_over3winds_and10seeds[100*(1-M_return/M_author)];mean24maps=equal12familyweights",
+  "methods": [
+    "native_strong_minmax_ALNS",
+    "independent_common_H"
+  ],
+  "budgets_s": [
+    6,
+    12
+  ],
+  "all_rows_ITT": "retain all2880;valid-only also report;no row/map/seed selection",
+  "WDL": "literal original binary64 strict comparisons, no new tie tolerance",
+  "intervals": {
+    "status": "POST_HOC_EXPLORATORY; original protocol requested before-opening freeze but no numerical settings found in actual freeze",
+    "bootstrap_reps": 50000,
+    "bootstrap_seed": 2026111419,
+    "method": "paired family-stratified map-cluster percentile bootstrap;resample2maps with replacement within each12fixedfamilies, preserving whole blocks",
+    "pointwise_level": 0.95,
+    "comparison_family": 8,
+    "simultaneous_report": "Bonferroni percentile intervals of level1-0.05/8 each;approximate coverage and n2perfamily limitation explicit",
+    "p_values": "not computed; no randomized algorithm labels or preregistered inferential tests"
+  },
+  "eight_contrasts": [
+    "ALNS6vsAuthor",
+    "H6vsAuthor",
+    "ALNS12vsAuthor",
+    "H12vsAuthor",
+    "HminusALNS6_author_percentage_points",
+    "HminusALNS12_author_percentage_points",
+    "ALNS12minus6_author_percentage_points",
+    "H12minus6_author_percentage_points"
+  ],
+  "deployment_selection_rule": {
+    "status": "freeze now before aggregate, postcollection calibration;futureDEV/Formal must remain fresh",
+    "rule": "one global method perbudget, smallest mean normalizedM across24maps×3winds×10seeds;exactties prefer nativeALNS; retain bothstrongcontrols as mandatory future RL comparisons",
+    "forbidden": "permap/perwind/perseed best-of-two as deployable baseline;best-of10 mainendpoint"
+  },
+  "G3": "adjudicate only F3 author/strongcontrol qualification/opportunity, not RLsuccess;no new5%/0.3% cutoff",
+  "G0": "independent stillnotpassed;notchanged byanalysis",
+  "resource": "sameapproved48CPUh ticket; reserve900CPU seconds and240wallseconds for analysis; separate bounded independent audit; no solverreruns",
+  "original_snapshot_hashes": {
+    "STATE.json": "3177ee27deb5d58be502d36afec200fcadc6a7a33e2fc089251c8bc72ed8b893",
+    "REPORT_ZH.md": "b50cd16832a88ebe9fb9349d47d99903b133bfed11b65c2330438a59a1b130fa",
+    "LATEST_STATUS.md": "e19a740fceb6ddbd927605ca2d38ba3e7502d85c9b7eaa4d41245d5990eaedbd"
+  }
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "phase": "BASELINE",
+    "command": [
+      "/usr/bin/python3",
+      "-c",
+      "import json;from pathlib import Path;s=json.loads(Path('ORIGINALS/STATE.json').read_text());assert s['G3'].startswith('SCIENTIFIC_ADJUDICATION_PENDING');print('ORIGINAL_G3_ADJUDICATION_PENDING')"
+    ],
+    "input": "independent original status/source proof copy only; no scientific solve",
+    "stdout_literal": "ORIGINAL_G3_ADJUDICATION_PENDING\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "ROLLBACK",
+    "command": [
+      "/bin/sh",
+      "ROLLBACK.sh",
+      "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1/ROLLBACK_COPY"
+    ],
+    "input": "independent original status/source proof copy only; no scientific solve",
+    "stdout_literal": "PRE_ANALYSIS_PENDING_STATE_AND_ABSENT_AGGREGATOR_RESTORED\n",
+    "stderr_literal": "",
+    "exit_status": 0
+  },
+  {
+    "phase": "MODIFIED",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/aggregate.py"
+    ],
+    "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1",
+    "input": "Existing registered FINAL_DELIVERY and author records only; no new solve",
+    "stdout_literal": "{\"deployment_selection\": [{\"calibration_mean_improvement_author_pct\": 15.726630078264423, \"deadline_s\": 6, \"global_only\": true, \"mandatory_future_RL_comparators\": [\"native_strong_minmax_ALNS\", \"independent_common_H\"], \"method\": \"native_strong_minmax_ALNS\"}, {\"calibration_mean_improvement_author_pct\": 15.727271282897872, \"deadline_s\": 12, \"global_only\": true, \"mandatory_future_RL_comparators\": [\"native_strong_minmax_ALNS\", \"independent_common_H\"], \"method\": \"native_strong_minmax_ALNS\"}], \"eight_contrasts\": [{\"exploratory_bonferroni8_percentile_CI\": [11.110236760926046, 20.338115604799338], \"exploratory_pointwise95_percentile_CI\": [12.300222985292299, 19.158624484403024], \"leave_one_family_out_mean_range\": [14.694811006887631, 16.955508217815282], \"map_sd_pct_or_pp\": 11.312717858836216, \"map_wdl_positive\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"mean_pct_or_pp\": 15.726630078264423, \"median_pct_or_pp\": 14.214143190981199, \"name\": \"ALNS6vsAuthor\"}, {\"exploratory_bonferroni8_percentile_CI\": [8.405901333879276, 17.546869397795682], \"exploratory_pointwise95_percentile_CI\": [9.600019473623314, 16.281867537749736], \"leave_one_family_out_mean_range\": [12.35121504789803, 13.811480330799071], \"map_sd_pct_or_pp\": 10.134688910046334, \"map_wdl_positive\": {\"loss\": 0, \"tie\": 3, \"win\": 21}, \"mean_pct_or_pp\": 12.958402934238562, \"median_pct_or_pp\": 14.631953586768837, \"name\": \"H6vsAuthor\"}, {\"exploratory_bonferroni8_percentile_CI\": [11.110236760926043, 20.339398014066234], \"exploratory_pointwise95_percentile_CI\": [12.300848159809913, 19.159444588882018], \"leave_one_family_out_mean_range\": [14.695510502851393, 16.956207713779044], \"map_sd_pct_or_pp\": 11.31363817567842, \"map_wdl_positive\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"mean_pct_or_pp\": 15.727271282897872, \"median_pct_or_pp\": 14.214143190981199, \"name\": \"ALNS12vsAuthor\"}, {\"exploratory_bonferroni8_percentile_CI\": [9.897102398630487, 19.74455836735538], \"exploratory_pointwise95_percentile_CI\": [11.227310077977833, 18.51131373495548], \"leave_one_family_out_mean_range\": [14.385575271897165, 15.887592801851271], \"map_sd_pct_or_pp\": 10.966540886897713, \"map_wdl_positive\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"mean_pct_or_pp\": 14.86150603270308, \"median_pct_or_pp\": 15.564942958279307, \"name\": \"H12vsAuthor\"}, {\"exploratory_bonferroni8_percentile_CI\": [-4.726049040585112, -0.7903936111613411], \"exploratory_pointwise95_percentile_CI\": [-4.231389332550913, -1.3076590753264656], \"leave_one_family_out_mean_range\": [-3.3605271960098215, -2.2009014363451893], \"map_sd_pct_or_pp\": 5.732618295018826, \"map_wdl_positive\": {\"loss\": 14, \"tie\": 6, \"win\": 4}, \"mean_pct_or_pp\": -2.768227144025861, \"median_pct_or_pp\": -1.0982500186750548, \"name\": \"HminusALNS6_author_percentage_points\"}, {\"exploratory_bonferroni8_percentile_CI\": [-2.430598419874026, 0.702626539032818], \"exploratory_pointwise95_percentile_CI\": [-2.009466272126409, 0.28878543551474334], \"leave_one_family_out_mean_range\": [-1.285114220921383, -0.1883329734750618], \"map_sd_pct_or_pp\": 4.626907075213266, \"map_wdl_positive\": {\"loss\": 9, \"tie\": 7, \"win\": 8}, \"mean_pct_or_pp\": -0.8657652501947922, \"median_pct_or_pp\": 0.0, \"name\": \"HminusALNS12_author_percentage_points\"}, {\"exploratory_bonferroni8_percentile_CI\": [-1.480297366166875e-16, 0.0012824092668974885], \"exploratory_pointwise95_percentile_CI\": [-1.1102230246251565e-16, 0.0012824092668974514], \"leave_one_family_out_mean_range\": [-1.2111523905001707e-16, 0.0006994959637622665], \"map_sd_pct_or_pp\": 0.003141248345315509, \"map_wdl_positive\": {\"loss\": 2, \"tie\": 20, \"win\": 2}, \"mean_pct_or_pp\": 0.0006412046334486702, \"median_pct_or_pp\": 0.0, \"name\": \"ALNS12minus6_author_percentage_points\"}, {\"exploratory_bonferroni8_percentile_CI\": [0.7389971488158391, 3.102792659155396], \"exploratory_pointwise95_percentile_CI\": [0.9419520550416075, 2.8642541418874274], \"leave_one_family_out_mean_range\": [1.2571297502782688, 2.0761124710522005], \"map_sd_pct_or_pp\": 3.7186672773865266, \"map_wdl_positive\": {\"loss\": 0, \"tie\": 15, \"win\": 9}, \"mean_pct_or_pp\": 1.9031030984645174, \"median_pct_or_pp\": 0.0, \"name\": \"H12minus6_author_percentage_points\"}], \"method_budget_summary\": [{\"cells\": 72, \"deadline_s\": 6, \"equal_anchor_M_rows\": 220, \"exact_anchor_solution_rows\": 127, \"map_wdl_vs_author\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"maps\": 24, \"maximum_cost_excess_absolute\": 1.1368683772161603e-13, \"mean_cost_change_author_pct\": -0.201370944448618, \"mean_improvement_author_pct\": 15.726630078264423, \"mean_within_cell_seed_sd_pct\": 0.45773756862953097, \"median_map_improvement_author_pct\": 14.214143190981199, \"method\": \"native_strong_minmax_ALNS\", \"outer_complete_wall_max_s\": 5.230257473886013, \"outer_complete_wall_mean_s\": 3.4872472972065833, \"outer_complete_wall_median_s\": 3.8916868397500366, \"outer_complete_wall_p90_s\": 5.197379567101597, \"row_wdl_vs_author\": {\"loss\": 0, \"tie\": 220, \"win\": 500}, \"rows\": 720, \"virtual_ITT_rows\": 0}, {\"cells\": 72, \"deadline_s\": 12, \"equal_anchor_M_rows\": 219, \"exact_anchor_solution_rows\": 125, \"map_wdl_vs_author\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"maps\": 24, \"maximum_cost_excess_absolute\": 1.1368683772161603e-13, \"mean_cost_change_author_pct\": -0.2065400652837953, \"mean_improvement_author_pct\": 15.727271282897872, \"mean_within_cell_seed_sd_pct\": 0.45775206277284175, \"median_map_improvement_author_pct\": 14.214143190981199, \"method\": \"native_strong_minmax_ALNS\", \"outer_complete_wall_max_s\": 10.440764621365815, \"outer_complete_wall_mean_s\": 5.03787830825313, \"outer_complete_wall_median_s\": 3.830313230631873, \"outer_complete_wall_p90_s\": 10.35500241802074, \"row_wdl_vs_author\": {\"loss\": 0, \"tie\": 219, \"win\": 501}, \"rows\": 720, \"virtual_ITT_rows\": 0}, {\"cells\": 72, \"deadline_s\": 6, \"equal_anchor_M_rows\": 262, \"exact_anchor_solution_rows\": 150, \"map_wdl_vs_author\": {\"loss\": 0, \"tie\": 3, \"win\": 21}, \"maps\": 24, \"maximum_cost_excess_absolute\": 0.0, \"mean_cost_change_author_pct\": -0.07087977871304675, \"mean_improvement_author_pct\": 12.958402934238562, \"mean_within_cell_seed_sd_pct\": 0.08808414977409663, \"median_map_improvement_author_pct\": 14.631953586768837, \"method\": \"independent_common_H\", \"outer_complete_wall_max_s\": 5.91358958510682, \"outer_complete_wall_mean_s\": 4.444468366587534, \"outer_complete_wall_median_s\": 5.6917343160603195, \"outer_complete_wall_p90_s\": 5.874697593273595, \"row_wdl_vs_author\": {\"loss\": 0, \"tie\": 262, \"win\": 458}, \"rows\": 720, \"virtual_ITT_rows\": 0}, {\"cells\": 72, \"deadline_s\": 12, \"equal_anchor_M_rows\": 220, \"exact_anchor_solution_rows\": 130, \"map_wdl_vs_author\": {\"loss\": 0, \"tie\": 2, \"win\": 22}, \"maps\": 24, \"maximum_cost_excess_absolute\": 0.0, \"mean_cost_change_author_pct\": -0.08526064766030812, \"mean_improvement_author_pct\": 14.86150603270308, \"mean_within_cell_seed_sd_pct\": 0.41340039135224493, \"median_map_improvement_author_pct\": 15.564942958279307, \"method\": \"independent_common_H\", \"outer_complete_wall_max_s\": 11.93111622100696, \"outer_complete_wall_mean_s\": 7.62363034636623, \"outer_complete_wall_median_s\": 9.727167987963185, \"outer_complete_wall_p90_s\": 11.875132716167718, \"row_wdl_vs_author\": {\"loss\": 0, \"tie\": 220, \"win\": 500}, \"rows\": 720, \"virtual_ITT_rows\": 0}], \"paired_method_comparisons\": [{\"commonH_vs_ALNS_relative_improvement_pct_mean24maps\": -4.285359441533183, \"deadline_s\": 6, \"map_wdl_using_mean_anchor_normalized_improvement\": {\"loss\": 14, \"tie\": 6, \"win\": 4}, \"same_seed_index_pair_wdl_descriptive_only\": {\"loss\": 284, \"tie\": 342, \"win\": 94}}, {\"commonH_vs_ALNS_relative_improvement_pct_mean24maps\": -1.6722758617742746, \"deadline_s\": 12, \"map_wdl_using_mean_anchor_normalized_improvement\": {\"loss\": 9, \"tie\": 7, \"win\": 8}, \"same_seed_index_pair_wdl_descriptive_only\": {\"loss\": 223, \"tie\": 368, \"win\": 129}}], \"status\": \"PERFORMANCE_SUMMARY_COMPLETE_POST_HOC_EXPLORATORY_INTERVALS\"}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "terminal_receipt": "analysis_guard/TERMINAL.json",
+    "budget_and_cleanup_pass": true
+  },
+  {
+    "phase": "MODIFIED_INDEPENDENT_AUDIT",
+    "command": [
+      "/usr/bin/python3",
+      "MODIFIED_FILE/audit_results.py"
+    ],
+    "cwd": "/root/rivermind-data/liu_f3_g3_authorized_20261114_v1/performance_g3_analysis_v1",
+    "input": "Existing registered FINAL_DELIVERY and author records only; no new solve",
+    "stdout_literal": "{\"Formal\": 0, \"all_registered_rows\": 2880, \"all_seeds_preserved\": true, \"audit_source_sha256\": \"1e6756dd6c7e52a2dbd4f20ddfc67af662cb69d2291111a6d4bb74ad4c842a95\", \"eight_contrast_means_verified\": 8, \"global_deployment_choices_verified\": 2, \"independent_maps\": 24, \"new_solves\": 0, \"status\": \"INDEPENDENT_ORIGINAL_RECORD_FSUM_AUDIT_PASS\", \"summary_sha256\": \"611a6214fb60393fc808cd8e76c5d7b5676b832f1cfa6a9126edd5c7b0b4ee2d\", \"training\": 0}\n",
+    "stderr_literal": "",
+    "exit_status": 0,
+    "terminal_receipt": "independent_audit_guard/TERMINAL.json",
+    "budget_and_cleanup_pass": true
+  }
+]
