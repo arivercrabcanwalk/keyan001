@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+baselines/tsalns_java/build/
+runs_*/
+results_*/
+logs/
+.markers_*/
+PROGRESS_SERVER.md
+*_results.tar.gz
+data/plans/train_ts_*.jsonl
+data/plans/fresh_ts_*.jsonl
+data/plans/*.partial
