@@ -1,5 +1,7 @@
 # 论文 A · 天气下的巡检路线
 
+> **日常跑实验**：从仓库根运行 `bash run_experiments.sh --part A`。见[两套独立实验与结果](../rlv3_review/TWO_EXPERIMENTS_ZH.md)。下文的旧协议入口是独立流程，并非本命令的前置条件。
+
 > 固定风 A 的当前训练入口与准入要求见 [联合路线训练说明](../rlv3_weather/JOINT_TRAINING_ZH.md)。本页旧 pilot 命令仅是历史记录；应急 B 不变。
 
 **版本：审查 c193b0d 后的开发版。** 零紧急任务。此版本不提供 RL 已胜出或真实飞行安全的证据。先看[实验与服务器说明](../rlv3_review/REVIEW_ZH.md)。

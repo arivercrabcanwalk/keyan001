@@ -9,6 +9,13 @@ if [[ "${SMOKE:-0}" == 1 && "$mode" != check && "$mode" != smoke ]]; then
   echo "SMOKE conflicts with the explicit MODE" >&2; exit 2
 fi
 case "$mode" in
+  experiment)
+    args=(--part B --profile "${PROFILE:-standard}" --device "${DEVICE:-auto}")
+    if [[ -n "${OUT:-}" ]]; then args+=(--out "$OUT"); fi
+    if [[ -n "${SEEDS:-}" ]]; then args+=(--seeds "$SEEDS"); fi
+    PY="$(command -v "$PY")"; export PY="$(cd "$(dirname "$PY")" && pwd)/$(basename "$PY")"
+    exec bash ../run_experiments.sh "${args[@]}"
+    ;;
   check|smoke)
     "$PY" -B -m pytest -p no:cacheprovider -q tests
     "$PY" -B -m rlcore.engineering_smoke
