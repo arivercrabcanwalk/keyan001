@@ -15,6 +15,7 @@ import re
 WINDS = {"W00": (0.0, 0.0), "W04E": (4.0, 0.0), "W08N": (0.0, 8.0)}
 SCENARIO_WINDS = {"nowind": "W00", "fixed_e4": "W04E", "fixed_n8": "W08N"}
 SCHEMA = "rlv3-fixed-author-anchor-audit-v1"
+ENERGY_EPS = 1e-12  # battery units, independent of the monetary cost tolerance
 FULL_AUTHOR_BUDGET_S = 1800.0
 
 
@@ -167,7 +168,7 @@ def audit_fixed_anchor(instance, solution, provenance=None, *, wind, map_path=No
                     node_energy = sum(n.energy for n in nodes)
                     energy = travel * p.flight_energy + node_energy
                     capacity = p.large_battery if di == 0 else p.small_battery
-                    if energy > capacity + 1e-7:
+                    if energy > capacity + ENERGY_EPS:
                         issues.append("battery:" + prefix)
                     duty += travel + service
                     total_distance += distance
